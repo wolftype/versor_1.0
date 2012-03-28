@@ -10,7 +10,7 @@
 #include <string>
 #include <iostream>
 
-namespace con {
+namespace vsr {
 
 	using namespace std;
 
@@ -39,4 +39,4 @@ namespace con {
 		return s;
 	}
 
-} // con::
+} // vsr::

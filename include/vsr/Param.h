@@ -18,7 +18,7 @@
 #include "CongaHeaders.h"
 #include "vsr_mktypes.h"
 
-namespace con {
+namespace vsr {
 
 	class Param {
 	

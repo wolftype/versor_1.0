@@ -21,7 +21,7 @@
 
 using std::ostream;
 
-namespace con {
+namespace vsr {
 
 	template < typename T > class Vec2;
 	template < typename T > class Vec3;
@@ -392,6 +392,6 @@ namespace con {
 	//template <typename T>
 	//inline Vec3<T> operator * (const Vec3& v) const { return Quat ( dot(v), x * v.y - y * v.x, y * v.z - z * v.y, x * v.z - z * v.x); }
 	
-}
+} //vsr::
 
 #endif

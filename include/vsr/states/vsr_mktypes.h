@@ -6,7 +6,7 @@
 	#include "CongaHeaders.h"
 	#include "State.h"
 	
-	namespace con {
+	namespace vsr {
 		using namespace std;
 		enum {
 						_SCA = 0,

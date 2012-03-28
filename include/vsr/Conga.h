@@ -19,8 +19,10 @@
 #include <iostream>
 #include <dlfcn.h>
 
+#include "vsr_file.h"
 
-namespace con {
+
+namespace vsr {
 
 using namespace std;
 

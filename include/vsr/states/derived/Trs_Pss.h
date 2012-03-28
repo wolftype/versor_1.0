@@ -5,7 +5,7 @@
 	#include "State.h"
 	using namespace std;
 
-	namespace con {
+	namespace vsr {
 
 		class Sca;
 		class Ori;

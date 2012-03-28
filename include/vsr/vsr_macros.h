@@ -12,7 +12,7 @@
 
 #include "Op.h"
 
-namespace con {
+namespace vsr {
 
 //CXR
 #define PT(x,y,z) Ro::null(Vec(x,y,z))
@@ -31,6 +31,7 @@ namespace con {
 #define EM Dls(0,0,0,1,.5)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
+//#define IT(x)
 
 //#define dbxy(f) 
 

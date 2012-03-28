@@ -16,7 +16,7 @@
 #include "Frame.h"
 //#include "GL.h"
 
-namespace con {
+namespace vsr {
 
 	class Chain : public Frame {
 		

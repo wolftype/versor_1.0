@@ -13,7 +13,7 @@
 #include <string>
 #include <iostream>
 
-namespace con {
+namespace vsr {
 
 	using namespace std;
 

@@ -30,14 +30,15 @@
 #include "vsr_interp.h"
 #include "vsr_macros.h"
 
-namespace con {
+namespace vsr {
 
 	class Frame {
 	
 		protected:
 		
 			Pnt mPos; 			/*!< Position Point */
-			Rot mRot;			/*!< Orientation Versor */ 
+			
+            Rot mRot;			/*!< Orientation Versor */ 
 			Trs mTrs;			/*!< Translation Versor */ 
 								
 			Vec mX;				/*!< Global X */	
@@ -406,7 +407,7 @@ namespace con {
 			/* Cubic and Quadric Interpolations . . . */
 			static void twist(const Frame * f, int num, double t, int ctype = Interp::QUADRIC) {
 				
-				Dll dlf[num];
+				Dll * dlf = new Dll[num];
 				for (int i = 0; i < num; ++i){ dlf[i] = f[i].dll(); }
 				Frame fr;
 				

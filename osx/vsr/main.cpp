@@ -4,7 +4,7 @@
 #include "vsr.h"
 
 
-using namespace con;
+using namespace vsr;
 
 void display(void)
 {

@@ -13,6 +13,8 @@
 #ifndef XCONSTANTS_H_INCLUDED
 #define XCONSTANTS_H_INCLUDED
 
+namespace vsr{
+    
 #define PI 3.14159265
 #define TWOPI 6.28318531
 #define PHI 1.61803
@@ -32,6 +34,7 @@
 
 //#define EPSILON
 
+} //vsr::
 
 #endif
 

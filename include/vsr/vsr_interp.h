@@ -13,7 +13,7 @@
 #include "State.h"
 #include "Matrix.h"
 
-namespace con {
+namespace vsr {
 
 	class Interp {
 		
@@ -54,12 +54,12 @@ namespace con {
 			static State line(State _a, State _b, double t);
 			
 			//arbitrary number of points to pass through
-			static State quad(State * t, int num, double t, bool closed =0);
-			static State cubic(State * t, int num, double t);
+			static State quad(State * s, int num, double t, bool closed =0);
+			static State cubic(State * s, int num, double t);
 			//assumes four
-			static State surface(State *t, double u, double v);
+			static State surface(State *s, double u, double v);
 			//assumes eight
-			static State volume(State *t, double u, double v, double w);
+			static State volume(State *s, double u, double v, double w);
 
 			void set( State * );
 			

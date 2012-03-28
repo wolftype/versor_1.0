@@ -22,30 +22,17 @@ changing States
 #include <iomanip>
 #include "Conga.h"
 #include "Matrix.h"
-#include "Glyph.h"
+#include "Draw.h"
 
 
 //#include "Multivector.h"
 
-namespace con {
+namespace vsr {
 
 using namespace std;
 
 static double * BUFFER = new double[MAXMV];
 
-//struct Assign {
-//	union{
-//		void * get;
-//		void * (*func)(int,double*,double*);		
-//	}ptr;
-//};
-
-//struct Revers {	
-//	union{
-//		double  * get;
-//		double  * (*func)(int,double*,double*);		
-//	}ptr;
-//};
 
 //Pointer to Operation Node Handlered by Observer class
 /*! 
@@ -60,7 +47,7 @@ TO DO:
 
 1- assignments are currently handled by the individual
 subclasses.  Would be nice to be able to say Pnt(Vec(x,y,z), Hyp(no,ni))
-to create one, instead of the jerry rig system of copying etc.
+to create one Point, instead of the jerry rig system of copying etc.
 
 2- all this should really be templated differently.  currently each instantiation
 requires a new double[n] call which slows things down (too much dynamic memory
@@ -68,6 +55,8 @@ allocation)
 
 3 - Intense compile times every time I make a note here . . .
 */
+    
+    
 class State {//public Drawable {
 
 	protected:
@@ -79,21 +68,19 @@ class State {//public Drawable {
 		//number of bases
 		int mNum;
 		//is dual?
-		bool bDual;		
+		bool bDual;
+    
+        //is selected?
+        bool bSelected;
 	
 		//zero out
 		void _zero() { fill( mW, mW+mNum,0 ); }
 		//zero out n places of static buffer
 		void _zerobuf(int n) const { fill (BUFFER, BUFFER+n, 0); } 
 		
-//		virtual void _init() {  
-//			mW = &mE;//new double[mNum]; _zero(); 
-//		}
-		
 		virtual void _init() {
 			mW = new double [mNum]; _zero();
 		}
-		//void _realloc(int n) { delete mW[]; mNum = n; _init(); }
 	
 	public:
 	
@@ -108,19 +95,7 @@ class State {//public Drawable {
 			copy(r, r+mNum, mW);
 		}
 
-//		State () : Multivector<0>(), mNum(0), mIdx(0), bDual(0) { _init(); }
-//		State (int _size, int _idx) : Multivector<_size>(), mNum(_size), mIdx(_idx), bDual(0) { _init(); }
-//		//State (int _idx) : mIdx(_idx), bDual(0){}			
-//
-//		State (const State& s);
-//		
-//		State (double * r, int _size, int _idx) : Multivector<_size>(), mNum(_size), mIdx(_idx), bDual(0) {
-//			_init();
-//			copy(r, r+mNum, mW);
-//		}
-
-				
-		State& operator = (const State& s);
+        State& operator = (const State& s);
 		
 		//refill doubles with values from s
 		void recomp(const State& s) { for (int i = 0; i < num(); ++i) mW[i] = s[i]; }
@@ -275,12 +250,16 @@ class State {//public Drawable {
 		/* Nane of ith Base */
 		string nameOf(int _idx) const { return Conga::Line().ba_nm(baseIdx(_idx));   }				
 		
+        /* Printing */
 		friend ostream& operator << (ostream&, const State&);
 		
-
 		void draw(){ Draw::S(*this); }
 		void clickTest(double x, double y){ Draw::clickTest(*this, x, y, 0); }
-		
+    
+        State& select()     { bSelected = 1; return *this; }
+        State& deselect()   { bSelected = 0; return *this; }
+        bool isSelected()  const { return bSelected; }
+        void toggle()       { bSelected = !bSelected; }
 };
 
 //

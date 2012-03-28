@@ -18,9 +18,8 @@
 #include "Matrix.h"
 #include "vsr_math.h"
 
-//#include "CongaHeaders.h"
 
-namespace con{
+namespace vsr {
 
 //using namespace std;
 
@@ -260,7 +259,7 @@ class Gen {
 		/*! Motor from a Rotor, Translation Along Axis tw, and Translation of Rotor tv*/
 		static State mot_rtt(const State& rot, const State& tw, const State& tv);
 		/*! Motor from a Bivector, Translation Vector, and Translation of Rotor Vector */
-		static State mot_bvv(const State& B, const State& v, const State& v);
+		static State mot_bvv(const State& B, const State&, const State&);
 		/*! Motor From Generic Contstruction (experimental) */
 		static State mot_gen(const State& e);
 		/*! Motor from Rotor and Vector */
@@ -312,7 +311,7 @@ class Gen {
 		/*! Rotor from a Point Pair and theta */
 		static State rot_par(const Par& p, double t);
 		/*! Rotor Spherical Interpoltation between Vec v1 and Vec v2 */
-		static State rot_slp(const State& v1, const State& v1, double t);
+		static State rot_slp(const State& v1, const State& v2, double t);
 		/*! Direction Vector from input Rotor (not implemented) */
 		static State dir(const State& r);
 		
@@ -554,6 +553,6 @@ class Mt {
 //class Xf {};
 
 
-} //con::
+} //vsr::
 
 #endif

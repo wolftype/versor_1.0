@@ -39,6 +39,8 @@
 
 #include "Op.h"
 #include "CongaHeaders.h"
+#include "vsr_mktypes.h"
+//#include "Interface.h"
 
 //#include <GLee.h>
 

@@ -10,12 +10,14 @@
  #ifndef CAMERA_H_INCLUDED
  #define CAMERA_H_INCLUDED
  
- #include "Frame.h"
+#include "Frame.h"
+
+#include "vsr_gxlib.h"
+
+// #include <OPENGL/gl.h>
+// #include <GLUT/glut.h>
  
- #include <OPENGL/gl.h>
- #include <GLUT/glut.h>
- 
-namespace con {
+namespace vsr {
 
 class Camera : public Frame {	
 
