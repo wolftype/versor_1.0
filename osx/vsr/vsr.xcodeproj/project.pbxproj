@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B683E841443C37F0066A350 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B683E831443C37F0066A350 /* GLUT.framework */; };
 		9B683EF91443CC1B0066A350 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
+		9B8D7D751449E51900018E82 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8D7D731449E51900018E82 /* libvsr.a */; };
 		9B936A481442B2C300679F92 /* Conga.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B936A461442B2C300679F92 /* Conga.h */; };
 		9B936A491442B2C300679F92 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B936A471442B2C300679F92 /* State.h */; };
 		9B936A4C1442B2D700679F92 /* Conga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B936A4A1442B2D700679F92 /* Conga.cpp */; };
@@ -17,7 +18,6 @@
 		9B936A681442B3DC00679F92 /* Param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B936A671442B3DC00679F92 /* Param.cpp */; };
 		9B936A6A1442B3E900679F92 /* Param.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B936A691442B3E900679F92 /* Param.h */; };
 		9B936A861442B4E100679F92 /* vsr.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B936A851442B4E100679F92 /* vsr.h */; };
-		9B936A901442B56B00679F92 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
 		9B936AA31442B61900679F92 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; };
 		9B9D043D1442981E0032E5A3 /* conga_assign_Aff.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D00F31442981D0032E5A3 /* conga_assign_Aff.h */; };
 		9B9D043E1442981E0032E5A3 /* conga_assign_Aff_con.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D00F41442981D0032E5A3 /* conga_assign_Aff_con.h */; };
@@ -2072,6 +2072,10 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B683E831443C37F0066A350 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		9B8D7D6E1449E4FB00018E82 /* libconga.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libconga.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B8D7D6F1449E4FB00018E82 /* libvsr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvsr.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B8D7D721449E51900018E82 /* libconga.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libconga.dylib; path = ../../lib/libconga.dylib; sourceTree = SOURCE_ROOT; };
+		9B8D7D731449E51900018E82 /* libvsr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvsr.a; path = ../../lib/libvsr.a; sourceTree = SOURCE_ROOT; };
 		9B936A461442B2C300679F92 /* Conga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conga.h; sourceTree = "<group>"; };
 		9B936A471442B2C300679F92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		9B936A4A1442B2D700679F92 /* Conga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conga.cpp; sourceTree = "<group>"; };
@@ -2080,7 +2084,6 @@
 		9B936A671442B3DC00679F92 /* Param.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Param.cpp; sourceTree = "<group>"; };
 		9B936A691442B3E900679F92 /* Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Param.h; sourceTree = "<group>"; };
 		9B936A851442B4E100679F92 /* vsr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr.h; sourceTree = "<group>"; };
-		9B9D00E6144297940032E5A3 /* libconga.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libconga.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9D00F31442981D0032E5A3 /* conga_assign_Aff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conga_assign_Aff.h; sourceTree = "<group>"; };
 		9B9D00F41442981D0032E5A3 /* conga_assign_Aff_con.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conga_assign_Aff_con.h; sourceTree = "<group>"; };
 		9B9D00F51442981D0032E5A3 /* conga_assign_Afl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conga_assign_Afl.h; sourceTree = "<group>"; };
@@ -3760,7 +3763,6 @@
 		9B9D0ACE144298370032E5A3 /* conga_op_Trv_Vec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_op_Trv_Vec.c; sourceTree = "<group>"; };
 		9B9D0ACF144298370032E5A3 /* conga_op_Vec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_op_Vec.c; sourceTree = "<group>"; };
 		9B9D0AD0144298370032E5A3 /* conga_op_Vec_Aff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_op_Vec_Aff.c; sourceTree = "<group>"; };
-		9B9D0E651442A5330032E5A3 /* libvsr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvsr.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9D116C1442AB280032E5A3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		9B9D11881442AB710032E5A3 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9D11DD1442B16D0032E5A3 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
@@ -4144,9 +4146,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B936A901442B56B00679F92 /* libvsr.a in Frameworks */,
 				9B683E841443C37F0066A350 /* GLUT.framework in Frameworks */,
 				9B683EF91443CC1B0066A350 /* OpenGL.framework in Frameworks */,
+				9B8D7D751449E51900018E82 /* libvsr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4177,9 +4179,9 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B9D00E6144297940032E5A3 /* libconga.dylib */,
-				9B9D0E651442A5330032E5A3 /* libvsr.a */,
 				9B9D11881442AB710032E5A3 /* test */,
+				9B8D7D6E1449E4FB00018E82 /* libconga.dylib */,
+				9B8D7D6F1449E4FB00018E82 /* libvsr.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5964,6 +5966,8 @@
 		9B9D11821442AB3E0032E5A3 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				9B8D7D721449E51900018E82 /* libconga.dylib */,
+				9B8D7D731449E51900018E82 /* libvsr.a */,
 				9B9D116C1442AB280032E5A3 /* OpenGL.framework */,
 				9B683E831443C37F0066A350 /* GLUT.framework */,
 			);
@@ -7468,7 +7472,7 @@
 			);
 			name = conga;
 			productName = conga;
-			productReference = 9B9D00E6144297940032E5A3 /* libconga.dylib */;
+			productReference = 9B8D7D6E1449E4FB00018E82 /* libconga.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		9B9D0E641442A5330032E5A3 /* vsr */ = {
@@ -7485,7 +7489,7 @@
 			);
 			name = vsr;
 			productName = vsr;
-			productReference = 9B9D0E651442A5330032E5A3 /* libvsr.a */;
+			productReference = 9B8D7D6F1449E4FB00018E82 /* libvsr.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		9B9D11871442AB710032E5A3 /* test */ = {

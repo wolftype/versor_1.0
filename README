@@ -1,16 +1,10 @@
 Disclaimer: this is currently a bit of hack to install and the library is not versioned correctly.
 
 
-This is the very first Versor .00001 library.  It loads a dynamic library for calculating multivectors efficiently.  libconga.dylib is the dynamic library.  libvsr is the static wrapper around it.  
+This is the very first Versor .00001 library.  It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors efficiently.  libvsr is the static wrapper around it.  
 
 
 TO "INSTALL" ON MAC OSX:
 
-Drag and drop /lib/libconga.dylib to usr/local/lib
-Try running the xcode project
-
-Take a look at Op.h to see some of the built in functionality.
-
-And er . . . good luck.  This will be updated soon!
-
+Make files are not quite finished, so you'll need to use the built in xcode project, and run "TestVsrGlv.app".  
 
