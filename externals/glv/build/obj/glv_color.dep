@@ -1,0 +1,1 @@
+build/obj/glv_color.o: src/glv_color.cpp GLV/glv_color.h GLV/glv_util.h
