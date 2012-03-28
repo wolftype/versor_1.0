@@ -1,0 +1,2 @@
+build/obj/glv_notification.o: src/glv_notification.cpp \
+  GLV/glv_notification.h
