@@ -1,2 +1,0 @@
-build/obj/glv_font.o: src/glv_font.cpp GLV/glv_font.h GLV/glv_draw.h \
-  GLV/glv_conf.h GLV/glv_color.h GLV/glv_util.h

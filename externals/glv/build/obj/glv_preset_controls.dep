@@ -1,7 +1,0 @@
-build/obj/glv_preset_controls.o: src/glv_preset_controls.cpp \
-  GLV/glv_preset_controls.h GLV/glv_core.h GLV/glv_rect.h \
-  GLV/glv_notification.h GLV/glv_color.h GLV/glv_util.h GLV/glv_draw.h \
-  GLV/glv_conf.h GLV/glv_font.h GLV/glv_model.h GLV/glv_behavior.h \
-  GLV/glv_layout.h GLV/glv_sliders.h GLV/glv_widget.h GLV/glv_buttons.h \
-  GLV/glv_icon.h GLV/glv_plots.h GLV/glv_grid.h GLV/glv_texture.h \
-  GLV/glv_textview.h
