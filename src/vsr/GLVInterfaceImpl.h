@@ -17,11 +17,6 @@ namespace vsr {
     
     using namespace glv;
     
-//    struct GLVWindow : public Interface::ViewImpl::WindowImpl {      
-//        Window * win;
-//    };
-
-    
     struct GLVView : public Interface::ViewImpl {
         
         Window * win;
@@ -81,11 +76,6 @@ namespace vsr {
         
     public:
         
-//        GLVInterface(GLVView * view, GLVInput * input) : Interface(){
-//            vimpl=view;
-//            iimpl=input; 
-//        }
-
         GLVInterface() : Interface() { init(); }
         
         GLVView& view() { return *(GLVView*)vimpl; }
@@ -95,6 +85,78 @@ namespace vsr {
             vimpl = new GLVView(this);
             iimpl = new GLVInput(this);
         }
+    };
+    
+    struct GLVScene : public View3D {
+        
+        void add(State * s) { interface.model -> add(s); }
+        
+        Camera& camera() { return interface.vimpl -> active(); }
+        
+        GLVScene(Window * w) : View3D() {
+            
+            interface.view().win = w;
+            
+            stretch(1,1);
+            
+            disable(DrawBorder);
+        }
+        
+        virtual void onDraw3D(GLV& glv){
+            //Update Camera Physics
+            camera().step();
+            
+            //Update ModelView Physics
+            camera().modelView().step();
+            
+            //Push into Active Camera Settings (viewport bit, etc)
+            camera().push3D();
+            
+            //Default Color
+            glColor3f(1,1,1);
+            
+            //Copy GLV's data into Interface controller
+            interface.view().getData(&glv);
+            
+            //Conduct User Interface Tests
+            interface.model -> ui();
+            
+            //Draw Multivectors to Scene
+            interface.model -> draw();
+            
+            camera().pop3D();
+        }
+        
+        virtual bool onEvent(Event::t e, GLV& glv){
+            interface.iimpl -> getData(&glv);
+            
+            switch(e){
+                case Event::MouseMove:
+                    interface.onMouseMove();
+                    break;
+                case Event::MouseDown:
+                    interface.onMouseDown();
+                    break;
+                case Event::MouseDrag:
+                    interface.onMouseDrag();
+                    break;
+                case Event::MouseUp:
+                    interface.onMouseUp();
+                    break;
+                case Event::KeyDown:
+                    interface.onKeyDown();
+                    break;
+                case Event::KeyUp:
+                    interface.onKeyUp();
+                    break;
+                    
+            }
+            
+            return false;
+        }
+        
+        GLVInterface interface;
+        
     };
 } // vsr::
     

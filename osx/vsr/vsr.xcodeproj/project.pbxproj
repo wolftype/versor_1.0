@@ -1691,12 +1691,10 @@
 		9B23AF17151FD58D009304D6 /* conga_op_Trv_Vec.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D0ACE144298370032E5A3 /* conga_op_Trv_Vec.c */; };
 		9B23AF18151FD58D009304D6 /* conga_op_Vec.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D0ACF144298370032E5A3 /* conga_op_Vec.c */; };
 		9B23AF19151FD58D009304D6 /* conga_op_Vec_Aff.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D0AD0144298370032E5A3 /* conga_op_Vec_Aff.c */; };
+		9B4780381523C7DE008A3481 /* TestVesrGlv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */; };
 		9B683EF91443CC1B0066A350 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
-		9B8AFC1A151FF631009E322F /* TestVsrGlv_cpp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B8AFC19151FF631009E322F /* TestVsrGlv_cpp.1 */; };
-		9B8AFC1E151FF65A009E322F /* TestVesrGlv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B8AFC0E151FF57B009E322F /* TestVesrGlv.cpp */; };
 		9B8AFC1F151FF676009E322F /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
 		9B8AFC27151FFD15009E322F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
-		9B8AFC46152026A4009E322F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B8AFC44152026A4009E322F /* InfoPlist.strings */; };
 		9B8AFC68152026B4009E322F /* glv.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8AFC4F152026B4009E322F /* glv.h */; };
 		9B8AFC69152026B4009E322F /* glv_behavior.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8AFC50152026B4009E322F /* glv_behavior.h */; };
 		9B8AFC6A152026B4009E322F /* glv_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8AFC51152026B4009E322F /* glv_binding.h */; };
@@ -1760,7 +1758,6 @@
 		9B936A6A1442B3E900679F92 /* Param.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B936A691442B3E900679F92 /* Param.h */; };
 		9B936A861442B4E100679F92 /* vsr.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B936A851442B4E100679F92 /* vsr.h */; };
 		9B936A901442B56B00679F92 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
-		9B936AA31442B61900679F92 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; };
 		9B9D116D1442AB280032E5A3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
 		9B9D12941442B16E0032E5A3 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D11DD1442B16D0032E5A3 /* Camera.cpp */; };
 		9B9D12951442B16E0032E5A3 /* Chain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D11DE1442B16D0032E5A3 /* Chain.cpp */; };
@@ -2120,8 +2117,6 @@
 		9B9D14BA1442B1760032E5A3 /* xRoutines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D14031442B1760032E5A3 /* xRoutines.h */; };
 		9BC171E91521261900A1128C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
 		9BC171F7152157D000A1128C /* GLVInterfaceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */; };
-		9BC172001522519500A1128C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BC171FF1522519500A1128C /* main.cpp */; };
-		9BC172021522519500A1128C /* TestStuff.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BC172011522519500A1128C /* TestStuff.1 */; };
 		9BC1720715225AA300A1128C /* Set.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720615225AA300A1128C /* Set.h */; };
 		9BC1720915225E6900A1128C /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720815225E6900A1128C /* Model.h */; };
 		9BC1720B15225E9000A1128C /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720A15225E9000A1128C /* Drawable.h */; };
@@ -2174,37 +2169,21 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				9B8AFC1A151FF631009E322F /* TestVsrGlv_cpp.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		9BC171FA1522519500A1128C /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-				9BC172021522519500A1128C /* TestStuff.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = "<group>"; };
 		9B23A842151E82A2009304D6 /* vsr_gxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_gxlib.h; sourceTree = "<group>"; };
 		9B23A844151E839E009304D6 /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Draw.cpp; sourceTree = "<group>"; };
 		9B23A846151E83D0009304D6 /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
 		9B23A848151E85AF009304D6 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
 		9B23A84A151E85C3009304D6 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Interface.cpp; path = ../../include/vsr/Interface.cpp; sourceTree = "<group>"; };
 		9B23A85E151FD339009304D6 /* cga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = cga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B8AFC0E151FF57B009E322F /* TestVesrGlv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestVesrGlv.cpp; path = ../TestVesrGlv.cpp; sourceTree = "<group>"; };
+		9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TestVesrGlv.cpp; path = ../../tests/TestVesrGlv.cpp; sourceTree = "<group>"; };
 		9B8AFC14151FF631009E322F /* TestVsrGlv.cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestVsrGlv.cpp; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B8AFC19151FF631009E322F /* TestVsrGlv_cpp.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestVsrGlv_cpp.1; sourceTree = "<group>"; };
 		9B8AFC3F152026A4009E322F /* glv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = glv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B8AFC43152026A4009E322F /* glv-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "glv-Info.plist"; sourceTree = "<group>"; };
-		9B8AFC45152026A4009E322F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9B8AFC47152026A4009E322F /* glv-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "glv-Prefix.pch"; sourceTree = "<group>"; };
 		9B8AFC4F152026B4009E322F /* glv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv.h; sourceTree = "<group>"; };
 		9B8AFC50152026B4009E322F /* glv_behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_behavior.h; sourceTree = "<group>"; };
 		9B8AFC51152026B4009E322F /* glv_binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_binding.h; sourceTree = "<group>"; };
@@ -3437,11 +3416,11 @@
 		9B9D08D1144298360032E5A3 /* conga_assign_Vec_Aff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_assign_Vec_Aff.c; sourceTree = "<group>"; };
 		9B9D08D2144298360032E5A3 /* conga_assign_Vec_Aff_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_assign_Vec_Aff_con.c; sourceTree = "<group>"; };
 		9B9D08D3144298360032E5A3 /* conga_assign_Vec_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_assign_Vec_con.c; sourceTree = "<group>"; };
-		9B9D08D4144298360032E5A3 /* conga_gp_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_gp_con.c; sourceTree = "<group>"; };
-		9B9D08D5144298360032E5A3 /* conga_Indexing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_Indexing.c; sourceTree = "<group>"; };
-		9B9D08D6144298360032E5A3 /* conga_ip_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_ip_con.c; sourceTree = "<group>"; };
-		9B9D08D7144298360032E5A3 /* conga_op_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_op_con.c; sourceTree = "<group>"; };
-		9B9D08D8144298360032E5A3 /* CongaBasicTypes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CongaBasicTypes.c; sourceTree = "<group>"; };
+		9B9D08D4144298360032E5A3 /* conga_gp_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = conga_gp_con.c; path = ../../src/conga/conga_gp_con.c; sourceTree = "<group>"; };
+		9B9D08D5144298360032E5A3 /* conga_Indexing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = conga_Indexing.c; path = ../../src/conga/conga_Indexing.c; sourceTree = "<group>"; };
+		9B9D08D6144298360032E5A3 /* conga_ip_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = conga_ip_con.c; path = ../../src/conga/conga_ip_con.c; sourceTree = "<group>"; };
+		9B9D08D7144298360032E5A3 /* conga_op_con.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = conga_op_con.c; path = ../../src/conga/conga_op_con.c; sourceTree = "<group>"; };
+		9B9D08D8144298360032E5A3 /* CongaBasicTypes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CongaBasicTypes.c; path = ../../src/conga/CongaBasicTypes.c; sourceTree = "<group>"; };
 		9B9D08DA144298360032E5A3 /* conga_gp_Aff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_gp_Aff.c; sourceTree = "<group>"; };
 		9B9D08DB144298360032E5A3 /* conga_gp_Afl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_gp_Afl.c; sourceTree = "<group>"; };
 		9B9D08DC144298360032E5A3 /* conga_gp_Afp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conga_gp_Afp.c; sourceTree = "<group>"; };
@@ -4303,9 +4282,6 @@
 		9B9D14011442B1760032E5A3 /* xConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xConstants.h; sourceTree = "<group>"; };
 		9B9D14031442B1760032E5A3 /* xRoutines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xRoutines.h; sourceTree = "<group>"; };
 		9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLVInterfaceImpl.h; path = ../../src/vsr/GLVInterfaceImpl.h; sourceTree = "<group>"; };
-		9BC171FC1522519500A1128C /* TestStuff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestStuff; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BC171FF1522519500A1128C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		9BC172011522519500A1128C /* TestStuff.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestStuff.1; sourceTree = "<group>"; };
 		9BC1720615225AA300A1128C /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
 		9BC1720815225E6900A1128C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		9BC1720A15225E9000A1128C /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
@@ -4360,26 +4336,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9BC171F91522519500A1128C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		08FB7794FE84155DC02AAC07 /* vsr */ = {
 			isa = PBXGroup;
 			children = (
+				9B47803D1523CA2C008A3481 /* tests */,
 				08FB7795FE84155DC02AAC07 /* vsr */,
 				C6859E8C029090F304C91782 /* Documentation */,
-				9B8AFC16151FF631009E322F /* TestVsrGlv.cpp */,
-				9B8AFC4E152026B4009E322F /* GLV */,
-				9B8AFC41152026A4009E322F /* glv */,
-				9BC171FE1522519500A1128C /* TestStuff */,
-				9B23A85F151FD339009304D6 /* Frameworks */,
+				9B4780361523C77B008A3481 /* external lib */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = vsr;
@@ -4388,6 +4354,7 @@
 		08FB7795FE84155DC02AAC07 /* vsr */ = {
 			isa = PBXGroup;
 			children = (
+				9B4780391523C872008A3481 /* cga framework */,
 				9B9D0E1A144298690032E5A3 /* src */,
 				9B9D0E191442985E0032E5A3 /* include */,
 			);
@@ -4402,7 +4369,6 @@
 				9B23A85E151FD339009304D6 /* cga.framework */,
 				9B8AFC14151FF631009E322F /* TestVsrGlv.cpp */,
 				9B8AFC3F152026A4009E322F /* glv.framework */,
-				9BC171FC1522519500A1128C /* TestStuff */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4418,32 +4384,77 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9B8AFC16151FF631009E322F /* TestVsrGlv.cpp */ = {
+		9B4780361523C77B008A3481 /* external lib */ = {
 			isa = PBXGroup;
 			children = (
-				08FB7796FE84155DC02AAC07 /* main.cpp */,
-				9B8AFC0E151FF57B009E322F /* TestVesrGlv.cpp */,
-				9B8AFC19151FF631009E322F /* TestVsrGlv_cpp.1 */,
+				9B23A85F151FD339009304D6 /* Frameworks */,
+				9B8AFC4E152026B4009E322F /* GLV */,
 			);
-			path = TestVsrGlv.cpp;
+			name = "external lib";
 			sourceTree = "<group>";
 		};
-		9B8AFC41152026A4009E322F /* glv */ = {
+		9B4780391523C872008A3481 /* cga framework */ = {
 			isa = PBXGroup;
 			children = (
-				9B8AFC42152026A4009E322F /* Supporting Files */,
+				9B9D00F11442981D0032E5A3 /* include */,
+				9B47803A1523C883008A3481 /* src */,
 			);
-			path = glv;
+			name = "cga framework";
 			sourceTree = "<group>";
 		};
-		9B8AFC42152026A4009E322F /* Supporting Files */ = {
+		9B47803A1523C883008A3481 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				9B8AFC43152026A4009E322F /* glv-Info.plist */,
-				9B8AFC44152026A4009E322F /* InfoPlist.strings */,
-				9B8AFC47152026A4009E322F /* glv-Prefix.pch */,
+				9B9D0785144298360032E5A3 /* assign */,
+				9B9D08D4144298360032E5A3 /* conga_gp_con.c */,
+				9B9D08D5144298360032E5A3 /* conga_Indexing.c */,
+				9B9D08D6144298360032E5A3 /* conga_ip_con.c */,
+				9B9D08D7144298360032E5A3 /* conga_op_con.c */,
+				9B9D08D8144298360032E5A3 /* CongaBasicTypes.c */,
+				9B9D08D9144298360032E5A3 /* gp */,
+				9B9D0981144298360032E5A3 /* ip */,
+				9B9D0A29144298360032E5A3 /* op */,
 			);
-			name = "Supporting Files";
+			name = src;
+			sourceTree = "<group>";
+		};
+		9B47803B1523C8D8008A3481 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				9B936A521442B35000679F92 /* vsr_macros.h */,
+				9B23A842151E82A2009304D6 /* vsr_gxlib.h */,
+				9B9D13FE1442B1760032E5A3 /* vsr_file.h */,
+				9B9D13FF1442B1760032E5A3 /* vsr_interp.h */,
+				9B9D14001442B1760032E5A3 /* vsr_math.h */,
+				9B9D14011442B1760032E5A3 /* xConstants.h */,
+				9B9D14031442B1760032E5A3 /* xRoutines.h */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		9B47803C1523C8FB008A3481 /* gfx */ = {
+			isa = PBXGroup;
+			children = (
+				9B23A846151E83D0009304D6 /* Draw.h */,
+				9B9D134D1442B1760032E5A3 /* GL.h */,
+			);
+			name = gfx;
+			sourceTree = "<group>";
+		};
+		9B47803D1523CA2C008A3481 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */,
+			);
+			name = tests;
+			sourceTree = "<group>";
+		};
+		9B47803E1523CB53008A3481 /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */,
+			);
+			name = impl;
 			sourceTree = "<group>";
 		};
 		9B8AFC4E152026B4009E322F /* GLV */ = {
@@ -4511,7 +4522,7 @@
 			path = ../src;
 			sourceTree = "<group>";
 		};
-		9B9D00F11442981D0032E5A3 /* conga */ = {
+		9B9D00F11442981D0032E5A3 /* include */ = {
 			isa = PBXGroup;
 			children = (
 				9B9D00F21442981D0032E5A3 /* assign */,
@@ -4523,7 +4534,7 @@
 				9B9D02ED1442981E0032E5A3 /* ip */,
 				9B9D03951442981E0032E5A3 /* op */,
 			);
-			name = conga;
+			name = include;
 			path = ../../include/conga;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -5390,23 +5401,6 @@
 			path = op;
 			sourceTree = "<group>";
 		};
-		9B9D0784144298360032E5A3 /* conga */ = {
-			isa = PBXGroup;
-			children = (
-				9B9D0785144298360032E5A3 /* assign */,
-				9B9D08D4144298360032E5A3 /* conga_gp_con.c */,
-				9B9D08D5144298360032E5A3 /* conga_Indexing.c */,
-				9B9D08D6144298360032E5A3 /* conga_ip_con.c */,
-				9B9D08D7144298360032E5A3 /* conga_op_con.c */,
-				9B9D08D8144298360032E5A3 /* CongaBasicTypes.c */,
-				9B9D08D9144298360032E5A3 /* gp */,
-				9B9D0981144298360032E5A3 /* ip */,
-				9B9D0A29144298360032E5A3 /* op */,
-			);
-			name = conga;
-			path = ../../src/conga;
-			sourceTree = SOURCE_ROOT;
-		};
 		9B9D0785144298360032E5A3 /* assign */ = {
 			isa = PBXGroup;
 			children = (
@@ -5745,7 +5739,8 @@
 				9B9D08D2144298360032E5A3 /* conga_assign_Vec_Aff_con.c */,
 				9B9D08D3144298360032E5A3 /* conga_assign_Vec_con.c */,
 			);
-			path = assign;
+			name = assign;
+			path = ../../src/conga/assign;
 			sourceTree = "<group>";
 		};
 		9B9D08D9144298360032E5A3 /* gp */ = {
@@ -5919,7 +5914,8 @@
 				9B9D097F144298360032E5A3 /* conga_gp_Vec.c */,
 				9B9D0980144298360032E5A3 /* conga_gp_Vec_Aff.c */,
 			);
-			path = gp;
+			name = gp;
+			path = ../../src/conga/gp;
 			sourceTree = "<group>";
 		};
 		9B9D0981144298360032E5A3 /* ip */ = {
@@ -6093,7 +6089,8 @@
 				9B9D0A27144298360032E5A3 /* conga_ip_Vec.c */,
 				9B9D0A28144298360032E5A3 /* conga_ip_Vec_Aff.c */,
 			);
-			path = ip;
+			name = ip;
+			path = ../../src/conga/ip;
 			sourceTree = "<group>";
 		};
 		9B9D0A29144298360032E5A3 /* op */ = {
@@ -6267,13 +6264,13 @@
 				9B9D0ACF144298370032E5A3 /* conga_op_Vec.c */,
 				9B9D0AD0144298370032E5A3 /* conga_op_Vec_Aff.c */,
 			);
-			path = op;
+			name = op;
+			path = ../../src/conga/op;
 			sourceTree = "<group>";
 		};
 		9B9D0E191442985E0032E5A3 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				9B9D00F11442981D0032E5A3 /* conga */,
 				9B9D13481442B1760032E5A3 /* vsr */,
 			);
 			name = include;
@@ -6282,7 +6279,6 @@
 		9B9D0E1A144298690032E5A3 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				9B9D0784144298360032E5A3 /* conga */,
 				9B9D11DC1442B16D0032E5A3 /* vsr */,
 			);
 			name = src;
@@ -6505,16 +6501,10 @@
 			isa = PBXGroup;
 			children = (
 				9B9D13521442B1760032E5A3 /* states */,
-				9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */,
-				9B936A521442B35000679F92 /* vsr_macros.h */,
-				9B23A842151E82A2009304D6 /* vsr_gxlib.h */,
-				9B9D13FE1442B1760032E5A3 /* vsr_file.h */,
-				9B9D13FF1442B1760032E5A3 /* vsr_interp.h */,
-				9B9D14001442B1760032E5A3 /* vsr_math.h */,
-				9B9D14011442B1760032E5A3 /* xConstants.h */,
-				9B9D14031442B1760032E5A3 /* xRoutines.h */,
-				9B9D134D1442B1760032E5A3 /* GL.h */,
 				9B936A851442B4E100679F92 /* vsr.h */,
+				9B47803E1523CB53008A3481 /* impl */,
+				9B47803C1523C8FB008A3481 /* gfx */,
+				9B47803B1523C8D8008A3481 /* util */,
 				9B936A461442B2C300679F92 /* Conga.h */,
 				9B936A471442B2C300679F92 /* State.h */,
 				9B936A691442B3E900679F92 /* Param.h */,
@@ -6525,7 +6515,6 @@
 				9BC1720615225AA300A1128C /* Set.h */,
 				9BC1720815225E6900A1128C /* Model.h */,
 				9BC1720A15225E9000A1128C /* Drawable.h */,
-				9B23A846151E83D0009304D6 /* Draw.h */,
 				9B9D134F1442B1760032E5A3 /* Matrix.h */,
 				9B9D13501442B1760032E5A3 /* Op.h */,
 			);
@@ -6723,15 +6712,6 @@
 				9B9D13FC1442B1760032E5A3 /* Vec_Aff.h */,
 			);
 			path = derived;
-			sourceTree = "<group>";
-		};
-		9BC171FE1522519500A1128C /* TestStuff */ = {
-			isa = PBXGroup;
-			children = (
-				9BC171FF1522519500A1128C /* main.cpp */,
-				9BC172011522519500A1128C /* TestStuff.1 */,
-			);
-			path = TestStuff;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -7850,9 +7830,9 @@
 			productReference = 9B23A85E151FD339009304D6 /* cga.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9B8AFC13151FF631009E322F /* TestVsrGlv.cpp */ = {
+		9B8AFC13151FF631009E322F /* TestVsrGlv */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9B8AFC1B151FF632009E322F /* Build configuration list for PBXNativeTarget "TestVsrGlv.cpp" */;
+			buildConfigurationList = 9B8AFC1B151FF632009E322F /* Build configuration list for PBXNativeTarget "TestVsrGlv" */;
 			buildPhases = (
 				9B8AFC10151FF631009E322F /* Sources */,
 				9B8AFC11151FF631009E322F /* Frameworks */,
@@ -7865,7 +7845,7 @@
 				9B8AFCB7152027A3009E322F /* PBXTargetDependency */,
 				9B8AFC23151FF7F1009E322F /* PBXTargetDependency */,
 			);
-			name = TestVsrGlv.cpp;
+			name = TestVsrGlv;
 			productName = TestVsrGlv.cpp;
 			productReference = 9B8AFC14151FF631009E322F /* TestVsrGlv.cpp */;
 			productType = "com.apple.product-type.tool";
@@ -7924,23 +7904,6 @@
 			productReference = 9B9D11881442AB710032E5A3 /* test */;
 			productType = "com.apple.product-type.tool";
 		};
-		9BC171FB1522519500A1128C /* TestStuff */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9BC172031522519500A1128C /* Build configuration list for PBXNativeTarget "TestStuff" */;
-			buildPhases = (
-				9BC171F81522519500A1128C /* Sources */,
-				9BC171F91522519500A1128C /* Frameworks */,
-				9BC171FA1522519500A1128C /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TestStuff;
-			productName = TestStuff;
-			productReference = 9BC171FC1522519500A1128C /* TestStuff */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -7965,8 +7928,7 @@
 				9B23A85D151FD339009304D6 /* cga */,
 				9B8AFC3E152026A4009E322F /* glv */,
 				9B9D11871442AB710032E5A3 /* TestVsr */,
-				9B8AFC13151FF631009E322F /* TestVsrGlv.cpp */,
-				9BC171FB1522519500A1128C /* TestStuff */,
+				9B8AFC13151FF631009E322F /* TestVsrGlv */,
 			);
 		};
 /* End PBXProject section */
@@ -7983,7 +7945,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B8AFC46152026A4009E322F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8841,7 +8802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B8AFC1E151FF65A009E322F /* TestVesrGlv.cpp in Sources */,
+				9B4780381523C7DE008A3481 /* TestVesrGlv.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9067,15 +9028,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B936AA31442B61900679F92 /* main.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9BC171F81522519500A1128C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9BC172001522519500A1128C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9103,17 +9055,6 @@
 			targetProxy = 9B8AFCB6152027A3009E322F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		9B8AFC44152026A4009E322F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9B8AFC45152026A4009E322F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB923608733DC60010E9CD /* Debug */ = {
@@ -9262,8 +9203,8 @@
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "glv/glv-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -9272,7 +9213,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				INFOPLIST_FILE = "glv/glv-Info.plist";
+				INFOPLIST_FILE = "";
 				INSTALL_PATH = "@exectuable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9292,12 +9233,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "glv/glv-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				INFOPLIST_FILE = "glv/glv-Info.plist";
+				INFOPLIST_FILE = "";
 				INSTALL_PATH = "@exectuable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9372,45 +9313,6 @@
 			};
 			name = Release;
 		};
-		9BC172041522519500A1128C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		9BC172051522519500A1128C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -9432,7 +9334,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9B8AFC1B151FF632009E322F /* Build configuration list for PBXNativeTarget "TestVsrGlv.cpp" */ = {
+		9B8AFC1B151FF632009E322F /* Build configuration list for PBXNativeTarget "TestVsrGlv" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B8AFC1C151FF632009E322F /* Debug */,
@@ -9467,14 +9369,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		9BC172031522519500A1128C /* Build configuration list for PBXNativeTarget "TestStuff" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9BC172041522519500A1128C /* Debug */,
-				9BC172051522519500A1128C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
