@@ -807,10 +807,10 @@ void Draw :: S (const State& s, float a, float b, float c){
 		{
 			//if (bLabel) drawLabel(p[0], p[1], p[2]);
 			double a = Ro::siz( s, -1 );
-			//Draw as ual Sphere (if radius not 0);
-			if ( a!=0 ) {
-				Pnt p = Ro::cen( s );
-				//Glyph::Point(p);
+			//Draw as ual Sphere (if |radius| > 0.000001);
+			if ( fabs(a) >  FPERROR ) {
+				
+                Pnt p = Ro::cen( s );
 				double t = sqrt ( fabs ( a ) );
 				bool real = a > 0 ? 1 : 0;			
 				glTranslatef(p[0], p[1], p[2]);

@@ -10,6 +10,15 @@
 
 #include "vsr.h"
 #include "GLVInterfaceImpl.h"
+#include "Gui.hpp"
+
+
+
+#define BEGSET \
+static bool bSet = 1;\
+if(bSet){\
+    bSet = 0;
+#define ENDSET }
 
 using namespace vsr;
 using namespace glv;
@@ -24,6 +33,13 @@ void test1(GLVApp& app){
     static Cir c = CXY(.5);	
     //Dual Plane with Normal(0,1,0) at Origin
 	static Dlp d (0,1,0,0);
+    
+    static bool but = 0;
+    BEGSET 
+    
+    app.gui.add(BUTTON,"button", but); 
+    
+    ENDSET
     
     //Click 'G' 'R' or 'S' to Grab, Rotate, or Scale 
     app.interface.ui( c );
@@ -42,7 +58,7 @@ void test1(GLVApp& app){
 //	
 //	c2.draw(1,0,0);
 //	
-    p.draw(0,0,1);
+    if ( but ) p.draw(0,0,1);
 }
 
 void test2(GLVApp& app){
