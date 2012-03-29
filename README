@@ -1,3 +1,5 @@
+See also wolftype.com/versor for doxygen
+
 This is the Versor .00002 library.  Use it to draw geometrical things! Support for MAC OS X.  
 Designed to run on other platforms but not currently supported.
 
@@ -8,13 +10,8 @@ It creates libvsr.a, a library that calls the functions in the cga framework and
 (like helps with common operations).  Take a look at Op.h.
 
 Documentation:
-
-Is shifty but coming along.  Please feel free to email me:  wolftype@gmail.com
-
-Copyright UC Regents:
-
-Whatever the typical GPL UC open source copyright says.  Free to re-distribute as long as this notice
-is included, etc. 
+wolftype.com/versor 
+email me at wolftype@gmail.com
 
 External Librarys:
 libvsr.a is a graphics library and so requires OpenGL.    
