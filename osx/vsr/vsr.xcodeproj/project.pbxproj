@@ -2182,7 +2182,8 @@
 		9B23A84A151E85C3009304D6 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Interface.cpp; path = ../../include/vsr/Interface.cpp; sourceTree = "<group>"; };
 		9B23A85E151FD339009304D6 /* cga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = cga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TestVesrGlv.cpp; path = ../../tests/TestVesrGlv.cpp; sourceTree = "<group>"; };
-		9B8AFC14151FF631009E322F /* TestVsrGlv.cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestVsrGlv.cpp; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B69B97B1523DE0100C308D4 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = ../../README; sourceTree = "<group>"; };
+		9B8AFC14151FF631009E322F /* TestVsrGlv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestVsrGlv; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8AFC3F152026A4009E322F /* glv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = glv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8AFC4F152026B4009E322F /* glv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv.h; sourceTree = "<group>"; };
 		9B8AFC50152026B4009E322F /* glv_behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_behavior.h; sourceTree = "<group>"; };
@@ -4342,6 +4343,7 @@
 		08FB7794FE84155DC02AAC07 /* vsr */ = {
 			isa = PBXGroup;
 			children = (
+				9B69B97B1523DE0100C308D4 /* README */,
 				9B47803D1523CA2C008A3481 /* tests */,
 				08FB7795FE84155DC02AAC07 /* vsr */,
 				C6859E8C029090F304C91782 /* Documentation */,
@@ -4367,7 +4369,7 @@
 				9B9D0E651442A5330032E5A3 /* libvsr.a */,
 				9B9D11881442AB710032E5A3 /* test */,
 				9B23A85E151FD339009304D6 /* cga.framework */,
-				9B8AFC14151FF631009E322F /* TestVsrGlv.cpp */,
+				9B8AFC14151FF631009E322F /* TestVsrGlv */,
 				9B8AFC3F152026A4009E322F /* glv.framework */,
 			);
 			name = Products;
@@ -7847,7 +7849,7 @@
 			);
 			name = TestVsrGlv;
 			productName = TestVsrGlv.cpp;
-			productReference = 9B8AFC14151FF631009E322F /* TestVsrGlv.cpp */;
+			productReference = 9B8AFC14151FF631009E322F /* TestVsrGlv */;
 			productType = "com.apple.product-type.tool";
 		};
 		9B8AFC3E152026A4009E322F /* glv */ = {

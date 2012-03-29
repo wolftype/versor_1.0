@@ -67,8 +67,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9B8AFBF2151FF416009E322F"
-            BuildableName = "TestVsrGlv.app"
+            BlueprintIdentifier = "9B8AFC13151FF631009E322F"
+            BuildableName = "TestVsrGlv"
             BlueprintName = "TestVsrGlv"
             ReferencedContainer = "container:vsr.xcodeproj">
          </BuildableReference>
