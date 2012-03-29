@@ -69,6 +69,7 @@ namespace vsr {
         
         if (s.isSelected()){
             xf(&s,x,dt);
+            s.select();
         }
         
     }
@@ -76,7 +77,7 @@ namespace vsr {
     Vec Interface :: screenCoord(const Pnt& p){
         
         Vec sc = GL::project(p[0], p[1], p[2], camera() );
-        sc[0] /= view.w; sc[1] /= view.h; sc[2] = 0;
+        sc[0] /= vd().w; sc[1] /= vd().h; sc[2] = 0;
         sc[1] = 1 - sc[1];
         
         return sc;
@@ -118,7 +119,7 @@ namespace vsr {
         
         //tdx = tdy = 0;
         
-        view.clickray = view.ray;
+        vd().clickray = vd().ray;
         mouse.click = mouse.pos;				
         mouse.isDown  = 1;
         mouse.newClick = 1;
@@ -173,7 +174,7 @@ namespace vsr {
             mouse.dragAccum = Vec(nx,ny,0);							//total dvector since program launch
             mouse.drag		= Vec(tdx,tdy,0);						//vector from last click and hold to current position
             mouse.dragCat = Op::sp0(mouse.drag, -camera().cat());  //rotate drag by concatenated camera position
-            mouse.dragBivCat = view.z ^ mouse.dragCat;
+            mouse.dragBivCat = vd().z ^ mouse.dragCat;
             mouse.dragBiv = Vec::z ^ (Vec(nx,ny,0)); // nx*-1 ?
             
             Vec v1  = mouse.pos;
@@ -256,7 +257,7 @@ namespace vsr {
         Vec sc = GL::project(tv[0], tv[1], tv[2], camera() ); 
         
         //Point in 3D space on Projection Ray closest to sphere.
-        Pnt cp  = Fl::loc( view.ray, Ro::loc(pos), 1);        
+        Pnt cp  = Fl::loc( vd().ray, Ro::loc(pos), 1);        
         
         switch(keyboard.code){
             case 's': //scale
@@ -311,14 +312,14 @@ namespace vsr {
     
     void Interface :: viewCalc(){
         //Points in Z Space
-       view.z		 = Op::sp0(Vec::z, -camera().cat());  
+        vd().z		 = Op::sp0(Vec::z, -camera().cat());  
         
-        Vec v1 = GL::unproject( mouse.x, view.h - mouse.y , 1.0,  camera() );
-        Vec v2 = GL::unproject( mouse.x, view.h - mouse.y , 0.0,  camera() );
-        Vec v3 = GL::unproject( mouse.x, view.h - mouse.y , 0.5,  camera() );     
+        Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  camera() );
+        Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  camera() );
+        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  camera() );     
         
         //Get Line of Mouse Position into Z Space (store as a Dual Line)
-		view.ray	 = Op::dl( Ro::null(v2) ^ v1.unit() ^ Inf(1) ) ;
+		vd().ray	 = Op::dl( Ro::null(v2) ^ v1.unit() ^ Inf(1) ) ;
 		mouse.projectFar	= v1 ;
 		mouse.projectNear	= v2 ;
 		
@@ -326,8 +327,8 @@ namespace vsr {
        mouse.cat     = Op::sp0( mouse.move * -1, -camera().cat() );
        mouse.biv     = mouse.pos ^ mouse.projectFar; //not used?
         
-        mouse.origin = Ro::null( Fl::loc( view.ray, Ori(1), 1 ) );
-       mouse.bivCat = view.z ^ mouse.cat;
+        mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), 1 ) );
+       mouse.bivCat = vd().z ^ mouse.cat;
 
     }
     

@@ -206,12 +206,14 @@ namespace vsr {
         
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
+        
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
         glPointSize(10);
         glEnable(GL_LINE_SMOOTH);
         
-        frontBackDiff();
+        //frontBackDiff();
         
         //	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
         

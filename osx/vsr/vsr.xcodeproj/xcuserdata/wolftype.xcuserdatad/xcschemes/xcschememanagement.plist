@@ -7,7 +7,7 @@
 		<key>TestVsr.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
 		</dict>
 		<key>TestVsrGlv.xcscheme</key>
 		<dict>
@@ -15,6 +15,11 @@
 			<true/>
 			<key>orderHint</key>
 			<integer>3</integer>
+		</dict>
+		<key>TestVsrGlv2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>cga.xcscheme</key>
 		<dict>
@@ -51,6 +56,11 @@
 			<true/>
 		</dict>
 		<key>9B23AF1E151FD60B009304D6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B69B97F1523E9FC00C308D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

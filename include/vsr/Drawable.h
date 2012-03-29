@@ -11,10 +11,27 @@
 
 namespace vsr  {
     class Drawable {
+        public:
+        
         virtual void draw() = 0;  
     };
-    class Touchable {
-        virtual void ui() = 0;  
+    
+    class Touchable : public Drawable {
+
+    protected: 
+        bool bSelected;
+        
+        public:
+        
+        Touchable() : bSelected(0){}
+        
+        Touchable& select()     { bSelected = 1; return *this; }
+        Touchable& deselect()   { bSelected = 0; return *this; }
+        bool isSelected()  const { return bSelected; }
+        bool& isSelected()  { return bSelected; }
+        void toggle()       { bSelected = !bSelected; }
+        
+        //virtual void ui() = 0;  
     };
 }
 

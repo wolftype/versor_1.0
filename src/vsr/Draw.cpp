@@ -213,7 +213,7 @@ void Glyph :: Circular(float radius, bool clockwise) {
 	glEnd();
 	
 	glColor3f(1,1,0);
-	glPointSize(5.0);
+	//glPointSize(5.0);
 	glBegin(GL_POINTS);
 	
 		Rot rn = Rot::e12(anomaly );
@@ -754,11 +754,15 @@ void Draw :: N (const State&) {
 }
 	
 void Draw :: S (const State& s){
+    S(s,1,1,1);
+}
+    
+void Draw :: S (const State& s, float a, float b, float c){
 	glPushMatrix();
 	
-		//glNormal3f(0, 0, 1);
-//		s.color3();
+    glColor3f(a,b,c);
     if (s.isSelected()) glColor3f(1,0,0);
+    
 
 	switch(s.idx()){
 	
@@ -824,8 +828,8 @@ void Draw :: S (const State& s){
 			
 //			pp[0].color(s.red(), s.green(), s.blue(), s.alpha()); 
 //			pp[1].color(s.red(), s.green(), s.blue(), s.alpha());
-			pp[0].draw();
-			pp[1].draw();
+			pp[0].draw(a,b,c);
+			pp[1].draw(a,b,c);
 			
 //			Pnt p = Ro::cen( s );
 //			Draw::L (p);

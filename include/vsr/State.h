@@ -23,7 +23,7 @@ changing States
 #include "Conga.h"
 #include "Matrix.h"
 #include "Draw.h"
-
+#include "Drawable.h"
 
 //#include "Multivector.h"
 
@@ -57,7 +57,7 @@ allocation)
 */
     
     
-class State {//public Drawable {
+    class State : public Touchable {//public Drawable {
 
 	protected:
 	
@@ -70,9 +70,6 @@ class State {//public Drawable {
 		//is dual?
 		bool bDual;
     
-        //is selected?
-        bool bSelected;
-	
 		//zero out
 		void _zero() { fill( mW, mW+mNum,0 ); }
 		//zero out n places of static buffer
@@ -84,13 +81,13 @@ class State {//public Drawable {
 	
 	public:
 	
-		State () : mNum(0), mIdx(0), bDual(0) { _init(); }
-		State (int _size, int _idx) : mNum(_size), mIdx(_idx), bDual(0) { _init(); }
-		State (int _idx) : mIdx(_idx), bDual(0){}			
+		State () : Touchable(), mNum(0), mIdx(0), bDual(0) { _init(); }
+		State (int _size, int _idx) :  Touchable(), mNum(_size), mIdx(_idx), bDual(0) { _init(); }
+		State (int _idx) :  Touchable(), mIdx(_idx), bDual(0){}			
 
 		State (const State& s);
 		
-		State (double * r, int _size, int _idx) : mNum(_size), mIdx(_idx), bDual(0) {
+		State (double * r, int _size, int _idx) :  Touchable(), mNum(_size), mIdx(_idx), bDual(0) {
 			_init();
 			copy(r, r+mNum, mW);
 		}
@@ -216,6 +213,9 @@ class State {//public Drawable {
 		State unit() const { double t = sqrt( fabs( dot()[0] ) ); if (t == 0) return State(); return *this / t; }
 		State runit() const { double t = rnorm(); if (t == 0) return State(); return *this / t; }
 		
+        
+        State dual() const;
+        
 		bool isDual() { return bDual; }
 		void duality(bool b) { bDual = b; }
 		
@@ -253,13 +253,11 @@ class State {//public Drawable {
         /* Printing */
 		friend ostream& operator << (ostream&, const State&);
 		
-		void draw(){ Draw::S(*this); }
-		void clickTest(double x, double y){ Draw::clickTest(*this, x, y, 0); }
+		virtual void draw(){ Draw::S(*this); }
+        void draw(float a, float b, float c){ Draw::S(*this,a,b,c); }
+//		void clickTest(double x, double y){ Draw::clickTest(*this, x, y, 0); }
     
-        State& select()     { bSelected = 1; return *this; }
-        State& deselect()   { bSelected = 0; return *this; }
-        bool isSelected()  const { return bSelected; }
-        void toggle()       { bSelected = !bSelected; }
+
 };
 
 //

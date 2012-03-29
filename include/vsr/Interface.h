@@ -95,6 +95,8 @@ namespace vsr  {
         
         struct ViewImpl {
                         
+            ViewData data;
+            
             Interface * interface;
             
             Camera * camera;
@@ -109,7 +111,11 @@ namespace vsr  {
             virtual void fullScreenToggle() = 0;            
             virtual void getData( void * udata) = 0;
             
-
+			/* Set camera size to view Size */
+			void fit() { 
+				camera -> width( data.w ); camera -> height( data.h ); 
+			}
+			
             //virtual void win() = 0;
         };
         
@@ -131,8 +137,11 @@ namespace vsr  {
         InputImpl * iimpl;
         
         MouseData       mouse;
-        ViewData        view;
+       // ViewData        view;
         KeyboardData    keyboard;
+        
+        ViewData& vd() { return vimpl -> data; }
+        ViewData vd() const { return vimpl -> data; }
 
         State& state();
 
@@ -156,8 +165,8 @@ namespace vsr  {
         void onKeyDown();
         void onKeyUp(){}
 
-        Dll ray(){ return view.ray;      }
-        Dll clickray(){ return view.clickray; }
+   //     Dll ray(){ return view.ray;      }
+   //    Dll clickray(){ return view.clickray; }
         
         Vec click(){ return mouse.click;   }
         Vec pos(){ return mouse.pos;     }

@@ -49,6 +49,11 @@ State State :: type(int _idx){
 	return State(n, _idx);
 }
 
+    
+    State State :: dual() const{
+        return Op::dl(*this);
+    }
+    
 //void State :: sBind(){
 //	if(!sBound ){
 	  //for(int i = 0; i < 29; ++i){
@@ -60,9 +65,10 @@ State State :: type(int _idx){
 //	}
 //}
 
-State :: State (const State& s) {
+    State :: State (const State& s) : Touchable() {
 //	cout << "State Copy Constructor" << endl;
-	
+    //bSelected = s.isSelected();
+        
 	mIdx = s.mIdx;
 	mNum = s.mNum;
 //	mR = s.mR; mG = s.mG; mB = s.mB;
@@ -90,6 +96,8 @@ State& State :: operator = (const State& s) {
 	_init();
 //	_reinit();
 	copy(s.mW, s.mW + mNum, mW); 
+    
+    bSelected = s.isSelected();
 	
 	return *this;
 }

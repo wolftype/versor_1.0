@@ -1,7 +1,11 @@
-See also wolftype.com/versor for doxygen
+Hi!  Welcome to conformal geometric algebra at your fingertips!  Huzzah!
 
-This is the Versor .00002 library.  Use it to draw geometrical things! Support for MAC OS X.  
-Designed to run on other platforms but not currently supported.
+See also wolftype.com/versor for doxygen and look at wolftype channel on vimeo for a few demos.
+
+This is the Versor (vsr) library.  Use it to draw geometrical things! Support for MAC OS X.  
+
+It is designed to run on other platforms but not currently supported.  A static library version
+is in the works . . .
 
 The Xcode project in OSX/vsr/ takes care of the multistage compilation process
 

@@ -1693,6 +1693,12 @@
 		9B23AF19151FD58D009304D6 /* conga_op_Vec_Aff.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D0AD0144298370032E5A3 /* conga_op_Vec_Aff.c */; };
 		9B4780381523C7DE008A3481 /* TestVesrGlv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */; };
 		9B683EF91443CC1B0066A350 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
+		9B69B9861523E9FC00C308D4 /* TestVsrGlv2.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B69B9851523E9FC00C308D4 /* TestVsrGlv2.1 */; };
+		9B69B98B1523EA1700C308D4 /* TestVsrGlv2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B69B98A1523EA1700C308D4 /* TestVsrGlv2.cpp */; };
+		9B69B98C1523ED4800C308D4 /* glv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFC3F152026A4009E322F /* glv.framework */; };
+		9B69B98D1523ED4D00C308D4 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
+		9B69B98E1523ED5E00C308D4 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
+		9B69B98F1523ED6700C308D4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
 		9B8AFC1F151FF676009E322F /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
 		9B8AFC27151FFD15009E322F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
 		9B8AFC68152026B4009E322F /* glv.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8AFC4F152026B4009E322F /* glv.h */; };
@@ -2123,6 +2129,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9B69B9901523ED7100C308D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B9D0E641442A5330032E5A3;
+			remoteInfo = vsr;
+		};
+		9B69B9921523ED7400C308D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B8AFC3E152026A4009E322F;
+			remoteInfo = glv;
+		};
 		9B8AFBE9151FF0FD009E322F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
@@ -2163,6 +2183,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B69B97E1523E9FC00C308D4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9B69B9861523E9FC00C308D4 /* TestVsrGlv2.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9B8AFC12151FF631009E322F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2183,6 +2213,10 @@
 		9B23A85E151FD339009304D6 /* cga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = cga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TestVesrGlv.cpp; path = ../../tests/TestVesrGlv.cpp; sourceTree = "<group>"; };
 		9B69B97B1523DE0100C308D4 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = ../../README; sourceTree = "<group>"; };
+		9B69B9801523E9FC00C308D4 /* TestVsrGlv2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestVsrGlv2; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B69B9831523E9FC00C308D4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9B69B9851523E9FC00C308D4 /* TestVsrGlv2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestVsrGlv2.1; sourceTree = "<group>"; };
+		9B69B98A1523EA1700C308D4 /* TestVsrGlv2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestVsrGlv2.cpp; path = ../../tests/TestVsrGlv2.cpp; sourceTree = "<group>"; };
 		9B8AFC14151FF631009E322F /* TestVsrGlv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestVsrGlv; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8AFC3F152026A4009E322F /* glv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = glv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8AFC4F152026B4009E322F /* glv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv.h; sourceTree = "<group>"; };
@@ -4297,6 +4331,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B69B97D1523E9FC00C308D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B69B98F1523ED6700C308D4 /* OpenGL.framework in Frameworks */,
+				9B69B98E1523ED5E00C308D4 /* GLUT.framework in Frameworks */,
+				9B69B98D1523ED4D00C308D4 /* libvsr.a in Frameworks */,
+				9B69B98C1523ED4800C308D4 /* glv.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B8AFC11151FF631009E322F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -4348,6 +4393,7 @@
 				08FB7795FE84155DC02AAC07 /* vsr */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				9B4780361523C77B008A3481 /* external lib */,
+				9B69B9821523E9FC00C308D4 /* TestVsrGlv2 */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = vsr;
@@ -4371,6 +4417,7 @@
 				9B23A85E151FD339009304D6 /* cga.framework */,
 				9B8AFC14151FF631009E322F /* TestVsrGlv */,
 				9B8AFC3F152026A4009E322F /* glv.framework */,
+				9B69B9801523E9FC00C308D4 /* TestVsrGlv2 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4447,6 +4494,7 @@
 			isa = PBXGroup;
 			children = (
 				9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */,
+				9B69B98A1523EA1700C308D4 /* TestVsrGlv2.cpp */,
 			);
 			name = tests;
 			sourceTree = "<group>";
@@ -4457,6 +4505,15 @@
 				9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */,
 			);
 			name = impl;
+			sourceTree = "<group>";
+		};
+		9B69B9821523E9FC00C308D4 /* TestVsrGlv2 */ = {
+			isa = PBXGroup;
+			children = (
+				9B69B9831523E9FC00C308D4 /* main.cpp */,
+				9B69B9851523E9FC00C308D4 /* TestVsrGlv2.1 */,
+			);
+			path = TestVsrGlv2;
 			sourceTree = "<group>";
 		};
 		9B8AFC4E152026B4009E322F /* GLV */ = {
@@ -7832,6 +7889,25 @@
 			productReference = 9B23A85E151FD339009304D6 /* cga.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		9B69B97F1523E9FC00C308D4 /* TestVsrGlv2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B69B9871523E9FD00C308D4 /* Build configuration list for PBXNativeTarget "TestVsrGlv2" */;
+			buildPhases = (
+				9B69B97C1523E9FC00C308D4 /* Sources */,
+				9B69B97D1523E9FC00C308D4 /* Frameworks */,
+				9B69B97E1523E9FC00C308D4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B69B9931523ED7400C308D4 /* PBXTargetDependency */,
+				9B69B9911523ED7100C308D4 /* PBXTargetDependency */,
+			);
+			name = TestVsrGlv2;
+			productName = TestVsrGlv2;
+			productReference = 9B69B9801523E9FC00C308D4 /* TestVsrGlv2 */;
+			productType = "com.apple.product-type.tool";
+		};
 		9B8AFC13151FF631009E322F /* TestVsrGlv */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B8AFC1B151FF632009E322F /* Build configuration list for PBXNativeTarget "TestVsrGlv" */;
@@ -7931,6 +8007,7 @@
 				9B8AFC3E152026A4009E322F /* glv */,
 				9B9D11871442AB710032E5A3 /* TestVsr */,
 				9B8AFC13151FF631009E322F /* TestVsrGlv */,
+				9B69B97F1523E9FC00C308D4 /* TestVsrGlv2 */,
 			);
 		};
 /* End PBXProject section */
@@ -8800,6 +8877,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B69B97C1523E9FC00C308D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B69B98B1523EA1700C308D4 /* TestVsrGlv2.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B8AFC10151FF631009E322F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -9036,6 +9121,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9B69B9911523ED7100C308D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B9D0E641442A5330032E5A3 /* vsr */;
+			targetProxy = 9B69B9901523ED7100C308D4 /* PBXContainerItemProxy */;
+		};
+		9B69B9931523ED7400C308D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B8AFC3E152026A4009E322F /* glv */;
+			targetProxy = 9B69B9921523ED7400C308D4 /* PBXContainerItemProxy */;
+		};
 		9B8AFBEA151FF0FD009E322F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9B9D0E641442A5330032E5A3 /* vsr */;
@@ -9142,6 +9237,45 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		9B69B9881523E9FD00C308D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9B69B9891523E9FD00C308D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -9335,6 +9469,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9B69B9871523E9FD00C308D4 /* Build configuration list for PBXNativeTarget "TestVsrGlv2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B69B9881523E9FD00C308D4 /* Debug */,
+				9B69B9891523E9FD00C308D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		9B8AFC1B151FF632009E322F /* Build configuration list for PBXNativeTarget "TestVsrGlv" */ = {
 			isa = XCConfigurationList;
