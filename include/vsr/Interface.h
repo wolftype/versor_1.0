@@ -149,6 +149,7 @@ namespace vsr  {
         
         Vec screenCoord(const Pnt& p);
         bool pntClicked(const State&, double rad = .05);
+        
         void ui(State&, double t = 1);
         void ui(State& s, State& x, double t);
         

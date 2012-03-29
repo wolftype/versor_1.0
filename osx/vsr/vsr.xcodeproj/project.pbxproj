@@ -11,7 +11,6 @@
 		9B23A845151E839E009304D6 /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B23A844151E839E009304D6 /* Draw.cpp */; };
 		9B23A847151E83D1009304D6 /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B23A846151E83D0009304D6 /* Draw.h */; };
 		9B23A849151E85B1009304D6 /* Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B23A848151E85AF009304D6 /* Interface.h */; };
-		9B23A84B151E85C5009304D6 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B23A84A151E85C3009304D6 /* Interface.cpp */; };
 		9B23A88B151FD55F009304D6 /* conga_assign_Aff.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D00F31442981D0032E5A3 /* conga_assign_Aff.h */; };
 		9B23A88C151FD55F009304D6 /* conga_assign_Aff_con.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D00F41442981D0032E5A3 /* conga_assign_Aff_con.h */; };
 		9B23A88D151FD55F009304D6 /* conga_assign_Afl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D00F51442981D0032E5A3 /* conga_assign_Afl.h */; };
@@ -2122,10 +2121,14 @@
 		9B9D14B81442B1760032E5A3 /* xConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D14011442B1760032E5A3 /* xConstants.h */; };
 		9B9D14BA1442B1760032E5A3 /* xRoutines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9D14031442B1760032E5A3 /* xRoutines.h */; };
 		9BC171E91521261900A1128C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
-		9BC171F7152157D000A1128C /* GLVInterfaceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */; };
 		9BC1720715225AA300A1128C /* Set.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720615225AA300A1128C /* Set.h */; };
 		9BC1720915225E6900A1128C /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720815225E6900A1128C /* Model.h */; };
 		9BC1720B15225E9000A1128C /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720A15225E9000A1128C /* Drawable.h */; };
+		9BCECCC21524FC9C00589E30 /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC01524FC9C00589E30 /* Gui.cpp */; };
+		9BCECCC31524FC9C00589E30 /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC01524FC9C00589E30 /* Gui.cpp */; };
+		9BCECCC81524FCFF00589E30 /* GLVInterfaceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */; };
+		9BCECCCA1524FD4100589E30 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC91524FD4100589E30 /* Interface.cpp */; };
+		9BCECCCC1524FD5900589E30 /* Gui.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCCB1524FD5900589E30 /* Gui.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2209,7 +2212,6 @@
 		9B23A844151E839E009304D6 /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Draw.cpp; sourceTree = "<group>"; };
 		9B23A846151E83D0009304D6 /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
 		9B23A848151E85AF009304D6 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
-		9B23A84A151E85C3009304D6 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Interface.cpp; path = ../../include/vsr/Interface.cpp; sourceTree = "<group>"; };
 		9B23A85E151FD339009304D6 /* cga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = cga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TestVesrGlv.cpp; path = ../../tests/TestVesrGlv.cpp; sourceTree = "<group>"; };
 		9B69B97B1523DE0100C308D4 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = ../../README; sourceTree = "<group>"; };
@@ -2270,9 +2272,9 @@
 		9B8AFCB0152026E2009E322F /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = System/Library/Frameworks/AGL.framework; sourceTree = SDKROOT; };
 		9B8AFCB315202705009E322F /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		9B8AFCB915202B6E009E322F /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		9B936A461442B2C300679F92 /* Conga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conga.h; sourceTree = "<group>"; };
+		9B936A461442B2C300679F92 /* Conga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Conga.h; path = ../Conga.h; sourceTree = "<group>"; };
 		9B936A471442B2C300679F92 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		9B936A4A1442B2D700679F92 /* Conga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Conga.cpp; sourceTree = "<group>"; };
+		9B936A4A1442B2D700679F92 /* Conga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Conga.cpp; path = ../Conga.cpp; sourceTree = "<group>"; };
 		9B936A4B1442B2D700679F92 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		9B936A521442B35000679F92 /* vsr_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_macros.h; sourceTree = "<group>"; };
 		9B936A671442B3DC00679F92 /* Param.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Param.cpp; sourceTree = "<group>"; };
@@ -4316,10 +4318,13 @@
 		9B9D14001442B1760032E5A3 /* vsr_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_math.h; sourceTree = "<group>"; };
 		9B9D14011442B1760032E5A3 /* xConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xConstants.h; sourceTree = "<group>"; };
 		9B9D14031442B1760032E5A3 /* xRoutines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xRoutines.h; sourceTree = "<group>"; };
-		9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLVInterfaceImpl.h; path = ../../src/vsr/GLVInterfaceImpl.h; sourceTree = "<group>"; };
 		9BC1720615225AA300A1128C /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
 		9BC1720815225E6900A1128C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		9BC1720A15225E9000A1128C /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
+		9BCECCC01524FC9C00589E30 /* Gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gui.cpp; sourceTree = "<group>"; };
+		9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVInterfaceImpl.h; sourceTree = "<group>"; };
+		9BCECCC91524FD4100589E30 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
+		9BCECCCB1524FD5900589E30 /* Gui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Gui.hpp; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* vsr.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -4502,7 +4507,8 @@
 		9B47803E1523CB53008A3481 /* impl */ = {
 			isa = PBXGroup;
 			children = (
-				9BC171F6152157D000A1128C /* GLVInterfaceImpl.h */,
+				9BCECCCB1524FD5900589E30 /* Gui.hpp */,
+				9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */,
 			);
 			name = impl;
 			sourceTree = "<group>";
@@ -6347,9 +6353,9 @@
 			isa = PBXGroup;
 			children = (
 				9B9D11E41442B16D0032E5A3 /* states */,
-				9B936A4A1442B2D700679F92 /* Conga.cpp */,
 				9B936A4B1442B2D700679F92 /* State.cpp */,
 				9B9D11DD1442B16D0032E5A3 /* Camera.cpp */,
+				9BCECCC91524FD4100589E30 /* Interface.cpp */,
 				9B9D11DE1442B16D0032E5A3 /* Chain.cpp */,
 				9B9D11E01442B16D0032E5A3 /* Frame.cpp */,
 				9B936A671442B3DC00679F92 /* Param.cpp */,
@@ -6358,8 +6364,8 @@
 				9B9D11E31442B16D0032E5A3 /* Op.cpp */,
 				9B9D12901442B16E0032E5A3 /* vsr_file.cpp */,
 				9B9D12911442B16E0032E5A3 /* vsr_interp.cpp */,
-				9B23A84A151E85C3009304D6 /* Interface.cpp */,
 				9B9D12921442B16E0032E5A3 /* vsr_math.cpp */,
+				9BCECCC01524FC9C00589E30 /* Gui.cpp */,
 			);
 			name = vsr;
 			path = ../../src/vsr;
@@ -6368,6 +6374,7 @@
 		9B9D11E41442B16D0032E5A3 /* states */ = {
 			isa = PBXGroup;
 			children = (
+				9B936A4A1442B2D700679F92 /* Conga.cpp */,
 				9B9D11E51442B16D0032E5A3 /* basic */,
 				9B9D120A1442B16D0032E5A3 /* derived */,
 				9B9D128F1442B16E0032E5A3 /* vsr_mktypes.cpp */,
@@ -6559,18 +6566,17 @@
 		9B9D13481442B1760032E5A3 /* vsr */ = {
 			isa = PBXGroup;
 			children = (
-				9B9D13521442B1760032E5A3 /* states */,
 				9B936A851442B4E100679F92 /* vsr.h */,
+				9B9D13521442B1760032E5A3 /* states */,
 				9B47803E1523CB53008A3481 /* impl */,
 				9B47803C1523C8FB008A3481 /* gfx */,
 				9B47803B1523C8D8008A3481 /* util */,
-				9B936A461442B2C300679F92 /* Conga.h */,
+				9B23A848151E85AF009304D6 /* Interface.h */,
 				9B936A471442B2C300679F92 /* State.h */,
 				9B936A691442B3E900679F92 /* Param.h */,
 				9B9D13491442B1760032E5A3 /* Camera.h */,
 				9B9D134A1442B1760032E5A3 /* Chain.h */,
 				9B9D134C1442B1760032E5A3 /* Frame.h */,
-				9B23A848151E85AF009304D6 /* Interface.h */,
 				9BC1720615225AA300A1128C /* Set.h */,
 				9BC1720815225E6900A1128C /* Model.h */,
 				9BC1720A15225E9000A1128C /* Drawable.h */,
@@ -6584,6 +6590,7 @@
 		9B9D13521442B1760032E5A3 /* states */ = {
 			isa = PBXGroup;
 			children = (
+				9B936A461442B2C300679F92 /* Conga.h */,
 				9B9D13531442B1760032E5A3 /* basic */,
 				9B9D13771442B1760032E5A3 /* CongaHeaders.h */,
 				9B9D13781442B1760032E5A3 /* derived */,
@@ -7634,7 +7641,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BC171F7152157D000A1128C /* GLVInterfaceImpl.h in Headers */,
+				9BCECCC81524FCFF00589E30 /* GLVInterfaceImpl.h in Headers */,
+				9BCECCCC1524FD5900589E30 /* Gui.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8882,6 +8890,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B69B98B1523EA1700C308D4 /* TestVsrGlv2.cpp in Sources */,
+				9BCECCC31524FC9C00589E30 /* Gui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8890,6 +8899,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B4780381523C7DE008A3481 /* TestVesrGlv.cpp in Sources */,
+				9BCECCC21524FC9C00589E30 /* Gui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9107,7 +9117,7 @@
 				9B936A4D1442B2D700679F92 /* State.cpp in Sources */,
 				9B936A681442B3DC00679F92 /* Param.cpp in Sources */,
 				9B23A845151E839E009304D6 /* Draw.cpp in Sources */,
-				9B23A84B151E85C5009304D6 /* Interface.cpp in Sources */,
+				9BCECCCA1524FD4100589E30 /* Interface.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9477,6 +9487,7 @@
 				9B69B9891523E9FD00C308D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B8AFC1B151FF632009E322F /* Build configuration list for PBXNativeTarget "TestVsrGlv" */ = {
 			isa = XCConfigurationList;

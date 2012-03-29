@@ -97,7 +97,7 @@ State& State :: operator = (const State& s) {
 //	_reinit();
 	copy(s.mW, s.mW + mNum, mW); 
     
-    bSelected = s.isSelected();
+    //bSelected = s.isSelected();
 	
 	return *this;
 }

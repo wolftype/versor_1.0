@@ -9,9 +9,14 @@
 #ifndef vsr_GLVInterfaceImpl_h
 #define vsr_GLVInterfaceImpl_h
 
+//ABSTRACT BASE CLASS
+#include "Interface.h"
+
+//GLV SPECIFIC HEADERS
 #include "glv.h"
 #include "glv_binding.h"
-#include "Interface.h"
+#include "Gui.hpp"
+
 
 namespace vsr {
     
@@ -83,6 +88,7 @@ namespace vsr {
         virtual void init(){
             vimpl = new GLVView(this);
             iimpl = new GLVInput(this);
+            
         }
     };
     
@@ -90,6 +96,7 @@ namespace vsr {
     struct GLVApp : public View3D{
         
         GLVInterface interface;
+        Gui gui;
         
         GLVApp(Window * w) : View3D() {
             
@@ -98,6 +105,8 @@ namespace vsr {
             stretch(1,1);
             
             disable(DrawBorder);
+            
+            *this << gui;
         }
         
         virtual void onDraw();
