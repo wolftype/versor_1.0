@@ -1,10 +1,28 @@
-Disclaimer: this is currently a bit of hack to install and the library is not versioned correctly.
+This is the Versor .00002 library.  Use it to draw geometrical things! Support for MAC OS X.  
+Designed to run on other platforms but not currently supported.
 
+The Xcode project in OSX/vsr/ takes care of the multistage compilation process
 
-This is the very first Versor .00001 library.  It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors efficiently.  libvsr is the static wrapper around it.  
+It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors.  
+It creates libvsr.a, a library that calls the functions in the cga framework and does other nifty things
+(like helps with common operations).  Take a look at Op.h.
+
+Documentation:
+
+Is shifty but coming along.  Please feel free to email me:  wolftype@gmail.com
+
+Copyright UC Regents:
+
+Whatever the typical GPL UC open source copyright says.  Free to re-distribute as long as this notice
+is included, etc. 
+
+External Librarys:
+libvsr.a is a graphics library and so requires OpenGL.    
+
+GLV is bundled and TestVsrGLV is an implementation that fuses vsr's interface class with a glv implementation.  
+Made by my colleagues at MAT program at UCSB, GLV is good for quick and easy OpenGL guis.
 
 
 TO "INSTALL" ON MAC OSX:
-
-Make files are not quite finished, so you'll need to use the built in xcode project, and run "TestVsrGlv.app".  
+The cross-platform Make files are not finished, so you'll need to use the built in xcode project, and run "TestVsrGlv.app".  
 
