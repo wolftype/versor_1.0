@@ -30,7 +30,6 @@ int main() {
 	win = new Window(500,500,"VSR",&glv);    
     scene = new GLVScene(win);    
     glv << scene;
-    
 
     Cir c = CXY(1);
     

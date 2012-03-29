@@ -1117,6 +1117,9 @@ std::vector<Pnt> Ro::split(const Par& pp){
 	
 	Pnt pA = ( tpa ) / tm;
 	Pnt pB = ( tpb ) / tm;
+    
+   // pA.isSelected() = pp.isSelected();
+   // pB.isSelected() = pp.isSelected();
 	
 	pair.push_back(pA);
 	pair.push_back(pB);

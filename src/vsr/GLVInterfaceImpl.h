@@ -31,10 +31,9 @@ namespace vsr {
             GLV& glv = *(GLV*)(udata);
             
             //COPY VIEW DATA
-            interface -> view.w		 = glv.width();
-            interface -> view.h		 = glv.height();
-            
-            interface -> viewCalc();            
+            interface -> vd().w		 = glv.width();
+            interface -> vd().h		 = glv.height();
+
         }
     };
     
@@ -87,6 +86,84 @@ namespace vsr {
         }
     };
     
+    
+    struct GLVApp : public View3D{
+        
+        GLVInterface interface;
+        
+        GLVApp(Window * w) : View3D() {
+            
+            interface.view().win = w;
+            
+            stretch(1,1);
+            
+            disable(DrawBorder);
+        }
+        
+        virtual void onDraw();
+        
+        virtual void onDraw3D(GLV& glv){
+            
+            
+            GL :: enablePreset();
+            
+            //Copy GLV's data into Interface controller view
+            interface.view().getData(&glv);
+            interface.view().fit();
+            
+            //Update Camera Physics
+            camera().step();
+            
+            //Update ModelView Physics
+            camera().modelView().step();
+            
+            //Push into Active Camera Settings (viewport bit, etc)
+            camera().push3D();
+            
+                //Default Color
+                glColor3f(1,1,1);
+                            
+                interface.viewCalc();  
+                onDraw();
+                        
+            camera().pop3D();
+            
+            GL :: disablePreset();
+        }
+      
+        Camera& camera() { return interface.view().active(); }
+        
+        virtual bool onEvent(Event::t e, GLV& glv){
+
+            interface.input().getData(&glv);
+            
+            switch(e){
+                case Event::MouseMove:
+                    interface.onMouseMove();
+                    break;
+                case Event::MouseDown:
+                    interface.onMouseDown();
+                    break;
+                case Event::MouseDrag:
+                    interface.onMouseDrag();
+                    break;
+                case Event::MouseUp:
+                    interface.onMouseUp();
+                    break;
+                case Event::KeyDown:
+                    interface.onKeyDown();
+                    break;
+                case Event::KeyUp:
+                    interface.onKeyUp();
+                    break;
+                    
+            }
+            
+            return false;
+        }
+        
+    };
+    
     struct GLVScene : public View3D {
         
         void add(State * s) { interface.model -> add(s); }
@@ -112,17 +189,17 @@ namespace vsr {
             //Push into Active Camera Settings (viewport bit, etc)
             camera().push3D();
             
-            //Default Color
-            glColor3f(1,1,1);
-            
-            //Copy GLV's data into Interface controller
-            interface.view().getData(&glv);
-            
-            //Conduct User Interface Tests
-            interface.model -> ui();
-            
-            //Draw Multivectors to Scene
-            interface.model -> draw();
+                //Default Color
+                glColor3f(1,1,1);
+                
+                //Copy GLV's data into Interface controller
+                interface.view().getData(&glv);
+                
+                //Conduct User Interface Tests
+                interface.model -> ui();
+                
+                //Draw Multivectors to Scene
+                interface.model -> draw();
             
             camera().pop3D();
         }
