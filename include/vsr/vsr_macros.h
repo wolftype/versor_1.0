@@ -29,6 +29,7 @@ namespace vsr {
 #define DLN(x,y,z) Op::dl(Ori(1)^PT(x,y,z)^Inf(1))
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
+#define INF Inf(1)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
 //#define IT(x)

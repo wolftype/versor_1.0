@@ -13,6 +13,7 @@ namespace vsr  {
     class Drawable {
         public:
         
+        //virtual void draw(float a, float b, float c) = 0;
         virtual void draw() = 0;  
     };
     

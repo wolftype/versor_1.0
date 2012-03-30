@@ -74,6 +74,22 @@ namespace vsr {
         
     }
     
+    void Interface :: ui( Frame& f, double t){
+        
+        static double dt = 5;
+        static double acc = .9;
+        dt *= acc;
+        if ( mouse.isDown ){
+            dt = t;// scene().ma() / scene().width();
+            if (pntClicked ( f.pos() ) ){
+                f.select();
+            }
+        }
+        if (f.isSelected()){
+            xfFrame(&f, dt);
+        }
+    }
+    
     Vec Interface :: screenCoord(const Pnt& p){
         
         Vec sc = GL::project(p[0], p[1], p[2], camera() );
@@ -308,6 +324,64 @@ namespace vsr {
                 break;
             }
         }
+    }
+    
+    void Interface :: xfFrame( Frame * frame, double t){
+        //	if ( frame->isSelected() ) {
+		Pnt& tp = frame->pos();
+		Rot& tr = frame->rot();
+		Vec tv ( tp );
+		Vec sc = GL::project(tv[0], tv[1], tv[2], camera());
+		switch(keyboard.code){
+			case 's': //scale
+			{
+                //printf("scale\n");s
+                Vec tm1 = mouse.pos + mouse.drag - sc;
+                Vec tm2 = mouse.pos - sc; 
+				int neg = (tm1.norm() > tm2.norm()) ? -1 : 1; //Drag towards or away from element
+				
+				frame->dd( mouse.drag.norm()*t*neg );
+				frame->dilate();
+				//ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
+				break;
+			}
+			case 'g': //translate
+			{
+                //			tp = Op::sp(tp, Gen::trs(scene().mdc()*t));
+				frame->dx() = mouse.dragCat * t;
+				frame->move();
+				break;
+			}
+			case 'r': //rotate about local line
+			{
+                //			Dll td = tp <= Drb(scene().dbc()*t);
+                //			tr = Op::sp(tr, Gen::mot_dll(td));
+				frame->db() =  mouse.dragBivCat * t; //scene().mp().unit() ^ scene().md();
+				frame->spin();
+				break;
+			}
+			case 'b': //boost by drag
+			{
+				//ts = Op::sp(ts, Gen::trv(scene().mdc()*t));
+				break;
+			}
+			case 'a': //all transformations
+			{
+				double neg = mouse.drag[0];
+                //			Dll td = pos <= Drb(scene().dbc()*t);
+                //			ts = Op::sp(ts, Gen::mot_dll(td));
+                //			ts = Op::sp(ts, Gen::trs(scene().mdc()*t));
+                //			ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
+				break;
+			}
+			case Key::Escape:
+			{
+				cout << "deselect all" << endl;
+				frame -> toggle();
+			}
+		}
+		frame ->acc();
+        //		}
     }
     
     void Interface :: viewCalc(){

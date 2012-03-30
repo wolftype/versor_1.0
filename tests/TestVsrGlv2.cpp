@@ -14,11 +14,14 @@
 
 
 
-#define BEGSET \
+#define SET \
 static bool bSet = 1;\
 if(bSet){\
     bSet = 0;
-#define ENDSET }
+#define END }
+
+#define IT(n) \
+for(int i = 0; i < n; ++i){
 
 using namespace vsr;
 using namespace glv;
@@ -34,12 +37,14 @@ void test1(GLVApp& app){
     //Dual Plane with Normal(0,1,0) at Origin
 	static Dlp d (0,1,0,0);
     
+    //A Button 
     static bool but = 0;
-    BEGSET 
     
-    app.gui.add(BUTTON,"button", but); 
+    SET 
     
-    ENDSET
+    app.gui.add(BUTTON,"show meet", but); 
+    
+    END
     
     //Click 'G' 'R' or 'S' to Grab, Rotate, or Scale 
     app.interface.ui( c );
@@ -47,18 +52,64 @@ void test1(GLVApp& app){
     
     //Dual Meet of Dual Circle and Dual Plane
 	Cir c2 = c.dual()  ^ d ;
-//
+
     //Dual of Dual Meet of Dual Representation (!) Is the Pair of Points where plane and circle meet
 	Par p = c2.dual();
-//
-//    //Draw Elements (passing in color values)
+
+    //Draw Elements (passing in color values)
 	d.draw(1,1,1);
 	
 	c.draw(1,1,0);
-//	
-//	c2.draw(1,0,0);
-//	
+
     if ( but ) p.draw(0,0,1);
+}
+
+void testProjector(GLVApp& app){
+    
+    static Dls sphere = Ro::dls3(0,0,0,10);    
+    static Frame src;
+    
+    static Drv d[4];
+    static Pnt p[4];
+        
+    static float hs, vs, tn;
+    SET    
+        app.gui.add(DIALER,"horiz spread",hs,-3.14, 3.14);
+        app.gui.add(DIALER,"vert spread",vs,-3.14, 3.14);
+        app.gui.add(DIALER,"transversor amt",tn,-3.14, 3.14);
+    
+    END
+    
+    app.interface.ui( src );
+    
+    
+    d[0] = src.z().rot( src.xz() * hs + src.yz() * vs );
+    d[1] = src.z().rot( src.xz() * -hs + src.yz() * vs );
+    d[2] = src.z().rot( src.xz() * -hs + src.yz() * -vs);
+    d[3] = src.z().rot( src.xz() * hs + src.yz() * -vs );
+
+    IT(4) 
+        Dll td = ( src.pos() ^ d[i] ).dual(); 
+        td.draw();
+        
+        Par  par = ( td ^ sphere ).dual();
+        p[i] = Ro::split1(par);    
+        p[i].draw(1,0,0);
+    END
+
+    IT(4)        
+        int idx = (i<3)? i+1 : 0;
+    
+        Dlp dlp = ( p[i] ^ p[idx] ^ src.pos() ^ INF ).dual();
+    
+        Cir c = ( dlp ^ sphere ).dual();
+        
+        c.draw(0,0,1);
+    
+        Cir c2 = c.trv( src.z() * tn ); c2.draw();
+    END
+    //Green Ball
+    sphere.draw(0,1,0,.3);    
 }
 
 void test2(GLVApp& app){
@@ -93,7 +144,8 @@ void test2(GLVApp& app){
 }
 void GLVApp :: onDraw(){
     
-    test1(*this);
+//    test1(*this);
+    testProjector(*this);
 }
 
 

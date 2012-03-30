@@ -54,28 +54,43 @@ State State :: type(int _idx){
         return Op::dl(*this);
     }
     
-//void State :: sBind(){
-//	if(!sBound ){
-	  //for(int i = 0; i < 29; ++i){
-//		Conga::Line().bindDouble("conga_reverse_fn",  &revers.ptr.get);
-//		Conga::Line().bindDouble("conga_involute_fn", &involut.ptr.get);
-//		Conga::Line().bindDouble("conga_conjugate_fn", &conjug.ptr.get);
-	  //}
-//	  sBound = true;
-//	}
-//}
+    State State :: rot( const State& biv) const {
+        return Op::sp(*this, Gen::rot_biv( biv ) ); 
+    }
+    State State :: trs(const State& trs) const {
+        return Op::sp(*this, Gen::trs(trs) );
+    }
+    State State :: mot(const State& dll) const {
+        return Op::sp(*this, Gen::mot_dll(dll) );
+    }
+    State State :: dil( double t) const {
+        return Op::sp(*this, Gen::dil( t ) );
+    }    
+    State State :: dil(const State& pos, double t) const {
+        return Op::sp(*this, Gen::dil_pnt(pos, t ) );
+    }    
+    State State :: trv( const State& tnv) const {
+        return Op::sp0(*this, Gen::trv(tnv) );
+    }
+    
+    State State :: sp(const State& spinor)  const {
+        return Op::sp(*this, spinor);
+    }
 
-    State :: State (const State& s) : Touchable() {
-//	cout << "State Copy Constructor" << endl;
-    //bSelected = s.isSelected();
+    State State :: re( const State& versor)  const {
+        return Op::re(*this, versor);
+    }
+    
+    State State ::null() const {
+        return Ro::null(mW[0], mW[1], mW[2]);
+    }
+
+State :: State (const State& s) : Touchable() {
         
 	mIdx = s.mIdx;
 	mNum = s.mNum;
-//	mR = s.mR; mG = s.mG; mB = s.mB;
 	_init();
-//	_reinit();
 	copy(s.mW, s.mW + mNum, mW);
-	//delete[] s.mW; 
 }
 
 State :: ~State() { 

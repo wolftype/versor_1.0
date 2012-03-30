@@ -757,11 +757,11 @@ void Draw :: S (const State& s){
     S(s,1,1,1);
 }
     
-void Draw :: S (const State& s, float a, float b, float c){
+void Draw :: S (const State& s, float r, float g, float b, float a){
 	glPushMatrix();
 	
-    glColor3f(a,b,c);
-    if (s.isSelected()) glColor3f(1,0,0);
+    glColor4f(r,g,b,a);
+    if (s.isSelected()) glColor4f(1,0,0,a );
     
 
 	switch(s.idx()){
@@ -828,8 +828,8 @@ void Draw :: S (const State& s, float a, float b, float c){
 			
 //			pp[0].color(s.red(), s.green(), s.blue(), s.alpha()); 
 //			pp[1].color(s.red(), s.green(), s.blue(), s.alpha());
-			pp[0].draw(a,b,c);
-			pp[1].draw(a,b,c);
+			pp[0].draw(r,g,b,a);
+			pp[1].draw(r,g,b,a);
 			
 //			Pnt p = Ro::cen( s );
 //			Draw::L (p);

@@ -2129,6 +2129,7 @@
 		9BCECCC81524FCFF00589E30 /* GLVInterfaceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */; };
 		9BCECCCA1524FD4100589E30 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC91524FD4100589E30 /* Interface.cpp */; };
 		9BCECCCC1524FD5900589E30 /* Gui.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCCB1524FD5900589E30 /* Gui.hpp */; };
+		9BCECCD415252EE700589E30 /* Eval.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCD315252EE600589E30 /* Eval.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4325,6 +4326,7 @@
 		9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVInterfaceImpl.h; sourceTree = "<group>"; };
 		9BCECCC91524FD4100589E30 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
 		9BCECCCB1524FD5900589E30 /* Gui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Gui.hpp; sourceTree = "<group>"; };
+		9BCECCD315252EE600589E30 /* Eval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eval.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* vsr.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -6572,6 +6574,7 @@
 				9B47803C1523C8FB008A3481 /* gfx */,
 				9B47803B1523C8D8008A3481 /* util */,
 				9B23A848151E85AF009304D6 /* Interface.h */,
+				9BCECCD315252EE600589E30 /* Eval.h */,
 				9B936A471442B2C300679F92 /* State.h */,
 				9B936A691442B3E900679F92 /* Param.h */,
 				9B9D13491442B1760032E5A3 /* Camera.h */,
@@ -7873,6 +7876,7 @@
 				9BC1720715225AA300A1128C /* Set.h in Headers */,
 				9BC1720915225E6900A1128C /* Model.h in Headers */,
 				9BC1720B15225E9000A1128C /* Drawable.h in Headers */,
+				9BCECCD415252EE700589E30 /* Eval.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

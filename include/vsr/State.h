@@ -215,10 +215,21 @@ allocation)
 		
         
         State dual() const;
-        
-		bool isDual() { return bDual; }
+ 		bool isDual() { return bDual; }
 		void duality(bool b) { bDual = b; }
-		
+
+        State rot(const State& biv) const;
+        State trs(const State& trs) const;
+        State mot(const State& mot) const;
+        State dil(double t) const;
+        State dil(const State& dil, double t) const;
+        State trv(const State& tnv) const;
+        
+		State sp(const State& spinor) const;
+        State re(const State& versor) const;
+        
+        State null() const;
+        
 		//Returns empty state return type of operation
 		static State gpr(int, int);
 		static State opr(int, int);
@@ -253,8 +264,8 @@ allocation)
         /* Printing */
 		friend ostream& operator << (ostream&, const State&);
 		
-		virtual void draw(){ Draw::S(*this); }
-        void draw(float a, float b, float c){ Draw::S(*this,a,b,c); }
+		virtual void draw(){ draw(1,1,1); }
+        virtual void draw(float r, float g, float b, float a = 1.0){ Draw::S(*this,r,g,b,a); }
 //		void clickTest(double x, double y){ Draw::clickTest(*this, x, y, 0); }
     
 

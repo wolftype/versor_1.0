@@ -150,8 +150,9 @@ namespace vsr  {
         Vec screenCoord(const Pnt& p);
         bool pntClicked(const State&, double rad = .05);
         
-        void ui(State&, double t = 1);
+        void ui(State&, double t = 1.0);
         void ui(State& s, State& x, double t);
+        void ui(Frame& f, double t = 1.0);
         
         void windowTransform();
         void stateTransform();
@@ -172,6 +173,7 @@ namespace vsr  {
         Vec click(){ return mouse.click;   }
         Vec pos(){ return mouse.pos;     }
         void xf ( State * s, State& pos, double t );
+        void xfFrame( Frame * f, double t);
         
         /* Mode */
         int& mode() { return mMode; }

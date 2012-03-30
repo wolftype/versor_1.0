@@ -152,7 +152,7 @@ namespace vsr {
 				
 				/* Draw State, Label, and Node Info */
 				static void S(const State&);
-                static void S(const State&, float, float, float);
+                static void S(const State&, float, float, float,float a = 1.0);
 
 //				static void L(const State&);				
 //				static void L(const State&, Scene&);

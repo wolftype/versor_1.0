@@ -32,7 +32,7 @@
 
 namespace vsr {
 
-	class Frame {
+	class Frame : public Touchable {
 	
 		protected:
 		
@@ -498,7 +498,8 @@ namespace vsr {
 			virtual void push();
 			virtual void pop();			
 
-			virtual void draw();
+            virtual void draw(float a, float b, float c);
+            virtual void draw(){ draw(1,1,1); }
 			void drawBound() { bound().draw(); }	
 
 			
