@@ -11,17 +11,17 @@
 
 namespace vsr {
 
-Frame :: Frame() :
+Frame :: Frame() : Touchable(),
 mPos(0,0,0,1,0), mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
 mRot(1,0,0,0), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9), aPar(.9)
 { orient(); }
 
-Frame :: Frame(const State& p, const State& r)  :
+Frame :: Frame(const State& p, const State& r)  : Touchable(),
 mPos( p ), mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
 mRot( r ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9), aPar(.9)
 { orient(); }
 
-Frame :: Frame(const State& m) :
+Frame :: Frame(const State& m) : Touchable(),
 mPos( Op::sp0(Ori(1),m) ), mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
 mRot( Op::sp(Rot::e12(0),m) ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9),  aPar(.9)
 { orient(); }
@@ -81,11 +81,11 @@ void Frame :: pop(){
 	Draw :: Pop();
 }
 
-void Frame :: draw(){
+void Frame :: draw(float a, float b, float c){
 	push();
-		mX.draw();
-		mY.draw();
-		mZ.draw();
+		mX.draw(1,0,0);
+		mY.draw(0,1,0);
+		mZ.draw(0,0,1);
 	pop();
 }
 

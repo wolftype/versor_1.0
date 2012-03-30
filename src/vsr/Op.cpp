@@ -487,8 +487,6 @@ State Gen::mot_dll(const State& dll){
 
 	Dll b = dll;
 
-//	if (b == Dll(0,0,0,0,0,0) ) { cout << "null dll mot" << endl; return Mot(1,0,0,0,0,0,0,0); }
-
 	double  c = ( sqrt( fabs ( Biv(dll).wt() ) ) );
 	double sc = sin(c);
 	double cc = cos(c);
@@ -503,8 +501,6 @@ State Gen::mot_dll(const State& dll){
 	Vec tv = Op::pj(t,B) ; //from axis
 	Vec tw = Op::rj(t,B) ; //along axis
 
-//	cout << dll << tw <<  t << B << Op::pj(t,B) << endl;
-//	cout << tv << Op::rj(t,B)<<endl;
 	
 	tv *= Math::sinc(c);
 	
