@@ -10,18 +10,9 @@
 
 #include "vsr.h"
 #include "GLVInterfaceImpl.h"
-#include "Gui.hpp"
 
 
 
-#define SET \
-static bool bSet = 1;\
-if(bSet){\
-    bSet = 0;
-#define END }
-
-#define IT(n) \
-for(int i = 0; i < n; ++i){
 
 using namespace vsr;
 using namespace glv;

@@ -1,0 +1,14 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="11",labelfontname="Helvetica",labelfontsize="11"];
+  node [fontname="Helvetica",fontsize="11",shape=record];
+  Node1 [label="vsr::Camera",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node2 [label="vsr::Frame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_frame.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node3 [label="vsr::Touchable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_touchable.html"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node4 [label="vsr::Drawable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_drawable.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" mImage" ,fontname="Helvetica"];
+  Node5 [label="vsr::Mat4\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_mat4.html"];
+}

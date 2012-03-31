@@ -1,0 +1,40 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="11",labelfontname="Helvetica",labelfontsize="11"];
+  node [fontname="Helvetica",fontsize="11",shape=record];
+  rankdir="LR";
+  Node1 [label="vsr::GLVInterface",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node2 [label="vsr::Interface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_interface.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" iimpl" ,fontname="Helvetica"];
+  Node3 [label="vsr::Interface::InputImpl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structvsr_1_1_interface_1_1_input_impl.html"];
+  Node2 -> Node3 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" interface" ,fontname="Helvetica"];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" mouse" ,fontname="Helvetica"];
+  Node4 [label="vsr::MouseData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structvsr_1_1_mouse_data.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" keyboard" ,fontname="Helvetica"];
+  Node5 [label="vsr::KeyboardData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structvsr_1_1_keyboard_data.html"];
+  Node6 -> Node2 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" model" ,fontname="Helvetica"];
+  Node6 [label="vsr::Model",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_model.html"];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node7 [label="vsr::Set\< State \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_set.html"];
+  Node8 -> Node6 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node8 [label="vsr::Drawable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_drawable.html"];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node8 -> Node6 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node9 -> Node6 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node9 [label="vsr::Touchable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_touchable.html"];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node2 -> Node6 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" interface" ,fontname="Helvetica"];
+  Node10 -> Node2 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" vimpl" ,fontname="Helvetica"];
+  Node10 [label="vsr::Interface::ViewImpl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structvsr_1_1_interface_1_1_view_impl.html"];
+  Node11 -> Node10 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" camera" ,fontname="Helvetica"];
+  Node11 [label="vsr::Camera",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_camera.html"];
+  Node12 -> Node11 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node12 [label="vsr::Frame",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_frame.html"];
+  Node9 -> Node12 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
+  Node13 -> Node12 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" mImage" ,fontname="Helvetica"];
+  Node13 [label="vsr::Mat4\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_mat4.html"];
+  Node14 -> Node10 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" data" ,fontname="Helvetica"];
+  Node14 [label="vsr::ViewData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structvsr_1_1_view_data.html"];
+  Node2 -> Node10 [dir="back",color="darkorchid3",fontsize="11",style="dashed",label=" interface" ,fontname="Helvetica"];
+}
