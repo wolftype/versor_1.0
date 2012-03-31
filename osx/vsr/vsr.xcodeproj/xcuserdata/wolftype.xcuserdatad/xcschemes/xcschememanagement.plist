@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>TestLinkage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>TestVsr.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -101,6 +106,11 @@
 			<true/>
 		</dict>
 		<key>9BC171FB1522519500A1128C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BCECCD81526759300589E30</key>
 		<dict>
 			<key>primary</key>
 			<true/>

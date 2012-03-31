@@ -401,6 +401,7 @@ namespace vsr {
        mouse.cat     = Op::sp0( mouse.move * -1, -camera().cat() );
        mouse.biv     = mouse.pos ^ mouse.projectFar; //not used?
         
+        //Point on Line Closest to Origin
         mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), 1 ) );
        mouse.bivCat = vd().z ^ mouse.cat;
 

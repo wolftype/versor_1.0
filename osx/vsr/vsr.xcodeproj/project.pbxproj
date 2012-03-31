@@ -2124,12 +2124,17 @@
 		9BC1720715225AA300A1128C /* Set.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720615225AA300A1128C /* Set.h */; };
 		9BC1720915225E6900A1128C /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720815225E6900A1128C /* Model.h */; };
 		9BC1720B15225E9000A1128C /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1720A15225E9000A1128C /* Drawable.h */; };
-		9BCECCC21524FC9C00589E30 /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC01524FC9C00589E30 /* Gui.cpp */; };
-		9BCECCC31524FC9C00589E30 /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC01524FC9C00589E30 /* Gui.cpp */; };
 		9BCECCC81524FCFF00589E30 /* GLVInterfaceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */; };
 		9BCECCCA1524FD4100589E30 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC91524FD4100589E30 /* Interface.cpp */; };
 		9BCECCCC1524FD5900589E30 /* Gui.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCCB1524FD5900589E30 /* Gui.hpp */; };
 		9BCECCD415252EE700589E30 /* Eval.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCD315252EE600589E30 /* Eval.h */; };
+		9BCECCDF1526759300589E30 /* TestLinkage.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BCECCDE1526759300589E30 /* TestLinkage.1 */; };
+		9BCECCE4152675C600589E30 /* TestLinkage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCE3152675C600589E30 /* TestLinkage.cpp */; };
+		9BCECCE5152676E200589E30 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
+		9BCECCE6152676E800589E30 /* glv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFC3F152026A4009E322F /* glv.framework */; };
+		9BCECCE7152676EE00589E30 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
+		9BCECCE8152676F900589E30 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
+		9BCECCEE15269AD600589E30 /* Graph.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCED15269AD400589E30 /* Graph.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2175,6 +2180,20 @@
 			remoteGlobalIDString = 9B8AFC3E152026A4009E322F;
 			remoteInfo = glv;
 		};
+		9BCECCE91526770900589E30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B8AFC3E152026A4009E322F;
+			remoteInfo = glv;
+		};
+		9BCECCEB1526770D00589E30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B9D0E641442A5330032E5A3;
+			remoteInfo = vsr;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -2203,6 +2222,16 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		9BCECCD71526759300589E30 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9BCECCDF1526759300589E30 /* TestLinkage.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -4322,11 +4351,14 @@
 		9BC1720615225AA300A1128C /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
 		9BC1720815225E6900A1128C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		9BC1720A15225E9000A1128C /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
-		9BCECCC01524FC9C00589E30 /* Gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gui.cpp; sourceTree = "<group>"; };
 		9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVInterfaceImpl.h; sourceTree = "<group>"; };
 		9BCECCC91524FD4100589E30 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
 		9BCECCCB1524FD5900589E30 /* Gui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Gui.hpp; sourceTree = "<group>"; };
 		9BCECCD315252EE600589E30 /* Eval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eval.h; sourceTree = "<group>"; };
+		9BCECCD91526759300589E30 /* TestLinkage */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestLinkage; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BCECCDE1526759300589E30 /* TestLinkage.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestLinkage.1; sourceTree = "<group>"; };
+		9BCECCE3152675C600589E30 /* TestLinkage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLinkage.cpp; path = ../../tests/TestLinkage.cpp; sourceTree = "<group>"; };
+		9BCECCED15269AD400589E30 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* vsr.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -4389,6 +4421,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BCECCD61526759300589E30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BCECCE8152676F900589E30 /* GLUT.framework in Frameworks */,
+				9BCECCE7152676EE00589E30 /* libvsr.a in Frameworks */,
+				9BCECCE6152676E800589E30 /* glv.framework in Frameworks */,
+				9BCECCE5152676E200589E30 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -4401,6 +4444,7 @@
 				C6859E8C029090F304C91782 /* Documentation */,
 				9B4780361523C77B008A3481 /* external lib */,
 				9B69B9821523E9FC00C308D4 /* TestVsrGlv2 */,
+				9BCECCDB1526759300589E30 /* TestLinkage */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = vsr;
@@ -4425,6 +4469,7 @@
 				9B8AFC14151FF631009E322F /* TestVsrGlv */,
 				9B8AFC3F152026A4009E322F /* glv.framework */,
 				9B69B9801523E9FC00C308D4 /* TestVsrGlv2 */,
+				9BCECCD91526759300589E30 /* TestLinkage */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4502,6 +4547,7 @@
 			children = (
 				9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */,
 				9B69B98A1523EA1700C308D4 /* TestVsrGlv2.cpp */,
+				9BCECCE3152675C600589E30 /* TestLinkage.cpp */,
 			);
 			name = tests;
 			sourceTree = "<group>";
@@ -6367,7 +6413,6 @@
 				9B9D12901442B16E0032E5A3 /* vsr_file.cpp */,
 				9B9D12911442B16E0032E5A3 /* vsr_interp.cpp */,
 				9B9D12921442B16E0032E5A3 /* vsr_math.cpp */,
-				9BCECCC01524FC9C00589E30 /* Gui.cpp */,
 			);
 			name = vsr;
 			path = ../../src/vsr;
@@ -6579,6 +6624,7 @@
 				9B936A691442B3E900679F92 /* Param.h */,
 				9B9D13491442B1760032E5A3 /* Camera.h */,
 				9B9D134A1442B1760032E5A3 /* Chain.h */,
+				9BCECCED15269AD400589E30 /* Graph.h */,
 				9B9D134C1442B1760032E5A3 /* Frame.h */,
 				9BC1720615225AA300A1128C /* Set.h */,
 				9BC1720815225E6900A1128C /* Model.h */,
@@ -6781,6 +6827,14 @@
 				9B9D13FC1442B1760032E5A3 /* Vec_Aff.h */,
 			);
 			path = derived;
+			sourceTree = "<group>";
+		};
+		9BCECCDB1526759300589E30 /* TestLinkage */ = {
+			isa = PBXGroup;
+			children = (
+				9BCECCDE1526759300589E30 /* TestLinkage.1 */,
+			);
+			path = TestLinkage;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -7877,6 +7931,7 @@
 				9BC1720915225E6900A1128C /* Model.h in Headers */,
 				9BC1720B15225E9000A1128C /* Drawable.h in Headers */,
 				9BCECCD415252EE700589E30 /* Eval.h in Headers */,
+				9BCECCEE15269AD600589E30 /* Graph.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7994,6 +8049,25 @@
 			productReference = 9B9D11881442AB710032E5A3 /* test */;
 			productType = "com.apple.product-type.tool";
 		};
+		9BCECCD81526759300589E30 /* TestLinkage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BCECCE01526759400589E30 /* Build configuration list for PBXNativeTarget "TestLinkage" */;
+			buildPhases = (
+				9BCECCD51526759300589E30 /* Sources */,
+				9BCECCD61526759300589E30 /* Frameworks */,
+				9BCECCD71526759300589E30 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9BCECCEC1526770D00589E30 /* PBXTargetDependency */,
+				9BCECCEA1526770900589E30 /* PBXTargetDependency */,
+			);
+			name = TestLinkage;
+			productName = TestLinkage;
+			productReference = 9BCECCD91526759300589E30 /* TestLinkage */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -8020,6 +8094,7 @@
 				9B9D11871442AB710032E5A3 /* TestVsr */,
 				9B8AFC13151FF631009E322F /* TestVsrGlv */,
 				9B69B97F1523E9FC00C308D4 /* TestVsrGlv2 */,
+				9BCECCD81526759300589E30 /* TestLinkage */,
 			);
 		};
 /* End PBXProject section */
@@ -8894,7 +8969,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B69B98B1523EA1700C308D4 /* TestVsrGlv2.cpp in Sources */,
-				9BCECCC31524FC9C00589E30 /* Gui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8903,7 +8977,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B4780381523C7DE008A3481 /* TestVesrGlv.cpp in Sources */,
-				9BCECCC21524FC9C00589E30 /* Gui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9132,6 +9205,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BCECCD51526759300589E30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BCECCE4152675C600589E30 /* TestLinkage.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -9164,6 +9245,16 @@
 			isa = PBXTargetDependency;
 			target = 9B8AFC3E152026A4009E322F /* glv */;
 			targetProxy = 9B8AFCB6152027A3009E322F /* PBXContainerItemProxy */;
+		};
+		9BCECCEA1526770900589E30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B8AFC3E152026A4009E322F /* glv */;
+			targetProxy = 9BCECCE91526770900589E30 /* PBXContainerItemProxy */;
+		};
+		9BCECCEC1526770D00589E30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B9D0E641442A5330032E5A3 /* vsr */;
+			targetProxy = 9BCECCEB1526770D00589E30 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -9463,6 +9554,45 @@
 			};
 			name = Release;
 		};
+		9BCECCE11526759400589E30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9BCECCE21526759400589E30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -9528,6 +9658,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9BCECCE01526759400589E30 /* Build configuration list for PBXNativeTarget "TestLinkage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BCECCE11526759400589E30 /* Debug */,
+				9BCECCE21526759400589E30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

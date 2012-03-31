@@ -98,6 +98,9 @@ namespace vsr {
         GLVInterface interface;
         Gui gui;
         
+        MouseData& mouse() { return interface.mouse; }
+        GLVView& view() { return interface.view(); }
+        
         GLVApp(Window * w) : View3D() {
             
             interface.view().win = w;

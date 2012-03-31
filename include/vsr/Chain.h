@@ -14,14 +14,24 @@
 #define VSR_CHAIN_H_INCLUDED
 
 #include "Frame.h"
-//#include "GL.h"
 
 namespace vsr {
+    
+    struct ChainNode : public Frame {
+        
+        
+        Frame mLink;  ///< Displacement From Previous Link
+        
+       // mJoint;
+    };
 
 	class Chain : public Frame {
 		
-		Frame * mFrame;			///< Absolute frame of Joints
-		Frame * mLink;			///< Relative frame (to previous joint)
+      //  ChainNode * mNode;
+        
+        
+		Frame * mFrame;			///< Absolute frames of Joints
+		Frame * mLink;			///< Relative frames (to previous joint)
 		Frame * mJoint;			///< In socket transformation
 		
 		int mNum;
@@ -47,17 +57,17 @@ namespace vsr {
 			
 			/* GETTERS AND SETTERS */
 			int num() const { return mNum; }
-			Frame& link(int k) { return mLink[k]; }						///< set Link to previous Joint
-			Frame& joint(int k) { return mJoint[k]; }					///< Get In Socket Transformation kth Joint
+			Frame& link(int k) { return mLink[k]; }						///< set Link From previous Joint
+			Frame& joint(int k) { return mJoint[k]; }					///< Get In Socket Transformation of kth Joint
 			Frame& frame(int k) { return mFrame[k]; }					///< set Absolute Displacement Motor
 
-			Frame link(int k) const { return mLink[k]; }				///< Get Link Frame to previous joint 
+			Frame link(int k) const { return mLink[k]; }				///< Get Link From previous joint 
 			Frame joint(int k) const { return mJoint[k]; }				///< Get In Socket Transformation kth Joint
 			Frame frame(int k) const { return mFrame[k]; }				///< set Absolute Displacement Motor
 
 			
-			Frame& operator [] (int k) { return frame(k); }				///< Set Absolute 
-			Frame operator [] (int k) const { return frame(k); }		///< Get Absolute 
+			Frame& operator [] (int k) { return frame(k); }				///< Set Absolute Frame at K
+			Frame operator [] (int k) const { return frame(k); }		///< Get Absolute Frame at K
 			
 			/* SURROUNDS */
 			/// Sphere Centered at Joint K Going Through Joint K+1 
@@ -83,14 +93,14 @@ namespace vsr {
 			}
 			/// Plane 
 			
-			/// Line Forward: Dual Line from kth joint to kth+1 joint
+			/// Line Forward: Line from kth joint to kth+1 joint
 			Dll linf(int k) { return Op::dl( mFrame[k].pos() ^ mFrame[k+1].pos() ^ Inf(1) ).runit() ; }
-			/// Line Backward: Dual Line from kth joint to kth-1 joint
+			/// Line Backward: Line from kth joint to kth-1 joint
 			Dll linb(int k ) { return Op::dl( mFrame[k].pos() ^ mFrame[k-1].pos() ^ Inf(1) ).runit() ; }
-			/// Line From Kth Joint to Target (Default is From Last joint)
+			/// Line From Kth Joint to Input Target (Default is From Last joint)
 			Dll lin(const Pnt& p ) { return Op::dl( mFrame[mNum-1].pos() ^ p ^ Inf(1) ).runit() ; }
 			
-			/// Forward Kinematics: Concatenation of previous frame, previous link, and current joint
+			/// Forward Kinematics: Concatenations of previous frame, previous link, and current joint
 			void fk() {							
 				for (int i = 1; i < mNum; ++i){		
 					Mot m = mJoint[i].mot() * mLink[i-1].mot() * mFrame[i-1].mot();
@@ -125,6 +135,7 @@ namespace vsr {
 					mLink[i].mot( mFrame[i+1].mot() / mFrame[i].mot() ); 
 				}
 			} 
+        
 			
 			virtual void draw(){
 				for (int i = 0; i < mNum; ++i){

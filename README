@@ -1,29 +1,133 @@
-Hi!  Welcome to conformal geometric algebra at your fingertips!  Huzzah!
+Versor (vsr) library for Conformal Geometric Algebra.  See Copyright notice (GPL).  
 
-See also wolftype.com/versor for doxygen and look at wolftype channel on vimeo for a few demos.
+Contact:    Pablo Colapinto
+Email:      wolftype@gmail.com
 
-This is the Versor (vsr) library.  Use it to draw geometrical things! Support for MAC OS X.  
+README CONTENTS: 
 
-It is designed to run on other platforms but not currently supported.  A static library version
-is in the works . . .
+INTRODUCTION | ELEMENTS AND OPERATORS | COMPILATION | DEPENDENCIES
 
-The Xcode project in OSX/vsr/ takes care of the multistage compilation process
+////////////
+INTRODUCTION
+------------
 
-It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors.  
-It creates libvsr.a, a library that calls the functions in the cga framework and does other nifty things
-(like helps with common operations).  Take a look at Op.h.
+Welcome!  This package provides operations and draw routines for conformal geometric algebra. It is designed to make graphical experimentation of geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/).
 
-Documentation:
-wolftype.com/versor 
-email me at wolftype@gmail.com
+I developed it while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It's a great book.
 
-External Librarys:
-libvsr.a is a graphics library and so requires OpenGL.    
+You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.
 
-GLV is bundled and TestVsrGLV is an implementation that fuses vsr's interface class with a glv implementation.  
-Made by my colleagues at MAT program at UCSB, GLV is good for quick and easy OpenGL guis.
+See also wolftype.com/versor for doxygen, a link to my master's thesis, and maybe take a look at wolftype channel on vimeo for a few quick demos on what kinds of animations this thing can quickly whip up.
+
+A tutorial is in the works . . . For now consider the test examples.  One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
+
+//////////////////////
+ELEMENTS AND OPERATORS
+----------------------
+
+Basically, there are three overloaded binary operators: 
+
+*    The Geometric Product
+^    The Outer Product
+<=   The Inner Product
+
+[There is also % which is a commutator product]
+
+And a few overloaded operations:
+
+! or -  Inverse
+~       Reverse
+
+And finally, since I ran out of operators, some basic methods
+
+conjugate()
+involute()
+
+These operators act on the elements of the algebra.  The elements are geometric entities.  
+
+A * B  multiplies two elements together (and, in the case of A * !B, finds ratios between elements)
+A ^ B   wedges two elements together ( builds up higher dimensional elements )
+A <= B  contracts A out of B ( returns the part of B least like A )
+
+To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long.
+
+"EUCLIDEAN ELEMENTS"
+Sca -- Scalar       (A real number)
+Vec -- Vector       (A Directed Magnitude, or 3D Vector, typical cartesian stuff)
+Biv -- Bivector     (A Directed Area. Use them to make Rotors (aka Quaternions): Gen::Rot( Biv b ) )
+Tri -- Trivector    (A Directed Volume Element)
+
+"ROUND ELEMENTS"
+Pnt -- Point            (Pnt a) (Pnt a = Vec(1,0,0).null() ) 
+Par -- Point Pair       (Pnt a ^ Pnt b)
+Cir -- Circle           (Pnt a ^ Pnt b ^ Pnt c)
+Sph -- Sphere           (Pnt a ^ Pnt b ^ Pnt c ^ Pnt d)
+Dls -- Dual Sphere      (same as a point, so: typedef Pnt Dls)
+
+"FLAT ELEMENTS"
+Lin -- Line
+Dll -- Dual Line
+Pln -- Plane
+Dlp -- Dual Plane
+
+"ABSTRACT ELEMENTS"
+Mnk -- Minkowski Plane
+Pss -- PseudoScalar (5D)
+Inf -- Infinity
+
+"VERSORS"
+Rot -- Rotor 
+Trs -- Translator
+Dil -- Dilator
+Mot -- Motor
+Trv -- Transversor
+
+There are also built in macros, for instance
+EP  -- Imaginary Sphere At the Origin. 
+EM  -- Sphere at the Origin.  
+INF -- Infinity
+
+EP and EM can be invoked instead of INF to work in non-Euclidean metrics ( Hyperbolic and Spherical, respectively)
+
+Most elements can be drawn by invoking the draw() method.  Some can't (yet) either because it wasn't obvious
+how to draw them (e.g the scalar) or because I just didn't figure out how to do it or because I forgot.  If you
+want something to be drawable, let me know and I'll add it in.
+
+<element>.draw() 
+or by feeding in r,g,b values
+<element>.draw(float r, float g, float b )
+or by feeding in r,g,b,a values
+<element>.draw(float r, float g, float b, float a )
 
 
+All elements can be dualized by invoking <element>.dual()
+
+All elements can be reflected over spinors with the sp() method
+
+All elements can be reflected over versors with the re() method
+
+///////////////
+COMPILATION
+---------------
 TO "INSTALL" ON MAC OSX:
-The cross-platform Make files are not finished, so you'll need to use the built in xcode project, and run "TestVsrGlv.app".  
+For now, you'll need to use the built in xcode project, and run "TestVsrGlv.app".  
+
+The Xcode project in OSX/vsr/ takes care of the multistage compilation process.
+It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors into  
+libvsr.a, a library that calls the functions in the cga framework and does other nifty things
+(like helps with draw routines and helps with common operations).  Take a look at Op.h.
+
+Versor is designed to run on other platforms but not currently tested.  A static library version
+is in the works.  It should run faster.
+
+Documentation can be found at wolftype.com/versor 
+This is my first program!  Feel free email me at wolftype@gmail.com
+
+/////////////
+DEPENDENCIES
+-------------
+libvsr.a is a graphics library and so requires OpenGL.  The included tests link to GLUT and GLV, which comes included.  
+(Made by my colleagues at MAT program at UCSB, GLV is good for quick and easy OpenGL guis).
+
+
 

@@ -32,10 +32,18 @@ namespace vsr {
 #define INF Inf(1)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
-//#define IT(x)
+    
+#define SET \
+static bool bSet = 1;\
+if(bSet){\
+bSet = 0;
 
-//#define dbxy(f) 
-
+    
+#define IT(n) \
+for(int i = 0; i < n; ++i){
+    
+#define END }
+    
 //#define CMP(min,max,omin,omax,val) 
 #ifndef CLAMP 
 #define CLAMP(val,min,max) val<min?min:val>max?max:val 
