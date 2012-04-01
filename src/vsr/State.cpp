@@ -49,17 +49,30 @@ State State :: type(int _idx){
 	return State(n, _idx);
 }
 
-    
+    State State :: edual() const{
+        return Op::dle(*this);
+    }
+    State State :: eundual() const{
+        return Op::ude(*this);
+    }     
     State State :: dual() const{
         return Op::dl(*this);
     }
-    
+    State State :: undual() const{
+        return Op::ud(*this);
+    }    
     State State :: rot( const State& biv) const {
         return Op::sp(*this, Gen::rot_biv( biv ) ); 
     }
     State State :: trs(const State& trs) const {
-        return Op::sp(*this, Gen::trs(trs) );
+        return Op::sp0(*this, Gen::trs(trs) );
     }
+    State State :: rot(double x, double y, double z) const {
+        return Op::sp0(*this, Gen::rot_biv( Biv(x,y,z) ) ); 
+    }
+    State State :: trs(double x, double y, double z) const {
+        return Op::sp0 (*this, Gen::trs3(x,y,z) );
+    }    
     State State :: mot(const State& dll) const {
         return Op::sp(*this, Gen::mot_dll(dll) );
     }
@@ -72,13 +85,16 @@ State State :: type(int _idx){
     State State :: trv( const State& tnv) const {
         return Op::sp0(*this, Gen::trv(tnv) );
     }
+    State State :: trv(double x, double y, double z) const {
+        return Op::sp0 (*this, Gen::trv3(x,y,z) );
+    } 
     
     State State :: sp(const State& spinor)  const {
-        return Op::sp(*this, spinor);
+        return Op::sp0 (*this, spinor);
     }
 
     State State :: re( const State& versor)  const {
-        return Op::re(*this, versor);
+        return Op::re0 (*this, versor);
     }
     
     State State ::null() const {
@@ -214,289 +230,5 @@ bool State :: operator != (const State& s) const {
 	return false;
 }
 
-} //con
+} //vsr::
 
-//void State :: drawLabel(double _x, double _y, double _z){
-//	//Checks to see that state has registered with Scene
-//	if(mScene){	
-//	Vec w = screenCoord(_x,_y,_z);
-////	glColor3f(1,0,0);
-//	glv::draw::push2D(mScene -> w, mScene ->h);
-//		glTranslated(w[0], mScene -> h - w[1], 0);
-////		glColor3f(1,1,1);
-//		glv::draw::text( name().c_str() );
-//		if( isSelected() ) {
-//			glColor3f(1,0,0);
-//			glScaled(10,10,10);
-//			Glyph::Circle();
-//		}
-//	glv::draw::pop2D();	
-//	}
-//}
-//
-//
-//void State :: drawLoop(){
-//
-//	glPushMatrix();
-//	
-//	color4();
-//	glNormal3f(0, 0, 1);
-//
-//	switch(mIdx){
-//	
-//		case _VEC:
-//		{
-//			Glyph::Dir( *this );
-//			break;
-//		}
-//		
-//		case _DRV:
-//		{
-//			Glyph::Arr( *this );
-//			break;
-//		}
-//		
-//		case _BIV:
-//		{
-//			
-//			Vec4<> t = Op::aa( Op::ratio( Vec::z, Op::dle( *this ).unit() ) );
-//			
-//			double s = norm(); 
-//			bool sn = Op::sn(*this, Biv::xy);
-//			
-//			glRotated(t.w, t.x, t.y, t.z);
-//			
-//			Glyph::DirCircle(s, sn);
-//			//Glyph::Circular(s, sn);
-//			
-//			break;
-//		}
-//		
-//		case _DRB:
-//		{
-//			
-//			break;
-//		}
-//		case _TRI:
-//		{
-//			break;
-//		}						
-//		case _PNT:
-//		{
-//			//Point
-//			//Glyph::Point(*this);
-//			Pnt p = Ro::cen(*this);
-//			Glyph::Point(p);
-//
-//			//if (bLabel) drawLabel(p[0], p[1], p[2]);
-//			
-//			//Sphere (if radius not 0);
-//			double s = Ro::siz(*this);
-//			if (s!=0){
-//				double t = sqrt ( fabs ( s ) );;
-//				bool real = s > 0 ? 1 : 0;			
-//				glTranslatef(p[0], p[1], p[2]);
-//				(real) ? Glyph::SolidSphere(t) : Glyph::Sphere(t);	
-//			}					
-//			break;
-//		}
-//		
-//		case _PAR:
-//		{
-//			std::vector<Pnt> pp = Ro::split(*this);
-//			
-//			pp[0].color(mR, mG, mB,mA); 
-//			pp[1].color(mR, mG, mB,mA);
-//			pp[0].draw();
-//			pp[1].draw();
-//			
-//			Pnt p = Ro::cen(*this);
-//			drawLabel(p[0], p[1], p[2]);
-//			
-//			break;
-//		}
-//		
-//		case _CIR:
-//		{
-//			Biv b = Biv(Ro::dir(*this));
-//			Rot r = Op::ratio(Vec::z, Op::dle( b ).unit() );  //can this be done directly to Biv b?
-//			Pnt v = Ro::cen(*this);	
-//			
-//			//drawLabel(v[0], v[1], v[2]);
-//							
-//			double siz = Ro::siz(*this);
-//			double rad = Ro::rad(*this);
-//			Vec4<> t = Op::aa(r);
-//			bool sn = Op::sn(b, Biv::xy);
-//			
-//			glTranslated(v[0],v[1],v[2]);
-//			glRotated(t.w, t.x, t.y, t.z);
-//
-////			/* Is it imaginary */
-//			bool im = siz > 0 ? 1 : 0;
-//			if(mStyle) {
-//				if (mStyle & Style::FILL) (im==1) ? Glyph::DirFillCircle(rad, sn, getStyle(Style::ANIMATE) ) : Glyph::DirDashedCircle(rad,sn,getStyle(Style::ANIMATE));
-//				if (mStyle & Style::OUTLINE)(im==1) ? Glyph::DirCircle(rad, sn,getStyle(Style::ANIMATE) ) : Glyph::DirDashedCircle(rad,sn,getStyle(Style::ANIMATE));
-//			} else { //default case
-//				im ? Glyph::DirCircle(rad,sn) : Glyph::DirDashedCircle(rad,sn);
-//			}
-//			//siz > 0 ? Glyph::DirSegment(2.0 * PI/rad , rad, sn ) : Glyph::DirSegment(2.0 * PI/rad , rad, sn );
-//			break;
-//		}
-//		case _SPH:
-//		{
-//			Dls s = Op::dl(*this);
-//			Pnt p = Ro::cen(s);
-//			Glyph::Point(p);
-//			//cout << "THIS: " << *this << "CENTER" << p << endl;	
-//			drawLabel(p[0], p[1], p[2]);
-//			
-//			//Sphere (if radius not 0);
-//			double st = Ro::siz(*this);
-//			double t = sqrt ( fabs ( st ) );;
-//			bool real = st > 0 ? 1 : 0;			
-//			glTranslatef(p[0], p[1], p[2]);
-//			real ? Glyph::SolidSphere(t,20,20) : Glyph::Sphere(t,20,20);			
-//			break;
-//		}
-//		case _PLN:
-//		{
-//			Drv d	= Fl::dir(*this);
-//			Sph v	= Fl::loc(*this, Ori(1) );
-//			Rot r = Op::ratio( Vec::z, Op::dle( Biv(*this) ).unit() );
-//			glTranslated(v[0],v[1],v[2]);
-//			glMultMatrixd(&(Op::mat(r)[0][0]));
-//			Glyph::Rect();			
-//			break;
-//		}
-//		case _DLP:
-//		{
-//			Drv d	= Fl::dir(*this , 1 );
-//			Sph v   = Fl::loc(*this, Ori(1), 1 );
-//			Rot r = Op::ratio( Vec::z, Vec(*this).unit() );
-//			Vec4<> t = Op::aa(r);
-//			glTranslated(v[0],v[1],v[2]);
-//			Glyph::Pin(Vec(mW[0], mW[1], mW[2]));
-//			glRotated(t.w, t.x, t.y, t.z);
-//			Glyph::DottedRect();			
-//			break;
-//		}
-//		case _LIN:
-//		{
-//			Drv d	= Fl::dir(*this);
-//			Sph v	= Fl::loc(*this, Ori(1) );
-//			glTranslated(v[0],v[1],v[2]);
-//			Glyph::Line(d * 10, d * -10);			
-//			break;
-//		}
-//		case _DLL:
-//		{
-//			Drv d = Fl::dir(*this,1);
-//			Sph v = Fl::loc(*this, Ori(1), 1);
-//			glTranslated(v[0],v[1],v[2]);
-////			Rot r = Op::ratio(Vec::z, Vec(d).unit() );
-////			Vec4<> t = Op::aa(r);
-////			glRotated(t.w, t.x, t.y, t.z);
-//			Glyph::Line(d * 10, d * -10);			
-//			break;
-//
-//		}
-//		case _ROT:
-//		{
-//			//cout << "draw rot: " << endl;
-//			break;
-//		}			
-//	}	
-//	glPopMatrix();
-//}
-//
-////passing in space coordinates
-//void State :: clickTest( double x, double y ) {
-//
-////		Pnt mp = Ro::null(Vec(x,y,z));
-//		Vec mp(x,y,0);
-//		
-//		switch(mIdx){
-//	
-//		case _VEC:
-//		{
-//			break;
-//		}
-//		
-//		case _DRV:
-//		{
-//			break;
-//		}
-//		
-//		case _BIV:
-//		{						
-//			break;
-//		}
-//		
-//		case _DRB:
-//		{
-//			
-//			break;
-//		}
-//		case _TRI:
-//		{
-//		
-//		}
-//			break;
-//			
-//		case _PNT:
-//		case _PAR:
-//		case _CIR:
-//		{
-//			double t = Ro::siz(*this);
-//			Pnt p = Ro::loc(*this);	
-//			Vec w = screenCoord(p[0], p[1], p[2]);
-//			w[2] = 0;
-//			
-//			Pnt q1 = Ro::null(mp);
-//			Pnt q2 = Ro::null(w);
-//			cout << mp << endl;
-//			
-//			cout << "SCREEN COORD: " << w << endl;
-//			
-//			if ( fabs(Op::sca( q1 <= q2 )) < (t + 20) ){
-//				selectToggle();
-//				if(bSelected) {
-//				
-//				}
-//			}
-//			break;
-//		}
-//
-//		case _PLN:
-//		{
-//			Sph v	= Fl::loc( *this, Ori(1) );
-//			break;
-//		}
-//		case _DLP:
-//		{
-//			Sph v   = Fl::loc(*this, Ori(1), 1 );
-//			break;
-//		}
-//		case _LIN:
-//		{
-//			Sph v	= Fl::loc(*this, Ori(1) );
-//			break;
-//		}
-//		case _DLL:
-//		{
-//			Sph v = Fl::loc(*this, Ori(1), 1);
-//			break;
-//
-//		}
-//		case _ROT:
-//		{
-//			break;
-//		}
-//			
-//	}
-//	
-//	
-//
-//
-//}

@@ -697,11 +697,17 @@ bool Op::sn(const State& a, const State& b) {
 	return Op::sca(a / b) > 0 ? 1 : 0;
 }
 
-/* Spin Transform (continuous) Mk::cxr forces type*/
+/* Spin Transform (continuous) Mk::cxr forces return type to be same as input type*/
 State Op::sp( const State& s, const State& x) {
 //	return ( x * s * -x ) ;
 	return Mk::cxr[s.idx()]( x * s * -x ) ;
 }
+    
+///* Spin Transform (continuous) Mk::cxr forces return type to be same as input type*/
+//State Op::spf( const State& s, const State& x) {
+//    //	return ( x * s * -x ) ;
+//    return Mk::cxr[s.idx()]( x * s * -x ) ;
+//}
 
 /* Pin Transform (binary reflection) */
 State Op::re( const State& s, const State& x){
@@ -709,6 +715,13 @@ State Op::re( const State& s, const State& x){
 	return Mk::cxr[s.idx()] ( x * s.involute() * -x );
 }
 
+///* Pin Transform (binary reflection) */
+//State Op::ref( const State& s, const State& x){
+//    //	return  ( x * s.involute() * -x );
+//    return Mk::cxr[s.idx()] ( x * s.involute() * -x );
+//}
+//   
+    
 /* unforced versions */
 State Op::sp0( const State& s, const State& x) {
 	return x * s * -x ;
@@ -736,10 +749,10 @@ State Op::exp( const State& s, int n ) {
 	return tmp;
 }
 
-/* Meet */
-State Op::mt( const State& a, const State& b){
-	return a ^ b;
-}
+///* Meet */
+//State Op::mt( const State& a, const State& b){
+//	return a ^ b;
+//}
 
 /* Join not implemented */
 State Op::jn( const State& a, const State& b){ return a; }
@@ -758,29 +771,30 @@ State Op::pj( const State& a, const State& b){ return (a <= b ) / b; }
 /* Dilation */
 State Op::di( const State& s , double t) { return Op::sp(s, Dil(cosh(t*.5), sinh(t*.5)) ); }
 
-/* Rotation */
-State Op::ro( const State& s, const Biv& b) { 
-	double  c = sqrt(- ( b.wt() ) );
-	double sc = sin(c);
-	return Op::sp(s, Rot( cos(c), b[0]*sc, b[1]*sc, b[2]*sc ));
-}
-/* Translation */
-State Op::ts( const State& s, const Vec& v) {
-	return Op::sp(s, Trs( 1, v[0] * -.5, v[1] * -.5, v[2] * -.5 ) );
-}
-State Op::ts( const State& s, const Drv& v) {
-	return Op::sp(s, Trs( 1, v[0] * -.5, v[1] * -.5, v[2] * -.5 ) );
-}
-
-/* Transversion */
-State Op::tv( const State& s, const State& v) {
-	return Op::sp(s, Trv( 1, v[0], v[1], v[2] ) );
-}
-
-State Op::mo( const State& s, const State& v){
-
-//	return Op::sp(s, Mot(
-}
+///*! Rotation */
+//State Op::ro( const State& s, const Biv& b) { 
+//	double  c = sqrt(- ( b.wt() ) );
+//	double sc = sin(c);
+//	return Op::sp(s, Rot( cos(c), b[0]*sc, b[1]*sc, b[2]*sc ));
+//}
+//
+///* Translation */
+//State Op::ts( const State& s, const Vec& v) {
+//	return Op::sp(s, Trs( 1, v[0] * -.5, v[1] * -.5, v[2] * -.5 ) );
+//}
+//State Op::ts( const State& s, const Drv& v) {
+//	return Op::sp(s, Trs( 1, v[0] * -.5, v[1] * -.5, v[2] * -.5 ) );
+//}
+//
+///* Transversion */
+//State Op::tv( const State& s, const State& v) {
+//	return Op::sp(s, Trv( 1, v[0], v[1], v[2] ) );
+//}
+//
+//State Op::mo( const State& s, const State& v){
+//
+////	return Op::sp(s, Mot(
+//}
 
 /* Basis blade idx to Standard State */ 
 State Op::ba( int idx){
@@ -1085,7 +1099,8 @@ State Ro::car( const State& s) {
 State Ro::sur( const State& s) {
 	return Dls( s / ( s ^ Inf(1) ));
 }
-
+    
+//Default Dual = 0
 double Ro::siz( const State& s, int sn) {
 	State b = Inf(1) <= s;
 	return Op::sca( ( s * s.involute() ) / ( b * b ) * sn );

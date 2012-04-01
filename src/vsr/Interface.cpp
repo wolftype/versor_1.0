@@ -20,7 +20,7 @@ namespace vsr {
     
     State& Interface :: state()  { return model -> active(); }
     
-    void Interface :: ui( State& s, double t){
+    void Interface :: touch( State& s, double t){
         
         Dls dls;
         
@@ -47,11 +47,11 @@ namespace vsr {
                 break;			
         }
         
-        ui( s, dls, t);	
+        touch( s, dls, t);	
     }
     
     
-    void Interface :: ui( State& s, State& x, double t){
+    void Interface :: touch( State& s, State& x, double t){
 
         //s.color(1,1,0);
         
@@ -74,7 +74,7 @@ namespace vsr {
         
     }
     
-    void Interface :: ui( Frame& f, double t){
+    void Interface :: touch( Frame& f, double t){
         
         static double dt = 5;
         static double acc = .9;
@@ -284,18 +284,18 @@ namespace vsr {
                 
                 //Drag towards or away from element
                 int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                ts = Op::sp( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
+                ts = Op::sp0( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
                 break;
             }
             case 'g': //translate
             {
-                ts = Op::sp(ts, Gen::trs( mouse.dragCat * t ) );
+                ts = Op::sp0 (ts, Gen::trs( mouse.dragCat * t ) );
                 break;
             }
             case 'r': //rotate about local line
             {
                 Dll td = pos <= Drb( mouse.dragBivCat * t );
-                ts = Op::sp( ts, Gen::mot_dll( td ) );
+                ts = Op::sp0 ( ts, Gen::mot_dll( td ) );
                 break;
             }
             case 'b': //boost by drag (not working)
@@ -303,7 +303,7 @@ namespace vsr {
                 Tnv tnv( mouse.dragCat );
                 
                 State pp = Gen::tpar( Op::sp0( tnv, Gen::trs( cp ) ) * t );
-                ts = Op::sp(ts, pp);
+                ts = Op::sp0 (ts, pp);
                 glPushMatrix();
 				glTranslated(cp[0],cp[1],cp[2]);
 				tnv.draw();
@@ -313,11 +313,11 @@ namespace vsr {
             case 't': // twist about global line
             {
                 Dll td = Op::dl( mouse.origin ^ mouse.dragCat ^ Inf(1) );
-                ts = Op::sp( ts, Gen::mot_dll(td) );
+                ts = Op::sp0 ( ts, Gen::mot_dll(td) );
                 break;
             }
 
-            case Key::Escape:
+            case 'q':
             {
                 //cout << "deselect all" << endl;
                 s -> toggle();

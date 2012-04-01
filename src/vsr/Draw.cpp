@@ -807,7 +807,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		{
 			//if (bLabel) drawLabel(p[0], p[1], p[2]);
 			double a = Ro::siz( s, -1 );
-			//Draw as ual Sphere (if |radius| > 0.000001);
+			//Draw as dual Sphere (if |radius| > 0.000001);
 			if ( fabs(a) >  FPERROR ) {
 				
                 Pnt p = Ro::cen( s );
@@ -824,15 +824,31 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		
 		case _PAR:
 		{
+            
+            //Is Imaginary?
+            double siz = Ro::siz( s );
 			std::vector<Pnt> pp = Ro::split( s );
 			
-//			pp[0].color(s.red(), s.green(), s.blue(), s.alpha()); 
-//			pp[1].color(s.red(), s.green(), s.blue(), s.alpha());
-			pp[0].draw(r,g,b,a);
-			pp[1].draw(r,g,b,a);
+//			pp[0].draw(r,g,b,a);
+// 			pp[1].draw(r,g,b,a);
+			double a = Ro::siz( pp[0], -1 );
+            if ( fabs(a) >  FPERROR ) {				
+                Pnt p1 = Ro::cen( pp[0] );
+                Pnt p2 = Ro::cen( pp[1] );
+				double t = sqrt ( fabs ( siz ) );
+				bool real = siz > 0 ? 1 : 0;	
+                
+                glPushMatrix();
+				glTranslatef(p1[0], p1[1], p1[2]);
+				(real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
+                glPopMatrix();
+				glTranslatef(p2[0], p2[1], p2[2]);
+				(real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
 			
-//			Pnt p = Ro::cen( s );
-//			Draw::L (p);
+            } else {
+				Glyph::Point(pp[0]);
+				Glyph::Point(pp[1]);
+			}
 			
 			break;
 		}
@@ -873,10 +889,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 			Dls ts = Op::dl( s );
 			Pnt p = Ro::cen(ts);
 			Glyph::Point(p);
-			//cout << "THIS: " << *this << "CENTER" << p << endl;	
-//			Draw::L(p[0], p[1], p[2]);
-//			Draw::L(p);
-			
+            			
 			//Sphere (if radius not 0);
 			double st = Ro::siz( ts );
 			double t = sqrt ( fabs ( st ) );;
@@ -936,11 +949,16 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		}
 		case _TNB: //homogenous . . .
 		{
-		
+            Biv b(s); b.draw(0,0,1,.5);
+            break;
 		}
+        case _FLP:
+        {
+            s.null().draw(r,g,b,a);
+            break;
+        }
 		case _ROT:
 		{
-			//cout << "draw rot: " << endl;
 			break;
 		}			
 	}	

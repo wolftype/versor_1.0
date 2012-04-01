@@ -38,8 +38,8 @@ void test1(GLVApp& app){
     END
     
     //Click 'G' 'R' or 'S' to Grab, Rotate, or Scale 
-    app.interface.ui( c );
-    app.interface.ui( d );
+    app.interface.touch( c );
+    app.interface.touch( d );
     
     //Dual Meet of Dual Circle and Dual Plane
 	Cir c2 = c.dual()  ^ d ;
@@ -113,8 +113,8 @@ void test2(GLVApp& app){
     //DUAL XY PLANE (normal z), .5 units from origin
     static Dlp p(0,0,1,.5);
     
-    app.interface.ui( c );
-    app.interface.ui( p );
+    app.interface.touch( c );
+    app.interface.touch( p );
     
     
     //INTERSECTION OF PLANE AND CIRCLE
