@@ -82,7 +82,7 @@ but does NOT force any type.
 class Op {
 
 	public:
-		Op(){}
+		//Op(){}
 		
 		/* Basic Products */
 		/*! Inner Product of a and b */
@@ -452,7 +452,8 @@ class Ro {
 		/*! Point on Direct Circle c, at angle theta from horizontal */
 		static State pnt_cir(const Cir&, double theta);
 		/*! Point at 12 o'clock on a circle (deprecated -- use pnt_cir instead with theta = PI/2) */								
-		static State noon( const State& s);						
+		static State noon( const State& s);	
+    
 		/*! Conic Transform of point P. 
 		   If 1 > ecc > 0 elliptic, If ecc > 1 is hyperbolic, if ecc = 1  parabolic.
 		   See "Recent applications of conformal geometric algebra" Wareham, Cameron, and Lasenby

@@ -208,7 +208,7 @@ namespace vsr {
                 interface.view().getData(&glv);
                 
                 //Conduct User Interface Tests
-                interface.model -> ui();
+                interface.model -> touch();
                 
                 //Draw Multivectors to Scene
                 interface.model -> draw();

@@ -61,20 +61,20 @@ allocation)
 
 	protected:
 	
-		//index (for navigating function table)
+		/// index (for navigating function table)
 		int mIdx;		
-		//weights of bases
+		/// weights of bases
 		double *mW;
-		//number of bases
+		/// number of bases
 		int mNum;
-		//is dual?
+		/// is dual?
 		bool bDual;
     
-		//zero out
+		/// zero out
 		void _zero() { fill( mW, mW+mNum,0 ); }
-		//zero out n places of static buffer
+		/// zero out n places of static buffer
 		void _zerobuf(int n) const { fill (BUFFER, BUFFER+n, 0); } 
-		
+		/// initializer
 		virtual void _init() {
 			mW = new double [mNum]; _zero();
 		}
@@ -94,51 +94,62 @@ allocation)
 
         State& operator = (const State& s);
 		
-		//refill doubles with values from s
+		/// refill doubles with values from s
 		void recomp(const State& s) { for (int i = 0; i < num(); ++i) mW[i] = s[i]; }
-		//zero out 
+		/// zero out 
 		void zero() { _zero(); }
 		
-		//fperror avoidance
+		/// floating point error avoidance
 		State& error();
 
 		virtual ~State();
 		
-		/* New States */
+		/*! Geometric Product */
 		State operator	*	(const State&) const;
+		/*! Outer Product */
 		State operator	^	(const State&) const;
+		/*! Inner (Left hand Contraction) Product */
 		State operator	<=	(const State&) const;		
+        /*! Addition */
 		State operator	+	(const State&) const;
+         /*! Subtraaction */
 		State operator	-	(const State&) const;
 
 		State& operator	*=	(const State&);		
 		State& operator +=  (const State&);
 		State& operator -=  (const State&);
 		
-		//comparison
+		/// Blade by Blade Comparison
 		bool operator == (const State&) const;
+		/// Blade by Blade Comparison
 		bool operator != (const State&) const;
+		/// Not Implemented
 		bool operator > (double) const;
+		/// Not Implemented
 		bool operator < (double) const;
 		
+        /// Per Blade Multiply
 		State operator * (double s) const {
 			//_zerobuf(mNum);
 			for (int i =0; i < mNum; ++i) BUFFER[i] = mW[i] * s;
 			return State(BUFFER, mNum, mIdx);
 		}
 		
+        /// Per Blade Divide
 		State operator / (double s) const {
 			//_zerobuf(mNum);
 			for (int i =0; i < mNum; ++i) BUFFER[i] = mW[i] / s;
 			return State(BUFFER, mNum, mIdx);
 		}
 		
+        /// Per Blade Subtraction
 		State operator - (double s) const {
 			//_zerobuf(mNum);
 			for (int i =0; i < mNum; ++i) BUFFER[i] = mW[i] - s;
 			return State(BUFFER, mNum, mIdx);
 		}
 		
+        /// Per Blade Addition
 		State operator + (double s) const {
 			//_zerobuf(mNum);
 			for (int i =0; i < mNum; ++i) BUFFER[i] = mW[i] + s;
@@ -165,13 +176,14 @@ allocation)
 			return *this;
 		}
 		
+        /// Inversion
 		State operator -() const {
 			State sr = (~(*this));
 			State s = (*this) * sr;
 			if (s[0] == 0 ) return sr;
 			return (  sr / s[0] ); 
 		}
-		
+		/// Inversion
 		State operator !() const {
 			State sr = (~(*this));
 			State s = (*this) * sr;
@@ -184,17 +196,17 @@ allocation)
 		
 		/*! Commutator Differential (satifies Jacobian Identity ) */
 		State operator % ( const State& s ) const { return ( (*this) * s - s * (*this) ) * .5; }
-		
+		/*! Reversion */
 		State operator ~() const {
 			_zerobuf(mNum);
 			return State ( Conga::Line().reversion(mIdx, w(), BUFFER ), mNum, mIdx );		
 		}
-		
+		/// Involution
 		State involute() const {
 			_zerobuf(mNum);
 			return State ( Conga::Line().involution(mIdx, w(), BUFFER ), mNum, mIdx );		
 		}
-		
+		/// Conjugation
 		State conjugate() const {
 			_zerobuf(mNum);
 			return State ( Conga::Line().conjugation(mIdx, w(), BUFFER ), mNum, mIdx );		
@@ -202,32 +214,59 @@ allocation)
 		}
 			
 		
-		//Self operations
+		/// Dot With Self
 		State  dot() const { return (*this) <= (*this); }
+		/// Reverse Dot With Self
 		State  rdot() const { return (*this) * ~(*this); }
+        /// Weight of Dot With Self
 		double wt()  const { return dot()[0]; }
+        /// Square Root of Weight (incorrect, needs a revisit)
 		double sqwt() const { double s = dot()[0]; return sqrt(s * s); }
-		double rwt() const { return rdot()[0]; }
+		/// Weight of Reverse Dot With Self
+        double rwt() const { return rdot()[0]; }
 		double norm() const { double a = rwt(); if(a<0) return 0; return sqrt( a ); }
 		double rnorm() const { double a = rwt(); if(a<0) return -sqrt( -a ); return sqrt( a ); }
 		State unit() const { double t = sqrt( fabs( dot()[0] ) ); if (t == 0) return State(); return *this / t; }
 		State runit() const { double t = rnorm(); if (t == 0) return State(); return *this / t; }
 		
-        
+        /*! Euclidean Dual */
+        State edual() const;
+        /*! Euclidean Undual */
+        State eundual() const;
+        /*! Conformal Dual */
         State dual() const;
+        /*! Conformal Undual */
+        State undual() const;
+        /*! Boolen Is Dual? (Use with duality() setter ) */
  		bool isDual() { return bDual; }
+        /*! Force set duality */
 		void duality(bool b) { bDual = b; }
-
+        /*! Rotate by Bivector biv*/
         State rot(const State& biv) const;
+        /*! Rotate by Bivector x,y,z */
+        State rot(double x, double y, double z) const;
+        /*! Translate by direction trs */
         State trs(const State& trs) const;
-        State mot(const State& mot) const;
+        /*! Translate by direction x, y, z */
+        State trs(double x, double y, double z) const;
+        /*! Twist by dual line dll*/
+        State mot(const State& dll) const;
+        /*! Dilate from Origin by amt t*/
         State dil(double t) const;
+        /*! Dilate from Point dil by amt t*/
         State dil(const State& dil, double t) const;
+        /*! Transversion by tangent tnv*/
         State trv(const State& tnv) const;
-        
-		State sp(const State& spinor) const;
+        /*! Transversion by tangent x, y, z*/
+        State trv(double x, double y, double z) const;
+
+
+		/*! Spin by Spinor (Rot, Trs, Mot, Dil, Trv) */
+        State sp(const State& spinor) const;
+        /*! Reflect by versor (Vec, Dlp, Dls, Cir, Par) */
         State re(const State& versor) const;
         
+        /*! Convert to Null Point */
         State null() const;
         
 		//Returns empty state return type of operation

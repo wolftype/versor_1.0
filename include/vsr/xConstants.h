@@ -28,6 +28,7 @@ namespace vsr{
 #define ROOT2 1.41421
 #define ROOT3 1.73205
 #define FPERROR .00000001
+#define MAXRADIUS 100000
 
 #define CLAMP(val,min,max) val<min?min:val>max?max:val
 #define D2R(val) PI*val/180.0

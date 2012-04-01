@@ -9,6 +9,16 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>TestMeet.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>TestTransformation.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>TestVsr.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -111,6 +121,16 @@
 			<true/>
 		</dict>
 		<key>9BCECCD81526759300589E30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BCECCF21527881500589E30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BCECD0A1527BDC400589E30</key>
 		<dict>
 			<key>primary</key>
 			<true/>

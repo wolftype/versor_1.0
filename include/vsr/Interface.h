@@ -150,9 +150,9 @@ namespace vsr  {
         Vec screenCoord(const Pnt& p);
         bool pntClicked(const State&, double rad = .05);
         
-        void ui(State&, double t = 1.0);
-        void ui(State& s, State& x, double t);
-        void ui(Frame& f, double t = 1.0);
+        void touch(State&, double t = 1.0);
+        void touch(State& s, State& x, double t);
+        void touch(Frame& f, double t = 1.0);
         
         void windowTransform();
         void stateTransform();
@@ -204,9 +204,9 @@ namespace vsr  {
             }
         }
         
-        virtual void ui(){
+        virtual void touch(){
              for (int i = 0; i < mStates.size(); ++i){
-                 interface -> ui( *mStates[i] ); 
+                 interface -> touch( *mStates[i] ); 
              }
         }
     };

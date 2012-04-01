@@ -173,23 +173,33 @@ namespace vsr {
 			Dlp gxz() const	{ return forward() <= xld(); }		///< xz dual plane
 			Dlp gxy() const { return up() <= xld(); }			///< xy dual plane
 			Dlp gyz() const	{ return up() <= zld(); }			///< yz dual plane
-			/* Local Pairs */
+			/* Local XY Pair */
 			Par pxy() const { return gxy() ^ bound(); }			///< xy point pair
 			Par pxz() const { return gxz() ^ bound(); }			///< xz point pair
 			Par pyz() const { return gyz() ^ bound(); }			///< yz point pair
-			/* Local Circles */
+			
+            /* Local XY Circle */
 			Cir cxy() const { return Op::ud( pxy() ); }			///< xy circle
+            /* Local XZ Circle */
 			Cir cxz() const { return Op::ud( pxz() ); }			///< xz circle		
+            /* Local YZ Circle */
 			Cir cyz() const { return Op::ud( pyz() ); }			///< yz circle	
 			/* Local Tangents */
 			Par tx() const { return Op::sp0( Tnv( right() ), trs() ); }		///< x tangent generator in global space
 			Par ty() const { return Op::sp0( Tnv( up() ), trs() ); }		///< y tangent generator in global space
 			Par tz() const { return Op::sp0( Tnv( forward() ), trs() ); }	///< z tangent generator in global space
+            /* Local Tangents */
+            Par tx(double t) const { return Op::sp0( Tnv( right() * t), trs() ); }		///< x tangent generator in global space * t
+            Par ty(double t) const { return Op::sp0( Tnv( up() * t ), trs() ); }		///< y tangent generator in global space * t
+            Par tz(double t) const { return Op::sp0( Tnv( forward() * t ), trs() ); }	///< z tangent generator in global space * t
 			/* Local Boost Tranformations */
 			Pnt_Pnt ppx() { return Gen::tpar(tx()); }			///< x tangent space boost versor
 			Pnt_Pnt ppy() { return Gen::tpar(ty()); }			///< y tangent space boost versor
 			Pnt_Pnt ppz() { return Gen::tpar(tz()); }			///< z tangent space boost versor
-			
+            /* Local Boost Tranformations */
+            Pnt_Pnt ppx(double t) { return Gen::tpar(tx(t)); }			///< x tangent space boost versor
+            Pnt_Pnt ppy(double t) { return Gen::tpar(ty(t)); }			///< y tangent space boost versor
+            Pnt_Pnt ppz(double t) { return Gen::tpar(tz(t)); }			///< z tangent space boost versor			
 			Pnt pos() const { return mPos; }					///< get position point
 			void pos(const Pnt& p) { mPos = p; }				///< set position point 
 			Pnt& pos() { return mPos; }							///< set position point
@@ -498,7 +508,10 @@ namespace vsr {
 			virtual void push();
 			virtual void pop();			
 
-            virtual void draw(float a, float b, float c);
+            void drawX(float r, float g, float b, float a = 1.0);
+            void drawY(float r, float g, float b, float a = 1.0);
+            void drawZ(float r, float g, float b, float a = 1.0);
+            virtual void draw(float r, float g, float b, float a = 1.0);
             virtual void draw(){ draw(1,1,1); }
 			void drawBound() { bound().draw(); }	
 

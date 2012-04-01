@@ -81,7 +81,23 @@ void Frame :: pop(){
 	Draw :: Pop();
 }
 
-void Frame :: draw(float a, float b, float c){
+void Frame :: drawX(float r, float g, float b, float a ){
+    push();
+        mX.draw(r,g,b,a);
+    pop();
+}
+    void Frame :: drawY(float r, float g, float b, float a ){
+        push();
+        mY.draw(r,g,b,a);
+        pop();
+    }
+    void Frame :: drawZ(float r, float g, float b, float a ){
+        push();
+        mZ.draw(r,g,b,a);
+        pop();
+    }
+    
+void Frame :: draw(float r, float g, float b, float a){
 	push();
 		mX.draw(1,0,0);
 		mY.draw(0,1,0);
