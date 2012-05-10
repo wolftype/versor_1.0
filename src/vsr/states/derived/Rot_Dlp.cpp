@@ -173,7 +173,7 @@
 
 	void Rot_Dlp :: Bind(){
 		if (!bound) {
-			cout << "binding Rot_Dlp" << endl;
+			//cout << "binding Rot_Dlp" << endl;
 			Conga::Line().bindFunc("conga_assign_Rot_Dlp_fn",   &assign.ptr.get);
 			bound = 1;
 		}

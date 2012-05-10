@@ -173,7 +173,7 @@
 
 	void Mnk_Cir :: Bind(){
 		if (!bound) {
-			cout << "binding Mnk_Cir" << endl;
+			//cout << "binding Mnk_Cir" << endl;
 			Conga::Line().bindFunc("conga_assign_Mnk_Cir_fn",   &assign.ptr.get);
 			bound = 1;
 		}

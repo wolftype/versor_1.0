@@ -173,7 +173,7 @@
 
 	void Dil_Biv :: Bind(){
 		if (!bound) {
-			cout << "binding Dil_Biv" << endl;
+			//cout << "binding Dil_Biv" << endl;
 			Conga::Line().bindFunc("conga_assign_Dil_Biv_fn",   &assign.ptr.get);
 			bound = 1;
 		}

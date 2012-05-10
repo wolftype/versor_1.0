@@ -173,7 +173,7 @@
 
 	void Pnt_Lin :: Bind(){
 		if (!bound) {
-			cout << "binding Pnt_Lin" << endl;
+			//cout << "binding Pnt_Lin" << endl;
 			Conga::Line().bindFunc("conga_assign_Pnt_Lin_fn",   &assign.ptr.get);
 			bound = 1;
 		}

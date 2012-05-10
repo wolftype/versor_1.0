@@ -173,7 +173,7 @@
 
 	void Trs_Dll :: Bind(){
 		if (!bound) {
-			cout << "binding Trs_Dll" << endl;
+			//cout << "binding Trs_Dll" << endl;
 			Conga::Line().bindFunc("conga_assign_Trs_Dll_fn",   &assign.ptr.get);
 			bound = 1;
 		}

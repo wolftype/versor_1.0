@@ -9,15 +9,17 @@
 #ifndef vsr_Set_h
 #define vsr_Set_h
 
+
+
 namespace vsr  {
 
     template<typename T>
     class Set {
 
     protected:
-    
-        vector<T*> mStates;
-        vector<T> mTmp;
+        
+        vector<T> mData;
+        //vector<T> mTmp;             ///<  Stack for in-place calculations
         unsigned long mActiveId;
     
     public:
@@ -26,16 +28,29 @@ namespace vsr  {
         unsigned long& activeId() { return mActiveId; }
         unsigned long activeId() const { return mActiveId; }
         
-        Set& add(T* s) { mStates.push_back(s); mActiveId = mStates.size(); return *this; }
+        Set& insert(T s) { mData.insert( mData.begin(), s); }
+        Set& pop() { mData.pop_back(); } 
+        Set& add(T s) { mData.push_back(s); mActiveId = mData.size(); return *this; }
+        Set& add(const Set& s) { IT(s.size()) add(s[i]); END }
+        Set& erase(int idx) { mData.erase( mData.begin() + idx ); }
+        Set& erase(int b, int e) { mData.erase( mData.begin() + b, mData.begin() + e ); }
         
-        T& active() { return *mStates[mActiveId-1]; }
-        T active() const { return *mStates[mActiveId-1]; }
+        
+        T& active() { return mData[mActiveId-1]; }
+        T active() const { return mData[mActiveId-1]; }
+        
+        T& operator [] (int i) { return mData[i]; }
+        T operator []  (int i) const { return mData[i]; }
+        
+        unsigned long size() const { return mData.size(); }
+        
+        
 
-        vector<T>& tmp() { return mTmp; }
-        vector<T> tmp() const { return mTmp; }
+//        vector<T>& tmp() { return mTmp; }
+//        vector<T> tmp() const { return mTmp; }
         
-        Set& push(const T& s) { mTmp.push_back(s); }
-        T& get() { return mTmp.back(); }
+//        Set& push(const T& s) { mTmp.push_back(s); }
+//        T& get() { return mTmp.back(); }
         
  
     };

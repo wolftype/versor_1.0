@@ -17,6 +17,7 @@ namespace vsr{
     
 #define PI 3.14159265
 #define TWOPI 6.28318531
+#define PIOVERTWO 1.57079633
 #define PHI 1.61803
 #define ONEOVERPHI .61803
 #define CHANCE 1.13198824

@@ -173,7 +173,7 @@
 
 	void Drb :: Bind(){
 		if (!bound) {
-			cout << "binding Drb" << endl;
+			//cout << "binding Drb" << endl;
 			Conga::Line().bindFunc("conga_assign_Drb_fn",   &assign.ptr.get);
 			bound = 1;
 		}

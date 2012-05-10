@@ -10,15 +10,46 @@
  #ifndef CAMERA_H_INCLUDED
  #define CAMERA_H_INCLUDED
  
-#include "Frame.h"
-
 #include "vsr_gxlib.h"
+#include "vsr_gl.h"
+#include "Frame.h"
 
 // #include <OPENGL/gl.h>
 // #include <GLUT/glut.h>
  
 namespace vsr {
 
+    struct Slab{
+        Vec blu, bru, tru, tlu;
+        Vec& operator[] (int i ) { return (&blu)[i]; }
+    };
+    
+    struct Volume{
+        Vec bl, br, tr, tl, blb, brb, trb, tlb; 
+        Vec& operator[] (int i ) { return (&bl)[i]; }
+    };
+    
+struct Frustrum{
+    float width, height, depth;
+    float bwidth, bheight;
+    
+    Slab dir;
+    Volume box;
+    
+    void calc(){
+        dir.blu = (box.blb - box.bl).unit();
+        dir.tru = (box.trb - box.tr).unit();
+        dir.bru = (box.brb - box.br).unit();
+        dir.tlu = (box.tlb - box.tl).unit();
+        width = box.br[0] - box.bl[0];
+        height = box.tr[1] - box.br[1];
+        depth = box.blb[2] - box.bl[2];
+        bwidth = box.brb[0] - box.blb[0];
+        bheight =box.trb[1] - box.brb[1];
+        
+    }
+};
+    
 class Camera : public Frame {	
 
 		bool bOrtho;
@@ -32,7 +63,7 @@ class Camera : public Frame {
 		Vec mLook;													///< Direction to Look In
 		Frame mModelView;
 
-
+        Frustrum mFrustrum;
 //		Vec mForward;//Unit Direction to Look At ( mZ * -1)		
 //		Rot mModView;
 //		Pnt mLook;
@@ -48,8 +79,9 @@ class Camera : public Frame {
 		void width( float w )	{ mWidth = w;}						///< set width
 		void height( float h )	{ mHeight = h;}						///< set height
 
-		float width()	{return mWidth;}							///< get width
-		float height()	{return mHeight;}							///< get height
+		float width()	const {return mWidth;}							///< get width
+		float height()	const {return mHeight;}							///< get height
+        float depth()   const { return mFar - mNear; }
 		
 		void	focal(float f)	{ mFocal = f; }						///< set focal length
 		double& focal()			{ return mFocal; }					///< get focal length
@@ -99,12 +131,27 @@ class Camera : public Frame {
 		const GLdouble * model() const { return mModel; }
 		const GLdouble * proj() const { return mProj; }
 		const GLint * view() const { return mView; }
-				
-//		void drawAxis();		
-//		virtual void drawLoop();
+    
+    Frustrum frustrum() const { return mFrustrum; }
+    
+    Frustrum frustrum(){
+           mFrustrum.box.bl = GL::unproject(0,0,0.0, *this);
+           mFrustrum.box.blb = GL::unproject(0,0,1.0, *this);
+           mFrustrum.box.tr = GL::unproject( width(), height(), 0.0, *this);    
+           mFrustrum.box.trb = GL::unproject( width(), height(), 1.0, *this );        
+           mFrustrum.box.br = GL::unproject(width(),0,0.0, *this);
+           mFrustrum.box.brb = GL::unproject(width(),0,1.0, *this);
+           mFrustrum.box.tl = GL::unproject( 0, height(), 0.0, *this );    
+           mFrustrum.box.tlb = GL::unproject( 0,height(), 1.0, *this );  
+                 
+            mFrustrum.calc();
+        
+            return mFrustrum;
+
+        }
 
 };
 
-}
+} //vsr::
 
 #endif

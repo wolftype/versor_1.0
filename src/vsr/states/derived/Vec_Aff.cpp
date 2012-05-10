@@ -173,7 +173,7 @@
 
 	void Vec_Aff :: Bind(){
 		if (!bound) {
-			cout << "binding Vec_Aff" << endl;
+			//cout << "binding Vec_Aff" << endl;
 			Conga::Line().bindFunc("conga_assign_Vec_Aff_fn",   &assign.ptr.get);
 			bound = 1;
 		}

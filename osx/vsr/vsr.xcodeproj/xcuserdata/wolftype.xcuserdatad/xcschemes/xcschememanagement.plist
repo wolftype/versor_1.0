@@ -4,6 +4,21 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Gamma.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
+		<key>TestAudio.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>TestField.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>TestLinkage.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +28,16 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>7</integer>
+		</dict>
+		<key>TestShader.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>TestStat.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>TestTransformation.xcscheme</key>
 		<dict>
@@ -60,6 +85,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>9B0D3DA6152CD32200AD875C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9B23A85D151FD339009304D6</key>
 		<dict>
 			<key>primary</key>
@@ -76,6 +106,21 @@
 			<true/>
 		</dict>
 		<key>9B69B97F1523E9FC00C308D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B6FDEAE155216AF0070D3E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B6FDECE15545D190070D3E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B6FDF4F15545E6F0070D3E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -111,6 +156,11 @@
 			<true/>
 		</dict>
 		<key>9B9D11871442AB710032E5A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BA4B2F71547491700C15100</key>
 		<dict>
 			<key>primary</key>
 			<true/>

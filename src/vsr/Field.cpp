@@ -7,3 +7,10 @@
 //
 
 #include <iostream>
+#include "Field.h"
+
+namespace vsr {
+    
+
+    //template class Field<float>;
+}

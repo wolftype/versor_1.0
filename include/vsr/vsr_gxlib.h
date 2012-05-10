@@ -30,6 +30,7 @@
         #define glBindVertexArrayAPPLE glBindVertexArrayOES
         #define glPointSizePointer glPointSizePointerOES
         #define glClearDepth glClearDepthf
+        #define GL_RGBA8 GL_RGBA8_OES
 
         //#include "vsr_gl.h"
 

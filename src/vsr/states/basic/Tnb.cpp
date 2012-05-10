@@ -173,7 +173,7 @@
 
 	void Tnb :: Bind(){
 		if (!bound) {
-			cout << "binding Tnb" << endl;
+			//cout << "binding Tnb" << endl;
 			Conga::Line().bindFunc("conga_assign_Tnb_fn",   &assign.ptr.get);
 			bound = 1;
 		}

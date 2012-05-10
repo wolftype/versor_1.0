@@ -173,7 +173,7 @@
 
 	void Sph :: Bind(){
 		if (!bound) {
-			cout << "binding Sph" << endl;
+			//cout << "binding Sph" << endl;
 			Conga::Line().bindFunc("conga_assign_Sph_fn",   &assign.ptr.get);
 			bound = 1;
 		}

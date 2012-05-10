@@ -173,7 +173,7 @@
 
 	void Dil_Pss :: Bind(){
 		if (!bound) {
-			cout << "binding Dil_Pss" << endl;
+			//cout << "binding Dil_Pss" << endl;
 			Conga::Line().bindFunc("conga_assign_Dil_Pss_fn",   &assign.ptr.get);
 			bound = 1;
 		}

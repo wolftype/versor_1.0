@@ -20,6 +20,17 @@ namespace vsr {
 		static double sinhc(double x);
 		static double clamp(double x, double min, double max);
 		static double map(double x, double min, double max, double rmin, double rmax);
+        
+        template<typename T>
+        inline static bool Range(T v, T low, T high){
+            return ( v >= low && v <= high) ? true : false;
+        }
+        
+        template<typename T>
+        inline static bool Error(T v, T goal, T error){
+            return Range(v, goal - error, goal + error);
+        }
+        
 	};
     
     inline double Math::sinc(double x) { 

@@ -214,8 +214,33 @@ namespace vsr {
 			Mot mot() const { Mot m(trs() * rot()); return m / m.rnorm(); }							 ///< get normalized motor relative to origin
 			void mot(const State m) { mPos = Op::sp0(Ori(1), m); mRot = Gen::rot_mot(m); orient(); } ///< set position and orientation by motor
 			
-			/* Absolute Transformations (based on global frame) */
+            /*! Orient Towards Point p  */
+            void orientX(const State& p){
+                mRot = Gen::ratio(Vec::x, (Vec(p) - Vec(mPos)).unit());
+                orient();
+            }
+            void orientX(double x, double y, double z){
+                orientX( Vec(x,y,z) );
+            }
+            /*! Orient Towards Point p  */
+            void orientY(const State& p){
+                mRot = Gen::ratio(Vec::y, (Vec(p) - Vec(mPos)).unit());
+                orient();
+            }
+            void orientY(double x, double y, double z){
+                orientY( Vec(x,y,z) );
+            }
+            /*! Orient Towards Point p  */
+            void orientZ(const State& p){
+                mRot = Gen::ratio(Vec::z, (Vec(p) - Vec(mPos)).unit() );
+                orient();
+            }
+            void orientZ(double x, double y, double z){
+                orientZ( Vec(x,y,z) );
+            }
+			/*! Absolute Twist Transformation (based on global frame) */
 			Frame& twista(const State& m)		{ mPos = Op::sp0(Ori(1), m); mRot = Gen::rot_mot(m); return orient(); }
+            /*! Absolute boost Transformation (based on global frame) */
 			Frame& boosta(const State& trv)		{ mPos = Op::sp0(Ori(1),trv); return *this; }
 
 			//absolute rotor (relative to Rot(1,0,0,0))
@@ -415,20 +440,20 @@ namespace vsr {
 //			Frame twist(const State& dx) { mPos = Op::sp(mPos,dx); mRot = Gen::rot_mot(dx) * mRot; orient(); }
 			
 			/* Cubic and Quadric Interpolations . . . */
-			static void twist(const Frame * f, int num, double t, int ctype = Interp::QUADRIC) {
+			static void twist(const Frame * f, int num, double t, Interpolation ctype = QUADRIC) {
 				
 				Dll * dlf = new Dll[num];
 				for (int i = 0; i < num; ++i){ dlf[i] = f[i].dll(); }
 				Frame fr;
 				
 				switch(ctype){
-					case Interp::QUADRIC : 
+					case QUADRIC : 
 					{
-						Dll dll = Interp::quad(dlf,num,t);
+						Dll dll = Interp::quad<Dll>(dlf,num,t);
 						fr.twist( Gen::mot_dll(dll) );
 						break;
 					}
-					case Interp::CUBIC :
+					case CUBIC :
 					{
 						break;
 					}
@@ -495,7 +520,7 @@ namespace vsr {
 			
 			double scale() const { return mScale; }
 			double& scale() { return mScale; }
-			void scale(double s) { mScale = s; }
+            Frame& scale(double s) { mScale = s; return *this; }
 			
 			bool clicked();
 //			

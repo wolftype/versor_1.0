@@ -173,7 +173,7 @@
 
 	void Sph_Vec :: Bind(){
 		if (!bound) {
-			cout << "binding Sph_Vec" << endl;
+			//cout << "binding Sph_Vec" << endl;
 			Conga::Line().bindFunc("conga_assign_Sph_Vec_fn",   &assign.ptr.get);
 			bound = 1;
 		}

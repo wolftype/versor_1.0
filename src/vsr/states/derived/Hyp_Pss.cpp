@@ -173,7 +173,7 @@
 
 	void Hyp_Pss :: Bind(){
 		if (!bound) {
-			cout << "binding Hyp_Pss" << endl;
+			//cout << "binding Hyp_Pss" << endl;
 			Conga::Line().bindFunc("conga_assign_Hyp_Pss_fn",   &assign.ptr.get);
 			bound = 1;
 		}

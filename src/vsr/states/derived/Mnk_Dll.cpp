@@ -173,7 +173,7 @@
 
 	void Mnk_Dll :: Bind(){
 		if (!bound) {
-			cout << "binding Mnk_Dll" << endl;
+			//cout << "binding Mnk_Dll" << endl;
 			Conga::Line().bindFunc("conga_assign_Mnk_Dll_fn",   &assign.ptr.get);
 			bound = 1;
 		}

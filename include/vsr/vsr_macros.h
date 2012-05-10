@@ -38,12 +38,40 @@ static bool bSet = 1;\
 if(bSet){\
 bSet = 0;
 
+//ITERATIONS 
     
 #define IT(n) \
 for(int i = 0; i < n; ++i){
+
+#define ITJ(j,n) \
+for(int j = 0; j < n; ++j){
+    
+#define VAL(n) \
+double t = 1.0 * i/n;
+    
+#define VALJ(j,n) \
+double t = 1.0 * j/n;  
+    
+#define IT1(n) \
+IT(n) VAL(n)
+
+#define IT2(n) \
+IT(n) VAL(n) double u = t;\
+ITJ(j,n) VALJ(j,n) double v = t;
+    
+#define IT3V(n) \
+IT(n) VAL(n) double x = t;\
+ITJ(j,n) VALJ(j,n) double y = t;\
+ITJ(k,n) VALJ(k,n) double z = t;
+
+#define IT3(x,y,z) \
+ITJ(i,x) ITJ(j,y) ITJ(k,z)
     
 #define END }
+#define END2 }}
+#define END3 }}}
     
+
 //#define CMP(min,max,omin,omax,val) 
 #ifndef CLAMP 
 #define CLAMP(val,min,max) val<min?min:val>max?max:val 

@@ -173,7 +173,7 @@
 
 	void Dil_Afl :: Bind(){
 		if (!bound) {
-			cout << "binding Dil_Afl" << endl;
+			//cout << "binding Dil_Afl" << endl;
 			Conga::Line().bindFunc("conga_assign_Dil_Afl_fn",   &assign.ptr.get);
 			bound = 1;
 		}

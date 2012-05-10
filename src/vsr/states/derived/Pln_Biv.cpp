@@ -173,7 +173,7 @@
 
 	void Pln_Biv :: Bind(){
 		if (!bound) {
-			cout << "binding Pln_Biv" << endl;
+			//cout << "binding Pln_Biv" << endl;
 			Conga::Line().bindFunc("conga_assign_Pln_Biv_fn",   &assign.ptr.get);
 			bound = 1;
 		}

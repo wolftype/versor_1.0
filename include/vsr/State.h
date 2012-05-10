@@ -255,6 +255,8 @@ allocation)
         State dil(double t) const;
         /*! Dilate from Point dil by amt t*/
         State dil(const State& dil, double t) const;
+        /*! Dilate from Own Center by amt t*/
+        State dils(double t) const;
         /*! Transversion by tangent tnv*/
         State trv(const State& tnv) const;
         /*! Transversion by tangent x, y, z*/

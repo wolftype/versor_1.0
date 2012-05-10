@@ -27,6 +27,7 @@ namespace vsr {
 			static string data;
 			static string shaders;
 			static string meshes;
+            static string resources;
 			static string textures;
 			static string images;
 			static string videos;

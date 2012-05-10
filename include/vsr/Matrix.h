@@ -88,6 +88,8 @@ namespace vsr {
 
 			Vec3& operator += (Vec3 v)  { x += v.x; y += v.y; z += v.z; return *this; }
 			Vec3& operator -= (Vec3 v)  { x -= v.x; y -= v.y; z -= v.z; return *this;}
+        
+            Vec3 operator -() const { return Vec3(-x, -y, -z); }
 			
 			Vec3 vec3() { return *this; }
 			//Quat product
@@ -106,6 +108,8 @@ namespace vsr {
 			static Vec3<> az(double s = 1.0){ return Vec3<>(0,0,s); }						
 																					
 			friend ostream& operator << (ostream&, const Vec3<>&);
+        
+        int size() const { return 3; } 
 
 	};
 
@@ -124,6 +128,7 @@ namespace vsr {
 			Vec4(T _x, T _y, T _z, T _w) : x(_x), y(_y), z(_z), w(_w) {}
 			
 			Vec4(T _w, Vec3<T> v) : x(v.x), y(v.y), z(v.z), w(_w) {}
+            Vec4(Vec3<T> v, T _w) : x(v.x), y(v.y), z(v.z), w(_w) {}
 
 			void set(T _x, T _y, T _z, T _w) { x=_x; y = _y; z = _z; w = _w; }
 				
@@ -237,7 +242,18 @@ namespace vsr {
 			
 			Vec4<T> & operator [] (int i) { return col[i]; }
 			Vec4<T>   operator [] (int i) const { return col[i]; }
-			
+		
+        Mat4& transpose(){
+            return Mat4<T>( 
+                           col[0][0], col[1][0], col[2][0], col[3][0],
+                           col[0][1], col[1][1], col[2][1], col[3][1],
+                           col[0][2], col[1][2], col[2][2], col[3][2],
+                           col[0][3], col[1][3], col[2][3], col[3][3]                            
+                           );
+        }
+        
+         T * val() { return &col[0][0]; }
+        
 			friend ostream& operator << (ostream&, const Mat4<>&);
 			
 			
@@ -387,7 +403,16 @@ namespace vsr {
 		}
 	};
 	
-	
+	typedef Vec2<float> Vec2f; 	typedef Vec2<int> Vec2i;
+    
+	typedef Vec3<float> Vec3f;  typedef Vec3<int> Vec3i;
+	typedef Vec4<float> Vec4f;  typedef Vec4<int> Vec4i;
+	typedef Vec4<unsigned char> Vec4u;
+    
+    typedef Mat2<float> Mat2f;
+    typedef Mat3<float> Mat3f;
+    typedef Mat4<float> Mat4f;
+    typedef Mat4<unsigned char > Mat4u;
 	
 	//template <typename T>
 	//inline Vec3<T> operator * (const Vec3& v) const { return Quat ( dot(v), x * v.y - y * v.x, y * v.z - z * v.y, x * v.z - z * v.x); }

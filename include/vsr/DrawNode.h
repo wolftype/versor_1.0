@@ -2,7 +2,7 @@
 #define INC_DRAWNODE_H
 
 #include "vsr_gxlib.h"
-#include "vsr_vertex.h"
+#include "Mesh.h"
 
 #include "GraphicsMatrix.h"
 #include "vsr_gl_varray.h"

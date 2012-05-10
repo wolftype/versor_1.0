@@ -173,7 +173,7 @@
 
 	void Trs_Ori :: Bind(){
 		if (!bound) {
-			cout << "binding Trs_Ori" << endl;
+			//cout << "binding Trs_Ori" << endl;
 			Conga::Line().bindFunc("conga_assign_Trs_Ori_fn",   &assign.ptr.get);
 			bound = 1;
 		}

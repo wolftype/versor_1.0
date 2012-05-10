@@ -1,5 +1,5 @@
 /*
- *  vsr_graphics.h
+ *  vsr_graphicsdata.h
  *  CONGA_07
  *
  *  Created by x on 8/23/10.
@@ -17,8 +17,16 @@
 
 using std::ostream;
 
-namespace con {
+namespace vsr  {
 
+    //make unions . . .
+struct UV {
+    float u, v;
+    UV(float _u, float _v) : u(_u), v(_v) {}
+    float& operator[] (int idx) { return (&u)[idx]; }
+    float operator[] (int idx) const { return (&u)[idx]; }	
+};    
+    
 struct Xyz {
 	float x, y, z;
 	Xyz(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
@@ -33,6 +41,7 @@ struct Rgb {
 	float operator[] (int idx) const { return (&r)[idx]; }
 };
 
+//rename to Int4 or Templatize to Vec4
 struct Poly {
 	int a, b, c, d;
 	Poly(int _a,int _b,int _c,int _d) : a(_a), b(_b), c(_c), d(_d) {}
@@ -56,12 +65,7 @@ struct Poly3 {
 	int operator[] (int idx) const { return (&a)[idx]; }
 };
 
-struct UV {
-	float u, v;
-	UV(float _u, float _v) : u(_u), v(_v) {}
-	float& operator[] (int idx) { return (&u)[idx]; }
-	float operator[] (int idx) const { return (&u)[idx]; }	
-};
+
 
 struct AxisAngle{
 
@@ -69,7 +73,27 @@ struct AxisAngle{
 	Vec3<> v;
 
 };
-//neighbors
+
+//struct Vertex {
+//    Vec3<float> Pos;
+//    Vec3<float> Norm;
+//    Vec4<float> Col;
+//    Vec2<float> Tex;
+//    
+//    //            Vertex() : Pos(0,0,0), Norm(0,0,0), Col(1,1,1,1), Tex(0,0){}
+//    
+//    Vertex(const Vec3f& pos = Vec3f(0,0,0), 
+//           const Vec4f& col = Vec4f(1,1,1,1), 
+//           const Vec3f& norm = Vec3f(0,0,0), 
+//           const Vec2f& tex = Vec2f(0,0) )  
+//    
+//    : Pos(pos), Col(col), Norm(norm), Tex(tex) 
+//    
+//    {}
+//    
+//};
+    
+/*! Data Structure of Neighbors in a cartesian volume (left, right, bottom, top, front, back) */
 class Nbr {
 	public:
 		Nbr(){}
@@ -88,6 +112,7 @@ inline ostream& operator << (ostream& os, const Nbr& m){
 	return os;	
 }
 
+    
 
 class Vxl {
 
@@ -116,6 +141,18 @@ inline ostream& operator << (ostream& os, const Vxl& m){
 	return os;	
 }
 
+    
+enum Cube{
+    LEFT	= 1,
+    RIGHT	= 1 << 1,
+    BOTTOM	= 1 << 2,
+    TOP	= 1 << 3,
+    FRONT	= 1 << 4,
+    BACK	= 1 << 5,
+    ALLSIDES = LEFT | RIGHT | BOTTOM | TOP | FRONT | BACK
+};
+    
+    
 } //con::
 
 #endif

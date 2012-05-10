@@ -12,8 +12,13 @@
 
 #include "glv.h"
 #include "glv_color_controls.h"
+
+#include "xTypes.h"
+
 #include <iostream>
 #include <string.h>
+#include <typeinfo>
+#include <sstream>
 
 namespace glv {
 
@@ -28,13 +33,15 @@ namespace glv {
 		DIALER,
 		COLORSLIDER
 	};
+    
+   
 
 	//typedef Widget Widget;
 	typedef map<string, Widget*> WidgetMap;
 	typedef map<string, Widget*>::iterator WidgetPtr;
 
 	class Gui : public Table {
-
+        
 			/* Map of Widgets (index by name) */
 			WidgetMap mWidget;
 
@@ -88,7 +95,40 @@ namespace glv {
 
 				}
 
-
+                /*!  add widget and automatically determine type of widget */
+                template<class T>
+                Gui& operator () (T& val, string nm = "", float min = 0, float max = 1){
+                    
+                    using namespace vsr;
+                    static int it = 0;
+                    stringstream name;
+                    
+                    if (nm == "" ) 
+                        name << typeid(T).name() << "_" << it; 
+                    else name << nm;
+                    
+                    
+                    switch ( vsr::Types[ typeid(T).name() ] ){
+                        case vsr::BOOLEAN:
+                            add(BUTTON, name.str(), val);
+                            break;
+                        case FLOAT:
+                        case DOUBLE:
+                        case INT:
+                            add(DIALER, name.str(), val, min, max);
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    it++;
+                    return *this;
+                }
+                /*!  add widget and automatically determine type of widget */
+                template<class T>
+                Gui& operator () (T& val, float max){
+                    return (*this)(val, "", 0, max);
+                }
 				/*! add widget: enum type, name, min, max, attach, num */
 				template <class V>
 				void add (int, string, V& val, float min = 0., float max = 1. );
@@ -122,6 +162,7 @@ namespace glv {
 
 
 	};
+    
 
 	template <class V>
 	void Gui :: add (int _type, string _name, V& val, float min , float max ){

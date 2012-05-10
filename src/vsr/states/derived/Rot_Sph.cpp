@@ -173,7 +173,7 @@
 
 	void Rot_Sph :: Bind(){
 		if (!bound) {
-			cout << "binding Rot_Sph" << endl;
+			//cout << "binding Rot_Sph" << endl;
 			Conga::Line().bindFunc("conga_assign_Rot_Sph_fn",   &assign.ptr.get);
 			bound = 1;
 		}

@@ -173,7 +173,7 @@
 
 	void Par_Biv :: Bind(){
 		if (!bound) {
-			cout << "binding Par_Biv" << endl;
+			//cout << "binding Par_Biv" << endl;
 			Conga::Line().bindFunc("conga_assign_Par_Biv_fn",   &assign.ptr.get);
 			bound = 1;
 		}

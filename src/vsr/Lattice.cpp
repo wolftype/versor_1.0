@@ -8,9 +8,9 @@
  */
 
 #include "Lattice.h"
-#include "Opera.h"
+//#include "Opera.h"
 
-namespace con {
+namespace vsr {
 
 	#define BEGIN_BOUNDED_LOOP \
 				for (int i = 1; i < mWidth-1; ++i){ \
@@ -32,13 +32,13 @@ namespace con {
 	Lattice < T >  :: Lattice () : 
 	Frame(), mWidth(10), mHeight(10), mDepth(10),
 	mNum(1000), mNumVxl( (mWidth-1) * (mHeight-1) * (mDepth-1) ), 
-	mSpacing(.5), mType(0) { alloc(); init(); copyPrev(); networkData();}
+	mSpacing(.5), mType(0) { alloc(); init(); copyPrev(); }//networkData();}
 
 	template < class T >
 	Lattice < T > :: Lattice (int _w, int _h, int _d, float _s ) : 
 	Frame(), mWidth(_w), mHeight(_h), mDepth(_d), 
 	mNum(_w * _h * _d), mNumVxl( (mWidth-1) * (mHeight-1) * (mDepth-1) ),
-	mSpacing(_s) { alloc(); init();  copyPrev(); networkData(); }
+	mSpacing(_s) { alloc(); init();  copyPrev(); }//networkData(); }
 	
 	template < class T >
 	Lattice < T >  :: ~Lattice () { 
@@ -49,13 +49,19 @@ namespace con {
 
 	template < class T >
 	void Lattice< T > :: alloc() {
+        
+        /// Current Data
 		mData		= new T[mNum];
+        
+        /// Data Storage for previous Time Step (for Simulations)
 		mPrev		= new T[mNum];
-		mGrid		= new Pnt[mNum];
+        
+		/// Position Information
+        mGrid		= new Pnt[mNum];
 
-		mNbr		= new Nbr[mNum];		
-		mVxl		= new Vxl[mNumVxl];
-		mVNbr		= new Nbr[mNumVxl];
+        mNbr		= new Nbr[mNum];                ///< Neighbor Idx Data
+		mVxl		= new Vxl[mNumVxl];             ///< Voxel Idx Data
+		mVNbr		= new Nbr[mNumVxl];             ///< Voxel Neighbor Idx Data
 
 		//Set Dimensions
 		mDim = 3;
@@ -64,41 +70,22 @@ namespace con {
 			if (t[i] == 1) mDim -= 1; 
 		}
 		
-//		mNumFace	= (mWidth * mHeight) * (mDim-1) + (mWidth * (mDepth-2)) * (mDim-1) + ((mHeight-2) * (mDepth-2)) *(mDim-1);
-//		mNumEdge    = mWidth * 2 * (mDim-1) + (mHeight-2) * 2 * (mDim-1) + (mDepth-2) * 2 * (mDim-1);
-//		mFace		= new int[mNumFace];
-//		mEdge		= new int[mNumEdge];		
+		//Make Grid of Spheres
+		BEGIN_LOOP									
+            int idx = _indexOf(i,j,k, *this);
+            mGrid[idx] = Ro::dls3 ( px(i), py(j), pz(k), mSpacing/2.0, 1 );
+                                
+            //assign nbrs
+            int type = 0;
+            type |= (k==0) ? _FRONT : 0;
+            type |= (k==mDepth-1) ? _BACK: 0;					
+            type |= (j==0) ? _BOTTOM : 0;
+            type |= (j==mHeight-1) ? _TOP: 0;					
+            type |= (i==0) ? _LEFT : 0;
+            type |= (i==mWidth-1) ? _RIGHT: 0;					
 
-//		int mwv = mWidth -1; int mhv = mHeight-1; int mdv = mDepth -1;
-//		int mwh, mwd, mhd;				
-//		mNumFaceVxl =  ( mwv * mhv) * 2 + (mwv * (mdv-2)) * 2 + ((mhv-2) * (mdv-2)) * 2;
-//		mNumEdgeVxl = mwv * 4 + (mhv-2) * 4 + (mdv-2) * 4;
-//		if (mNumFaceVxl < 0) mNumFaceVxl = 0; if (mNumEdgeVxl < 0) mNumEdgeVxl = 0;		
-//		mFaceVxl = new int[mNumFaceVxl];
-//		mEdgeVxl = new int[mNumEdgeVxl];		
-//		cout << "NUM FACE: " << mNumFace << " vxl: " << mNumFaceVxl << endl;
-		
-		//Make Grid
-		for (int i = 0; i < mWidth; ++i){
-			for (int j = 0; j < mHeight; ++j){
-				for (int k = 0; k < mDepth; ++k){										
-					int idx = _indexOf(i,j,k, *this);
-					mGrid[idx] = Ro::dls3 ( px(i), py(j), pz(k), mSpacing/2.0, 1 );
-					//Ro::null( px(i), py(j), pz(k) );
-										
-					//assign nbrs
-					int type = 0;
-					type |= (k==0) ? _FRONT : 0;
-					type |= (k==mDepth-1) ? _BACK: 0;					
-					type |= (j==0) ? _BOTTOM : 0;
-					type |= (j==mHeight-1) ? _TOP: 0;					
-					type |= (i==0) ? _LEFT : 0;
-					type |= (i==mWidth-1) ? _RIGHT: 0;					
-
-					mNbr[idx] = nbr(idx, *this, type);
-				}
-			}
-		}
+            mNbr[idx] = nbr(idx, *this, type);
+		END_LOOP
 		
 		//Assign Vxls
 		for (int i = 0; i < mWidth-1; ++i){
@@ -168,14 +155,20 @@ namespace con {
 		if (!mEdgeVxl.empty()) mEdgeVxl.clear();
 		if (!mCornerVxl.empty()) mCornerVxl.clear();
 				
-		alloc(); init();  copyPrev(); networkData();
+		alloc(); init();  copyPrev(); //networkData();
 	}
 	
 	/* Default Generic Initialization */
-	template < class T > 
-	void Lattice < T > :: init(){}
+    template<class T>
+   void  Lattice<T> :: init() {
+        IT(mNum)
+        VAL(mNum)
+        mData[i] = T(t);
+        END 
+    }
 	
 	/* Specialized Initializations for Positioning of Data */
+    
 	template <> 
 	void Lattice< Vec > :: init(){
 		for (int i = 0; i < mNum; ++i){
@@ -209,11 +202,13 @@ namespace con {
 	template <> 
 	void Lattice< Dll > :: init(){
 		for (int i = 0; i < mNum; ++i){
-			Rot rot = Gen::rot( Op::dl ( Vec( mGrid[i] ) ) );
-			Trs trs = Gen::trs( Vec( mGrid[i] ) );
-			Mot mot = trs * rot;
-			mData[i] = Gen::log_mot( mot / mot.rnorm() );
-			//mGrid[i] <= Drb(mGrid[i]);
+            VAL(mNum)
+            Lin lin = mGrid[i] ^ Drv( mGrid[i] ).rot( Vec(mGrid[i]).unit() ^ Vec::y );
+            mData[i] = lin.dual().runit();
+//			Rot rot = Gen::rot( Op::dl ( Vec( mGrid[i] ) ) );
+//			Trs trs = Gen::trs( Vec( mGrid[i] ) );
+//			Mot mot = trs * rot;
+//			mData[i] = Gen::log_mot( mot / mot.rnorm() );
 		}
 	}
 
@@ -248,21 +243,25 @@ namespace con {
 			mData[i] = Fl::dlp_drv_pnt(mGrid[i], Drv(mGrid[i]));			
 		}
 	}
+    
+    
+    // RANDOMIZATION
 
 	//Jitter Samples
 	template < class T >
-	void Lattice < T > :: jitter(double s){
+	void Lattice < T > :: jitter(double x, double y, double z){
 		Trs trs; double rx, ry, rz;
 		for (int i = 0; i < mNum; ++i){
 		
-			rx = ( (double) rand() / RAND_MAX ) * mSpacing * s; //Random Values
-			ry = ( (double) rand() / RAND_MAX ) * mSpacing * s;
-			rz = ( (double) rand() / RAND_MAX ) * mSpacing * s;
+			rx = ( (double) rand() / RAND_MAX ) * mSpacing * x; //Random Values
+			ry = ( (double) rand() / RAND_MAX ) * mSpacing * y;
+			rz = ( (double) rand() / RAND_MAX ) * mSpacing * z;
 			
 			trs = Gen::trs3(rx,ry,rz);
 			mData[i] = Op::sp0(mData[i], trs);
 		}
 	}
+    
 
 	//Jitter Samples
 	template < class T >
@@ -279,6 +278,8 @@ namespace con {
 		}
 	}	
 		
+    // NEIGHBORS
+    
 	//idx of neighbors
 	template < class T >
 	Nbr Lattice < T > :: nbr(int idx, const Lattice& f, int type) {	
@@ -328,63 +329,63 @@ namespace con {
 		return type;
 	}
 	
-	template < class T >
-	void Lattice < T > :: facesAndEdges( Nbr nb, int * faces, int * edges ) {
-		//face?
-		int i = 0;  static int tot = 0;
-		static int * ptr = faces;
-		while (i < 7){
-			if (nb[i] == -1) { 
-				*ptr++ = nb.idx; 
-				tot ++;
-				break; 
-			}
-			i++;
-		}
-		
-		//edge?
-		static int * eptr = edges;
-		i = 0; int n = 0;
-		while (	i < 7 ){
-			if (nb[i] == -1) {
-				n++;
-				if (n==2){
-					*eptr++ = nb.idx;
-					break;
-				}
-			}
-			i++;
-		}
-	}
-
-	template < class T >
-	void Lattice < T > :: facesAndEdgesVxl( Nbr nb, int * faces, int * edges ) {
-		//face?
-		int i = 0;  static int tot = 0;
-		static int * ptr = faces;
-		while (i < 7){
-			if (nb[i] == -1) { 
-				*ptr++ = nb.idx; 
-				tot ++;
-				break; 
-			}
-			i++;
-		}
-		
-		//edge?
-		static int * eptr = edges;
-		i = 0; int n = 0;
-		while (	i < 7 ){
-			if (nb[i] == -1) {
-				n++;
-				if (n==2){
-					*eptr++ = nb.idx;
-					break;
-				}
-			}
-			i++;
-		}
-	}
+//	template < class T >
+//	void Lattice < T > :: facesAndEdges( Nbr nb, int * faces, int * edges ) {
+//		//face?
+//		int i = 0;  static int tot = 0;
+//		static int * ptr = faces;
+//		while (i < 7){
+//			if (nb[i] == -1) { 
+//				*ptr++ = nb.idx; 
+//				tot ++;
+//				break; 
+//			}
+//			i++;
+//		}
+//		
+//		//edge?
+//		static int * eptr = edges;
+//		i = 0; int n = 0;
+//		while (	i < 7 ){
+//			if (nb[i] == -1) {
+//				n++;
+//				if (n==2){
+//					*eptr++ = nb.idx;
+//					break;
+//				}
+//			}
+//			i++;
+//		}
+//	}
+//
+//	template < class T >
+//	void Lattice < T > :: facesAndEdgesVxl( Nbr nb, int * faces, int * edges ) {
+//		//face?
+//		int i = 0;  static int tot = 0;
+//		static int * ptr = faces;
+//		while (i < 7){
+//			if (nb[i] == -1) { 
+//				*ptr++ = nb.idx; 
+//				tot ++;
+//				break; 
+//			}
+//			i++;
+//		}
+//		
+//		//edge?
+//		static int * eptr = edges;
+//		i = 0; int n = 0;
+//		while (	i < 7 ){
+//			if (nb[i] == -1) {
+//				n++;
+//				if (n==2){
+//					*eptr++ = nb.idx;
+//					break;
+//				}
+//			}
+//			i++;
+//		}
+//	}
 
 	template < class T >
 	void Lattice < T > :: FE( Nbr nb){
@@ -422,6 +423,7 @@ namespace con {
 		}
 
 	}	
+    
 	template < class T >
 	void Lattice < T > :: vxlFE( Nbr nb){
 		int i = 0;
@@ -570,10 +572,10 @@ namespace con {
 		}	
 	}
 	
-	template < class T >
-	bool Lattice < T > :: clickedData(int i, Dll dll){
-		return ( Ro::siz( dll ^ grid(i) ) < 0 ) ? 1 : 0;
-	}
+//	template < class T >
+//	bool Lattice < T > :: clickedData(int i, Dll dll){
+//		return ( Ro::siz( dll ^ grid(i) ) < 0 ) ? 1 : 0;
+//	}
 
 //	template <>
 //	bool Lattice < Drv > :: clickedData(int i, Dll dll){
@@ -589,6 +591,7 @@ namespace con {
 			
 			//glTranslated(tmp.x - tw()/2.0, tmp.y - th()/2.0, tmp.z + td()/2.0);			
 			glTranslated(tmp.x, tmp.y, tmp.z);
+        
 			for (int i = 0; i < mNum; ++i){
 				mData[i].draw();	
 			}
@@ -748,13 +751,12 @@ namespace con {
 	template < class T >
 	void Lattice < T > :: diffuse(double diff, double dt, bool bounded, bool neg){
 	
-		int it = 20;
+		static int it = 20;
 
 		double rate = diff * dt;// * num();
-		switch (bounded) {
+		if  (bounded) {
 		
 			//unbounded (toroidal?)
-			case 0:
 			//iterate
 			for (int k = 0; k < it; ++k){
 				//for each data member
@@ -770,9 +772,9 @@ namespace con {
 					mData[i] = mPrev[i] + tdx;
 				}
 			}
-			break;
+			//break;
+        } else {       
 			//bounded 
-			case 1:
 			//iterate
 			for (int n = 0; n < it; ++n){
 				//cout << "BOUNDED:";
@@ -783,7 +785,7 @@ namespace con {
 					//sum up neighboring values
 					for (int m = 1; m < 7; ++m){
 						//if ( nbr(idx)[m] != -1 ) 
-						tdx += mData[ nbr(idx)[m] ];
+						tdx += mData[ nbr(idx)[m] ]; // Sum up neighbrs
 					}
 					//multiply by (rate )
 					tdx *= rate;					
@@ -794,28 +796,28 @@ namespace con {
 				
 				bound(mData, neg);
 			}
-			break;
+			//break;
 		}
 	}
 	
 
-	//incompressibility
+	//incompressibility of fluids
 	template < class T >
 	void Lattice < T > :: project( int it){
 		
-		double h = 1.0/w();//mSpacing;//num();//w();///num();///mSpacing;
-		T * tmp = new T[ num() ]; 
+		double h = 1.0/w();
         
+		T * tmp = new T[ num() ];         
         T nil;
 
 		Sca * tmp1 = new Sca[ num() ];
 		Sca * tmp2 = new Sca[ num() ];
-//		//Zero out
+
 		BEGIN_LOOP
 			tmp1[ix][0] = 0;//nil;
-			//cout << tmp[ix] << endl;
 		END_LOOP
-		//Sum Pressure Differences of each Face (tensor)
+
+		//Sum Pressure Differences of each Face (TENSOR)
 		BEGIN_BOUNDED_LOOP
 			tmp2[ix] = Sca( tensNbrs(mData, mNbr, ix) * ( h/ 2.0 ) );			
 		END_BOUNDED_LOOP		
@@ -831,6 +833,7 @@ namespace con {
 		
 		//Substract out result
 		BEGIN_BOUNDED_LOOP
+        
 			mData[ix][0] -= ( Lattice<Sca>::diffXNbrs(tmp1, mNbr, ix)[0] / (h*2.0) );
 			mData[ix][1] -= ( Lattice<Sca>::diffYNbrs(tmp1, mNbr, ix)[0] / (h*2.0) );
 			mData[ix][2] -= ( Lattice<Sca>::diffZNbrs(tmp1, mNbr, ix)[0] / (h*2.0) );
@@ -953,32 +956,6 @@ namespace con {
 		State * g = (grid)? (State*)f.grid() : (State*)f.data();
 		int typ = vxl.type;
 		//cout << vxl << endl;
-
-//		switch(typ){
-//			case _FRONT:
-//				cout << "front" << endl;
-//				break;
-//			case _BACK:
-//				cout << "back" << endl;
-//				break;
-//			
-//			case _LEFT:
-//				cout << "left" << endl;
-//				break;
-//			
-//			case _RIGHT:
-//				cout << "right" << endl;
-//				break;
-//			
-//			case _TOP:
-//				cout << "top" << endl;
-//				break;
-//			
-//			case _BOTTOM:
-//				cout << "bottom" << endl;
-//				break;
-//
-//		}
 
 			//FACES
 			Poly4 fr = vxl.fr();

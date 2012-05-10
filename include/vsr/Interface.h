@@ -9,7 +9,7 @@
 #ifndef vsr_Interface_h
 #define vsr_Interface_h
 
-#include "GL.h"
+#include "vsr_gl.h"
 #include "vsr.h"
 #include "Set.h"
 #include "Drawable.h"
@@ -147,12 +147,13 @@ namespace vsr  {
 
         Camera& camera() { return vimpl -> active(); }
         
-        Vec screenCoord(const Pnt& p);
+        Vec screenCoord(const State& p);
         bool pntClicked(const State&, double rad = .05);
         
         void touch(State&, double t = 1.0);
         void touch(State& s, State& x, double t);
         void touch(Frame& f, double t = 1.0);
+        void touch( Frame& f, Frame& e, double t = 1.0);
         
         void windowTransform();
         void stateTransform();
@@ -172,13 +173,19 @@ namespace vsr  {
         
         Vec click(){ return mouse.click;   }
         Vec pos(){ return mouse.pos;     }
+        /// Transform a State 's' Centered at position 'pos' by velocity 't'
         void xf ( State * s, State& pos, double t );
+        /// Transform a Frame 'f' by velocity 't'
         void xfFrame( Frame * f, double t);
-        
-        /* Mode */
+        /// Transform a Frame 'e' Centered at Position 'f' by velocity 't'
+        void xfFrame( Frame * f, Frame * e, double t);
+        /*! Set Mode */
         int& mode() { return mMode; }
+        /*! Get Mode */
         int mode() const { return mMode; }
+        /// Check Interface Mode
         bool mode(int q) { return mMode & q; }
+        /// Enable Mode
         void enable(int bitflag) { mMode |= bitflag; }
         void disable(int bitflag) { mMode &= ~bitflag; }
         void toggle(int bitflag)  { mMode & bitflag ? disable(bitflag) : enable(bitflag); }
@@ -199,14 +206,14 @@ namespace vsr  {
         Model(Interface * i) : interface(i) {}
         
         virtual void draw(){
-            for (int i = 0; i < mStates.size(); ++i){
-                mStates[i] -> draw();
+            for (int i = 0; i < mData.size(); ++i){
+                mData[i].draw();
             }
         }
         
         virtual void touch(){
-             for (int i = 0; i < mStates.size(); ++i){
-                 interface -> touch( *mStates[i] ); 
+             for (int i = 0; i < mData.size(); ++i){
+                 interface -> touch( mData[i] ); 
              }
         }
     };

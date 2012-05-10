@@ -173,7 +173,7 @@
 
 	void Dil_Sta :: Bind(){
 		if (!bound) {
-			cout << "binding Dil_Sta" << endl;
+			//cout << "binding Dil_Sta" << endl;
 			Conga::Line().bindFunc("conga_assign_Dil_Sta_fn",   &assign.ptr.get);
 			bound = 1;
 		}

@@ -6,7 +6,13 @@
  *  Copyright 2010 x. All rights reserved.
  *
  
- KINEMATIC CHAIN
+ KINEMATIC CHAIN can be closed or open (robot arm)
+ 
+ if one end is fixed, it is a MECHANISM
+ 
+ if a MECHANISM transmits power it is a MACHINE
+ 
+ 
  
  */
 
@@ -16,23 +22,14 @@
 #include "Frame.h"
 
 namespace vsr {
-    
-    struct ChainNode : public Frame {
-        
-        
-        Frame mLink;  ///< Displacement From Previous Link
-        
-       // mJoint;
-    };
 
 	class Chain : public Frame {
 		
-      //  ChainNode * mNode;
         
+		Frame * mFrame;			///< Absolute frames of Joints = joint * prev link * prev frame
         
-		Frame * mFrame;			///< Absolute frames of Joints
-		Frame * mLink;			///< Relative frames (to previous joint)
-		Frame * mJoint;			///< In socket transformation
+		Frame * mLink;			///< Relative Link (to next joint)
+		Frame * mJoint;			///< In Socket Transformation (RDHC, etc)
 		
 		int mNum;
 		
@@ -40,10 +37,12 @@ namespace vsr {
 			for (int i = 0; i < mNum; ++i){
 				Vec v(0,1.0,0);
 				mLink[i].trs(Gen::trs(v));
-				mFrame[i].scale(.4);
-				fk();
+				mFrame[i].scale(.2);
+				
 				//cout << mLink[i].pos() << endl;
 			}
+            
+            fk();
 		}
 		
 		public:
@@ -54,20 +53,25 @@ namespace vsr {
 				mJoint = new Frame[n];
 				_init();			
 			}
-			
+        ~Chain(){
+            if (mFrame) delete[] mFrame;
+            if (mLink) delete[] mLink;
+            if (mJoint) delete[] mJoint;
+        }
+        
 			/* GETTERS AND SETTERS */
 			int num() const { return mNum; }
-			Frame& link(int k) { return mLink[k]; }						///< set Link From previous Joint
-			Frame& joint(int k) { return mJoint[k]; }					///< Get In Socket Transformation of kth Joint
+			Frame& link(int k) { return mLink[k]; }						///< set k's Link To Next Joint
+			Frame& joint(int k) { return mJoint[k]; }					///< set kth joint's In Socket Transformation
 			Frame& frame(int k) { return mFrame[k]; }					///< set Absolute Displacement Motor
 
-			Frame link(int k) const { return mLink[k]; }				///< Get Link From previous joint 
-			Frame joint(int k) const { return mJoint[k]; }				///< Get In Socket Transformation kth Joint
-			Frame frame(int k) const { return mFrame[k]; }				///< set Absolute Displacement Motor
+			Frame link(int k) const { return mLink[k]; }				///< Get k's Link To Next joint 
+			Frame joint(int k) const { return mJoint[k]; }				///< Get kth Joint's In Socket Transformation
+			Frame frame(int k) const { return mFrame[k]; }				///< Get Absolute Displacement Motor
 
 			
-			Frame& operator [] (int k) { return frame(k); }				///< Set Absolute Frame at K
-			Frame operator [] (int k) const { return frame(k); }		///< Get Absolute Frame at K
+			Frame& operator [] (int k) { return frame(k); }				///< Set kth Absolute Frame
+			Frame operator [] (int k) const { return frame(k); }		///< Get kth Absolute Frame
 			
 			/* SURROUNDS */
 			/// Sphere Centered at Joint K Going Through Joint K+1 
@@ -78,10 +82,25 @@ namespace vsr {
 			Dls prevDls(int k) const{
 				return Ro::dls(mFrame[k].pos(), mLink[k-1].vec().norm());//mFrame[k-1].pos());
 			}
+            /// Sphere at Point p through Joint K
+            Dls goalDls(const Pnt& p, int k){
+                return Ro::dls(p, mLink[k].vec().norm());
+            }
 			/// Sphere at point p through last link (default, or set arbitary link)
 			Dls lastDls(const Pnt& p){
 				return Ro::dls(p,mLink[mNum-1].vec().norm());
 			}
+        
+            /* Possible Points */
+        
+            /// Pnt at position t along Link idx
+            Pnt at(int idx, double t = 0.0){
+                return Ro::null( Interp::linear<Vec>( mFrame[idx].vec(), mFrame[idx+1].vec(), t) );
+            }
+            
+            Frame& base() { return mFrame[0]; }
+            Frame& first() { return mFrame[0]; }        
+            Frame& last() { return mFrame[mNum -1]; }
 			
 			/// Vert xy Plane Containing Root Target Point v ( NORMALIZED )
 			Dlp xy(const Pnt& p) {
@@ -101,48 +120,222 @@ namespace vsr {
 			Dll lin(const Pnt& p ) { return Op::dl( mFrame[mNum-1].pos() ^ p ^ Inf(1) ).runit() ; }
 			
 			/// Forward Kinematics: Concatenations of previous frame, previous link, and current joint
-			void fk() {							
-				for (int i = 1; i < mNum; ++i){		
-					Mot m = mJoint[i].mot() * mLink[i-1].mot() * mFrame[i-1].mot();
-					mFrame[i].mot( m );
-				}
-			}
-			
-			/// Forward Kinematics: Selective From begin joint to end joint
+            void fk() {	
+                Mot mot = mJoint[0].mot();
+                mFrame[0].mot( mot );
+                for (int i = 1; i < mNum; ++i){		
+                    Mot rel = mLink[i-1].mot() * mJoint[i].mot();
+                    mFrame[i].mot(  mFrame[i-1].mot() * rel ) ;
+                }
+            }	
+//			void fk2() {	
+//                Mot mot = mJoint[0].mot();
+//                mFrame[0].mot( mot );
+//				for (int i = 1; i < mNum; ++i){		
+//					Mot m = mJoint[i].mot() * mLink[i-1].mot() * mFrame[i-1].mot();
+//					mFrame[i].mot( m );
+//				}
+//			}
+//            void fk3() {	
+//                Mot mot = mJoint[0].mot();
+//                mFrame[0].mot( mot );
+//                for (int i = 1; i < mNum; ++i){		
+//                    Mot rel = mLink[i-1].mot().sp( mFrame[i-1].mot() ) * mJoint[i].mot();
+//                    mFrame[i].mot(  rel * mFrame[i-1].mot() ) ;
+//                }
+//            }	      
+        
+            /// Forward Kinematics: Selective From begin joint to end joint
 			void fk(int begin, int end){
+//                Mot mot = mJoint[0].mot();
 				for (int i = begin; i < end; ++i){
-					Mot m = mJoint[i].mot() * mLink[i-1].mot() * mFrame[i-1].mot();
+					Mot m =  mFrame[i-1].mot()  * mLink[i-1].mot() * mJoint[i].mot();
 					mFrame[i].mot( m );				
 				}
 			}
+
+            void ik(int end, int begin){
+                
+            }
+        
+            void ifabrik(const Pnt& p, int end, int begin, double err = .01){
+                //squared distance between last frame and goal p
+                Sca s = mFrame[end].pos() <= p;
+                
+                //Temporary Goal
+                Pnt goal = p;
+                Pnt base = mFrame[begin].pos();
+                
+                int n = 0;
+                
+                //repeat until distance is decreased below threshold, or give up after 20 iterations
+                while (s > err){
+                    
+                    Pnt tmpGoal = goal;
+                    Pnt tmpBase = base;
+                    
+                    //some objects
+                    static Dls dls; //surround
+                    static Dll dll; //line
+                    static Par par; //intersection of line ^ surround
+                    
+                    //forward reaching
+                    for (int i = end; i < begin; ++i){
+                        mFrame[i].pos( tmpGoal );          //set position of ith frame
+                        dls = nextDls(i);               //set boundary sphere through i-1 th frame;
+                        dll = linf(i);                  //get line from tmp to i-1th frame
+                        par = (dll ^ dls).dual();       //get point pair intersection of line and boundary sphere
+                        tmpGoal = Ro::split1(par);         //extract point from point pair intersection
+                    }
+                    
+                    //backward correction
+                    for (int i = begin; i > end; --i){
+                        dls = prevDls(i);                   //set boundary sphere through i+1 th frame
+                        dll = linb(i);                      //get line to i+1th frame;
+                        par = (dll ^ dls).dual();           //get point pair intersection of line and boundary sphere
+                        tmpBase = Ro::split1(par);
+                        mFrame[i-1].pos(tmpBase);             //set position of i+1th frame
+                    }
+                    
+                    //squared distance between end frame and goal p
+                    s = mFrame[ end ].pos() <= p;
+                    
+                    n++;  if (n > 20) {  break; }
+                }
+                
+                //calculate joint angles
+                joints();               
+            }
+            /// "FABRIK" Iterative Solver [see paper] feed target point, end frame and beginning frame,
+            void fabrik(const Pnt& p, int end, int begin, double err = .01){
+                
+                //squared distance between last frame and goal p
+                Sca s = mFrame[end].pos() <= p;
+                
+                //Temporary Goal
+                Pnt goal = p;
+                Pnt base = mFrame[begin].pos();
+                
+                int n = 0;
+                
+                //repeat until distance is decreased below threshold, or give up after 20 iterations
+                while (s > err){
+                    
+                    Pnt tmpGoal = goal;
+                    Pnt tmpBase = base;
+                    
+                    static Dls dls; //surround
+                    static Dll dll; //line
+                    static Par par; //intersection of line ^ surround
+                    
+                    //backward reaching
+                    for (int i = end; i > begin; --i){
+                        mFrame[i].pos( tmpGoal );          //set position of ith frame
+                        dls = prevDls(i);               //set boundary sphere through i-1 th frame;
+                        dll = linb(i);                  //get line from tmp to i-1th frame
+                        par = (dll ^ dls).dual();       //get point pair intersection of line and boundary sphere
+                        tmpGoal = Ro::split1(par);         //extract point from point pair intersection
+                    }
+                    
+                    //forward correction
+                    for (int i = begin; i < end; ++i){
+                        dls = nextDls(i);                   //set boundary sphere through i+1 th frame
+                        dll = linf(i);                      //get line to i+1th frame;
+                        par = (dll ^ dls).dual();           //get point pair intersection of line and boundary sphere
+                        tmpBase = Ro::split1(par);
+                        mFrame[i+1].pos(tmpBase);             //set position of i+1th frame
+                    }
+                    
+                    s = mFrame[ end ].pos() <= p;
+                     
+                    n++;  if (n > 20) {  break; }
+                }
+
+                //calculate joint angles
+                joints();
+
+            }
+        
+
+        
+            /// Derive Joint Rotations from Current Positions
+            void joints(){
+
+                Vec t = Vec::y;
+                Rot R(1,0,0,0);
+
+                for (int i = 0; i < mNum-1; ++i){
+                    //DRV of LINK
+                    Vec b = Biv( linf(i) ).unit().edual();                    
+                    Rot nr = Gen::ratio(t, b); //What it takes to turn it there
+                    //mJoint[i].rot( nr );
+                    R = nr * R;
+                    mFrame[i].rot( R );
+                    t = Op::sp(t, nr );
+                }
+                
+                //Set Base Joint
+                mJoint[0].rot( mFrame[0].rot() );
+                
+                for (int i = 1; i < mNum; ++i){                    
+                    //disassemble
+                    Rot Rt = (-mFrame[i-1].rot()) * mFrame[i].rot();
+                    mJoint[i].rot( Rt ); 
+                }
+
+            }
+        
+            ///Satisfy Specific Angle Constraint at frame k
+            void angle(int k, double theta){
+                
+                Rot R =  mJoint[k].rot();
+                double t = Op::iphi ( R );
+                
+                cout << t << endl ;
+                
+                Biv b = Biv( R ) * -1;// * ( (t > 1) ? ); // note: check Op:lg and Gen::log_rot (maybe mult by -1 there as well)
+                cout << b << endl; 
+                cout << Op::lg( R ) << endl; 
+                cout << Op :: pl( R ) << endl; 
+                
+                Rot nr = Gen::rot_biv_ang( b, theta );
+                
+                mJoint[k].rot( nr );
+                
+                //forward kinematics
+                fk(k,mNum);
+                
+            }
+        
+//            void step(){
+//                
+//            }
 			
-			/// Inverse Kinematics: in development
-			void ik(){
-				for (int i = num()-1; i > 1; i--){
-				
-				}
-			}
-			/// Inverse Kinematics: Selective
-			void ik(int end, int begin){
-				for (int i = end; i > begin; i--){
-				
-				}			
-			}
-			
-			/// Derive Link Frames from current Pose
-			void lk(){
+			/// Derive Link Frames from current Positions
+			void links(){
 				for (int i = 0; i < mNum-1; ++i){
-					mLink[i].mot( mFrame[i+1].mot() / mFrame[i].mot() ); 
+					mLink[i].pos() = Ro::null( mFrame[i+1].vec() - mFrame[i].vec() ); 
+                    //mLink[i].mot( mFrame[i+1].mot() / mFrame[i].mot() ); 
 				}
 			} 
         
-			
+        virtual void drawLinkages(){
+            for (int i = 0; i < mNum-1; ++i){
+                Glyph::DashedLine(mFrame[i].pos(), mFrame[i+1].pos() );
+            }            
+        }
+        
+        virtual void drawJoints(){
+            for (int i = 0; i < mNum; ++i){
+//                mFrame[i].draw();
+                mFrame[i].cxy().draw();
+            }           
+        }
+        
 			virtual void draw(){
-				for (int i = 0; i < mNum; ++i){
-					mJoint[i].step();
-					mFrame[i].draw();
-					mFrame[i].drawBound();
-				}
+				drawLinkages(); 
+                drawJoints();
+
 			}
 	
 	};

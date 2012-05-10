@@ -173,7 +173,7 @@
 
 	void Ori_Cir :: Bind(){
 		if (!bound) {
-			cout << "binding Ori_Cir" << endl;
+			//cout << "binding Ori_Cir" << endl;
 			Conga::Line().bindFunc("conga_assign_Ori_Cir_fn",   &assign.ptr.get);
 			bound = 1;
 		}

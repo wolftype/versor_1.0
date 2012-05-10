@@ -173,7 +173,7 @@
 
 	void Mtd_Pss :: Bind(){
 		if (!bound) {
-			cout << "binding Mtd_Pss" << endl;
+			//cout << "binding Mtd_Pss" << endl;
 			Conga::Line().bindFunc("conga_assign_Mtd_Pss_fn",   &assign.ptr.get);
 			bound = 1;
 		}

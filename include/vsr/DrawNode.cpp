@@ -253,7 +253,7 @@ void MeshNode :: onDraw(Graphics& gl) {
                  vtex.data( &(*mesh[i])[0].Tex[0] );
                  vtex.pointer();
                  
-                 Mat4f tm = XMat::rot( mesh[i] -> rot );
+                 Mat4f tm = XMat::rot( mesh[i] -> rot() );
                  ShaderProgram::SetUniform(modID, tm.val());
                  
 //                 VAttrib :: draw( mesh[i]->num(), mesh[i]->mode() );

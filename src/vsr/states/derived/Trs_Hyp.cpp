@@ -173,7 +173,7 @@
 
 	void Trs_Hyp :: Bind(){
 		if (!bound) {
-			cout << "binding Trs_Hyp" << endl;
+			//cout << "binding Trs_Hyp" << endl;
 			Conga::Line().bindFunc("conga_assign_Trs_Hyp_fn",   &assign.ptr.get);
 			bound = 1;
 		}

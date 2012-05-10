@@ -29,12 +29,10 @@
 
 #ifndef OPERA_H_INCLUDED
 #define OPERA_H_INCLUDED
-#include "State.h"
 #include "Op.h"
 #include "vsr_mktypes.h"
-#include "Field.h"
 
-namespace con {
+namespace vsr {
 	//Template different Types of Function Ptrs?
 	//place operations into a chain?
 	
@@ -79,7 +77,7 @@ namespace con {
 		_LOOP,
 	};	
 	
-	class Opera : public Drawable{
+	class Opera {
 		
 		protected:
 			bool bCalc;
@@ -88,7 +86,7 @@ namespace con {
 			int mTactic;						//Loop, Countdown, etc
 		
 		public:
-			Opera(int tactic = _LOOP, bool calc = 1) : Drawable(), bCalc(calc), mTactic(tactic) {}
+			Opera(int tactic = _LOOP, bool calc = 1) : bCalc(calc), mTactic(tactic) {}
 			
 			vector<State*> input;
 			vector<State*> output;			
@@ -215,16 +213,7 @@ namespace con {
 			void operator()(){ r -> recomp ( Mk::cxr[(*r).idx()] ( func(*a, *b) ) ); }
 	};
 
-	//experiment with a field of states Pnts and Bivs ( a state space )
-	class Opera_1f : public Opera {
-		public:
-			Opera_1f ( State* state, Field<Pnt, Biv>* field ) : Opera(), a(state), b(field) {
-				vox = new Vxl; *vox = (*b).vxl(*a);
-				res.push_back((Vxl*)vox);
-			}
-			State* a; Field<Pnt,Biv>* b; Vxl * vox;//FieldFunc *f, 
-			void operator()(){ *vox = (*b).vxl(*a); if(mTactic == _ONCE) off(); }
-	};
+
 
 }
 

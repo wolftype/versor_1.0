@@ -2,7 +2,7 @@
  *  LATTICE.h
  *  
  *
- *  Created by x on 1/28/10.
+ *  Created by Pablo Colapinto on 1/28/10.
  *  Copyright 2010 x. All rights reserved.
  *
  */
@@ -31,7 +31,7 @@
 	A Combination of elements by templating it as a Lattice of Multivectors or Bases is possible
 	(000 = scalar, 001 = vector, 011 = bivector, etc)
 	
-	The Lattice can thereby easily have different types of effects at different points - some which rotate, some which screw,
+	The Lattice could thereby  have different types of effects at different points - some which rotate, some which screw,
 	some which spin a particle.
 	
 	Two Lattices should be able to influence each other -- a Lattice of scalars, for instance, could serve as a gradient on top
@@ -73,18 +73,20 @@
 #ifndef VSR_LATTICE_H_INCLUDED
 #define VSR_LATTICE_H_INCLUDED
 
+#include "Frame.h"
 #include "Matrix.h"
 #include "Op.h"
-#include "Opera.h"
+#include "State.h"
+
+#include "vsr_eval.h"
 #include "CongaHeaders.h"
-#include "vsr_graphics.h"
+#include "vsr_gfxdata.h"
 #include "vsr_mktypes.h"
-#include "GL.h"
-#include "Frame.h"
+#include "vsr_gl.h"
 
 using std::ostream;
 
-namespace con {
+namespace vsr {
 
 	enum {
 		_LEFT	= 1,
@@ -107,8 +109,10 @@ namespace con {
 		protected:
 			
 			//parameters of the Lattice
-			int mWidth, mHeight, mDepth, mNum, mDim, mNumVxl,mType;
-			float mSpacing;			
+			int mWidth, mHeight, mDepth, mNum, mDim, mNumVxl, mType;
+            int mNumFace, mNumEdge;
+
+            float mSpacing;			
 
 			//data array
 			T	* mData;
@@ -123,30 +127,20 @@ namespace con {
 			//Fixed Reference (spheres)
 			Dls * mGrid;
 			
-			//reference to corners
-			//Vxl mCorner;
-			//reference to faces
-			//int * mFace; 
-			int mNumFace;
-			//reference to edges
-			//int * mEdge; 
-			int mNumEdge;
-			//reference to face vxls
-			//int * mFaceVxl; int mNumFaceVxl;
-			//reference to edge vxls
-			//int * mEdgeVxl; int mNumEdgeVxl;
-			//vector rep
-			vector <int> mFace;
+            vector <int> mFace;
 			vector <int> mEdge;
 			vector <int> mCorner;
 			vector <int> mFaceVxl;
 			vector <int> mEdgeVxl;
 			vector <int> mCornerVxl; 						
 								
-			void facesAndEdges( Nbr nb, int *, int *);
-			void facesAndEdgesVxl( Nbr nb, int *, int *);	
+            /// Routines to Find Face and Edge Boundary 
 			void vxlFE( Nbr nb );
 			void FE(Nbr nb );
+
+        //Deprecated 
+        //            void facesAndEdges( Nbr nb, int *, int *);
+        //			void facesAndEdgesVxl( Nbr nb, int *, int *);	
 			
 		public:
 		
@@ -155,22 +149,24 @@ namespace con {
 			Lattice (int w, int h, int d, float s =.1);
 			void resize(int w, int h, int d, float s = .1);
 			
-			/*! Initialize or Reset */
+            /*! Allocate Memory */
+            void alloc();
+            /*! Initialize or Reset */
 			void init();
-			/*! copy into previous */
+			/*! copy into "previous" container */
 			void copyPrev();
-			/*! Allocate Memory */
-			void alloc();
 			/*! Swap Previous and Current Values */
 			void swap() { T * tmp = mPrev; mPrev = mData; mData = tmp; }
 			
 			/*! Add All Data to Scene Observer Chain (so it can access Scene Data) */
-			void networkData(){ 
-				for (int i = 0; i < mNum; ++i) {
-					mNetwork.push_back((Observer*)&(mData[i]));
-					mNetwork.push_back((Observer*)&(mPrev[i]));  
-				}
-			}
+//			void networkData(){ 
+//				for (int i = 0; i < mNum; ++i) {
+//					mNetwork.push_back((Observer*)&(mData[i]));
+//					mNetwork.push_back((Observer*)&(mPrev[i]));  
+//				}
+//			}
+        
+            bool hit(Pnt p, int idx, double threshold = 0) { return ( Op::sca( p <= mGrid[idx] ) <= threshold ) ? 1 : 0; }
 					
 			/*! Set Data by Index*/
 			T&	operator [] (int i)	{ return ( ( (T*) mData ) [i] ); }
@@ -236,6 +232,7 @@ namespace con {
 			
 			/*! Sum of Neighbors of T data */
 			static T sumNbrs(T * data, Nbr * nb, int idx) ;
+        
 			/*! Tensor Difference of Neighbors of T data */
 			static T diffNbrs(T * data, Nbr * nb, int idx) ;
 			static T diffXNbrs(T * data, Nbr * nb, int idx) ;
@@ -249,9 +246,9 @@ namespace con {
 			template < class S >
 			static T euler(const Lattice< S > & f, T * data, Pnt& p) ;
 
-			/*! Interpolate Voxel's Average in Lattce F, using data, at Point p (using just one voxel)*/
+			/*! Interpolate Voxel's Average in Lattice F, using data, at Point p (using just one voxel)*/
 			template < class S >
-			static T singleEuler(const Lattice< S > & f, T * data, State& p) ;
+			static T localEuler(const Lattice< S > & f, T * data, State& p) ;
 			
 			/*! Tensor of Current Data Step at Index idx */
 			T diffNbrs(int idx) { 
@@ -318,9 +315,9 @@ namespace con {
 			
 			/*! Spatial Positions of ith element in x direction  */
 			float px(int i) const { return -ow() + (mSpacing * i); }
-			/*! Spatial Positions of ith element in y direction  */
+			/*! Spatial Positions of jth element in y direction  */
 			float py(int j) const { return -oh() + (mSpacing * j); }
-			/*! Spatial Positions of ith element in z direction  */
+			/*! Spatial Positions of kth element in z direction  */
 			float pz(int k) const { return  od() - (mSpacing * k); }
 		
 			int num() const { return mNum; }					///< Number of Points
@@ -331,7 +328,7 @@ namespace con {
 			int numFaceVxl() const { return mFaceVxl.size(); }	///< Number of Face Voxels
 			
 			/*! Offset Jitter Coordinates by random percentage of +- s*/
-			void jitter(double s = .5 );
+			void jitter(double x = .5, double y = .5, double z = .5 );
 			void jitterGrid(double s = .5);
 
 			/*! Convolve with another Lattice (not yet implemented) */
@@ -442,20 +439,24 @@ namespace con {
 			break;
 		}
 	}
+    
+    //////////////////////////// //////////////////////////// 
+    //////////////////////////// EULER INTEGRATING
 
 	template < class T > template < class S > 
 	T Lattice < T > :: euler ( const Lattice< S > & f, T * data, Pnt& p ) { 
-		
-		//T tdx;
-		Vec v = limit(f,p);							
 
+		//Limit of p in f
+		Vec v = limit(f,p);							
+        //Vxl of v in f
 		Vxl vxl = _vxlOfVec( v, f );
-		//vxl.limit(); //cout << "euler: " << vxl << endl;
-		//int n = vxl[0];//(vxl[0] == -1) ? 0 : vxl[0];
-		Vec tp = Vec( v - f.grid( vxl[0] ) ); //x,y,z distance from lower front corner
+        //x,y,z distance from lower front corner of vxl
+		Vec tp = Vec( v - f.grid( vxl[0] ) ); 
+        //Adjustment to Y direction and spacing
 		tp[2] *= -1;
 		tp /= f.spacing();
 		
+        
 		double x = tp[0]; double xo = 1-x;
 		double y = tp[1]; double yo = 1-y;
 		double z = tp[2]; double zo = 1-z;
@@ -469,9 +470,9 @@ namespace con {
 	}
 	
 	template < class T > template < class S > 
-	T Lattice < T > :: singleEuler ( const Lattice< S > & f, T * data, State& tp ) { 
+	T Lattice < T > ::  localEuler ( const Lattice< S > & f, T * data, State& tp ) { 
 		
-		Vxl vxl(0,1,2,3,4,5,6,7);
+		static Vxl vxl(0,1,2,3,4,5,6,7);
 		
 		double x = tp[0]; double xo = 1-x;
 		double y = tp[1]; double yo = 1-y;
@@ -488,16 +489,23 @@ namespace con {
 
 	template < class T > template < class S > 
 	Vec Lattice <  T > :: limit ( const Lattice < S > & f, const State& p){
-		Vec v(p);
+		Vec v(p);        
+        
 		if ( v[0] < f.px(0) ) v[0] = f.px(0) + f.spacing()/2.0;
+        else if  ( v[0] > f.px(f.w()-1) ) v[0] = f.px(f.w()-1) - f.spacing()/2.0;
+
 		if ( v[1] < f.py(0) ) v[1] = f.py(0) + f.spacing()/2.0;	
+        else if ( v[1] > f.py(f.h()-1) ) v[1] = f.py(f.h()-1) - f.spacing()/2.0;	
+        
 		if ( v[2] > f.pz(0) ) v[2] = f.pz(0) - f.spacing()/2.0;
-		
-		if ( v[0] > f.px(f.w()-1) ) v[0] = f.px(f.w()-1) - f.spacing()/2.0;
-		if ( v[1] > f.py(f.h()-1) ) v[1] = f.py(f.h()-1) - f.spacing()/2.0;								
-		if ( v[2] < f.pz(f.d()-1) ) v[2] = f.pz(f.d()-1) + f.spacing()/2.0;	
+		else if ( v[2] < f.pz(f.d()-1) ) v[2] = f.pz(f.d()-1) + f.spacing()/2.0;	
+
 		return v;
 	}	
+    
+    //////////////////////////// //////////////////////////// 
+    //////////////////////////// INDEXING
+    
 	//what vxl are we in at vec v with regards to lattice f ?
 	template < class T > template < class S > 
 	Vxl Lattice < T > :: _vxlOfVec( const Vec& v, const Lattice<S>& f ) {	

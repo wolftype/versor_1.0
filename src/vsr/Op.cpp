@@ -339,9 +339,10 @@ State Gen::ratio(const State& a, const State& b){
 	double ss = 2 * (s+1);
 	double n = ( ss >= 0 ? sqrt ( ss ) : 0 );
 	
-	Rot r = ( b * a ) ;
+	Rot r = ( b * a ) ; //cout << r << endl;
 	r[0] += 1;	
 	if (n != 0 ) r /= n;
+    if (r == Rot(0,0,0,0) ) return Rot(1,0,0,0);//else cout << r << endl; //printf("0 in gen::ratio\n");
 	return r;
 }
 
@@ -576,7 +577,7 @@ State Gen::rot_biv2(const State& b){
 //bivector and angle
 State Gen::rot_biv_ang(const State& b, double t){
 	Biv nb = b.unit();
-	double sc = -sin(t);
+	double sc = -sin(t);//-?
 	return Rot( cos(t), nb[0]*sc, nb[1]*sc, nb[2]*sc );
 }
 
@@ -600,13 +601,20 @@ State Gen::rot_par(const Par& p, double t){
 	return Rot( cos(c), p[0]*sc, p[1]*sc, p[2]*sc );
 }
 
-State Gen::tpar(const State& s){
-	return Pnt_Pnt(1, 
-				s[0], s[1], s[2], 
-				s[3], s[4], s[5], 
-				s[6], s[7], s[8], s[9]);
-}
+//State Gen::tpar(const State& s){
+//	return Pnt_Pnt(1, 
+//				s[0], s[1], s[2], 
+//				s[3], s[4], s[5], 
+//				s[6], s[7], s[8], s[9]);
+//}
 
+    State Gen::tpar(const State& s, double t){
+        return Pnt_Pnt(t, 
+                       s[0], s[1], s[2], 
+                       s[3], s[4], s[5], 
+                       s[6], s[7], s[8], s[9]);
+    }    
+    
 State Gen::trv3(double x, double y, double z){
 	return Trv(1,x,y,z);
 }
@@ -1061,7 +1069,10 @@ Vec3<> Eu::vec3(const State& s){
 //
 //}
 
-
+//inner product returns negative squared distance over two
+bool Ro :: hit ( const State& a, const State& b, double range){
+    return ( -Op::sca(a<=b) <= range ) ? 1 : 0;
+}
 
 State Ro::loc( const State& s) { 
 	State t = Inf(1) <= s; 
@@ -1104,6 +1115,8 @@ State Ro::sur( const State& s) {
 double Ro::siz( const State& s, int sn) {
 	State b = Inf(1) <= s;
 	return Op::sca( ( s * s.involute() ) / ( b * b ) * sn );
+//	return Op::sca( ( s <= s.involute() ) / ( b * b ) * sn );
+
 }
 
 double Ro::rad( const State& s) {
@@ -1207,7 +1220,7 @@ State Ro::dls_pnt( const State& pnt, double _sr, bool real){
 	return s;
 }
 
-//At center c through point p
+//Sphere At center c through point p
 State Ro::dls( const State& c, const State& p){
 	return Dls( p <= ( c^Inf(1) ) );
 }
@@ -1267,7 +1280,16 @@ State Ro::conic(const State& v, double ecc){
 State Ro::parbiv( const State& B) {
 	return Ro::par( Vec(0,0,0), Op::dle(B) );
 }
-
+    
+/*!
+ Direct (imaginary?) Round From Dual Sphere and Euclidean Carrier Flat
+ */    
+State Ro::dls_flat(const State& dls, const State& flat){
+   // State s = dls ^ ( ( dls <= ( flat.involute() * Inf(1) ) )  * -1.0 );
+    //cout << s << endl; 
+    return dls ^ ( ( dls <= ( flat.involute() * Inf(1) ) )  * -1.0 );  
+}
+    
 /*! Direct Round from Point and Euclidean Carrier Flat 
 	@param Center pnt 
 	@param Carrier flat 
@@ -1307,7 +1329,7 @@ State Ro::hom( const State& s){
 	return ( s[3] == 0 ) ? s : s / s[3];
 }
 
-/*Axis of circle */
+/*Dual Line Axis of circle */
 State Ro::ax(const State& s){
 	return Inf(1) <= s;
 }
@@ -1360,6 +1382,12 @@ State Ro::dls_bound(const State& s, double t){
 
 }
 
+    double Ro :: cur(const State& s){
+        double r = Ro::rad(s);
+        
+        return (r==0) ? 10000 : 1.0 / Ro::rad(s);
+    }
+    
 //make from direction?
 
 /***F L A T S ****/
@@ -1370,7 +1398,7 @@ State Fl::dir( const State& s , bool dual) {
 
 }
 
-//point on line or plane s closest to point p
+//point on line or plane s closest to point p (is flat dual default 0)
 State Fl::loc( const State& s, const State& p, bool dual) {
 	return dual ? ( p ^ s ) / s : ( p <= s ) / s  ;
 }
@@ -1393,7 +1421,7 @@ State Fl::lin_drv_pnt( const Drv& d, const Pnt& p){
 	return p ^ d;
 }
 
-/* Direct Plane from DRB an PNT*/
+/* Direct Plane from DRB and PNT*/
 State Fl::pln( const State& drb, const State& pnt){
 	return pnt ^ drb;
 }

@@ -9,7 +9,7 @@
 #ifndef opengles_00_GraphicsMatrix_h
 #define opengles_00_GraphicsMatrix_h
 
-#include "vsr_matrix.h"
+#include "Matrix.h"
 #include <math.h>
 
 using namespace std;
@@ -92,9 +92,9 @@ namespace vsr{
     }
     
     inline Mat4f XMat::rot( Rot r ){
-        Vec x = sp(Vec(1,0,0),r);
-        Vec y = sp(Vec(0,1,0),r);
-        Vec z = sp(Vec(0,0,1),r);
+        Vec x = Op::sp(Vec(1,0,0),r);
+        Vec y = Op::sp(Vec(0,1,0),r);
+        Vec z = Op::sp(Vec(0,0,1),r);
         
         return Mat4f(
             x[0], x[1], x[2], 0,

@@ -10,5 +10,20 @@
 #define vsr_Cell_h
 
 
+namespace vsr{
+
+    class Cell {
+        
+        bool bAlive;
+    
+        double mSize;
+        
+        public:
+        
+        void grow(double rate) { mSize+= rate; }
+        void die(){ bAlive = 0; }
+    };
+    
+} //vsr::
 
 #endif

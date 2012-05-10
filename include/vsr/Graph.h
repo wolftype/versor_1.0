@@ -47,6 +47,8 @@ namespace vsr  {
 
     };
     
+//    struct  
+    
     
     //INT IDX TYPES
     

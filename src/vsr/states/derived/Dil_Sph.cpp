@@ -173,7 +173,7 @@
 
 	void Dil_Sph :: Bind(){
 		if (!bound) {
-			cout << "binding Dil_Sph" << endl;
+			//cout << "binding Dil_Sph" << endl;
 			Conga::Line().bindFunc("conga_assign_Dil_Sph_fn",   &assign.ptr.get);
 			bound = 1;
 		}

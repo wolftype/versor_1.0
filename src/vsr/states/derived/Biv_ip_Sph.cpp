@@ -173,7 +173,7 @@
 
 	void Biv_ip_Sph :: Bind(){
 		if (!bound) {
-			cout << "binding Biv_ip_Sph" << endl;
+			//cout << "binding Biv_ip_Sph" << endl;
 			Conga::Line().bindFunc("conga_assign_Biv_ip_Sph_fn",   &assign.ptr.get);
 			bound = 1;
 		}

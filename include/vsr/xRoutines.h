@@ -38,5 +38,7 @@ namespace vsr {
 		cout << s;
 		return s;
 	}
+    
+
 
 } // vsr::

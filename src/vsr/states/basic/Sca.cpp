@@ -173,7 +173,7 @@
 
 	void Sca :: Bind(){
 		if (!bound) {
-			cout << "binding Sca" << endl;
+			//cout << "binding Sca" << endl;
 			Conga::Line().bindFunc("conga_assign_Sca_fn",   &assign.ptr.get);
 			bound = 1;
 		}

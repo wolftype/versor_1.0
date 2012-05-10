@@ -173,7 +173,7 @@
 
 	void Hyp_Par :: Bind(){
 		if (!bound) {
-			cout << "binding Hyp_Par" << endl;
+			//cout << "binding Hyp_Par" << endl;
 			Conga::Line().bindFunc("conga_assign_Hyp_Par_fn",   &assign.ptr.get);
 			bound = 1;
 		}

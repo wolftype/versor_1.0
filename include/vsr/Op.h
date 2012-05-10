@@ -318,7 +318,7 @@ class Gen {
 		
 		//POINT RATIO
 		/*! Conformal Point Ratio from Point Pair */
-		static State tpar(const State&);
+		static State tpar(const State&, double t = 1.0);
 		
 		//TRANSVERSORS
 		/*! Transversor from 3 coordinates */
@@ -394,6 +394,9 @@ class Ro {
 //		static State loc_fl (const State&,const State&);
 //		static State loc_ta_dl(const State&);
 //		static State loc_ta(const State&);
+    
+        /*! Returns TRUE if two rounds (pnts or dls) a and b are within a range r */
+        static bool hit ( const State& a, const State& b, double r  = 0);
 		
 		/*! Point Location of Round Element */
 		static State loc( const State&);
@@ -463,6 +466,8 @@ class Ro {
 		
 		/*! Create Par at origin from Biv */
 		static State parbiv( const State& );
+        /*! Direct Round from Dual Sphere and Euclidean Carrier */
+        static State dls_flat(const State& dls, const State& flat);
 		/*! Direct Round from center and carrier */
 		static State pnt_flat(const State& pnt, const State& flat, double r=1.0);
 		/*! Dual Round From center and dual carrier */
@@ -481,6 +486,9 @@ class Ro {
 		static State cir_lin_pnt(const State& L, const State& p, bool dual);
 		/*! Bounding Sphere of any Element*/
 		static State dls_bound(const State& s, double t = .3);
+    
+        /*! Curvature K of Round Element */
+        static double cur(const State& s);
 };
 
 /*!
@@ -533,7 +541,7 @@ class Ta {
 		/*! Direction of Tangent */
 		static State dir( const State&);
 		/*! Tangent to Round at Point pnt, with boolean flag = 1 if Round is dual. */
-		static State at ( const State& round, const State& pnt, bool dual = 1);
+		static State at ( const State& round, const State& pnt, bool dual);
 		/*! Scalar weight of Tangent */
 		static double wt(const State& s);		
 		/*! Tangent Vector from Direction Vector and Point */

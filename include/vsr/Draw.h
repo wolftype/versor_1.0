@@ -49,16 +49,12 @@ namespace vsr {
 		class Cir;
 		class Pnt;
 		class State;
+    
+        
+        class Camera;
 		
+        //GL BUILTIN PIPELINE
 		class Glyph {
-		
-				//Glyphs can be animated, and so have static methods that can refer to a time member
-				//which is updated by a static clock
-				
-				// Revised: Glyphs now just fetch global time (if bool to do so is passed in as arg)
-				
-				//static int mTime;
-				//static bool bAnimate;
 
 			public:
 			
@@ -147,8 +143,11 @@ namespace vsr {
 			public:
 				static void dir(bool b);
 			
-				static void Seg(const Cir&, double t, bool dir = 1, int res = 20);				
+				static void Seg(const Cir&, double t, bool dir = 1, int res = 20);
+                static void SegRad( const Cir& );
+                static void SegTo(const Cir&, double st, double t, int res = 20);
 				static void Seg2(const Cir&, const Pnt&, const Pnt&, int res = 20);
+                static void SegPnts(const Cir& K, const Pnt& a, const Pnt& b, int res = 20);
 				
 				/* Draw State, Label, and Node Info */
 				static void S(const State&);
@@ -176,6 +175,15 @@ namespace vsr {
 		//void printPS();
 		
 		};
+    
+    struct Print {
+        inline static string Begin() { return "\\begin{tikzpicture}"; }
+        inline static string End()   { return "\\end{tikzpicture}";}
+        static string Tikz( const State&, const Camera& );
+        static string TikzPerspective( const State&, const Camera& );
+    };
+    
+        
 } //vsr::
 
 #endif

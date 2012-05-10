@@ -173,7 +173,7 @@
 
 	void Mnk_Par :: Bind(){
 		if (!bound) {
-			cout << "binding Mnk_Par" << endl;
+			//cout << "binding Mnk_Par" << endl;
 			Conga::Line().bindFunc("conga_assign_Mnk_Par_fn",   &assign.ptr.get);
 			bound = 1;
 		}

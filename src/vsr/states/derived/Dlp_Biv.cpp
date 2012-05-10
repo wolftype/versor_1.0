@@ -173,7 +173,7 @@
 
 	void Dlp_Biv :: Bind(){
 		if (!bound) {
-			cout << "binding Dlp_Biv" << endl;
+			//cout << "binding Dlp_Biv" << endl;
 			Conga::Line().bindFunc("conga_assign_Dlp_Biv_fn",   &assign.ptr.get);
 			bound = 1;
 		}

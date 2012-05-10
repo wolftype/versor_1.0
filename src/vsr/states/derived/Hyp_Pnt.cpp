@@ -173,7 +173,7 @@
 
 	void Hyp_Pnt :: Bind(){
 		if (!bound) {
-			cout << "binding Hyp_Pnt" << endl;
+			//cout << "binding Hyp_Pnt" << endl;
 			Conga::Line().bindFunc("conga_assign_Hyp_Pnt_fn",   &assign.ptr.get);
 			bound = 1;
 		}
