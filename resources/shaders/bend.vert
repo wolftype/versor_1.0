@@ -1,20 +1,4 @@
-/*
- 
- Basic Vertex Data Shader 
- 
- */
 
-//uniform mat4 proj;  // Projection Matrix (ortho or frustrum)
-//uniform mat4 cam;   // Camera Transformation Matrix (Rot and Trs)
-//uniform mat4 mod;   // Model Transformation Matrix (Rot, Trs, Scl)
-
-//attribute vec3 position;
-//attribute vec4 colorSrc;
-//attribute vec2 texCoord;
-//normal
-
-//varying vec4 colorDst;
-//varying vec2 texco;
 
 uniform vec3 utnv;
 uniform vec3 upos;

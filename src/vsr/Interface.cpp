@@ -22,13 +22,13 @@ namespace vsr {
     
     void Interface :: touch( State& s, double t){
         
-        Dls dls;
+        Dls dls = Ro::dls3(0,0,0);
         
         switch ( s.idx() ){
             case _VEC:
             case _TNV:
             case _DRV:
-                dls = Ro::dls_vec(s, .3);
+                dls = Ro::dls_vec(s, .5);
                 break;
             case _CIR:
             case _PAR:
@@ -63,6 +63,7 @@ namespace vsr {
         if ( mouse.isDown ){
             dt = t; // Reset acc
             if ( pntClicked( x ) ) {
+                cout << "clicked" << s << endl; 
                 s.select();
             }
         }
@@ -90,11 +91,27 @@ namespace vsr {
         }
     }
     
-    Vec Interface :: screenCoord(const Pnt& p){
+    void Interface :: touch( Frame& f, Frame& e, double t){
+        
+        static double dt = 5;
+        static double acc = .9;
+        dt *= acc;
+        if ( mouse.isDown ){
+            dt = t;// scene().ma() / scene().width();
+            if (pntClicked ( f.pos() ) ){
+                f.select();
+            }
+        }
+        if (f.isSelected()){
+            xfFrame(&f, &e, dt);
+        }
+    }
+    
+    Vec Interface :: screenCoord(const State& p){
         
         Vec sc = GL::project(p[0], p[1], p[2], camera() );
         sc[0] /= vd().w; sc[1] /= vd().h; sc[2] = 0;
-        sc[1] = 1 - sc[1];
+        //sc[1] = 1 - sc[1];
         
         return sc;
     }
@@ -267,10 +284,10 @@ namespace vsr {
         State& ts = *s;
         
         //Center of Defining Sphere
-        Vec tv ( Ro::cen(pos) );   
+        Vec tv ( Ro::null_cen(pos) );   
         
         //2D coordinates of Defining Sphere
-        Vec sc = GL::project(tv[0], tv[1], tv[2], camera() ); 
+        Vec sc = screenCoord(tv);//GL::project(tv[0], tv[1], tv[2], camera() ); 
         
         //Point in 3D space on Projection Ray closest to sphere.
         Pnt cp  = Fl::loc( vd().ray, Ro::loc(pos), 1);        
@@ -284,20 +301,42 @@ namespace vsr {
                 
                 //Drag towards or away from element
                 int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                ts = Op::sp0( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
+                ts = Op::sp( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
                 break;
             }
             case 'g': //translate
             {
-                ts = Op::sp0 (ts, Gen::trs( mouse.dragCat * t ) );
+                ts = Op::sp (ts, Gen::trs( mouse.dragCat * t ) );
                 break;
             }
             case 'r': //rotate about local line
             {
                 Dll td = pos <= Drb( mouse.dragBivCat * t );
-                ts = Op::sp0 ( ts, Gen::mot_dll( td ) );
+                ts = Op::sp ( ts, Gen::mot_dll( td ) );
                 break;
             }
+            case 'a': //scale
+            {
+                //printf("scale\n");s
+                Vec tm1 = mouse.pos + mouse.drag - sc;
+                Vec tm2 = mouse.pos - sc; 
+                
+                //Drag towards or away from element
+                int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
+                ts = Op::sp0( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
+                break;
+            }
+            case 'f': //translate
+            {
+                ts = Op::sp0(ts, Gen::trs( mouse.dragCat * t ) );
+                break;
+            }
+            case 'e': //rotate about local line
+            {
+                Dll td = pos <= Drb( mouse.dragBivCat * t );
+                ts = Op::sp0( ts, Gen::mot_dll( td ) );
+                break;
+            }           
             case 'b': //boost by drag (not working)
             {
                 Tnv tnv( mouse.dragCat );
@@ -325,6 +364,64 @@ namespace vsr {
             }
         }
     }
+
+    void Interface :: xfFrame( Frame * frame, Frame * eframe, double t){
+        //	if ( frame->isSelected() ) {
+		Pnt& tp = frame->pos();
+//		Rot& tr = frame->rot();
+		Vec tv ( tp );
+		Vec sc = GL::project(tv[0], tv[1], tv[2], camera());
+		switch(keyboard.code){
+			case 's': //scale
+			{
+                //printf("scale\n");s
+                Vec tm1 = mouse.pos + mouse.drag - sc;
+                Vec tm2 = mouse.pos - sc; 
+				int neg = (tm1.norm() > tm2.norm()) ? -1 : 1; //Drag towards or away from element
+				
+				eframe->dd( mouse.drag.norm()*t*neg );
+				eframe->dilate();
+				//ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
+				break;
+			}
+			case 'g': //translate
+			{
+                //			tp = Op::sp(tp, Gen::trs(scene().mdc()*t));
+				eframe->dx() = mouse.dragCat * t;
+				eframe->move();
+				break;
+			}
+			case 'r': //rotate about local line
+			{
+                //			Dll td = tp <= Drb(scene().dbc()*t);
+                //			tr = Op::sp(tr, Gen::mot_dll(td));
+				eframe->db() =  mouse.dragBivCat * t; //scene().mp().unit() ^ scene().md();
+				eframe->spin();
+				break;
+			}
+			case 'b': //boost by drag
+			{
+				//ts = Op::sp(ts, Gen::trv(scene().mdc()*t));
+				break;
+			}
+			case 'a': //all transformations
+			{
+				double neg = mouse.drag[0];
+                //			Dll td = pos <= Drb(scene().dbc()*t);
+                //			ts = Op::sp(ts, Gen::mot_dll(td));
+                //			ts = Op::sp(ts, Gen::trs(scene().mdc()*t));
+                //			ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
+				break;
+			}
+			case 'q':
+			{
+				//cout << "deselect all" << endl;
+				frame -> toggle();
+			}
+		}
+		eframe ->acc();
+        //		}
+    }    
     
     void Interface :: xfFrame( Frame * frame, double t){
         //	if ( frame->isSelected() ) {
@@ -374,9 +471,9 @@ namespace vsr {
                 //			ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
 				break;
 			}
-			case Key::Escape:
+			case 'q':
 			{
-				cout << "deselect all" << endl;
+				//cout << "deselect all" << endl;
 				frame -> toggle();
 			}
 		}
@@ -421,45 +518,45 @@ namespace vsr {
         }
     }
 
-    void Interface :: stateTransform(){
-        switch(keyboard.code){
-            case 's': //scale
-                {
-                    if (mMode & Mode::Transform) { 
-                        state() = model -> get();//tmp().back();
-                    } else {
-                        model -> push( state() );//tmp().push_back( state() );
-                    }
-                    enable( Mode::Scale | Mode::Transform );
-                    disable( Mode::Rotate | Mode::Grab );
-                    break;
-                }
-            case 'r': //rotate
-                {
-                    if (mMode & Mode::Transform) { 
-                        state() = model -> get();
-                    } else {								
-                        model -> push( state() );
-                        
-                    }
-                    enable( Mode::Rotate | Mode::Transform );
-                    disable( Mode::Scale | Mode::Grab );
-                    break;
-                }
-            case 'g': //grab
-                {
-                    
-                    if (mMode & Mode::Transform) { 
-                        state() = model -> get();
-                    } else {								
-                        model -> push( state() );
-                    }
-                    enable( Mode::Grab | Mode::Transform  );
-                    disable( Mode::Rotate | Mode::Scale );
-                    break;
-                }
-        }
-    }
+//    void Interface :: stateTransform(){
+//        switch(keyboard.code){
+//            case 's': //scale
+//                {
+//                    if (mMode & Mode::Transform) { 
+//                        state() = model -> active();//tmp().back();
+//                    } else {
+//                        model -> push( state() );//tmp().push_back( state() );
+//                    }
+//                    enable( Mode::Scale | Mode::Transform );
+//                    disable( Mode::Rotate | Mode::Grab );
+//                    break;
+//                }
+//            case 'r': //rotate
+//                {
+//                    if (mMode & Mode::Transform) { 
+//                        state() = model -> get();
+//                    } else {								
+//                        model -> push( state() );
+//                        
+//                    }
+//                    enable( Mode::Rotate | Mode::Transform );
+//                    disable( Mode::Scale | Mode::Grab );
+//                    break;
+//                }
+//            case 'g': //grab
+//                {
+//                    
+//                    if (mMode & Mode::Transform) { 
+//                        state() = model -> get();
+//                    } else {								
+//                        model -> push( state() );
+//                    }
+//                    enable( Mode::Grab | Mode::Transform  );
+//                    disable( Mode::Rotate | Mode::Scale );
+//                    break;
+//                }
+//        }
+//    }
     
     void Interface :: mvTransform(){
         // Get Rotor Ratio between camera and model view

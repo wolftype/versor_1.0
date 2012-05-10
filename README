@@ -49,13 +49,13 @@ And a few overloaded operations:
 ! or -  Inverse
 ~       Reverse
 
-And finally, since I ran out of operators, some basic methods
+And finally, since I ran out of overloadable operators, some basic methods
 
 conjugate()
 involute()
 
 
-A * B  multiplies two elements together (and, in the case of A * !B, finds ratios between elements)
+A * B   multiplies two elements together (and, in the case of A * !B (or A * -B), finds ratios between elements)
 A ^ B   wedges two elements together ( builds up higher dimensional elements )
 A <= B  contracts A out of B ( returns the part of B least like A )
 

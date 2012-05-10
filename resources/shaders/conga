@@ -1,0 +1,342 @@
+ 
+	struct Tvt {
+		float s,e12,e13,e23,e1no,e2no,e3no,e1ni,e2ni,e3ni,noni,e12noni,e13noni,e23noni,e123ni;
+	};
+	
+	struct Rtc {
+		float e1,e2,e3,no,ni,e12no,e13no,e23no,e12ni,e13ni,e23ni,e1noni,e2noni,e3noni,e123,e123noni;
+	};
+	
+	struct Par {
+		float e12,e13,e23,e1no,e2no,e3no,e1ni,e2ni,e3ni,noni;
+	};
+	
+	struct Tnv_Flp {
+		float s,e12,e13,e23,e1no,e2no,e3no,noni,e12noni,e13noni,e23noni;
+	};
+	
+	struct Pnt {
+		float e1,e2,e3,no,ni;
+	};
+	
+	struct Pnt_Pnt {
+		float s,e12,e13,e23,e1no,e2no,e3no,e1ni,e2ni,e3ni,noni;
+	};
+	
+	struct Sph {
+		float e12noni,e13noni,e23noni,e123no,e123ni;
+	};
+	
+	struct Cir {
+		float e12no,e13no,e23no,e12ni,e13ni,e23ni,e1noni,e2noni,e3noni,e123;
+	};
+	
+	struct Dll {
+		float e12,e13,e23,e1ni,e2ni,e3ni;
+	};
+	
+	struct Lin {
+		float e12ni,e13ni,e23ni,e1noni,e2noni,e3noni;
+	};
+	
+	struct Rot {
+		float s,e12,e13,e23;
+	};
+	
+	struct Trs {
+		float s,e1ni,e2ni,e3ni;
+	};
+	
+	struct Mot {
+		float s,e12,e13,e23,e1ni,e2ni,e3ni,e123ni;
+	};
+	
+	struct Dil {
+		float s,noni;
+	};
+	
+	struct Trv {
+		float s,e1no,e2no,e3no;
+	};
+	
+	
+ 
+ Pnt_Pnt gp (Pnt a, Pnt b) { 
+	return Pnt_Pnt (
+a.e1 * b.e1 + a.e2 * b.e2 + a.e3 * b.e3 - a.no * b.ni - a.ni * b.no,
+a.e1 * b.e2 - a.e2 * b.e1,
+a.e1 * b.e3 - a.e3 * b.e1,
+a.e2 * b.e3 - a.e3 * b.e2,
+a.e1 * b.no - a.no * b.e1,
+a.e2 * b.no - a.no * b.e2,
+a.e3 * b.no - a.no * b.e3,
+a.e1 * b.ni - a.ni * b.e1,
+a.e2 * b.ni - a.ni * b.e2,
+a.e3 * b.ni - a.ni * b.e3,
+a.no * b.ni - a.ni * b.no
+);
+}			
+		
+ 
+ Sph gp (Pnt a, Pss b) { 
+	return Sph (
+a.e3 * b.e123noni,
+ - a.e2 * b.e123noni,
+a.e1 * b.e123noni,
+ - a.no * b.e123noni,
+a.ni * b.e123noni
+);
+}			
+		
+ 
+ Cir gp (Par a, Pss b) { 
+	return Cir (
+ - a.e3no * b.e123noni,
+a.e2no * b.e123noni,
+ - a.e1no * b.e123noni,
+a.e3ni * b.e123noni,
+ - a.e2ni * b.e123noni,
+a.e1ni * b.e123noni,
+ - a.e23 * b.e123noni,
+a.e13 * b.e123noni,
+ - a.e12 * b.e123noni,
+a.noni * b.e123noni
+);
+}			
+		
+ 
+ Par gp (Cir a, Pss b) { 
+	return Par (
+a.e3noni * b.e123noni,
+ - a.e2noni * b.e123noni,
+a.e1noni * b.e123noni,
+a.e23no * b.e123noni,
+ - a.e13no * b.e123noni,
+a.e12no * b.e123noni,
+ - a.e23ni * b.e123noni,
+a.e13ni * b.e123noni,
+ - a.e12ni * b.e123noni,
+ - a.e123 * b.e123noni
+);
+}			
+		
+ 
+ Pnt gp (Sph a, Pss b) { 
+	return Pnt (
+ - a.e23noni * b.e123noni,
+a.e13noni * b.e123noni,
+ - a.e12noni * b.e123noni,
+a.e123no * b.e123noni,
+ - a.e123ni * b.e123noni
+);
+}			
+		
+ 
+ Dll gp (Lin a, Pss b) { 
+	return Dll (
+a.e3noni * b.e123noni,
+ - a.e2noni * b.e123noni,
+a.e1noni * b.e123noni,
+ - a.e23ni * b.e123noni,
+a.e13ni * b.e123noni,
+ - a.e12ni * b.e123noni
+);
+}			
+		
+ 
+ Lin gp (Dll a, Pss b) { 
+	return Lin (
+a.e3ni * b.e123noni,
+ - a.e2ni * b.e123noni,
+a.e1ni * b.e123noni,
+ - a.e23 * b.e123noni,
+a.e13 * b.e123noni,
+ - a.e12 * b.e123noni
+);
+}			
+		
+ 
+ Sph gp (Pnt a, Pss b) { 
+	return Sph (
+a.e3 * b.e123noni,
+ - a.e2 * b.e123noni,
+a.e1 * b.e123noni,
+ - a.no * b.e123noni,
+a.ni * b.e123noni
+);
+}			
+		
+ 
+ Cir gp (Par a, Pss b) { 
+	return Cir (
+ - a.e3no * b.e123noni,
+a.e2no * b.e123noni,
+ - a.e1no * b.e123noni,
+a.e3ni * b.e123noni,
+ - a.e2ni * b.e123noni,
+a.e1ni * b.e123noni,
+ - a.e23 * b.e123noni,
+a.e13 * b.e123noni,
+ - a.e12 * b.e123noni,
+a.noni * b.e123noni
+);
+}			
+		
+ 
+ Par gp (Cir a, Pss b) { 
+	return Par (
+a.e3noni * b.e123noni,
+ - a.e2noni * b.e123noni,
+a.e1noni * b.e123noni,
+a.e23no * b.e123noni,
+ - a.e13no * b.e123noni,
+a.e12no * b.e123noni,
+ - a.e23ni * b.e123noni,
+a.e13ni * b.e123noni,
+ - a.e12ni * b.e123noni,
+ - a.e123 * b.e123noni
+);
+}			
+		
+ 
+ Pnt gp (Sph a, Pss b) { 
+	return Pnt (
+ - a.e23noni * b.e123noni,
+a.e13noni * b.e123noni,
+ - a.e12noni * b.e123noni,
+a.e123no * b.e123noni,
+ - a.e123ni * b.e123noni
+);
+}			
+		
+ 
+ Lin gp (Dll a, Pss b) { 
+	return Lin (
+a.e3ni * b.e123noni,
+ - a.e2ni * b.e123noni,
+a.e1ni * b.e123noni,
+ - a.e23 * b.e123noni,
+a.e13 * b.e123noni,
+ - a.e12 * b.e123noni
+);
+}			
+		
+ 
+ Dll gp (Lin a, Pss b) { 
+	return Dll (
+a.e3noni * b.e123noni,
+ - a.e2noni * b.e123noni,
+a.e1noni * b.e123noni,
+ - a.e23ni * b.e123noni,
+a.e13ni * b.e123noni,
+ - a.e12ni * b.e123noni
+);
+}			
+		
+ 
+ Pln gp (Dlp a, Pss b) { 
+	return Pln (
+a.e3 * b.e123noni,
+ - a.e2 * b.e123noni,
+a.e1 * b.e123noni,
+a.ni * b.e123noni
+);
+}			
+		
+ 
+ Dlp gp (Pln a, Pss b) { 
+	return Dlp (
+ - a.e23noni * b.e123noni,
+a.e13noni * b.e123noni,
+ - a.e12noni * b.e123noni,
+ - a.e123ni * b.e123noni
+);
+}			
+		
+  	
+Par sp1 (Tnv tnv, Trs trs) {					
+					
+Trs t1 = trs;
+Tnv t2 = tnv;
+Tnv_Flp t3 (
+t1.e1ni * t2.e1no + t1.e2ni * t2.e2no + t1.e3ni * t2.e3no,
+t1.e1ni * t2.e2no - t1.e2ni * t2.e1no,
+t1.e1ni * t2.e3no - t1.e3ni * t2.e1no,
+t1.e2ni * t2.e3no - t1.e3ni * t2.e2no,
+t1.s * t2.e1no,
+t1.s * t2.e2no,
+t1.s * t2.e3no,
+t1.e1ni * t2.e1no + t1.e2ni * t2.e2no + t1.e3ni * t2.e3no,
+t1.e1ni * t2.e2no - t1.e2ni * t2.e1no,
+t1.e1ni * t2.e3no - t1.e3ni * t2.e1no,
+t1.e2ni * t2.e3no - t1.e3ni * t2.e2no
+);
+Trs t4 = trs;
+Trs t5 = reverse( t4);
+return Par (
+t3.e12 * t5.s + t3.e1no * t5.e2ni - t3.e2no * t5.e1ni,
+t3.e13 * t5.s + t3.e1no * t5.e3ni - t3.e3no * t5.e1ni,
+t3.e23 * t5.s + t3.e2no * t5.e3ni - t3.e3no * t5.e2ni,
+t3.e1no * t5.s,
+t3.e2no * t5.s,
+t3.e3no * t5.s,
+t3.s * t5.e1ni + t3.e12 * t5.e2ni + t3.e13 * t5.e3ni + t3.noni * t5.e1ni + t3.e12noni * t5.e2ni + t3.e13noni * t5.e3ni,
+t3.s * t5.e2ni - t3.e12 * t5.e1ni + t3.e23 * t5.e3ni + t3.noni * t5.e2ni - t3.e12noni * t5.e1ni + t3.e23noni * t5.e3ni,
+t3.s * t5.e3ni - t3.e13 * t5.e1ni - t3.e23 * t5.e2ni + t3.noni * t5.e3ni - t3.e13noni * t5.e1ni - t3.e23noni * t5.e2ni,
+ - t3.e1no * t5.e1ni - t3.e2no * t5.e2ni - t3.e3no * t5.e3ni + t3.noni * t5.s
+);
+
+}
+		
+	
+	
+  	
+Pnt sp (Pnt pnt, Mot mot) {					
+					
+Mot t1 = mot;
+Pnt t2 = pnt;
+Rtc t3 (
+t1.s * t2.e1 + t1.e12 * t2.e2 + t1.e13 * t2.e3 - t1.e1ni * t2.no,
+t1.s * t2.e2 - t1.e12 * t2.e1 + t1.e23 * t2.e3 - t1.e2ni * t2.no,
+t1.s * t2.e3 - t1.e13 * t2.e1 - t1.e23 * t2.e2 - t1.e3ni * t2.no,
+t1.s * t2.no,
+t1.s * t2.ni - t1.e1ni * t2.e1 - t1.e2ni * t2.e2 - t1.e3ni * t2.e3,
+t1.e12 * t2.no,
+t1.e13 * t2.no,
+t1.e23 * t2.no,
+t1.e12 * t2.ni - t1.e1ni * t2.e2 + t1.e2ni * t2.e1 - t1.e123ni * t2.e3,
+t1.e13 * t2.ni - t1.e1ni * t2.e3 + t1.e3ni * t2.e1 + t1.e123ni * t2.e2,
+t1.e23 * t2.ni - t1.e2ni * t2.e3 + t1.e3ni * t2.e2 - t1.e123ni * t2.e1,
+ - t1.e1ni * t2.no,
+ - t1.e2ni * t2.no,
+ - t1.e3ni * t2.no,
+t1.e12 * t2.e3 - t1.e13 * t2.e2 + t1.e23 * t2.e1 - t1.e123ni * t2.no,
+ - t1.e123ni * t2.no
+);
+Mot t4 = mot;
+Mot t5 = reverse( t4);
+return Pnt (
+t3.e1 * t5.s - t3.e2 * t5.e12 - t3.e3 * t5.e13 + t3.no * t5.e1ni + t3.e12no * t5.e2ni + t3.e13no * t5.e3ni - t3.e23no * t5.e123ni - t3.e123 * t5.e23,
+t3.e1 * t5.e12 + t3.e2 * t5.s - t3.e3 * t5.e23 + t3.no * t5.e2ni - t3.e12no * t5.e1ni + t3.e13no * t5.e123ni + t3.e23no * t5.e3ni + t3.e123 * t5.e13,
+t3.e1 * t5.e13 + t3.e2 * t5.e23 + t3.e3 * t5.s + t3.no * t5.e3ni - t3.e12no * t5.e123ni - t3.e13no * t5.e1ni - t3.e23no * t5.e2ni - t3.e123 * t5.e12,
+t3.no * t5.s - t3.e12no * t5.e12 - t3.e13no * t5.e13 - t3.e23no * t5.e23,
+t3.e1 * t5.e1ni + t3.e2 * t5.e2ni + t3.e3 * t5.e3ni + t3.ni * t5.s - t3.e12ni * t5.e12 - t3.e13ni * t5.e13 - t3.e23ni * t5.e23 + t3.e1noni * t5.e1ni + t3.e2noni * t5.e2ni + t3.e3noni * t5.e3ni - t3.e123 * t5.e123ni - t3.e123noni * t5.e123ni
+);
+
+}
+		
+	
+	
+	
+	//Point from Vector
+	Pnt null(vec3 s){
+	    return Pnt ( s[0], s[1], s[2], 1, dot(s,s) / 2.0 );
+	}
+	
+	//Line from Eye and Direction
+	Lin ray(vec3 eye, vec3 dir){
+		return op( op( null(eye), Drv( dir.x, dir.y, dir.z ) ), Inf(1) );
+	}
+	
+	
+	

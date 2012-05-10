@@ -7,3 +7,11 @@
 //
 
 #include <iostream>
+
+#include "Gamma/gamma.h"
+
+
+int main(){
+    
+    
+}

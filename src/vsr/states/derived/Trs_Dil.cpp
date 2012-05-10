@@ -173,7 +173,7 @@
 
 	void Trs_Dil :: Bind(){
 		if (!bound) {
-			cout << "binding Trs_Dil" << endl;
+			//cout << "binding Trs_Dil" << endl;
 			Conga::Line().bindFunc("conga_assign_Trs_Dil_fn",   &assign.ptr.get);
 			bound = 1;
 		}

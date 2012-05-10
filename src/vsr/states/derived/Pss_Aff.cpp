@@ -173,7 +173,7 @@
 
 	void Pss_Aff :: Bind(){
 		if (!bound) {
-			cout << "binding Pss_Aff" << endl;
+			//cout << "binding Pss_Aff" << endl;
 			Conga::Line().bindFunc("conga_assign_Pss_Aff_fn",   &assign.ptr.get);
 			bound = 1;
 		}

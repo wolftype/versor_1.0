@@ -173,7 +173,7 @@
 
 	void Pnt_Vec :: Bind(){
 		if (!bound) {
-			cout << "binding Pnt_Vec" << endl;
+			//cout << "binding Pnt_Vec" << endl;
 			Conga::Line().bindFunc("conga_assign_Pnt_Vec_fn",   &assign.ptr.get);
 			bound = 1;
 		}

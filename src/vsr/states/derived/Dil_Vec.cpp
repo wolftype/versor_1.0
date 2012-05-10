@@ -173,7 +173,7 @@
 
 	void Dil_Vec :: Bind(){
 		if (!bound) {
-			cout << "binding Dil_Vec" << endl;
+			//cout << "binding Dil_Vec" << endl;
 			Conga::Line().bindFunc("conga_assign_Dil_Vec_fn",   &assign.ptr.get);
 			bound = 1;
 		}

@@ -173,7 +173,7 @@
 
 	void Drv :: Bind(){
 		if (!bound) {
-			cout << "binding Drv" << endl;
+			//cout << "binding Drv" << endl;
 			Conga::Line().bindFunc("conga_assign_Drv_fn",   &assign.ptr.get);
 			bound = 1;
 		}

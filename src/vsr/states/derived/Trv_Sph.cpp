@@ -173,7 +173,7 @@
 
 	void Trv_Sph :: Bind(){
 		if (!bound) {
-			cout << "binding Trv_Sph" << endl;
+			//cout << "binding Trv_Sph" << endl;
 			Conga::Line().bindFunc("conga_assign_Trv_Sph_fn",   &assign.ptr.get);
 			bound = 1;
 		}

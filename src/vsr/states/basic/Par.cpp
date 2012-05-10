@@ -173,7 +173,7 @@
 
 	void Par :: Bind(){
 		if (!bound) {
-			cout << "binding Par" << endl;
+			//cout << "binding Par" << endl;
 			Conga::Line().bindFunc("conga_assign_Par_fn",   &assign.ptr.get);
 			bound = 1;
 		}

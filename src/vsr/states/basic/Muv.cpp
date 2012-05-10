@@ -173,7 +173,7 @@
 
 	void Muv :: Bind(){
 		if (!bound) {
-			cout << "binding Muv" << endl;
+			//cout << "binding Muv" << endl;
 			Conga::Line().bindFunc("conga_assign_Muv_fn",   &assign.ptr.get);
 			bound = 1;
 		}

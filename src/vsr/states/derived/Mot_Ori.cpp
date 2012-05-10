@@ -173,7 +173,7 @@
 
 	void Mot_Ori :: Bind(){
 		if (!bound) {
-			cout << "binding Mot_Ori" << endl;
+			//cout << "binding Mot_Ori" << endl;
 			Conga::Line().bindFunc("conga_assign_Mot_Ori_fn",   &assign.ptr.get);
 			bound = 1;
 		}

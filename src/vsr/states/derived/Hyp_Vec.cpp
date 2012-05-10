@@ -173,7 +173,7 @@
 
 	void Hyp_Vec :: Bind(){
 		if (!bound) {
-			cout << "binding Hyp_Vec" << endl;
+			//cout << "binding Hyp_Vec" << endl;
 			Conga::Line().bindFunc("conga_assign_Hyp_Vec_fn",   &assign.ptr.get);
 			bound = 1;
 		}

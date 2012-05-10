@@ -49,7 +49,10 @@ void Camera :: push3D(){
 	
 	glLoadIdentity();
 	if (bOrtho){
-		glOrtho(-1.0, 1.0, -1.0, 1.0, 1.0, 100.0); 
+	
+        float oz = mPos[2];
+        glOrtho(-1.0 * oz, 1.0* oz, -1.0* oz, 1.0* oz, -50.0, 50.0); 
+
 	} else {
 		gluPerspective(mFocal, mWidth/mHeight, mNear, mFar);				
 	}

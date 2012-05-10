@@ -173,7 +173,7 @@
 
 	void Mtd :: Bind(){
 		if (!bound) {
-			cout << "binding Mtd" << endl;
+			//cout << "binding Mtd" << endl;
 			Conga::Line().bindFunc("conga_assign_Mtd_fn",   &assign.ptr.get);
 			bound = 1;
 		}

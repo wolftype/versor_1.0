@@ -173,7 +173,7 @@
 
 	void Pnt_Dll :: Bind(){
 		if (!bound) {
-			cout << "binding Pnt_Dll" << endl;
+			//cout << "binding Pnt_Dll" << endl;
 			Conga::Line().bindFunc("conga_assign_Pnt_Dll_fn",   &assign.ptr.get);
 			bound = 1;
 		}

@@ -7,13 +7,16 @@
  *
  */
 
-#include "GL.h"
+#include "vsr_gl.h"
 #include "Draw.h"
 #include "vsr.h"
 #include "Frame.h"
 #include "Param.h"
+#include "Camera.h"
 
 #include "vsr_gxlib.h"
+
+#include <sstream>
 
 
 namespace vsr {
@@ -229,7 +232,7 @@ void Glyph :: Segment(float angle, float radius, bool sign, int res){
 
 	glNormal3f(0, 0, 1);
 
-	int num = res * fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
+	int num = res * fabs(angle);   //floor(20 * PI / (1 + ( PI - angle ) ));
 
 	glBegin(GL_LINE_STRIP);
 		
@@ -250,12 +253,13 @@ void Glyph :: Segment2(float angle, float angle2, float radius, int res){
 
 	glNormal3f(0, 0, 1);
 
-	//int num = res;// * fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
+    // * fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
 
 	double t = angle2 - angle;
-	glBegin(GL_LINE_STRIP);
+	int num = res * fabs(t);
+    glBegin(GL_LINE_STRIP);
 		
-		for (int i = 0; i < res; ++ i){
+		for (int i = 0; i < num; ++ i){
 
 			float rad = ( angle ) + t * i / res;
 			Vec2<> t ( cos(rad), sin(rad) );
@@ -605,6 +609,7 @@ void Glyph :: DottedRect(double w, double h){
 }
 
 void Glyph :: DottedGrid(int w, int h, double s){
+     glPushMatrix();
 	glTranslatef(- (w*s)/ 2.0, -(h*s)/2.0, 0);
 	for (int i =0; i < h; ++i){		
 		for (int j = 0; j < w; ++j){
@@ -613,9 +618,12 @@ void Glyph :: DottedGrid(int w, int h, double s){
 		}
 		glTranslatef(-(w*s),s,0);
 	}
+     glPopMatrix();
 }
 
 void Glyph :: SolidGrid(int w, int h, double s){
+    
+    glPushMatrix();
 	glTranslatef(- (w*s)/ 2.0, -(h*s)/2.0, 0);
 	for (int i =0; i < h; ++i){		
 		for (int j = 0; j < w; ++j){
@@ -624,6 +632,7 @@ void Glyph :: SolidGrid(int w, int h, double s){
 		}
 		glTranslatef(-(w*s),s,0);
 	}
+    glPopMatrix();
 }
 
 void Glyph :: Axes(const Vec& v1, const Vec& v2, const Vec& v3){
@@ -644,27 +653,59 @@ void Glyph :: Axes(const Vec& v1, const Vec& v2, const Vec& v3){
 
 bool Draw :: bDir = 0;
 void Draw :: dir(bool b ) { bDir = b; }
+    
+void Draw :: SegRad( const Cir& k){
+    Seg( k, TWOPI * Ro::cur(k) );
+}
 
 void Draw :: Seg(const Cir& K, double t, bool dir, int res){
 
-//	glColor3f(K.red(), K.green(), K.blue());
-
+    //ORIENTATION
 	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
 	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
-	Pnt v = Ro::cen(K);			
-	double siz = Ro::siz(K);
-	double rad = Ro::rad(K);
-	Vec4<> v4 = Op::aa(r);
+    Vec4<> v4 = Op::aa(r);  
+
+    //POINT POSITION AND RADIUS
+	Pnt v = Ro::cen(K);                                 //Center of Circle
+	double siz = Ro::siz(K);                            //Squared Radius
+	double rad = sqrt ( fabs (siz) );                   //Radius
+	                           
 	bool sign = Op::sn(b, Biv::xy);
 	
 	glPushMatrix();
 		glTranslated(v[0],v[1],v[2]);
 		glRotated(v4.w, v4.x, v4.y, v4.z);
-		siz > 0 ? Glyph::Segment(t, rad, dir, res) : Glyph::DashedSegment(t,rad, dir, res);
+		siz > 0 ? Glyph::Segment(t, rad, sign, res) : Glyph::DashedSegment(t,rad, sign, res);
 	glPopMatrix();
 
 }
 
+void Draw :: SegTo(const Cir& K, double st, double t, int res){
+    
+    Rot roff = Gen::rot_biv_ang(Biv::xy, st);
+    //Vec4<> r4 = Op::aa(roff);  
+    //cout << roff << endl; 
+    //ORIENTATION
+    Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+    Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );// * roff;	//Determine Orientation
+    Vec4<> v4 = Op::aa(r);  
+    
+    //POINT POSITION AND RADIUS
+    Pnt v = Ro::cen(K);                                 //Center of Circle
+    double siz = Ro::siz(K);                            //Squared Radius
+    double rad = sqrt ( fabs (siz) );                   //Radius
+    
+    bool sign = Op::sn(b, Biv::xy);
+    
+    glPushMatrix();
+    glTranslated(v[0],v[1],v[2]);
+    glRotated(v4.w, v4.x, v4.y, v4.z);//glRotated(r4.w, r4.x, r4.y, r4.z);
+//    siz > 0 ? Glyph::Segment(t, rad, sign, res) : Glyph::DashedSegment(t,rad, sign, res);
+    siz > 0 ? Glyph::Segment2(st, st + t, rad, res) : Glyph::DashedSegment2(st, st + t, rad, res);
+    glPopMatrix();
+    
+}    
+    
 void Draw :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
 //	glColor3f(K.red(), K.green(), K.blue());
 	Biv bi = Biv(Ro::dir(K));							//Extract Euclidean Bivector
@@ -692,6 +733,27 @@ void Draw :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
 	glPopMatrix();
 }
 
+    void Draw :: SegPnts(const Cir& K, const Pnt& a, const Pnt& b, int res){
+        static Pnt tp, cen;
+        static Dll da, db, rat;
+        
+        cen = Ro::null_cen(K);
+        da = ( cen ^ a ^ Inf(1) ).dual(); 
+        db = ( cen ^ b ^ Inf(1) ).dual(); 
+    
+        rat = Gen::dll_ratio(da, db);
+       
+        glBegin(GL_LINE_STRIP);
+        IT1(res)
+            tp = a.mot( rat* t ); 
+            glVertex3f(tp[0], tp[1], tp[2]);
+        END 
+        glEnd();
+        
+    }
+    
+    
+    
 /*
 void Draw :: L (const State& s){			
 			
@@ -765,6 +827,12 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
     
 
 	switch(s.idx()){
+            
+        case _SCA:
+        {
+//            glColor3f(s[0],
+            Glyph::Point(Vec(0,0,0));
+        }
 	
 		case _VEC:
 		{
@@ -933,9 +1001,6 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 			Drv d = Fl::dir( s ,1);
 			Sph v = Fl::loc( s , Ori(1), 1);
 			glTranslated(v[0],v[1],v[2]);
-//			Rot r = Op::ratio(Vec::z, Vec(d).unit() );
-//			Vec4<> t = Op::aa(r);
-//			glRotated(t.w, t.x, t.y, t.z);
 			Glyph::DashedLine(d * 10, d * -10);			
 			break;
 
@@ -1012,6 +1077,84 @@ void Draw :: Pop(){
 	glPopMatrix();
 }
 
+    
+    
+    string Print :: Tikz( const State & s, const Camera& cam){
+        
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+        
+        static Vec v[4];
+        static Vec vo[4];
+        
+       
+        string ts;
+        
+        switch (s.idx()){
+                
+            case _CIR:
+                
+                ts += "\\draw plot[tension = 1, smooth cycle] coordinates{";
+                
+                Par a = Ro::par_cir(s, 0);
+                Par b = Ro::par_cir(s, PIOVERTWO);
+                
+                vector<Pnt> pa = Ro::split(a);
+                vector<Pnt> pb = Ro::split(b);
+                
+               v[0] = Ro::null_cen(pa[0]);
+               v[2] = Ro::null_cen(pa[1]);
+               v[1] = Ro::null_cen(pb[0]);
+               v[3] = Ro::null_cen(pb[1]);
+
+               IT(4) 
+                vo[i]= GL::project( v[i][0], v[i][1], v[i][2], cam);
+                stringstream od;
+                od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
+                ts += od.str();
+               END
+                
+                ts += "};";
+                
+                break;
+        }
+
+        return ts;
+    }
+    
+    string Print :: TikzPerspective( const State & s, const Camera& cam){
+        
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+        
+        string ts;
+        
+        switch (s.idx()){
+                
+            case _CIR:
+                
+                ts += "\\draw plot[tension = 1, smooth cycle] coordinates{";
+                
+                IT(12) VAL(12)
+                
+                Vec v = Ro::pnt_cir(s, PI*t);
+                
+                Vec vo = GL::project( v[0], v[1], v[2], cam);
+
+                stringstream od;
+                od << "(" << vo[0] * rw << "," << vo[1] * rh << ")";
+                
+                ts += od.str();
+               
+                END
+                
+                ts += "};";
+                
+                break;
+        }
+        
+        return ts;
+    }
+    
+    
 /*
 //passing in space coordinates
 void Draw :: clickTest( State& s, double x, double y, double z ) {

@@ -7,12 +7,137 @@
  *
  */
 
-#include "GL.h"
+#include "vsr_gl.h"
 #include "Camera.h"
 #include "vsr.h"
 
 namespace vsr {
+    //NEW
+//    int     GL::AttributeSize[] = {3,3,4,2};
+//    bool    GL::AttributeNormalizeBoolean[] = {GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE};
+//    GLenum  GL::AttributeType[] = {GL::FLOAT, GL::FLOAT, GL::UBYTE, GL::FLOAT};
     
+    
+    //}
+    
+    
+    void GL :: error(string tmsg){
+        
+        GLenum err = glGetError();
+        
+        const char * msg = tmsg.c_str();
+        
+        switch(err) {
+            case GL_INVALID_ENUM:
+                printf("%s:\n %s\n", msg, "An unacceptable value is specified for an enumerated argument. The offending command is ignored and has no other side effect than to set the error flag.");
+                break;
+                
+            case GL_INVALID_VALUE:
+                printf("%s:\n %s\n", msg, "A numeric argument is out of range. The offending command is ignored and has no other side effect than to set the error flag.");
+                break;
+                
+            case GL_INVALID_OPERATION:
+                printf("%s:\n %s\n", msg, "The specified operation is not allowed in the current state. The offending command is ignored and has no other side effect than to set the error flag.");
+                break;
+                
+            case GL_INVALID_FRAMEBUFFER_OPERATION:
+                printf("%s:\n %s\n", msg, "Framebuffer is Incomplete");
+                break;
+                
+            case GL_STACK_OVERFLOW:
+                printf("%s:\n %s\n", msg, "This command would cause a stack overflow. The offending command is ignored and has no other side effect than to set the error flag.");
+                break;
+                
+            case GL_STACK_UNDERFLOW:
+                printf("%s:\n %s\n", msg, "This command would cause a stack underflow. The offending command is ignored and has no other side effect than to set the error flag.");
+                break;
+                
+            case GL_OUT_OF_MEMORY:
+                printf("%s:\n %s\n", msg, "There is not enough memory left to execute the command.  The state of the GL is undefined, except for the state of the error flags, after this error is recorded.");
+                break;
+                
+                //		case GL_TABLE_TOO_LARGE:
+                //			printf("%s:\n %s\n", msg, "The specified table exceeds the implementation's maximum supported table size.  The offending command is ignored and has no other side effect than to set the error flag.");
+                //			break;
+                
+            case GL_NO_ERROR:
+                break;
+                
+            default:
+                break;
+        }
+        
+        //return 10;
+    }
+    
+    GLsizeiptr GL :: dataSize(GLenum format, GLenum type, int num) {
+        int p = planes(format);
+        int b = bpp(type);
+        return p * b * num;
+    }
+    
+    int GL :: planes(GLenum format) {
+        switch(format) {
+                //		case GL_COLOR_INDEX:
+            case GL_STENCIL_INDEX:
+            case GL_DEPTH_COMPONENT:
+                //		case GL_RED:
+                //		case GL_GREEN:
+                //		case GL_BLUE:
+            case GL_ALPHA:
+            case GL_LUMINANCE:			return 1;
+                
+            case GL_LUMINANCE_ALPHA:	return 2;
+            case GL_RGB:				return 3;
+            case GL_RGBA:
+            default:					return 4;
+        }
+    }
+    
+    GLenum GL::type(GLenum typ){
+        switch(typ){
+            case GL_FLOAT_MAT2:
+            case GL_FLOAT_MAT4:
+            case GL_FLOAT_VEC2: 
+            case GL_FLOAT_VEC3: 
+            case GL_FLOAT_VEC4: return GL_FLOAT;         
+        }
+    }
+    int GL:: cmp( GLenum type) {
+        switch (type){
+                
+            case GL_FLOAT_MAT2: 
+            case GL_FLOAT_VEC2: return 2;
+            case GL_FLOAT_VEC3: return 3;
+            case GL_FLOAT_VEC4: return 4;
+                
+            default:            return 3;
+                
+        }
+    }
+    // bytes/px
+    int GL :: bpp(GLenum type) {
+        switch(type) {
+                /*
+                 case GL_BITMAP:	??????
+                 type = sizeof(GLbitfield);
+                 break;
+                 */
+                
+            case GL_UNSIGNED_SHORT:	return sizeof(GLushort);
+            case GL_SHORT:			return sizeof(GLshort);
+            case GL_UNSIGNED_INT:	return sizeof(GLuint);
+            case GL_INT:			return sizeof(GLint);
+            case GL_FLOAT:			return sizeof(GLfloat);
+                //case GL_
+            case GL_BYTE:			return sizeof(GLbyte);
+                
+            case GL_UNSIGNED_BYTE:
+            default:				return sizeof(GLubyte);
+        }
+    }
+
+    //OLD
     
     Vec GL :: project(double _x, double _y, double _z, GLdouble* model_view, GLdouble* projection, GLint* viewport) {
         
@@ -29,6 +154,30 @@ namespace vsr {
         
         return Vec(winX, winY, winZ);
         
+    }
+    
+    Vec GL :: project(double * p, const Camera& cam) {
+        
+        // arrays to hold matrix information
+        GLdouble winX, winY, winZ;
+        
+        gluProject(p[0], p[1], p[2],
+                   cam.model(),
+                   cam.proj(),
+                   cam.view(),
+                   &winX,
+                   &winY,
+                   &winZ );
+        
+        return Vec(winX, winY, winZ);
+        
+    }
+    
+    //scaled project
+    Vec GL :: sproject(double * p, const Camera& cam) {
+        Vec v = project(p,cam);
+
+        return Vec(v[0] / cam.width(), v[1] / cam.height(), v[2] / cam.depth() );
     }
     
     Vec GL :: unproject(double _x, double _y, double _z, GLdouble* model_view, GLdouble* projection, GLint* viewport){
@@ -78,6 +227,16 @@ namespace vsr {
         return Vec(posX, posY, posZ);
     }
     
+
+    
+    //Ratio of Screen Pixel width to 3D coordinates
+    Vec GL :: ratio( double w, double h, const Camera& c){
+            Vec bl = GL::unproject(0, 0, 1.0, c );
+            Vec tr = GL::unproject(w, h, 1.0, c );
+            Vec diff = tr - bl;    
+            return Vec( diff[0] / w, diff[1] /h, 0);
+    }
+        
     void GL :: translate (double * p){
         glTranslated(p[0], p[1], p[2]);
     }
@@ -99,7 +258,7 @@ namespace vsr {
         glNormal3d(p[0], p[1], p[2]);
     }
     
-    GLenum GL::Lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7 };
+//    GLenum GL::Lights[] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7 };
     
     void GL :: smooth(){ glShadeModel(GL_SMOOTH); }
     void GL :: flat(){ glShadeModel(GL_FLAT); }

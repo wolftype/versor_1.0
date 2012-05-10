@@ -19,11 +19,15 @@ namespace vsr {
 	string File :: videos;
 	string File :: shaders;
 	string File :: textures;
+    string File :: resources;
 	string File :: audio;
 	
 	void File :: setdir (string directory) {
 
-		directory.erase(directory.find_last_of('/')+1);
+        
+		resources = directory + "/";
+        
+        directory.erase(directory.find_last_of('/')+1);
 		cwd = directory;
 		
 		directory.erase(directory.find_last_of('/'));
@@ -31,7 +35,7 @@ namespace vsr {
 		directory.erase(directory.find_last_of('/'));
 		directory.erase(directory.find_last_of('/')+1);
 		
-		data = directory+"data/";
+		data = directory+"resources/";
 		shaders = data+"shaders/";
 		textures = data+"textures/";
 		meshes = data  + "meshes/";

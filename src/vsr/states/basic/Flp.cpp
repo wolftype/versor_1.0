@@ -173,7 +173,7 @@
 
 	void Flp :: Bind(){
 		if (!bound) {
-			cout << "binding Flp" << endl;
+			//cout << "binding Flp" << endl;
 			Conga::Line().bindFunc("conga_assign_Flp_fn",   &assign.ptr.get);
 			bound = 1;
 		}

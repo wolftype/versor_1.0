@@ -173,7 +173,7 @@
 
 	void Rot_Pnt :: Bind(){
 		if (!bound) {
-			cout << "binding Rot_Pnt" << endl;
+			//cout << "binding Rot_Pnt" << endl;
 			Conga::Line().bindFunc("conga_assign_Rot_Pnt_fn",   &assign.ptr.get);
 			bound = 1;
 		}

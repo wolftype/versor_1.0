@@ -173,7 +173,7 @@
 
 	void Trv :: Bind(){
 		if (!bound) {
-			cout << "binding Trv" << endl;
+			//cout << "binding Trv" << endl;
 			Conga::Line().bindFunc("conga_assign_Trv_fn",   &assign.ptr.get);
 			bound = 1;
 		}

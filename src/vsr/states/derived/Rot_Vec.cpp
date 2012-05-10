@@ -173,7 +173,7 @@
 
 	void Rot_Vec :: Bind(){
 		if (!bound) {
-			cout << "binding Rot_Vec" << endl;
+			//cout << "binding Rot_Vec" << endl;
 			Conga::Line().bindFunc("conga_assign_Rot_Vec_fn",   &assign.ptr.get);
 			bound = 1;
 		}

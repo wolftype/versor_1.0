@@ -173,7 +173,7 @@
 
 	void Sph_Afl :: Bind(){
 		if (!bound) {
-			cout << "binding Sph_Afl" << endl;
+			//cout << "binding Sph_Afl" << endl;
 			Conga::Line().bindFunc("conga_assign_Sph_Afl_fn",   &assign.ptr.get);
 			bound = 1;
 		}

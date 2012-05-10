@@ -173,7 +173,7 @@
 
 	void Mnk_Sph_Afl :: Bind(){
 		if (!bound) {
-			cout << "binding Mnk_Sph_Afl" << endl;
+			//cout << "binding Mnk_Sph_Afl" << endl;
 			Conga::Line().bindFunc("conga_assign_Mnk_Sph_Afl_fn",   &assign.ptr.get);
 			bound = 1;
 		}

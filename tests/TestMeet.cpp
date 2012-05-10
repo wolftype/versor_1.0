@@ -18,7 +18,7 @@ using namespace glv;
 Window * win;
 GLVApp * app;
 
-
+//Two Circles
 void circles(GLVApp& app){
     
     //CIRCLE in XY Plane translated to 1,0,0
@@ -39,6 +39,21 @@ void circles(GLVApp& app){
     Par p = (c2.dual() ^ s1).dual();
         
     p.draw(1,0,1);
+}
+
+void circle_line(GLVApp& app){
+    static Cir c1 = CXY(1);
+    static Dll dll = DLN(0,0,1).trs(2,0,0);
+    
+    app.interface.touch(c1); app.interface.touch(dll);
+    
+    Dls p = ( dll ^ c1.dual() ).dual();
+    
+    c1.draw(0,1,0); dll.draw(1,0,0);
+    
+    p.draw();
+    
+    cout << Ro::siz(p,-1) << endl; 
 }
 
 void circle_sphere(GLVApp & app){
@@ -106,18 +121,81 @@ void lines(GLVApp& app){
 
 }
 
-void GLVApp :: onDraw(){
-    static bool bCir, bCirSph, bLines;
-    SET
-        gui.add(BUTTON, "Circles", bCir);
-        gui.add(BUTTON, "Circle Sphere", bCirSph);
-        gui.add(BUTTON, "Lines", bLines);
-    END
-
-        if (bCir) circles(*this);
-        if (bCirSph) circle_sphere(*this);
-        if (bLines) lines(*this);
+void circle_clock(GLVApp& app){
     
+    static float theta, theta2;
+    SET
+    app.gui.add(DIALER, "theta", theta, -PI, PI);
+    app.gui.add(DIALER, "theta2", theta2, -PI, PI);
+    END 
+    
+    static Cir c = CXY(1);
+    app.interface.touch(c);
+    c.draw(0,1,0);
+    
+    ////////////////////////////////
+    
+    Pnt p = Ro::pnt_cir(c, theta);
+    p.draw(0,1,1);
+    Pnt p2 = Ro::pnt_cir(c, theta2);
+    p2.draw(0,1,1);
+    
+    glColor3f(1,1,1);
+    Draw::SegPnts(c, p, p2);
+    
+    
+    Dll s = Ro::ax(c);
+    s.draw();
+    
+    Par par = c.dual();
+    
+    Dlp dlp = Ro::car(c);
+    
+    Biv us = Vec(Drv(par)) ^ Vec(dlp);
+    us.draw();
+    
+    Biv(par).draw(0,0,1);
+    Drv(par).draw(1,0,0);
+    Tnv(par).draw(1,1,1);
+    
+    Fl::dlp_ortho_cir(c, theta).draw(0,1,0);
+    //Fl::dlp_pnt_cir(p, c).draw(0,0,1);
+    
+    
+}
+
+void sphericalCoord(GLVApp& app){
+    
+    static Frame f;
+    
+    app.interface.touch(f);
+    
+    f.draw();
+    
+    f.bound().draw();
+    
+    Dls s = f.bound();
+  
+    
+}
+
+void GLVApp :: onDraw(){
+//    static bool bCir, bCirSph, bLines;
+//    
+//    SET
+//        gui.add(BUTTON, "Circles", bCir);
+//        gui.add(BUTTON, "Circle Sphere", bCirSph);
+//        gui.add(BUTTON, "Lines", bLines);
+//    END
+//
+//        if (bCir) circles(*this);
+//        if (bCirSph) circle_sphere(*this);
+//        if (bLines) lines(*this);
+
+//    circle_line(*this);
+    
+    circle_clock(*this);
+   // sphericalCoord(*this);
 }
 
 

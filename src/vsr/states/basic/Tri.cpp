@@ -173,7 +173,7 @@
 
 	void Tri :: Bind(){
 		if (!bound) {
-			cout << "binding Tri" << endl;
+			//cout << "binding Tri" << endl;
 			Conga::Line().bindFunc("conga_assign_Tri_fn",   &assign.ptr.get);
 			bound = 1;
 		}

@@ -82,6 +82,9 @@ State State :: type(int _idx){
     State State :: dil(const State& pos, double t) const {
         return Op::sp(*this, Gen::dil_pnt(pos, t ) );
     }    
+    State State :: dils(double t) const {
+        return Op::sp(*this, Gen::dil_pnt( Ro::null(*this) , t ) );
+    }  
     State State :: trv( const State& tnv) const {
         return Op::sp0(*this, Gen::trv(tnv) );
     }

@@ -173,7 +173,7 @@
 
 	void Rot_Drv :: Bind(){
 		if (!bound) {
-			cout << "binding Rot_Drv" << endl;
+			//cout << "binding Rot_Drv" << endl;
 			Conga::Line().bindFunc("conga_assign_Rot_Drv_fn",   &assign.ptr.get);
 			bound = 1;
 		}
