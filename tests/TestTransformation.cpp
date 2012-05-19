@@ -14,6 +14,7 @@
 #include "Boost.h"
 #include "GLVInterfaceImpl.h"
 #include "Optics.h"
+#include "Stat.h" 
 
 using namespace vsr;
 using namespace glv;
@@ -146,7 +147,7 @@ void circleSegments(GLVApp& app){
         
         cir[i] = test.sp( f.ppx( t*f.scale()*vAmt ) );          //SPIN CIR BY FRAME PP GENERATOR
         double k = Ro::cur( cir[i] );                           //GET CURVATURE
-        bool sign = Op::sn( Ro::dir(cir[i]), Biv::xy );
+        bool sign = Op::sn( Ro::dir(cir[i], false), Biv::xy );
         Draw::Seg( cir[i], 2 * PI * k, (bSign) ? sign : !sign );
     END 
 }
@@ -353,10 +354,7 @@ void twistedBoost(GLVApp& app){
     Cir ctr = c.trs(f.box.tr);
     Cir ctl = c.trs(f.box.tl);
     
-    IT(4) VAL(4)
-    double u = t;
-    ITJ(j,4) VALJ(j,4)
-    double v = t;
+    IT2(4)
     
     Cir fin = Interp::surface<Cir>(cbl, cbr, ctr, ctl, u, v);
 
@@ -374,6 +372,7 @@ void twistedBoost(GLVApp& app){
     
     int n = 3;
     ITJ(k,n) VALJ(k,n)
+    
         Cir tc = CXY(1).sp( twist.mot( -1.0 + 2*t ) );
         ITJ(l,n) VALJ(l,n)
     
@@ -386,6 +385,7 @@ void twistedBoost(GLVApp& app){
             Draw::SegRad(tc);
             Draw::SegRad(ttc);//.draw(0,1,0);
         END
+    
     END 
     
     END
@@ -394,30 +394,30 @@ void twistedBoost(GLVApp& app){
 
 void interpolated(GLVApp& app){
     
-    static Frame a, b, c, d;
+    static Lattice<Pnt> f(2,2,1,2);
+    static Frame * frame = new Frame[4];//a, b, c, d;
     
-    app.interface.touch(a); app.interface.touch(b);
-    app.interface.touch(c); app.interface.touch(d);
+//    app.interface.touch(a); app.interface.touch(b);
+//    app.interface.touch(c); app.interface.touch(d);
     
     
     static Cir sc = CXY(1); app.interface.touch(sc);
     
-    static bool bdraw, bFollow,bDuo, bOrtho,bPrint;
-    static double ua, ub;
+    static bool bdraw, bFollow,bDuo, bOrtho,bPrint, bReset, bSep;
+    static double ua, ub, itnum,xoffset;
     static double tan1, tan2, tan3, tan4;
-    static double period1, period2, period3, period4;
-    static double pitch1, pitch2, pitch3, pitch4;
+    static double period1, period2, period3, period4, periodZ;
+    static double pitch1, pitch2, pitch3, pitch4, pitchZ;
     static double mnk, scale, scale2;
+    
     SET
-    a.pos(-1,-1,0); b.pos(1,-1,0);
-    c.pos(1,1,0); d.pos(-1,1,0);
-    a.orientY(0,0,0);
-    b.orientY(0,0,0);
-    c.orientY(0,0,0);
-    d.orientY(0,0,0);
-    app.gui(bOrtho)(bPrint);
-    app.gui.add(DIALER, "ua", ua, 0,20);
-    app.gui.add(DIALER, "ub", ub, 0,20);
+        IT(4)
+            frame[i].pos() = Ro::null( f.grid(i) );
+            frame[i].orientY(0,0,0);
+        END 
+    app.gui(bOrtho)(bPrint,"print")(bReset,"reset")(bSep,"separate")(itnum, "iterations",1,10)(xoffset,"xoffset",-10,10);
+    app.gui.add(DIALER, "ua", ua, 0,100);
+    app.gui.add(DIALER, "ub", ub, 0,100);
     app.gui(period1, "period1", -10,10)(period2, "period2", -10,10)(period3, "period3", -10,10)(period4, "period4", -10,10);
     app.gui(pitch1, "pitch1", -10,10)(pitch2, "pitch2", -10,10)(pitch3, "pitch3", -10,10)(pitch4, "pitch4", -10,10);
     app.gui(tan1, "tan1",-10,10)(tan2, "tan2",-10,10)(tan3, "tan3",-10,10)(tan4, "tan4",-10,10);
@@ -426,13 +426,16 @@ void interpolated(GLVApp& app){
     app.gui.add(BUTTON, "draw", bdraw);
     app.gui.add(DIALER, "scale", scale);
     app.gui.add(DIALER, "scale2", scale2);
+    
+    app.gui(pitchZ,"pz",-10,10)(periodZ, "z",-PI, PI);
     END 
     
     
+    IT(4)
+    frame[i].scale(scale);
+    END 
     
     app.camera().perspective() = bOrtho;
-    
-    a.scale(scale); b.scale(scale); c.scale(scale); d.scale(scale);
     
     if( app.interface.keyboard.code == 'f' ){
         bFollow = true;
@@ -441,61 +444,76 @@ void interpolated(GLVApp& app){
     }
     
     if (bFollow){
-        a.orientX ( app.mouse().origin );
-        b.orientX ( app.mouse().origin );
-        c.orientX ( app.mouse().origin );
-        d.orientX ( app.mouse().origin );
+        IT(4)
+        frame[i].orientZ(app.mouse().origin );
+        END 
+    }
+    
+    if (bReset){
+        IT(4) frame[i].pos() = Ro::null(f.grid(i)); frame[i].orientY(0,0,0); END
     }
     
     if (bdraw){
+        IT(4)
+        Cir ca = frame[i].cxy();  ca.draw(); frame[i].draw();
+        END
+    }   
     
-        Cir ca = a.cxy();  ca.draw(); a.draw();
-        Cir cb = b.cxy();  cb.draw(); b.draw();
-        Cir cc = c.cxy();  cc.draw(); c.draw();
-        Cir cd = d.cxy();  cd.draw(); d.draw();
-    }
+//    glPushMatrix();
     
+    Dll dll = DLN(0,0,1);
+    Twist tw; tw.along(dll, pitchZ, periodZ);
     
-    if (bPrint) cout << Print::Begin() << endl;
-    
-    IT(ua+1) VAL(ua)
-    double u = t;
-    ITJ(j,ub+1) VALJ(j,ub)
-    double v = t;
-
-        double s = Interp::surface(tan1, tan2, tan3, tan4, u, v);
-        double pe = Interp::surface(period1, period2, period3, period4, u, v);
-        double pi = Interp::surface(pitch1, pitch2, pitch3, pitch4, u, v);
-    
-        Par p = Interp::surface<Par>(a.pxy(), b.pxy(), c.pxy(), d.pxy(), u, v);
-        Vec pos = Interp::surface<Vec>( Vec(-1,-1,0), Vec(1,-1,0), Vec(1,1,0), Vec(-1,1,0), u, v );
-    
-        Boost b;  
-        b.par(p);
-            
-        b.mod(pe,s,pi,mnk);
-    
-        Cir c = sc.sp( Gen::tpar(b.par()) * Gen::trs( pos ) );    
-        c.draw(0,0,0);
-    
-        if (bPrint) {
-            cout << app.printTikz( c ) << endl ;
-        }
-
-    if (bDuo){
-        b.tnv() *= -1;
-        c = sc.sp(Gen::tpar(b.par())* Gen::trs( pos ) );    
-        c.draw(0,0,0);
-    }
-    
-    END
-    END
-    
-    
-   
-    if (bPrint) { cout << Print::End() << endl; bPrint = 0; }
+     if (bPrint) cout << Print::Begin() << endl;
+    for (int m = 1; m < itnum; ++m){
+        
+        double mt = 1.0 * m/itnum;
+        //glTranslated(xoffset, 0, 0);
+        
        
-    
+        
+        IT(ua+1) VAL(ua)
+        double u = t;
+        ITJ(j,ub+1) VALJ(j,ub)
+        double v = t;
+
+            double s = Interp::surface(tan1, tan2, tan3, tan4, u, v) * mt;
+            double pe = Interp::surface(period1, period2, period3, period4, u, v)* mt;
+            double pi = Interp::surface(pitch1, pitch2, pitch3, pitch4, u, v)* mt;
+        
+            Par p = Interp::surface<Par>(frame[0].pxy(), frame[1].pxy(), frame[3].pxy(), frame[2].pxy(), u, v);
+            Vec pos = Interp::surface<Vec>( frame[0].vec(), frame[1].vec(), frame[3].vec(), frame[2].vec(), u, v );
+        
+            Boost b;  
+            b.par(p);
+                
+            if (bSep) b.mod(pe,s,pi,mnk);
+            else b.mod(period1 * mt,tan1* mt,pitch1* mt,mnk* mt);
+        
+            Cir c = sc.sp( Gen::tpar(b.par()) * Gen::trs( pos ) ).trs(xoffset*m,0,0);  
+            c = c.mot( tw.dll() * mt );
+            c.draw(0,0,0);
+        
+            if (bPrint) { cout << app.printTikz( c ) << endl ; }
+
+            if (bDuo){
+                b.tnv() *= -1;
+                c = sc.sp(Gen::tpar(b.par())* Gen::trs( pos ) );    
+                c.draw(0,0,0);
+            }
+        
+        END
+        END
+
+        
+        
+       
+      
+       
+    }
+//    glPopMatrix();
+      if (bPrint) cout << Print::End() << endl;
+    if (bPrint) bPrint = 0;
 
 }
 
@@ -600,7 +618,7 @@ void simple(GLVApp& app){
         Cir c = f[i] ^ pt;
         c.draw();
         
-        if (Ro::siz(c) <= influence){
+        if (Ro::siz(c, false) <= influence){
             tdll += f[i];
             c.draw(0,0,1);
             it++;
@@ -634,59 +652,490 @@ void simple(GLVApp& app){
     END
 }
 
-void optics(GLVApp& app){
+
+
+void leaves(GLVApp& app){
     
-    static Cir c = CXY(1).trs(-1,0,0);
-    static Cir cb = CXY(1).trs(1,0,0);
+    static Cir cir = CXY(1);
     
-    //c.draw(); 
-    cb.draw();
-    app.interface.touch(c);
-    app.interface.touch(cb);
+    static Lattice<Pnt> f(2,2,1,2);
     
-    static double ref,ref2;
-    SET
-    app.gui(ref,"ref",0,10);
-    app.gui(ref2,"ref2",-10,10);
+    static Frame * frame = new Frame[4]; //(PT(0,0,0), Rot(1,0,0,0) );
+    
+    
+    static bool bDraw, bDrawSeg;
+    static float num, iter;
+    
+    SET  
+        app.gui(bDraw)(bDrawSeg)(num,"num",1,100)(iter, "iter",1,100); 
+    
+        IT(4) frame[i].pos() = f[i]; frame[i].rot( Rot(1,0,0,0) ); END 
     END 
     
-    Lens lens(ref, c);
-    Lens lens2(ref2,cb);
+    //app.interface.touch(cir);
+    IT(4) 
+        app.interface.touch(frame[i]);
+        if (bDraw) frame[i].cxy().draw();
+    END
+    
+    static Cir tc; static Pnt tp; static Par tpar; 
+
+    for (int m = 0; m <= iter; ++m){
+        double uu = 1.0 * m / iter;
+        for (int n = 0; n <= iter; ++n){
+            double vv = 1.0 * n / iter;
+    
+            tpar = Interp::surface<Par>( frame[0].pxy(), frame[1].pxy(), frame[3].pxy(), frame[2].pxy(), uu, vv);
+            Pnt ipar = Interp::surface<Pnt> ( f[0], f[1], f[3], f[2], uu,vv);
+            
+            
+            vector<Pnt> pos; vector<Cir> c; vector<double> cur;
+            
+            IT1(num)
+                tc = cir.trs(ipar).sp( Gen::tpar( tpar * t ) );
+                c.push_back(tc);
+                cur.push_back( Ro::cur(tc) );
+            END 
+            
+            IT2(num)
+                double k = cur[j];
+                tp = Ro::pnt_cir(c[j], ( - PI/2.0 * k + ( PI * k  * u ) )  ); 
+                pos.push_back(tp);
+            END END 
+            
+            IT1(num)
+                double k = cur[i];
+                if (bDrawSeg) Draw::SegRad(c[i]); 
+                    //Draw::SegPnts( c[i], Ro::pnt_cir(c[i], k * TWOPI), Ro::pnt_cir(c[i], -k * TWOPI) );
+            
+        //        
+
+                glBegin(GL_LINE_STRIP);
+                    ITJ(j,num) VALJ(j,num)
+                    int idx =i * num + j;
+                    glVertex3f( pos[idx][0], pos[idx][1], pos[idx][2] );
+                    END 
+                glEnd();
+            END 
+        
+    
+        }
+    }
+    
+}
+
+void twistCircle(GLVApp& app){
+    
+    static Lattice<Cir> f(10,1,1,2);
+    static Cir cir = CXY(1);
+   
+    static Frame frame;
+    
+    static Dll dll;
+    static Pnt tp = PT(-5,0,0);
+    
+    static bool bDraw, bFrame, bPrint;
+    static float period, pitch, dt, perdev, pitchdev, minDist, prob, scale, spread;
+    static float num, iter,piter;
+    SET
+        IT(f.num())
+            f[i] = CXY(1).trs(f.grid(i));
+        END
+    
+        app.gui(period, "period", -PI, PI)(pitch,"pitch",-10,10)(dt, "dt", 0,5)(num,"num",1,10000)(iter,"iter",1,100)(piter,"p_iter",1,100)(bDraw,"drawCir")(perdev, "perDev",0,2)(pitchdev, "pitchDev", 0,2)(minDist, "dist",-10,10)(prob, "prob",0,1)(bFrame)(scale,"scale",0,1);
+    app.gui(spread,"spread", 0, 10)(bPrint,"print"); 
+                                        
+    END 
+    
+    app.interface.touch(tp);
+    tp.draw();
+
+    if (bDraw) f.drawLoop();
+    
+    Rand::Seed(10);
+    
+    ITJ(pr, piter);//VALJ(pr,piter)
+    double tpr = 1.0 * (pr+1)/piter;
+    
+    ITJ(m, iter)VALJ(m,iter) 
+    
+        Pnt p = tp.trs(0, t * f.tw() * spread, 0 );
     
     
-    Pnt cpa, cpb;
+        Rot r (1,1,1,1);
+        vector<State> pos;
+        vector<Rot> rot;
+        IT1(num);
+            
+           // int id = phase * num;
+        
+            //which circle is p closest to?
+            int idx = 0;  double ts = -1000;
+            ITJ(j,f.num())
+                double s = Op::sca( p <= f.grid(j) );
+                if (s > minDist ) { idx = j; break; }
+                else if (s > ts) { ts = s; idx = j; }
+            END
+        
+            cir = f[idx];// : LN(1,0,0);
+            vector<Pnt> tpar = Ro::split ( Ta::at( cir, p, false) );
+            vector<Pnt> ipar = Ro::split ( ( ( tpar[0] - tpar[1] ) ^ cir.dual() ).dual() ) ;
+        
+            Par par = Ta::at(cir, ipar[1], false);
+            Dll td = ( par ^ Inf(1) ).dual(); //td.draw();
+            Twist tw; tw.along( (Stat::Prob(prob * tpr) ) ?  td : DLN(1,0,0), Rand::Normal(period, t * perdev), Rand::Normal(pitch, t * pitchdev) );
+            
+            //Commutator!
+            Pnt dp = p % ( tw.dll() * dt );
+            p += dp;
+            p = Ro::null(p);
     
-    IT1(50)
+            //Commutator of Rotor!
+            Rot dr = r % (tw.dll() * dt );
+            r += dr;
+            r = r.unit();
+    
+            //cout << r << endl;
+    
+            pos.push_back(p);
+            rot.push_back(r);
         
-    glColor3f(1,0,0);
-        Dll ray = DLN(1,0,0).trs(0,2*t,0);   ray = ray.conjugate();         
-        Pnt pa = Ro::null ( ( ray ^ Dlp(1,0,0).trs(-3,0,0) ).dual().runit() );
+        END 
+
+        glColor3f(0,0,0);
+
+        IT1(pos.size())
+            frame.pos(pos[i]); frame.rot( rot[i]);
+            frame.scale(scale * Rand::Normal(1 - t, 1) );
+            if (bFrame) {
+ //               frame.cxy().draw();
+                Glyph::Line( Vec(frame.pos()), Vec( frame.pos() ) + frame.x() * frame.scale() );
+                Glyph::Line( Vec(frame.pos()), Vec( frame.pos() ) + frame.y() * frame.scale() );
+            }
+        END 
+    
+        glBegin(GL_LINE_STRIP);
+            IT(pos.size())
+                glVertex3f(pos[i][0],pos[i][1],pos[i][2]); 
+            END 
+        glEnd();
+    
+      
+    
+        if (bPrint){
+            //IT(pos.size()-1)
+            //app.printTikz(pos[i], pos[i+1]);
+            cout << app.printTikz(pos) << endl;
+            //END 
+            
+        }
+    
+    END 
+    
+    END 
+    
+    if (bPrint) bPrint = false;
+}
+
+void twistSelf(GLVApp& app){
+    //temp (tp), derivative (dp) , current (p), original (pt)
+    static Pnt tp, dp, p;
+    static Pnt pt = PT(0,1,0);
+
+    static Cir cir = CXY(1);
+    static Dll tdll, odll, ddll, ndll, pdll;
+    static Dll sdll = DLN(0,1,0);
+    
+    static float num, max, minDist, maxDist, period, pitch, dt, dev, dev2, rOff;
+    static Twist tw;
+    
+    static bool bOld, bPrint;
+    
+    app.interface.touch(pt);
+    
+    SET
+    
+    app.gui(num,"num",0,20000)(max,"max",0,20000)(minDist,"dist",-10,10);
+    app.gui(period, "period",-100,100)(pitch, "pitch",-100,100)(dt, "dt",-10,10);
+    app.gui(dev,"dev",-10,10)(dev2,"dev2",-10,10)(rOff, "rOff",-10,10);
+    app.gui(bOld, "oldmeth")(bPrint, "print");
+    
+    END 
+    
+    p = pt;
+    odll = sdll;
+    
+    vector<State> pos;
+    vector<Dll> dll;
+    pos.push_back(pt);
+    dll.push_back(odll.trs(pt));
+    
+    Rand::Seed(10);
+    
+    IT1(num);
+    
+        //temp hold
+        tp = p;
+//        tdll = odll;
+    
+        //which point is p closest to?
+        int idx = 0;  double ts = -1000;
+        bool bRange = false;
+        ITJ( j, pos.size() )
+            double s = Op::sca( tp <= pos[j] );
+            //cout << s << endl; 
+            if (s > minDist ) { idx = j; bRange = true; break; }            // Within range?
+            else if (s > ts) { ts = s; idx = j; }                           // Oh well, find closest
+        END
         
-        Pnt pb = lens.meet( ray );
-//        Pnt pb = lens.meet( ray );
+        pdll = (bRange) ? dll[idx] : sdll.trs( tp[0] + Rand::Normal(0,rOff), tp[1], tp[2]);
         
-        Glyph::Line(Vec(pa), Vec(pb));
-        //static Pnt bottom = pb;
-        if (i == 0 ) cpb = pb;
-        cpa = pb;
+        tw.along( pdll, Rand::Normal(period, t*dev ), Rand::Normal(pitch,t*dev2) );
+        
+        //Commutator!
+        dp = tp % ( tw.dll() * dt );
+        tp += dp;
+        tp = Ro::null(tp);
+        pos.push_back(tp);
+    
+//        //Commutator DLL!
+//        ddll = tdll % ( tw.dll() * dt );
+//        tdll += ddll;
+//        tdll = tdll.runit();
+    
+        
+        
+        ndll = (p ^ tp ^ Inf(1) ).dual();
+        if (bOld) dll.push_back(ndll);
+//        else dll.push_back(tdll);
+//        odll = tdll;
+    
+        p = tp;
+    END 
+    
     
     glColor3f(0,1,0);
-        Dll nd = lens.refract( ray );
-        nd = nd.conjugate();
-        Glyph::Line(Vec(pb), Vec( lens2.meet(nd) ) );
- 
-    glColor3f(0,1,1);
+    glBegin(GL_LINE_STRIP);
+    IT(pos.size())
+    glVertex3f(pos[i][0],pos[i][1],pos[i][2]); 
+    END 
+    glEnd();
     
-        Dll nd2 = lens2.refract( nd );
-        Pnt pout = Ro::null ( ( nd2 ^ Dlp(1,0,0).trs(2,0,0) ).dual().unit() );
-        Glyph::Line(Vec( lens2.meet(nd) ) , Vec( pout ) );
-            
+    if (bPrint) {
+
+        app.printTikz( pos );
+        
+        bPrint = false;
+        
+    }
+
+}
+
+
+void twistLines(GLVApp& app){
+    
+    static Lattice<Dll> f(10,1,1,2);
+    static Pnt tp = PT(-2,0,0);
+    app.interface.touch(tp);
+    tp.draw();
+    
+    static float num, period, pitch, dt, prox;
+    
+    SET
+        IT(f.num())
+            f[i] = (i & 1) ? DLN(1,1,0).trs( f.grid(i) ) : DLN(-1,1,0).trs( f.grid(i) );
+        END 
+    
+    app.gui(num,"num",0,1000)(period, "period",-PI, PI)(pitch,"pitch",-100,100)(dt, "dt", 0, 10)(prox,"prox",0,10);
+                                                                                                     
     END 
     
-   glColor3f(1,1,1);
-   Draw::SegPnts(c, cpa, cpb); 
-    //cout << cpa << cpb << endl; 
+   f.drawLoop();
+    
+    Pnt p = tp;
+    IT1(num)
+    
+        /// CLOSEST LINE TO POINT
+        double ts = 10;  int idx = 0;
+       // while ( ts > 
+        ITJ(j, f.num())
+            Dlp dlp = p <= f[j];
+            double s = dlp.norm();
+            if (s < prox ) { ts = s; idx = j; }
+        END 
+    
+        Twist tw; tw.along( f[idx], period, pitch);
+    
+        //Commutator!
+        Pnt dp = p % ( tw.dll() * dt );
+        p += dp;
+        p = Ro::null(p);
+        
+        p.draw(1,0,0);
+        
+    END     
+    
 }
+
+
+void twisties(GLVApp& app){
+    
+    static Lattice<Pnt> f(1,10,1,.5);
+    static Dll * dll = new Dll[f.num()];
+
+    static float num, spread, iter;
+    static float prob, min, amt;
+    static float period, pitch;
+    
+    SET
+        app.gui(num,"num",0,100)(spread,"spread",1,10)(iter, "iter", 1,1000);
+        app.gui(prob, "prob")(min, "min", -10,10)(amt, "amt",-10,10);
+        app.gui(period, "period",-PI, PI)(pitch, "pitch", -PI, PI);
+    END 
+    
+    int n = num;
+    Dll * tl = new Dll[ n ];
+    Pnt * pl = new Pnt[ n ];    
+    Pnt * op = new Pnt [n];
+    
+    Dll * nl = new Dll[n];
+    
+    Twist tw;
+   
+    // SETUP 
+    IT1(num)
+    
+        tl[i] = DLN(1,0,0).trs( Vec::y * t * spread );  
+         
+    END 
+
+    vector<Pnt> * final = new vector<Pnt>[n];
+    
+    // ITERATE
+    ITJ(m, iter)VALJ(m,iter)
+        double val = -2.0 + 4.0 * t;
+        Dlp dlp = Dlp(1,0,0).trs(val, 0, 0 );
+        
+        int it = 0;
+        IT(num)
+            op[i] = pl[i];
+            pl[i] = Ro::dll_meet_dlp( tl[i], dlp );
+            final[it].push_back(pl[i]);
+            it ++;
+        END 
+        
+        IT(num)
+            //tl[i].draw();
+            
+            double dist = 1000; int idx = 0;
+        
+            //get closest line at val
+            ITJ(j,num)
+                if ( i == j ) continue;
+                double d = Ro::dst( pl[i] , pl[j] );
+                if (d < min) { idx = j; break; }
+                if (d < dist) { idx = j; dist = d; }
+            END 
+            
+            
+            Dll ndl = (op[idx] ^ pl[idx] ^ Inf(1) ).dual().runit();
+            
+//            tw.along( tl[idx], period, pitch ); 
+            tw.along( ndl, period, pitch ); 
+            tl[i] = tl[i].mot( tw.dll() * amt );
+
+        END
+                  
+    END 
+    
+    IT(num)
+        glBegin(GL_LINE_STRIP);
+        ITJ(j, final[i].size() )
+            glVertex3f(final[i][j][0], final[i][j][1], final[i][j][2]);
+        END 
+        glEnd();
+    END 
+    
+    if (final) delete[] final;
+    if (tl) delete[] tl;
+     if (pl) delete[] pl;
+     if (op) delete[] op;
+      if (nl) delete[] nl;
+}
+
+
+void testPrint(GLVApp& app){
+    
+    static Lens lens;
+    static bool bPrint;
+    SET
+    app.gui(bPrint);
+    END
+    
+    app.interface.touch(lens[0].cir);
+    app.interface.touch(lens[1].cir);
+    
+    lens.structure();
+    
+    lens.draw();
+    //app.camera().frustrum();
+    
+    Dll ray = DLN(1,1,0).trs( 0, .5, 0 );
+    
+    ray.draw();
+    
+    Vec L = app.camera().frustrum().box.tl;
+    Vec R = app.camera().frustrum().box.tr;
+    L.draw();
+    R.draw();
+    
+    
+    Dlp left = app.camera().frustrum().left().dual();
+    Dlp right = app.camera().frustrum().right().dual();
+    
+    Pnt pa = Ro::null( (ray.conjugate() ^ left).dual().runit() ); 
+    Pnt pb = Ro::null( (ray.conjugate() ^ right).dual().runit() ); 
+    
+    pa.draw(); pb.draw();
+    
+    
+    string str;
+    if (bPrint){
+        str += Print::Begin();
+        bPrint = false;
+        str += app.printTikz( lens[0].cir, lens.mb, lens.ma );
+        str += app.printTikz( lens[1].cir, lens.ma, lens.mb );
+        str += app.printTikz( ray.dual(), pa, pb );
+        str += Print::End();
+        
+        cout << str << endl; 
+    }
+
+    
+}
+
+void cirdir(GLVApp& app){
+    
+    static float trv;
+
+    SET
+        app.gui(trv,"trv",-2,2);
+    END 
+    Cir c = CXY(1).trv(0,trv,0).trs(-1,0,0);
+    c.draw();
+    
+    Par p = Ro::meet_cir(c, CXY(1) );
+    Ro::split1(p).draw();
+    
+    Biv b1( Ro::dir( CXY(1), false ) );
+    Biv b2( Ro::dir( c, false ) );
+    
+    cout << Op::sn(b1,b2) << endl; 
+
+}
+
+
+
 
 void GLVApp :: onDraw(){
      //   trv(*this);
@@ -699,15 +1148,26 @@ void GLVApp :: onDraw(){
     //series(*this);
     //twist(*this);
     
-   // twistedBoost(*this);
+  // twistedBoost(*this);
     
-   // interpolated(*this);
-    optics(*this);
+  // interpolated(*this);
+   
+  //  testPrint(*this);
+    
+    twisties(*this);
+  
+//    twistSelf(*this);
+  // twistCircle(*this);
+//    twistLines(*this);
+   
+//    leaves(*this);
     
    // motortwist(*this);
     //ntwist(*this);
     
    // simple(*this);
+
+    //cirdir(*this);
 }
 
 
@@ -722,6 +1182,8 @@ int main() {
 	win = new Window(500,500,"VSR",&glv);    
     app = new GLVApp(win);    
     glv << app;
+    
+    Rand::Seed();
     
     Application::run();
     

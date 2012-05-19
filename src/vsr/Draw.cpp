@@ -661,13 +661,13 @@ void Draw :: SegRad( const Cir& k){
 void Draw :: Seg(const Cir& K, double t, bool dir, int res){
 
     //ORIENTATION
-	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+	Biv b = Biv(Ro::dir(K,false));							//Extract Euclidean Bivector
 	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
     Vec4<> v4 = Op::aa(r);  
 
     //POINT POSITION AND RADIUS
 	Pnt v = Ro::cen(K);                                 //Center of Circle
-	double siz = Ro::siz(K);                            //Squared Radius
+	double siz = Ro::siz(K,false);                            //Squared Radius
 	double rad = sqrt ( fabs (siz) );                   //Radius
 	                           
 	bool sign = Op::sn(b, Biv::xy);
@@ -686,13 +686,13 @@ void Draw :: SegTo(const Cir& K, double st, double t, int res){
     //Vec4<> r4 = Op::aa(roff);  
     //cout << roff << endl; 
     //ORIENTATION
-    Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+    Biv b = Biv(Ro::dir(K,false));							//Extract Euclidean Bivector
     Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );// * roff;	//Determine Orientation
     Vec4<> v4 = Op::aa(r);  
     
     //POINT POSITION AND RADIUS
     Pnt v = Ro::cen(K);                                 //Center of Circle
-    double siz = Ro::siz(K);                            //Squared Radius
+    double siz = Ro::siz(K,false);                            //Squared Radius
     double rad = sqrt ( fabs (siz) );                   //Radius
     
     bool sign = Op::sn(b, Biv::xy);
@@ -708,11 +708,11 @@ void Draw :: SegTo(const Cir& K, double st, double t, int res){
     
 void Draw :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
 //	glColor3f(K.red(), K.green(), K.blue());
-	Biv bi = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+	Biv bi = Biv(Ro::dir(K, false));							//Extract Euclidean Bivector
 	Rot r = Gen::ratio(Vec::z, Op::dle( bi ).unit() );	//Determine Orientation
 	Pnt v = Ro::cen(K);			
 	Vec4<> v4 = Op::aa(r);
-	double siz = Ro::siz(K);
+	double siz = Ro::siz(K,false);
 	double rad = Ro::rad(K);
 	bool sn = Op::sn(bi, Biv::xy);
 
@@ -737,17 +737,20 @@ void Draw :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
         static Pnt tp, cen;
         static Dll da, db, rat;
         
+        bool sn = 0;//Op::sn ( Ro::dir(K, false ), Biv::xy );
+        
         cen = Ro::null_cen(K);
         da = ( cen ^ a ^ Inf(1) ).dual(); 
         db = ( cen ^ b ^ Inf(1) ).dual(); 
     
-        rat = Gen::dll_ratio(da, db);
+        rat = (sn) ? Gen::dll_ratio(db, da) : Gen::dll_ratio(da, db);
        
         glBegin(GL_LINE_STRIP);
-        IT1(res)
-            tp = a.mot( rat* t ); 
+        for (int i = 0; i <= res; ++i){
+            double t = 1.0 * i/res;
+            tp = a.mot( rat * t ); 
             glVertex3f(tp[0], tp[1], tp[2]);
-        END 
+        }
         glEnd();
         
     }
@@ -894,7 +897,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		{
             
             //Is Imaginary?
-            double siz = Ro::siz( s );
+            double siz = Ro::siz( s, true );
 			std::vector<Pnt> pp = Ro::split( s );
 			
 //			pp[0].draw(r,g,b,a);
@@ -923,13 +926,13 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		
 		case _CIR:
 		{
-			Biv b = Biv(Ro::dir( s ));
+			Biv b = Biv(Ro::dir( s, false ));
 			Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );  //can this be done directly to Biv b?
 			Pnt v = Ro::cen( s );	
 			
 			//drawLabel(v[0], v[1], v[2]);
 							
-			double siz = Ro::siz( s );
+			double siz = Ro::siz( s, false );
 			double rad = Ro::rad( s );
 			Vec4<> t = Op::aa(r);
 			bool sn = Op::sn(b, Biv::xy);
@@ -959,7 +962,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 			Glyph::Point(p);
             			
 			//Sphere (if radius not 0);
-			double st = Ro::siz( ts );
+			double st = Ro::siz( ts, false );
 			double t = sqrt ( fabs ( st ) );;
 			bool real = st > 0 ? 1 : 0;			
 			glTranslatef(p[0], p[1], p[2]);
@@ -969,7 +972,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		case _PLN:
 		{
 			Drv d	= Fl::dir( s );
-			Sph v	= Fl::loc( s , Ori(1) );
+			Sph v	= Fl::loc( s , Ori(1), false );
 			Rot r = Gen::ratio( Vec::z, Op::dle( Biv( s ) ).unit() );
 			glTranslated(v[0],v[1],v[2]);
 			glMultMatrixd(&(Op::mat(r)[0][0]));
@@ -991,7 +994,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		case _LIN:
 		{
 			Drv d	= Fl::dir( s );
-			Sph v	= Fl::loc( s , Ori(1) );
+			Sph v	= Fl::loc( s , Ori(1), false );
 			glTranslated(v[0],v[1],v[2]);
 			Glyph::Line(d * 10, d * -10);			
 			break;
@@ -1046,14 +1049,14 @@ State Draw :: pos(const State& s){
 		case _LIN:
 		case _PLN:
 		{
-			Sph v   = Fl::loc( s , Ori(1)  );
+			Sph v   = Fl::loc( s , Ori(1), false  );
 			return Op::dl(v);
 			break;
 		}
 		case _DLL:
 		case _DLP:
 		{
-			Sph v   = Fl::loc( s , Ori(1), 1 );
+			Sph v   = Fl::loc( s , Ori(1), true );
 			return Op::dl(v);
 			break;
 		}	
@@ -1092,8 +1095,12 @@ void Draw :: Pop(){
         switch (s.idx()){
                 
             case _CIR:
+            {
+                ts += "\\draw";
                 
-                ts += "\\draw plot[tension = 1, smooth cycle] coordinates{";
+                if ( Ro::siz(s, false) < 0 ) ts += "[dotted]";
+                
+                ts +=" plot[tension = 1, smooth cycle] coordinates{";
                 
                 Par a = Ro::par_cir(s, 0);
                 Par b = Ro::par_cir(s, PIOVERTWO);
@@ -1114,10 +1121,147 @@ void Draw :: Pop(){
                END
                 
                 ts += "};";
-                
+            } 
                 break;
+            case _LIN:
+            {
+                ts += "\\draw ";
+                
+                Dlp left = cam.frustrum().left().dual();
+                Dlp right = cam.frustrum().right().dual();
+                Dlp top = cam.frustrum().top().dual();
+                Dlp bottom = cam.frustrum().bottom().dual();
+                
+                Pnt pa = Ro::null( (s.dual().conjugate() ^ left).dual().runit() ); 
+                Pnt pb = Ro::null( (s.dual().conjugate() ^ right).dual().runit() ); 
+                Pnt pc = Ro::null( (s.dual().conjugate() ^ top).dual().runit() ); 
+                Pnt pd = Ro::null( (s.dual().conjugate() ^ bottom).dual().runit() ); 
+                
+                Vec va = GL::project( pa[0], pa[1], pa[2], cam);
+                Vec vb = GL::project( pb[0], pb[1], pb[2], cam);
+                Vec vc = GL::project( pc[0], pc[1], pc[2], cam);
+                Vec vd = GL::project( pd[0], pd[1], pd[2], cam);
+                
+                double a= va.norm();
+                double b= vb.norm();
+                double c= vc.norm();
+                double d= vd.norm();
+                
+//                double sm = (a<b) ? ( (a<c) ? ( (a<d) ? a : d ) : (c<d) ? c : d )  ) 
+                
+                stringstream od;
+                od << "(" << va[0] * rw << "," << va[1] * rh << ")";
+                od << "--";
+                od << "(" << vb[0] * rw << "," << vb[1] * rh << ");\n";
+            
+                ts += od.str();
+                break;
+            }
+            case _DLL:
+            {
+                break;
+            }
         }
 
+        return ts;
+    }
+    
+    string Print :: TikzSeg2( vector<State> s, const Camera& cam){
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+        string ts = Print::Begin();
+        switch (s[0].idx() ){
+            case _VEC:
+            case _PNT:
+            {
+                 ts += "\\draw plot[tension = 1, smooth] coordinates{";
+                
+                    IT(s.size())
+                        Vec va = GL::project( s[i][0], s[i][1], s[i][2], cam);
+                        
+                        stringstream od;
+                        od << "(" << va[0] * rw  << "," << va[1] * rh << ")";
+                        
+                        ts += od.str();
+                    END
+                
+                 ts += "};";
+                
+                break;
+            }
+            default:
+                break;
+        }
+        ts += Print::End();
+        return ts;
+    }
+
+    
+    string Print :: TikzSeg( const State& s, const State& pa, const State& pb, const Camera& cam){
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+        string ts;
+        
+        switch (s.idx() ){
+            case _CIR:
+            {
+                ts += "\\draw plot[tension = 1, smooth] coordinates{";
+                
+                Dlp dlp = pa - pb;
+                Par par = ( dlp ^ s.dual() ).dual();
+                Pnt np = Ro::split2( par );
+                
+                Vec va = GL::project( pa[0], pa[1], pa[2], cam);
+                Vec vb = GL::project( pb[0], pb[1], pb[2], cam);
+                Vec vc = GL::project( np[0], np[1], np[2], cam);
+                
+                stringstream od;
+                od << "(" << va[0] * rw << "," << va[1] * rh << ")";
+                od << "(" << vc[0] * rw << "," << vc[1] * rh << ")";
+                od << "(" << vb[0] * rw << "," << vb[1] * rh << ")";
+                
+                ts += od.str();
+                ts += "};\n";
+                break;
+            }
+            case _LIN:
+            {
+                ts += "\\draw ";
+                
+                Vec va = GL::project( pa[0], pa[1], pa[2], cam);
+                Vec vb = GL::project( pb[0], pb[1], pb[2], cam);
+                
+                stringstream od;
+                od << "(" << va[0] * rw << "," << va[1] * rh << ")";
+                od << "--";
+                od << "(" << vb[0] * rw << "," << vb[1] * rh << ");\n";
+                
+                ts += od.str();
+                break;
+            }
+                
+            case _DLL:
+            {
+                break;
+            }
+                
+            case _VEC:
+            {
+                ts += "\\draw plot[tension = 1, smooth] coordinates{";
+                
+                Vec va = GL::project( s[0], s[1], s[2], cam);
+                Vec vb = GL::project( pa[0], pa[1], pa[2], cam);
+                Vec vc = GL::project( pb[0], pb[1], pb[2], cam);
+                
+                stringstream od;
+                od << "(" << va[0] * rw  << "," << va[1] * rh << ")";
+                od << "(" << vb[0] * rw  << "," << vb[1] * rh << ")";
+                od << "(" << vc[0] * rw  << "," << vc[1] * rh << ")";
+                
+                ts += od.str();
+                break;
+            }
+                
+        }
+        
         return ts;
     }
     

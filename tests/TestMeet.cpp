@@ -43,7 +43,7 @@ void circles(GLVApp& app){
 
 void circle_line(GLVApp& app){
     static Cir c1 = CXY(1);
-    static Dll dll = DLN(0,0,1).trs(2,0,0);
+    static Dll dll = DLN(1,0,0);//.trs(,0,0);
     
     app.interface.touch(c1); app.interface.touch(dll);
     
@@ -53,7 +53,7 @@ void circle_line(GLVApp& app){
     
     p.draw();
     
-    cout << Ro::siz(p,-1) << endl; 
+    cout << Ro::siz(p,true) << endl; 
 }
 
 void circle_sphere(GLVApp & app){
@@ -179,6 +179,34 @@ void sphericalCoord(GLVApp& app){
     
 }
 
+
+void two_points(GLVApp& app){
+    //is a point between two points on a circle?
+    
+    
+    static Cir cir = CXY(1);
+    cir.draw();
+    
+    static float tha,thb,thc;
+    SET app.gui(tha, "tha", -PI, PI)(thb, "thb", -PI, PI)(thc, "thc", -PI, PI); END 
+    
+    Pnt pa = Ro::pnt_cir(cir, tha);
+    Pnt pb = Ro::pnt_cir(cir, thb);
+    Pnt pc = Ro::pnt_cir(cir, thc);
+    
+    pa.draw(); pb.draw(); pc.draw();
+    
+    Vec dp = pa - pb; //dlp.draw();
+    Vec va = pa <= Ro::ax(cir);
+    Vec vc = pc <= Ro::ax(cir);
+
+    double n = Op::sca( dp <= va );
+    double n2 = Op::sca( dp <= vc );
+    cout << n << " " << n2 << endl; 
+    if (n2 > n ) cout << "YUP" << endl; 
+    
+}
+
 void GLVApp :: onDraw(){
 //    static bool bCir, bCirSph, bLines;
 //    
@@ -192,9 +220,10 @@ void GLVApp :: onDraw(){
 //        if (bCirSph) circle_sphere(*this);
 //        if (bLines) lines(*this);
 
+    circles(*this);
 //    circle_line(*this);
-    
-    circle_clock(*this);
+ //   two_points(*this);
+//    circle_clock(*this);
    // sphericalCoord(*this);
 }
 
