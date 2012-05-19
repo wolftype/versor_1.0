@@ -591,12 +591,12 @@ State Gen::rot_aa(double x, double y, double z,double w){
 State Gen::rot_cir(const Cir& c, double t){
 	double  co = sqrt(- ( c.wt() ) );
 	double sc = -sin(co);
-	Biv b = Op::dl( Ro::dir(c) );
+	Biv b = Op::dl( Ro::dir(c,false) );
 	return Rot( cos(co), b[0]*sc, b[1]*sc, b[2]*sc );
 }
 
 State Gen::rot_par(const Par& p, double t){
-	double  c = sqrt(fabs( Ro::siz(p) ) );
+	double  c = sqrt(fabs( Ro::siz(p,true) ) );
 	double sc = -sin(c);
 	return Rot( cos(c), p[0]*sc, p[1]*sc, p[2]*sc );
 }
@@ -1073,6 +1073,22 @@ Vec3<> Eu::vec3(const State& s){
 bool Ro :: hit ( const State& a, const State& b, double range){
     return ( -Op::sca(a<=b) <= range ) ? 1 : 0;
 }
+    
+    double Ro :: sqd(const State& a, const State& b){
+        return -Op::sca(a <= b);
+    }
+
+    double Ro :: dst(const State& a, const State& b){
+        return sqrt( fabs(sqd(a,b) ) );
+    }
+    
+ Par Ro :: meet_cir(const State& a, const State& b){
+     return ( a.dual() ^ Ro::sur(b) ).dual();//( Ro::car( ( Ro::sur( a ) ^ Ro::sur( b ) ).dual() ).dual() ^ a.dual() ).dual();
+}
+    
+Pnt Ro :: dll_meet_dlp (const State& dll, const State& dlp){
+    return Ro::null( ( dll.conjugate() ^ dlp ).dual().runit()  );
+}
 
 State Ro::loc( const State& s) { 
 	State t = Inf(1) <= s; 
@@ -1094,7 +1110,7 @@ State Ro::dir( const State& s, bool dual) {
 }
 
 double Ro::wt(const State& s){
-	return (Ori(1) <= Ro::dir(s)).sqwt();
+	return (Ori(1) <= Ro::dir(s, true)).sqwt();
 }
 
 Pnt Ro::nrml(const State& s){
@@ -1112,15 +1128,15 @@ State Ro::sur( const State& s) {
 }
     
 //Default Dual = 0
-double Ro::siz( const State& s, int sn) {
+double Ro::siz( const State& s, bool dual) {
 	State b = Inf(1) <= s;
-	return Op::sca( ( s * s.involute() ) / ( b * b ) * sn );
+	return Op::sca( ( s * s.involute() ) / ( b * b ) * ( (dual) ? -1.0 : 1.0 ) );
 //	return Op::sca( ( s <= s.involute() ) / ( b * b ) * sn );
 
 }
 
-double Ro::rad( const State& s) {
-	return sqrt ( fabs ( Ro::siz(s) ) );
+double Ro::rad( const State& s ) {
+	return sqrt ( fabs ( Ro::siz(s,false) ) );
 }
 
 
@@ -1226,7 +1242,7 @@ State Ro::dls( const State& c, const State& p){
 }
 
 bool Ro::re(const State& s){
-	return (Ro::siz(s) > 0) ? 1 :  0;
+	return (Ro::siz(s,true) > 0) ? 1 :  0;
 }
 //default face forward
 State Ro::par( const Vec& v, double r, bool b){
@@ -1251,13 +1267,30 @@ State Ro::pnt_cir( const Cir& cir, double theta){
 	return Ro::null_cen( Ro::split2( Ro::par_cir( cir, theta) ) );
 }
 
-
+bool Ro :: between( const State& cir, const State& pa, const State& pb, const State& pc){
+    Vec dp = pa - pb; //dlp.draw();
+    Vec va = pa <= Ro::ax(cir);
+    Vec vc = pc <= Ro::ax(cir);
+    
+    double n = Op::sca( dp <= va );
+    double n2 = Op::sca( dp <= vc );
+    return (n2 > n ); 
+}
+    
 State Ro::noon( const State& c ){
-	Dlp tdlp = Ro::cen(c) <= Drv(Ro::dir(c));
+	Dlp tdlp = Ro::cen(c) <= Drv(Ro::dir(c, false));
 	Par np = Op::dl( tdlp ^ Op::dl(c));
 	return Ro::split1(np);	
 }
 
+State Ro::par_dls(const State& dls, double u, double v){    
+    Vec vec = Vec::x.rot( Biv::xy * u ).rot( Biv::xz * v );
+    
+    return dls_flat( dls, vec );
+}
+State Ro::pnt_dls(const State& dls, double u, double v){
+    return Ro::split1( par_dls(dls,u,v) );
+}    
 /*! Conic from Vec 
     If 1 > ecc > 0 then elliptic, 
 	If ecc > 1 then hyperbolic, 
@@ -1383,7 +1416,7 @@ State Ro::dls_bound(const State& s, double t){
 }
 
     double Ro :: cur(const State& s){
-        double r = Ro::rad(s);
+        double r = Ro::rad( s);
         
         return (r==0) ? 10000 : 1.0 / Ro::rad(s);
     }
@@ -1479,7 +1512,7 @@ State Fl::flp( const State& p ) {
 
 /*Ortho Plane through round (use ratio method of dlp_ortho_cir instead)*/
 State Fl::dlp_cir(const State& c){
-	return Ro::cen(c) <= Drv(Ro::dir(c));
+	return Ro::cen(c) <= Drv(Ro::dir(c,false));
 }
 
 /********TANGENTS*********/
@@ -1500,7 +1533,7 @@ State Ta::at( const State& round, const State& pnt, bool dual){
 }
 
 double Ta::wt(const State& s){
-	return (Ori(1) <= Ro::dir(s)).sqwt();
+	return (Ori(1) <= Ro::dir(s, false)).sqwt();
 }
 
 Tnv Ta::drvpnt( const Drv& d, const Pnt& p){

@@ -395,9 +395,18 @@ class Ro {
 //		static State loc_ta_dl(const State&);
 //		static State loc_ta(const State&);
     
+    /*! Chord Check: Returns True if pc is between pa and pb on circle K (maybe...) */
+    static bool between(const State& cir, const State& pa, const State& pb, const State& pc);
         /*! Returns TRUE if two rounds (pnts or dls) a and b are within a range r */
         static bool hit ( const State& a, const State& b, double r  = 0);
-		
+        /*! Squared Distance between two points */
+        static double sqd ( const State& a, const State& b );
+        /*! Meet of Two Circles */
+        static Par meet_cir( const State& a, const State& b);
+        /*! returns dualized flat point unit point */
+        static Pnt dll_meet_dlp(const State& dll, const State& dlp);
+        /*! Double Distance between two points */
+        static double dst ( const State& a, const State& b );
 		/*! Point Location of Round Element */
 		static State loc( const State&);
 		/*! Dual Sphere Location (inflated) of Round Element  */
@@ -405,9 +414,9 @@ class Ro {
 		/*! Null Point Extraction of Center Point of Round Element*/		
 		static State null_cen(const State&);
 		/*! Direction of Round Element, dual or not*/
-		static State dir( const State&, bool dual = 0);
+		static State dir( const State&, bool dual );
 		/*! Squared Size of Round Element (can be negative!) */
-		static double siz( const State&, int sn = 1.0);
+        static double siz( const State&, bool dual);//int sn = 1.0);
 		/*! Radius of Round Element*/
 		static double rad( const State&);
 		/*! Boolean check returns TRUE if element is Real */
@@ -457,6 +466,8 @@ class Ro {
 		/*! Point at 12 o'clock on a circle (deprecated -- use pnt_cir instead with theta = PI/2) */								
 		static State noon( const State& s);	
     
+    static State par_dls(const State& dls, double u, double v); 
+    static State pnt_dls(const State& dls, double u, double v);
 		/*! Conic Transform of point P. 
 		   If 1 > ecc > 0 elliptic, If ecc > 1 is hyperbolic, if ecc = 1  parabolic.
 		   See "Recent applications of conformal geometric algebra" Wareham, Cameron, and Lasenby
@@ -497,7 +508,7 @@ Generation of and Information about Flat elements.
 class Fl {
 	public:
 		/*! Point on Plane or Line f Closest to Point p, Direct or Dual Flat */
-		static State loc( const State& f, const State& p, bool dual = 0);
+		static State loc( const State& f, const State& p, bool dual);
 		/*! Direction of Flat, Dual or Direct */
 		static State dir( const State&, bool dual = 0);
 		/*! Unit Conversion */

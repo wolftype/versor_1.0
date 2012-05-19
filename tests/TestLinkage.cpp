@@ -257,38 +257,36 @@ void permutations(GLVApp& app){
     static Dlp XY(0,0,1,0);
     static Dlp XZ(0,1,0,0);
 
-    //static Chain k(5);
     static Chain tk(5);
-    
-//    vector<Chain> pk;
     
     static Cir c = CXY(1).trs(0,1,0);
     
-    static Pnt BaseB = PT(2,0,0);    
-    static Pnt BaseA = PT(-2,0,0);
+//    static Pnt BaseB = PT(2,0,0);    
+//    static Pnt BaseA = PT(-2,0,0);
 
-    int num= 100;
     
-    static float which;
-    static bool bPick;
+    
+    static float which, num;
+    static bool bPick, bDraw, bReset;
     static float dist, r1, r2;
-    
+    static double squaredDist;
     
     SET
     
-        app.gui(which, "which",1,num*num)(bPick)(dist,"dist",0,10);
+        app.gui(num, "num",1,100)(bDraw,"Draw")(dist,"dist",0,10);
         app.gui(r1,"r1",0,10)(r2,"r2",0,10);
+        app.gui(bReset, "reset");
         //k[0].pos() = BaseA;    
     
     END 
     
-    static int t; t++;
-    int swhich = ( bPick ) ? floor(which) : ( 1 + sin( 1.0 * t / 45.0) )/2.0 * (num*num) ;
+//    static int t; t++;
+//    int swhich = ( bPick ) ? floor(which) : ( 1 + sin( 1.0 * t / 45.0) )/2.0 * (num*num) ;
     
     static Dls a = Ro::dls3(-2,0,0); static Dls b = Ro::dls3(2,0,0);      
     app.interface.touch(a); app.interface.touch(b);
+    if (bReset) { a = Ro::dls3(-2,0,0); b = Ro::dls3(2,0,0); }
     
-
     //Possible Points (on XY plane)
     vector<Pnt> posa,posb;
     
@@ -297,58 +295,49 @@ void permutations(GLVApp& app){
         Par s = Ro::dls_flat(a, v);
         vector<Pnt> p = Ro::split(s);    
         posa.push_back( Ro::null_cen(p[0]) );
-        //posa.push_back( Ro::null_cen(p[1]) );
     
         s = Ro::dls_flat(b,v);
         p = Ro::split(s);    
         posb.push_back( Ro::null_cen(p[0]) );
-        //posb.push_back( Ro::null_cen(p[1]) );
     
     END
             
-    
+    //First and Last Joints
     tk[0].pos() = Ro::null_cen(a);
     tk[4].pos() = Ro::null_cen(b);
-    double squaredDist;
-    // Possible Spheres
+    
+    // Possible Spheres    
     IT( num )
         
         Dls ta = Ro::dls_pnt(posa[i], r1);//k.link(1).vec().norm() );
         
-        //Unknow Point 
         Set<Pnt> traj;
 
         ITJ(j,num ) VALJ(t, num )
             
-        Dls tb = Ro::dls_pnt(posb[j], r2);//k.link(2).vec().norm() );
+            Dls tb = Ro::dls_pnt(posb[j], r2); //k.link(2).vec().norm() );
     
             Par mt = ta ^ tb;
 
-                squaredDist = -( posa[i] <= posb[j] )[0];
+            squaredDist = -( posa[i] <= posb[j] )[0];                
+        
+            if ( Ro::siz(mt, true) <= 0 && Math::Error<double>(squaredDist, dist,0.05 ) ) {
                 
-            
-                if ( Ro::siz(mt) <= 0 && Math::Error<double>(squaredDist, dist,0.05 ) ) {
-                   // cout << (i * num + j) << endl; 
-                    posa[i].draw(); posb[j].draw(); 
-                       
-                    Pnt np = Ro::null_cen( Ro::split1( (XY ^ mt).dual() ) );
-                    traj.add(np);
-                   // if ( ( i * num + j ) == swhich  ){
-                         
-                        
-                        tk[1].pos() =  posa[i];
-                        tk[2].pos() =  np;
-                        tk[3].pos() =  posb[j];
-                        
-                        tk.joints();
-                        tk.draw();
-                    
-                        tk[2].bound().dils(-.5).draw(0,1,0,.1);
+                posa[i].draw(); posb[j].draw(); 
+                   
+                Pnt np = Ro::null_cen( Ro::split1( (XY ^ mt).dual() ) );
+                traj.add(np);
 
-                   // }
-
-                    
-                }
+                tk[1].pos() =  posa[i];
+                tk[2].pos() =  np;
+                tk[3].pos() =  posb[j];
+                
+                tk.joints();
+                tk.drawLinkages();
+                tk[2].scale(.2).bound().draw(0,1,0);
+                //tk[2].bound().dils(-.5).draw(0,1,0,.1);
+                
+            }
         
         END 
         
@@ -361,11 +350,8 @@ void permutations(GLVApp& app){
 //        glEnd();
    
     END 
-
-
-    cout << squaredDist << endl; 
     
-    a.draw(1,0,0,.2);  b.draw(1,0,0,.2);
+    if (bDraw) { a.draw(1,0,0,.2);  b.draw(1,0,0,.2); }
 }
 
 void GLVApp :: onDraw(){

@@ -2277,6 +2277,13 @@
 		9BCDA8971533BCC800FD9994 /* cga.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B0D3DCC152D2B9500AD875C /* cga.vert */; };
 		9BCDA89A1533C91A00FD9994 /* scratch.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BCDA8981533C8F900FD9994 /* scratch.vert */; };
 		9BCDA89B1533C91F00FD9994 /* scratch.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BCDA8991533C90E00FD9994 /* scratch.frag */; };
+		9BCEBA8F15671D4A00FFE99E /* TestOptics.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BCEBA8E15671D4A00FFE99E /* TestOptics.1 */; };
+		9BCEBA9715671D6300FFE99E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
+		9BCEBA9815671D6B00FFE99E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
+		9BCEBA9915671D7400FFE99E /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
+		9BCEBA9A15671D7C00FFE99E /* glv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFC3F152026A4009E322F /* glv.framework */; };
+		9BCEBA9C15671D9600FFE99E /* TestOptics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEBA9B15671D9600FFE99E /* TestOptics.cpp */; };
+		9BCEBA9D15671E1300FFE99E /* TestOptics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCEBA9B15671D9600FFE99E /* TestOptics.cpp */; };
 		9BCECCC81524FCFF00589E30 /* GLVInterfaceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */; };
 		9BCECCCA1524FD4100589E30 /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BCECCC91524FD4100589E30 /* Interface.cpp */; };
 		9BCECCCC1524FD5900589E30 /* Gui.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9BCECCCB1524FD5900589E30 /* Gui.hpp */; };
@@ -2402,6 +2409,20 @@
 			remoteInfo = vsr;
 		};
 		9BA4B3081547494800C15100 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B8AFC3E152026A4009E322F;
+			remoteInfo = glv;
+		};
+		9BCEBA9315671D5800FFE99E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B9D0E641442A5330032E5A3;
+			remoteInfo = vsr;
+		};
+		9BCEBA9515671D5800FFE99E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
@@ -2534,6 +2555,16 @@
 			dstSubfolderSpec = 0;
 			files = (
 				9BA4B2FE1547491700C15100 /* TestField.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		9BCEBA8715671D4900FFE99E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9BCEBA8F15671D4A00FFE99E /* TestOptics.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -4833,6 +4864,10 @@
 		9BC4BD021548C99B00A53E2D /* surfacebend.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = surfacebend.frag; path = ../../resources/shaders/surfacebend.frag; sourceTree = "<group>"; };
 		9BCDA8981533C8F900FD9994 /* scratch.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = scratch.vert; path = ../../resources/shaders/scratch.vert; sourceTree = "<group>"; };
 		9BCDA8991533C90E00FD9994 /* scratch.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = scratch.frag; path = ../../resources/shaders/scratch.frag; sourceTree = "<group>"; };
+		9BCEBA8915671D4900FFE99E /* TestOptics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestOptics; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BCEBA8C15671D4A00FFE99E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9BCEBA8E15671D4A00FFE99E /* TestOptics.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestOptics.1; sourceTree = "<group>"; };
+		9BCEBA9B15671D9600FFE99E /* TestOptics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestOptics.cpp; path = ../../tests/TestOptics.cpp; sourceTree = "<group>"; };
 		9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVInterfaceImpl.h; sourceTree = "<group>"; };
 		9BCECCC91524FD4100589E30 /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
 		9BCECCCB1524FD5900589E30 /* Gui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Gui.hpp; sourceTree = "<group>"; };
@@ -4972,6 +5007,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BCEBA8615671D4900FFE99E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BCEBA9A15671D7C00FFE99E /* glv.framework in Frameworks */,
+				9BCEBA9915671D7400FFE99E /* libvsr.a in Frameworks */,
+				9BCEBA9815671D6B00FFE99E /* GLUT.framework in Frameworks */,
+				9BCEBA9715671D6300FFE99E /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BCECCD61526759300589E30 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -5024,6 +5070,7 @@
 				9BA4B2FA1547491700C15100 /* TestField */,
 				9B6FDEB1155216AF0070D3E3 /* TestStat */,
 				9B6FDF5215545E6F0070D3E3 /* TestAudio */,
+				9BCEBA8B15671D4900FFE99E /* TestOptics */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = vsr;
@@ -5056,6 +5103,7 @@
 				9B6FDEAF155216AF0070D3E3 /* TestStat */,
 				9B6FDECF15545D190070D3E3 /* libGamma.a */,
 				9B6FDF5015545E6F0070D3E3 /* TestAudio */,
+				9BCEBA8915671D4900FFE99E /* TestOptics */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5220,6 +5268,7 @@
 				9B69B98A1523EA1700C308D4 /* TestVsrGlv2.cpp */,
 				9BCECCE3152675C600589E30 /* TestLinkage.cpp */,
 				9B6FDF6A15545EFF0070D3E3 /* TestAudio.cpp */,
+				9BCEBA9B15671D9600FFE99E /* TestOptics.cpp */,
 				9BA4B30A1547497300C15100 /* TestField.cpp */,
 				9BCECD1D1527BE0900589E30 /* TestTransformation.cpp */,
 				9BCECCFD1527884600589E30 /* TestMeet.cpp */,
@@ -7665,6 +7714,15 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		9BCEBA8B15671D4900FFE99E /* TestOptics */ = {
+			isa = PBXGroup;
+			children = (
+				9BCEBA8C15671D4A00FFE99E /* main.cpp */,
+				9BCEBA8E15671D4A00FFE99E /* TestOptics.1 */,
+			);
+			path = TestOptics;
+			sourceTree = "<group>";
+		};
 		9BCECCDB1526759300589E30 /* TestLinkage */ = {
 			isa = PBXGroup;
 			children = (
@@ -9073,6 +9131,25 @@
 			productReference = 9BA4B2F81547491700C15100 /* TestField */;
 			productType = "com.apple.product-type.tool";
 		};
+		9BCEBA8815671D4900FFE99E /* TestOptics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BCEBA9215671D4A00FFE99E /* Build configuration list for PBXNativeTarget "TestOptics" */;
+			buildPhases = (
+				9BCEBA8515671D4900FFE99E /* Sources */,
+				9BCEBA8615671D4900FFE99E /* Frameworks */,
+				9BCEBA8715671D4900FFE99E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9BCEBA9415671D5800FFE99E /* PBXTargetDependency */,
+				9BCEBA9615671D5800FFE99E /* PBXTargetDependency */,
+			);
+			name = TestOptics;
+			productName = TestOptics;
+			productReference = 9BCEBA8915671D4900FFE99E /* TestOptics */;
+			productType = "com.apple.product-type.tool";
+		};
 		9BCECCD81526759300589E30 /* TestLinkage */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BCECCE01526759400589E30 /* Build configuration list for PBXNativeTarget "TestLinkage" */;
@@ -9164,6 +9241,7 @@
 				9BA4B2F71547491700C15100 /* TestField */,
 				9B6FDEAE155216AF0070D3E3 /* TestStat */,
 				9B6FDF4F15545E6F0070D3E3 /* TestAudio */,
+				9BCEBA8815671D4900FFE99E /* TestOptics */,
 			);
 		};
 /* End PBXProject section */
@@ -10332,6 +10410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BCEBA9C15671D9600FFE99E /* TestOptics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10340,6 +10419,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA4B30B1547497300C15100 /* TestField.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BCEBA8515671D4900FFE99E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BCEBA9D15671E1300FFE99E /* TestOptics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10444,6 +10531,16 @@
 			isa = PBXTargetDependency;
 			target = 9B8AFC3E152026A4009E322F /* glv */;
 			targetProxy = 9BA4B3081547494800C15100 /* PBXContainerItemProxy */;
+		};
+		9BCEBA9415671D5800FFE99E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B9D0E641442A5330032E5A3 /* vsr */;
+			targetProxy = 9BCEBA9315671D5800FFE99E /* PBXContainerItemProxy */;
+		};
+		9BCEBA9615671D5800FFE99E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B8AFC3E152026A4009E322F /* glv */;
+			targetProxy = 9BCEBA9515671D5800FFE99E /* PBXContainerItemProxy */;
 		};
 		9BCECCEA1526770900589E30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -10988,6 +11085,45 @@
 			};
 			name = Release;
 		};
+		9BCEBA9015671D4A00FFE99E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9BCEBA9115671D4A00FFE99E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		9BCECCE11526759400589E30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -11215,6 +11351,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9BCEBA9215671D4A00FFE99E /* Build configuration list for PBXNativeTarget "TestOptics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BCEBA9015671D4A00FFE99E /* Debug */,
+				9BCEBA9115671D4A00FFE99E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		9BCECCE01526759400589E30 /* Build configuration list for PBXNativeTarget "TestLinkage" */ = {
 			isa = XCConfigurationList;

@@ -228,6 +228,7 @@ allocation)
 		double rnorm() const { double a = rwt(); if(a<0) return -sqrt( -a ); return sqrt( a ); }
 		State unit() const { double t = sqrt( fabs( dot()[0] ) ); if (t == 0) return State(); return *this / t; }
 		State runit() const { double t = rnorm(); if (t == 0) return State(); return *this / t; }
+		State tunit() const { double t = norm(); if (t == 0) return State(); return *this / t; }
 		
         /*! Euclidean Dual */
         State edual() const;

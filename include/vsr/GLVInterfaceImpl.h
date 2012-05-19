@@ -166,12 +166,34 @@ namespace vsr {
             interface.view().fit();
             camera().push3D();
                 
-           string ts = Print::Tikz(s, camera());
+            string ts = Print::Tikz(s, camera());
  //           string ts = Print::TikzPerspective(s, camera());
             camera().pop3D();
             
             return ts;
         }
+
+        string printTikz(vector<State> pa){
+            interface.view().fit();
+            camera().push3D();
+            
+            string ts = Print::TikzSeg2(pa,  camera());
+                //       string ts = Print::TikzPerspective(s, camera());
+            camera().pop3D();
+            
+            return ts;
+        }       
+        
+        string printTikz(const State& s, const State& pa, const State& pb){
+            interface.view().fit();
+            camera().push3D();
+            
+            string ts = Print::TikzSeg(s, pa, pb, camera());
+            //           string ts = Print::TikzPerspective(s, camera());
+            camera().pop3D();
+            
+            return ts;
+        }       
         
         virtual void gl2ps(){
             FILE *fp;

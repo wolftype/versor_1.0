@@ -28,6 +28,11 @@ namespace vsr{
         
 
         /// Seed 
+        
+        inline static void Seed(int num){
+            srand(num);
+            gen.seed( num );
+        }
         inline static void Seed() { 
             
             //typical srand

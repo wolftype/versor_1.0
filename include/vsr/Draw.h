@@ -29,6 +29,10 @@
 //#include "glv.h"
 //#include <GLUT/glut.h>
 
+#include <vector>
+
+using namespace std;
+
 #include "Matrix.h"
 
 //namespace glv {
@@ -177,9 +181,11 @@ namespace vsr {
 		};
     
     struct Print {
-        inline static string Begin() { return "\\begin{tikzpicture}"; }
+        inline static string Begin() { return "\\begin{tikzpicture}\n"; }
         inline static string End()   { return "\\end{tikzpicture}";}
         static string Tikz( const State&, const Camera& );
+        static string TikzSeg( const State&, const State&, const State&, const Camera& );
+        static string  TikzSeg2( vector<State> pa, const Camera& cam);
         static string TikzPerspective( const State&, const Camera& );
     };
     

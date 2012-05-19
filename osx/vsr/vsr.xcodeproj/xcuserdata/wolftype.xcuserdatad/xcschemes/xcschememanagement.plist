@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>TestOptics.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 		<key>TestShader.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -166,6 +171,11 @@
 			<true/>
 		</dict>
 		<key>9BC171FB1522519500A1128C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BCEBA8815671D4900FFE99E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
