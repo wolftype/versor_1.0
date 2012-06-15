@@ -119,125 +119,86 @@ void optics2(GLVApp& app){
 }
 
 void optics3(GLVApp& app){
+
+    Rand::Seed(100);
     
     static Lattice<Pnt> f(3,2,1,1);
     static Frame * frame = new Frame[ f.num() ];
     static Lenz * lens = new Lenz[ f.num() ];
     static bool * bVisited = new bool[ f.num() ];
     
-    static Dls src = Ro::dls3(-2,0,0); app.interface.touch(src);
-    src.draw(1,0,0,.2);
+    static Dls src = Ro::dls3(-2,2,0); app.interface.touch(src);
+    static Dls src2 = Ro::dls3(-2,-2,0); app.interface.touch(src2);
     
-    //RAYS
+    
+    //RAY PARAM
     static float num, spread, theta, phi ;  
     
-    //LENSES
+    //LENS PARAM
     static float  grad,dist, ridx,dev2, ratio;
     
+    //BOOLEAN
+    static bool bDraw, bDraw2;
+    
     SET
-    // RAYS
-    app.gui(num,"num", 1, 100)(spread, "spread", 0,10);
-    app.gui(theta,"theta",-PI,PI)(phi, "phi", -PI, PI); 
-    //Lens Parameters
-    app.gui(ridx,"ridx",-10,10)(grad,"grad",-100,100)(dist,"dist",0,5)(ratio, "ratio", 1,10);
-    app.gui(dev2, "dev2");
+        // RAYS
+        app.gui(num,"num", 1, 100)(spread, "spread", 0,10);
+        app.gui(theta,"theta",-PI,PI)(phi, "phi", -PI, PI); 
+        //Lens Parameters
+        app.gui(ridx,"ridx",-10,10)(grad,"grad",-100,100)(dist,"dist",0,5)(ratio, "ratio", 1,10);
+        app.gui(dev2, "dev2");
+        
+        //Bool
+        app.gui(bDraw,"draw");
+        app.gui(bDraw2,"draw2");
+        IT(f.num())
+        frame[i].pos() = f[i];
+        END 
     
-    IT(f.num())
-    frame[i].pos() = f[i];
     END 
     
-    END 
-    
+    //GEOM
     static Dll ray, oray; static Pnt pos, npos, tpos; static Cir cir;
     
+    //PLANES
     static Dlp left, right;
     left = app.camera().frustrum().left();
     right = app.camera().frustrum().right();
-    
-    
-    Rand::Seed(100);
-    //Set Lens parameters
+            
+    //PARAM
     IT(f.num())
     
-    app.interface.touch(frame[i]);
-    lens[i].pos() = frame[i].pos(); 
-    lens[i].scale( frame[i].scale() );
-    lens[i].rot( frame[i].rot() );
-    lens[i].ratio( ratio );
-    lens[i].ridx( ridx );
-    lens[i].grad = grad;// + Rand::Normal(0,dev2);
-    
-    lens[i].position();
-    
+        app.interface.touch(frame[i]);        
+        lens[i].set(frame[i], ridx, grad, 1, ratio);
+        
     END 
     
     // PER RAY
     IT2(num)
-    
-    //RESET FLAGS
-    IT(f.num())
-    bVisited[i] = false;
-    END 
-    
-    vector<Pnt> p;
-    
-    Par ps = Ro::par_dls(src, (-1.0 + 2.0 * u) * theta, (-1.0 + 2.0 * v) * phi  );
-    Dll ray = ( ps ^ Inf(1) ).dual();
-    oray = ray;
-    
-    pos = Ro::dll_meet_dlp( ray,  Dlp(1,0,0).trs(-10,0,0) );//left );
-    pos.draw();
-    
-    bool meet = true;
-    double x = pos[0];
-    int max = 100; int it = 0;
-    
-    while ( meet && (it < max) ) {
-        it++;
-        meet = false;
-        int idx = 0; double dist = 10000;
         
-        ITJ(j,f.num())
-        
-        if (bVisited[j]) continue;              // have we already visited this lens?
-        
-        if ( lens[j][0].hit( oray ) ) {
-            
-            Pnt p = lens[j][0].meet( oray );
-            bool valid = ( Op::sca( p <= Ro::sur( lens[j].meet) ) > 0 ) ? 1 : 0; 
-            
-            if ( valid && p[0] > x ) {
-                meet = true;
-                double a = sqrt( fabs( Op::sca( pos <= p ) ) );
-                if (a < dist) { dist = a; idx =j; } 
-            }
-        }
-        END 
-        
-        if (meet ) {
-            bVisited[idx] = true;
-            oray = lens[idx].curve(oray);                       //curve and spit out new ray
-            npos = lens[idx].pa; x = lens[idx].pb[0];
-            Op::sn( Ro::dir( lens[idx].bend, false ), Biv::xy ) ? glColor3f(1,1,0) : glColor3f(0,0,1);
-            
-            Draw::SegPnts(lens[idx].bend, lens[idx].pa, lens[idx].pb);
-            
-            Glyph::Line( Vec(pos), Vec(npos) );
-            pos = lens[idx].pb;
-        }
-        
-    }
+        Par ps = Ro::par_dls(src, (-1.0 + 2.0 * u) * theta, (-1.0 + 2.0 * v) * phi  );
+        Dll ray = ( ps ^ Inf(1) ).dual();        
+        pos = Ro::dll_meet_dlp( ray,  Dlp(1,0,0).trs(-10,0,0) );//left );
+
+        Trajectory traj;
+        traj.calc(pos, ray, lens, f.num(), Dlp(1,0,0).trs(10,0,0) );
+        traj.draw();
     
-    npos = Ro::dll_meet_dlp( oray, right);
-    Glyph::Line( Vec(pos), Vec(npos) );
+        ps = Ro::par_dls(src2, (-1.0 + 2.0 * u) * theta, (-1.0 + 2.0 * v) * phi  );
+        ray = ( ps ^ Inf(1) ).dual();        
+        pos = Ro::dll_meet_dlp( ray,  Dlp(1,0,0).trs(-10,0,0) );//left );
+
+        Trajectory traj2;
+        traj2.calc(pos, ray, lens, f.num(), Dlp(1,0,0).trs(10,0,0) );
+        traj2.draw();
     
+
     END END
-    
-    
+        
     IT(f.num())
-    lens[i].draw();
+        if(bDraw2) lens[i].drawMeet();
     END 
-    
+    if (bDraw) { src.draw(1,0,0,.2); src2.draw(1,0,0,.2);}
 }
 
 //an array of lenses
@@ -377,7 +338,7 @@ void optics4(GLVApp& app){
     Lenz lens;
     lens.pos() = Ro::null( surf ); lens.position();
     lens.ridx(ridx);
-    lens.grad = grad;
+    lens.mGrad = grad;
     lens.ratio(r2);
     lens.dist(dist);
     
@@ -399,13 +360,187 @@ void optics4(GLVApp& app){
     
 }
 
+void optics5(GLVApp& app){
+    
+   static Lattice<Pnt> f(1,10,1);
+   static Frame * frame = new Frame[f.num()];
+   
+   
+   static float ridx, grad, dist, rat;
+   
+   static float numrays, iter, spread;
+   
+   static bool bDraw;
+   
+   SET
+    IT(f.num())  frame[i].pos() = f[i]; END
+    
+    
+    app.gui(ridx,"ridx", -5, 5)(grad,"grad", -5, 5)(dist, "dist",0,5)(rat,"rat", 0,10);
+    
+    app.gui(numrays, "numrays",1,100)(spread,"spread",1,100);
+    
+    app.gui(bDraw, "draw");
+  
+    END 
+     
+    
+    IT1(f.num())
+    
+        Lenz lens;
+        
+        lens.set(frame[i], ridx * t, grad * t, dist * t, rat * t );
+        
+        if (bDraw) lens.drawMeet();
+        
+        ITJ(j, numrays)VALJ(j,numrays)
+            Dll ray = DLN(1,0,0).trs(0, -spread/2.0 + spread * t, 0 );
+            Pnt pnt = Ro::dll_meet_dlp(ray, Dlp(1,0,0).trs(-5,0,0) );
+            
+            Trajectory traj;
+            traj.calc(pnt, ray, &lens, 1, Dlp(1,0,0).trs(5,0,0) );
+            traj.draw();
+            
+        END 
+        
+    END
+    
+
+}
+
 void opticalRobot(GLVApp& app){
+    
+    
+    int num = 5;
+    static Chain k(num);
+    static Chain k2(num);
+    static Lenz * lens = new Lenz[num];
+    
+    static Dls src = Ro::dls3(-2,0,0);
+    app.interface.touch(src);
+    
+    static float grad, ridx, scale, rat;
+    static float theta, phi;
+    
+    static bool bFabrik, bDraw;
+    SET
+        app.gui(scale, "scale")(grad, "grad")(ridx,"ridx")(rat,"rat");
+        app.gui(theta, "theta", -PI, PI)(phi, "phi", -PI, PI);
+        app.gui(bFabrik, "fab")(bDraw, "draw");
+    END 
+    
+     
+    Pnt p = app.mouse().origin;
+    
+    if (bFabrik) k.fabrik(p, k.num()-1, 0 );
+    
+    if (bDraw) k.draw();
+    
+    k2.first() = k[3];
+    k2.fabrik( PT(2,2,0), k2.num()-1, 0);
+    if (bDraw)  k2.draw();
+    
+    
+    IT(k.num())
+        k[i].scale(scale);
+    
+        lens[i].set( k[i], ridx, grad, 1, rat );
+        
+        if (bDraw) lens[i].draw();
+        
+    END 
+    
+    int numrays = 10;
+    
+    IT2(numrays)
+        Trajectory traj;
+
+        Dll dll = Op::dl( Ro::par_dls(src, (-1.0 + 2.0*u)*theta, (-1.0 + 2.0*v)*phi) ^ Inf(1) );
+        Pnt start = Ro::dll_meet_dlp(dll, Dlp(1,0,0).trs(-4,0,0));
+
+        traj.calc(start, dll, lens, num, Dlp(1,0,0).trs(5,0,0) ) ;
+        traj.draw();
+    END END
+    
+    
+    if (app.interface.keyboard.code == 'f' ) bFabrik = !bFabrik;
+    
+}
+
+void optics6(GLVApp& app){
+
+    static Lattice<Pnt> f(5,1,1,3);
+    //static Frame * f = new Frame(f.num());
+    static Lenz * lens = new Lenz[ f.num() ];
+    // (PT(0,0,0), Rot(1,0,0,0) );  
+    IT(f.num())
+        app.interface.touch( *(Frame*)(&lens[i]));
+    END  
+
+    static double ridx, grad,dist,  rat;
+    static float rnum, iter, vspread;
+    static bool bDraw, bR, bG, bD, bRat,bNum;
+    static bool bPrint;
+    SET
+        IT(f.num()) lens[i].pos() = f[i]; END
+        
+        app.gui(ridx,"r", -10,10)(grad,"g",-10,10)(dist,"dist",0,10)(rat,"rat",1,10);
+        app.gui(rnum, "rnum", 1,100)(iter,"iter",1,100)(vspread,"vspread",0,10);
+        app.gui(bDraw, "draw");
+        app.gui(bR)(bG)(bD)(bRat)(bNum);
+        app.gui(bPrint,"print");
+    END 
+    
+    ITJ(k,iter) VALJ(k, iter)
+       
+        
+        IT(f.num())
+            lens[i].set(ridx * (bR? t:1), grad *  (bG? t:1), dist * (bD? t:1), rat *  (bRat? t:1));
+        END 
+
+        if (bDraw) { IT(f.num()) lens[i].drawMeet(); END }
+        
+        int num = rnum * (bNum? t : 1) ;
+        
+        IT2(num)
+        
+            Dll dll = DLN(1,0,0).trs( 0, -2.0 + 4.0 * i/num, -2.0 + 4.0 * j/num );
+            Pnt p = Ro::dll_meet_dlp(dll, Dlp(1,0,0).trs(-f.ow(),0,0));
+            Trajectory traj;
+            
+            glColor3f(1,0,0);
+            traj.calc(p, dll, lens, f.num(), Dlp(1,0,0).trs(f.ow()+ 1,0,0));
+            traj.draw();
+            
+            if (bPrint){
+                traj.print(app.camera());
+            }
+            
+        END END
+        
+         glTranslated(0, vspread, 0);
+    END 
+    
+    if (bPrint){
+        bPrint = false;
+    }
+        
+}
+
+void optics7(GLVApp& app){
+    static Lattice<Pnt> f(5,5,1,3);
+
+    static Lenz * lens = new Lenz[ f.num() ];
+    
+    
     
 }
 
 void GLVApp :: onDraw(){
-    opticalRobot(*this);
-    optics3(*this);
+  //  opticalRobot(*this);
+   // optics3(*this);
+   //optics5(*this);
+   optics7(*this);
 }
 
 int main() {
@@ -426,5 +561,55 @@ int main() {
     
     return 0;
 }
+
+
+//    //RESET FLAGS
+//    IT(f.num())
+//    bVisited[i] = false;
+//    END 
+//    pos.draw();
+//    
+//    bool meet = true;
+//    double x = pos[0];
+//    int max = 100; int it = 0;
+//    
+//    while ( meet && (it < max) ) {
+//        it++;
+//        meet = false;
+//        int idx = 0; double dist = 10000;
+//        
+//        ITJ(j,f.num())
+//        
+//        if (bVisited[j]) continue;              // have we already visited this lens?
+//        
+//        if ( lens[j][0].hit( oray ) ) {
+//            
+//            Pnt p = lens[j][0].meet( oray );
+//            bool valid = ( Op::sca( p <= Ro::sur( lens[j].meet) ) > 0 ) ? 1 : 0; 
+//            
+//            if ( valid && p[0] > x ) {
+//                meet = true;
+//                double a = sqrt( fabs( Op::sca( pos <= p ) ) );
+//                if (a < dist) { dist = a; idx =j; } 
+//            }
+//        }
+//        END 
+//        
+//        if (meet ) {
+//            bVisited[idx] = true;
+//            oray = lens[idx].curve(oray);                       //curve and spit out new ray
+//            npos = lens[idx].pa; x = lens[idx].pb[0];
+//            Op::sn( Ro::dir( lens[idx].bend, false ), Biv::xy ) ? glColor3f(1,1,0) : glColor3f(0,0,1);
+//            
+//            Draw::SegPnts(lens[idx].bend, lens[idx].pa, lens[idx].pb);
+//            
+//            Glyph::Line( Vec(pos), Vec(npos) );
+//            pos = lens[idx].pb;
+//        }
+//        
+//    }
+//    
+//    npos = Ro::dll_meet_dlp( oray, right);
+//    Glyph::Line( Vec(pos), Vec(npos) );
 
 

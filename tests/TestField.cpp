@@ -91,7 +91,7 @@ void plunges(GLVApp& app){
                 
                 Cir cm = par.dual(); cm.draw();
      
-                if ( Ro::siz(cm) >=0) {
+                if ( Ro::siz(cm, false) >=0) {
                     cout << "hit" << endl; 
                     Pln pln  = Ro::car( cm ); pln.draw(0,0,1);
                     Cir c = pln.dual() ^ s[i].dual();
@@ -155,7 +155,7 @@ void ripples(GLVApp& app){
             
             //cout << i << " " << j << " : " <<  Ro::siz(cm) << endl; 
                 
-            if ( Ro::siz(cm) >= 0 ){
+            if ( Ro::siz(cm, false ) >= 0 ){
                // cout << "add 1" << endl; 
                 
                 Cir tc = Ro::car(cm).dual() ^ c[i].dual();
@@ -185,7 +185,7 @@ void ripples(GLVApp& app){
     
         vel[i] *= .95 + .05 * (1-vel[i]);
         
-        double s = fabs( Ro::siz(c[i]) );
+        double s = fabs( Ro::siz(c[i], false) );
         
         if ( s > 5 ) {
             vel.erase(i);
@@ -203,16 +203,17 @@ void ripples2(GLVApp& app){
     static Lattice<Dls> f(5,5,1,1);
     
     static int max = 200;
+    static float sizeProb, makeProb;
     
     SET
-        
-    //f.jitter(1);
     
-    IT(f.num()) c.add( f.grid(i) ); vel.add( Rand::Num(.6, 1.5) ); END
-    
+            app.gui(sizeProb, "size_prob", 0,100)(makeProb, "make_prob", 0, 100);
+                            
+        IT(f.num()) c.add( f.grid(i) ); vel.add( Rand::Num(.6, 1.5) ); END
     
     END
     
+    //ADD RANDOM NUMBER OF spheres
     if (c.size() <= 1){
         IT(10)
         Dls tc = Ro::dls3( Rand::Num(-2,2), Rand::Num(-2,2), 0, Rand::Num(.1,.3) );
@@ -222,6 +223,8 @@ void ripples2(GLVApp& app){
     
     Set<float> tmpv; Set<Dls> tmpc;
     
+    
+    //Find all intersecting spheres 
     if ( c.size() > 0 && c.size() < max ) {
        // cout << "calculating...."<<endl; 
         
@@ -234,7 +237,8 @@ void ripples2(GLVApp& app){
                 
                 Cir cm = par.dual();
                             
-                if ( Ro::siz(cm) >= 0 && Stat::Prob(.1) && Stat::Prob(1-(1.0* n/10) ) && (c.size() + tmpc.size() < max) ){
+                //if ( Ro::siz(cm, false ) >= 0 && Stat::Prob(.1) && Stat::Prob(1-(1.0* n/10) ) && (c.size() + tmpc.size() < max) ){
+                if ( Ro::siz(cm, false ) >= 0 && (c.size() + tmpc.size() < max) && Stat::Prob(makeProb) ){
                     n++;
                     Cir tc = Ro::car(cm).dual() ^ Dlp(0,0,1,0) ^ c[i];
                     Par tp = tc.dual();
@@ -253,17 +257,15 @@ void ripples2(GLVApp& app){
         
     if (tmpc.size() > 0 ) {  c.add(tmpc); vel.add(tmpv); }
         
-    cout << c.size() << endl; 
-        
         int i = 0;
         
         static Cir cir;
         
         while ( i < c.size() ) {
 
-            double s = fabs( Ro::siz(c[i]) );
-            
-            if ( Stat::Prob( 1.0 * c.size() / max ) ||  Stat::Prob(.02 * s) || c[i][3] == 0 ) {
+            double s = fabs( Ro::siz(c[i], false) );
+            //Stat::Prob( 1.0 * c.size() / max ) ||
+            if (   Stat::Prob(sizeProb * s) || c[i][3] == 0 ) {
                 vel.erase(i);
                 c.erase(i);
                 continue;
@@ -333,7 +335,7 @@ void scalar(GLVApp& app){
 }
 
 void GLVApp :: onDraw(){
- //   plunges(*this);
+  //  plunges(*this);
     ripples2(*this);
  //   scalar(*this);
 }

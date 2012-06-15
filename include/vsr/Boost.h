@@ -20,6 +20,8 @@ namespace vsr{
 
     public:
         
+       // Boost (const Par & p) { par(p); }
+        
         // The elements
         Biv mBiv;    ///< Bivector Element
         Drv mDrv;    ///< Direction Vector Element

@@ -48,16 +48,29 @@ namespace vsr {
 		public:
 		
 			Chain(int n = 3) : mNum(n) {
+                if (mNum > 0){
 				mFrame = new Frame[n];
 				mLink  = new Frame[n];
 				mJoint = new Frame[n];
-				_init();			
+				_init();		
+                }	
 			}
         ~Chain(){
             if (mFrame) delete[] mFrame;
             if (mLink) delete[] mLink;
             if (mJoint) delete[] mJoint;
         }
+        
+            void alloc(int n){
+                mNum = n;
+                if (mFrame) delete[] mFrame;
+                if (mLink) delete[] mLink;
+                if (mJoint) delete[] mJoint;   
+            	mFrame = new Frame[n];
+				mLink  = new Frame[n];
+				mJoint = new Frame[n];
+				_init();	        
+            }
         
 			/* GETTERS AND SETTERS */
 			int num() const { return mNum; }
@@ -319,9 +332,9 @@ namespace vsr {
 				}
 			} 
         
-        virtual void drawLinkages(){
+        virtual void drawLinkages(bool dashed = true){
             for (int i = 0; i < mNum-1; ++i){
-                Glyph::DashedLine(mFrame[i].pos(), mFrame[i+1].pos() );
+                (dashed) ? Glyph::DashedLine(mFrame[i].pos(), mFrame[i+1].pos() ) : Glyph::Line(mFrame[i].pos(), mFrame[i+1].pos() );
             }            
         }
         

@@ -49,6 +49,11 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>TestTwists.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
 		<key>TestVsr.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -65,6 +70,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+		<key>TestWarp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
 		</dict>
 		<key>cga.xcscheme</key>
 		<dict>
@@ -176,6 +186,16 @@
 			<true/>
 		</dict>
 		<key>9BCEBA8815671D4900FFE99E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BCEBAA115681C8D00FFE99E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BCEBAB715681CEA00FFE99E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

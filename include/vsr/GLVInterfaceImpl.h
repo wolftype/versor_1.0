@@ -195,6 +195,14 @@ namespace vsr {
             return ts;
         }       
         
+        
+        /*
+        const char *title, const char *producer, GLint viewport[4], 
+        GLint format, GLint sort, GLint options, GLint colormode, 
+        GLint colorsize, GL2PSrgba *colortable,
+        GLint nr, GLint ng, GLint nb, GLint buffersize, FILE *stream, const char *filename )
+
+        */
         virtual void gl2ps(){
             FILE *fp;
             int state = GL2PS_OVERFLOW, buffsize = 0;
@@ -202,23 +210,29 @@ namespace vsr {
             string name = File::images + "output/out.eps";
             fp = fopen("out.eps", "wb");
             
-            //    fp = fopen(name.c_str(), "wb");
             printf("Writing 'out.eps'... ");
             GLint tv[4];
             glGetIntegerv(GL_VIEWPORT, tv);
             glPointSize(15);
-            //	gl2psEnable(GL2PS_BLEND);
+            
+            //gl2psEnable(GL2PS_BLEND);
             //	gl2psBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            //| GL2PS_NO_BLENDING 
+            //| GL2PS_SIMPLE_LINE_OFFSET
+            //
+            
+            //gl2psEnable( GL2PS_POLYGON_OFFSET_FILL );
             while(state == GL2PS_OVERFLOW){
                 buffsize += 1024*1024;
-                gl2psBeginPage("test", "gl2psTestSimple", tv , GL2PS_EPS, GL2PS_SIMPLE_SORT, 
-                               GL2PS_TIGHT_BOUNDING_BOX | GL2PS_NO_PS3_SHADING | GL2PS_NO_BLENDING | GL2PS_OCCLUSION_CULL | GL2PS_SIMPLE_LINE_OFFSET, 
+                gl2psBeginPage("test", "gl2psTestSimple", tv , GL2PS_EPS, GL2PS_SIMPLE_SORT,//GL2PS_NO_SORT,//, //GL2PS_SIMPLE_SORT, 
+                               GL2PS_TIGHT_BOUNDING_BOX | GL2PS_NO_PS3_SHADING | GL2PS_BEST_ROOT | GL2PS_NO_BLENDING | GL2PS_SIMPLE_LINE_OFFSET,// | GL2PS_BEST_ROOT, 
                                GL_RGBA, 0, NULL, 0, 0, 0, buffsize, fp, "out.eps");
                 
                  onDraw();
                 
                 state = gl2psEndPage();
             }
+            
             fclose(fp);
             printf("Done!\n");
         }

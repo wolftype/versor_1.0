@@ -164,6 +164,49 @@ namespace vsr {
             
             printf("# of vertices: %d\n", (int)mVertex.size() );
         }    
+    
+        ///Skin a bunch of Circles
+        void skinCirc (State * s, int num, int res = 10){
+
+           int mU = res;
+           int mV = num;
+                                    
+            if (!mVertex.empty() ) mVertex.clear();	
+
+            for (int j = 0; j < mU; ++j){
+                double t = 2 * PI * j/mU;
+                for (int i = 0 ; i < mV; ++i){					
+                    Par p = Ro::par_cir( s[ i ], t );
+                    Pnt tp =  Ro::cen( Ro::split1(p) );
+                    mVertex.push_back( Vertex( Vec3f(tp[0], tp[1], tp[2]) ) ) ;
+                }
+            }
+            
+            //store quad indices and normals
+
+            if (!mIndex.empty()) mIndex.clear();
+            
+            for (int j = 0; j < mU-1; ++j){
+                for (int i = 0; i < mV-1; ++i){
+                    int idx = j * mV + i;
+                    int idx2 = idx + mV;
+                    mIndex.push_back( idx);
+                    mIndex.push_back( idx+1);
+                    mIndex.push_back( idx2+1);
+                    mIndex.push_back( idx2);
+                }
+            }
+            //last strip
+            for (int i = 0; i < mV-1; ++i){
+                int idx = (mU-1) * mV + i; 
+                int idx2 = i;
+                 mIndex.push_back( idx);
+                 mIndex.push_back( idx+1);
+                 mIndex.push_back( idx2+1);
+                 mIndex.push_back( idx2);
+            }
+
+        }
         
         static Mesh Circle(double scale = 1);        
         static Mesh Rect(float w, float h);

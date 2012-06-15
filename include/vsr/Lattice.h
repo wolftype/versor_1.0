@@ -217,7 +217,71 @@ namespace vsr {
 			/*! Get vxl position (eight indexes) of position point p */
 			template < class S > 
 			static Vxl _vxlOfPnt( const Pnt&, const Lattice<S>&);
+            
+            /*! Get BL idx at eval u,v,w */
+            T surf(double u, double v){
+            
+                double pw = 1.0 / ( mWidth-1);
+                double ph = 1.0/ ( mHeight-1);
+                //double pd = 1.0 / mDepth;
+                
+                double fw = u / pw;
+                double fh = v / ph;
+                //double fd = w / pd;
+                
+                int iw = floor ( fw );
+                int ih = floor ( fh );
+                //int id = floor ( fd );
+               // cout << iw << " " << ih << endl; 
+                
+                double rw = fw - iw;
+                double rh = fh - ih;
+                //double rd = fd - id;
+               // cout << rw << " " << rh << endl; 
+                
+                T a = at ( iw, ih, 0 );
+                T d = at ( iw, ih + 1, 0 );
+                T b = at ( iw + 1, ih, 0 );
+                T c = at ( iw + 1, ih + 1, 0 );
+                
+                return Interp::surface<T> (a,b,c,d, rw, rh);
+            }
+            
+            Pnt surfpnt(double u, double v){
+                 
+                double pw = 1.0 / ( mWidth-1);
+                double ph = 1.0/ ( mHeight-1);
+                //double pd = 1.0 / mDepth;
+                
+                double fw = u / pw;
+                double fh = v / ph;
+                //double fd = w / pd;
+                
+                int iw = floor ( fw );
+                int ih = floor ( fh );
+                //int id = floor ( fd );
+               // cout << iw << " " << ih << endl; 
+                
+                double rw = fw - iw;
+                double rh = fh - ih;
+                //double rd = fd - id;
+               // cout << rw << " " << rh << endl; 
+                
+                Pnt a = grid( idx ( iw, ih, 0 ) );
+                Pnt d =grid( idx ( iw, ih + 1, 0 ));
+                Pnt b = grid( idx (  iw + 1, ih, 0 ));
+                Pnt c = grid( idx (  iw + 1, ih + 1, 0 ));
+                
+                return Ro::null( Interp::surface<Pnt> (a,b,c,d, rw, rh) );       
+            }
 			
+            Pnt pnt(double u = 0, double v = 0, double w = 0){
+                double x = -ow() + tw() * u;
+                double y = -oh() + th() * v;
+                double z = od() - td() * w;
+                return Ro::null(x,y,z);
+            }
+            
 			/*! Get Vec valued offset of point p from vxls */
 			Vec offset(const Pnt& p);
 			
@@ -301,17 +365,17 @@ namespace vsr {
 					
 			/* Totals and Offsets From Center */
 			/*! Total Width */
-			float tw() const { return mWidth * mSpacing; }
+			float tw() const { return (mWidth-1) * mSpacing; }
 			/*! Offset Width */
-			float ow() const { return (mWidth - 1) * mSpacing / 2.0 ; }
+			float ow() const { return tw() / 2.0 ; }
 			/*! Total Height */
-			float th() const { return mHeight * mSpacing; }
+			float th() const { return (mHeight-1) * mSpacing; }
 			/*! Offset Height */
-			float oh() const { return (mHeight- 1) * mSpacing / 2.0 ; }
+			float oh() const { return th() / 2.0 ; }
 			/*! Total Depth */
-			float td() const { return mDepth * mSpacing; }
+			float td() const { return (mDepth-1) * mSpacing; }
 			/*! Offset Depth */
-			float od() const { return (mDepth - 1) * mSpacing / 2.0 ; }//0;}//
+			float od() const { return td() / 2.0 ; }//0;}//
 			
 			/*! Spatial Positions of ith element in x direction  */
 			float px(int i) const { return -ow() + (mSpacing * i); }
@@ -491,14 +555,14 @@ namespace vsr {
 	Vec Lattice <  T > :: limit ( const Lattice < S > & f, const State& p){
 		Vec v(p);        
         
-		if ( v[0] < f.px(0) ) v[0] = f.px(0) + f.spacing()/2.0;
-        else if  ( v[0] > f.px(f.w()-1) ) v[0] = f.px(f.w()-1) - f.spacing()/2.0;
+		if ( v[0] < f.px(0) ) v[0] = f.px(0);// + f.spacing()/2.0;
+        else if  ( v[0] > f.px(f.w()-1) ) v[0] = f.px(f.w()-1);// - f.spacing()/2.0;
 
-		if ( v[1] < f.py(0) ) v[1] = f.py(0) + f.spacing()/2.0;	
-        else if ( v[1] > f.py(f.h()-1) ) v[1] = f.py(f.h()-1) - f.spacing()/2.0;	
+		if ( v[1] < f.py(0) ) v[1] = f.py(0);// + f.spacing()/2.0;	
+        else if ( v[1] > f.py(f.h()-1) ) v[1] = f.py(f.h()-1);// - f.spacing()/2.0;	
         
-		if ( v[2] > f.pz(0) ) v[2] = f.pz(0) - f.spacing()/2.0;
-		else if ( v[2] < f.pz(f.d()-1) ) v[2] = f.pz(f.d()-1) + f.spacing()/2.0;	
+		if ( v[2] > f.pz(0) ) v[2] = f.pz(0);// - f.spacing()/2.0;
+		else if ( v[2] < f.pz(f.d()-1) ) v[2] = f.pz(f.d()-1);// + f.spacing()/2.0;	
 
 		return v;
 	}	
@@ -508,14 +572,19 @@ namespace vsr {
     
 	//what vxl are we in at vec v with regards to lattice f ?
 	template < class T > template < class S > 
-	Vxl Lattice < T > :: _vxlOfVec( const Vec& v, const Lattice<S>& f ) {	
+	Vxl Lattice < T > :: _vxlOfVec( const Vec& tv, const Lattice<S>& f ) {	
 		
 		Vxl vxl;
 		
+        Vec v = limit(f, tv);
 		//Bottom - Left corner		
 		int w = floor((v[0] + f.ow() ) / f.spacing() );
 		int h = floor((v[1] + f.oh() ) / f.spacing() );
 		int d = floor((-v[2] + f.od() ) / f.spacing() );
+        
+        if (w > f.w()-2) w = f.w() -2;
+        if (h > f.h()-2) h = f.h() -2;
+        if (d > f.d() -2) d = f.d() -2;
 
 		vxl.a = _indexOf(w,h,d, f);
 		vxl.b = _indexOf(w+1,h,d, f);

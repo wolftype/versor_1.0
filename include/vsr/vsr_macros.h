@@ -45,6 +45,10 @@ for(int i = 0; i < n; ++i){
 
 #define ITJ(j,n) \
 for(int j = 0; j < n; ++j){
+
+#define ITI(j,n) \
+for(int j = 0; j <= n; ++j){\
+double t = 1.0*j/n;
     
 #define VAL(n) \
 double t = 1.0 * i/n;
@@ -58,6 +62,10 @@ IT(n) VAL(n)
 #define IT2(n) \
 IT(n) VAL(n) double u = t;\
 ITJ(j,n) VALJ(j,n) double v = t;
+
+#define IT2I(n) \
+ITI(i,n) double u = t;\
+ITI(j,n) double v = t;
     
 #define IT3V(n) \
 IT(n) VAL(n) double x = t;\
@@ -66,6 +74,11 @@ ITJ(k,n) VALJ(k,n) double z = t;
 
 #define IT3(x,y,z) \
 ITJ(i,x) ITJ(j,y) ITJ(k,z)
+
+#define IT3I(n) \
+ITI(i,n) double u = t;\
+ITI(j,n) double v = t;\
+ITI(k,n) double w = t;
     
 #define END }
 #define END2 }}

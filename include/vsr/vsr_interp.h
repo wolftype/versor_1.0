@@ -151,7 +151,7 @@ namespace vsr {
     template<typename T>
     inline T Interp :: surface(T * cp, double u, double v){
         T bot = cp[0] * (1-u) + cp[1] * u;
-        T top = cp[3] * (1-u) + cp[2] * u;
+        T top = cp[2] * (1-u) + cp[3] * u;
         return bot * (1-v) + top * v;
     }
 

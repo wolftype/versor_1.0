@@ -34,7 +34,7 @@
 using namespace std;
 
 #include "Matrix.h"
-
+#include <sstream>
 //namespace glv {
 //	class Scene;
 //}
@@ -53,6 +53,7 @@ namespace vsr {
 		class Cir;
 		class Pnt;
 		class State;
+        class Frame;
     
         
         class Camera;
@@ -97,9 +98,11 @@ namespace vsr {
 				//circle segment
 				static void Segment(float angle = PI, float radius = 1.0,  bool sign = 0, int res = 20);
 				static void Segment2(float angle = PI, float off = 0, float radius = 1.0, int res = 20);
-				static void DashedSegment(float angle = PI, float radius = 1.0, bool sign =0, int res = 20);
+				static void Segment3(float angle = PI, float off = 0, float radius = 1.0,  bool sign = 0,   int res = 20);
+                static void DashedSegment(float angle = PI, float radius = 1.0, bool sign =0, int res = 20);
 				static void DashedSegment2(float t = PI, float t2 = 0, float rad = 1.0, int res = 20);
-				static void DirSegment(float angle = PI, float radius = 1.0, bool clockwise = 0, int res = 20);
+				static void DashedSegment3(float angle = PI, float off= 0, float radius = 1.0, bool sign =0, int res = 20);
+                static void DirSegment(float angle = PI, float radius = 1.0, bool clockwise = 0, int res = 20);
 				static void DirDashedSegment(float angle = PI, float radius = 1.0, bool clockwise = 0, int res = 20);
 				
 				//2D Spiral
@@ -148,6 +151,7 @@ namespace vsr {
 				static void dir(bool b);
 			
 				static void Seg(const Cir&, double t, bool dir = 1, int res = 20);
+                static void SegOff(const Cir& K, double t, double off, bool dir = 1, int res = 20);
                 static void SegRad( const Cir& );
                 static void SegTo(const Cir&, double st, double t, int res = 20);
 				static void Seg2(const Cir&, const Pnt&, const Pnt&, int res = 20);
@@ -181,8 +185,31 @@ namespace vsr {
 		};
     
     struct Print {
+    
+        enum Style {
+            None = 0,
+            Smooth = 1,
+            Tension = 1 << 1,
+            Cycle = 1 << 2,
+            Dotted = 1 << 3,
+            Dashed = 1 << 4,
+            Fill  = 1 << 5
+        };
         inline static string Begin() { return "\\begin{tikzpicture}\n"; }
         inline static string End()   { return "\\end{tikzpicture}";}
+        
+        inline static string DrawEnd() { return ";"; }
+        inline static string PlotEnd() { return "};"; }
+
+        static string DrawBegin(Style s = None);        
+        static string PlotBegin(float tension, bool cycle, bool smooth = false);
+        
+        static string frame(const Frame& f, const Camera& cam);
+        static string Cube(const Frame& f, const Camera& cam);
+        static string Circle(const State& cir, const Camera& cam);
+        static string CircleSeg( const State& cir, const State&, const State&, const Camera& cam);
+        static string Coord(const State & s, const Camera& cam);
+        static string Line(const State& pa, const State& pb, const Camera& cam);
         static string Tikz( const State&, const Camera& );
         static string TikzSeg( const State&, const State&, const State&, const Camera& );
         static string  TikzSeg2( vector<State> pa, const Camera& cam);

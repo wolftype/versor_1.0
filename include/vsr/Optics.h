@@ -190,14 +190,14 @@ namespace vsr {
         //double grad; ///< Gradient Index
         
         /// Meet of ray and circle (entrance point)
-        Pnt meet(const Dll& ray) {
+        Pnt meet(const Dll& ray) const {
             Par p = (ray ^ dls ).dual();
             return (convex) ? Ro::split2(p) : Ro::split1(p);
         }
         
         
         /// Meet of Curved ray (pre-split) 
-        Pnt meet( const Cir& c ){
+        Pnt meet( const Cir& c ) const{
             
             Cir tc = c.dual() ^ dls; 
             
@@ -206,18 +206,18 @@ namespace vsr {
         }
         
         /// Meet of Curved Ray (split and decide which point to use later, or use for tangent)
-        Par meet2( const Cir& c ){
+        Par meet2( const Cir& c ) const{
             Cir tc = c.dual() ^ dls; 
             return ( tc.dual());
         }
         
-        bool hit(const Dll& ray){
+        bool hit(const Dll& ray) const{
             Par s = ( ray ^ dls ).dual();
             double t =  Ro::siz( s, true );
             return ( t <= 0 ) ? true : false;
         }
         
-        bool hit(const Cir& c){
+        bool hit(const Cir& c) const{
             Cir s = ( c.dual() ^ dls );
             double t =  Ro::siz( s, false );
             //cout << s << t << endl; 
@@ -226,37 +226,37 @@ namespace vsr {
         
         
         /// Tangent of incoming light ray's reflection at meet
-        Par tangent( const Dll& ray){
+        Par tangent( const Dll& ray) const{
             return Ta::at( ray.re(dls),  meet(ray), true );
         }
         
         /// Tangent of incoming curved light ray
-        Par tangent (const Cir& c){
+        Par tangent (const Cir& c) const{
             return Ta::at( c.re(dls), meet(c), false);
         }
         
         /// Reflection of a Straight Ray
-        Dll reflect (const Dll& ray) {
+        Dll reflect (const Dll& ray) const {
             return ( tangent(ray) ^ Inf(1) ).dual();
         }
         
         /// Reflection of a Circle (straight ray output)
-        Dll reflect (const Cir& c) {            
+        Dll reflect (const Cir& c) const {            
             return ( tangent(c) ^ Inf(1) ).dual();
         }
         
         /// Tangent Line on Surface at Meet of Ray
-        Dll tanline( const Dll& ray) {
+        Dll tanline( const Dll& ray) const {
 //            Par p = meet2(ray);
             return Ro::ax( Ta::at( dls, meet(ray), true ) ); //.dual() ^ Inf(1) ).dual();
         }
         
         /// Tangent Line on Surface at Meet of Circle
-        Dll tanline( const Cir& c) {
+        Dll tanline( const Cir& c) const {
             return ( Ta::at( dls, meet(c), true ) ^ Inf(1) ).dual();
         }       
         
-        Dll refract (const Dll& ray, bool exit = false) {
+        Dll refract (const Dll& ray, bool exit = false) const {
             Dll nray = ray;
             if (exit) nray = ray.conjugate();
             //Line TANGENT To Circle AT MEET POINT
@@ -278,14 +278,14 @@ namespace vsr {
         }
         
         /// Refract a circle back to a straight line by refracting the tangent line at the meet
-        Dll refract(const Cir& c, bool exit = false){
+        Dll refract(const Cir& c, bool exit = false) const {
             Pnt p = meet( c );
             
             return refract( Dll( (Ta::at( c, p, false ) ^ Inf(1) ).dual() ), exit );
         }
         
         /// Bend incoming straight line ray by amt (refracts the ray first by ridx, then bends it by amt)
-        Cir bend (const Dll& ray, double amt ){
+        Cir bend (const Dll& ray, double amt ) const {
             
             Dll refr = refract(ray);
             Par p = tangent(ray);
@@ -294,7 +294,7 @@ namespace vsr {
         }
         
         /// Bend incoming curved line ray by amt (refracts the ray first by ridx, then bends it by amt)
-        Cir bend (const Cir& c, double amt ){
+        Cir bend (const Cir& c, double amt ) const {
             
             Dll refr = refract(c);
             Par p = tangent(c);
@@ -326,7 +326,7 @@ namespace vsr {
         Cir bend;   //circle bend through (tmp)
         Cir meet;   //circle meet of surfaces;
         
-        double mDist, grad;
+        double mDist, mGrad, mRatio;
         
         bool gradient; ///simple circle gradient for now
         
@@ -337,8 +337,43 @@ namespace vsr {
         Type type;
         
         
-        Lenz ( Type s = Biconvex, bool g = false) : type(s), gradient(g), mDist(1), grad(0) { position(); }
-        
+        Lenz ( Type s = Biconvex, bool g = false) : type(s), gradient(g), mDist(1), mGrad(0) { position(); }
+  
+        Lenz( const Frame& f ) : type(Biconvex), gradient(0), mGrad(0), mDist(1) {
+            set(f);
+        }
+      Lenz( const Frame& f, float r, float g, float dist, float rat ) : type(Biconvex), gradient(0), mGrad(0), mDist(1) {
+        set(f,r,g,dist,rat);
+    }      
+        Lenz& set( const Frame& f){
+            pos() = f.pos();
+            rot ( f.rot() );
+            mScale = f.scale();
+            position();
+            return *this;
+        }
+        Lenz& set( const Frame& f, float r, float g, float dist, float rat){
+            ridx(r);
+            mGrad = g;
+            mDist = dist;
+            pos() = f.pos();
+            rot ( f.rot() );
+            mScale = f.scale();
+            
+            ratio(rat);
+            position();
+            return *this;
+        }   
+        Lenz& set( float r, float g, float dist, float rat) {
+            ridx(r);
+            mGrad = g;
+            mDist = dist;
+            
+            ratio(rat);
+            position();
+            return *this;      
+        }
+                  
         void ridx( double f) { os[0].ridx = f; os[1].ridx = f; }
         
         void dist ( double d ) { mDist = d; position(); }
@@ -427,6 +462,14 @@ namespace vsr {
             
         }
         
+        void drawMeet(){
+            meet.draw(0,0,0);
+        }
+        
+        void drawLeft(){
+//            Draw::SegPnts( 
+        }
+        
         void drawPath(){
             Glyph::Line( Vec(pa), Vec(pb) );
         }
@@ -436,7 +479,7 @@ namespace vsr {
         }
         
         /// Calculate straight path 
-        Dll path(const Dll& ray){
+        Dll path(const Dll& ray) {
             
             pa = os[0].meet(ray);
             Dll bray = os[0].refract(ray);
@@ -446,14 +489,172 @@ namespace vsr {
         }
         
         /// Calculate curved path and return straight line out
-        Dll curve(const Dll& ray){
+        Dll curve(const Dll& ray) {
             pa = os[0].meet(ray);
-            bend = os[0].bend(ray, grad);
+            bend = os[0].bend(ray, mGrad);
             
             pb = os[1].meet(bend);
             return os[1].refract(bend, true);
         }   
         
+    };
+    
+    //trajectory of light ray through a lens
+    struct Trajectory{
+    
+//        //Circle Segment
+//        struct Seg {
+//            Seg(int idx) : id(idx) {}
+//            const int id;
+//            vector<State> states;
+//        };
+        
+        struct CirSeg  {
+            CirSeg(const Cir& c, const Pnt& _pa, const Pnt& _pb) : cir(c), pa(_pa), pb(_pb){}
+            Cir cir;
+            Pnt pa, pb;
+         
+        };
+        struct LinSeg  {
+            LinSeg(const Pnt& _pa, const Pnt& _pb) : pa(_pa), pb(_pb){}
+            Pnt pa, pb;
+        };
+    
+        bool bMet = 0;
+        
+        vector<Pnt> pnt;
+        vector<Dll> dll;
+        vector<LinSeg> refseg;
+        vector<LinSeg> linseg;
+        vector<CirSeg> cirseg;
+        //vector<Seg*> seg;
+        
+//        void draw(){
+//            IT(seg.size())
+//                switch( seg[i] -> id ){
+//                    case _CIR:
+//                    Draw::SegPnts(seg[i] -> states[0], seg[i] -> states[1], seg[i] -> states[2] );
+//                     break;
+//                    case _LIN:
+//                    Glyph::Line( Vec( seg[i] -> states[0] ), Vec ( seg[i] -> states[1] ) );
+//                    break;
+//                }
+//            END
+//        }
+        void draw(){
+            int it = 0;
+            IT(cirseg.size())
+                Glyph::Line( Vec( linseg[i].pa ), Vec (linseg[i].pb ) );
+                Draw::SegPnts( cirseg[i].cir, cirseg[i].pa, cirseg[i].pb );
+                it++;
+            END 
+            if (bMet) Glyph::Line( Vec( linseg[it].pa), Vec( linseg[it].pb ) );
+            
+            IT(refseg.size())
+                Glyph::Line( Vec( refseg[i].pa ), Vec (refseg[i].pb) );
+            END
+        }
+        
+        void print(const Camera& cam){
+            string s = Print::Begin();
+            int it = 0;
+            IT(cirseg.size())
+                s += Print::PlotBegin(1, false);
+                s += Print::CircleSeg( cirseg[i].cir, cirseg[i].pa, cirseg[i].pb, cam ); 
+                s += Print::PlotEnd();
+              //  s += Print::PlotBegin(0, false);
+                s += Print::Line( linseg[i].pa, linseg[i].pb, cam );
+              //  s += Print::PlotEnd();
+                it ++;
+            END
+                s += Print::Line( linseg[it].pa, linseg[it].pb, cam );
+                
+            s += Print::End();
+            
+            cout << s << endl;
+            
+        }
+        
+        void printReflections(const Camera& cam){
+            string s = Print::Begin();
+             IT(refseg.size())
+                s += Print::Line( ( refseg[i].pa ), (refseg[i].pb), cam );
+            END
+            s += Print::End();
+        }
+            
+//        void calc( const Pnt& start, const Dll& d, Lenz& lens){
+//            
+//        }
+        
+        
+        void calc(const Pnt& start, const Dll& d, Lenz * lens, int num, Dlp end){
+            
+            Dll rray;
+            Dll oray = d;
+            Pnt pos = start;
+            Pnt npos, rpos;
+            Vec dpos;
+            
+            bool * bVisited = new bool[num];
+            
+            double x = start[0];
+
+            bool meet = true;
+            bool evermet = false;
+            int max = 100; int it = 0;
+            
+            
+            while ( meet && (it < max) ) {
+            
+                it++;
+                meet = false;
+                int idx = 0; double dist = 10000;
+                
+                ITJ(j, num )
+                
+                if (bVisited[j]) continue;              // have we already visited this lens?
+                
+                if ( lens[j][0].hit( oray ) ) {
+                    
+                    Pnt p = lens[j][0].meet( oray );
+                    bool valid = ( Op::sca( p <= Ro::sur( lens[j].meet) ) > 0 ) ? 1 : 0; 
+                    
+                    if ( valid && p[0] > x ) {
+                        meet = true;
+                        double a = sqrt( fabs( Op::sca( start <= p ) ) );
+                        if (a < dist) { dist = a; idx =j; } 
+                    }
+                }
+                END 
+                
+                if (meet ) {
+                    
+                    bVisited[idx] = true;
+                    rray = lens[idx][0].reflect(oray);
+                    
+                    oray = lens[idx].curve(oray);                       //curve and spit out new ray
+                    npos = lens[idx].pa; x = lens[idx].pb[0];
+                    //rpos = Ro::split1( ( rray ^ lens[idx].bound().dils(1.5) ).undual() );
+                    dpos = Vec( Fl::dir( rray, true ) );
+                    //Add Circle to List
+                    refseg.push_back( LinSeg(npos, npos - dpos) );
+                    linseg.push_back( LinSeg(pos, npos) );                    
+                    cirseg.push_back( CirSeg( lens[idx].bend, lens[idx].pa, lens[idx].pb) );
+                    
+                    pos = lens[idx].pb;
+                   // if (idx == num-1) bMet = true;
+                }
+            
+            }
+            
+            if (bMet){
+                npos = Ro::dll_meet_dlp(oray, end);
+                linseg.push_back( LinSeg(pos, npos) );
+            }
+            
+            if (bVisited) delete[] bVisited;
+        }
     };
     
     /*! Two Optical Surfaces */
@@ -559,7 +760,7 @@ namespace vsr {
         }
         
         /// Calculate straight path 
-        Dll path(const Dll& ray){
+        Dll path(const Dll& ray) {
             
             pa = enter().meet(ray);
             Dll bray = enter().refract(ray);
@@ -569,7 +770,7 @@ namespace vsr {
         }
         
         /// Calculate curved path and return straight line out
-        Dll curve(const Dll& ray){
+        Dll curve(const Dll& ray) {
             pa = enter().meet(ray);
             bend = enter().bend(ray, grad);
             

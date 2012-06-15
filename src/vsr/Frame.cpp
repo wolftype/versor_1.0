@@ -81,6 +81,14 @@ void Frame :: pop(){
 	Draw :: Pop();
 }
 
+void Frame :: drawLite(){
+//    push();
+        Glyph::Line(Vec(pos()), x());
+        Glyph::Line(Vec(pos()), y());
+        Glyph::Line(Vec(pos()), z());
+//    pop();
+}
+
 void Frame :: drawX(float r, float g, float b, float a ){
     push();
         mX.draw(r,g,b,a);

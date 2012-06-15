@@ -22,6 +22,7 @@
 namespace vsr {
     
 	class Vec;
+    class State;
 	class Camera;  
     
     using std::string;
@@ -269,6 +270,10 @@ namespace vsr {
         void disablePreset();
         
         //			static int getError();
+        //FIXED PIPELINE STUFF
+         void Line(const vsr::State &a, const vsr::State &b);
+         void Tri(const vsr::State &a, const vsr::State &b, const vsr::State &c);
+         void Quad(const State& a, const State& b, const State& c, const State& d);
 		
     
     inline void GL::ability(Ability a, bool v) { v ? enable(a) : disable(a); }

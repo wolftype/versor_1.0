@@ -236,9 +236,9 @@ void Glyph :: Segment(float angle, float radius, bool sign, int res){
 
 	glBegin(GL_LINE_STRIP);
 		
-		for (int i = 0; i < num; ++ i){
+		for (int i = 0; i <= num; ++ i){
 
-			float rad = (sign?PI:0) + ( angle * i / num ) - angle/2 ;
+			float rad = (sign?0:0) + ( angle * i / num ) - angle/2 ;
 			Vec2<> t ( cos(rad), sin(rad) );
 			t *= radius;
 			glVertex2f(t.x, t.y);			
@@ -272,6 +272,28 @@ void Glyph :: Segment2(float angle, float angle2, float radius, int res){
 	
 }
 
+//like segment, but with offset
+void Glyph :: Segment3(float angle, float off, float radius, bool sign, int res){
+
+	glNormal3f(0, 0, 1);
+
+	int num = res;// * fabs(angle);   //floor(20 * PI / (1 + ( PI - angle ) ));
+
+	glBegin(GL_LINE_STRIP);
+		
+		for (int i = 0; i <= num; ++ i){
+
+//			float rad = off + (sign?PI:0) + ( angle * i / num ) - angle/2 ;
+			float rad = off + ( angle * i / num ) - angle/2 ;
+			Vec2<> t ( cos(rad), sin(rad) );
+			t *= radius;
+			glVertex2f(t.x, t.y);			
+			
+		}
+
+	glEnd();
+	
+}
 
 void Glyph ::  DashedSegment (float angle, float radius, bool sign, int res){
 
@@ -313,7 +335,27 @@ void Glyph::DashedSegment2(float angle, float angle2, float radius, int res){
 	glEnd();
 
 }
+//like segment, but with offset
+void Glyph :: DashedSegment3(float angle, float off, float radius, bool sign, int res){
 
+	glNormal3f(0, 0, 1);
+
+	int num = res * fabs(angle);   //floor(20 * PI / (1 + ( PI - angle ) ));
+
+	glBegin(GL_LINES );
+		
+		for (int i = 0; i < num; ++ i){
+
+			float rad = off + (sign?PI:0) + ( angle * i / num ) - angle/2 ;
+			Vec2<> t ( cos(rad), sin(rad) );
+			t *= radius;
+			glVertex2f(t.x, t.y);			
+			
+		}
+
+	glEnd();
+	
+}
 void Glyph :: DirSegment (float angle, float radius, bool clockwise, int res){
 
 	glNormal3f(0, 0, 1);
@@ -526,7 +568,8 @@ void Glyph :: Point(const Vec3<>& v) {
 }
 
 void Glyph :: Cone() {
-	glutWireCone(.1,.2,10,3);
+    glTranslated(0,0,-.1);
+	glutWireCone(.05,.1,2,1);
 }
 
 void Glyph :: Tri(bool down) {
@@ -672,10 +715,35 @@ void Draw :: Seg(const Cir& K, double t, bool dir, int res){
 	                           
 	bool sign = Op::sn(b, Biv::xy);
 	
+    if (siz != 0){
 	glPushMatrix();
 		glTranslated(v[0],v[1],v[2]);
 		glRotated(v4.w, v4.x, v4.y, v4.z);
 		siz > 0 ? Glyph::Segment(t, rad, sign, res) : Glyph::DashedSegment(t,rad, sign, res);
+	glPopMatrix();
+    }
+
+}
+
+//like seg, but with offset
+void Draw :: SegOff(const Cir& K, double t, double off, bool dir, int res){
+
+    //ORIENTATION
+	Biv b = Biv(Ro::dir(K,false));							//Extract Euclidean Bivector
+	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
+    Vec4<> v4 = Op::aa(r);  
+
+    //POINT POSITION AND RADIUS
+	Pnt v = Ro::cen(K);                                 //Center of Circle
+	double siz = Ro::siz(K,false);                       //Squared Radius
+	double rad = sqrt ( fabs (siz) );                   //Radius
+	                           
+	bool sign = Op::sn(b, Biv::xy);
+	
+	glPushMatrix();
+		glTranslated(v[0],v[1],v[2]);
+		glRotated(v4.w, v4.x, v4.y, v4.z);
+		siz > 0 ? Glyph::Segment3(t, off, rad, sign, res) : Glyph::DashedSegment3(t, off, rad, sign, res);
 	glPopMatrix();
 
 }
@@ -971,7 +1039,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		}
 		case _PLN:
 		{
-			Drv d	= Fl::dir( s );
+			Drv d	= Fl::dir( s, false );
 			Sph v	= Fl::loc( s , Ori(1), false );
 			Rot r = Gen::ratio( Vec::z, Op::dle( Biv( s ) ).unit() );
 			glTranslated(v[0],v[1],v[2]);
@@ -993,7 +1061,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		}
 		case _LIN:
 		{
-			Drv d	= Fl::dir( s );
+			Drv d	= Fl::dir( s, false );
 			Sph v	= Fl::loc( s , Ori(1), false );
 			glTranslated(v[0],v[1],v[2]);
 			Glyph::Line(d * 10, d * -10);			
@@ -1001,7 +1069,7 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		}
 		case _DLL:
 		{
-			Drv d = Fl::dir( s ,1);
+			Drv d = Fl::dir( s , true);
 			Sph v = Fl::loc( s , Ori(1), 1);
 			glTranslated(v[0],v[1],v[2]);
 			Glyph::DashedLine(d * 10, d * -10);			
@@ -1080,7 +1148,160 @@ void Draw :: Pop(){
 	glPopMatrix();
 }
 
+////////////// VERY PRETTY PRINTING USING TIKZ ///////////////////
+string Print :: DrawBegin(Style style){
+
+    stringstream od;
     
+    od <<  "\\draw  [";
+    
+    if (style & Dashed) od << "dashed";
+    if (style & Dotted) od << "dotted";
+    if (style & Fill) od << "fill";
+
+    od << "]";
+    return od.str();
+}
+
+string Print :: PlotBegin(float tension, bool smooth, bool cycle){
+ 
+        stringstream od;
+        od << "plot[tension = ";
+        od << tension;
+        if (smooth) od << ", smooth "; 
+        if (cycle) od << "cycle";
+        od << "] ";
+        od << "coordinates{";
+        
+       return od.str(); 
+        
+}
+    string Print :: Coord(const State & s, const Camera& cam){
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+        stringstream od;
+        Vec vo = GL::project( s[0], s[1], s[2], cam);
+        od << "(" << vo[0] * rw << "," << vo[1] * rh << ")";
+        
+        return od.str();
+    }
+    
+    string Print :: Line(const State& pa, const State& pb, const Camera& cam){
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+        stringstream od;
+        Vec vo = GL::project( pa[0], pa[1], pb[2], cam);
+        Vec vb = GL::project( pa[0], pa[1], pb[2], cam);
+        od << Print::PlotBegin(0, false);
+        od << "(" << vo[0] * rw << "," << vo[1] * rh << ")";
+        od << "(" << vb[0] * rw << "," << vb[1] * rh << ")";
+        od << Print::PlotEnd();
+        return od.str();
+    }
+
+    string Print :: Circle(const State & s, const Camera& cam){
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+           static Vec v[4]; static Vec vo[4];
+           
+        Par a = Ro::par_cir(s, 0);
+        Par b = Ro::par_cir(s, PIOVERTWO);
+        
+        vector<Pnt> pa = Ro::split(a);
+        vector<Pnt> pb = Ro::split(b);
+        
+       v[0] = Ro::null_cen(pa[0]);
+       v[2] = Ro::null_cen(pa[1]);
+       v[1] = Ro::null_cen(pb[0]);
+       v[3] = Ro::null_cen(pb[1]);
+
+        stringstream od;
+       
+       od << Print::PlotBegin(1,true);
+       
+       IT(4) 
+        vo[i]= GL::project( v[i][0], v[i][1], v[i][2], cam);
+        
+        od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
+        //ts += od.str();
+       END
+    
+        od << Print::PlotEnd();
+        
+        return od.str();
+    }
+    
+    string Print :: frame(const Frame& f, const Camera& cam){
+         double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+         static Vec v[4]; static Vec vo[4];
+         stringstream od;
+          
+        v[0] = f.pos();
+        v[1] = f.x(); 
+        v[2] = f.x() + f.y();
+        v[3] = f.y();
+        
+        IT(4)
+        vo[i] = GL::project( v[i][0],v[i][1],v[i][2],cam); 
+        END 
+        
+         return od.str();
+    }
+    
+    string Print :: Cube( const Frame& f, const Camera& cam){
+        double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+        static Vec v[8]; static Vec vo[8];
+        
+        stringstream od;
+        v[0] = f.pos();
+        v[1] = f.x(); 
+        v[2] = f.x() + f.y();
+        v[3] = f.y();
+
+        v[4] = f.pos() + f.z();
+        v[5] = v[4] + f.x();
+        v[6] = v[5] + f.y();
+        v[7] = v[4] + f.y();
+                
+        IT(8)
+        vo[i] = GL::project( v[i][0],v[i][1],v[i][2],cam); 
+        
+        END 
+        
+        IT(4)
+        od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
+        END
+        od << "(" << vo[0][0] * rw << "," << vo[0][1] * rh << ")";
+        IT(4)
+        od << "(" << vo[i+4][0] * rw << "," << vo[i+4][1] * rh << ")";
+        END
+        od << "(" << vo[3][0] * rw << "," << vo[3][1] * rh << ")";
+        IT(4)
+        od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
+        END
+        
+        return od.str();
+    }
+        
+    string Print :: CircleSeg( const State& cir, const State& pa, const State& pb, const Camera& cam){
+                
+                double  rw = 5.0 / cam.width(); double rh = 5.0 / cam.height();
+                             
+                Dlp dlp = pa - pb;
+                Par par = ( dlp ^ cir.dual() ).dual();
+                Pnt np = Ro::split2( par );
+                
+                Vec va = GL::project( pa[0], pa[1], pa[2], cam);
+                Vec vb = GL::project( pb[0], pb[1], pb[2], cam);
+                Vec vc = GL::project( np[0], np[1], np[2], cam);
+                
+                stringstream od;
+                
+                od << Print::PlotBegin(0, false);
+                od << "(" << va[0] * rw << "," << va[1] * rh << ")";
+                od << "(" << vc[0] * rw << "," << vc[1] * rh << ")";
+                od << "(" << vb[0] * rw << "," << vb[1] * rh << ")";
+                od << Print::PlotEnd();
+                
+                return od.str();
+    }
     
     string Print :: Tikz( const State & s, const Camera& cam){
         

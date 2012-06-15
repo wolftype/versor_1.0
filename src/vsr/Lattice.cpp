@@ -481,7 +481,7 @@ namespace vsr {
 		Vxl vxl = vxlPnt(p);
 		T tdx;
 		for (int i = 0; i < 8; ++i){
-			tdx += mData[ vxl[i] ] * ( p <= grid ( vxl[i] ) );
+			tdx += mData[ vxl[i] ] * ( 1.0 / Ro::dst ( p , grid ( vxl[i] ) ) );
 		}
 		return tdx;
 	}

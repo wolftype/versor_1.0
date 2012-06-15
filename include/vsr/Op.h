@@ -510,7 +510,7 @@ class Fl {
 		/*! Point on Plane or Line f Closest to Point p, Direct or Dual Flat */
 		static State loc( const State& f, const State& p, bool dual);
 		/*! Direction of Flat, Dual or Direct */
-		static State dir( const State&, bool dual = 0);
+		static State dir( const State&, bool dual);
 		/*! Unit Conversion */
 		static State uni( const State&);
 		/*! Weight of Flat, Dual or Direct */

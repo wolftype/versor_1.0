@@ -533,9 +533,11 @@ namespace vsr {
 			virtual void push();
 			virtual void pop();			
 
-            void drawX(float r, float g, float b, float a = 1.0);
-            void drawY(float r, float g, float b, float a = 1.0);
-            void drawZ(float r, float g, float b, float a = 1.0);
+            void drawLite();
+            void drawBox();
+            void drawX(float r=1.0, float g=1.0, float b=1.0, float a = 1.0);
+            void drawY(float r=1.0, float g=1.0, float b=1.0, float a = 1.0);
+            void drawZ(float r=1.0, float g=1.0, float b=1.0, float a = 1.0);
             virtual void draw(float r, float g, float b, float a = 1.0);
             virtual void draw(){ draw(1,1,1); }
 			void drawBound() { bound().draw(); }	
