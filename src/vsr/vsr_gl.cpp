@@ -387,7 +387,7 @@ namespace vsr {
         //	GL :: specularMat(.2,.2,.2,0.5);			
         GL :: emissionMat(.2,.2,.2,0.5);
         
-        lightPos(0,0,0);
+        lightPos(0,0,5);
         
     }
     
@@ -396,8 +396,25 @@ namespace vsr {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_LIGHTING);
     }
+
+
+    void GL :: Line(const vsr::State &a, const vsr::State &b){
+        glVertex3f( a[0], a[1], a[2]);
+        glVertex3f( b[0], b[1], b[2]);
+    }
     
-    
+    void GL :: Tri(const vsr::State &a, const vsr::State &b, const vsr::State &c){
+        glVertex3f( a[0], a[1], a[2]);
+        glVertex3f( b[0], b[1], b[2]);
+        glVertex3f( c[0], c[1], c [2]);
+    }
+        
+    void GL :: Quad(const State &a, const State &b, const State &c, const State &d){
+        glVertex3f( a[0], a[1], a[2]);
+        glVertex3f( b[0], b[1], b[2]);
+        glVertex3f( c[0], c[1], c [2]);
+        glVertex3f( d [0], d[1], d [2]);
+    }
     
     //	glLineWidth(1.2);
     //	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);

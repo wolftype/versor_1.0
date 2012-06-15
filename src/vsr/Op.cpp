@@ -1289,7 +1289,7 @@ State Ro::par_dls(const State& dls, double u, double v){
     return dls_flat( dls, vec );
 }
 State Ro::pnt_dls(const State& dls, double u, double v){
-    return Ro::split1( par_dls(dls,u,v) );
+    return Ro::null( Ro::split1( par_dls(dls,u,v) ) );
 }    
 /*! Conic from Vec 
     If 1 > ecc > 0 then elliptic, 

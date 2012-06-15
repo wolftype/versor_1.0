@@ -12,6 +12,9 @@
 #include "vsr_interp.h"
 #include "vsr_math.h"
 #include "GLVInterfaceImpl.h"
+#include "MotorCouple.h"
+#include "Optics.h"
+#include "Stat.h"
 
 
 using namespace vsr;
@@ -354,6 +357,252 @@ void permutations(GLVApp& app){
     if (bDraw) { a.draw(1,0,0,.2);  b.draw(1,0,0,.2); }
 }
 
+void circular(GLVApp& app){
+    
+    static Dls dls = Ro::dls3(0,0,0);    
+   
+    
+    static Frame frame( PT(0,0,0), Rot(1,0,0,0) );
+    app.interface.touch(frame);
+    
+    static bool bPrint,bDraw;
+    static float scale;
+    
+    static float period, pitch, numlink;
+    
+    static float spread, iter, iter2,num, length, hspread, hspread2;
+    static bool bnumlinks;
+    
+    SET
+        app.gui(bPrint,"print")(bDraw, "draw");
+        app.gui(scale);
+        app.gui(period, "period",-PI,PI)(pitch, "pitch", -PI, PI)(numlink,"numlink",1,100);
+        app.gui(spread, "spread",0,10)(iter,"iter",0,100)(num, "num",1,100)(iter2,"iter2",1,100);
+        app.gui(length, "length", 4,20)(hspread, "hspread",1,20)(hspread2, "hspread2",0,100);
+        app.gui(bnumlinks);
+    END
+    
+    static bool bNext = 0;
+    
+    if (!bNext && app.interface.keyboard.code == 'p') {
+        bPrint = true;
+        bNext = 1;
+    } 
+    
+    if (app.interface.keyboard.code == 'o') bNext = 0;
+    
+    int l = length;
+
+    string s = Print::Begin(); 
+
+    ITJ(q, iter2)VALJ(q,iter2)
+    
+        
+        double qq = t;
+        Rot r = Gen::rot( Biv(qq*PI,0,0) );
+        Vec v = (Vec::x * hspread2).sp( r) ;
+        Frame f ( Ro::null(v), r );
+        f.push();
+        
+        
+        int nc = numlink * (bnumlinks ? qq : 1 );
+        Chain k(nc+3);
+        
+        if (bDraw) frame.draw();
+
+        for (int j = 0; j < iter; ++j ){    
+            
+            double t  = (1.0 * j)/iter;
+            
+
+            
+            Pnt sp = app.mouse().origin;//.trs( 0, - (spread *qq ) / 2.0 + ( spread * qq) * t, 0);
+            //sp.draw();
+            
+            for (int i = 0; i < num; ++i){
+              
+               double tt = ( 1.0 * i ) / num;
+
+               Pnt p = Ro::pnt_dls( Ro::dls3(0,0,0), 0, tt * PI);//.trs( ( -v + v * 2.0 * tt) );
+               k[0].pos() = p;
+               
+               Twist tw; tw.along(frame.yld(), period , pitch );
+               
+               Pnt target = sp.mot( tw.dll() * tt * PIOVERTWO );
+               
+               k.fabrik(target, k.num()-1, 0 );
+               glColor3f(0,1,1);
+                k.drawLinkages(0);
+                
+                if (bPrint) {
+                    s += Print::DrawBegin( );
+                    s += Print::PlotBegin(0,0);
+                    ITJ(m,k.num())  s += Print::Coord( k[m].pos(), app.camera() ); END 
+                    s += Print::PlotEnd();
+                }
+            
+            }
+            
+           
+        }
+        
+       
+        f.pop();
+    END 
+       
+     s+= Print::End();
+     if (bPrint) { cout << s << endl; bPrint = false; }       
+}
+
+
+void stochastic(GLVApp& app){
+    Rand::Seed(10);
+
+    static int nc = 5;
+    static float num = 10;
+    static float spread, prob, period, pitch;
+    static bool bDraw, bPrint;
+    
+    SET
+        app.gui(nc, "nc", 1,100);
+        app.gui(num, "num", 1,100);
+        app.gui(spread,"spread",0,10);
+        app.gui(prob, "prob");
+        app.gui(period, "period", -PI, PI)(pitch,"pitch",-PI, PI);
+        app.gui(bDraw);
+        app.gui(bPrint);
+//     IT1(nc)
+//        ch[i].alloc(num); 
+//        ch[i].first().pos() = PT((-1.0 + 2.0 * t) * spread,0,0);   
+//    END  
+
+  
+    
+
+    END 
+    
+    Chain * ch = new Chain[nc];
+    IT1(nc)
+        ch[i].alloc(num); 
+    END  
+    
+    Pnt p = app.mouse().origin;
+     string s = Print::Begin(); 
+    static Frame frame(PT(0,0,0), Rot(1,0,0,0));
+    app.interface.touch(frame);
+    if (bDraw) frame.draw();
+    IT1(nc)
+        
+        double tx = -1.0 + 2.0 * t;
+        Pnt target = Ro::null_cen( PT(0,0,0).sp( frame.ppx(tx * pitch) ) );
+        if (bDraw) target.draw();
+    
+        Twist tw; tw.along(DLN(0,1,0), period, pitch);
+        ch[i].first().pos() = Ro::pnt_dls( Ro::dls3(0,0,0, spread), 0, t * PI);//PT((-1.0 + 2.0 * t) * spread,0,0);  
+//        ch[i].fabrik( p.mot(tw.dll() * t), num-1, 0); 
+         ch[i].fabrik( target, num-1, 0); 
+
+        ch[i].drawLinkages(0);
+        
+            if (bPrint) {
+        s += Print::DrawBegin( );
+        s += Print::PlotBegin(0,0);
+        ITJ(m,ch[i].num())  s += Print::Coord( ch[i][m].pos(), app.camera() ); END 
+        s += Print::PlotEnd();
+    }
+        
+    END 
+    
+         s+= Print::End();
+     if (bPrint) { cout << s << endl; bPrint = false; }   
+
+ //random connections
+
+//    IT(nc)
+//        
+//        ITJ(j, num)
+//            
+//            ITJ(k,nc)
+//            if (i == k) continue;
+//            ITJ(l,num)
+//                if ( Stat::Prob( prob ) ){
+//                    Chain m(num);
+//                    m.first().pos() = ch[i][j].pos();
+//                    m.fabrik( ch[k][l].pos(), num-1, 0);
+//                    m.drawLinkages(0);
+//                }
+//            END 
+//            END 
+//        END    
+//    
+//    END  
+    
+    if (ch) delete[] ch;
+    
+   // if (k) delete[] k;
+}
+
+void parabolic(GLVApp& app){
+    
+    static Dls dls = Ro::dls3(0,0,0);     
+    static Frame frame( PT(0,0,0), Rot(1,0,0,0) );
+    app.interface.touch(frame);  
+    
+    Par pyz = frame.pxy();    Par pxz = frame.pxz();
+
+    static Chain k(5);
+    
+    static bool bPrint, bDraw, bCalc;
+    
+    static float scale;    
+    static float period, pitch;    
+    static float spread, iter, num;
+        
+    SET
+        app.gui(bPrint, "print")(bDraw, "draw");
+        app.gui(scale);
+        app.gui(period, "period",-PI,PI)(pitch, "pitch", -PI, PI);
+        app.gui(spread, "spread",1,10)(iter,"iter",1,100)(num, "num",1,100);
+        app.gui(bDraw,"draw")(bCalc,"calc");
+    END
+    
+    if (bDraw) frame.draw();
+
+    
+    string s = Print::Begin();
+    
+    for (int i = 0; i<= num; ++i){    
+        double u = 1.0 * i/num;
+    
+        Dls td = dls.sp( Gen::tpar( pyz * ( -1.0+ 2.0*u ) ) );
+        Pnt target2 = Ro::null_cen(td);
+
+        Cir c = Ro::dls_flat(td, Biv::xz);         
+        if (bDraw) c.draw();
+                
+        Pnt p = Ro::pnt_cir(c, u * TWOPI);
+        k[0].pos() = p;
+
+        if (bCalc){
+            Twist tw; tw.along(Ro::ax(c), period, pitch);
+           k.fabrik(target2, k.num()-1, 0 );
+           k[i].scale(scale);
+           k.drawLinkages(0); 
+        }
+        
+        if (bPrint) {
+            s += Print::DrawBegin( );
+            s += Print::PlotBegin(0,0);
+            IT(k.num())  s += Print::Coord( k[i].pos(), app.camera() ); END 
+            s += Print::PlotEnd();                
+        }
+    
+    } 
+        
+    s+= Print::End();
+    if (bPrint) { cout << s << endl; bPrint = false; }       
+}
+
 void GLVApp :: onDraw(){
 
   //robot(*this);
@@ -362,7 +611,13 @@ void GLVApp :: onDraw(){
  // chain(*this);
  // ratios(*this);
     
-  permutations(*this);
+//  permutations(*this);
+
+ //   parabolic(*this);
+  //  circular(*this);
+//    circularWithOptics(*this);
+
+    stochastic(*this);
 }
 
 

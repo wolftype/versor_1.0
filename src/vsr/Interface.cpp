@@ -35,7 +35,8 @@ namespace vsr {
                 dls = Ro::sur(s);
                 break;
             case _PNT:
-                dls = Ro::dls_vec(Vec(s), .2);
+                //dls = Ro::dls_vec(Vec(s), .2);
+                dls = Ro::dls_pnt( Ro::null_cen(s), .2);
                 break;
             case _LIN:
             case _PLN:
@@ -301,7 +302,7 @@ namespace vsr {
                 
                 //Drag towards or away from element
                 int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                ts = Op::sp( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
+                ts = Op::sp( ts, Gen::dil_pnt( Ro::null_cen(pos), mouse.drag.norm() * t * neg ) );
                 break;
             }
             case 'g': //translate
