@@ -79,7 +79,7 @@ void testProjector(GLVApp& app){
     d[2] = src.z().rot( src.xz() * -hs + src.yz() * -vs);
     d[3] = src.z().rot( src.xz() * hs + src.yz() * -vs );
 
-    IT(4) 
+    ITJ(i,4) 
         Dll td = ( src.pos() ^ d[i] ).dual(); 
         td.draw();
         
@@ -88,7 +88,7 @@ void testProjector(GLVApp& app){
         p[i].draw(1,0,0);
     END
 
-    IT(4)        
+    ITJ(i,4)        
         int idx = (i<3)? i+1 : 0;
     
         Dlp dlp = ( p[i] ^ p[idx] ^ src.pos() ^ INF ).dual();

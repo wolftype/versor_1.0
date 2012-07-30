@@ -28,7 +28,7 @@ void distributions(GLVApp& app){
     
     int n = 100;
     
-    IT(n) VAL(n)
+    ITJ(i,n) VAL(n)
         
         double tmp = Eval::Gaussian( t, b, c, a);
         if (Stat::Gaussian( t, b, c, a) ) Glyph::Point(Vec(5 * t, tmp, 0));
@@ -50,7 +50,7 @@ void powerlaw(GLVApp& app){
     int numbins = 100;
     int * bins = new int[numbins];
     
-    IT(numbins) bins[i] = 0; END
+    ITJ(i,numbins) bins[i] = 0; END
     
     static float scale,shape;
     SET
@@ -70,10 +70,10 @@ void powerlaw(GLVApp& app){
         
     END 
     
-    //IT(numbins)  cout << bins[i] << endl; END
+    //ITJ(i,numbins)  cout << bins[i] << endl; END
 
     glBegin(GL_LINE_STRIP);
-    IT(numbins)
+    ITJ(i,numbins)
         glVertex3f( i * .01, 2.0 * bins[i] / num, 0);
     END 
     glEnd();
@@ -119,7 +119,7 @@ int main(int argc, char * const argv[]) {
 
     
     Rand::Seed();
-    IT(10)
+    ITJ(i,10)
     //cout << RAND_MAX << endl; 
     cout << fixed << Rand::Normal(2,.2) << endl;
     //cout << Rand::Pareto(10,1) << endl; 

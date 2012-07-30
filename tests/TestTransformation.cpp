@@ -51,7 +51,7 @@ void trv(GLVApp& app){
     
     int num = 100;
     
-    IT(num) 
+    ITJ(i,num) 
     
         double t = 1.0 * i/num;
 //        Tnv tnv( fr.x() * fr.scale() * t );
@@ -90,7 +90,7 @@ void tangentFrame(GLVApp& app){
     int num = 10;
     
     //TEST    
-    IT(num+1)
+    ITJ(i,num+1)
         double t = 1.0 * i/num;
         static Cir c;
         
@@ -141,7 +141,7 @@ void circleSegments(GLVApp& app){
     
     static Frame f; //app.interface.touch(f);
         
-    IT(num)
+    ITJ(i,num)
         double t = 1.0 * i/num;
         
         cir[i] = test.sp( f.ppx( t*f.scale()*vAmt ) );          //SPIN CIR BY FRAME PP GENERATOR
@@ -184,7 +184,7 @@ void tangentSpace(GLVApp& app){
     
     static Lattice<Dls> f(4,4,4);
     
-    //IT(f.num()) f.grid(i).draw(); END
+    //ITJ(i,f.num()) f.grid(i).draw(); END
     static float amt;
     SET
         app.gui.add(DIALER, "amt", amt, -10, 10);
@@ -210,7 +210,7 @@ void tangentSpace(GLVApp& app){
     //ts.dual().draw(0,1,1);
     p.draw();
     
-    IT(10)
+    ITJ(i,10)
         VAL(10)
     Cir c3 = CXY(1) * (1- t) + ts * t;
         Cir c1 = CXY(1).re( ts.dual() * amt );
@@ -252,7 +252,7 @@ void boost (GLVApp& app){
     Par par(pp);
     
     const int num = 100;
-    IT(num)
+    ITJ(i,num)
     VAL(num)
         Pnt p = a.sp( Gen::tpar(par * t) );
         Ro::null_cen(p).draw();
@@ -280,7 +280,7 @@ void series(GLVApp& app){
     
     c.draw(0,1,0);
     
-    IT(n) VAL(n)
+    ITJ(i,n) VAL(n)
  
         pnt[i] = Ro::null(10 * t, 0, 0);
         pnt[i][3] = t;
@@ -317,11 +317,11 @@ void leaves(GLVApp& app){
     SET  
         app.gui(bDraw)(bDrawSeg)(num,"num",1,100)(iter, "iter",1,100); 
     
-        IT(4) frame[i].pos() = f[i]; frame[i].rot( Rot(1,0,0,0) ); END 
+        ITJ(i,4) frame[i].pos() = f[i]; frame[i].rot( Rot(1,0,0,0) ); END 
     END 
     
     //app.interface.touch(cir);
-    IT(4) 
+    ITJ(i,4) 
         app.interface.touch(frame[i]);
         if (bDraw) frame[i].cxy().draw();
     END
