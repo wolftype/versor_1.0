@@ -155,7 +155,7 @@ namespace vsr {
     
     template<typename T>
     void Field<T> :: init() {
-        IT(A::size())
+        ITJ(i,A::size())
         VAL(A::size())
         A::data(i) = T(t);
         A::prev(i) = T(t);

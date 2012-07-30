@@ -257,11 +257,15 @@ namespace vsr {
             mvTransform();
         }
         
-        if (keyboard.shift){                    
+        if (keyboard.shift){   
+            cout << "shift" << endl;
             camTranslate();
         }  
+        
+//        if (keyboard.
                 
-        if (keyboard.ctrl){					
+        if (keyboard.ctrl){	
+            cout << "ctrl" << endl; 
             camSpin();
         }				
                 
@@ -608,11 +612,13 @@ namespace vsr {
     }
     
     void Interface :: camSpin(){
+        if (!keyboard.shift){
         switch(keyboard.code){
             case Key::Up:    camera().db() -= camera().yz() * .01;	break;
             case Key::Down:  camera().db() += camera().yz() * .01; break;
             case Key::Left:  camera().db() += camera().xz() * .01; break;
             case Key::Right: camera().db() -= camera().xz() * .01; break;							
+        }
         }
     }
 } // Vsr::

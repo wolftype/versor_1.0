@@ -60,15 +60,17 @@ void meshwarp(GLVApp& app){
     static Cir c;
     
     static float amt;
+    
     SET    
-    app.gui.add(DIALER, "amt", amt, -10,10);    
+        shader = new ShaderProgram("surfacebend");
+        app.gui.add(DIALER, "amt", amt, -10,10);    
     END 
     
     Tnv tnv(v[0], v[1], v[2]);
     Par par = Op::sp0( tnv, Gen::trs3(p[0],p[1],p[2]) );
     Pnt_Pnt pp = Gen::tpar(par);
     
-    IT(50)
+    ITJ(i,50)
     float rad = 2 * PI * i / 50;
     Vec2<> t (cos(rad), sin(rad));
     //t *= radius;
@@ -91,7 +93,7 @@ void meshwarp(GLVApp& app){
     Test::Par par2 = Test::sp( ttnv, trs );
     Test::Pnt_Pnt pntpnt =  Test::pp(par2);
     
-    IT(100)
+    ITJ(i,100)
         float rad = 2 * PI * i / 100;
         Vec2<> t (cos(rad), sin(rad));
         
@@ -227,7 +229,7 @@ void surface(GLVApp& app){
 
     f.draw(); 
     
-    IT(4)
+    ITJ(i,4)
         app.interface.touch( f[i] );
     END
     
@@ -236,7 +238,7 @@ void surface(GLVApp& app){
     
     shader -> begin();
     
-        IT(4)
+        ITJ(i,4)
             
             //f[i] = Op::sp( Tnv( frust.dir[i] ), Gen::trs( f.grid(i) ) ); 
     

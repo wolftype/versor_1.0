@@ -193,13 +193,13 @@ void chain(GLVApp& app){
 //    k3.joint(2).rot( Gen::rot( Biv(b,0,0) ) );    
     
     
-    IT(n)
+    ITJ(i,n)
         //k2.link(i).mot( k.link(i).mot() );
         k2.joint(i).rot( k.joint(i).rot() );
     END
     k2.joint(0).pos(1,0,0);
 
-    IT( n -1 )     
+    ITJ(i, n -1 )     
        // app.interface.touch( k3[i], k3.joint(i) ); 
           k.linf(i).draw(0,1,0);
        // k3.linf(i).draw();
@@ -225,7 +225,7 @@ void fourBar(GLVApp & app){
 
     k.draw();
     
-    IT( n -1 )     
+    ITJ(i, n -1 )     
         k.linf(i).draw(0,1,0);
     END    
     
@@ -310,7 +310,7 @@ void permutations(GLVApp& app){
     tk[4].pos() = Ro::null_cen(b);
     
     // Possible Spheres    
-    IT( num )
+    ITJ(i, num )
         
         Dls ta = Ro::dls_pnt(posa[i], r1);//k.link(1).vec().norm() );
         
@@ -518,7 +518,7 @@ void stochastic(GLVApp& app){
 
  //random connections
 
-//    IT(nc)
+//    ITJ(i,nc)
 //        
 //        ITJ(j, num)
 //            
@@ -593,7 +593,7 @@ void parabolic(GLVApp& app){
         if (bPrint) {
             s += Print::DrawBegin( );
             s += Print::PlotBegin(0,0);
-            IT(k.num())  s += Print::Coord( k[i].pos(), app.camera() ); END 
+            ITJ(i,k.num())  s += Print::Coord( k[i].pos(), app.camera() ); END 
             s += Print::PlotEnd();                
         }
     

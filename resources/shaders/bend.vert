@@ -219,12 +219,13 @@ void main(void) {
     Pnt p = null(gl_Vertex);
     
     //Create Boost Spinor from Tnv and Pos uniforms
-    Tnv tnv = Tnv( utnv.x, utnv.y, utnv.z );
-    Trs trs = Trs( 1.0, upos.x * -.5, upos.y * -.5, upos.z * -.5); //Translator
-    Par par = sp( tnv, trs );
-    Pnt pnt = sp( p, pp(par) );     //Transform CGA Point
+    Tnv tnv = Tnv( utnv.x, utnv.y, utnv.z );                                //Tangent
+    Trs trs = Trs( 1.0, upos.x * -.5, upos.y * -.5, upos.z * -.5);          //Translator
+    Par par = sp( tnv, trs );                                               //Translated Tangent
     
-    modp = vec4( euc3( cen ( pnt ) ), 1.0 );         //Cast back center of transformed point to vec4
+    Pnt pnt = sp( p, pp(par) );                                             //Transform CGA Point
+    
+    modp = vec4( euc3( cen ( pnt ) ), 1.0 );                                //Cast back center of transformed point to vec4
 
     gl_Position = gl_ModelViewProjectionMatrix * modp ;
         

@@ -261,6 +261,115 @@ namespace vsr {
         m.mode(GL::TS);
         return m;
     }
+    
+    
+    struct CirMesh{
+
+    vector<Cir> vc;
+    vector<Pnt> vp;
+    int res;
+    
+    CirMesh& add(const Cir& c) { vc.push_back(c); return *this; }
+
+    void skin() { 
+        res = vc.size();
+        for (int i = 0; i <= res; ++i){
+            double t= 1.0 * i/res;
+            ITJ( j, res ) 
+                vp.push_back( Ro::pnt_cir(vc[j], t * TWOPI) );
+            END 
+        END 
+    
+    }
+    void draw(float r = .5, float g=.5, float b=.5, float a = 1.0) {
+        TIT( res )
+            ITJ(j, res -1)
+                glColor4f(r,g,b,a);
+                glBegin(GL_QUADS);
+                int a = i * (res) + j;
+                int b = a + 1;
+                int c = b + res ;
+                int d = c - 1 ;
+                Vec n = Ro::dir( vp[a] ^ vp[b] ^ vp[c], false).dual();
+                GL::normal( (n.unit() * -1.0).w() );
+                GL::Quad( vp[a], vp[d], vp[c], vp[b] );
+               // GL::vertex(vp[a].w());
+                glEnd();
+
+                //ENABLE for PRINTING
+//                glColor3f(.7,.7,.7);
+//                glNormal3f(0,0,1);
+//                glBegin(GL_LINE_STRIP);
+//                GL::Tri( vp[a], vp[b], vp[c] );
+//                GL::Tri( vp[a], vp[d], vp[c] );
+//                glEnd();
+            END
+            
+        END
+    }
+};
+
+struct UVMesh{
+    vector<Pnt> vp;
+    int u, v;
+    UVMesh(int _u, int _v) : u(_u), v(_v) {}
+    void add(const Pnt& p) { vp.push_back(p); }
+    void draw(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
+    
+        glColor4f(rr,gg,bb,aa);
+        glBegin(GL_QUADS);
+        for (int i = 0; i < u-1; ++i){
+            for (int j = 0; j < v-1; ++j){
+                int a = i * v + j;
+                int b = a + 1;
+                int c = b + v;
+                int d = c - 1;
+                
+                Vec dir  = Ro::dir(vp[a] ^ vp[c] ^ vp[b], false).dual();
+                GL::normal(dir.unit().w());
+                GL::Quad(vp[a], vp[b], vp[c], vp[d]);
+            
+            }
+        }
+        glEnd();
+    
+    
+    }
+    
+    void drawTri(float rr=1, float gg=1, float bb=1, float aa =1){
+    
+     glColor4f(rr,gg,bb,aa);
+      for (int i = 0; i < u-1; ++i){
+            for (int j = 0; j < v-1; ++j){
+                int a = i * v + j;
+                int b = a + 1;
+                int c = b + v;
+                int d = c - 1;
+                
+                Vec dir  = Ro::dir(vp[a] ^ vp[c] ^ vp[b], false).dual();
+//                glNormal3f(.5,.5,.5);
+                glBegin(GL_LINE_STRIP);
+                GL::normal(dir.unit().w());
+                GL::Tri( vp[a], vp[b], vp[c]);
+                GL::Tri(vp[a], vp[d], vp[c]);
+                glEnd();
+            }
+        }
+    }
+};
+
+struct CubeMesh{
+     vector<Pnt> vp;
+     void add(const Pnt& p ) { vp.push_back(p); }
+     
+     void draw(int dim){
+        
+//        IT3V(dim)
+//            int a = i * (dim+1) * (dim+1) + j * (dim+1) + k;
+//            int b = a  
+//        END 
+     }
+};
 } //vsr
 
 #endif

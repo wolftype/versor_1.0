@@ -151,7 +151,7 @@ void optics3(GLVApp& app){
         //Bool
         app.gui(bDraw,"draw");
         app.gui(bDraw2,"draw2");
-        IT(f.num())
+        ITJ(i,f.num())
         frame[i].pos() = f[i];
         END 
     
@@ -166,7 +166,7 @@ void optics3(GLVApp& app){
     right = app.camera().frustrum().right();
             
     //PARAM
-    IT(f.num())
+    ITJ(i,f.num())
     
         app.interface.touch(frame[i]);        
         lens[i].set(frame[i], ridx, grad, 1, ratio);
@@ -195,7 +195,7 @@ void optics3(GLVApp& app){
 
     END END
         
-    IT(f.num())
+    ITJ(i,f.num())
         if(bDraw2) lens[i].drawMeet();
     END 
     if (bDraw) { src.draw(1,0,0,.2); src2.draw(1,0,0,.2);}
@@ -213,7 +213,7 @@ void opticsArray(GLVApp& app){
     
     SET 
     
-    IT(f.num())
+    ITJ(i,f.num())
     surf[i][0].cir = surf[i][0].cir.trs( f.grid(i) );
     surf[i][1].cir = surf[i][1].cir.trs( f.grid(i) );
     surf[i].structure();
@@ -223,7 +223,7 @@ void opticsArray(GLVApp& app){
     //app.camera().pos( 0, 0 ,10 );
     END 
     
-    IT(f.num())
+    ITJ(i,f.num())
     
     if (bDraw) { surf[i].draw(); }
     surf[i].ridx( ref ); 
@@ -373,7 +373,7 @@ void optics5(GLVApp& app){
    static bool bDraw;
    
    SET
-    IT(f.num())  frame[i].pos() = f[i]; END
+    ITJ(i,f.num())  frame[i].pos() = f[i]; END
     
     
     app.gui(ridx,"ridx", -5, 5)(grad,"grad", -5, 5)(dist, "dist",0,5)(rat,"rat", 0,10);
@@ -441,7 +441,7 @@ void opticalRobot(GLVApp& app){
     if (bDraw)  k2.draw();
     
     
-    IT(k.num())
+    ITJ(i,k.num())
         k[i].scale(scale);
     
         lens[i].set( k[i], ridx, grad, 1, rat );
@@ -473,7 +473,7 @@ void optics6(GLVApp& app){
     //static Frame * f = new Frame(f.num());
     static Lenz * lens = new Lenz[ f.num() ];
     // (PT(0,0,0), Rot(1,0,0,0) );  
-    IT(f.num())
+    ITJ(i,f.num())
         app.interface.touch( *(Frame*)(&lens[i]));
     END  
 
@@ -482,7 +482,7 @@ void optics6(GLVApp& app){
     static bool bDraw, bR, bG, bD, bRat,bNum;
     static bool bPrint;
     SET
-        IT(f.num()) lens[i].pos() = f[i]; END
+        ITJ(i,f.num()) lens[i].pos() = f[i]; END
         
         app.gui(ridx,"r", -10,10)(grad,"g",-10,10)(dist,"dist",0,10)(rat,"rat",1,10);
         app.gui(rnum, "rnum", 1,100)(iter,"iter",1,100)(vspread,"vspread",0,10);
@@ -494,11 +494,11 @@ void optics6(GLVApp& app){
     ITJ(k,iter) VALJ(k, iter)
        
         
-        IT(f.num())
+        ITJ(i,f.num())
             lens[i].set(ridx * (bR? t:1), grad *  (bG? t:1), dist * (bD? t:1), rat *  (bRat? t:1));
         END 
 
-        if (bDraw) { IT(f.num()) lens[i].drawMeet(); END }
+        if (bDraw) { ITJ(i,f.num()) lens[i].drawMeet(); END }
         
         int num = rnum * (bNum? t : 1) ;
         
@@ -528,9 +528,33 @@ void optics6(GLVApp& app){
 }
 
 void optics7(GLVApp& app){
-    static Lattice<Pnt> f(5,5,1,3);
+   // static Lattice<Pnt> f(5,5,1,3);
 
-    static Lenz * lens = new Lenz[ f.num() ];
+    static Lenz lens;
+    //app.interface.touch( *(Frame*)(&lens));
+    static float ridx, grad, dist, rat;
+    
+    SET
+        app.gui(ridx, "ridx",-10,10);
+        app.gui(grad, "grad",-10,10);
+        app.gui(dist, "grad",-10,10);
+        app.gui(rat, "rat",-10,10);
+    END
+    
+    lens.set(ridx, grad, dist, rat);
+    
+    Trajectory traj;
+    ITI(i,10)
+        double xt = -1.0 + 2.0 * t;
+        Dll dll = DLN(1,0,0).trs(0,xt,0);
+        
+         Pnt p = Ro::dll_meet_dlp(dll, Dlp(1,0,0).trs(-3,0,0));
+        Trajectory traj;
+        
+        glColor3f(1,0,0);
+        traj.calc(p, dll, &lens, 1, Dlp(1,0,0).trs(4,0,0));
+        traj.draw();
+    END 
     
     
     
@@ -564,7 +588,7 @@ int main() {
 
 
 //    //RESET FLAGS
-//    IT(f.num())
+//    ITJ(i,f.num())
 //    bVisited[i] = false;
 //    END 
 //    pos.draw();

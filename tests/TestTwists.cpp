@@ -42,7 +42,7 @@ void twist(GLVApp& app){
     //static Dll dll2 = DLN(0, 1, 0).trs(1,0,0); 
     static Cir c = CXY(1);
     
-    IT(10) VAL(10)
+    ITJ(i,10) VAL(10)
        // t = t * PI;
         Mot m = Gen::mot( dll*t );
         Cir tc = c.sp(m);
@@ -136,7 +136,7 @@ void twistCircle(GLVApp& app){
     static float period, pitch, dt, perdev, pitchdev, minDist, prob, scale, spread;
     static float num, iter,piter;
     SET
-        IT(f.num())
+        ITJ(i,f.num())
             f[i] = CXY(1).trs(f.grid(i));//.dil(Rand::Normal(1.5,.2))
         END
     
@@ -213,7 +213,7 @@ void twistCircle(GLVApp& app){
         END 
     
         glBegin(GL_LINE_STRIP);
-            IT(pos.size())
+            ITJ(i,pos.size())
                 glVertex3f(pos[i][0],pos[i][1],pos[i][2]); 
             END 
         glEnd();
@@ -221,10 +221,10 @@ void twistCircle(GLVApp& app){
       
     
         if (bPrint){
-            //IT(pos.size()-1)
+            //ITJ(i,pos.size()-1)
             //app.printTikz(pos[i], pos[i+1]);
             s+= Print::PlotBegin(1, true, false);
-            IT(pos.size()-1) 
+            ITJ(i,pos.size()-1) 
                 s += Print::Coord(pos[i], app.camera());
             END
             s += Print::PlotEnd();
@@ -321,7 +321,7 @@ void twistSelf(GLVApp& app){
     
     glColor3f(0,1,0);
     glBegin(GL_LINE_STRIP);
-    IT(pos.size())
+    ITJ(i,pos.size())
     glVertex3f(pos[i][0],pos[i][1],pos[i][2]); 
     END 
     glEnd();
@@ -347,7 +347,7 @@ void twistLines(GLVApp& app){
     static float num, period, pitch, dt, prox;
     
     SET
-        IT(f.num())
+        ITJ(i,f.num())
             f[i] = (i & 1) ? DLN(1,1,0).trs( f.grid(i) ) : DLN(-1,1,0).trs( f.grid(i) );
         END 
     
@@ -431,14 +431,14 @@ void twisties(GLVApp& app){
         Dlp dlp = Dlp(1,0,0).trs(val, 0, 0 );
         
         int it = 0;
-        IT(num)
+        ITJ(i,num)
             op[i] = pl[i];
             pl[i] = Ro::dll_meet_dlp( tl[i], dlp );
             final[it].push_back(pl[i]);
             it ++;
         END 
         
-        IT(num)VAL(num)
+        ITJ(i,num)VAL(num)
             //tl[i].draw();
             
             double dist = 1000; int idx = 0;
@@ -463,7 +463,7 @@ void twisties(GLVApp& app){
                   
     END 
     
-    IT(num)
+    ITJ(i,num)
         glColor3f( Rand::Num(), Rand::Num(), Rand::Num());
         glBegin(GL_LINE_STRIP);
         ITJ(j, final[i].size() )
@@ -480,7 +480,7 @@ void twisties(GLVApp& app){
         
         s += Print::Begin();
         
-            IT(num)
+            ITJ(i,num)
                 s += Print::DrawBegin();
                 s += Print::PlotBegin(1,0);
                 ITJ(j, final[i].size() )
@@ -524,7 +524,7 @@ void motortwist(GLVApp& app){
     ct.period(perx,pery,perz);
     ct.ext(extx, exty, extz);
         
-    IT(100) VAL(100)
+    ITJ(i,100) VAL(100)
     double x = t;
     Cir tc = c.mot( ct.dll(x) ) ;
     tc.draw();
@@ -588,7 +588,7 @@ void simple(GLVApp& app){
     
     pt.draw();
     
-    IT(f.num())
+    ITJ(i,f.num())
     app.interface.touch(f[i]);    
     END
     
@@ -623,7 +623,7 @@ void simple(GLVApp& app){
     END 
     
     
-    IT(set.size()) set[i].draw(); END
+    ITJ(i,set.size()) set[i].draw(); END
     
 //    IT2( 10 )
 //    Dll tdll = Interp::surface(f.data(), u, v);
@@ -634,7 +634,7 @@ void simple(GLVApp& app){
 //        END 
 //    END2
 
-    IT(f.num())    
+    ITJ(i,f.num())    
     f[i].draw();
     END
 }

@@ -185,16 +185,16 @@ struct Multi{
 	/// Get element at index with no bounds checking
 	const T& operator[](uint32_t i) const { return elems[i]; }
 
-	#define IT for(uint32_t i=0; i<N; ++i)
+	#define TIT for(uint32_t i=0; i<N; ++i)
 
-	bool operator !=(const M& v){ IT{ if((*this)[i] == v[i]) return false; } return true; }
-	bool operator !=(const T& v){ IT{ if((*this)[i] == v   ) return false; } return true; }
-	M& operator   = (const M& v){ IT{ (*this)[i] = v[i]; } return *this; }
-	M& operator   = (const T& v){ IT{ (*this)[i] = v;    } return *this; }
-	bool operator ==(const M& v){ IT{ if((*this)[i] != v[i]) return false; } return true; }
-	bool operator ==(const T& v){ IT{ if((*this)[i] != v   ) return false; } return true; }
+	bool operator !=(const M& v){ TIT{ if((*this)[i] == v[i]) return false; } return true; }
+	bool operator !=(const T& v){ TIT{ if((*this)[i] == v   ) return false; } return true; }
+	M& operator   = (const M& v){ TIT{ (*this)[i] = v[i]; } return *this; }
+	M& operator   = (const T& v){ TIT{ (*this)[i] = v;    } return *this; }
+	bool operator ==(const M& v){ TIT{ if((*this)[i] != v[i]) return false; } return true; }
+	bool operator ==(const T& v){ TIT{ if((*this)[i] != v   ) return false; } return true; }
 
-	#undef IT
+	#undef TIT
 
 	/// Returns size of array
 	static uint32_t size(){ return N; }

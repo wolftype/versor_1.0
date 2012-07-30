@@ -32,15 +32,13 @@ namespace vsr {
 #define INF Inf(1)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
-    
+ 
 #define SET \
-static bool bSet = 1;\
-if(bSet){\
-bSet = 0;
-
-//ITERATIONS 
-    
-#define IT(n) \
+static bool bSet = 0; \
+if (!bSet){ \
+bSet = 1;
+ 
+#define TIT(n) \
 for(int i = 0; i < n; ++i){
 
 #define ITJ(j,n) \
@@ -57,10 +55,10 @@ double t = 1.0 * i/n;
 double t = 1.0 * j/n;  
     
 #define IT1(n) \
-IT(n) VAL(n)
+ITJ(i,n) VAL(n)
 
 #define IT2(n) \
-IT(n) VAL(n) double u = t;\
+TIT(n) VAL(n) double u = t;\
 ITJ(j,n) VALJ(j,n) double v = t;
 
 #define IT2I(n) \
@@ -68,7 +66,7 @@ ITI(i,n) double u = t;\
 ITI(j,n) double v = t;
     
 #define IT3V(n) \
-IT(n) VAL(n) double x = t;\
+TIT(n) VAL(n) double x = t;\
 ITJ(j,n) VALJ(j,n) double y = t;\
 ITJ(k,n) VALJ(k,n) double z = t;
 
@@ -82,8 +80,7 @@ ITI(k,n) double w = t;
     
 #define END }
 #define END2 }}
-#define END3 }}}
-    
+#define END3 }}}       
 
 //#define CMP(min,max,omin,omax,val) 
 #ifndef CLAMP 

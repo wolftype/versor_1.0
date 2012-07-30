@@ -269,7 +269,7 @@ namespace vsr {
             void submit(){  
                 if (mDll) delete[] mDll;
                 mDll = new Dll[mNum];
-                IT(mNum)  mDll[i] = mTwist[i].dll(); END
+                ITJ(i,mNum)  mDll[i] = mTwist[i].dll(); END
             }
         
             /// Interpolated Generators (t from 0 to 1)

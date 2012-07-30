@@ -31,7 +31,7 @@ namespace vsr  {
         Set& insert(T s) { mData.insert( mData.begin(), s); }
         Set& pop() { mData.pop_back(); } 
         Set& add(T s) { mData.push_back(s); mActiveId = mData.size(); return *this; }
-        Set& add(const Set& s) { IT(s.size()) add(s[i]); END }
+        Set& add(const Set& s) { TIT(s.size()) add(s[i]); END }
         Set& erase(int idx) { mData.erase( mData.begin() + idx ); }
         Set& erase(int b, int e) { mData.erase( mData.begin() + b, mData.begin() + e ); }
         

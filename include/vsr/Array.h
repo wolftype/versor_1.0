@@ -16,7 +16,7 @@ namespace vsr {
 
     using namespace std;
     
-//#define IT(i, x) for(int i = 0; i < x; ++i)
+//#define ITJ(ii, x) for(int i = 0; i < x; ++i)
 
 //An N-dimensional Array of type T
 template <int N, class T>

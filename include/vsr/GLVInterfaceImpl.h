@@ -43,6 +43,8 @@ namespace vsr {
             interface -> vd().h		 = glv.height();
 
         }
+        
+
     };
     
     struct GLVInput : public Interface::InputImpl {
@@ -100,15 +102,16 @@ namespace vsr {
         
         GLVInterface interface;
         Gui gui;
+        map<string, Gui*> subgui;
         
         bool bPrintPS;
         
         MouseData& mouse() { return interface.mouse; }
         GLVView& view() { return interface.view(); }
         
-        GLVApp(Window * w) : View3D(), bPrintPS(false) {
+        GLVApp(Window * win) : View3D(), bPrintPS(false) {
             
-            interface.view().win = w;
+            interface.view().win = win;
             
             stretch(1,1);
             
@@ -279,6 +282,15 @@ namespace vsr {
             }
             
             return false;
+        }
+        
+                //scene descriptor
+        void text(string s, int ow = 50, int oh = 100){
+            draw::enter2D(w, h);
+                glTranslated(ow,h-oh,0);
+                glColor3f(1,1,1);
+                draw::text( s.c_str() );
+            //draw::pop2D();
         }
         
     };

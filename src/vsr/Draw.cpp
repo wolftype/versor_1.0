@@ -1216,7 +1216,7 @@ string Print :: PlotBegin(float tension, bool smooth, bool cycle){
        
        od << Print::PlotBegin(1,true);
        
-       IT(4) 
+       TIT(4) 
         vo[i]= GL::project( v[i][0], v[i][1], v[i][2], cam);
         
         od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
@@ -1238,7 +1238,7 @@ string Print :: PlotBegin(float tension, bool smooth, bool cycle){
         v[2] = f.x() + f.y();
         v[3] = f.y();
         
-        IT(4)
+        TIT(4)
         vo[i] = GL::project( v[i][0],v[i][1],v[i][2],cam); 
         END 
         
@@ -1260,20 +1260,20 @@ string Print :: PlotBegin(float tension, bool smooth, bool cycle){
         v[6] = v[5] + f.y();
         v[7] = v[4] + f.y();
                 
-        IT(8)
+        TIT(8)
         vo[i] = GL::project( v[i][0],v[i][1],v[i][2],cam); 
         
         END 
         
-        IT(4)
+        TIT(4)
         od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
         END
         od << "(" << vo[0][0] * rw << "," << vo[0][1] * rh << ")";
-        IT(4)
+        TIT(4)
         od << "(" << vo[i+4][0] * rw << "," << vo[i+4][1] * rh << ")";
         END
         od << "(" << vo[3][0] * rw << "," << vo[3][1] * rh << ")";
-        IT(4)
+        TIT(4)
         od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
         END
         
@@ -1334,7 +1334,7 @@ string Print :: PlotBegin(float tension, bool smooth, bool cycle){
                v[1] = Ro::null_cen(pb[0]);
                v[3] = Ro::null_cen(pb[1]);
 
-               IT(4) 
+               TIT(4) 
                 vo[i]= GL::project( v[i][0], v[i][1], v[i][2], cam);
                 stringstream od;
                 od << "(" << vo[i][0] * rw << "," << vo[i][1] * rh << ")";
@@ -1396,7 +1396,7 @@ string Print :: PlotBegin(float tension, bool smooth, bool cycle){
             {
                  ts += "\\draw plot[tension = 1, smooth] coordinates{";
                 
-                    IT(s.size())
+                    TIT(s.size())
                         Vec va = GL::project( s[i][0], s[i][1], s[i][2], cam);
                         
                         stringstream od;
@@ -1498,7 +1498,7 @@ string Print :: PlotBegin(float tension, bool smooth, bool cycle){
                 
                 ts += "\\draw plot[tension = 1, smooth cycle] coordinates{";
                 
-                IT(12) VAL(12)
+                TIT(12) VAL(12)
                 
                 Vec v = Ro::pnt_cir(s, PI*t);
                 

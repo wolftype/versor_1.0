@@ -25,64 +25,6 @@ using namespace glv;
 Window * win;
 GLVApp * app;
 
-struct CirMesh{
-
-    vector<Cir> vc;
-    vector<Pnt> vp;
-    int res;
-    
-    CirMesh& add(const Cir& c) { vc.push_back(c); return *this; }
-
-    void skin() { 
-        res = vc.size();
-        for (int i = 0; i <= res; ++i){
-            double t= 1.0 * i/res;
-            ITJ( j, res ) 
-                vp.push_back( Ro::pnt_cir(vc[j], t * TWOPI) );
-            END 
-        END 
-    
-    }
-    void draw() {
-        IT( res )
-            ITJ(j, res -1)
-                glColor3f(.4,.4,.4);
-                glBegin(GL_QUADS);
-                int a = i * (res) + j;
-                int b = a + 1;
-                int c = b + res ;
-                int d = c - 1 ;
-                Vec n = Ro::dir( vp[a] ^ vp[b] ^ vp[c], false).dual();
-                GL::normal( (-n.unit() ).w() );
-                GL::Quad( vp[a], vp[d], vp[c], vp[b] );
-               // GL::vertex(vp[a].w());
-                glEnd();
-                
-                glColor3f(.7,.7,.7);
-                glNormal3f(0,0,1);
-                glBegin(GL_LINE_STRIP);
-                GL::Tri( vp[a], vp[b], vp[c] );
-                GL::Tri( vp[a], vp[d], vp[c] );
-                glEnd();
-            END
-            
-        END
-    }
-};
-
-struct CubeMesh{
-     vector<Pnt> vp;
-     void add(const Pnt& p ) { vp.push_back(p); }
-     
-     void draw(int dim){
-        
-//        IT3V(dim)
-//            int a = i * (dim+1) * (dim+1) + j * (dim+1) + k;
-//            int b = a  
-//        END 
-     }
-};
-
 void interpolated(GLVApp& app){
     
     static Lattice<Pnt> f(2,2,1,2);
@@ -102,7 +44,7 @@ void interpolated(GLVApp& app){
     static double mnk, scale, scale2;
     
     SET
-        IT(4)
+        ITJ(i,4)
             frame[i].pos() = Ro::null( f.grid(i) );
             frame[i].orientY(0,0,0);
         END 
@@ -125,7 +67,7 @@ void interpolated(GLVApp& app){
       
      //FRAMES 
     
-    IT(4)
+    ITJ(i,4)
     frame[i].scale(scale);
     app.interface.touch(frame[i]);
     END 
@@ -137,17 +79,17 @@ void interpolated(GLVApp& app){
     }
     
     if (bFollow){
-        IT(4)
+        ITJ(i,4)
         frame[i].orientZ(app.mouse().origin );
         END 
     }
     
     if (bReset){
-        IT(4) frame[i].pos() = Ro::null(f.grid(i)); frame[i].orientY(0,0,0); END
+        ITJ(i,4) frame[i].pos() = Ro::null(f.grid(i)); frame[i].orientY(0,0,0); END
     }
     
     if (bdraw){
-        IT(4)
+        ITJ(i,4)
         Cir ca = frame[i].cxy();  ca.draw(); frame[i].draw();
         END
     }   
@@ -164,7 +106,7 @@ void interpolated(GLVApp& app){
         double mt = 1.0 * m/itnum;
         //glTranslated(xoffset, 0, 0);
         
-        IT(ua+1) VAL(ua)
+        ITJ(i,ua+1) VAL(ua)
         double u = t;
         ITJ(j,ub+1) VALJ(j,ub)
         double v = t;
@@ -227,7 +169,7 @@ void interpolated2(GLVApp& app){
     
     static double niter, perioditer, pitchiter,taniter, mper, mpit, mtan;
     SET
-        IT(4)
+        ITJ(i,4)
             frame[i].pos() = Ro::null( f.grid(i) );
             frame[i].orientY(0,0,0);
         END 
@@ -263,7 +205,7 @@ void interpolated2(GLVApp& app){
     if (bTanFrameDraw) tanFrame.draw();
     
     
-    IT(4)
+    ITJ(i,4)
     frame[i].scale(scale);
     app.interface.touch(frame[i]);
     END 
@@ -275,18 +217,18 @@ void interpolated2(GLVApp& app){
     }
     
     if (bFollow){
-        IT(4)
+        ITJ(i,4)
         frame[i].orientZ(app.mouse().origin );
         END 
     }
     
     if (bReset){
-        IT(4) frame[i].pos() = Ro::null(f.grid(i)); frame[i].orientY(0,0,0); END
+        ITJ(i,4) frame[i].pos() = Ro::null(f.grid(i)); frame[i].orientY(0,0,0); END
         tanFrame.reset();
     }
     
     if (bdraw){
-        IT(4)
+        ITJ(i,4)
         Cir ca = frame[i].cxy();  ca.draw(); frame[i].draw();
         END
     }   
@@ -335,7 +277,7 @@ void interpolated2(GLVApp& app){
                         double ct = ( 1.0 * k * itnum * itnum * taniter + m * itnum * taniter + n * taniter + tanp ) / (taniter * itnum * itnum * niter);
                         //cout << at << endl; 
                         
-                        IT(ua+1) VAL(ua)
+                        ITJ(i,ua+1) VAL(ua)
                         double u = t;
                         ITJ(j,ub+1) VALJ(j,ub)
                         double v = t;
@@ -397,7 +339,7 @@ void interpolated3(GLVApp& app){
     static double niter, perioditer, pitchiter,taniter, mper, mpit, mtan;
     SET
 
-        IT(4)
+        ITJ(i,4)
             frame[i].pos() = Ro::null( f.grid(i) );
             frame[i].orientY(0,0,0);
         END 
@@ -434,7 +376,7 @@ void interpolated3(GLVApp& app){
     if (bTanFrameDraw) tanFrame.draw();
     
     
-    IT(4)
+    ITJ(i,4)
     frame[i].scale(scale);
     END 
     
@@ -445,18 +387,18 @@ void interpolated3(GLVApp& app){
     }
     
     if (bFollow){
-        IT(4)
+        ITJ(i,4)
         frame[i].orientZ(app.mouse().origin );
         END 
     }
     
     if (bReset){
-        IT(4) frame[i].pos() = Ro::null(f.grid(i)); frame[i].orientY(0,0,0); END
+        ITJ(i,4) frame[i].pos() = Ro::null(f.grid(i)); frame[i].orientY(0,0,0); END
         tanFrame.reset();
     }
     
     if (bdraw){
-        IT(4)
+        ITJ(i,4)
         Cir ca = frame[i].cxy();  ca.draw(); frame[i].draw();
         END
     }   
@@ -493,7 +435,7 @@ void interpolated3(GLVApp& app){
                         double at = ( 1.0 * k * itnum * itnum * perioditer + m * itnum * perioditer + n * perioditer + per ) / (perioditer * itnum * itnum * niter);
                         double atx = -1.0 + 2.0 * at;
                         
-                        IT(ua+1) VAL(ua)
+                        ITJ(i,ua+1) VAL(ua)
                         double u = t;
                         ITJ(j,ub+1) VALJ(j,ub)
                         double v = t;
@@ -572,7 +514,7 @@ void bendies(GLVApp& app){
     
     END 
     
-    IT(vp.size()) vp[i].draw(); END
+    ITJ(i,vp.size()) vp[i].draw(); END
     
     if (par) delete[] par;
     
@@ -584,7 +526,7 @@ void bendField(GLVApp& app){
     
     static Frame * frame = new Frame[f.num()];
         
-    IT(f.num())
+    ITJ(i,f.num())
         app.interface.touch(frame[i]); frame[i].draw();        
     END    
 
@@ -592,7 +534,7 @@ void bendField(GLVApp& app){
     static float num, iter, amt;
 
     SET        
-        IT(f.num())  frame[i].pos() = f[i]; END
+        ITJ(i,f.num())  frame[i].pos() = f[i]; END
         app.gui(num, "num", 1,100)(iter, "iter", 1, 100)(amt, "amt", -10, 10);
     END
         
@@ -623,7 +565,7 @@ void bendField(GLVApp& app){
         END
         
         glColor3f(0,0,0);
-         IT(vp.size()-1) Glyph::Line( Vec(vp[i]), Vec(vp[i+1]) ); END
+         ITJ(i,vp.size()-1) Glyph::Line( Vec(vp[i]), Vec(vp[i+1]) ); END
         
     END END
     
@@ -649,7 +591,7 @@ void bendItself(GLVApp& app){
     Par * vpar = new Par[n];
     Par * npar  = new Par[n];
     
-    IT(num)  
+    ITJ(i,num)  
         par = Ro::par_dls( Ro::dls3(0,0,0), PI * i/num, 0);
         vpar[i] = par;        
     END 
@@ -659,13 +601,13 @@ void bendItself(GLVApp& app){
     ITJ(m, iter)
         glColor3f(Rand::Normal(.5,.2), 0, Rand::Normal(.5,.2) );
        
-         IT(n)
+         ITJ(i,n)
            // vpar[i].undual().draw();
             vector<Pnt> tp = Ro::split( vpar[i] );
             Glyph::Line( Vec( Ro::null(tp[0]) ), Vec( Ro::null(tp[1]) ) );
          END 
         
-        IT( n )
+        ITJ(i, n )
         
             int idx = -1; double tdist = 1000;
             
@@ -684,7 +626,7 @@ void bendItself(GLVApp& app){
         
         END 
                 
-        IT (n)
+        ITJ(i,n)
             vpar[i] = npar[i];
         END 
         //vpar = npar;
@@ -701,14 +643,14 @@ void tangentFrame(GLVApp& app){
     static Frame * frame = new Frame[4];
     static Frame fr;
     
-    IT(f.num())
+    ITJ(i,f.num())
         app.interface.touch(frame[i]); //f[i].draw();        
     END     
     
     static float iter, num;
     static double px, py, pz;
     SET        
-        IT(f.num())  frame[i].pos() = f[i]; END
+        ITJ(i,f.num())  frame[i].pos() = f[i]; END
         
         app.gui(iter,"iter",1,100);
         app.gui(num, "num", 1,100);
@@ -756,7 +698,7 @@ void boostField(GLVApp& app){
     static float num, iter, w, h, period, pitch;
     
     SET
-        IT(f.num()) frame[i].pos() = f[i]; frame[i].scale(.2); END 
+        ITJ(i,f.num()) frame[i].pos() = f[i]; frame[i].scale(.2); END 
 
         app.gui(bDraw)(bPrint)(bDrawPos, "drawpos")(bDrawFrame, "drawframe")(bDrawGrid, "drawGrid")(bDrawMesh, "drawMesh");
         
@@ -770,7 +712,7 @@ void boostField(GLVApp& app){
     static Dll * dll = new Dll[f.num()];
     static Par * par = new Par[f.num()];
 
-    IT(f.num()) 
+    ITJ(i,f.num()) 
         dll[i] = frame[i].dll(); 
         par[i] = frame[i].tx();
     END 
@@ -805,7 +747,7 @@ void boostField(GLVApp& app){
             Vec target =  app.mouse().origin ; 
             //Fl::loc(DLN(1,0,0), app.mouse().origin, true );
            // target = target.rot ( Biv::xy * mn * PI ) ;
-            IT(f.num() ) frame[i].orientX( target ); END 
+            ITJ(i,f.num() ) frame[i].orientX( target ); END 
         }
         
           IT3V(numb)
@@ -836,8 +778,8 @@ void boostField(GLVApp& app){
         
        glColor3f(0,0,0);
         
-        if (bDrawPos) { IT(vf.size()) vf[i].pos().draw(); END }
-        if (bDrawFrame) {  IT(vf.size()) vf[i].draw(); END  }
+        if (bDrawPos) { ITJ(i,vf.size()) vf[i].pos().draw(); END }
+        if (bDrawFrame) {  ITJ(i,vf.size()) vf[i].draw(); END  }
         if (bDrawGrid) {
             fl.drawFaceLines();
         }
@@ -865,7 +807,7 @@ void twistField(GLVApp& app){
     static float num, iter, w, h, period, pitch;
     
     SET
-        IT(f.num()) frame[i].pos() = f[i]; frame[i].scale(.2); END 
+        ITJ(i,f.num()) frame[i].pos() = f[i]; frame[i].scale(.2); END 
 
         app.gui(bDraw)(bPrint)(bDrawPos, "drawpos")(bDrawFrame, "drawframe")(bDrawGrid, "drawGrid")(bDrawMesh, "drawMesh");
         
@@ -879,7 +821,7 @@ void twistField(GLVApp& app){
     static Dll * dll = new Dll[f.num()];
     static Par * par = new Par[f.num()];
 
-    IT(f.num()) 
+    ITJ(i,f.num()) 
         dll[i] = frame[i].dll(); 
         par[i] = frame[i].tx();
     END 
@@ -913,7 +855,7 @@ void twistField(GLVApp& app){
          if (app.interface.keyboard.code == 'f' ){
             Vec target =  app.mouse().origin ; //Fl::loc(DLN(1,0,0), app.mouse().origin, true );
            // target = target.rot ( Biv::xy * mn * PI ) ;
-            IT(f.num() ) frame[i].orientX( target ); END 
+            ITJ(i,f.num() ) frame[i].orientX( target ); END 
         }
         
           IT3V(numb)
@@ -947,7 +889,7 @@ void twistField(GLVApp& app){
         
         
 //        glBegin(GL_LINES);
-//        IT(vf.size())
+//        ITJ(i,vf.size())
 //        Pnt v = vf[i].pos();
 //        glColor3f(0,0,0);
 //        glVertex3f(v[0],v[1],v[2]); 
@@ -956,12 +898,12 @@ void twistField(GLVApp& app){
         
        glColor3f(0,0,0);
         
-        if (bDrawPos) { IT(vf.size()) vf[i].pos().draw(); END }
-        if (bDrawFrame) {  IT(vf.size()) vf[i].draw(); END  }
+        if (bDrawPos) { ITJ(i,vf.size()) vf[i].pos().draw(); END }
+        if (bDrawFrame) {  ITJ(i,vf.size()) vf[i].draw(); END  }
         if (bDrawGrid) {
             fl.drawFaceLines();
 //            glBegin(GL_LINE_STRIP);
-//            IT(vf.size()) 
+//            ITJ(i,vf.size()) 
 //                if ((1.0 * i / numb) == numb) glVertex3f( vf[i].pos()[0], vf[i].pos()[1], vf[i].pos()[2] ); 
 //            
 //            END
@@ -1057,7 +999,7 @@ void points2(GLVApp& app){
         //p[2] = Ro::dls3(0,1,0);
     END 
     
-    IT(3) p[i].draw(); app.interface.touch(p[i]); END
+    ITJ(i,3) p[i].draw(); app.interface.touch(p[i]); END
     
     IT1(100)
         Cir tp = p[0] * (1-t) + p[2] * t;
@@ -1073,7 +1015,7 @@ void points3(GLVApp& app){
     
     SET IT1(3) p[i] = Ro::null((-1.0 + 2.0 * t) * 3, 0, 0); END END 
     
-    IT(3) app.interface.touch(p[i]); p[i].draw(); END
+    ITJ(i,3) app.interface.touch(p[i]); p[i].draw(); END
     
     IT1(100)
         Pnt tp = Interp::quad<Pnt>(p, 3, t);
@@ -1086,14 +1028,14 @@ void points4(GLVApp& app){
     
     static Frame * frame = new Frame[4];
 
-    IT(4) app.interface.touch(frame[i]); frame[i].draw(); END
+    ITJ(i,4) app.interface.touch(frame[i]); frame[i].draw(); END
         
    static double val, amt, rad;
    static bool bPar, bReal = false; 
    SET 
         app.gui(val, "val", -100, 100)(amt,"amt",-100,100)(rad,"rad",0,10)(bPar)(bReal, "real"); 
   
-        IT(f.num()) frame[i].pos() = f[i]; frame[i].scale(.2); END
+        ITJ(i,f.num()) frame[i].pos() = f[i]; frame[i].scale(.2); END
         
     END 
         
@@ -1226,11 +1168,12 @@ void origin(GLVApp& app){
     END 
 
     cm.skin();
-    cm.draw();
+    cm.draw(1,0,0);
 }
 
 //Dini's Surface
 void dini(GLVApp& app){
+
 
     static Dll dll = DLN(0,1,0);
     static Frame frame(PT(0,-1,0), Rot(1,0,0,0));
@@ -1267,7 +1210,7 @@ void dini(GLVApp& app){
     
     //DRAW
     
-    IT(num-1)
+    ITJ(i,num-1)
         
         
         ITJ(j,num-1)
@@ -1375,8 +1318,11 @@ void lineToCircle(GLVApp& app){
     static float rad, ypos, amt, dbiv, dtnv, dpit, dmnk, err, num;
     
     SET 
+    
+    
     app.gui(rad,"rad",-5,5)(ypos,"ypos",-10,10)(amt, "amt", -10,10)(dbiv, "dbiv",-10,10)(dtnv, "dtnv",-10,10)(dpit,"dpit",-10,10)(dmnk,"dmnk",-10,10); 
     app.gui(err,"err",0,10)(num, "num",1,100);
+    
     END
     
     Pnt pt = frame.pos();//Fl::loc(lin, PT(0,0,0), false);//PT(0,ypos,0);
@@ -1397,18 +1343,14 @@ void lineToCircle(GLVApp& app){
         
         double cur = Ro::cur(tc);
         
-        glColor3f(.5*t,.5*t,.5*t);
+        glColor3f(t,.5*t,.5*t);
         Draw::Seg( tc , TWOPI * cur  );
         
         
         if ( ERROR(cur,err) ) Glyph::Line(frame.vec() + frame.y() * PI, frame.vec() - frame.y() * PI); 
-        //tc.draw();
-        //cout << Ro::cur(tc) << endl;
+
     END 
     
-    //Cir gc = CXY(rad).trs(-rad,0,0); gc.draw(0,1,1);
-    
-    //cout << "wt " << Ro::wt(b.par()) << "s " << Ro::siz(b.par(), true) << endl;
 }
 
 
@@ -1483,10 +1425,10 @@ void grid(GLVApp& app){
     SET
         app.gui(val,"val",-10,10);
         app.gui(bGrid)(bPoints)(bMesh)(bBoost,"boost");
-        IT(8) frame[i].pos() = f[i]; frame[i].orientX( frame[i].pos() * 2.0 ); END
+        ITJ(i,8) frame[i].pos() = f[i]; frame[i].orientX( frame[i].pos() * 2.0 ); END
     END 
     
-    IT(8) 
+    ITJ(i,8) 
         app.interface.touch(frame[i]); frame[i].draw(); 
         //if (frame[i].isSelected()) cout << i << endl; 
         par[i] = frame[i].tx() * frame[i].scale(); 
@@ -1529,10 +1471,10 @@ void grid2(GLVApp& app){
     static float val, amt;
     SET
         app.gui(val,"val",-10,10)(amt,"amt",-10,10)(bGrid);
-        IT(4) frame[i].pos() = f[i]; frame[i].orientX( PT(0,0,0) ); END 
+        ITJ(i,4) frame[i].pos() = f[i]; frame[i].orientX( PT(0,0,0) ); END 
     END 
     
-    IT(4) 
+    ITJ(i,4) 
         app.interface.touch(frame[i]); frame[i].draw(); 
         par[i] = frame[i].tx( frame[i].scale() * amt); 
         pnt[i] = frame[i].pos();
@@ -1591,7 +1533,7 @@ void grid3(GLVApp& app){
     static bool bGrid, bTwist, bTanv, bDraw, bDrawNormals, bSizeVal;
     SET
         bool  s = 0;
-        IT(f.num())
+        ITJ(i,f.num())
             s = !s; 
             frame[i].pos() = Ro::null(f.grid(i));
             
@@ -1610,7 +1552,7 @@ void grid3(GLVApp& app){
     
     GL::lightPos(0,0,lz);
     
-    IT(f.num())
+    ITJ(i,f.num())
 
         f.grid(i) = frame[i].pos();
         fd.grid(i) = frame[i].pos();
@@ -1665,7 +1607,7 @@ void grid3(GLVApp& app){
     vector<Vec> p;
     
     
-    IT(num)
+    ITJ(i,num)
     
        
         ITJ(j,num)
@@ -1697,7 +1639,7 @@ void grid3(GLVApp& app){
     
     if (bDrawNormals) {
         glBegin(GL_LINES);
-        IT(n.size())
+        ITJ(i,n.size())
                 Vec d = p[i] + n[i] * normlen;
                 GL::vertex( p[i].w() );
                 GL::vertex( d.w() );
@@ -1716,12 +1658,12 @@ void sphere(GLVApp& app){
     static float val,amt, num,dy1, dy2, w1, w2;
     SET
     
-        IT(f.num()) frame[i].pos() = Ro::null( f.grid(i) ); frame[i].orientX( frame[i].pos() * 2 ); END 
+        ITJ(i,f.num()) frame[i].pos() = Ro::null( f.grid(i) ); frame[i].orientX( frame[i].pos() * 2 ); END 
         
         app.gui(num, "num", 10,100)(val, "val", -10,10)(amt,"amt",-100,100)(dy1, "dy1",-10,10)(dy2,"dy2",-10,10)(w1, "w1",-10,10)(w2,"w2",-10,10)(bDraw);
     END 
 
-    IT(f.num())
+    ITJ(i,f.num())
         if (bDraw) {frame[i].push(); (Vec::x * amt * frame[i].scale() ).draw(0,0,0); frame[i].pop(); }
         app.interface.touch(frame[i]);
         f.grid(i) = frame[i].pos();
@@ -1759,7 +1701,7 @@ void sphere(GLVApp& app){
     //cout << Lattice<Par>::limit( f, app.mouse().origin ) << endl; 
     //cout << f.offset( app.mouse().origin ) << endl; 
 
-    IT( cm.vp.size() )
+    ITJ(i, cm.vp.size() )
     
         Vec tv = f.offset( cm.vp[i] );
         //cout << tv << endl; 
@@ -1774,9 +1716,74 @@ void sphere(GLVApp& app){
     
     cm2.draw();
     
+}
 
+void dupin(GLVApp& app){
+
+    static Pnt a, b;
+    static Frame fa, fb;
+    static Cir c;
+    app.interface.touch(fa);
+    app.interface.touch(fb);
+    app.interface.touch(c);
+    c.draw();
     
+    SET
+        a = PT(0,1,0);
+        b = PT(0,-1,0);
+        fa.pos() = a; fb.pos() = b;
+        c = CXZ(1);
+    END 
+    
+    Par pa =( Tnv(0,1,0).trs(a) );
+    Par pb =( Tnv(0,-1,0).trs(b) );
+    
+    
+    ITI(i,100)
+        double xt = -1.0 + 2.0 *t;
+         Par tp = Interp::linear<Par>( fa.ty(), fb.ty(), xt );
+        
+        Cir tc = c.sp( Gen::tpar( tp) );
+        tc.draw();
+    END 
+    
+    
+}
 
+void polarField(GLVApp& app){
+
+    static Lattice<Pnt> f(5,5,5);
+
+    static bool bDraw;
+    static float val,amt, num,dy1, dy2, w1, w2;
+    SET
+        app.gui(num, "num", 10,100)(amt,"amt",-100,100)(dy1, "dy1",-10,10)(dy2,"dy2",-10,10)(w1, "w1",-10,10)(w2,"w2",-10,10)(bDraw);
+        
+        w1 = 1;
+        w2 = 2;
+    END 
+    
+        static Cir c = CXZ(1);
+    Par par = c.dual();
+    
+    Pnt pa = Ro::null_cen( Ro::split1(par) ).trs(0,dy1,0);
+    Pnt pb = Ro::null_cen( Ro::split2(par) ).trs(0,dy2,0);
+    pa[3] = w1;
+    pb[3] = w2;
+    Par par2 = pa ^ pb;
+    Sca sca = pa <= pb;
+    
+    int it = num;
+    
+    ITI(i, it)
+        Pnt_Pnt pp = par2 * (-1.0 + 2.0 * t);
+        pp[0] = sca[0];
+        
+        ITJ(j, f.num())
+            Pnt tp = Ro::null_cen( f[j].sp( pp ) );
+            tp.draw(t, 0, 1-t);
+        END 
+    END 
 }
 
 void cube (GLVApp& app) {
@@ -1790,7 +1797,7 @@ void cube (GLVApp& app) {
     SET
     
        
-        IT(f.num()) 
+        ITJ(i,f.num()) 
             frame[i].pos() = f[i]; 
             
             frame[i].orientX( f[i] * 2 ); 
@@ -1800,7 +1807,7 @@ void cube (GLVApp& app) {
     END 
     
     
-    IT(f.num())
+    ITJ(i,f.num())
         par[i] = frame[i].tx( frame[i].scale() );
         pnt[i] = frame[i].pos();
         frame[i].push(); Vec::x.draw(0,0,0); frame[i].pop(); 
@@ -1842,26 +1849,29 @@ void bunny(GLVApp& app){
 
 void curvsurf(GLVApp& app){
 
-    static float num, spacing;
+    static float num, spacing,rad;
     
     SET
         app.gui(num, "num",1,100)(spacing, "spacing",0,100);
+        app.gui(rad, "rad",0,100);
     END 
     
     IT1(num)
         
-        Vec v((-1,0 + 2.0 * t) * spacing, 0, 0 );
+        Vec v((-1.0 + 2.0 * t) * spacing, 0, 0 );
         //Starting Line
         Lin lin = LN(0,0,1).trs(v);
         
         //radius
-        double r =  1/t ;
+        double r =  rad ;
         Par p = Tnv(0,1,0).trs(v);
-        Pnt_Pnt pp = (p);
-        pp[0] = r;
+        Pnt_Pnt pp = Gen::tpar(p * t);
+        pp[0] = rad;
         
         Cir c = lin.sp(pp);
-        c.draw();
+        double cur = Ro::cur(c);
+        glColor3f(1,0,0);
+        Draw::Seg(c, TWOPI * cur);//.draw();
         
     END 
 
@@ -1869,8 +1879,10 @@ void curvsurf(GLVApp& app){
 
 void GLVApp :: onDraw(){
    // bunny(*this);
-     //   cube(*this);
+    //    cube(*this);
     //sphere(*this);
+    //polarField(*this);
+    dupin(*this);
        //  boost(*this);
      // grid3(*this);
     //    circleToPoles(*this);
@@ -1880,7 +1892,7 @@ void GLVApp :: onDraw(){
     // dini(*this);
     //  homogenous(*this);
     //  interpolatedTangentLines(*this);
-  //    lineToCircle(*this);
+    //  lineToCircle(*this);
   //    reflection(*this);
   //    bendies(*this);
    //   interpolated(*this);

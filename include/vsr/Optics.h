@@ -530,7 +530,7 @@ namespace vsr {
         //vector<Seg*> seg;
         
 //        void draw(){
-//            IT(seg.size())
+//            ITJ(i,seg.size())
 //                switch( seg[i] -> id ){
 //                    case _CIR:
 //                    Draw::SegPnts(seg[i] -> states[0], seg[i] -> states[1], seg[i] -> states[2] );
@@ -543,14 +543,14 @@ namespace vsr {
 //        }
         void draw(){
             int it = 0;
-            IT(cirseg.size())
+            ITJ(i,cirseg.size())
                 Glyph::Line( Vec( linseg[i].pa ), Vec (linseg[i].pb ) );
                 Draw::SegPnts( cirseg[i].cir, cirseg[i].pa, cirseg[i].pb );
                 it++;
             END 
             if (bMet) Glyph::Line( Vec( linseg[it].pa), Vec( linseg[it].pb ) );
             
-            IT(refseg.size())
+            ITJ(i,refseg.size())
                 Glyph::Line( Vec( refseg[i].pa ), Vec (refseg[i].pb) );
             END
         }
@@ -558,7 +558,7 @@ namespace vsr {
         void print(const Camera& cam){
             string s = Print::Begin();
             int it = 0;
-            IT(cirseg.size())
+            ITJ(i,cirseg.size())
                 s += Print::PlotBegin(1, false);
                 s += Print::CircleSeg( cirseg[i].cir, cirseg[i].pa, cirseg[i].pb, cam ); 
                 s += Print::PlotEnd();
@@ -577,7 +577,7 @@ namespace vsr {
         
         void printReflections(const Camera& cam){
             string s = Print::Begin();
-             IT(refseg.size())
+             ITJ(i,refseg.size())
                 s += Print::Line( ( refseg[i].pa ), (refseg[i].pb), cam );
             END
             s += Print::End();
@@ -690,7 +690,7 @@ namespace vsr {
         
         Lens& trs( const State& s ) {
             position();
-            IT(2) os[i].cir = os[i].cir.trs( s ); END 
+            ITJ(i,2) os[i].cir = os[i].cir.trs( s ); END 
             structure();
         }
         

@@ -161,7 +161,7 @@ namespace vsr {
 	/* Default Generic Initialization */
     template<class T>
    void  Lattice<T> :: init() {
-        IT(mNum)
+        ITJ(i,mNum)
         VAL(mNum)
         mData[i] = T(t);
         END 

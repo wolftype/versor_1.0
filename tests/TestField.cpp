@@ -39,7 +39,7 @@ void tst(GLVApp& app){
     
     app.camera().perspective() = bOrtho;
     
-    IT(f.num())
+    ITJ(i,f.num())
     
         app.interface.touch( f[i] );
     
@@ -56,7 +56,7 @@ void tst(GLVApp& app){
         bPrint = 0;
 
         cout << Print::Begin() << endl;
-        IT(f.num())
+        ITJ(i,f.num())
         cout << app.printTikz( f[i] ) << endl ;;
         END 
         cout << Print::End() << endl;
@@ -80,7 +80,7 @@ void plunges(GLVApp& app){
         
     if (s.size() < max) {
         
-        IT(s.size()-1)
+        ITJ(i,s.size()-1)
             
         Dls da = Ro::sur(s[i]); //da.draw(0,1,0,.2);
             
@@ -103,7 +103,7 @@ void plunges(GLVApp& app){
         END
     }
         
-    IT(s.size())
+    ITJ(i,s.size())
         s[i].draw();
         app.interface.touch(s[i]); 
     END
@@ -130,19 +130,19 @@ void ripples(GLVApp& app){
 
         //f.jitter(1);
     
-    IT(f.num()) c.add( f[i] ); vel.add( Rand::Num(.5,.8) ); END
+    ITJ(i,f.num()) c.add( f[i] ); vel.add( Rand::Num(.5,.8) ); END
             
         
     END
     
-    //IT(f.num()) f[i].draw(); END 
+    //ITJ(i,f.num()) f[i].draw(); END 
     
     Set<float> tmpv; Set<Cir> tmpc;
     
     if ( c.size() > 0 && c.size() < max) {
         cout << "calculating...."<<endl; 
         
-        IT(c.size()-1)
+        ITJ(i,c.size()-1)
             Dls da = Ro::sur(c[i]);
         
         for (int j = i + 1; j < c.size(); ++j){
@@ -209,13 +209,13 @@ void ripples2(GLVApp& app){
     
             app.gui(sizeProb, "size_prob", 0,100)(makeProb, "make_prob", 0, 100);
                             
-        IT(f.num()) c.add( f.grid(i) ); vel.add( Rand::Num(.6, 1.5) ); END
+        ITJ(i,f.num()) c.add( f.grid(i) ); vel.add( Rand::Num(.6, 1.5) ); END
     
     END
     
     //ADD RANDOM NUMBER OF spheres
     if (c.size() <= 1){
-        IT(10)
+        ITJ(i,10)
         Dls tc = Ro::dls3( Rand::Num(-2,2), Rand::Num(-2,2), 0, Rand::Num(.1,.3) );
         c.add( tc ); vel.add( Rand::Num(.5,1) );
         END 
@@ -228,7 +228,7 @@ void ripples2(GLVApp& app){
     if ( c.size() > 0 && c.size() < max ) {
        // cout << "calculating...."<<endl; 
         
-        IT(c.size()-1)
+        ITJ(i,c.size()-1)
         
             int n = 0;
             for (int j = i + 1; j < c.size(); ++j){
@@ -302,7 +302,7 @@ void scalar(GLVApp& app){
     
     cout << app.mouse().pos << endl; 
         
-    IT(f.size())
+    ITJ(i,f.size())
     
         Vec v = GL::sproject( f.grid(i).w(), app.camera() ); 
         double s = (app.mouse().pos - v).norm();
