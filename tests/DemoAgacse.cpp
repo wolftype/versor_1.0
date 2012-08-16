@@ -3,6 +3,7 @@
 //  vsr
 //
 //  Created by Pablo Colapinto on 6/28/12.
+//  FOR A DEMO at AGACSE LA ROCHELLE 2012
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
