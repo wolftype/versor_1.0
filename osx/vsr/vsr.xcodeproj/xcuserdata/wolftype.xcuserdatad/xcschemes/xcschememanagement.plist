@@ -49,6 +49,11 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
+		<key>TestStaticVsr.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
 		<key>TestTransformation.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -186,6 +191,11 @@
 			<true/>
 		</dict>
 		<key>9BA4B2F71547491700C15100</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BBBDFE515DDC0DC00BDE419</key>
 		<dict>
 			<key>primary</key>
 			<true/>

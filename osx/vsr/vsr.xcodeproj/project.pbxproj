@@ -4995,6 +4995,7 @@
 		9BA4B326154892B700C15100 /* nurbs.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = nurbs.vert; path = ../../resources/shaders/nurbs.vert; sourceTree = "<group>"; };
 		9BA4B327154892CC00C15100 /* nurbs.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = nurbs.frag; path = ../../resources/shaders/nurbs.frag; sourceTree = "<group>"; };
 		9BA4B3281548951500C15100 /* dist.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = dist.vert; path = ../../resources/shaders/dist.vert; sourceTree = "<group>"; };
+		9BBBDFEB15DDC0DC00BDE419 /* TestStaticVsr.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestStaticVsr.1; sourceTree = "<group>"; };
 		9BC1720615225AA300A1128C /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
 		9BC1720815225E6900A1128C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		9BC1720A15225E9000A1128C /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
@@ -5327,6 +5328,7 @@
 		9B0D3DBD152CD5AD00AD875C /* Tests.1 */ = {
 			isa = PBXGroup;
 			children = (
+				9BBBDFE815DDC0DC00BDE419 /* TestStaticVsr */,
 				9B69B9821523E9FC00C308D4 /* TestVsrGlv2 */,
 				9BCECCDB1526759300589E30 /* TestLinkage */,
 				9BCECCF51527881500589E30 /* TestMeet */,
@@ -8004,6 +8006,14 @@
 				9B212BF3155B4033004CC73D /* Optics.h */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		9BBBDFE815DDC0DC00BDE419 /* TestStaticVsr */ = {
+			isa = PBXGroup;
+			children = (
+				9BBBDFEB15DDC0DC00BDE419 /* TestStaticVsr.1 */,
+			);
+			path = TestStaticVsr;
 			sourceTree = "<group>";
 		};
 		9BCEBA8B15671D4900FFE99E /* TestOptics */ = {

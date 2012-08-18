@@ -1,0 +1,16 @@
+	#include "vsr_templates.h"
+
+	using namespace std;
+
+	namespace vsr {
+		string Idx<>::name = "Null Set";
+		
+	    
+		string Idx<SCA>::name = "Sca";
+		string Idx<VEC>::name = "Vec";
+		string Idx<BIV>::name = "Biv";
+		string Idx<TRI>::name = "Tri";
+		string Idx<ROT>::name = "Rot";
+		string Idx<VEC_ROT>::name = "Vec_Rot";
+	}
+	

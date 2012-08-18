@@ -1917,6 +1917,9 @@ int main() {
     
     Rand::Seed();
     
+    State s = Biv(0,1,0) <= Pnt(1,0,1,1,1);
+    cout << s << endl;
+    
     Application::run();
     
     return 0;
