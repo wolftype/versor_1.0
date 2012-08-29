@@ -351,8 +351,8 @@ end
 
 
 -- local out =  "Vec ( Vec * Biv ) * Vec (Biv * Vec) "
-local exp =  "Rot * Rot * !Rot"
-print ( makeExp(exp) )
+--local exp =  "Rot * Rot * !Rot"
+--print ( makeExp(exp) )
 --evalGA(ct)
 --print (makeExp() )
 

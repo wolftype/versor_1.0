@@ -538,6 +538,13 @@ a[0] * b[13] + a[1] * b[3],
 a[0] * b[14] + a[1] * b[14]
 );
 }			
+		 
+inline Dil ip (const Dil& a, const Dil& b) { 
+	return Dil (
+a[0] * b[0] + a[1] * b[1],
+a[0] * b[1]
+);
+}			
 		  	
 inline Dil sp (const Dil& dil, const Rot& rot) {					
 					
@@ -587,25 +594,6 @@ Mot t5 = reverse( t4);
 return Dil (
 t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3],
 t3[7] * t5[0] - t3[8] * t5[1] - t3[9] * t5[2] - t3[10] * t5[3]
-);
-
-}
-		
-	
-	  	
-inline Dil sp (const Dil& dila, const Dil& dil) {					
-					
-const Dil& t1 = dila;
-const Dil& t2 = dil;
-Dil t3 (
-t1[0] * t2[0] + t1[1] * t2[1],
-t1[0] * t2[1] + t1[1] * t2[0]
-);
-const Dil& t4 = dil;
-Dil t5 = reverse( t4);
-return Dil (
-t3[0] * t5[0] + t3[1] * t5[1],
-t3[0] * t5[1] + t3[1] * t5[0]
 );
 
 }

@@ -600,30 +600,16 @@ a[1] * b[6] - a[2] * b[5] + a[3] * b[4],
 a[0] * b[14] + a[1] * b[9] - a[2] * b[8] + a[3] * b[7]
 );
 }			
+		 
+inline Rot ip (const Rot& a, const Rot& b) { 
+	return Rot (
+a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3],
+a[0] * b[1],
+a[0] * b[2],
+a[0] * b[3]
+);
+}			
 		  	
-inline Rot sp (const Rot& rota, const Rot& rotb) {					
-					
-const Rot& t1 = rota;
-const Rot& t2 = rotb;
-Rot t3 (
-t1[0] * t2[0] - t1[1] * t2[1] - t1[2] * t2[2] - t1[3] * t2[3],
-t1[0] * t2[1] + t1[1] * t2[0] - t1[2] * t2[3] + t1[3] * t2[2],
-t1[0] * t2[2] + t1[1] * t2[3] + t1[2] * t2[0] - t1[3] * t2[1],
-t1[0] * t2[3] - t1[1] * t2[2] + t1[2] * t2[1] + t1[3] * t2[0]
-);
-const Rot& t4 = rotb;
-Rot t5 = reverse( t4);
-return Rot (
-t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3],
-t3[0] * t5[1] + t3[1] * t5[0] - t3[2] * t5[3] + t3[3] * t5[2],
-t3[0] * t5[2] + t3[1] * t5[3] + t3[2] * t5[0] - t3[3] * t5[1],
-t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0]
-);
-
-}
-		
-	
-	  	
 inline Rot sp (const Rot& rot, const Mot& mot) {					
 					
 const Mot& t1 = mot;

@@ -5029,6 +5029,8 @@
 		9BCECD0B1527BDC400589E30 /* TestTransformation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestTransformation; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCECD101527BDC500589E30 /* TestTransformation.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestTransformation.1; sourceTree = "<group>"; };
 		9BCECD1D1527BE0900589E30 /* TestTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestTransformation.cpp; path = ../../tests/TestTransformation.cpp; sourceTree = "<group>"; };
+		9BF4FE6515E6E37A000D6508 /* libfreenect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreenect.a; path = ../../../../../../sw/lib/libfreenect.a; sourceTree = "<group>"; };
+		9BF4FE6715E6E3CF000D6508 /* libfreenect.0.1.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreenect.0.1.2.dylib; path = ../../../../../../sw/lib/libfreenect.0.1.2.dylib; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* vsr.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -5481,6 +5483,8 @@
 		9B4780361523C77B008A3481 /* external lib */ = {
 			isa = PBXGroup;
 			children = (
+				9BF4FE6515E6E37A000D6508 /* libfreenect.a */,
+				9BF4FE6715E6E3CF000D6508 /* libfreenect.0.1.2.dylib */,
 				9B415E4F159F4DBB0089BE8E /* osc */,
 				9B75AA1D154B5509004FFAAA /* gl2ps */,
 				9B6FDED315545D3A0070D3E3 /* Gamma */,

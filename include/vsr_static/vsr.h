@@ -91,5 +91,7 @@
 	#include "Tst.h"
 	
 	#include "Tvt.h"
+    
+    #include "versorFuncs.h"
 	
 	#endif

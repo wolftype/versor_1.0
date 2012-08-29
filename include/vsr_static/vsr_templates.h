@@ -177,7 +177,7 @@
 		
 	};
 	
-	template<int A> struct Idx;
+	template<int A> struct Idx{ static const int Size = 0; static string name;};
 	
 	template<> struct Idx<ROT>{ static const int Size = 4; static string name;};
 	
@@ -509,7 +509,11 @@
 	
 	template<> struct Idx<PSS_HYP_DRV_TNB>{ static const int Size = 8; static string name;};
 	
-			template<int A, int B> struct ProductIdx;
+        template<int A, int B> struct ProductIdx{
+            static const int GP = 0;
+            static const int OP = 0;
+            static const int IP = 0;
+        };
 		
 		template<> struct ProductIdx<SCA, SCA> {
 			static const int GP = SCA;

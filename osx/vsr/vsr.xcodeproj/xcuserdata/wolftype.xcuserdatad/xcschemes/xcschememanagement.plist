@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
+		<key>TestKinect.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
 		<key>TestLinkage.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -231,6 +236,11 @@
 			<true/>
 		</dict>
 		<key>9BCECD0A1527BDC400589E30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BF4FE5015E6DB5B000D6508</key>
 		<dict>
 			<key>primary</key>
 			<true/>

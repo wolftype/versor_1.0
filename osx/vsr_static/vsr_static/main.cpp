@@ -9,29 +9,31 @@
 #include <iostream>
 
 #include "vsr.h"
+#include "vsr_op.h"
 
 int main (int argc, const char * argv[])
 {
 
     using namespace vsr;
-    Vec v1(0,2,1);
-    Rot r1 (1,1,0,1);
+
+    Flp flp();
     
-    Biv b (v1);
-    Biv b2 (r1);
+    Cir c = Vec(1,1,1).null() ^ Vec(2,0,0).null() ^ Vec(3,1,1).null();
     
-    Dll dll (0,1,1,0,2,2);
+    Vec va[1000];
     
-    Drb drb (1,1,1);
-    Sta sta;
+    for (int i = 0; i < 1000; ++i){
+        double t = 1.0 * i/1000;
+        va[i] = Vec(1,0,0).rot( (Biv(t,0,0)));
+        
+        cout << va[i] << endl; 
+    }
     
+    cout << c << c.involution() << endl;
     
-    Mot mot(dll);
-    Pnt pnt(0,0,0,1,-.5);
-    
-    
-    // insert code here...
-    std::cout << (drb<=sta) << v1 << r1 << b << b2 << dll * b << (  sp(v1, r1) ) << sp(pnt, mot);
-    return 0;
+//    Rot rot = Op::gptest(Vec(1,0,1), Vec(2,2,0) );
+
+//    cout << rot << endl; 
+    return 0; 
 }
 

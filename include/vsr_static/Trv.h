@@ -649,6 +649,15 @@ a[1] * b[3] + a[1] * b[13] - a[2] * b[2] - a[2] * b[12] + a[3] * b[1] + a[3] * b
 a[0] * b[14]
 );
 }			
+		 
+inline Trv ip (const Trv& a, const Trv& b) { 
+	return Trv (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+a[0] * b[3]
+);
+}			
 		  	
 inline Trv sp (const Trv& trv, const Rot& rot) {					
 					
@@ -730,29 +739,6 @@ t3[0] * t5[0] + t3[4] * t5[1],
 t3[1] * t5[0] + t3[1] * t5[1],
 t3[2] * t5[0] + t3[2] * t5[1],
 t3[3] * t5[0] + t3[3] * t5[1]
-);
-
-}
-		
-	
-	  	
-inline Trv sp (const Trv& trva, const Trv& trv) {					
-					
-const Trv& t1 = trva;
-const Trv& t2 = trv;
-Trv t3 (
-t1[0] * t2[0],
-t1[0] * t2[1] + t1[1] * t2[0],
-t1[0] * t2[2] + t1[2] * t2[0],
-t1[0] * t2[3] + t1[3] * t2[0]
-);
-const Trv& t4 = trv;
-Trv t5 = reverse( t4);
-return Trv (
-t3[0] * t5[0],
-t3[0] * t5[1] + t3[1] * t5[0],
-t3[0] * t5[2] + t3[2] * t5[0],
-t3[0] * t5[3] + t3[3] * t5[0]
 );
 
 }
