@@ -539,7 +539,8 @@ State Gen::mot(const State& dll){
 	
 	Vec tt = ( B.wt() == 0 ) ? t : tw * cc + tv;
 
-	State ts = B*tw;	
+	State ts = B*tw;
+    	
 	Mot mot;	
 	mot[0] = cc;
 	mot[1] = B[0]*sc;

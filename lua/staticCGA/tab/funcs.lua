@@ -394,15 +394,30 @@ makeVType = function (tx, lhid)
 end
 
 --casting
-makeCType = function (tx, rhid)
+makeCType = function (ctype, tx, rhid)
 
 	local out = "("
 	local sep = ","	
-	for i, iv in ipairs(tx) do
-		out = out .. rhid .. "["..iv[2].."]"
-		if ( i < #tx ) then out = out .. sep end
+	local res = {}
+	
+	for i = 1, #ctype.bases, 1 do
+		table.insert(res,-1)
 	end
+	
+	for i, iv in ipairs(tx)do
+		res[ iv[1] + 1 ] = iv[2]
+	end
+
+	for i = 1, #res, 1 do
+
+		if res[i] == -1 then out = out .. "0"
+		else out = out .. rhid .. "["..res[i].."]" end 	
+		if ( i < #res ) then out = out .. sep end
+		
+	end
+	
 	out = out .. ")"	
+	
 	return out	
 end
 
@@ -490,6 +505,8 @@ sym = {"op","ip", "gp"}
 for i, iv in pairs(sym) do
 --	pretty ( getProductListType( productList( Dll, Dll, iv) ) )
 end
+
+--print ( makeCType(Pnt, castList(Pnt,Vec), "a") )
 
 --TEST REQUIRE--
 --for i, iv in ipairs(States) do

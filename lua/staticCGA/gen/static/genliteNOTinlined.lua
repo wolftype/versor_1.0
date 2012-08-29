@@ -12,29 +12,25 @@ some returns cast in a way such that the intermediate types are not all necessar
 ]]
 
 --SET SEARCH PATHS FOR LUA REQUIRES
-package.path = "../tab/?.lua;" .. package.path
+package.path = "../../tab/?.lua;../../util/?.lua;" .. package.path
 
 require "types"
 require "funcs"
 require "cosmo"
+require "routines"
 require "grammar"
+require "headers"
 
 --SET FILE WRITE PATH
 local env = os.getenv("HOME")
-local cwd = dofile("../util/cwd.lua")
-local path = cwd.."../../../include/vsr_static/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/include/"
-local cpath = cwd.."../../../src/vsr_static/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/src/"
+local cwd = dofile("../../util/cwd.lua")
+local path = cwd.."../../../../include/vsr_static/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/include/"
+local cpath = cwd.."../../../../src/vsr_static/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/src/"
 local prefix = ""
 print (env)
 print (path)
 
---Table insertion
-local AddTab = function(x,y)
-	for i, iv in ipairs(y) do
-		table.insert(x,iv)
-	
-	end
-end
+
 --DEFINE OPERATORS
 local operators = {
 	op = "op",--"operator ^", 
@@ -83,23 +79,18 @@ AddTab(myMV, myVersors)
 local GPTypes ={}
 local OPTypes ={}
 local IPTypes ={}
+local SelfIPTypes = {}
 
 
 AddTab(GPTypes, myStates)
 AddTab(GPTypes, myVersors)
 AddTab(OPTypes, myStates)
 AddTab(IPTypes, myStates)
+AddTab(SelfIPTypes, myVersors)
 
-
-
-
---USEFUL FUNCS
-local up = function(x)
-	return string.upper(x)
-end
 
 --GENERATE typedef
-local typeGen = function()
+local genTypedefs = function()
 
 	local template = [[
 	#ifndef VSR_TYPEDEFS_H_INCLUDED
@@ -237,7 +228,7 @@ template<> inline $rtype $fname (const $arga& a) {
 					rtype = tx.id,
 					fname = "cast<" ..tx.id..","..ty.id ..">",
 					arga = ty.id,
-					cast = makeCType(list, "a")
+					cast = makeCType(tx, list, "a")
 				}
 			end
 		}
@@ -287,10 +278,10 @@ inline $rtype $fname (const $obj& $arga, const $gen& $argb) {
 end
 
 local pprint = function(output, method)
-	if method == "io" then
-		io.write(output)
-	else
+	if method == "" then
 		print(output)
+	else
+		io.write(output)
 	end
 end
 
@@ -430,69 +421,6 @@ end
 
 
 
---HEADERS AND FOOTERS
-local genMVHeader = function(tx)
-
-	local template = [[
-		#ifndef $guard
-		#define $guard
-		
-		#include "vsr_typedefs.h"
-		
-		namespace vsr{
-	]]
-	local code = cosmo.f(template){
-		guard = up(tx.id).."_H_INCLUDED"
-	}
-	return code
-end
-
-local genMVFooter = function()
-	local code = [[	
-	} //vsr::
-	#endif
-	]]
-	return code
-end
-
-local genFooter = function()
-	local code = [[	
-	} //vsr::
-	#endif
-	]]
-	return code
-end
-
-local genHeader1 = function(tx)
-
-	local template = [[
-	#ifndef $guard
-	#define $guard
-	
-	#include <string>
-
-	]]
-	local code = cosmo.f(template){
-		guard = up(tx).."_H_INCLUDED"
-	}
-	return code
-end
-local genHeader = function(tx)
-
-	local template = [[
-	#ifndef $guard
-	#define $guard
-	
-	#include <string>
-	
-	namespace vsr{
-	]]
-	local code = cosmo.f(template){
-		guard = up(tx).."_H_INCLUDED"
-	}
-	return code
-end
-
 
 
 local genericCast = function()
@@ -510,36 +438,21 @@ local genericCast = function()
 	return template
 end
 
---WRITE FUNCTIONS TO STD OUT OR FILE
-local genFunctions = function(dest)
-
-	--MAKE TYPEDEFS
-	--clear files
-	for i , iv in ipairs(myMV) do
-		local filename = prefix..iv.id..".h"				
-		io.output( io.open(path..filename, "w") ) 
-		io.close()
-	end
-	
-	
-	local filename = prefix.."vsr_typedefs.h"
+local genVsrTypedefs = function (dest)
+	local filename = prefix..dest..".h"
 	io.output( io.open(path..filename, "w") )
-	
 
-	pprint(typeGen(), dest)
+
+	pprint(genTypedefs(), dest)
 	io.write ( genericCast() )
+
 	--MAKE VERSIONS
-	for i, iv in ipairs(myTypes) do
-	
-		-- local filename = prefix..iv.id..".h"
-		-- io.output( io.open(path..filename, "w") )
-		-- 	
-		-- pprint( genMVHeader(iv), dest )
-	
+	for i, iv in ipairs(myMV) do
+
 		pprint(versionGen(iv, "involute"), dest)
 		pprint(versionGen(iv, "reverse"),dest)
 		pprint(versionGen(iv, "conjugate"),dest)
-		
+	
 		for k, kv in ipairs(myTypes) do
 			if iv.id ~= kv.id then
 				pprint(castGen(iv,kv), dest)
@@ -547,9 +460,28 @@ local genFunctions = function(dest)
 		end
 
 	end
-	
+
 	io.write(genFooter())
 	io.close();
+end
+
+--WRITE FUNCTIONS TO STD OUT OR FILE
+local genFunctions = function(dest)
+
+	--MAKE PRODUCTS
+	
+	--1. clear files
+	for i , iv in ipairs(myMV) do
+		
+		local filename = prefix..iv.id..".h"				
+		io.output( io.open(path..filename, "w") ) 
+		io.close()
+		
+		local filename = prefix..iv.id..".cpp"				
+		io.output( io.open(path..filename, "w") ) 
+		io.close()
+	
+	end
 	
 	for i,iv in ipairs(GPTypes) do
 
@@ -593,13 +525,26 @@ local genFunctions = function(dest)
 		
 	end
 	
+	for i,iv in ipairs(SelfIPTypes) do
+
+		local filename = prefix..iv.id..".h"
+		io.output( io.open(path..filename, "a") ) -- APPEND
+
+		pprint(productGen(iv,iv, "ip"),dest)
+		
+		io.close();
+		
+	end	
+	
 	for i , iv in ipairs(myMV) do
 	
 		local filename = prefix..iv.id..".h"				
 		io.output( io.open(path..filename, "a") ) -- APPEND
 		
 		for k, kv in ipairs(myVersors) do
-			pprint ( versorGen(iv, kv, "sp"),dest )
+			if iv.id ~= kv.id then
+				pprint ( versorGen(iv, kv, "sp"),dest )
+			end
 		--	pprint ( versorGen(iv, kv, "sp0"),dest )
 		end
 		io.close()
@@ -669,20 +614,13 @@ local genVsrTemplateC = function(dest)
 end
 
 
--- for i,iv in ipairs(GPTypes) do
--- 	for k,kv in ipairs(GPTypes) do
--- 		local glist = productList(iv, kv, "gp")
--- 		local gtyp =  getProductListType(glist)
--- 
--- 	end
--- end
 
 
 
-genVsrH("vsr")
-genVsrTemplateH("vsr_templates")
-genVsrTemplateC("vsr_templates")
-
+-- genVsrH("vsr")
+--genVsrTypedefs("vsr_typedefs")
+-- genVsrTemplateH("vsr_templates")
+-- genVsrTemplateC("vsr_templates")
 genFunctions("io")
 
 
