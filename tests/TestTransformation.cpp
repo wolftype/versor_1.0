@@ -445,11 +445,37 @@ void cirdir(GLVApp& app){
 }
 
 
-
+void reflections(GLVApp& app){
+    
+    cout << ( Ori(1) ^ PT(1,0,0) ^ Inf(1) ) << endl; 
+     cout << ( Aff(1,1,1).dual() ) << endl; 
+     cout << "afl" << ( Afl(1,1,1,1,1,1).dual() ) << endl; 
+    
+    static double v,t;
+    
+    SET app.gui(v)(t); END 
+    
+    Cir c = CXY(1);
+    
+    c.draw();
+    
+    static Lin dll = LN(1,0,0);
+    
+    app.interface.touch(dll);
+    
+    dll.draw();
+    
+    Lin ndll = dll.re( Hyp(v,t) );
+    ndll.draw(1,0,0);
+    
+    Cir c2 = c.re(dll);
+    c2.draw();
+    
+}
 
 void GLVApp :: onDraw(){
      //   trv(*this);
-    tangentFrame(*this);
+    //tangentFrame(*this);
     //circleSegments(*this);
     //spherePatches(*this);
     //tangentSpace(*this);
@@ -476,6 +502,8 @@ void GLVApp :: onDraw(){
    // simple(*this);
 
     //cirdir(*this);
+    
+    reflections(*this);
 }
 
 

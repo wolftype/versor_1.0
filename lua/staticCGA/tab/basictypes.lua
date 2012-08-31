@@ -30,6 +30,14 @@ local Tri = { id = "Tri", desc = "Trivector", bases = { _e123 } }
 local Aff = { id = "Aff", desc = "Affine Point", bases = {_e1,_e2,_e3,_no}}
 local Afl = { id = "Afl", desc = "Affine Line", bases = {_e12,_e13,_e23,_e1no,_e2no,_e3no}}
 local Afp = { id = "Afp", desc = "Affine Plane", bases = {_e12no,_e13no,_e23no,_e123}}
+--dual affine
+local Dap = { id = "Dap", desc = "Dual Affine Plane", bases = {_e1no, _e2no, _e3no, _noni}}
+local Daf = { id = "Daf", desc = "Dual Affine Point", bases = {_e12noni,  _e13noni,  _e23noni,  _e123no} }
+local Dal = { id = "Dal", desc = "Dual Affine Line", bases = {_e12no, _e13no, _e23no, _e1noni, _e2noni, _e3noni}}
+
+--
+Dfp = { id = "Dfp", desc = "Dual Flat Point", bases = {_e12ni, _e13ni, _e23ni, _e123, }, key = 6815872 }
+Bst = { id = "Bst", desc = "Booster", bases = {_s, _e12, _e13, _e23, _e1no, _e2no, _e3no, _e1ni, _e2ni, _e3ni, _noni, }, key = 18224745 }
 
 --PARAVECTOR
 local Prv = { id = "Prv", desc = "Paravector", bases = {_s, _e1, _e2, _e3}}
@@ -47,7 +55,7 @@ local BivNO = {id = "BivNO", bases = { _e1no, _e2no, _e3no }}
 local BivNI = { id = "BivNI", bases = { _e1ni, _e2ni, _e3ni }}
 local TriNO = { id = "TriNO", bases = {_e12no, _e13no, _e23no} }
 local TriNI = { id = "TriNI", bases = {_e12ni, _e13ni, _e23ni} }
-local TriNONI = { id = "TriNONI", bases = { _e1noni, _e2noni, _e3noni} }	--unknown
+local Mnv = { id = "Mnv", desc = "Minkowski Vector", bases = { _e1noni, _e2noni, _e3noni} }	--unknown
 local QuadNO = { id = "QuadNo", bases = { _e123no, } }
 local QuadNI = { id = "QuadNi", bases = { _e123ni, } }
 local QuadNONI = { id = "QuadNONI", bases = { _e12noni, _e13noni, _e23noni, } } --part of plane (minkowski plane * bivector)
@@ -131,7 +139,8 @@ basicTypes = {
 	--	5 Flats
 		Lin, 
 		Pln,
-		Flp,		 
+		Flp,
+		Dfp,		 
 		Dll,	
 		Dlp,
 
@@ -144,8 +153,28 @@ basicTypes = {
 		Aff,
 		Afl,
 		Afp,
+		
+	-- 3 Affine Dual
+		Dap,
+		Daf,
+		Dal,
+		
+	-- other
+		Mnv,
 }
 
+--reflect in these
+pinors = {
+	Vec,
+	Dlp,
+	Pln,
+	Dll,
+	Lin,
+	Pnt,
+	Par,
+	Cir,
+	Sph,
+}
 -- Generators
 generators = {
 	Rot,
@@ -164,6 +193,7 @@ generators = {
 	Rvd,
 	Tst,
 	Tvt,
+	Bst,
 	--paravector...
 	--Prv,
 }
