@@ -92,8 +92,8 @@ a[0] * b[0],
 );
 }			
 		 
-inline Sta_Drt gp (const Drt& a, const Sta& b) { 
-	return Sta_Drt (
+inline Inf_Dal gp (const Drt& a, const Sta& b) { 
+	return Inf_Dal (
 a[0] * b[5],
  - a[0] * b[4],
 a[0] * b[3],
@@ -172,6 +172,12 @@ inline Drt gp (const Drt& a, const Flp& b) {
 );
 }			
 		 
+inline Inf gp (const Drt& a, const Dfp& b) { 
+	return Inf (
+a[0] * b[3]
+);
+}			
+		 
 inline Drv gp (const Drt& a, const Dll& b) { 
 	return Drv (
  - a[0] * b[2],
@@ -220,8 +226,8 @@ a[0] * b[1],
 );
 }			
 		 
-inline Sta_Drt gp (const Drt& a, const Afl& b) { 
-	return Sta_Drt (
+inline Inf_Dal gp (const Drt& a, const Afl& b) { 
+	return Inf_Dal (
 a[0] * b[5],
  - a[0] * b[4],
 a[0] * b[3],
@@ -234,12 +240,56 @@ a[0] * b[3]
 );
 }			
 		 
-inline Drt_Afp gp (const Drt& a, const Afp& b) { 
-	return Drt_Afp (
+inline Inf_Dap gp (const Drt& a, const Afp& b) { 
+	return Inf_Dap (
 a[0] * b[2],
  - a[0] * b[1],
 a[0] * b[0],
 a[0] * b[3],
+a[0] * b[2],
+ - a[0] * b[1],
+a[0] * b[0]
+);
+}			
+		 
+inline Inf_Afp gp (const Drt& a, const Dap& b) { 
+	return Inf_Afp (
+a[0] * b[2],
+ - a[0] * b[1],
+a[0] * b[0],
+a[0] * b[2],
+ - a[0] * b[1],
+a[0] * b[0],
+ - a[0] * b[3]
+);
+}			
+		 
+inline Tsd gp (const Drt& a, const Daf& b) { 
+	return Tsd (
+ - a[0] * b[3],
+a[0] * b[2],
+ - a[0] * b[1],
+a[0] * b[0],
+ - a[0] * b[3]
+);
+}			
+		 
+inline Inf_Sta gp (const Drt& a, const Dal& b) { 
+	return Inf_Sta (
+a[0] * b[2],
+ - a[0] * b[1],
+a[0] * b[0],
+a[0] * b[5],
+ - a[0] * b[4],
+a[0] * b[3],
+a[0] * b[2],
+ - a[0] * b[1],
+a[0] * b[0]
+);
+}			
+		 
+inline Drb gp (const Drt& a, const Mnv& b) { 
+	return Drb (
 a[0] * b[2],
  - a[0] * b[1],
 a[0] * b[0]
@@ -439,6 +489,21 @@ a[0] * b[0] - a[0] * b[10]
 );
 }			
 		 
+inline Inf_Cir gp (const Drt& a, const Bst& b) { 
+	return Inf_Cir (
+a[0] * b[6],
+ - a[0] * b[5],
+a[0] * b[4],
+ - a[0] * b[3],
+a[0] * b[2],
+ - a[0] * b[1],
+a[0] * b[6],
+ - a[0] * b[5],
+a[0] * b[4],
+a[0] * b[0] - a[0] * b[10]
+);
+}			
+		 
 inline Drt op (const Drt& a, const Sca& b) { 
 	return Drt (
 a[0] * b[0]
@@ -543,6 +608,11 @@ inline Sca op (const Drt& a, const Flp& b) {
 );
 }			
 		 
+inline Sca op (const Drt& a, const Dfp& b) { 
+	return Sca (
+);
+}			
+		 
 inline Sca op (const Drt& a, const Dll& b) { 
 	return Sca (
 );
@@ -580,6 +650,26 @@ inline Sca op (const Drt& a, const Afl& b) {
 }			
 		 
 inline Sca op (const Drt& a, const Afp& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca op (const Drt& a, const Dap& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca op (const Drt& a, const Daf& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca op (const Drt& a, const Dal& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca op (const Drt& a, const Mnv& b) { 
 	return Sca (
 );
 }			
@@ -687,6 +777,11 @@ inline Sca ip (const Drt& a, const Flp& b) {
 );
 }			
 		 
+inline Sca ip (const Drt& a, const Dfp& b) { 
+	return Sca (
+);
+}			
+		 
 inline Sca ip (const Drt& a, const Dll& b) { 
 	return Sca (
 );
@@ -726,7 +821,29 @@ inline Sca ip (const Drt& a, const Afp& b) {
 	return Sca (
 );
 }			
+		 
+inline Sca ip (const Drt& a, const Dap& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca ip (const Drt& a, const Daf& b) { 
+	return Sca (
+ - a[0] * b[3]
+);
+}			
+		 
+inline Sca ip (const Drt& a, const Dal& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca ip (const Drt& a, const Mnv& b) { 
+	return Sca (
+);
+}			
 		  	
+template<>
 inline Drt sp (const Drt& drt, const Rot& rot) {					
 					
 const Rot& t1 = rot;
@@ -747,6 +864,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Mot& mot) {					
 					
 const Mot& t1 = mot;
@@ -767,6 +885,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Dil& dil) {					
 					
 const Dil& t1 = dil;
@@ -784,6 +903,7 @@ t3[0] * t5[0] - t3[0] * t5[1]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Trv& trv) {					
 					
 const Trv& t1 = trv;
@@ -807,6 +927,7 @@ t3[6] * t5[0]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Mtd& mtd) {					
 					
 const Mtd& t1 = mtd;
@@ -827,6 +948,7 @@ t3[0] * t5[3] - t3[0] * t5[10] - t3[1] * t5[2] + t3[1] * t5[9] + t3[2] * t5[1] -
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Trs& trs) {					
 					
 const Trs& t1 = trs;
@@ -844,6 +966,7 @@ t3[0] * t5[0]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Rtc& rtc) {					
 					
 const Rtc& t1 = rtc;
@@ -872,6 +995,7 @@ t3[0] * t5[10] - t3[1] * t5[9] + t3[2] * t5[8] - t3[3] * t5[14] + t3[3] * t5[15]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Mtt& mtt) {					
 					
 const Mtt& t1 = mtt;
@@ -900,6 +1024,7 @@ t3[0] * t5[15] + t3[1] * t5[9] - t3[2] * t5[8] + t3[3] * t5[7] + t3[4] * t5[3] -
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Rtt& rtt) {					
 					
 const Rtt& t1 = rtt;
@@ -928,6 +1053,7 @@ t3[4] * t5[3] - t3[5] * t5[2] + t3[6] * t5[1] + t3[11] * t5[0]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Rtd& rtd) {					
 					
 const Rtd& t1 = rtd;
@@ -948,6 +1074,7 @@ t3[0] * t5[3] - t3[0] * t5[7] - t3[1] * t5[2] + t3[1] * t5[6] + t3[2] * t5[1] - 
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Tvd& tvd) {					
 					
 const Tvd& t1 = tvd;
@@ -971,6 +1098,7 @@ t3[6] * t5[0] - t3[6] * t5[4]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Tsd& tsd) {					
 					
 const Tsd& t1 = tsd;
@@ -988,6 +1116,7 @@ t3[0] * t5[0] - t3[0] * t5[4]
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Trt& trt) {					
 					
 const Trt& t1 = trt;
@@ -1014,6 +1143,7 @@ t3[0] * t5[9] - t3[1] * t5[8] + t3[2] * t5[7] + t3[3] * t5[3] - t3[3] * t5[13] -
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Rvd& rvd) {					
 					
 const Rvd& t1 = rvd;
@@ -1042,6 +1172,7 @@ t3[4] * t5[3] - t3[4] * t5[10] - t3[5] * t5[2] + t3[5] * t5[9] + t3[6] * t5[1] -
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Tst& tst) {					
 					
 const Tst& t1 = tst;
@@ -1070,6 +1201,7 @@ t3[1] * t5[9] - t3[2] * t5[8] + t3[3] * t5[7] + t3[4] * t5[3] - t3[4] * t5[13] -
 		
 	
 	  	
+template<>
 inline Drt sp (const Drt& drt, const Tvt& tvt) {					
 					
 const Tvt& t1 = tvt;
@@ -1090,6 +1222,240 @@ const Tvt& t4 = tvt;
 Tvt t5 = reverse( t4);
 return Drt (
 t3[0] * t5[9] - t3[1] * t5[8] + t3[2] * t5[7] + t3[3] * t5[3] - t3[3] * t5[13] - t3[4] * t5[2] + t3[4] * t5[12] + t3[5] * t5[1] - t3[5] * t5[11] + t3[6] * t5[9] - t3[7] * t5[8] + t3[8] * t5[7] + t3[9] * t5[0] - t3[9] * t5[10]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt sp (const Drt& drt, const Bst& bst) {					
+					
+const Bst& t1 = bst;
+const Drt& t2 = drt;
+Inf_Cir t3 (
+t1[6] * t2[0],
+ - t1[5] * t2[0],
+t1[4] * t2[0],
+ - t1[3] * t2[0],
+t1[2] * t2[0],
+ - t1[1] * t2[0],
+ - t1[6] * t2[0],
+t1[5] * t2[0],
+ - t1[4] * t2[0],
+t1[0] * t2[0] + t1[10] * t2[0]
+);
+const Bst& t4 = bst;
+Bst t5 = reverse( t4);
+return Drt (
+t3[0] * t5[9] - t3[1] * t5[8] + t3[2] * t5[7] + t3[3] * t5[3] - t3[4] * t5[2] + t3[5] * t5[1] + t3[6] * t5[9] - t3[7] * t5[8] + t3[8] * t5[7] + t3[9] * t5[0] - t3[9] * t5[10]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Vec& vec) {					
+					
+const Vec& t1 = vec;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Drb t4 (
+t1[2] * t3[0],
+ - t1[1] * t3[0],
+t1[0] * t3[0]
+);
+const Vec& t5 = vec;
+Vec t6 = reverse( t5);
+return Drt (
+ - t4[0] * t6[2] + t4[1] * t6[1] - t4[2] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Dlp& dlp) {					
+					
+const Dlp& t1 = dlp;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Drb t4 (
+t1[2] * t3[0],
+ - t1[1] * t3[0],
+t1[0] * t3[0]
+);
+const Dlp& t5 = dlp;
+Dlp t6 = reverse( t5);
+return Drt (
+ - t4[0] * t6[2] + t4[1] * t6[1] - t4[2] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Pln& pln) {					
+					
+const Pln& t1 = pln;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Drv t4 (
+ - t1[2] * t3[0],
+t1[1] * t3[0],
+ - t1[0] * t3[0]
+);
+const Pln& t5 = pln;
+Pln t6 = reverse( t5);
+return Drt (
+ - t4[0] * t6[2] + t4[1] * t6[1] - t4[2] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Dll& dll) {					
+					
+const Dll& t1 = dll;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Drv t4 (
+ - t1[2] * t3[0],
+t1[1] * t3[0],
+ - t1[0] * t3[0]
+);
+const Dll& t5 = dll;
+Dll t6 = reverse( t5);
+return Drt (
+t4[0] * t6[2] - t4[1] * t6[1] + t4[2] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Lin& lin) {					
+					
+const Lin& t1 = lin;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Drb t4 (
+t1[5] * t3[0],
+ - t1[4] * t3[0],
+t1[3] * t3[0]
+);
+const Lin& t5 = lin;
+Lin t6 = reverse( t5);
+return Drt (
+t4[0] * t6[5] - t4[1] * t6[4] + t4[2] * t6[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Pnt& pnt) {					
+					
+const Pnt& t1 = pnt;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Inf_Sph t4 (
+t1[2] * t3[0],
+ - t1[1] * t3[0],
+t1[0] * t3[0],
+t1[3] * t3[0],
+ - t1[3] * t3[0]
+);
+const Pnt& t5 = pnt;
+Pnt t6 = reverse( t5);
+return Drt (
+ - t4[0] * t6[2] + t4[1] * t6[1] - t4[2] * t6[0] + t4[3] * t6[4] + t4[4] * t6[4]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Par& par) {					
+					
+const Par& t1 = par;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Inf_Cir t4 (
+t1[5] * t3[0],
+ - t1[4] * t3[0],
+t1[3] * t3[0],
+ - t1[2] * t3[0],
+t1[1] * t3[0],
+ - t1[0] * t3[0],
+ - t1[5] * t3[0],
+t1[4] * t3[0],
+ - t1[3] * t3[0],
+t1[9] * t3[0]
+);
+const Par& t5 = par;
+Par t6 = reverse( t5);
+return Drt (
+t4[0] * t6[8] - t4[1] * t6[7] + t4[2] * t6[6] + t4[3] * t6[2] - t4[4] * t6[1] + t4[5] * t6[0] + t4[6] * t6[8] - t4[7] * t6[7] + t4[8] * t6[6] - t4[9] * t6[9]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Cir& cir) {					
+					
+const Cir& t1 = cir;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Inf_Par t4 (
+ - t1[2] * t3[0],
+t1[1] * t3[0],
+ - t1[0] * t3[0],
+ - t1[9] * t3[0],
+t1[8] * t3[0],
+ - t1[7] * t3[0],
+t1[6] * t3[0],
+t1[2] * t3[0],
+ - t1[1] * t3[0],
+t1[0] * t3[0]
+);
+const Cir& t5 = cir;
+Cir t6 = reverse( t5);
+return Drt (
+t4[0] * t6[5] - t4[1] * t6[4] + t4[2] * t6[3] - t4[3] * t6[9] + t4[4] * t6[8] - t4[5] * t6[7] + t4[6] * t6[6] + t4[7] * t6[5] - t4[8] * t6[4] + t4[9] * t6[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Drt re (const Drt& drt, const Sph& sph) {					
+					
+const Sph& t1 = sph;
+const Drt& t2 = drt;
+Drt t3 = involute( t2);
+Tsd t4 (
+ - t1[3] * t3[0],
+ - t1[2] * t3[0],
+t1[1] * t3[0],
+ - t1[0] * t3[0],
+t1[3] * t3[0]
+);
+const Sph& t5 = sph;
+Sph t6 = reverse( t5);
+return Drt (
+t4[0] * t6[4] - t4[1] * t6[2] + t4[2] * t6[1] - t4[3] * t6[0] + t4[4] * t6[4]
 );
 
 }

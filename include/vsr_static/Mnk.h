@@ -179,6 +179,15 @@ a[0] * b[2]
 );
 }			
 		 
+inline Mnk_Dfp gp (const Mnk& a, const Dfp& b) { 
+	return Mnk_Dfp (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+a[0] * b[3]
+);
+}			
+		 
 inline Mnk_Dll gp (const Mnk& a, const Dll& b) { 
 	return Mnk_Dll (
 a[0] * b[3],
@@ -199,8 +208,8 @@ a[0] * b[2]
 );
 }			
 		 
-inline Mnk_Vec gp (const Mnk& a, const Vec& b) { 
-	return Mnk_Vec (
+inline Mnv gp (const Mnk& a, const Vec& b) { 
+	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
@@ -250,8 +259,45 @@ a[0] * b[3]
 );
 }			
 		 
-inline Pss_Vec_Biv gp (const Mnk& a, const Rot& b) { 
-	return Pss_Vec_Biv (
+inline Trv gp (const Mnk& a, const Dap& b) { 
+	return Trv (
+a[0] * b[3],
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2]
+);
+}			
+		 
+inline Mnk_Daf gp (const Mnk& a, const Daf& b) { 
+	return Mnk_Daf (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+ - a[0] * b[3]
+);
+}			
+		 
+inline Mnk_Dal gp (const Mnk& a, const Dal& b) { 
+	return Mnk_Dal (
+a[0] * b[3],
+a[0] * b[4],
+a[0] * b[5],
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2]
+);
+}			
+		 
+inline Vec gp (const Mnk& a, const Mnv& b) { 
+	return Vec (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
+);
+}			
+		 
+inline Vec_Mnv gp (const Mnk& a, const Rot& b) { 
+	return Vec_Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2],
@@ -279,8 +325,8 @@ a[0] * b[0]
 );
 }			
 		 
-inline Pss_Afp gp (const Mnk& a, const Trv& b) { 
-	return Pss_Afp (
+inline Dap gp (const Mnk& a, const Trv& b) { 
+	return Dap (
  - a[0] * b[1],
  - a[0] * b[2],
  - a[0] * b[3],
@@ -356,8 +402,8 @@ a[0] * b[15]
 );
 }			
 		 
-inline Pss_Vec_Afl gp (const Mnk& a, const Rtt& b) { 
-	return Pss_Vec_Afl (
+inline Vec_Dal gp (const Mnk& a, const Rtt& b) { 
+	return Vec_Dal (
  - a[0] * b[4],
  - a[0] * b[5],
  - a[0] * b[6],
@@ -478,6 +524,22 @@ a[0] * b[14]
 );
 }			
 		 
+inline Pss_Mnk_Pnt_Sph gp (const Mnk& a, const Bst& b) { 
+	return Pss_Mnk_Pnt_Sph (
+a[0] * b[10],
+ - a[0] * b[4],
+ - a[0] * b[5],
+ - a[0] * b[6],
+a[0] * b[7],
+a[0] * b[8],
+a[0] * b[9],
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+a[0] * b[3]
+);
+}			
+		 
 inline Mnk op (const Mnk& a, const Sca& b) { 
 	return Mnk (
 a[0] * b[0]
@@ -509,8 +571,8 @@ inline Sca op (const Mnk& a, const Pss& b) {
 );
 }			
 		 
-inline Mnk_Vec op (const Mnk& a, const Pnt& b) { 
-	return Mnk_Vec (
+inline Mnv op (const Mnk& a, const Pnt& b) { 
+	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
@@ -589,6 +651,12 @@ inline Sca op (const Mnk& a, const Flp& b) {
 );
 }			
 		 
+inline Pss op (const Mnk& a, const Dfp& b) { 
+	return Pss (
+a[0] * b[3]
+);
+}			
+		 
 inline Mnk_Biv op (const Mnk& a, const Dll& b) { 
 	return Mnk_Biv (
 a[0] * b[0],
@@ -597,16 +665,16 @@ a[0] * b[2]
 );
 }			
 		 
-inline Mnk_Vec op (const Mnk& a, const Dlp& b) { 
-	return Mnk_Vec (
+inline Mnv op (const Mnk& a, const Dlp& b) { 
+	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
 );
 }			
 		 
-inline Mnk_Vec op (const Mnk& a, const Vec& b) { 
-	return Mnk_Vec (
+inline Mnv op (const Mnk& a, const Vec& b) { 
+	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
@@ -627,8 +695,8 @@ a[0] * b[0]
 );
 }			
 		 
-inline Mnk_Vec op (const Mnk& a, const Aff& b) { 
-	return Mnk_Vec (
+inline Mnv op (const Mnk& a, const Aff& b) { 
+	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
@@ -646,6 +714,26 @@ a[0] * b[2]
 inline Pss op (const Mnk& a, const Afp& b) { 
 	return Pss (
 a[0] * b[3]
+);
+}			
+		 
+inline Sca op (const Mnk& a, const Dap& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca op (const Mnk& a, const Daf& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca op (const Mnk& a, const Dal& b) { 
+	return Sca (
+);
+}			
+		 
+inline Sca op (const Mnk& a, const Mnv& b) { 
+	return Sca (
 );
 }			
 		 
@@ -765,6 +853,11 @@ a[0] * b[3]
 );
 }			
 		 
+inline Sca ip (const Mnk& a, const Dfp& b) { 
+	return Sca (
+);
+}			
+		 
 inline Sca ip (const Mnk& a, const Dll& b) { 
 	return Sca (
 );
@@ -804,12 +897,43 @@ inline Sca ip (const Mnk& a, const Afp& b) {
 	return Sca (
 );
 }			
+		 
+inline Sca ip (const Mnk& a, const Dap& b) { 
+	return Sca (
+a[0] * b[3]
+);
+}			
+		 
+inline Biv ip (const Mnk& a, const Daf& b) { 
+	return Biv (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
+);
+}			
+		 
+inline Vec ip (const Mnk& a, const Dal& b) { 
+	return Vec (
+a[0] * b[3],
+a[0] * b[4],
+a[0] * b[5]
+);
+}			
+		 
+inline Vec ip (const Mnk& a, const Mnv& b) { 
+	return Vec (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
+);
+}			
 		  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Rot& rot) {					
 					
 const Rot& t1 = rot;
 const Mnk& t2 = mnk;
-Pss_Vec_Biv t3 (
+Vec_Mnv t3 (
 t1[0] * t2[0],
 t1[1] * t2[0],
 t1[2] * t2[0],
@@ -825,6 +949,7 @@ t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Mot& mot) {					
 					
 const Mot& t1 = mot;
@@ -849,6 +974,7 @@ t3[3] * t5[0] - t3[4] * t5[1] - t3[5] * t5[2] - t3[6] * t5[3]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Dil& dil) {					
 					
 const Dil& t1 = dil;
@@ -867,11 +993,12 @@ t3[0] * t5[1] + t3[1] * t5[0]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Trv& trv) {					
 					
 const Trv& t1 = trv;
 const Mnk& t2 = mnk;
-Pss_Afp t3 (
+Dap t3 (
 t1[1] * t2[0],
 t1[2] * t2[0],
 t1[3] * t2[0],
@@ -887,6 +1014,7 @@ t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Mtd& mtd) {					
 					
 const Mtd& t1 = mtd;
@@ -915,6 +1043,7 @@ t3[0] * t5[7] - t3[1] * t5[8] - t3[2] * t5[9] - t3[3] * t5[10] + t3[7] * t5[0] -
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Trs& trs) {					
 					
 const Trs& t1 = trs;
@@ -935,6 +1064,7 @@ t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Rtc& rtc) {					
 					
 const Rtc& t1 = rtc;
@@ -967,6 +1097,7 @@ t3[0] * t5[11] + t3[1] * t5[12] + t3[2] * t5[13] + t3[3] * t5[4] - t3[4] * t5[3]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Mtt& mtt) {					
 					
 const Mtt& t1 = mtt;
@@ -999,11 +1130,12 @@ t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Rtt& rtt) {					
 					
 const Rtt& t1 = rtt;
 const Mnk& t2 = mnk;
-Pss_Vec_Afl t3 (
+Vec_Dal t3 (
 t1[4] * t2[0],
 t1[5] * t2[0],
 t1[6] * t2[0],
@@ -1023,6 +1155,7 @@ t3[3] * t5[0] - t3[4] * t5[1] - t3[5] * t5[2] - t3[6] * t5[3]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Rtd& rtd) {					
 					
 const Rtd& t1 = rtd;
@@ -1047,6 +1180,7 @@ t3[0] * t5[4] - t3[1] * t5[5] - t3[2] * t5[6] - t3[3] * t5[7] + t3[4] * t5[0] - 
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Tvd& tvd) {					
 					
 const Tvd& t1 = tvd;
@@ -1068,6 +1202,7 @@ t3[0] * t5[4] + t3[4] * t5[0]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Tsd& tsd) {					
 					
 const Tsd& t1 = tsd;
@@ -1089,6 +1224,7 @@ t3[0] * t5[4] + t3[4] * t5[0]
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Trt& trt) {					
 					
 const Trt& t1 = trt;
@@ -1119,6 +1255,7 @@ t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Rvd& rvd) {					
 					
 const Rvd& t1 = rvd;
@@ -1147,6 +1284,7 @@ t3[0] * t5[7] - t3[1] * t5[8] - t3[2] * t5[9] - t3[3] * t5[10] + t3[7] * t5[0] -
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Tst& tst) {					
 					
 const Tst& t1 = tst;
@@ -1178,6 +1316,7 @@ t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7
 		
 	
 	  	
+template<>
 inline Mnk sp (const Mnk& mnk, const Tvt& tvt) {					
 					
 const Tvt& t1 = tvt;
@@ -1203,6 +1342,249 @@ const Tvt& t4 = tvt;
 Tvt t5 = reverse( t4);
 return Mnk (
 t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7] - t3[5] * t5[8] - t3[6] * t5[9] + t3[7] * t5[4] + t3[8] * t5[5] + t3[9] * t5[6] + t3[10] * t5[0] - t3[11] * t5[1] - t3[12] * t5[2] - t3[13] * t5[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk sp (const Mnk& mnk, const Bst& bst) {					
+					
+const Bst& t1 = bst;
+const Mnk& t2 = mnk;
+Pss_Mnk_Pnt_Sph t3 (
+t1[10] * t2[0],
+t1[4] * t2[0],
+t1[5] * t2[0],
+t1[6] * t2[0],
+ - t1[7] * t2[0],
+ - t1[8] * t2[0],
+ - t1[9] * t2[0],
+t1[0] * t2[0],
+t1[1] * t2[0],
+t1[2] * t2[0],
+t1[3] * t2[0]
+);
+const Bst& t4 = bst;
+Bst t5 = reverse( t4);
+return Mnk (
+t3[0] * t5[10] - t3[1] * t5[7] - t3[2] * t5[8] - t3[3] * t5[9] + t3[4] * t5[4] + t3[5] * t5[5] + t3[6] * t5[6] + t3[7] * t5[0] - t3[8] * t5[1] - t3[9] * t5[2] - t3[10] * t5[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Vec& vec) {					
+					
+const Vec& t1 = vec;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnv t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Vec& t5 = vec;
+Vec t6 = reverse( t5);
+return Mnk (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Dlp& dlp) {					
+					
+const Dlp& t1 = dlp;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Dlp t4 (
+ - t1[3] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Dlp& t5 = dlp;
+Dlp t6 = reverse( t5);
+return Mnk (
+t4[1] * t6[0] + t4[2] * t6[1] + t4[3] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Pln& pln) {					
+					
+const Pln& t1 = pln;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Pln t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+ - t1[3] * t3[0]
+);
+const Pln& t5 = pln;
+Pln t6 = reverse( t5);
+return Mnk (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Dll& dll) {					
+					
+const Dll& t1 = dll;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Dll t4 (
+ - t1[3] * t3[0],
+ - t1[4] * t3[0],
+ - t1[5] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Dll& t5 = dll;
+Dll t6 = reverse( t5);
+return Mnk (
+ - t4[3] * t6[0] - t4[4] * t6[1] - t4[5] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Lin& lin) {					
+					
+const Lin& t1 = lin;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Lin t4 (
+t1[3] * t3[0],
+t1[4] * t3[0],
+t1[5] * t3[0],
+ - t1[0] * t3[0],
+ - t1[1] * t3[0],
+ - t1[2] * t3[0]
+);
+const Lin& t5 = lin;
+Lin t6 = reverse( t5);
+return Mnk (
+t4[0] * t6[3] + t4[1] * t6[4] + t4[2] * t6[5]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Pnt& pnt) {					
+					
+const Pnt& t1 = pnt;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Pnt t4 (
+t1[3] * t3[0],
+ - t1[4] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Pnt& t5 = pnt;
+Pnt t6 = reverse( t5);
+return Mnk (
+t4[0] * t6[4] - t4[1] * t6[3] + t4[2] * t6[0] + t4[3] * t6[1] + t4[4] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Par& par) {					
+					
+const Par& t1 = par;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Par t4 (
+t1[9] * t3[0],
+t1[3] * t3[0],
+t1[4] * t3[0],
+t1[5] * t3[0],
+ - t1[6] * t3[0],
+ - t1[7] * t3[0],
+ - t1[8] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Par& t5 = par;
+Par t6 = reverse( t5);
+return Mnk (
+t4[0] * t6[9] - t4[1] * t6[6] - t4[2] * t6[7] - t4[3] * t6[8] + t4[4] * t6[3] + t4[5] * t6[4] + t4[6] * t6[5] - t4[7] * t6[0] - t4[8] * t6[1] - t4[9] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Cir& cir) {					
+					
+const Cir& t1 = cir;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Cir t4 (
+t1[6] * t3[0],
+t1[7] * t3[0],
+t1[8] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+ - t1[3] * t3[0],
+ - t1[4] * t3[0],
+ - t1[5] * t3[0],
+t1[9] * t3[0]
+);
+const Cir& t5 = cir;
+Cir t6 = reverse( t5);
+return Mnk (
+t4[0] * t6[6] + t4[1] * t6[7] + t4[2] * t6[8] - t4[3] * t6[3] - t4[4] * t6[4] - t4[5] * t6[5] + t4[6] * t6[0] + t4[7] * t6[1] + t4[8] * t6[2] - t4[9] * t6[9]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Mnk re (const Mnk& mnk, const Sph& sph) {					
+					
+const Sph& t1 = sph;
+const Mnk& t2 = mnk;
+Mnk t3 = involute( t2);
+Mnk_Sph t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[3] * t3[0],
+ - t1[4] * t3[0]
+);
+const Sph& t5 = sph;
+Sph t6 = reverse( t5);
+return Mnk (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2] + t4[3] * t6[4] - t4[4] * t6[3]
 );
 
 }

@@ -25,159 +25,160 @@
 		 RVD = 14, 
 		 TST = 15, 
 		 TVT = 16, 
-		 SCA = 17, 
-		 ORI = 18, 
-		 INF = 19, 
-		 MNK = 20, 
-		 HYP = 21, 
-		 PSS = 22, 
-		 PNT = 23, 
-		 PAR = 24, 
-		 CIR = 25, 
-		 SPH = 26, 
-		 STA = 27, 
-		 DRV = 28, 
-		 DRB = 29, 
-		 DRT = 30, 
-		 TNV = 31, 
-		 TNB = 32, 
-		 TNT = 33, 
-		 LIN = 34, 
-		 PLN = 35, 
-		 FLP = 36, 
-		 DLL = 37, 
-		 DLP = 38, 
-		 VEC = 39, 
-		 BIV = 40, 
-		 TRI = 41, 
-		 AFF = 42, 
-		 AFL = 43, 
-		 AFP = 44, 
-		 ORI_ORI = 45, 
-		 ORI_PAR = 46, 
-		 ORI_CIR = 47, 
-		 ORI_SPH = 48, 
-		 ORI_STA = 49, 
-		 ORI_DRV = 50, 
-		 ORI_DRB = 51, 
-		 ORI_DRT = 52, 
-		 ORI_LIN = 53, 
-		 ORI_FLP = 54, 
-		 INF_PAR = 55, 
-		 INF_CIR = 56, 
-		 INF_SPH = 57, 
-		 INF_STA = 58, 
-		 INF_AFP = 59, 
-		 MNK_PNT = 60, 
-		 MNK_PAR = 61, 
-		 MNK_CIR = 62, 
-		 MNK_SPH = 63, 
-		 MNK_STA = 64, 
-		 MNK_LIN = 65, 
-		 MNK_PLN = 66, 
-		 MNK_DLL = 67, 
-		 MNK_DLP = 68, 
-		 MNK_VEC = 69, 
-		 MNK_BIV = 70, 
-		 MNK_AFF = 71, 
-		 MNK_AFL = 72, 
-		 MNK_AFP = 73, 
-		 HYP_PSS = 74, 
-		 HYP_PNT = 75, 
-		 HYP_PAR = 76, 
-		 HYP_CIR = 77, 
-		 HYP_SPH = 78, 
-		 HYP_STA = 79, 
-		 HYP_LIN = 80, 
-		 HYP_FLP = 81, 
-		 HYP_VEC = 82, 
-		 HYP_BIV = 83, 
-		 HYP_AFP = 84, 
-		 PSS_STA = 85, 
-		 PSS_FLP = 86, 
-		 PSS_AFF = 87, 
-		 PSS_AFL = 88, 
-		 PSS_AFP = 89, 
-		 PNT_PNT = 90, 
-		 PNT_PAR = 91, 
-		 PNT_CIR = 92, 
-		 PNT_SPH = 93, 
-		 PNT_LIN = 94, 
-		 PNT_FLP = 95, 
-		 PNT_DLL = 96, 
-		 PNT_VEC = 97, 
-		 PNT_BIV = 98, 
-		 PNT_AFL = 99, 
-		 PNT_AFP = 100, 
-		 PAR_DRB = 101, 
-		 PAR_TNB = 102, 
-		 PAR_BIV = 103, 
-		 PAR_AFP = 104, 
-		 CIR_FLP = 105, 
-		 CIR_BIV = 106, 
-		 SPH_FLP = 107, 
-		 SPH_VEC = 108, 
-		 SPH_BIV = 109, 
-		 SPH_AFL = 110, 
-		 SPH_AFP = 111, 
-		 STA_DRT = 112, 
-		 STA_VEC = 113, 
-		 STA_BIV = 114, 
-		 STA_TRI = 115, 
-		 DRV_TNB = 116, 
-		 DRV_LIN = 117, 
-		 DRV_PLN = 118, 
-		 DRV_AFP = 119, 
-		 DRB_AFP = 120, 
-		 DRT_AFP = 121, 
-		 TNV_FLP = 122, 
-		 TNV_VEC = 123, 
-		 TNV_BIV = 124, 
-		 TNB_FLP = 125, 
-		 TNT_FLP = 126, 
-		 LIN_PLN = 127, 
-		 LIN_FLP = 128, 
-		 LIN_DLL = 129, 
-		 LIN_DLP = 130, 
-		 PLN_PLN = 131, 
-		 PLN_FLP = 132, 
-		 PLN_DLP = 133, 
-		 PLN_BIV = 134, 
-		 FLP_DLL = 135, 
-		 FLP_DLP = 136, 
-		 FLP_TRI = 137, 
-		 FLP_AFP = 138, 
-		 DLP_BIV = 139, 
-		 VEC_BIV = 140, 
-		 VEC_AFF = 141, 
-		 VEC_AFL = 142, 
-		 VEC_AFP = 143, 
-		 BIV_AFF = 144, 
-		 BIV_AFP = 145, 
-		 TRI_AFF = 146, 
-		 TRI_AFL = 147, 
-		 MNK_PNT_PNT = 148, 
-		 MNK_PNT_SPH = 149, 
-		 MNK_PNT_LIN = 150, 
-		 MNK_PNT_DLL = 151, 
-		 MNK_PNT_AFL = 152, 
-		 MNK_SPH_AFL = 153, 
-		 MNK_STA_VEC = 154, 
-		 MNK_STA_BIV = 155, 
-		 MNK_VEC_BIV = 156, 
-		 MNK_VEC_AFF = 157, 
-		 MNK_VEC_AFL = 158, 
-		 MNK_VEC_AFP = 159, 
-		 MNK_BIV_AFF = 160, 
-		 MNK_BIV_AFP = 161, 
-		 HYP_DRV_TNB = 162, 
-		 PSS_VEC_BIV = 163, 
-		 PSS_VEC_AFL = 164, 
-		 PSS_HYP_DRV_TNB = 165 
+		 BST = 17, 
+		 SCA = 18, 
+		 ORI = 19, 
+		 INF = 20, 
+		 MNK = 21, 
+		 HYP = 22, 
+		 PSS = 23, 
+		 PNT = 24, 
+		 PAR = 25, 
+		 CIR = 26, 
+		 SPH = 27, 
+		 STA = 28, 
+		 DRV = 29, 
+		 DRB = 30, 
+		 DRT = 31, 
+		 TNV = 32, 
+		 TNB = 33, 
+		 TNT = 34, 
+		 LIN = 35, 
+		 PLN = 36, 
+		 FLP = 37, 
+		 DFP = 38, 
+		 DLL = 39, 
+		 DLP = 40, 
+		 VEC = 41, 
+		 BIV = 42, 
+		 TRI = 43, 
+		 AFF = 44, 
+		 AFL = 45, 
+		 AFP = 46, 
+		 DAP = 47, 
+		 DAF = 48, 
+		 DAL = 49, 
+		 MNV = 50, 
+		 ORI_ORI = 51, 
+		 ORI_PAR = 52, 
+		 ORI_CIR = 53, 
+		 ORI_SPH = 54, 
+		 ORI_STA = 55, 
+		 ORI_DRV = 56, 
+		 ORI_DRB = 57, 
+		 ORI_DRT = 58, 
+		 ORI_LIN = 59, 
+		 ORI_FLP = 60, 
+		 ORI_DFP = 61, 
+		 INF_PAR = 62, 
+		 INF_CIR = 63, 
+		 INF_SPH = 64, 
+		 INF_STA = 65, 
+		 INF_AFP = 66, 
+		 INF_DAP = 67, 
+		 INF_DAL = 68, 
+		 MNK_PNT = 69, 
+		 MNK_PAR = 70, 
+		 MNK_CIR = 71, 
+		 MNK_SPH = 72, 
+		 MNK_STA = 73, 
+		 MNK_LIN = 74, 
+		 MNK_PLN = 75, 
+		 MNK_DFP = 76, 
+		 MNK_DLL = 77, 
+		 MNK_DLP = 78, 
+		 MNK_BIV = 79, 
+		 MNK_AFF = 80, 
+		 MNK_AFL = 81, 
+		 MNK_AFP = 82, 
+		 MNK_DAF = 83, 
+		 MNK_DAL = 84, 
+		 HYP_PSS = 85, 
+		 HYP_PNT = 86, 
+		 HYP_PAR = 87, 
+		 HYP_CIR = 88, 
+		 HYP_SPH = 89, 
+		 HYP_STA = 90, 
+		 HYP_LIN = 91, 
+		 HYP_FLP = 92, 
+		 HYP_DFP = 93, 
+		 HYP_VEC = 94, 
+		 HYP_BIV = 95, 
+		 PSS_STA = 96, 
+		 PNT_PAR = 97, 
+		 PNT_CIR = 98, 
+		 PNT_SPH = 99, 
+		 PNT_LIN = 100, 
+		 PNT_FLP = 101, 
+		 PNT_DFP = 102, 
+		 PNT_DLL = 103, 
+		 PNT_VEC = 104, 
+		 PNT_BIV = 105, 
+		 PNT_AFL = 106, 
+		 PNT_AFP = 107, 
+		 PNT_DAP = 108, 
+		 PNT_DAL = 109, 
+		 PNT_MNV = 110, 
+		 PAR_DRB = 111, 
+		 PAR_TNB = 112, 
+		 PAR_DFP = 113, 
+		 PAR_BIV = 114, 
+		 PAR_AFP = 115, 
+		 PAR_MNV = 116, 
+		 SPH_VEC = 117, 
+		 STA_VEC = 118, 
+		 STA_BIV = 119, 
+		 STA_TRI = 120, 
+		 STA_MNV = 121, 
+		 DRV_TNB = 122, 
+		 DRV_LIN = 123, 
+		 DRV_PLN = 124, 
+		 DRV_AFP = 125, 
+		 DRV_DAP = 126, 
+		 TNV_FLP = 127, 
+		 TNV_DFP = 128, 
+		 TNV_VEC = 129, 
+		 TNV_BIV = 130, 
+		 LIN_PLN = 131, 
+		 LIN_FLP = 132, 
+		 LIN_DFP = 133, 
+		 LIN_DLL = 134, 
+		 LIN_DLP = 135, 
+		 PLN_PLN = 136, 
+		 PLN_FLP = 137, 
+		 PLN_DFP = 138, 
+		 PLN_DLP = 139, 
+		 PLN_BIV = 140, 
+		 PLN_MNV = 141, 
+		 FLP_AFP = 142, 
+		 VEC_BIV = 143, 
+		 VEC_AFF = 144, 
+		 VEC_AFL = 145, 
+		 VEC_AFP = 146, 
+		 VEC_DAP = 147, 
+		 VEC_DAF = 148, 
+		 VEC_DAL = 149, 
+		 VEC_MNV = 150, 
+		 BIV_AFF = 151, 
+		 BIV_AFP = 152, 
+		 BIV_DAP = 153, 
+		 BIV_DAF = 154, 
+		 BIV_DAL = 155, 
+		 BIV_MNV = 156, 
+		 MNK_PNT_SPH = 157, 
+		 MNK_PNT_LIN = 158, 
+		 MNK_PNT_DLL = 159, 
+		 MNK_PNT_AFL = 160, 
+		 MNK_PNT_DAL = 161, 
+		 MNK_STA_BIV = 162, 
+		 HYP_DRV_TNB = 163, 
+		 HYP_VEC_MNV = 164, 
+		 PSS_MNK_PNT_SPH = 165 
 		
 	};
 	
-	template<int A> struct Idx{ static const int Size = 0; static string name;};
+	template<int A> struct Idx{ static const int Size = 0; static string name; };
+	template<> struct Idx<0>{ static const int Size = 0; static string name;};
 	
 	template<> struct Idx<ROT>{ static const int Size = 4; static string name;};
 	
@@ -210,6 +211,8 @@
 	template<> struct Idx<TST>{ static const int Size = 15; static string name;};
 	
 	template<> struct Idx<TVT>{ static const int Size = 15; static string name;};
+	
+	template<> struct Idx<BST>{ static const int Size = 11; static string name;};
 	
 	template<> struct Idx<SCA>{ static const int Size = 1; static string name;};
 	
@@ -251,6 +254,8 @@
 	
 	template<> struct Idx<FLP>{ static const int Size = 4; static string name;};
 	
+	template<> struct Idx<DFP>{ static const int Size = 4; static string name;};
+	
 	template<> struct Idx<DLL>{ static const int Size = 6; static string name;};
 	
 	template<> struct Idx<DLP>{ static const int Size = 4; static string name;};
@@ -266,6 +271,14 @@
 	template<> struct Idx<AFL>{ static const int Size = 6; static string name;};
 	
 	template<> struct Idx<AFP>{ static const int Size = 4; static string name;};
+	
+	template<> struct Idx<DAP>{ static const int Size = 4; static string name;};
+	
+	template<> struct Idx<DAF>{ static const int Size = 4; static string name;};
+	
+	template<> struct Idx<DAL>{ static const int Size = 6; static string name;};
+	
+	template<> struct Idx<MNV>{ static const int Size = 3; static string name;};
 	
 	template<> struct Idx<ORI_ORI>{ static const int Size = 0; static string name;};
 	
@@ -287,6 +300,8 @@
 	
 	template<> struct Idx<ORI_FLP>{ static const int Size = 7; static string name;};
 	
+	template<> struct Idx<ORI_DFP>{ static const int Size = 7; static string name;};
+	
 	template<> struct Idx<INF_PAR>{ static const int Size = 10; static string name;};
 	
 	template<> struct Idx<INF_CIR>{ static const int Size = 10; static string name;};
@@ -296,6 +311,10 @@
 	template<> struct Idx<INF_STA>{ static const int Size = 9; static string name;};
 	
 	template<> struct Idx<INF_AFP>{ static const int Size = 7; static string name;};
+	
+	template<> struct Idx<INF_DAP>{ static const int Size = 7; static string name;};
+	
+	template<> struct Idx<INF_DAL>{ static const int Size = 9; static string name;};
 	
 	template<> struct Idx<MNK_PNT>{ static const int Size = 5; static string name;};
 	
@@ -311,11 +330,11 @@
 	
 	template<> struct Idx<MNK_PLN>{ static const int Size = 4; static string name;};
 	
+	template<> struct Idx<MNK_DFP>{ static const int Size = 4; static string name;};
+	
 	template<> struct Idx<MNK_DLL>{ static const int Size = 6; static string name;};
 	
 	template<> struct Idx<MNK_DLP>{ static const int Size = 4; static string name;};
-	
-	template<> struct Idx<MNK_VEC>{ static const int Size = 3; static string name;};
 	
 	template<> struct Idx<MNK_BIV>{ static const int Size = 3; static string name;};
 	
@@ -324,6 +343,10 @@
 	template<> struct Idx<MNK_AFL>{ static const int Size = 6; static string name;};
 	
 	template<> struct Idx<MNK_AFP>{ static const int Size = 4; static string name;};
+	
+	template<> struct Idx<MNK_DAF>{ static const int Size = 4; static string name;};
+	
+	template<> struct Idx<MNK_DAL>{ static const int Size = 6; static string name;};
 	
 	template<> struct Idx<HYP_PSS>{ static const int Size = 2; static string name;};
 	
@@ -341,23 +364,13 @@
 	
 	template<> struct Idx<HYP_FLP>{ static const int Size = 8; static string name;};
 	
+	template<> struct Idx<HYP_DFP>{ static const int Size = 8; static string name;};
+	
 	template<> struct Idx<HYP_VEC>{ static const int Size = 6; static string name;};
 	
 	template<> struct Idx<HYP_BIV>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<HYP_AFP>{ static const int Size = 8; static string name;};
-	
 	template<> struct Idx<PSS_STA>{ static const int Size = 9; static string name;};
-	
-	template<> struct Idx<PSS_FLP>{ static const int Size = 4; static string name;};
-	
-	template<> struct Idx<PSS_AFF>{ static const int Size = 4; static string name;};
-	
-	template<> struct Idx<PSS_AFL>{ static const int Size = 6; static string name;};
-	
-	template<> struct Idx<PSS_AFP>{ static const int Size = 4; static string name;};
-	
-	template<> struct Idx<PNT_PNT>{ static const int Size = 11; static string name;};
 	
 	template<> struct Idx<PNT_PAR>{ static const int Size = 15; static string name;};
 	
@@ -369,6 +382,8 @@
 	
 	template<> struct Idx<PNT_FLP>{ static const int Size = 11; static string name;};
 	
+	template<> struct Idx<PNT_DFP>{ static const int Size = 11; static string name;};
+	
 	template<> struct Idx<PNT_DLL>{ static const int Size = 14; static string name;};
 	
 	template<> struct Idx<PNT_VEC>{ static const int Size = 10; static string name;};
@@ -379,35 +394,33 @@
 	
 	template<> struct Idx<PNT_AFP>{ static const int Size = 11; static string name;};
 	
+	template<> struct Idx<PNT_DAP>{ static const int Size = 11; static string name;};
+	
+	template<> struct Idx<PNT_DAL>{ static const int Size = 14; static string name;};
+	
+	template<> struct Idx<PNT_MNV>{ static const int Size = 10; static string name;};
+	
 	template<> struct Idx<PAR_DRB>{ static const int Size = 12; static string name;};
 	
 	template<> struct Idx<PAR_TNB>{ static const int Size = 12; static string name;};
+	
+	template<> struct Idx<PAR_DFP>{ static const int Size = 15; static string name;};
 	
 	template<> struct Idx<PAR_BIV>{ static const int Size = 15; static string name;};
 	
 	template<> struct Idx<PAR_AFP>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<CIR_FLP>{ static const int Size = 15; static string name;};
-	
-	template<> struct Idx<CIR_BIV>{ static const int Size = 15; static string name;};
-	
-	template<> struct Idx<SPH_FLP>{ static const int Size = 11; static string name;};
+	template<> struct Idx<PAR_MNV>{ static const int Size = 15; static string name;};
 	
 	template<> struct Idx<SPH_VEC>{ static const int Size = 10; static string name;};
-	
-	template<> struct Idx<SPH_BIV>{ static const int Size = 10; static string name;};
-	
-	template<> struct Idx<SPH_AFL>{ static const int Size = 14; static string name;};
-	
-	template<> struct Idx<SPH_AFP>{ static const int Size = 11; static string name;};
-	
-	template<> struct Idx<STA_DRT>{ static const int Size = 9; static string name;};
 	
 	template<> struct Idx<STA_VEC>{ static const int Size = 12; static string name;};
 	
 	template<> struct Idx<STA_BIV>{ static const int Size = 12; static string name;};
 	
 	template<> struct Idx<STA_TRI>{ static const int Size = 9; static string name;};
+	
+	template<> struct Idx<STA_MNV>{ static const int Size = 12; static string name;};
 	
 	template<> struct Idx<DRV_TNB>{ static const int Size = 8; static string name;};
 	
@@ -417,23 +430,21 @@
 	
 	template<> struct Idx<DRV_AFP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<DRB_AFP>{ static const int Size = 11; static string name;};
-	
-	template<> struct Idx<DRT_AFP>{ static const int Size = 7; static string name;};
+	template<> struct Idx<DRV_DAP>{ static const int Size = 11; static string name;};
 	
 	template<> struct Idx<TNV_FLP>{ static const int Size = 11; static string name;};
+	
+	template<> struct Idx<TNV_DFP>{ static const int Size = 11; static string name;};
 	
 	template<> struct Idx<TNV_VEC>{ static const int Size = 4; static string name;};
 	
 	template<> struct Idx<TNV_BIV>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<TNB_FLP>{ static const int Size = 11; static string name;};
-	
-	template<> struct Idx<TNT_FLP>{ static const int Size = 7; static string name;};
-	
 	template<> struct Idx<LIN_PLN>{ static const int Size = 8; static string name;};
 	
 	template<> struct Idx<LIN_FLP>{ static const int Size = 7; static string name;};
+	
+	template<> struct Idx<LIN_DFP>{ static const int Size = 7; static string name;};
 	
 	template<> struct Idx<LIN_DLL>{ static const int Size = 8; static string name;};
 	
@@ -443,19 +454,15 @@
 	
 	template<> struct Idx<PLN_FLP>{ static const int Size = 7; static string name;};
 	
+	template<> struct Idx<PLN_DFP>{ static const int Size = 7; static string name;};
+	
 	template<> struct Idx<PLN_DLP>{ static const int Size = 7; static string name;};
 	
 	template<> struct Idx<PLN_BIV>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<FLP_DLL>{ static const int Size = 7; static string name;};
-	
-	template<> struct Idx<FLP_DLP>{ static const int Size = 7; static string name;};
-	
-	template<> struct Idx<FLP_TRI>{ static const int Size = 4; static string name;};
+	template<> struct Idx<PLN_MNV>{ static const int Size = 7; static string name;};
 	
 	template<> struct Idx<FLP_AFP>{ static const int Size = 14; static string name;};
-	
-	template<> struct Idx<DLP_BIV>{ static const int Size = 7; static string name;};
 	
 	template<> struct Idx<VEC_BIV>{ static const int Size = 4; static string name;};
 	
@@ -465,15 +472,25 @@
 	
 	template<> struct Idx<VEC_AFP>{ static const int Size = 7; static string name;};
 	
+	template<> struct Idx<VEC_DAP>{ static const int Size = 7; static string name;};
+	
+	template<> struct Idx<VEC_DAF>{ static const int Size = 7; static string name;};
+	
+	template<> struct Idx<VEC_DAL>{ static const int Size = 8; static string name;};
+	
+	template<> struct Idx<VEC_MNV>{ static const int Size = 4; static string name;};
+	
 	template<> struct Idx<BIV_AFF>{ static const int Size = 7; static string name;};
 	
 	template<> struct Idx<BIV_AFP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<TRI_AFF>{ static const int Size = 4; static string name;};
+	template<> struct Idx<BIV_DAP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<TRI_AFL>{ static const int Size = 6; static string name;};
+	template<> struct Idx<BIV_DAF>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<MNK_PNT_PNT>{ static const int Size = 11; static string name;};
+	template<> struct Idx<BIV_DAL>{ static const int Size = 8; static string name;};
+	
+	template<> struct Idx<BIV_MNV>{ static const int Size = 4; static string name;};
 	
 	template<> struct Idx<MNK_PNT_SPH>{ static const int Size = 11; static string name;};
 	
@@ -483,36 +500,20 @@
 	
 	template<> struct Idx<MNK_PNT_AFL>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<MNK_SPH_AFL>{ static const int Size = 14; static string name;};
-	
-	template<> struct Idx<MNK_STA_VEC>{ static const int Size = 12; static string name;};
+	template<> struct Idx<MNK_PNT_DAL>{ static const int Size = 14; static string name;};
 	
 	template<> struct Idx<MNK_STA_BIV>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<MNK_VEC_BIV>{ static const int Size = 4; static string name;};
-	
-	template<> struct Idx<MNK_VEC_AFF>{ static const int Size = 7; static string name;};
-	
-	template<> struct Idx<MNK_VEC_AFL>{ static const int Size = 8; static string name;};
-	
-	template<> struct Idx<MNK_VEC_AFP>{ static const int Size = 7; static string name;};
-	
-	template<> struct Idx<MNK_BIV_AFF>{ static const int Size = 7; static string name;};
-	
-	template<> struct Idx<MNK_BIV_AFP>{ static const int Size = 7; static string name;};
-	
 	template<> struct Idx<HYP_DRV_TNB>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<PSS_VEC_BIV>{ static const int Size = 4; static string name;};
+	template<> struct Idx<HYP_VEC_MNV>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<PSS_VEC_AFL>{ static const int Size = 8; static string name;};
+	template<> struct Idx<PSS_MNK_PNT_SPH>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<PSS_HYP_DRV_TNB>{ static const int Size = 8; static string name;};
-	
-        template<int A, int B> struct ProductIdx{
-            static const int GP = 0;
-            static const int OP = 0;
-            static const int IP = 0;
+			template<int A, int B> struct ProductIdx{
+            static const int GP = MUV;
+            static const int OP = MUV;
+            static const int IP = MUV;
         };
 		
 		template<> struct ProductIdx<SCA, SCA> {
@@ -635,6 +636,12 @@
 			static const int IP = FLP;
 		};
 		
+		template<> struct ProductIdx<SCA, DFP> {
+			static const int GP = DFP;
+			static const int OP = DFP;
+			static const int IP = DFP;
+		};
+		
 		template<> struct ProductIdx<SCA, DLL> {
 			static const int GP = DLL;
 			static const int OP = DLL;
@@ -681,6 +688,30 @@
 			static const int GP = AFP;
 			static const int OP = AFP;
 			static const int IP = AFP;
+		};
+		
+		template<> struct ProductIdx<SCA, DAP> {
+			static const int GP = DAP;
+			static const int OP = DAP;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<SCA, DAF> {
+			static const int GP = DAF;
+			static const int OP = DAF;
+			static const int IP = DAF;
+		};
+		
+		template<> struct ProductIdx<SCA, DAL> {
+			static const int GP = DAL;
+			static const int OP = DAL;
+			static const int IP = DAL;
+		};
+		
+		template<> struct ProductIdx<SCA, MNV> {
+			static const int GP = MNV;
+			static const int OP = MNV;
+			static const int IP = MNV;
 		};
 		
 		template<> struct ProductIdx<SCA, ROT> {
@@ -779,6 +810,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<SCA, BST> {
+			static const int GP = BST;
+			static const int OP = BST;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<ORI, SCA> {
 			static const int GP = ORI;
 			static const int OP = ORI;
@@ -817,19 +854,19 @@
 		
 		template<> struct ProductIdx<ORI, PNT> {
 			static const int GP = TVD;
-			static const int OP = PSS_AFP;
+			static const int OP = DAP;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<ORI, PAR> {
 			static const int GP = ORI_PAR;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = AFF;
 		};
 		
 		template<> struct ProductIdx<ORI, CIR> {
 			static const int GP = ORI_CIR;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = AFL;
 		};
 		
@@ -841,13 +878,13 @@
 		
 		template<> struct ProductIdx<ORI, STA> {
 			static const int GP = ORI_STA;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = VEC;
 		};
 		
 		template<> struct ProductIdx<ORI, DRV> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = VEC;
 		};
 		
@@ -895,19 +932,25 @@
 		
 		template<> struct ProductIdx<ORI, FLP> {
 			static const int GP = ORI_FLP;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<ORI, DFP> {
+			static const int GP = ORI_DFP;
+			static const int OP = DAF;
+			static const int IP = BIV;
 		};
 		
 		template<> struct ProductIdx<ORI, DLL> {
 			static const int GP = ORI_STA;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = VEC;
 		};
 		
 		template<> struct ProductIdx<ORI, DLP> {
 			static const int GP = TVD;
-			static const int OP = PSS_AFP;
+			static const int OP = DAP;
 			static const int IP = SCA;
 		};
 		
@@ -947,6 +990,30 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<ORI, DAP> {
+			static const int GP = ORI;
+			static const int OP = SCA;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<ORI, DAF> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = TNB;
+		};
+		
+		template<> struct ProductIdx<ORI, DAL> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = TNV;
+		};
+		
+		template<> struct ProductIdx<ORI, MNV> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = TNV;
+		};
+		
 		template<> struct ProductIdx<ORI, ROT> {
 			static const int GP = TNV_VEC;
 			static const int OP = TNV_VEC;
@@ -955,7 +1022,7 @@
 		
 		template<> struct ProductIdx<ORI, MOT> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = VEC_BIV;
 		};
 		
@@ -973,7 +1040,7 @@
 		
 		template<> struct ProductIdx<ORI, MTD> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = VEC_AFL;
 		};
 		
@@ -985,13 +1052,13 @@
 		
 		template<> struct ProductIdx<ORI, RTC> {
 			static const int GP = RVD;
-			static const int OP = PSS_VEC_AFL;
+			static const int OP = VEC_DAL;
 			static const int IP = RTT;
 		};
 		
 		template<> struct ProductIdx<ORI, MTT> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = VEC_AFL;
 		};
 		
@@ -1021,7 +1088,7 @@
 		
 		template<> struct ProductIdx<ORI, TRT> {
 			static const int GP = ORI_PAR;
-			static const int OP = MNK_BIV_AFP;
+			static const int OP = VEC_DAP;
 			static const int IP = BIV_AFP;
 		};
 		
@@ -1033,14 +1100,20 @@
 		
 		template<> struct ProductIdx<ORI, TST> {
 			static const int GP = ORI_PAR;
-			static const int OP = MNK_BIV_AFP;
+			static const int OP = VEC_DAP;
 			static const int IP = BIV_AFP;
 		};
 		
 		template<> struct ProductIdx<ORI, TVT> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<ORI, BST> {
+			static const int GP = ORI_PAR;
+			static const int OP = VEC_DAP;
+			static const int IP = AFF;
 		};
 		
 		template<> struct ProductIdx<INF, SCA> {
@@ -1100,7 +1173,7 @@
 		template<> struct ProductIdx<INF, SPH> {
 			static const int GP = INF_SPH;
 			static const int OP = PSS;
-			static const int IP = PSS_FLP;
+			static const int IP = DFP;
 		};
 		
 		template<> struct ProductIdx<INF, STA> {
@@ -1129,7 +1202,7 @@
 		
 		template<> struct ProductIdx<INF, TNV> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = VEC;
 		};
 		
@@ -1161,6 +1234,12 @@
 			static const int GP = INF;
 			static const int OP = SCA;
 			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<INF, DFP> {
+			static const int GP = DRT;
+			static const int OP = DRT;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<INF, DLL> {
@@ -1211,6 +1290,30 @@
 			static const int IP = BIV;
 		};
 		
+		template<> struct ProductIdx<INF, DAP> {
+			static const int GP = INF_DAP;
+			static const int OP = MNV;
+			static const int IP = DLP;
+		};
+		
+		template<> struct ProductIdx<INF, DAF> {
+			static const int GP = INF_SPH;
+			static const int OP = PSS;
+			static const int IP = DFP;
+		};
+		
+		template<> struct ProductIdx<INF, DAL> {
+			static const int GP = INF_DAL;
+			static const int OP = MNK_BIV;
+			static const int IP = DLL;
+		};
+		
+		template<> struct ProductIdx<INF, MNV> {
+			static const int GP = DRV;
+			static const int OP = SCA;
+			static const int IP = DRV;
+		};
+		
 		template<> struct ProductIdx<INF, ROT> {
 			static const int GP = DRV_LIN;
 			static const int OP = DRV_LIN;
@@ -1230,7 +1333,7 @@
 		};
 		
 		template<> struct ProductIdx<INF, TRV> {
-			static const int GP = DRT_AFP;
+			static const int GP = INF_DAP;
 			static const int OP = MNK_DLP;
 			static const int IP = VEC;
 		};
@@ -1272,7 +1375,7 @@
 		};
 		
 		template<> struct ProductIdx<INF, TVD> {
-			static const int GP = DRT_AFP;
+			static const int GP = INF_DAP;
 			static const int OP = MNK_DLP;
 			static const int IP = DLP;
 		};
@@ -1285,7 +1388,7 @@
 		
 		template<> struct ProductIdx<INF, TRT> {
 			static const int GP = INF_PAR;
-			static const int OP = FLP_DLP;
+			static const int OP = PLN_DFP;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -1303,8 +1406,14 @@
 		
 		template<> struct ProductIdx<INF, TVT> {
 			static const int GP = INF_PAR;
-			static const int OP = FLP_DLP;
+			static const int OP = PLN_DFP;
 			static const int IP = LIN_FLP;
+		};
+		
+		template<> struct ProductIdx<INF, BST> {
+			static const int GP = INF_PAR;
+			static const int OP = PLN_DFP;
+			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<MNK, SCA> {
@@ -1345,7 +1454,7 @@
 		
 		template<> struct ProductIdx<MNK, PNT> {
 			static const int GP = MNK_PNT;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -1427,6 +1536,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<MNK, DFP> {
+			static const int GP = MNK_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<MNK, DLL> {
 			static const int GP = MNK_DLL;
 			static const int OP = MNK_BIV;
@@ -1435,13 +1550,13 @@
 		
 		template<> struct ProductIdx<MNK, DLP> {
 			static const int GP = MNK_DLP;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<MNK, VEC> {
-			static const int GP = MNK_VEC;
-			static const int OP = MNK_VEC;
+			static const int GP = MNV;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -1459,7 +1574,7 @@
 		
 		template<> struct ProductIdx<MNK, AFF> {
 			static const int GP = MNK_AFF;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -1475,15 +1590,39 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<MNK, DAP> {
+			static const int GP = TRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNK, DAF> {
+			static const int GP = MNK_DAF;
+			static const int OP = SCA;
+			static const int IP = BIV;
+		};
+		
+		template<> struct ProductIdx<MNK, DAL> {
+			static const int GP = MNK_DAL;
+			static const int OP = SCA;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNK, MNV> {
+			static const int GP = VEC;
+			static const int OP = SCA;
+			static const int IP = VEC;
+		};
+		
 		template<> struct ProductIdx<MNK, ROT> {
-			static const int GP = PSS_VEC_BIV;
-			static const int OP = PSS_VEC_BIV;
+			static const int GP = VEC_MNV;
+			static const int OP = VEC_MNV;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<MNK, MOT> {
 			static const int GP = LIN_DLP;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = SCA;
 		};
 		
@@ -1494,14 +1633,14 @@
 		};
 		
 		template<> struct ProductIdx<MNK, TRV> {
-			static const int GP = PSS_AFP;
+			static const int GP = DAP;
 			static const int OP = MNK;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<MNK, MTD> {
 			static const int GP = MTD;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = ROT;
 		};
 		
@@ -1513,25 +1652,25 @@
 		
 		template<> struct ProductIdx<MNK, RTC> {
 			static const int GP = RTC;
-			static const int OP = MNK_VEC_BIV;
+			static const int OP = BIV_MNV;
 			static const int IP = VEC_BIV;
 		};
 		
 		template<> struct ProductIdx<MNK, MTT> {
 			static const int GP = MTT;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = ROT;
 		};
 		
 		template<> struct ProductIdx<MNK, RTT> {
-			static const int GP = PSS_VEC_AFL;
-			static const int OP = PSS_VEC_BIV;
+			static const int GP = VEC_DAL;
+			static const int OP = VEC_MNV;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<MNK, RTD> {
 			static const int GP = RTD;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = ROT;
 		};
 		
@@ -1549,26 +1688,32 @@
 		
 		template<> struct ProductIdx<MNK, TRT> {
 			static const int GP = TRT;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = ROT;
 		};
 		
 		template<> struct ProductIdx<MNK, RVD> {
 			static const int GP = RVD;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = ROT;
 		};
 		
 		template<> struct ProductIdx<MNK, TST> {
 			static const int GP = TST;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = ROT;
 		};
 		
 		template<> struct ProductIdx<MNK, TVT> {
 			static const int GP = TVT;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = ROT;
+		};
+		
+		template<> struct ProductIdx<MNK, BST> {
+			static const int GP = PSS_MNK_PNT_SPH;
+			static const int OP = VEC_MNV;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<HYP, SCA> {
@@ -1639,7 +1784,7 @@
 		
 		template<> struct ProductIdx<HYP, DRV> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = VEC;
 		};
 		
@@ -1657,7 +1802,7 @@
 		
 		template<> struct ProductIdx<HYP, TNV> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = VEC;
 		};
 		
@@ -1687,8 +1832,14 @@
 		
 		template<> struct ProductIdx<HYP, FLP> {
 			static const int GP = HYP_FLP;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<HYP, DFP> {
+			static const int GP = HYP_DFP;
+			static const int OP = SPH;
+			static const int IP = BIV;
 		};
 		
 		template<> struct ProductIdx<HYP, DLL> {
@@ -1734,20 +1885,44 @@
 		};
 		
 		template<> struct ProductIdx<HYP, AFP> {
-			static const int GP = HYP_AFP;
+			static const int GP = HYP_DFP;
 			static const int OP = SPH;
 			static const int IP = BIV;
 		};
 		
+		template<> struct ProductIdx<HYP, DAP> {
+			static const int GP = HYP_FLP;
+			static const int OP = MNV;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<HYP, DAF> {
+			static const int GP = HYP_SPH;
+			static const int OP = PSS;
+			static const int IP = MUV;
+		};
+		
+		template<> struct ProductIdx<HYP, DAL> {
+			static const int GP = HYP_LIN;
+			static const int OP = MNK_BIV;
+			static const int IP = STA;
+		};
+		
+		template<> struct ProductIdx<HYP, MNV> {
+			static const int GP = HYP_VEC;
+			static const int OP = SCA;
+			static const int IP = HYP_VEC;
+		};
+		
 		template<> struct ProductIdx<HYP, ROT> {
-			static const int GP = PSS_HYP_DRV_TNB;
-			static const int OP = PSS_HYP_DRV_TNB;
+			static const int GP = HYP_VEC_MNV;
+			static const int OP = HYP_VEC_MNV;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<HYP, MOT> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = VEC_BIV;
 		};
 		
@@ -1765,7 +1940,7 @@
 		
 		template<> struct ProductIdx<HYP, MTD> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = STA_VEC;
 		};
 		
@@ -1783,20 +1958,20 @@
 		
 		template<> struct ProductIdx<HYP, MTT> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = STA_VEC;
 		};
 		
 		template<> struct ProductIdx<HYP, RTT> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = VEC_BIV;
 		};
 		
 		template<> struct ProductIdx<HYP, RTD> {
-			static const int GP = PSS_HYP_DRV_TNB;
-			static const int OP = PSS_HYP_DRV_TNB;
-			static const int IP = PSS_HYP_DRV_TNB;
+			static const int GP = HYP_VEC_MNV;
+			static const int OP = HYP_VEC_MNV;
+			static const int IP = HYP_VEC_MNV;
 		};
 		
 		template<> struct ProductIdx<HYP, TVD> {
@@ -1819,20 +1994,26 @@
 		
 		template<> struct ProductIdx<HYP, RVD> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = STA_VEC;
 		};
 		
 		template<> struct ProductIdx<HYP, TST> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = STA_VEC;
 		};
 		
 		template<> struct ProductIdx<HYP, TVT> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = STA_VEC;
+		};
+		
+		template<> struct ProductIdx<HYP, BST> {
+			static const int GP = HYP_PAR;
+			static const int OP = MUV;
+			static const int IP = PNT;
 		};
 		
 		template<> struct ProductIdx<PSS, SCA> {
@@ -1950,7 +2131,13 @@
 		};
 		
 		template<> struct ProductIdx<PSS, FLP> {
-			static const int GP = PSS_FLP;
+			static const int GP = DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PSS, DFP> {
+			static const int GP = FLP;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -1974,7 +2161,7 @@
 		};
 		
 		template<> struct ProductIdx<PSS, BIV> {
-			static const int GP = MNK_VEC;
+			static const int GP = MNV;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -1986,25 +2173,49 @@
 		};
 		
 		template<> struct ProductIdx<PSS, AFF> {
-			static const int GP = PSS_AFF;
+			static const int GP = DAF;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<PSS, AFL> {
-			static const int GP = PSS_AFL;
+			static const int GP = DAL;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<PSS, AFP> {
-			static const int GP = PSS_AFP;
+			static const int GP = DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PSS, DAP> {
+			static const int GP = AFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PSS, DAF> {
+			static const int GP = AFF;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PSS, DAL> {
+			static const int GP = AFL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PSS, MNV> {
+			static const int GP = BIV;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<PSS, ROT> {
-			static const int GP = MNK_VEC_BIV;
+			static const int GP = BIV_MNV;
 			static const int OP = PSS;
 			static const int IP = SCA;
 		};
@@ -2034,7 +2245,7 @@
 		};
 		
 		template<> struct ProductIdx<PSS, TRS> {
-			static const int GP = FLP_TRI;
+			static const int GP = MNK_DFP;
 			static const int OP = PSS;
 			static const int IP = SCA;
 		};
@@ -2052,7 +2263,7 @@
 		};
 		
 		template<> struct ProductIdx<PSS, RTT> {
-			static const int GP = MNK_VEC_AFL;
+			static const int GP = BIV_DAL;
 			static const int OP = PSS;
 			static const int IP = SCA;
 		};
@@ -2094,7 +2305,13 @@
 		};
 		
 		template<> struct ProductIdx<PSS, TVT> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PSS, BST> {
+			static const int GP = PNT_SPH;
 			static const int OP = PSS;
 			static const int IP = SCA;
 		};
@@ -2107,7 +2324,7 @@
 		
 		template<> struct ProductIdx<PNT, ORI> {
 			static const int GP = TVD;
-			static const int OP = PSS_AFP;
+			static const int OP = DAP;
 			static const int IP = SCA;
 		};
 		
@@ -2119,7 +2336,7 @@
 		
 		template<> struct ProductIdx<PNT, MNK> {
 			static const int GP = MNK_PNT;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = HYP;
 		};
 		
@@ -2136,7 +2353,7 @@
 		};
 		
 		template<> struct ProductIdx<PNT, PNT> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = PAR;
 			static const int IP = SCA;
 		};
@@ -2180,18 +2397,18 @@
 		template<> struct ProductIdx<PNT, DRT> {
 			static const int GP = INF_SPH;
 			static const int OP = PSS;
-			static const int IP = PSS_FLP;
+			static const int IP = DFP;
 		};
 		
 		template<> struct ProductIdx<PNT, TNV> {
 			static const int GP = ORI_PAR;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = AFF;
 		};
 		
 		template<> struct ProductIdx<PNT, TNB> {
 			static const int GP = ORI_CIR;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = AFL;
 		};
 		
@@ -2219,6 +2436,12 @@
 			static const int IP = PNT;
 		};
 		
+		template<> struct ProductIdx<PNT, DFP> {
+			static const int GP = PNT_DFP;
+			static const int OP = SPH;
+			static const int IP = DLL;
+		};
+		
 		template<> struct ProductIdx<PNT, DLL> {
 			static const int GP = PNT_DLL;
 			static const int OP = CIR;
@@ -2226,7 +2449,7 @@
 		};
 		
 		template<> struct ProductIdx<PNT, DLP> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = PAR;
 			static const int IP = SCA;
 		};
@@ -2250,7 +2473,7 @@
 		};
 		
 		template<> struct ProductIdx<PNT, AFF> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = PAR;
 			static const int IP = SCA;
 		};
@@ -2265,6 +2488,30 @@
 			static const int GP = PNT_AFP;
 			static const int OP = SPH;
 			static const int IP = AFL;
+		};
+		
+		template<> struct ProductIdx<PNT, DAP> {
+			static const int GP = PNT_DAP;
+			static const int OP = DAL;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<PNT, DAF> {
+			static const int GP = PNT_SPH;
+			static const int OP = PSS;
+			static const int IP = CIR;
+		};
+		
+		template<> struct ProductIdx<PNT, DAL> {
+			static const int GP = PNT_DAL;
+			static const int OP = DAF;
+			static const int IP = PAR;
+		};
+		
+		template<> struct ProductIdx<PNT, MNV> {
+			static const int GP = PNT_MNV;
+			static const int OP = MNK_BIV;
+			static const int IP = MUV;
 		};
 		
 		template<> struct ProductIdx<PNT, ROT> {
@@ -2286,8 +2533,8 @@
 		};
 		
 		template<> struct ProductIdx<PNT, TRV> {
-			static const int GP = SPH_AFP;
-			static const int OP = SPH_AFP;
+			static const int GP = PNT_DAP;
+			static const int OP = PNT_DAP;
 			static const int IP = AFF;
 		};
 		
@@ -2328,8 +2575,8 @@
 		};
 		
 		template<> struct ProductIdx<PNT, TVD> {
-			static const int GP = SPH_AFP;
-			static const int OP = SPH_AFP;
+			static const int GP = PNT_DAP;
+			static const int OP = PNT_DAP;
 			static const int IP = PNT;
 		};
 		
@@ -2363,6 +2610,12 @@
 			static const int IP = PNT_PAR;
 		};
 		
+		template<> struct ProductIdx<PNT, BST> {
+			static const int GP = PNT_PAR;
+			static const int OP = PNT_PAR;
+			static const int IP = PNT;
+		};
+		
 		template<> struct ProductIdx<PAR, SCA> {
 			static const int GP = PAR;
 			static const int OP = PAR;
@@ -2371,7 +2624,7 @@
 		
 		template<> struct ProductIdx<PAR, ORI> {
 			static const int GP = ORI_PAR;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = SCA;
 		};
 		
@@ -2449,7 +2702,7 @@
 		
 		template<> struct ProductIdx<PAR, TNV> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -2481,6 +2734,12 @@
 			static const int GP = TVT;
 			static const int OP = PLN;
 			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PAR, DFP> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<PAR, DLL> {
@@ -2531,6 +2790,30 @@
 			static const int IP = AFF;
 		};
 		
+		template<> struct ProductIdx<PAR, DAP> {
+			static const int GP = TST;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PAR, DAF> {
+			static const int GP = PNT_CIR;
+			static const int OP = SCA;
+			static const int IP = PAR;
+		};
+		
+		template<> struct ProductIdx<PAR, DAL> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<PAR, MNV> {
+			static const int GP = PAR_MNV;
+			static const int OP = PSS;
+			static const int IP = PNT;
+		};
+		
 		template<> struct ProductIdx<PAR, ROT> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
@@ -2551,14 +2834,14 @@
 		
 		template<> struct ProductIdx<PAR, TRV> {
 			static const int GP = TST;
-			static const int OP = SPH_AFL;
+			static const int OP = PNT_DAL;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<PAR, MTD> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<PAR, TRS> {
@@ -2576,7 +2859,7 @@
 		template<> struct ProductIdx<PAR, MTT> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<PAR, RTT> {
@@ -2588,12 +2871,12 @@
 		template<> struct ProductIdx<PAR, RTD> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<PAR, TVD> {
 			static const int GP = TST;
-			static const int OP = SPH_AFL;
+			static const int OP = PNT_DAL;
 			static const int IP = SCA;
 		};
 		
@@ -2606,25 +2889,31 @@
 		template<> struct ProductIdx<PAR, TRT> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<PAR, RVD> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<PAR, TST> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<PAR, TVT> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
+		};
+		
+		template<> struct ProductIdx<PAR, BST> {
+			static const int GP = MTT;
+			static const int OP = PNT_CIR;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<CIR, SCA> {
@@ -2635,7 +2924,7 @@
 		
 		template<> struct ProductIdx<CIR, ORI> {
 			static const int GP = ORI_CIR;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -2742,8 +3031,14 @@
 		};
 		
 		template<> struct ProductIdx<CIR, FLP> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<CIR, DFP> {
+			static const int GP = TVT;
+			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
@@ -2766,7 +3061,7 @@
 		};
 		
 		template<> struct ProductIdx<CIR, BIV> {
-			static const int GP = CIR_BIV;
+			static const int GP = PAR_MNV;
 			static const int OP = PSS;
 			static const int IP = SCA;
 		};
@@ -2791,6 +3086,30 @@
 		
 		template<> struct ProductIdx<CIR, AFP> {
 			static const int GP = TST;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<CIR, DAP> {
+			static const int GP = PAR_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<CIR, DAF> {
+			static const int GP = PNT_PAR;
+			static const int OP = SCA;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<CIR, DAL> {
+			static const int GP = MTT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<CIR, MNV> {
+			static const int GP = PAR_BIV;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -2826,7 +3145,7 @@
 		};
 		
 		template<> struct ProductIdx<CIR, TRS> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = PNT_SPH;
 			static const int IP = SCA;
 		};
@@ -2834,7 +3153,7 @@
 		template<> struct ProductIdx<CIR, RTC> {
 			static const int GP = MTT;
 			static const int OP = SPH;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<CIR, MTT> {
@@ -2862,7 +3181,7 @@
 		};
 		
 		template<> struct ProductIdx<CIR, TSD> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = PNT_SPH;
 			static const int IP = SCA;
 		};
@@ -2889,6 +3208,12 @@
 			static const int GP = RTC;
 			static const int OP = PNT_SPH;
 			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<CIR, BST> {
+			static const int GP = RTC;
+			static const int OP = PNT_SPH;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<SPH, SCA> {
@@ -2946,7 +3271,7 @@
 		};
 		
 		template<> struct ProductIdx<SPH, SPH> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -3000,13 +3325,19 @@
 		};
 		
 		template<> struct ProductIdx<SPH, PLN> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<SPH, FLP> {
-			static const int GP = SPH_FLP;
+			static const int GP = PNT_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<SPH, DFP> {
+			static const int GP = PNT_FLP;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -3030,7 +3361,7 @@
 		};
 		
 		template<> struct ProductIdx<SPH, BIV> {
-			static const int GP = SPH_BIV;
+			static const int GP = PNT_MNV;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -3048,13 +3379,37 @@
 		};
 		
 		template<> struct ProductIdx<SPH, AFL> {
-			static const int GP = SPH_AFL;
+			static const int GP = PNT_DAL;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<SPH, AFP> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<SPH, DAP> {
+			static const int GP = PNT_AFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<SPH, DAF> {
+			static const int GP = BST;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<SPH, DAL> {
+			static const int GP = PNT_AFL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<SPH, MNV> {
+			static const int GP = PNT_BIV;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -3072,7 +3427,7 @@
 		};
 		
 		template<> struct ProductIdx<SPH, DIL> {
-			static const int GP = HYP_AFP;
+			static const int GP = HYP_DFP;
 			static const int OP = SPH;
 			static const int IP = SCA;
 		};
@@ -3090,7 +3445,7 @@
 		};
 		
 		template<> struct ProductIdx<SPH, TRS> {
-			static const int GP = SPH_FLP;
+			static const int GP = PNT_DFP;
 			static const int OP = SPH;
 			static const int IP = SCA;
 		};
@@ -3126,7 +3481,7 @@
 		};
 		
 		template<> struct ProductIdx<SPH, TSD> {
-			static const int GP = SPH_FLP;
+			static const int GP = PNT_DFP;
 			static const int OP = SPH;
 			static const int IP = SCA;
 		};
@@ -3155,6 +3510,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<SPH, BST> {
+			static const int GP = PNT_CIR;
+			static const int OP = SPH;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<STA, SCA> {
 			static const int GP = STA;
 			static const int OP = STA;
@@ -3163,7 +3524,7 @@
 		
 		template<> struct ProductIdx<STA, ORI> {
 			static const int GP = ORI_STA;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = SCA;
 		};
 		
@@ -3234,14 +3595,14 @@
 		};
 		
 		template<> struct ProductIdx<STA, DRT> {
-			static const int GP = STA_DRT;
+			static const int GP = INF_DAL;
 			static const int OP = SCA;
 			static const int IP = DLL;
 		};
 		
 		template<> struct ProductIdx<STA, TNV> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -3273,6 +3634,12 @@
 			static const int GP = TVT;
 			static const int OP = PLN;
 			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<STA, DFP> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<STA, DLL> {
@@ -3323,6 +3690,30 @@
 			static const int IP = AFF;
 		};
 		
+		template<> struct ProductIdx<STA, DAP> {
+			static const int GP = TST;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<STA, DAF> {
+			static const int GP = PNT_CIR;
+			static const int OP = SCA;
+			static const int IP = PAR;
+		};
+		
+		template<> struct ProductIdx<STA, DAL> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<STA, MNV> {
+			static const int GP = STA_MNV;
+			static const int OP = PSS;
+			static const int IP = HYP;
+		};
+		
 		template<> struct ProductIdx<STA, ROT> {
 			static const int GP = STA_BIV;
 			static const int OP = MUV;
@@ -3350,7 +3741,7 @@
 		template<> struct ProductIdx<STA, MTD> {
 			static const int GP = MTT;
 			static const int OP = HYP_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<STA, TRS> {
@@ -3368,7 +3759,7 @@
 		template<> struct ProductIdx<STA, MTT> {
 			static const int GP = MTT;
 			static const int OP = HYP_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<STA, RTT> {
@@ -3404,19 +3795,25 @@
 		template<> struct ProductIdx<STA, RVD> {
 			static const int GP = MTT;
 			static const int OP = HYP_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<STA, TST> {
 			static const int GP = MTT;
 			static const int OP = HYP_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<STA, TVT> {
 			static const int GP = MTT;
 			static const int OP = HYP_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
+		};
+		
+		template<> struct ProductIdx<STA, BST> {
+			static const int GP = MTT;
+			static const int OP = HYP_CIR;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<DRV, SCA> {
@@ -3427,7 +3824,7 @@
 		
 		template<> struct ProductIdx<DRV, ORI> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -3445,7 +3842,7 @@
 		
 		template<> struct ProductIdx<DRV, HYP> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -3539,6 +3936,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<DRV, DFP> {
+			static const int GP = DRB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<DRV, DLL> {
 			static const int GP = DRV_PLN;
 			static const int OP = DRT;
@@ -3587,6 +3990,30 @@
 			static const int IP = VEC;
 		};
 		
+		template<> struct ProductIdx<DRV, DAP> {
+			static const int GP = DRV_DAP;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRV, DAF> {
+			static const int GP = INF_CIR;
+			static const int OP = SCA;
+			static const int IP = DLL;
+		};
+		
+		template<> struct ProductIdx<DRV, DAL> {
+			static const int GP = PAR_DRB;
+			static const int OP = PSS;
+			static const int IP = DLP;
+		};
+		
+		template<> struct ProductIdx<DRV, MNV> {
+			static const int GP = DRV_LIN;
+			static const int OP = SCA;
+			static const int IP = INF;
+		};
+		
 		template<> struct ProductIdx<DRV, ROT> {
 			static const int GP = DRV_PLN;
 			static const int OP = DRV_PLN;
@@ -3606,7 +4033,7 @@
 		};
 		
 		template<> struct ProductIdx<DRV, TRV> {
-			static const int GP = DRB_AFP;
+			static const int GP = DRV_DAP;
 			static const int OP = MNK_DLL;
 			static const int IP = SCA;
 		};
@@ -3631,13 +4058,13 @@
 		
 		template<> struct ProductIdx<DRV, MTT> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<DRV, RTT> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = ROT;
 		};
 		
@@ -3648,7 +4075,7 @@
 		};
 		
 		template<> struct ProductIdx<DRV, TVD> {
-			static const int GP = DRB_AFP;
+			static const int GP = DRV_DAP;
 			static const int OP = MNK_DLL;
 			static const int IP = SCA;
 		};
@@ -3661,26 +4088,32 @@
 		
 		template<> struct ProductIdx<DRV, TRT> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<DRV, RVD> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<DRV, TST> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<DRV, TVT> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
+		};
+		
+		template<> struct ProductIdx<DRV, BST> {
+			static const int GP = MTD;
+			static const int OP = LIN_DFP;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<DRB, SCA> {
@@ -3803,6 +4236,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<DRB, DFP> {
+			static const int GP = DRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<DRB, DLL> {
 			static const int GP = DRV_LIN;
 			static const int OP = SCA;
@@ -3846,7 +4285,31 @@
 		};
 		
 		template<> struct ProductIdx<DRB, AFP> {
-			static const int GP = DRB_AFP;
+			static const int GP = DRV_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRB, DAP> {
+			static const int GP = DRV_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRB, DAF> {
+			static const int GP = INF_PAR;
+			static const int OP = SCA;
+			static const int IP = DLP;
+		};
+		
+		template<> struct ProductIdx<DRB, DAL> {
+			static const int GP = MTD;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRB, MNV> {
+			static const int GP = DRV_PLN;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -3871,7 +4334,7 @@
 		
 		template<> struct ProductIdx<DRB, TRV> {
 			static const int GP = DRV_AFP;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = SCA;
 		};
 		
@@ -3895,13 +4358,13 @@
 		
 		template<> struct ProductIdx<DRB, MTT> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<DRB, RTT> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = VEC;
 		};
 		
@@ -3913,7 +4376,7 @@
 		
 		template<> struct ProductIdx<DRB, TVD> {
 			static const int GP = DRV_AFP;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = SCA;
 		};
 		
@@ -3925,26 +4388,32 @@
 		
 		template<> struct ProductIdx<DRB, TRT> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = INF;
 		};
 		
 		template<> struct ProductIdx<DRB, RVD> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<DRB, TST> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<DRB, TVT> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DRB, BST> {
+			static const int GP = PAR_DRB;
+			static const int OP = MNK_DFP;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<DRT, SCA> {
@@ -4008,7 +4477,7 @@
 		};
 		
 		template<> struct ProductIdx<DRT, STA> {
-			static const int GP = STA_DRT;
+			static const int GP = INF_DAL;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -4067,6 +4536,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<DRT, DFP> {
+			static const int GP = INF;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<DRT, DLL> {
 			static const int GP = DRV;
 			static const int OP = SCA;
@@ -4104,13 +4579,37 @@
 		};
 		
 		template<> struct ProductIdx<DRT, AFL> {
-			static const int GP = STA_DRT;
+			static const int GP = INF_DAL;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<DRT, AFP> {
-			static const int GP = DRT_AFP;
+			static const int GP = INF_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRT, DAP> {
+			static const int GP = INF_AFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRT, DAF> {
+			static const int GP = TSD;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRT, DAL> {
+			static const int GP = INF_STA;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DRT, MNV> {
+			static const int GP = DRB;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -4211,6 +4710,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<DRT, BST> {
+			static const int GP = INF_CIR;
+			static const int OP = DRT;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<TNV, SCA> {
 			static const int GP = TNV;
 			static const int OP = TNV;
@@ -4225,7 +4730,7 @@
 		
 		template<> struct ProductIdx<TNV, INF> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -4237,7 +4742,7 @@
 		
 		template<> struct ProductIdx<TNV, HYP> {
 			static const int GP = ORI_DRV;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -4249,13 +4754,13 @@
 		
 		template<> struct ProductIdx<TNV, PNT> {
 			static const int GP = ORI_PAR;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TNV, PAR> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -4273,7 +4778,7 @@
 		
 		template<> struct ProductIdx<TNV, STA> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -4331,15 +4836,21 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<TNV, DFP> {
+			static const int GP = TNV_DFP;
+			static const int OP = PSS;
+			static const int IP = VEC;
+		};
+		
 		template<> struct ProductIdx<TNV, DLL> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TNV, DLP> {
 			static const int GP = ORI_PAR;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = SCA;
 		};
 		
@@ -4379,6 +4890,30 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<TNV, DAP> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNV, DAF> {
+			static const int GP = TNV_BIV;
+			static const int OP = SCA;
+			static const int IP = TNV;
+		};
+		
+		template<> struct ProductIdx<TNV, DAL> {
+			static const int GP = TNV_VEC;
+			static const int OP = SCA;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<TNV, MNV> {
+			static const int GP = TNV_VEC;
+			static const int OP = SCA;
+			static const int IP = ORI;
+		};
+		
 		template<> struct ProductIdx<TNV, ROT> {
 			static const int GP = TNV_BIV;
 			static const int OP = TNV_BIV;
@@ -4387,7 +4922,7 @@
 		
 		template<> struct ProductIdx<TNV, MOT> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = ROT;
 		};
 		
@@ -4405,7 +4940,7 @@
 		
 		template<> struct ProductIdx<TNV, MTD> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = VEC_AFF;
 		};
 		
@@ -4417,13 +4952,13 @@
 		
 		template<> struct ProductIdx<TNV, RTC> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_BIV_AFF;
+			static const int OP = VEC_DAF;
 			static const int IP = BIV_AFP;
 		};
 		
 		template<> struct ProductIdx<TNV, MTT> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = VEC_AFF;
 		};
 		
@@ -4453,7 +4988,7 @@
 		
 		template<> struct ProductIdx<TNV, TRT> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
@@ -4465,14 +5000,20 @@
 		
 		template<> struct ProductIdx<TNV, TST> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
 		template<> struct ProductIdx<TNV, TVT> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<TNV, BST> {
+			static const int GP = RVD;
+			static const int OP = BIV_DAP;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TNB, SCA> {
@@ -4513,7 +5054,7 @@
 		
 		template<> struct ProductIdx<TNB, PNT> {
 			static const int GP = ORI_CIR;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -4590,8 +5131,14 @@
 		};
 		
 		template<> struct ProductIdx<TNB, FLP> {
-			static const int GP = TNB_FLP;
+			static const int GP = TNV_DFP;
 			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNB, DFP> {
+			static const int GP = TNV_FLP;
+			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
@@ -4603,7 +5150,7 @@
 		
 		template<> struct ProductIdx<TNB, DLP> {
 			static const int GP = ORI_CIR;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -4643,6 +5190,30 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<TNB, DAP> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNB, DAF> {
+			static const int GP = TNV_VEC;
+			static const int OP = SCA;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<TNB, DAL> {
+			static const int GP = TNV_BIV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNB, MNV> {
+			static const int GP = TNV_BIV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<TNB, ROT> {
 			static const int GP = TNV_VEC;
 			static const int OP = TNB;
@@ -4674,14 +5245,14 @@
 		};
 		
 		template<> struct ProductIdx<TNB, TRS> {
-			static const int GP = TNB_FLP;
+			static const int GP = TNV_DFP;
 			static const int OP = MNK_AFP;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TNB, RTC> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = TRV;
 		};
 		
@@ -4710,7 +5281,7 @@
 		};
 		
 		template<> struct ProductIdx<TNB, TSD> {
-			static const int GP = TNB_FLP;
+			static const int GP = TNV_DFP;
 			static const int OP = MNK_AFP;
 			static const int IP = SCA;
 		};
@@ -4737,6 +5308,12 @@
 			static const int GP = PAR_TNB;
 			static const int OP = MNK_AFP;
 			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<TNB, BST> {
+			static const int GP = PAR_TNB;
+			static const int OP = MNK_AFP;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TNT, SCA> {
@@ -4854,7 +5431,13 @@
 		};
 		
 		template<> struct ProductIdx<TNT, FLP> {
-			static const int GP = TNT_FLP;
+			static const int GP = ORI_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNT, DFP> {
+			static const int GP = ORI_FLP;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -4907,6 +5490,30 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<TNT, DAP> {
+			static const int GP = TNT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNT, DAF> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNT, DAL> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNT, MNV> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<TNT, ROT> {
 			static const int GP = TNV_BIV;
 			static const int OP = TNT;
@@ -4938,7 +5545,7 @@
 		};
 		
 		template<> struct ProductIdx<TNT, TRS> {
-			static const int GP = TNT_FLP;
+			static const int GP = ORI_DFP;
 			static const int OP = TNT;
 			static const int IP = SCA;
 		};
@@ -4974,7 +5581,7 @@
 		};
 		
 		template<> struct ProductIdx<TNT, TSD> {
-			static const int GP = TNT_FLP;
+			static const int GP = ORI_DFP;
 			static const int OP = TNT;
 			static const int IP = SCA;
 		};
@@ -4999,6 +5606,12 @@
 		
 		template<> struct ProductIdx<TNT, TVT> {
 			static const int GP = RVD;
+			static const int OP = TNT;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TNT, BST> {
+			static const int GP = ORI_CIR;
 			static const int OP = TNT;
 			static const int IP = SCA;
 		};
@@ -5123,6 +5736,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<LIN, DFP> {
+			static const int GP = LIN_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<LIN, DLL> {
 			static const int GP = LIN_DLL;
 			static const int OP = PSS;
@@ -5171,6 +5790,30 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<LIN, DAP> {
+			static const int GP = PAR_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<LIN, DAF> {
+			static const int GP = PNT_DLL;
+			static const int OP = SCA;
+			static const int IP = DLP;
+		};
+		
+		template<> struct ProductIdx<LIN, DAL> {
+			static const int GP = MTT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<LIN, MNV> {
+			static const int GP = MOT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<LIN, ROT> {
 			static const int GP = LIN_DLL;
 			static const int OP = PLN_DLP;
@@ -5202,7 +5845,7 @@
 		};
 		
 		template<> struct ProductIdx<LIN, TRS> {
-			static const int GP = FLP_DLP;
+			static const int GP = PLN_DFP;
 			static const int OP = LIN;
 			static const int IP = SCA;
 		};
@@ -5267,6 +5910,12 @@
 			static const int IP = DLP;
 		};
 		
+		template<> struct ProductIdx<LIN, BST> {
+			static const int GP = RTC;
+			static const int OP = PLN_DLP;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<PLN, SCA> {
 			static const int GP = PLN;
 			static const int OP = PLN;
@@ -5322,7 +5971,7 @@
 		};
 		
 		template<> struct ProductIdx<PLN, SPH> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -5387,6 +6036,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<PLN, DFP> {
+			static const int GP = PLN_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<PLN, DLL> {
 			static const int GP = LIN_DLP;
 			static const int OP = SCA;
@@ -5424,13 +6079,37 @@
 		};
 		
 		template<> struct ProductIdx<PLN, AFL> {
-			static const int GP = SPH_AFL;
+			static const int GP = PNT_DAL;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<PLN, AFP> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PLN, DAP> {
+			static const int GP = PNT_AFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PLN, DAF> {
+			static const int GP = BST;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PLN, DAL> {
+			static const int GP = PNT_AFL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<PLN, MNV> {
+			static const int GP = PLN_MNV;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -5466,7 +6145,7 @@
 		};
 		
 		template<> struct ProductIdx<PLN, TRS> {
-			static const int GP = FLP_DLL;
+			static const int GP = LIN_DFP;
 			static const int OP = PLN;
 			static const int IP = SCA;
 		};
@@ -5531,6 +6210,12 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<PLN, BST> {
+			static const int GP = PNT_CIR;
+			static const int OP = PLN;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<FLP, SCA> {
 			static const int GP = FLP;
 			static const int OP = FLP;
@@ -5539,7 +6224,7 @@
 		
 		template<> struct ProductIdx<FLP, ORI> {
 			static const int GP = ORI_FLP;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -5557,14 +6242,14 @@
 		
 		template<> struct ProductIdx<FLP, HYP> {
 			static const int GP = HYP_FLP;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<FLP, PSS> {
-			static const int GP = PSS_FLP;
+			static const int GP = DFP;
 			static const int OP = SCA;
-			static const int IP = PSS_FLP;
+			static const int IP = DFP;
 		};
 		
 		template<> struct ProductIdx<FLP, PNT> {
@@ -5580,13 +6265,13 @@
 		};
 		
 		template<> struct ProductIdx<FLP, CIR> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = PSS;
 			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<FLP, SPH> {
-			static const int GP = SPH_FLP;
+			static const int GP = PNT_DFP;
 			static const int OP = SCA;
 			static const int IP = DLL;
 		};
@@ -5622,13 +6307,13 @@
 		};
 		
 		template<> struct ProductIdx<FLP, TNB> {
-			static const int GP = TNB_FLP;
+			static const int GP = TNV_DFP;
 			static const int OP = PSS;
 			static const int IP = VEC;
 		};
 		
 		template<> struct ProductIdx<FLP, TNT> {
-			static const int GP = TNT_FLP;
+			static const int GP = ORI_DFP;
 			static const int OP = SCA;
 			static const int IP = BIV;
 		};
@@ -5651,32 +6336,38 @@
 			static const int IP = SCA;
 		};
 		
+		template<> struct ProductIdx<FLP, DFP> {
+			static const int GP = MNK_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<FLP, DLL> {
-			static const int GP = FLP_DLL;
+			static const int GP = LIN_DFP;
 			static const int OP = PLN;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<FLP, DLP> {
-			static const int GP = FLP_DLP;
+			static const int GP = PLN_DFP;
 			static const int OP = LIN;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<FLP, VEC> {
-			static const int GP = FLP_DLP;
+			static const int GP = PLN_DFP;
 			static const int OP = LIN;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<FLP, BIV> {
-			static const int GP = FLP_DLL;
+			static const int GP = LIN_DFP;
 			static const int OP = PLN;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<FLP, TRI> {
-			static const int GP = FLP_TRI;
+			static const int GP = MNK_DFP;
 			static const int OP = PSS;
 			static const int IP = SCA;
 		};
@@ -5697,6 +6388,30 @@
 			static const int GP = FLP_AFP;
 			static const int OP = PSS;
 			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<FLP, DAP> {
+			static const int GP = TRT;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<FLP, DAF> {
+			static const int GP = PNT_DFP;
+			static const int OP = SCA;
+			static const int IP = DLL;
+		};
+		
+		template<> struct ProductIdx<FLP, DAL> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = DLP;
+		};
+		
+		template<> struct ProductIdx<FLP, MNV> {
+			static const int GP = LIN_FLP;
+			static const int OP = SCA;
+			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<FLP, ROT> {
@@ -5795,6 +6510,312 @@
 			static const int IP = PLN_PLN;
 		};
 		
+		template<> struct ProductIdx<FLP, BST> {
+			static const int GP = TVT;
+			static const int OP = LIN_DLP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, SCA> {
+			static const int GP = DFP;
+			static const int OP = DFP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, ORI> {
+			static const int GP = ORI_DFP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, INF> {
+			static const int GP = DRT;
+			static const int OP = DRT;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, MNK> {
+			static const int GP = MNK_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, HYP> {
+			static const int GP = HYP_DFP;
+			static const int OP = SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, PSS> {
+			static const int GP = FLP;
+			static const int OP = SCA;
+			static const int IP = FLP;
+		};
+		
+		template<> struct ProductIdx<DFP, PNT> {
+			static const int GP = PNT_DFP;
+			static const int OP = SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, PAR> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, CIR> {
+			static const int GP = TVT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, SPH> {
+			static const int GP = PNT_FLP;
+			static const int OP = SCA;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<DFP, STA> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DRV> {
+			static const int GP = DRB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DRB> {
+			static const int GP = DRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DRT> {
+			static const int GP = INF;
+			static const int OP = SCA;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DFP, TNV> {
+			static const int GP = TNV_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, TNB> {
+			static const int GP = TNV_FLP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, TNT> {
+			static const int GP = ORI_FLP;
+			static const int OP = SCA;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DFP, LIN> {
+			static const int GP = LIN_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, PLN> {
+			static const int GP = PLN_DFP;
+			static const int OP = SCA;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DFP, FLP> {
+			static const int GP = MNK_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DFP> {
+			static const int GP = TRS;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DLL> {
+			static const int GP = LIN_FLP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DLP> {
+			static const int GP = PLN_FLP;
+			static const int OP = DRT;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, VEC> {
+			static const int GP = PLN_FLP;
+			static const int OP = DRT;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, BIV> {
+			static const int GP = LIN_FLP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, TRI> {
+			static const int GP = TRS;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, AFF> {
+			static const int GP = PNT_DFP;
+			static const int OP = SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, AFL> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, AFP> {
+			static const int GP = TRT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DAP> {
+			static const int GP = FLP_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, DAF> {
+			static const int GP = PNT_FLP;
+			static const int OP = SCA;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<DFP, DAL> {
+			static const int GP = TVT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, MNV> {
+			static const int GP = LIN_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, ROT> {
+			static const int GP = LIN_PLN;
+			static const int OP = DFP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, MOT> {
+			static const int GP = LIN_PLN;
+			static const int OP = DFP;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DFP, DIL> {
+			static const int GP = INF_SPH;
+			static const int OP = INF_SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, TRV> {
+			static const int GP = FLP_AFP;
+			static const int OP = INF_SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, MTD> {
+			static const int GP = PAR_DRB;
+			static const int OP = INF_SPH;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DFP, TRS> {
+			static const int GP = DFP;
+			static const int OP = DFP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, RTC> {
+			static const int GP = MTT;
+			static const int OP = SPH;
+			static const int IP = TSD;
+		};
+		
+		template<> struct ProductIdx<DFP, MTT> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<DFP, RTT> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DFP, RTD> {
+			static const int GP = PAR_DRB;
+			static const int OP = INF_SPH;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DFP, TVD> {
+			static const int GP = FLP_AFP;
+			static const int OP = INF_SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, TSD> {
+			static const int GP = INF_SPH;
+			static const int OP = INF_SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DFP, TRT> {
+			static const int GP = PAR_DFP;
+			static const int OP = INF_SPH;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DFP, RVD> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<DFP, TST> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<DFP, TVT> {
+			static const int GP = PAR_DFP;
+			static const int OP = INF_SPH;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<DFP, BST> {
+			static const int GP = PAR_DFP;
+			static const int OP = INF_SPH;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<DLL, SCA> {
 			static const int GP = DLL;
 			static const int OP = DLL;
@@ -5803,7 +6824,7 @@
 		
 		template<> struct ProductIdx<DLL, ORI> {
 			static const int GP = ORI_STA;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = SCA;
 		};
 		
@@ -5881,7 +6902,7 @@
 		
 		template<> struct ProductIdx<DLL, TNV> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = SCA;
 		};
 		
@@ -5910,9 +6931,15 @@
 		};
 		
 		template<> struct ProductIdx<DLL, FLP> {
-			static const int GP = FLP_DLL;
+			static const int GP = LIN_DFP;
 			static const int OP = PLN;
 			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DLL, DFP> {
+			static const int GP = LIN_FLP;
+			static const int OP = SCA;
+			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<DLL, DLL> {
@@ -5923,13 +6950,13 @@
 		
 		template<> struct ProductIdx<DLL, DLP> {
 			static const int GP = LIN_PLN;
-			static const int OP = PSS_FLP;
+			static const int OP = DFP;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<DLL, VEC> {
 			static const int GP = LIN_PLN;
-			static const int OP = PSS_FLP;
+			static const int OP = DFP;
 			static const int IP = SCA;
 		};
 		
@@ -5963,6 +6990,30 @@
 			static const int IP = AFF;
 		};
 		
+		template<> struct ProductIdx<DLL, DAP> {
+			static const int GP = TST;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DLL, DAF> {
+			static const int GP = PNT_LIN;
+			static const int OP = SCA;
+			static const int IP = PAR;
+		};
+		
+		template<> struct ProductIdx<DLL, DAL> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<DLL, MNV> {
+			static const int GP = LIN_DLL;
+			static const int OP = PSS;
+			static const int IP = INF;
+		};
+		
 		template<> struct ProductIdx<DLL, ROT> {
 			static const int GP = MOT;
 			static const int OP = PLN_FLP;
@@ -5976,8 +7027,8 @@
 		};
 		
 		template<> struct ProductIdx<DLL, DIL> {
-			static const int GP = STA_DRT;
-			static const int OP = STA_DRT;
+			static const int GP = INF_DAL;
+			static const int OP = INF_DAL;
 			static const int IP = SCA;
 		};
 		
@@ -6007,13 +7058,13 @@
 		
 		template<> struct ProductIdx<DLL, MTT> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
-			static const int IP = PNT_PNT;
+			static const int OP = PNT_DFP;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<DLL, RTT> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = VEC_AFF;
 		};
 		
@@ -6037,26 +7088,32 @@
 		
 		template<> struct ProductIdx<DLL, TRT> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = TSD;
 		};
 		
 		template<> struct ProductIdx<DLL, RVD> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
-			static const int IP = PNT_PNT;
+			static const int OP = PNT_DFP;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<DLL, TST> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
-			static const int IP = PNT_PNT;
+			static const int OP = PNT_DFP;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<DLL, TVT> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = TSD;
+		};
+		
+		template<> struct ProductIdx<DLL, BST> {
+			static const int GP = MTT;
+			static const int OP = PNT_DFP;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<DLP, SCA> {
@@ -6067,7 +7124,7 @@
 		
 		template<> struct ProductIdx<DLP, ORI> {
 			static const int GP = TVD;
-			static const int OP = PSS_AFP;
+			static const int OP = DAP;
 			static const int IP = SCA;
 		};
 		
@@ -6079,7 +7136,7 @@
 		
 		template<> struct ProductIdx<DLP, MNK> {
 			static const int GP = MNK_DLP;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = INF;
 		};
 		
@@ -6096,7 +7153,7 @@
 		};
 		
 		template<> struct ProductIdx<DLP, PNT> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = PAR;
 			static const int IP = SCA;
 		};
@@ -6145,13 +7202,13 @@
 		
 		template<> struct ProductIdx<DLP, TNV> {
 			static const int GP = ORI_PAR;
-			static const int OP = PSS_AFL;
+			static const int OP = DAL;
 			static const int IP = AFF;
 		};
 		
 		template<> struct ProductIdx<DLP, TNB> {
 			static const int GP = ORI_CIR;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = AFL;
 		};
 		
@@ -6174,14 +7231,20 @@
 		};
 		
 		template<> struct ProductIdx<DLP, FLP> {
-			static const int GP = FLP_DLP;
+			static const int GP = PLN_DFP;
 			static const int OP = LIN;
 			static const int IP = INF;
 		};
 		
+		template<> struct ProductIdx<DLP, DFP> {
+			static const int GP = PLN_FLP;
+			static const int OP = DRT;
+			static const int IP = DLL;
+		};
+		
 		template<> struct ProductIdx<DLP, DLL> {
 			static const int GP = LIN_PLN;
-			static const int OP = PSS_FLP;
+			static const int OP = DFP;
 			static const int IP = DLP;
 		};
 		
@@ -6198,8 +7261,8 @@
 		};
 		
 		template<> struct ProductIdx<DLP, BIV> {
-			static const int GP = DLP_BIV;
-			static const int OP = PSS_FLP;
+			static const int GP = PLN_MNV;
+			static const int OP = DFP;
 			static const int IP = VEC;
 		};
 		
@@ -6210,7 +7273,7 @@
 		};
 		
 		template<> struct ProductIdx<DLP, AFF> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = PAR;
 			static const int IP = SCA;
 		};
@@ -6227,6 +7290,30 @@
 			static const int IP = AFL;
 		};
 		
+		template<> struct ProductIdx<DLP, DAP> {
+			static const int GP = PNT_DAP;
+			static const int OP = DAL;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<DLP, DAF> {
+			static const int GP = PNT_SPH;
+			static const int OP = PSS;
+			static const int IP = CIR;
+		};
+		
+		template<> struct ProductIdx<DLP, DAL> {
+			static const int GP = PNT_DAL;
+			static const int OP = DAF;
+			static const int IP = PAR;
+		};
+		
+		template<> struct ProductIdx<DLP, MNV> {
+			static const int GP = PLN_BIV;
+			static const int OP = MNK_BIV;
+			static const int IP = FLP;
+		};
+		
 		template<> struct ProductIdx<DLP, ROT> {
 			static const int GP = LIN_PLN;
 			static const int OP = LIN_PLN;
@@ -6240,13 +7327,13 @@
 		};
 		
 		template<> struct ProductIdx<DLP, DIL> {
-			static const int GP = DRT_AFP;
-			static const int OP = DRT_AFP;
+			static const int GP = INF_DAP;
+			static const int OP = INF_DAP;
 			static const int IP = INF;
 		};
 		
 		template<> struct ProductIdx<DLP, TRV> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
 			static const int OP = MUV;
 			static const int IP = AFF;
 		};
@@ -6271,13 +7358,13 @@
 		
 		template<> struct ProductIdx<DLP, MTT> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = PNT_PAR;
 		};
 		
 		template<> struct ProductIdx<DLP, RTT> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = VEC_AFL;
 		};
 		
@@ -6288,7 +7375,7 @@
 		};
 		
 		template<> struct ProductIdx<DLP, TVD> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
 			static const int OP = MUV;
 			static const int IP = PNT;
 		};
@@ -6301,26 +7388,32 @@
 		
 		template<> struct ProductIdx<DLP, TRT> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = PNT_FLP;
 		};
 		
 		template<> struct ProductIdx<DLP, RVD> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = PNT_PAR;
 		};
 		
 		template<> struct ProductIdx<DLP, TST> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = PNT_PAR;
 		};
 		
 		template<> struct ProductIdx<DLP, TVT> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = PNT_FLP;
+		};
+		
+		template<> struct ProductIdx<DLP, BST> {
+			static const int GP = PNT_PAR;
+			static const int OP = PNT_DLL;
+			static const int IP = PNT;
 		};
 		
 		template<> struct ProductIdx<VEC, SCA> {
@@ -6342,8 +7435,8 @@
 		};
 		
 		template<> struct ProductIdx<VEC, MNK> {
-			static const int GP = MNK_VEC;
-			static const int OP = MNK_VEC;
+			static const int GP = MNV;
+			static const int OP = MNV;
 			static const int IP = SCA;
 		};
 		
@@ -6438,14 +7531,20 @@
 		};
 		
 		template<> struct ProductIdx<VEC, FLP> {
-			static const int GP = FLP_DLP;
+			static const int GP = PLN_DFP;
 			static const int OP = LIN;
 			static const int IP = INF;
 		};
 		
+		template<> struct ProductIdx<VEC, DFP> {
+			static const int GP = PLN_FLP;
+			static const int OP = DRT;
+			static const int IP = DLL;
+		};
+		
 		template<> struct ProductIdx<VEC, DLL> {
 			static const int GP = LIN_PLN;
-			static const int OP = PSS_FLP;
+			static const int OP = DFP;
 			static const int IP = DLP;
 		};
 		
@@ -6491,6 +7590,30 @@
 			static const int IP = AFL;
 		};
 		
+		template<> struct ProductIdx<VEC, DAP> {
+			static const int GP = VEC_DAP;
+			static const int OP = DAL;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<VEC, DAF> {
+			static const int GP = VEC_DAF;
+			static const int OP = PSS;
+			static const int IP = DAL;
+		};
+		
+		template<> struct ProductIdx<VEC, DAL> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<VEC, MNV> {
+			static const int GP = VEC_MNV;
+			static const int OP = MNK_BIV;
+			static const int IP = MNK;
+		};
+		
 		template<> struct ProductIdx<VEC, ROT> {
 			static const int GP = VEC_BIV;
 			static const int OP = VEC_BIV;
@@ -6499,7 +7622,7 @@
 		
 		template<> struct ProductIdx<VEC, MOT> {
 			static const int GP = LIN_PLN;
-			static const int OP = DLP_BIV;
+			static const int OP = PLN_MNV;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -6511,7 +7634,7 @@
 		
 		template<> struct ProductIdx<VEC, TRV> {
 			static const int GP = BIV_AFP;
-			static const int OP = TRI_AFL;
+			static const int OP = MNK_DAL;
 			static const int IP = ORI;
 		};
 		
@@ -6571,20 +7694,26 @@
 		
 		template<> struct ProductIdx<VEC, RVD> {
 			static const int GP = PAR_TNB;
-			static const int OP = TNB_FLP;
+			static const int OP = TNV_DFP;
 			static const int IP = ORI_PAR;
 		};
 		
 		template<> struct ProductIdx<VEC, TST> {
 			static const int GP = RTC;
 			static const int OP = FLP_AFP;
-			static const int IP = SPH_AFP;
+			static const int IP = PNT_DAP;
 		};
 		
 		template<> struct ProductIdx<VEC, TVT> {
 			static const int GP = RTC;
 			static const int OP = FLP_AFP;
 			static const int IP = PNT_FLP;
+		};
+		
+		template<> struct ProductIdx<VEC, BST> {
+			static const int GP = PNT_PAR;
+			static const int OP = MUV;
+			static const int IP = PNT;
 		};
 		
 		template<> struct ProductIdx<BIV, SCA> {
@@ -6618,9 +7747,9 @@
 		};
 		
 		template<> struct ProductIdx<BIV, PSS> {
-			static const int GP = MNK_VEC;
+			static const int GP = MNV;
 			static const int OP = SCA;
-			static const int IP = MNK_VEC;
+			static const int IP = MNV;
 		};
 		
 		template<> struct ProductIdx<BIV, PNT> {
@@ -6636,13 +7765,13 @@
 		};
 		
 		template<> struct ProductIdx<BIV, CIR> {
-			static const int GP = CIR_BIV;
+			static const int GP = PAR_MNV;
 			static const int OP = PSS;
 			static const int IP = PNT;
 		};
 		
 		template<> struct ProductIdx<BIV, SPH> {
-			static const int GP = SPH_BIV;
+			static const int GP = PNT_MNV;
 			static const int OP = SCA;
 			static const int IP = MUV;
 		};
@@ -6702,9 +7831,15 @@
 		};
 		
 		template<> struct ProductIdx<BIV, FLP> {
-			static const int GP = FLP_DLL;
+			static const int GP = LIN_DFP;
 			static const int OP = PLN;
 			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<BIV, DFP> {
+			static const int GP = LIN_FLP;
+			static const int OP = SCA;
+			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<BIV, DLL> {
@@ -6714,8 +7849,8 @@
 		};
 		
 		template<> struct ProductIdx<BIV, DLP> {
-			static const int GP = DLP_BIV;
-			static const int OP = PSS_FLP;
+			static const int GP = PLN_MNV;
+			static const int OP = DFP;
 			static const int IP = SCA;
 		};
 		
@@ -6755,6 +7890,30 @@
 			static const int IP = AFF;
 		};
 		
+		template<> struct ProductIdx<BIV, DAP> {
+			static const int GP = BIV_DAP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<BIV, DAF> {
+			static const int GP = BIV_DAF;
+			static const int OP = SCA;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<BIV, DAL> {
+			static const int GP = BIV_DAL;
+			static const int OP = PSS;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<BIV, MNV> {
+			static const int GP = BIV_MNV;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<BIV, ROT> {
 			static const int GP = ROT;
 			static const int OP = BIV;
@@ -6775,7 +7934,7 @@
 		
 		template<> struct ProductIdx<BIV, TRV> {
 			static const int GP = VEC_AFP;
-			static const int OP = TRI_AFF;
+			static const int OP = MNK_DAF;
 			static const int IP = SCA;
 		};
 		
@@ -6799,13 +7958,13 @@
 		
 		template<> struct ProductIdx<BIV, MTT> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = HYP_PNT;
 		};
 		
 		template<> struct ProductIdx<BIV, RTT> {
 			static const int GP = RTT;
-			static const int OP = TRI_AFF;
+			static const int OP = MNK_DAF;
 			static const int IP = TRV;
 		};
 		
@@ -6817,7 +7976,7 @@
 		
 		template<> struct ProductIdx<BIV, TVD> {
 			static const int GP = ORI_CIR;
-			static const int OP = TNT_FLP;
+			static const int OP = ORI_DFP;
 			static const int IP = SCA;
 		};
 		
@@ -6829,26 +7988,32 @@
 		
 		template<> struct ProductIdx<BIV, TRT> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = DIL;
 		};
 		
 		template<> struct ProductIdx<BIV, RVD> {
 			static const int GP = RVD;
-			static const int OP = TNT_FLP;
+			static const int OP = ORI_DFP;
 			static const int IP = TVD;
 		};
 		
 		template<> struct ProductIdx<BIV, TST> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = TVD;
 		};
 		
 		template<> struct ProductIdx<BIV, TVT> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = TSD;
+		};
+		
+		template<> struct ProductIdx<BIV, BST> {
+			static const int GP = PAR_BIV;
+			static const int OP = HYP_DFP;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TRI, SCA> {
@@ -6966,8 +8131,14 @@
 		};
 		
 		template<> struct ProductIdx<TRI, FLP> {
-			static const int GP = FLP_TRI;
+			static const int GP = MNK_DFP;
 			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TRI, DFP> {
+			static const int GP = TRS;
+			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
@@ -7002,19 +8173,43 @@
 		};
 		
 		template<> struct ProductIdx<TRI, AFF> {
-			static const int GP = TRI_AFF;
+			static const int GP = MNK_DAF;
 			static const int OP = TNT;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TRI, AFL> {
-			static const int GP = TRI_AFL;
+			static const int GP = MNK_DAL;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<TRI, AFP> {
 			static const int GP = TRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TRI, DAP> {
+			static const int GP = MNK_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TRI, DAF> {
+			static const int GP = MNK_AFF;
+			static const int OP = SCA;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<TRI, DAL> {
+			static const int GP = MNK_AFL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<TRI, MNV> {
+			static const int GP = MNK_BIV;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -7050,7 +8245,7 @@
 		};
 		
 		template<> struct ProductIdx<TRI, TRS> {
-			static const int GP = PSS_FLP;
+			static const int GP = DFP;
 			static const int OP = TRI;
 			static const int IP = SCA;
 		};
@@ -7110,9 +8305,15 @@
 		};
 		
 		template<> struct ProductIdx<TRI, TVT> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = ORI_DRT;
 			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<TRI, BST> {
+			static const int GP = MNK_PNT_SPH;
+			static const int OP = ORI_DRT;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<AFF, SCA> {
@@ -7135,7 +8336,7 @@
 		
 		template<> struct ProductIdx<AFF, MNK> {
 			static const int GP = MNK_AFF;
-			static const int OP = MNK_VEC;
+			static const int OP = MNV;
 			static const int IP = ORI;
 		};
 		
@@ -7146,13 +8347,13 @@
 		};
 		
 		template<> struct ProductIdx<AFF, PSS> {
-			static const int GP = PSS_AFF;
+			static const int GP = DAF;
 			static const int OP = SCA;
-			static const int IP = PSS_AFF;
+			static const int IP = DAF;
 		};
 		
 		template<> struct ProductIdx<AFF, PNT> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = PAR;
 			static const int IP = SCA;
 		};
@@ -7196,7 +8397,7 @@
 		template<> struct ProductIdx<AFF, DRT> {
 			static const int GP = INF_SPH;
 			static const int OP = PSS;
-			static const int IP = PSS_FLP;
+			static const int IP = DFP;
 		};
 		
 		template<> struct ProductIdx<AFF, TNV> {
@@ -7235,6 +8436,12 @@
 			static const int IP = PNT;
 		};
 		
+		template<> struct ProductIdx<AFF, DFP> {
+			static const int GP = PNT_DFP;
+			static const int OP = SPH;
+			static const int IP = DLL;
+		};
+		
 		template<> struct ProductIdx<AFF, DLL> {
 			static const int GP = PNT_DLL;
 			static const int OP = CIR;
@@ -7242,7 +8449,7 @@
 		};
 		
 		template<> struct ProductIdx<AFF, DLP> {
-			static const int GP = PNT_PNT;
+			static const int GP = BST;
 			static const int OP = PAR;
 			static const int IP = SCA;
 		};
@@ -7260,7 +8467,7 @@
 		};
 		
 		template<> struct ProductIdx<AFF, TRI> {
-			static const int GP = TRI_AFF;
+			static const int GP = MNK_DAF;
 			static const int OP = TNT;
 			static const int IP = BIV;
 		};
@@ -7281,6 +8488,30 @@
 			static const int GP = VEC_AFP;
 			static const int OP = TNT;
 			static const int IP = AFL;
+		};
+		
+		template<> struct ProductIdx<AFF, DAP> {
+			static const int GP = VEC_DAP;
+			static const int OP = DAL;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<AFF, DAF> {
+			static const int GP = VEC_DAF;
+			static const int OP = PSS;
+			static const int IP = DAL;
+		};
+		
+		template<> struct ProductIdx<AFF, DAL> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<AFF, MNV> {
+			static const int GP = BIV_DAF;
+			static const int OP = MNK_BIV;
+			static const int IP = DAP;
 		};
 		
 		template<> struct ProductIdx<AFF, ROT> {
@@ -7358,7 +8589,7 @@
 		template<> struct ProductIdx<AFF, TRT> {
 			static const int GP = RTC;
 			static const int OP = PAR_AFP;
-			static const int IP = SPH_AFP;
+			static const int IP = PNT_DAP;
 		};
 		
 		template<> struct ProductIdx<AFF, RVD> {
@@ -7370,13 +8601,19 @@
 		template<> struct ProductIdx<AFF, TST> {
 			static const int GP = RTC;
 			static const int OP = PAR_AFP;
-			static const int IP = SPH_AFP;
+			static const int IP = PNT_DAP;
 		};
 		
 		template<> struct ProductIdx<AFF, TVT> {
 			static const int GP = RTC;
 			static const int OP = PAR_AFP;
 			static const int IP = PNT_PAR;
+		};
+		
+		template<> struct ProductIdx<AFF, BST> {
+			static const int GP = PNT_PAR;
+			static const int OP = PNT_AFL;
+			static const int IP = PNT;
 		};
 		
 		template<> struct ProductIdx<AFL, SCA> {
@@ -7410,9 +8647,9 @@
 		};
 		
 		template<> struct ProductIdx<AFL, PSS> {
-			static const int GP = PSS_AFL;
+			static const int GP = DAL;
 			static const int OP = SCA;
-			static const int IP = PSS_AFL;
+			static const int IP = DAL;
 		};
 		
 		template<> struct ProductIdx<AFL, PNT> {
@@ -7434,7 +8671,7 @@
 		};
 		
 		template<> struct ProductIdx<AFL, SPH> {
-			static const int GP = SPH_AFL;
+			static const int GP = PNT_DAL;
 			static const int OP = SCA;
 			static const int IP = PAR;
 		};
@@ -7458,7 +8695,7 @@
 		};
 		
 		template<> struct ProductIdx<AFL, DRT> {
-			static const int GP = STA_DRT;
+			static const int GP = INF_DAL;
 			static const int OP = SCA;
 			static const int IP = DLL;
 		};
@@ -7488,7 +8725,7 @@
 		};
 		
 		template<> struct ProductIdx<AFL, PLN> {
-			static const int GP = SPH_AFL;
+			static const int GP = PNT_DAL;
 			static const int OP = SCA;
 			static const int IP = PAR;
 		};
@@ -7497,6 +8734,12 @@
 			static const int GP = TVT;
 			static const int OP = PLN;
 			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<AFL, DFP> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<AFL, DLL> {
@@ -7524,7 +8767,7 @@
 		};
 		
 		template<> struct ProductIdx<AFL, TRI> {
-			static const int GP = TRI_AFL;
+			static const int GP = MNK_DAL;
 			static const int OP = SCA;
 			static const int IP = VEC;
 		};
@@ -7545,6 +8788,30 @@
 			static const int GP = BIV_AFP;
 			static const int OP = SCA;
 			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<AFL, DAP> {
+			static const int GP = BIV_DAP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<AFL, DAF> {
+			static const int GP = VEC_DAL;
+			static const int OP = SCA;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<AFL, DAL> {
+			static const int GP = BIV_DAL;
+			static const int OP = PSS;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<AFL, MNV> {
+			static const int GP = BIV_DAL;
+			static const int OP = PSS;
+			static const int IP = ORI;
 		};
 		
 		template<> struct ProductIdx<AFL, ROT> {
@@ -7574,7 +8841,7 @@
 		template<> struct ProductIdx<AFL, MTD> {
 			static const int GP = MTT;
 			static const int OP = PNT_AFP;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<AFL, TRS> {
@@ -7586,13 +8853,13 @@
 		template<> struct ProductIdx<AFL, RTC> {
 			static const int GP = RTC;
 			static const int OP = PNT_SPH;
-			static const int IP = SPH_AFP;
+			static const int IP = PNT_DAP;
 		};
 		
 		template<> struct ProductIdx<AFL, MTT> {
 			static const int GP = MTT;
 			static const int OP = PNT_AFP;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<AFL, RTT> {
@@ -7640,7 +8907,13 @@
 		template<> struct ProductIdx<AFL, TVT> {
 			static const int GP = MTT;
 			static const int OP = PNT_AFP;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
+		};
+		
+		template<> struct ProductIdx<AFL, BST> {
+			static const int GP = MTT;
+			static const int OP = PNT_AFP;
+			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<AFP, SCA> {
@@ -7668,15 +8941,15 @@
 		};
 		
 		template<> struct ProductIdx<AFP, HYP> {
-			static const int GP = HYP_AFP;
+			static const int GP = HYP_DFP;
 			static const int OP = SPH;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<AFP, PSS> {
-			static const int GP = PSS_AFP;
+			static const int GP = DAP;
 			static const int OP = SCA;
-			static const int IP = PSS_AFP;
+			static const int IP = DAP;
 		};
 		
 		template<> struct ProductIdx<AFP, PNT> {
@@ -7698,7 +8971,7 @@
 		};
 		
 		template<> struct ProductIdx<AFP, SPH> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
 			static const int OP = SCA;
 			static const int IP = PNT;
 		};
@@ -7716,13 +8989,13 @@
 		};
 		
 		template<> struct ProductIdx<AFP, DRB> {
-			static const int GP = DRB_AFP;
+			static const int GP = DRV_DAP;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
 		template<> struct ProductIdx<AFP, DRT> {
-			static const int GP = DRT_AFP;
+			static const int GP = INF_DAP;
 			static const int OP = SCA;
 			static const int IP = DLP;
 		};
@@ -7752,7 +9025,7 @@
 		};
 		
 		template<> struct ProductIdx<AFP, PLN> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
 			static const int OP = SCA;
 			static const int IP = PNT;
 		};
@@ -7760,6 +9033,12 @@
 		template<> struct ProductIdx<AFP, FLP> {
 			static const int GP = FLP_AFP;
 			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<AFP, DFP> {
+			static const int GP = TRT;
+			static const int OP = SCA;
 			static const int IP = SCA;
 		};
 		
@@ -7807,6 +9086,30 @@
 		
 		template<> struct ProductIdx<AFP, AFP> {
 			static const int GP = TRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<AFP, DAP> {
+			static const int GP = MNK_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<AFP, DAF> {
+			static const int GP = VEC_DAP;
+			static const int OP = SCA;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<AFP, DAL> {
+			static const int GP = BIV_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<AFP, MNV> {
+			static const int GP = BIV_DAP;
 			static const int OP = SCA;
 			static const int IP = SCA;
 		};
@@ -7907,6 +9210,1212 @@
 			static const int IP = PNT;
 		};
 		
+		template<> struct ProductIdx<AFP, BST> {
+			static const int GP = PAR_AFP;
+			static const int OP = ORI_SPH;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, SCA> {
+			static const int GP = DAP;
+			static const int OP = DAP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, ORI> {
+			static const int GP = ORI;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, INF> {
+			static const int GP = INF_DAP;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, MNK> {
+			static const int GP = TRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, HYP> {
+			static const int GP = HYP_FLP;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, PSS> {
+			static const int GP = AFP;
+			static const int OP = SCA;
+			static const int IP = AFP;
+		};
+		
+		template<> struct ProductIdx<DAP, PNT> {
+			static const int GP = PNT_DAP;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, PAR> {
+			static const int GP = TST;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, CIR> {
+			static const int GP = PAR_AFP;
+			static const int OP = PSS;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, SPH> {
+			static const int GP = PNT_AFP;
+			static const int OP = SCA;
+			static const int IP = AFL;
+		};
+		
+		template<> struct ProductIdx<DAP, STA> {
+			static const int GP = TST;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, DRV> {
+			static const int GP = DRV_DAP;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, DRB> {
+			static const int GP = DRV_AFP;
+			static const int OP = PSS;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<DAP, DRT> {
+			static const int GP = INF_AFP;
+			static const int OP = SCA;
+			static const int IP = BIV;
+		};
+		
+		template<> struct ProductIdx<DAP, TNV> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, TNB> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, TNT> {
+			static const int GP = TNT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, LIN> {
+			static const int GP = PAR_AFP;
+			static const int OP = PSS;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, PLN> {
+			static const int GP = PNT_AFP;
+			static const int OP = SCA;
+			static const int IP = AFL;
+		};
+		
+		template<> struct ProductIdx<DAP, FLP> {
+			static const int GP = TRT;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, DFP> {
+			static const int GP = FLP_AFP;
+			static const int OP = PSS;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<DAP, DLL> {
+			static const int GP = TST;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, DLP> {
+			static const int GP = PNT_DAP;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, VEC> {
+			static const int GP = VEC_DAP;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, BIV> {
+			static const int GP = BIV_DAP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, TRI> {
+			static const int GP = MNK_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, AFF> {
+			static const int GP = VEC_DAP;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, AFL> {
+			static const int GP = BIV_DAP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, AFP> {
+			static const int GP = MNK_AFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, DAP> {
+			static const int GP = TRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, DAF> {
+			static const int GP = VEC_AFP;
+			static const int OP = SCA;
+			static const int IP = AFL;
+		};
+		
+		template<> struct ProductIdx<DAP, DAL> {
+			static const int GP = BIV_AFP;
+			static const int OP = SCA;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, MNV> {
+			static const int GP = BIV_AFP;
+			static const int OP = SCA;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, ROT> {
+			static const int GP = VEC_DAL;
+			static const int OP = VEC_DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, MOT> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = ROT;
+		};
+		
+		template<> struct ProductIdx<DAP, DIL> {
+			static const int GP = TVD;
+			static const int OP = DAP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, TRV> {
+			static const int GP = DAP;
+			static const int OP = DAP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, MTD> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, TRS> {
+			static const int GP = TRT;
+			static const int OP = BIV_DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, RTC> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<DAP, MTT> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, RTT> {
+			static const int GP = VEC_DAL;
+			static const int OP = VEC_DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, RTD> {
+			static const int GP = RVD;
+			static const int OP = VEC_DAL;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, TVD> {
+			static const int GP = TVD;
+			static const int OP = DAP;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, TSD> {
+			static const int GP = TRT;
+			static const int OP = BIV_DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAP, TRT> {
+			static const int GP = TST;
+			static const int OP = VEC_DAL;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, RVD> {
+			static const int GP = RVD;
+			static const int OP = VEC_DAL;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, TST> {
+			static const int GP = TST;
+			static const int OP = VEC_DAL;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, TVT> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAP, BST> {
+			static const int GP = TST;
+			static const int OP = VEC_DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, SCA> {
+			static const int GP = DAF;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, ORI> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, INF> {
+			static const int GP = INF_SPH;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, MNK> {
+			static const int GP = MNK_DAF;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, HYP> {
+			static const int GP = HYP_SPH;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, PSS> {
+			static const int GP = AFF;
+			static const int OP = SCA;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAF, PNT> {
+			static const int GP = PNT_SPH;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, PAR> {
+			static const int GP = PNT_CIR;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, CIR> {
+			static const int GP = PNT_PAR;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, SPH> {
+			static const int GP = BST;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, STA> {
+			static const int GP = PNT_CIR;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DRV> {
+			static const int GP = INF_CIR;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DRB> {
+			static const int GP = INF_PAR;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DRT> {
+			static const int GP = TSD;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TNV> {
+			static const int GP = TNV_BIV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TNB> {
+			static const int GP = TNV_VEC;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TNT> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, LIN> {
+			static const int GP = PNT_DLL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, PLN> {
+			static const int GP = BST;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, FLP> {
+			static const int GP = PNT_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DFP> {
+			static const int GP = PNT_FLP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DLL> {
+			static const int GP = PNT_LIN;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DLP> {
+			static const int GP = PNT_SPH;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, VEC> {
+			static const int GP = VEC_DAF;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, BIV> {
+			static const int GP = BIV_DAF;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TRI> {
+			static const int GP = MNK_AFF;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, AFF> {
+			static const int GP = VEC_DAF;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, AFL> {
+			static const int GP = VEC_DAL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, AFP> {
+			static const int GP = VEC_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DAP> {
+			static const int GP = VEC_AFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DAF> {
+			static const int GP = VEC_AFF;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DAL> {
+			static const int GP = VEC_AFL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, MNV> {
+			static const int GP = BIV_AFF;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, ROT> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, MOT> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, DIL> {
+			static const int GP = ORI_DFP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TRV> {
+			static const int GP = BIV_DAP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, MTD> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TRS> {
+			static const int GP = PNT_DFP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, RTC> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAF, MTT> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, RTT> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, RTD> {
+			static const int GP = RVD;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TVD> {
+			static const int GP = ORI_CIR;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TSD> {
+			static const int GP = PNT_DFP;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TRT> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, RVD> {
+			static const int GP = RVD;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TST> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, TVT> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAF, BST> {
+			static const int GP = PNT_CIR;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, SCA> {
+			static const int GP = DAL;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, ORI> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, INF> {
+			static const int GP = INF_DAL;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, MNK> {
+			static const int GP = MNK_DAL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, HYP> {
+			static const int GP = HYP_LIN;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, PSS> {
+			static const int GP = AFL;
+			static const int OP = SCA;
+			static const int IP = AFL;
+		};
+		
+		template<> struct ProductIdx<DAL, PNT> {
+			static const int GP = PNT_DAL;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, PAR> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, CIR> {
+			static const int GP = MTT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, SPH> {
+			static const int GP = PNT_AFL;
+			static const int OP = SCA;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, STA> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DRV> {
+			static const int GP = PAR_DRB;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DRB> {
+			static const int GP = MTD;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DRT> {
+			static const int GP = INF_STA;
+			static const int OP = SCA;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<DAL, TNV> {
+			static const int GP = TNV_VEC;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, TNB> {
+			static const int GP = TNV_BIV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, TNT> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, LIN> {
+			static const int GP = MTT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, PLN> {
+			static const int GP = PNT_AFL;
+			static const int OP = SCA;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, FLP> {
+			static const int GP = PAR_DFP;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DFP> {
+			static const int GP = TVT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DLL> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DLP> {
+			static const int GP = PNT_DAL;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, VEC> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, BIV> {
+			static const int GP = BIV_DAL;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, TRI> {
+			static const int GP = MNK_AFL;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, AFF> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, AFL> {
+			static const int GP = BIV_DAL;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, AFP> {
+			static const int GP = BIV_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DAP> {
+			static const int GP = BIV_AFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, DAF> {
+			static const int GP = VEC_AFL;
+			static const int OP = SCA;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, DAL> {
+			static const int GP = RTT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, MNV> {
+			static const int GP = RTT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, ROT> {
+			static const int GP = BIV_DAL;
+			static const int OP = VEC_DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, MOT> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<DAL, DIL> {
+			static const int GP = ORI_STA;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, TRV> {
+			static const int GP = VEC_DAP;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, MTD> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, TRS> {
+			static const int GP = PAR_DFP;
+			static const int OP = VEC_DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, RTC> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, MTT> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, RTT> {
+			static const int GP = BIV_DAL;
+			static const int OP = VEC_DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, RTD> {
+			static const int GP = PAR_TNB;
+			static const int OP = VEC_DAF;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, TVD> {
+			static const int GP = ORI_PAR;
+			static const int OP = DAL;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, TSD> {
+			static const int GP = PAR_DFP;
+			static const int OP = VEC_DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<DAL, TRT> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, RVD> {
+			static const int GP = PAR_TNB;
+			static const int OP = VEC_DAF;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, TST> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, TVT> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<DAL, BST> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, SCA> {
+			static const int GP = MNV;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, ORI> {
+			static const int GP = TNV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, INF> {
+			static const int GP = DRV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, MNK> {
+			static const int GP = VEC;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, HYP> {
+			static const int GP = HYP_VEC;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, PSS> {
+			static const int GP = BIV;
+			static const int OP = SCA;
+			static const int IP = BIV;
+		};
+		
+		template<> struct ProductIdx<MNV, PNT> {
+			static const int GP = PNT_MNV;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, PAR> {
+			static const int GP = PAR_MNV;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, CIR> {
+			static const int GP = PAR_BIV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, SPH> {
+			static const int GP = PNT_BIV;
+			static const int OP = SCA;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, STA> {
+			static const int GP = STA_MNV;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DRV> {
+			static const int GP = DRV_LIN;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DRB> {
+			static const int GP = DRV_PLN;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DRT> {
+			static const int GP = DRB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, TNV> {
+			static const int GP = TNV_VEC;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, TNB> {
+			static const int GP = TNV_BIV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, TNT> {
+			static const int GP = TNB;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, LIN> {
+			static const int GP = MOT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, PLN> {
+			static const int GP = PLN_MNV;
+			static const int OP = SCA;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, FLP> {
+			static const int GP = LIN_FLP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DFP> {
+			static const int GP = LIN_DFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DLL> {
+			static const int GP = LIN_DLL;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DLP> {
+			static const int GP = PLN_BIV;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, VEC> {
+			static const int GP = VEC_MNV;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, BIV> {
+			static const int GP = BIV_MNV;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, TRI> {
+			static const int GP = MNK_BIV;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, AFF> {
+			static const int GP = BIV_DAF;
+			static const int OP = MNK_BIV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, AFL> {
+			static const int GP = BIV_DAL;
+			static const int OP = PSS;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, AFP> {
+			static const int GP = BIV_DAP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DAP> {
+			static const int GP = BIV_AFP;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DAF> {
+			static const int GP = BIV_AFF;
+			static const int OP = SCA;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, DAL> {
+			static const int GP = RTT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, MNV> {
+			static const int GP = ROT;
+			static const int OP = SCA;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, ROT> {
+			static const int GP = BIV_MNV;
+			static const int OP = BIV_MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, MOT> {
+			static const int GP = LIN_DLL;
+			static const int OP = BIV_MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, DIL> {
+			static const int GP = ORI_DRV;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, TRV> {
+			static const int GP = VEC_DAP;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, MTD> {
+			static const int GP = PAR_DRB;
+			static const int OP = BIV_MNV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, TRS> {
+			static const int GP = PLN_DFP;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, RTC> {
+			static const int GP = MTT;
+			static const int OP = MNK_BIV;
+			static const int IP = ROT;
+		};
+		
+		template<> struct ProductIdx<MNV, MTT> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, RTT> {
+			static const int GP = BIV_DAL;
+			static const int OP = BIV_MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, RTD> {
+			static const int GP = DRV_TNB;
+			static const int OP = BIV_MNV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, TVD> {
+			static const int GP = ORI_PAR;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, TSD> {
+			static const int GP = INF_PAR;
+			static const int OP = MNV;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<MNV, TRT> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, RVD> {
+			static const int GP = PAR_TNB;
+			static const int OP = BIV_MNV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, TST> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, TVT> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<MNV, BST> {
+			static const int GP = PAR_MNV;
+			static const int OP = BIV_MNV;
+			static const int IP = SCA;
+		};
+		
 		template<> struct ProductIdx<ROT, SCA> {
 			static const int GP = ROT;
 			static const int OP = ROT;
@@ -7926,21 +10435,21 @@
 		};
 		
 		template<> struct ProductIdx<ROT, MNK> {
-			static const int GP = PSS_VEC_BIV;
-			static const int OP = PSS_VEC_BIV;
+			static const int GP = VEC_MNV;
+			static const int OP = VEC_MNV;
 			static const int IP = MNK;
 		};
 		
 		template<> struct ProductIdx<ROT, HYP> {
-			static const int GP = PSS_HYP_DRV_TNB;
-			static const int OP = PSS_HYP_DRV_TNB;
+			static const int GP = HYP_VEC_MNV;
+			static const int OP = HYP_VEC_MNV;
 			static const int IP = HYP;
 		};
 		
 		template<> struct ProductIdx<ROT, PSS> {
-			static const int GP = MNK_VEC_BIV;
+			static const int GP = BIV_MNV;
 			static const int OP = PSS;
-			static const int IP = MNK_VEC_BIV;
+			static const int IP = BIV_MNV;
 		};
 		
 		template<> struct ProductIdx<ROT, PNT> {
@@ -7952,7 +10461,7 @@
 		template<> struct ProductIdx<ROT, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<ROT, CIR> {
@@ -8012,7 +10521,7 @@
 		template<> struct ProductIdx<ROT, LIN> {
 			static const int GP = LIN_DLL;
 			static const int OP = PLN_DLP;
-			static const int IP = FLP_DLP;
+			static const int IP = PLN_DFP;
 		};
 		
 		template<> struct ProductIdx<ROT, PLN> {
@@ -8025,6 +10534,12 @@
 			static const int GP = LIN_DLP;
 			static const int OP = LIN_DLP;
 			static const int IP = FLP;
+		};
+		
+		template<> struct ProductIdx<ROT, DFP> {
+			static const int GP = LIN_PLN;
+			static const int OP = DFP;
+			static const int IP = LIN_PLN;
 		};
 		
 		template<> struct ProductIdx<ROT, DLL> {
@@ -8073,6 +10588,30 @@
 			static const int GP = VEC_AFL;
 			static const int OP = AFP;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<ROT, DAP> {
+			static const int GP = VEC_DAL;
+			static const int OP = VEC_DAL;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<ROT, DAF> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = VEC_DAL;
+		};
+		
+		template<> struct ProductIdx<ROT, DAL> {
+			static const int GP = BIV_DAL;
+			static const int OP = VEC_DAF;
+			static const int IP = VEC_DAP;
+		};
+		
+		template<> struct ProductIdx<ROT, MNV> {
+			static const int GP = BIV_MNV;
+			static const int OP = BIV_MNV;
+			static const int IP = MNV;
 		};
 		
 		template<> struct ProductIdx<ROT, ROT> {
@@ -8171,6 +10710,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<ROT, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<MOT, SCA> {
 			static const int GP = MOT;
 			static const int OP = MOT;
@@ -8179,7 +10724,7 @@
 		
 		template<> struct ProductIdx<MOT, ORI> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = ORI;
 		};
 		
@@ -8191,13 +10736,13 @@
 		
 		template<> struct ProductIdx<MOT, MNK> {
 			static const int GP = LIN_DLP;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = MNK;
 		};
 		
 		template<> struct ProductIdx<MOT, HYP> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = HYP;
 		};
 		
@@ -8216,7 +10761,7 @@
 		template<> struct ProductIdx<MOT, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<MOT, CIR> {
@@ -8257,7 +10802,7 @@
 		
 		template<> struct ProductIdx<MOT, TNV> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
@@ -8276,7 +10821,7 @@
 		template<> struct ProductIdx<MOT, LIN> {
 			static const int GP = LIN_DLL;
 			static const int OP = PLN_DLP;
-			static const int IP = FLP_DLP;
+			static const int IP = PLN_DFP;
 		};
 		
 		template<> struct ProductIdx<MOT, PLN> {
@@ -8289,6 +10834,12 @@
 			static const int GP = LIN_DLP;
 			static const int OP = LIN_DLP;
 			static const int IP = FLP;
+		};
+		
+		template<> struct ProductIdx<MOT, DFP> {
+			static const int GP = LIN_PLN;
+			static const int OP = DFP;
+			static const int IP = LIN_PLN;
 		};
 		
 		template<> struct ProductIdx<MOT, DLL> {
@@ -8305,7 +10856,7 @@
 		
 		template<> struct ProductIdx<MOT, VEC> {
 			static const int GP = LIN_PLN;
-			static const int OP = DLP_BIV;
+			static const int OP = PLN_MNV;
 			static const int IP = VEC;
 		};
 		
@@ -8337,6 +10888,30 @@
 			static const int GP = RTC;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<MOT, DAP> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<MOT, DAF> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<MOT, DAL> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT_DAP;
+		};
+		
+		template<> struct ProductIdx<MOT, MNV> {
+			static const int GP = LIN_DLL;
+			static const int OP = BIV_MNV;
+			static const int IP = MNK_DLP;
 		};
 		
 		template<> struct ProductIdx<MOT, ROT> {
@@ -8396,7 +10971,7 @@
 		template<> struct ProductIdx<MOT, RTD> {
 			static const int GP = MTD;
 			static const int OP = MTD;
-			static const int IP = DRB_AFP;
+			static const int IP = DRV_DAP;
 		};
 		
 		template<> struct ProductIdx<MOT, TVD> {
@@ -8433,6 +11008,12 @@
 			static const int GP = MTT;
 			static const int OP = MTT;
 			static const int IP = TVT;
+		};
+		
+		template<> struct ProductIdx<MOT, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<DIL, SCA> {
@@ -8480,7 +11061,7 @@
 		template<> struct ProductIdx<DIL, PAR> {
 			static const int GP = TRT;
 			static const int OP = MUV;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<DIL, CIR> {
@@ -8490,9 +11071,9 @@
 		};
 		
 		template<> struct ProductIdx<DIL, SPH> {
-			static const int GP = HYP_AFP;
+			static const int GP = HYP_DFP;
 			static const int OP = SPH;
-			static const int IP = HYP_AFP;
+			static const int IP = HYP_DFP;
 		};
 		
 		template<> struct ProductIdx<DIL, STA> {
@@ -8555,15 +11136,21 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<DIL, DFP> {
+			static const int GP = INF_SPH;
+			static const int OP = INF_SPH;
+			static const int IP = DFP;
+		};
+		
 		template<> struct ProductIdx<DIL, DLL> {
-			static const int GP = STA_DRT;
-			static const int OP = STA_DRT;
+			static const int GP = INF_DAL;
+			static const int OP = INF_DAL;
 			static const int IP = DLL;
 		};
 		
 		template<> struct ProductIdx<DIL, DLP> {
-			static const int GP = DRT_AFP;
-			static const int OP = DRT_AFP;
+			static const int GP = INF_DAP;
+			static const int OP = INF_DAP;
 			static const int IP = DLP;
 		};
 		
@@ -8601,6 +11188,30 @@
 			static const int GP = ORI_SPH;
 			static const int OP = ORI_SPH;
 			static const int IP = AFP;
+		};
+		
+		template<> struct ProductIdx<DIL, DAP> {
+			static const int GP = TVD;
+			static const int OP = DAP;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<DIL, DAF> {
+			static const int GP = ORI_DFP;
+			static const int OP = DAF;
+			static const int IP = ORI_DFP;
+		};
+		
+		template<> struct ProductIdx<DIL, DAL> {
+			static const int GP = ORI_STA;
+			static const int OP = DAL;
+			static const int IP = ORI_STA;
+		};
+		
+		template<> struct ProductIdx<DIL, MNV> {
+			static const int GP = ORI_DRV;
+			static const int OP = MNV;
+			static const int IP = ORI_DRV;
 		};
 		
 		template<> struct ProductIdx<DIL, ROT> {
@@ -8699,6 +11310,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<DIL, BST> {
+			static const int GP = TRT;
+			static const int OP = TRT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<TRV, SCA> {
 			static const int GP = TRV;
 			static const int OP = TRV;
@@ -8712,13 +11329,13 @@
 		};
 		
 		template<> struct ProductIdx<TRV, INF> {
-			static const int GP = DRT_AFP;
+			static const int GP = INF_DAP;
 			static const int OP = MNK_DLP;
 			static const int IP = INF;
 		};
 		
 		template<> struct ProductIdx<TRV, MNK> {
-			static const int GP = PSS_AFP;
+			static const int GP = DAP;
 			static const int OP = MNK;
 			static const int IP = MNK;
 		};
@@ -8736,15 +11353,15 @@
 		};
 		
 		template<> struct ProductIdx<TRV, PNT> {
-			static const int GP = SPH_AFP;
-			static const int OP = SPH_AFP;
+			static const int GP = PNT_DAP;
+			static const int OP = PNT_DAP;
 			static const int IP = PNT;
 		};
 		
 		template<> struct ProductIdx<TRV, PAR> {
 			static const int GP = TST;
-			static const int OP = SPH_AFL;
-			static const int IP = PNT_PNT;
+			static const int OP = PNT_DAL;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TRV, CIR> {
@@ -8766,14 +11383,14 @@
 		};
 		
 		template<> struct ProductIdx<TRV, DRV> {
-			static const int GP = DRB_AFP;
+			static const int GP = DRV_DAP;
 			static const int OP = MNK_DLL;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<TRV, DRB> {
 			static const int GP = DRV_AFP;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = MNK_LIN;
 		};
 		
@@ -8819,6 +11436,12 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<TRV, DFP> {
+			static const int GP = FLP_AFP;
+			static const int OP = INF_SPH;
+			static const int IP = PLN_MNV;
+		};
+		
 		template<> struct ProductIdx<TRV, DLL> {
 			static const int GP = TST;
 			static const int OP = MUV;
@@ -8826,20 +11449,20 @@
 		};
 		
 		template<> struct ProductIdx<TRV, DLP> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
 			static const int OP = MUV;
 			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<TRV, VEC> {
 			static const int GP = BIV_AFP;
-			static const int OP = TRI_AFL;
+			static const int OP = MNK_DAL;
 			static const int IP = VEC;
 		};
 		
 		template<> struct ProductIdx<TRV, BIV> {
 			static const int GP = VEC_AFP;
-			static const int OP = TRI_AFF;
+			static const int OP = MNK_DAF;
 			static const int IP = BIV;
 		};
 		
@@ -8865,6 +11488,30 @@
 			static const int GP = AFP;
 			static const int OP = AFP;
 			static const int IP = AFP;
+		};
+		
+		template<> struct ProductIdx<TRV, DAP> {
+			static const int GP = DAP;
+			static const int OP = DAP;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<TRV, DAF> {
+			static const int GP = BIV_DAP;
+			static const int OP = DAF;
+			static const int IP = BIV_DAP;
+		};
+		
+		template<> struct ProductIdx<TRV, DAL> {
+			static const int GP = VEC_DAP;
+			static const int OP = DAL;
+			static const int IP = VEC_DAP;
+		};
+		
+		template<> struct ProductIdx<TRV, MNV> {
+			static const int GP = VEC_DAP;
+			static const int OP = MNV;
+			static const int IP = MNK_AFF;
 		};
 		
 		template<> struct ProductIdx<TRV, ROT> {
@@ -8935,7 +11582,7 @@
 		
 		template<> struct ProductIdx<TRV, TSD> {
 			static const int GP = TRT;
-			static const int OP = MNK_PNT_PNT;
+			static const int OP = PSS_MNK_PNT_SPH;
 			static const int IP = TSD;
 		};
 		
@@ -8963,6 +11610,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<TRV, BST> {
+			static const int GP = TST;
+			static const int OP = TST;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<MTD, SCA> {
 			static const int GP = MTD;
 			static const int OP = MTD;
@@ -8971,7 +11624,7 @@
 		
 		template<> struct ProductIdx<MTD, ORI> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = ORI;
 		};
 		
@@ -8983,13 +11636,13 @@
 		
 		template<> struct ProductIdx<MTD, MNK> {
 			static const int GP = MTD;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = DIL;
 		};
 		
 		template<> struct ProductIdx<MTD, HYP> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = HYP;
 		};
 		
@@ -9008,7 +11661,7 @@
 		template<> struct ProductIdx<MTD, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<MTD, CIR> {
@@ -9049,7 +11702,7 @@
 		
 		template<> struct ProductIdx<MTD, TNV> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
@@ -9081,6 +11734,12 @@
 			static const int GP = MTD;
 			static const int OP = LIN_DLP;
 			static const int IP = TSD;
+		};
+		
+		template<> struct ProductIdx<MTD, DFP> {
+			static const int GP = PAR_DRB;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
 		};
 		
 		template<> struct ProductIdx<MTD, DLL> {
@@ -9129,6 +11788,30 @@
 			static const int GP = RTC;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<MTD, DAP> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<MTD, DAF> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<MTD, DAL> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT_DAP;
+		};
+		
+		template<> struct ProductIdx<MTD, MNV> {
+			static const int GP = PAR_DRB;
+			static const int OP = BIV_MNV;
+			static const int IP = INF_DAP;
 		};
 		
 		template<> struct ProductIdx<MTD, ROT> {
@@ -9188,7 +11871,7 @@
 		template<> struct ProductIdx<MTD, RTD> {
 			static const int GP = MTD;
 			static const int OP = MTD;
-			static const int IP = DRB_AFP;
+			static const int IP = DRV_DAP;
 		};
 		
 		template<> struct ProductIdx<MTD, TVD> {
@@ -9227,6 +11910,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<MTD, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<TRS, SCA> {
 			static const int GP = TRS;
 			static const int OP = TRS;
@@ -9258,9 +11947,9 @@
 		};
 		
 		template<> struct ProductIdx<TRS, PSS> {
-			static const int GP = FLP_TRI;
+			static const int GP = MNK_DFP;
 			static const int OP = PSS;
-			static const int IP = FLP_TRI;
+			static const int IP = MNK_DFP;
 		};
 		
 		template<> struct ProductIdx<TRS, PNT> {
@@ -9272,19 +11961,19 @@
 		template<> struct ProductIdx<TRS, PAR> {
 			static const int GP = TVT;
 			static const int OP = PNT_LIN;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TRS, CIR> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = PNT_SPH;
 			static const int IP = PNT_DLL;
 		};
 		
 		template<> struct ProductIdx<TRS, SPH> {
-			static const int GP = SPH_FLP;
+			static const int GP = PNT_DFP;
 			static const int OP = SPH;
-			static const int IP = SPH_FLP;
+			static const int IP = PNT_DFP;
 		};
 		
 		template<> struct ProductIdx<TRS, STA> {
@@ -9318,33 +12007,39 @@
 		};
 		
 		template<> struct ProductIdx<TRS, TNB> {
-			static const int GP = TNB_FLP;
+			static const int GP = TNV_DFP;
 			static const int OP = MNK_AFP;
-			static const int IP = TRI_AFL;
+			static const int IP = MNK_DAL;
 		};
 		
 		template<> struct ProductIdx<TRS, TNT> {
-			static const int GP = TNT_FLP;
+			static const int GP = ORI_DFP;
 			static const int OP = TNT;
-			static const int IP = TRI_AFF;
+			static const int IP = MNK_DAF;
 		};
 		
 		template<> struct ProductIdx<TRS, LIN> {
-			static const int GP = FLP_DLP;
+			static const int GP = PLN_DFP;
 			static const int OP = LIN;
-			static const int IP = FLP_DLP;
+			static const int IP = PLN_DFP;
 		};
 		
 		template<> struct ProductIdx<TRS, PLN> {
-			static const int GP = FLP_DLL;
+			static const int GP = LIN_DFP;
 			static const int OP = PLN;
-			static const int IP = FLP_DLL;
+			static const int IP = LIN_DFP;
 		};
 		
 		template<> struct ProductIdx<TRS, FLP> {
 			static const int GP = FLP;
 			static const int OP = FLP;
 			static const int IP = FLP;
+		};
+		
+		template<> struct ProductIdx<TRS, DFP> {
+			static const int GP = DFP;
+			static const int OP = DFP;
+			static const int IP = DFP;
 		};
 		
 		template<> struct ProductIdx<TRS, DLL> {
@@ -9372,7 +12067,7 @@
 		};
 		
 		template<> struct ProductIdx<TRS, TRI> {
-			static const int GP = PSS_FLP;
+			static const int GP = DFP;
 			static const int OP = TRI;
 			static const int IP = TRI;
 		};
@@ -9393,6 +12088,30 @@
 			static const int GP = FLP_AFP;
 			static const int OP = ORI_SPH;
 			static const int IP = BIV_AFF;
+		};
+		
+		template<> struct ProductIdx<TRS, DAP> {
+			static const int GP = TRT;
+			static const int OP = BIV_DAF;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<TRS, DAF> {
+			static const int GP = PNT_DFP;
+			static const int OP = DAF;
+			static const int IP = MUV;
+		};
+		
+		template<> struct ProductIdx<TRS, DAL> {
+			static const int GP = PAR_DFP;
+			static const int OP = VEC_DAF;
+			static const int IP = MUV;
+		};
+		
+		template<> struct ProductIdx<TRS, MNV> {
+			static const int GP = PLN_DFP;
+			static const int OP = MNV;
+			static const int IP = MNK_DLP;
 		};
 		
 		template<> struct ProductIdx<TRS, ROT> {
@@ -9452,12 +12171,12 @@
 		template<> struct ProductIdx<TRS, RTD> {
 			static const int GP = MTD;
 			static const int OP = MTD;
-			static const int IP = DRB_AFP;
+			static const int IP = DRV_DAP;
 		};
 		
 		template<> struct ProductIdx<TRS, TVD> {
 			static const int GP = TRT;
-			static const int OP = MNK_PNT_PNT;
+			static const int OP = PSS_MNK_PNT_SPH;
 			static const int IP = TVD;
 		};
 		
@@ -9491,6 +12210,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<TRS, BST> {
+			static const int GP = TVT;
+			static const int OP = TVT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<RTC, SCA> {
 			static const int GP = RTC;
 			static const int OP = RTC;
@@ -9499,7 +12224,7 @@
 		
 		template<> struct ProductIdx<RTC, ORI> {
 			static const int GP = RVD;
-			static const int OP = PSS_VEC_AFL;
+			static const int OP = VEC_DAL;
 			static const int IP = SCA;
 		};
 		
@@ -9511,7 +12236,7 @@
 		
 		template<> struct ProductIdx<RTC, MNK> {
 			static const int GP = RTC;
-			static const int OP = MNK_VEC_BIV;
+			static const int OP = BIV_MNV;
 			static const int IP = HYP;
 		};
 		
@@ -9542,7 +12267,7 @@
 		template<> struct ProductIdx<RTC, CIR> {
 			static const int GP = MTT;
 			static const int OP = SPH;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<RTC, SPH> {
@@ -9577,13 +12302,13 @@
 		
 		template<> struct ProductIdx<RTC, TNV> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_BIV_AFF;
+			static const int OP = VEC_DAF;
 			static const int IP = AFF;
 		};
 		
 		template<> struct ProductIdx<RTC, TNB> {
 			static const int GP = RVD;
-			static const int OP = PSS_AFF;
+			static const int OP = DAF;
 			static const int IP = VEC_AFF;
 		};
 		
@@ -9596,7 +12321,7 @@
 		template<> struct ProductIdx<RTC, LIN> {
 			static const int GP = MTT;
 			static const int OP = PLN;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<RTC, PLN> {
@@ -9609,6 +12334,12 @@
 			static const int GP = RTC;
 			static const int OP = PLN_DLP;
 			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<RTC, DFP> {
+			static const int GP = MTT;
+			static const int OP = SPH;
+			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<RTC, DLL> {
@@ -9657,6 +12388,30 @@
 			static const int GP = MTT;
 			static const int OP = SPH;
 			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<RTC, DAP> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<RTC, DAF> {
+			static const int GP = RTC;
+			static const int OP = PSS;
+			static const int IP = PNT_PAR;
+		};
+		
+		template<> struct ProductIdx<RTC, DAL> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = BST;
+		};
+		
+		template<> struct ProductIdx<RTC, MNV> {
+			static const int GP = MTT;
+			static const int OP = MNK_BIV;
+			static const int IP = HYP_PNT;
 		};
 		
 		template<> struct ProductIdx<RTC, ROT> {
@@ -9755,6 +12510,12 @@
 			static const int IP = PNT_PAR;
 		};
 		
+		template<> struct ProductIdx<RTC, BST> {
+			static const int GP = RTC;
+			static const int OP = RTC;
+			static const int IP = PNT;
+		};
+		
 		template<> struct ProductIdx<MTT, SCA> {
 			static const int GP = MTT;
 			static const int OP = MTT;
@@ -9763,7 +12524,7 @@
 		
 		template<> struct ProductIdx<MTT, ORI> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = ORI;
 		};
 		
@@ -9775,13 +12536,13 @@
 		
 		template<> struct ProductIdx<MTT, MNK> {
 			static const int GP = MTT;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = DIL;
 		};
 		
 		template<> struct ProductIdx<MTT, HYP> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = HYP;
 		};
 		
@@ -9800,7 +12561,7 @@
 		template<> struct ProductIdx<MTT, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<MTT, CIR> {
@@ -9823,13 +12584,13 @@
 		
 		template<> struct ProductIdx<MTT, DRV> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<MTT, DRB> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -9841,7 +12602,7 @@
 		
 		template<> struct ProductIdx<MTT, TNV> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
@@ -9875,15 +12636,21 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<MTT, DFP> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
 		template<> struct ProductIdx<MTT, DLL> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<MTT, DLP> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = DLP;
 		};
 		
@@ -9895,7 +12662,7 @@
 		
 		template<> struct ProductIdx<MTT, BIV> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = ROT;
 		};
 		
@@ -9921,6 +12688,30 @@
 			static const int GP = RTC;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<MTT, DAP> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<MTT, DAF> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<MTT, DAL> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT_DAP;
+		};
+		
+		template<> struct ProductIdx<MTT, MNV> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = HYP_FLP;
 		};
 		
 		template<> struct ProductIdx<MTT, ROT> {
@@ -10019,6 +12810,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<MTT, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<RTT, SCA> {
 			static const int GP = RTT;
 			static const int OP = RTT;
@@ -10038,21 +12835,21 @@
 		};
 		
 		template<> struct ProductIdx<RTT, MNK> {
-			static const int GP = PSS_VEC_AFL;
-			static const int OP = PSS_VEC_BIV;
+			static const int GP = VEC_DAL;
+			static const int OP = VEC_MNV;
 			static const int IP = MNK;
 		};
 		
 		template<> struct ProductIdx<RTT, HYP> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = HYP;
 		};
 		
 		template<> struct ProductIdx<RTT, PSS> {
-			static const int GP = MNK_VEC_AFL;
+			static const int GP = BIV_DAL;
 			static const int OP = PSS;
-			static const int IP = MNK_VEC_AFL;
+			static const int IP = BIV_DAL;
 		};
 		
 		template<> struct ProductIdx<RTT, PNT> {
@@ -10064,7 +12861,7 @@
 		template<> struct ProductIdx<RTT, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<RTT, CIR> {
@@ -10087,13 +12884,13 @@
 		
 		template<> struct ProductIdx<RTT, DRV> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<RTT, DRB> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -10139,15 +12936,21 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<RTT, DFP> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
 		template<> struct ProductIdx<RTT, DLL> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<RTT, DLP> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = DLP;
 		};
 		
@@ -10159,7 +12962,7 @@
 		
 		template<> struct ProductIdx<RTT, BIV> {
 			static const int GP = RTT;
-			static const int OP = TRI_AFF;
+			static const int OP = MNK_DAF;
 			static const int IP = ROT;
 		};
 		
@@ -10185,6 +12988,30 @@
 			static const int GP = VEC_AFL;
 			static const int OP = AFP;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<RTT, DAP> {
+			static const int GP = VEC_DAL;
+			static const int OP = VEC_DAL;
+			static const int IP = DAP;
+		};
+		
+		template<> struct ProductIdx<RTT, DAF> {
+			static const int GP = VEC_DAL;
+			static const int OP = DAF;
+			static const int IP = VEC_DAL;
+		};
+		
+		template<> struct ProductIdx<RTT, DAL> {
+			static const int GP = BIV_DAL;
+			static const int OP = VEC_DAF;
+			static const int IP = VEC_DAP;
+		};
+		
+		template<> struct ProductIdx<RTT, MNV> {
+			static const int GP = BIV_DAL;
+			static const int OP = BIV_MNV;
+			static const int IP = MNK_AFF;
 		};
 		
 		template<> struct ProductIdx<RTT, ROT> {
@@ -10283,6 +13110,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<RTT, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<RTD, SCA> {
 			static const int GP = RTD;
 			static const int OP = RTD;
@@ -10303,13 +13136,13 @@
 		
 		template<> struct ProductIdx<RTD, MNK> {
 			static const int GP = RTD;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = DIL;
 		};
 		
 		template<> struct ProductIdx<RTD, HYP> {
-			static const int GP = PSS_HYP_DRV_TNB;
-			static const int OP = PSS_HYP_DRV_TNB;
+			static const int GP = HYP_VEC_MNV;
+			static const int OP = HYP_VEC_MNV;
 			static const int IP = HYP;
 		};
 		
@@ -10328,7 +13161,7 @@
 		template<> struct ProductIdx<RTD, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<RTD, CIR> {
@@ -10403,6 +13236,12 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<RTD, DFP> {
+			static const int GP = PAR_DRB;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
 		template<> struct ProductIdx<RTD, DLL> {
 			static const int GP = MTD;
 			static const int OP = INF_CIR;
@@ -10449,6 +13288,30 @@
 			static const int GP = PAR_TNB;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<RTD, DAP> {
+			static const int GP = RVD;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<RTD, DAF> {
+			static const int GP = RVD;
+			static const int OP = DAF;
+			static const int IP = RVD;
+		};
+		
+		template<> struct ProductIdx<RTD, DAL> {
+			static const int GP = PAR_TNB;
+			static const int OP = VEC_DAF;
+			static const int IP = ORI_PAR;
+		};
+		
+		template<> struct ProductIdx<RTD, MNV> {
+			static const int GP = DRV_TNB;
+			static const int OP = BIV_MNV;
+			static const int IP = ORI_DRV;
 		};
 		
 		template<> struct ProductIdx<RTD, ROT> {
@@ -10547,6 +13410,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<RTD, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<TVD, SCA> {
 			static const int GP = TVD;
 			static const int OP = TVD;
@@ -10560,7 +13429,7 @@
 		};
 		
 		template<> struct ProductIdx<TVD, INF> {
-			static const int GP = DRT_AFP;
+			static const int GP = INF_DAP;
 			static const int OP = MNK_DLP;
 			static const int IP = INF;
 		};
@@ -10584,15 +13453,15 @@
 		};
 		
 		template<> struct ProductIdx<TVD, PNT> {
-			static const int GP = SPH_AFP;
-			static const int OP = SPH_AFP;
+			static const int GP = PNT_DAP;
+			static const int OP = PNT_DAP;
 			static const int IP = PNT;
 		};
 		
 		template<> struct ProductIdx<TVD, PAR> {
 			static const int GP = TST;
-			static const int OP = SPH_AFL;
-			static const int IP = PNT_PNT;
+			static const int OP = PNT_DAL;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TVD, CIR> {
@@ -10614,14 +13483,14 @@
 		};
 		
 		template<> struct ProductIdx<TVD, DRV> {
-			static const int GP = DRB_AFP;
+			static const int GP = DRV_DAP;
 			static const int OP = MNK_DLL;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<TVD, DRB> {
 			static const int GP = DRV_AFP;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = MNK_LIN;
 		};
 		
@@ -10667,6 +13536,12 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<TVD, DFP> {
+			static const int GP = FLP_AFP;
+			static const int OP = INF_SPH;
+			static const int IP = PLN_MNV;
+		};
+		
 		template<> struct ProductIdx<TVD, DLL> {
 			static const int GP = TST;
 			static const int OP = MUV;
@@ -10674,7 +13549,7 @@
 		};
 		
 		template<> struct ProductIdx<TVD, DLP> {
-			static const int GP = SPH_AFP;
+			static const int GP = PNT_DAP;
 			static const int OP = MUV;
 			static const int IP = DLP;
 		};
@@ -10687,7 +13562,7 @@
 		
 		template<> struct ProductIdx<TVD, BIV> {
 			static const int GP = ORI_CIR;
-			static const int OP = TNT_FLP;
+			static const int OP = ORI_DFP;
 			static const int IP = BIV;
 		};
 		
@@ -10713,6 +13588,30 @@
 			static const int GP = ORI_SPH;
 			static const int OP = ORI_SPH;
 			static const int IP = AFP;
+		};
+		
+		template<> struct ProductIdx<TVD, DAP> {
+			static const int GP = TVD;
+			static const int OP = DAP;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<TVD, DAF> {
+			static const int GP = ORI_CIR;
+			static const int OP = DAF;
+			static const int IP = ORI_CIR;
+		};
+		
+		template<> struct ProductIdx<TVD, DAL> {
+			static const int GP = ORI_PAR;
+			static const int OP = DAL;
+			static const int IP = ORI_PAR;
+		};
+		
+		template<> struct ProductIdx<TVD, MNV> {
+			static const int GP = ORI_PAR;
+			static const int OP = MNV;
+			static const int IP = ORI_FLP;
 		};
 		
 		template<> struct ProductIdx<TVD, ROT> {
@@ -10747,7 +13646,7 @@
 		
 		template<> struct ProductIdx<TVD, TRS> {
 			static const int GP = TRT;
-			static const int OP = MNK_PNT_PNT;
+			static const int OP = PSS_MNK_PNT_SPH;
 			static const int IP = TRS;
 		};
 		
@@ -10783,7 +13682,7 @@
 		
 		template<> struct ProductIdx<TVD, TSD> {
 			static const int GP = TRT;
-			static const int OP = MNK_PNT_PNT;
+			static const int OP = PSS_MNK_PNT_SPH;
 			static const int IP = TSD;
 		};
 		
@@ -10809,6 +13708,12 @@
 			static const int GP = MTT;
 			static const int OP = MTT;
 			static const int IP = TVT;
+		};
+		
+		template<> struct ProductIdx<TVD, BST> {
+			static const int GP = TST;
+			static const int OP = TST;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TSD, SCA> {
@@ -10856,19 +13761,19 @@
 		template<> struct ProductIdx<TSD, PAR> {
 			static const int GP = TVT;
 			static const int OP = PNT_LIN;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TSD, CIR> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = PNT_SPH;
 			static const int IP = PNT_DLL;
 		};
 		
 		template<> struct ProductIdx<TSD, SPH> {
-			static const int GP = SPH_FLP;
+			static const int GP = PNT_DFP;
 			static const int OP = SPH;
-			static const int IP = SPH_FLP;
+			static const int IP = PNT_DFP;
 		};
 		
 		template<> struct ProductIdx<TSD, STA> {
@@ -10902,15 +13807,15 @@
 		};
 		
 		template<> struct ProductIdx<TSD, TNB> {
-			static const int GP = TNB_FLP;
+			static const int GP = TNV_DFP;
 			static const int OP = MNK_AFP;
-			static const int IP = TRI_AFL;
+			static const int IP = MNK_DAL;
 		};
 		
 		template<> struct ProductIdx<TSD, TNT> {
-			static const int GP = TNT_FLP;
+			static const int GP = ORI_DFP;
 			static const int OP = TNT;
-			static const int IP = TRI_AFF;
+			static const int IP = MNK_DAF;
 		};
 		
 		template<> struct ProductIdx<TSD, LIN> {
@@ -10929,6 +13834,12 @@
 			static const int GP = TSD;
 			static const int OP = FLP;
 			static const int IP = TSD;
+		};
+		
+		template<> struct ProductIdx<TSD, DFP> {
+			static const int GP = INF_SPH;
+			static const int OP = INF_SPH;
+			static const int IP = DFP;
 		};
 		
 		template<> struct ProductIdx<TSD, DLL> {
@@ -10979,6 +13890,30 @@
 			static const int IP = BIV_AFF;
 		};
 		
+		template<> struct ProductIdx<TSD, DAP> {
+			static const int GP = TRT;
+			static const int OP = BIV_DAF;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<TSD, DAF> {
+			static const int GP = PNT_DFP;
+			static const int OP = DAF;
+			static const int IP = MUV;
+		};
+		
+		template<> struct ProductIdx<TSD, DAL> {
+			static const int GP = PAR_DFP;
+			static const int OP = VEC_DAF;
+			static const int IP = MUV;
+		};
+		
+		template<> struct ProductIdx<TSD, MNV> {
+			static const int GP = INF_PAR;
+			static const int OP = MNV;
+			static const int IP = INF_DAP;
+		};
+		
 		template<> struct ProductIdx<TSD, ROT> {
 			static const int GP = MTD;
 			static const int OP = MTD;
@@ -10999,7 +13934,7 @@
 		
 		template<> struct ProductIdx<TSD, TRV> {
 			static const int GP = TRT;
-			static const int OP = MNK_PNT_PNT;
+			static const int OP = PSS_MNK_PNT_SPH;
 			static const int IP = TRV;
 		};
 		
@@ -11036,12 +13971,12 @@
 		template<> struct ProductIdx<TSD, RTD> {
 			static const int GP = MTD;
 			static const int OP = MTD;
-			static const int IP = DRB_AFP;
+			static const int IP = DRV_DAP;
 		};
 		
 		template<> struct ProductIdx<TSD, TVD> {
 			static const int GP = TRT;
-			static const int OP = MNK_PNT_PNT;
+			static const int OP = PSS_MNK_PNT_SPH;
 			static const int IP = TVD;
 		};
 		
@@ -11075,6 +14010,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<TSD, BST> {
+			static const int GP = TVT;
+			static const int OP = TVT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<TRT, SCA> {
 			static const int GP = TRT;
 			static const int OP = TRT;
@@ -11083,19 +14024,19 @@
 		
 		template<> struct ProductIdx<TRT, ORI> {
 			static const int GP = ORI_PAR;
-			static const int OP = MNK_BIV_AFP;
+			static const int OP = VEC_DAP;
 			static const int IP = ORI;
 		};
 		
 		template<> struct ProductIdx<TRT, INF> {
 			static const int GP = INF_PAR;
-			static const int OP = FLP_DLP;
+			static const int OP = PLN_DFP;
 			static const int IP = INF;
 		};
 		
 		template<> struct ProductIdx<TRT, MNK> {
 			static const int GP = TRT;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = DIL;
 		};
 		
@@ -11120,7 +14061,7 @@
 		template<> struct ProductIdx<TRT, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TRT, CIR> {
@@ -11143,13 +14084,13 @@
 		
 		template<> struct ProductIdx<TRT, DRV> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<TRT, DRB> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -11161,7 +14102,7 @@
 		
 		template<> struct ProductIdx<TRT, TNV> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
@@ -11195,15 +14136,21 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<TRT, DFP> {
+			static const int GP = PAR_DFP;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
 		template<> struct ProductIdx<TRT, DLL> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<TRT, DLP> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = DLP;
 		};
 		
@@ -11215,7 +14162,7 @@
 		
 		template<> struct ProductIdx<TRT, BIV> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = ROT;
 		};
 		
@@ -11241,6 +14188,30 @@
 			static const int GP = PAR_AFP;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<TRT, DAP> {
+			static const int GP = TST;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<TRT, DAF> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<TRT, DAL> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT_DAP;
+		};
+		
+		template<> struct ProductIdx<TRT, MNV> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = HYP_FLP;
 		};
 		
 		template<> struct ProductIdx<TRT, ROT> {
@@ -11339,6 +14310,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<TRT, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<RVD, SCA> {
 			static const int GP = RVD;
 			static const int OP = RVD;
@@ -11359,13 +14336,13 @@
 		
 		template<> struct ProductIdx<RVD, MNK> {
 			static const int GP = RVD;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = DIL;
 		};
 		
 		template<> struct ProductIdx<RVD, HYP> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = HYP;
 		};
 		
@@ -11384,7 +14361,7 @@
 		template<> struct ProductIdx<RVD, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<RVD, CIR> {
@@ -11407,13 +14384,13 @@
 		
 		template<> struct ProductIdx<RVD, DRV> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<RVD, DRB> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -11459,27 +14436,33 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<RVD, DFP> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
 		template<> struct ProductIdx<RVD, DLL> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<RVD, DLP> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = DLP;
 		};
 		
 		template<> struct ProductIdx<RVD, VEC> {
 			static const int GP = PAR_TNB;
-			static const int OP = TNB_FLP;
+			static const int OP = TNV_DFP;
 			static const int IP = VEC;
 		};
 		
 		template<> struct ProductIdx<RVD, BIV> {
 			static const int GP = RVD;
-			static const int OP = TNT_FLP;
+			static const int OP = ORI_DFP;
 			static const int IP = ROT;
 		};
 		
@@ -11505,6 +14488,30 @@
 			static const int GP = PAR_TNB;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<RVD, DAP> {
+			static const int GP = RVD;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<RVD, DAF> {
+			static const int GP = RVD;
+			static const int OP = DAF;
+			static const int IP = RVD;
+		};
+		
+		template<> struct ProductIdx<RVD, DAL> {
+			static const int GP = PAR_TNB;
+			static const int OP = VEC_DAF;
+			static const int IP = ORI_PAR;
+		};
+		
+		template<> struct ProductIdx<RVD, MNV> {
+			static const int GP = PAR_TNB;
+			static const int OP = BIV_MNV;
+			static const int IP = ORI_FLP;
 		};
 		
 		template<> struct ProductIdx<RVD, ROT> {
@@ -11603,6 +14610,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<RVD, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<TST, SCA> {
 			static const int GP = TST;
 			static const int OP = TST;
@@ -11611,7 +14624,7 @@
 		
 		template<> struct ProductIdx<TST, ORI> {
 			static const int GP = ORI_PAR;
-			static const int OP = MNK_BIV_AFP;
+			static const int OP = VEC_DAP;
 			static const int IP = ORI;
 		};
 		
@@ -11623,13 +14636,13 @@
 		
 		template<> struct ProductIdx<TST, MNK> {
 			static const int GP = TST;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = DIL;
 		};
 		
 		template<> struct ProductIdx<TST, HYP> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = HYP;
 		};
 		
@@ -11648,7 +14661,7 @@
 		template<> struct ProductIdx<TST, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TST, CIR> {
@@ -11671,13 +14684,13 @@
 		
 		template<> struct ProductIdx<TST, DRV> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<TST, DRB> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -11689,7 +14702,7 @@
 		
 		template<> struct ProductIdx<TST, TNV> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
@@ -11723,15 +14736,21 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<TST, DFP> {
+			static const int GP = RTC;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
 		template<> struct ProductIdx<TST, DLL> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<TST, DLP> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = DLP;
 		};
 		
@@ -11743,7 +14762,7 @@
 		
 		template<> struct ProductIdx<TST, BIV> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = ROT;
 		};
 		
@@ -11769,6 +14788,30 @@
 			static const int GP = PAR_AFP;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<TST, DAP> {
+			static const int GP = TST;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<TST, DAF> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<TST, DAL> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT_DAP;
+		};
+		
+		template<> struct ProductIdx<TST, MNV> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = HYP_FLP;
 		};
 		
 		template<> struct ProductIdx<TST, ROT> {
@@ -11867,6 +14910,12 @@
 			static const int IP = TVT;
 		};
 		
+		template<> struct ProductIdx<TST, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
 		template<> struct ProductIdx<TVT, SCA> {
 			static const int GP = TVT;
 			static const int OP = TVT;
@@ -11875,32 +14924,32 @@
 		
 		template<> struct ProductIdx<TVT, ORI> {
 			static const int GP = PAR_TNB;
-			static const int OP = MNK_VEC_AFL;
+			static const int OP = BIV_DAL;
 			static const int IP = ORI;
 		};
 		
 		template<> struct ProductIdx<TVT, INF> {
 			static const int GP = INF_PAR;
-			static const int OP = FLP_DLP;
+			static const int OP = PLN_DFP;
 			static const int IP = INF;
 		};
 		
 		template<> struct ProductIdx<TVT, MNK> {
 			static const int GP = TVT;
-			static const int OP = PSS_VEC_BIV;
+			static const int OP = VEC_MNV;
 			static const int IP = DIL;
 		};
 		
 		template<> struct ProductIdx<TVT, HYP> {
 			static const int GP = RTC;
-			static const int OP = MNK_STA_VEC;
+			static const int OP = STA_MNV;
 			static const int IP = HYP;
 		};
 		
 		template<> struct ProductIdx<TVT, PSS> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = PSS;
-			static const int IP = CIR_FLP;
+			static const int IP = PAR_DFP;
 		};
 		
 		template<> struct ProductIdx<TVT, PNT> {
@@ -11912,7 +14961,7 @@
 		template<> struct ProductIdx<TVT, PAR> {
 			static const int GP = MTT;
 			static const int OP = PNT_CIR;
-			static const int IP = PNT_PNT;
+			static const int IP = BST;
 		};
 		
 		template<> struct ProductIdx<TVT, CIR> {
@@ -11935,13 +14984,13 @@
 		
 		template<> struct ProductIdx<TVT, DRV> {
 			static const int GP = MTD;
-			static const int OP = FLP_DLL;
+			static const int OP = LIN_DFP;
 			static const int IP = TRS;
 		};
 		
 		template<> struct ProductIdx<TVT, DRB> {
 			static const int GP = PAR_DRB;
-			static const int OP = FLP_TRI;
+			static const int OP = MNK_DFP;
 			static const int IP = LIN_FLP;
 		};
 		
@@ -11953,7 +15002,7 @@
 		
 		template<> struct ProductIdx<TVT, TNV> {
 			static const int GP = RVD;
-			static const int OP = MNK_VEC_AFP;
+			static const int OP = BIV_DAP;
 			static const int IP = TRV;
 		};
 		
@@ -11987,15 +15036,21 @@
 			static const int IP = TSD;
 		};
 		
+		template<> struct ProductIdx<TVT, DFP> {
+			static const int GP = PAR_DFP;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
 		template<> struct ProductIdx<TVT, DLL> {
 			static const int GP = MTT;
-			static const int OP = SPH_FLP;
+			static const int OP = PNT_DFP;
 			static const int IP = PLN_PLN;
 		};
 		
 		template<> struct ProductIdx<TVT, DLP> {
 			static const int GP = RTC;
-			static const int OP = CIR_FLP;
+			static const int OP = PAR_DFP;
 			static const int IP = DLP;
 		};
 		
@@ -12007,12 +15062,12 @@
 		
 		template<> struct ProductIdx<TVT, BIV> {
 			static const int GP = MTT;
-			static const int OP = HYP_AFP;
+			static const int OP = HYP_DFP;
 			static const int IP = ROT;
 		};
 		
 		template<> struct ProductIdx<TVT, TRI> {
-			static const int GP = CIR_FLP;
+			static const int GP = PAR_DFP;
 			static const int OP = ORI_DRT;
 			static const int IP = VEC_BIV;
 		};
@@ -12033,6 +15088,30 @@
 			static const int GP = RTC;
 			static const int OP = ORI_SPH;
 			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<TVT, DAP> {
+			static const int GP = MTT;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<TVT, DAF> {
+			static const int GP = MTT;
+			static const int OP = DAF;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<TVT, DAL> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT_DAP;
+		};
+		
+		template<> struct ProductIdx<TVT, MNV> {
+			static const int GP = RTC;
+			static const int OP = BIV_MNV;
+			static const int IP = HYP_FLP;
 		};
 		
 		template<> struct ProductIdx<TVT, ROT> {
@@ -12129,6 +15208,312 @@
 			static const int GP = MTT;
 			static const int OP = MTT;
 			static const int IP = TVT;
+		};
+		
+		template<> struct ProductIdx<TVT, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
+		};
+		
+		template<> struct ProductIdx<BST, SCA> {
+			static const int GP = BST;
+			static const int OP = BST;
+			static const int IP = SCA;
+		};
+		
+		template<> struct ProductIdx<BST, ORI> {
+			static const int GP = ORI_PAR;
+			static const int OP = VEC_DAP;
+			static const int IP = ORI;
+		};
+		
+		template<> struct ProductIdx<BST, INF> {
+			static const int GP = INF_PAR;
+			static const int OP = PLN_DFP;
+			static const int IP = INF;
+		};
+		
+		template<> struct ProductIdx<BST, MNK> {
+			static const int GP = PSS_MNK_PNT_SPH;
+			static const int OP = VEC_MNV;
+			static const int IP = DIL;
+		};
+		
+		template<> struct ProductIdx<BST, HYP> {
+			static const int GP = HYP_PAR;
+			static const int OP = MUV;
+			static const int IP = HYP;
+		};
+		
+		template<> struct ProductIdx<BST, PSS> {
+			static const int GP = PNT_SPH;
+			static const int OP = PSS;
+			static const int IP = PNT_SPH;
+		};
+		
+		template<> struct ProductIdx<BST, PNT> {
+			static const int GP = PNT_PAR;
+			static const int OP = PNT_PAR;
+			static const int IP = PNT;
+		};
+		
+		template<> struct ProductIdx<BST, PAR> {
+			static const int GP = MTT;
+			static const int OP = PNT_CIR;
+			static const int IP = BST;
+		};
+		
+		template<> struct ProductIdx<BST, CIR> {
+			static const int GP = RTC;
+			static const int OP = PNT_SPH;
+			static const int IP = PNT_PAR;
+		};
+		
+		template<> struct ProductIdx<BST, SPH> {
+			static const int GP = PNT_CIR;
+			static const int OP = SPH;
+			static const int IP = PNT_CIR;
+		};
+		
+		template<> struct ProductIdx<BST, STA> {
+			static const int GP = MTT;
+			static const int OP = HYP_CIR;
+			static const int IP = PNT_VEC;
+		};
+		
+		template<> struct ProductIdx<BST, DRV> {
+			static const int GP = MTD;
+			static const int OP = LIN_DFP;
+			static const int IP = TRS;
+		};
+		
+		template<> struct ProductIdx<BST, DRB> {
+			static const int GP = PAR_DRB;
+			static const int OP = MNK_DFP;
+			static const int IP = LIN_FLP;
+		};
+		
+		template<> struct ProductIdx<BST, DRT> {
+			static const int GP = INF_CIR;
+			static const int OP = DRT;
+			static const int IP = PLN_FLP;
+		};
+		
+		template<> struct ProductIdx<BST, TNV> {
+			static const int GP = RVD;
+			static const int OP = BIV_DAP;
+			static const int IP = TRV;
+		};
+		
+		template<> struct ProductIdx<BST, TNB> {
+			static const int GP = PAR_TNB;
+			static const int OP = MNK_AFP;
+			static const int IP = BIV_AFP;
+		};
+		
+		template<> struct ProductIdx<BST, TNT> {
+			static const int GP = ORI_CIR;
+			static const int OP = TNT;
+			static const int IP = VEC_AFP;
+		};
+		
+		template<> struct ProductIdx<BST, LIN> {
+			static const int GP = RTC;
+			static const int OP = PLN_DLP;
+			static const int IP = PNT_FLP;
+		};
+		
+		template<> struct ProductIdx<BST, PLN> {
+			static const int GP = PNT_CIR;
+			static const int OP = PLN;
+			static const int IP = PNT_LIN;
+		};
+		
+		template<> struct ProductIdx<BST, FLP> {
+			static const int GP = TVT;
+			static const int OP = LIN_DLP;
+			static const int IP = TSD;
+		};
+		
+		template<> struct ProductIdx<BST, DFP> {
+			static const int GP = PAR_DFP;
+			static const int OP = INF_SPH;
+			static const int IP = LIN_PLN;
+		};
+		
+		template<> struct ProductIdx<BST, DLL> {
+			static const int GP = MTT;
+			static const int OP = PNT_DFP;
+			static const int IP = PLN_PLN;
+		};
+		
+		template<> struct ProductIdx<BST, DLP> {
+			static const int GP = PNT_PAR;
+			static const int OP = PNT_DLL;
+			static const int IP = DLP;
+		};
+		
+		template<> struct ProductIdx<BST, VEC> {
+			static const int GP = PNT_PAR;
+			static const int OP = MUV;
+			static const int IP = VEC;
+		};
+		
+		template<> struct ProductIdx<BST, BIV> {
+			static const int GP = PAR_BIV;
+			static const int OP = HYP_DFP;
+			static const int IP = ROT;
+		};
+		
+		template<> struct ProductIdx<BST, TRI> {
+			static const int GP = MNK_PNT_SPH;
+			static const int OP = ORI_DRT;
+			static const int IP = VEC_BIV;
+		};
+		
+		template<> struct ProductIdx<BST, AFF> {
+			static const int GP = PNT_PAR;
+			static const int OP = PNT_AFL;
+			static const int IP = AFF;
+		};
+		
+		template<> struct ProductIdx<BST, AFL> {
+			static const int GP = MTT;
+			static const int OP = PNT_AFP;
+			static const int IP = VEC_AFF;
+		};
+		
+		template<> struct ProductIdx<BST, AFP> {
+			static const int GP = PAR_AFP;
+			static const int OP = ORI_SPH;
+			static const int IP = VEC_AFL;
+		};
+		
+		template<> struct ProductIdx<BST, DAP> {
+			static const int GP = TST;
+			static const int OP = VEC_DAL;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<BST, DAF> {
+			static const int GP = PNT_CIR;
+			static const int OP = DAF;
+			static const int IP = PNT_DAL;
+		};
+		
+		template<> struct ProductIdx<BST, DAL> {
+			static const int GP = RTC;
+			static const int OP = VEC_DAF;
+			static const int IP = PNT_DAP;
+		};
+		
+		template<> struct ProductIdx<BST, MNV> {
+			static const int GP = PAR_MNV;
+			static const int OP = BIV_MNV;
+			static const int IP = HYP_FLP;
+		};
+		
+		template<> struct ProductIdx<BST, ROT> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = ROT;
+		};
+		
+		template<> struct ProductIdx<BST, MOT> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = MOT;
+		};
+		
+		template<> struct ProductIdx<BST, DIL> {
+			static const int GP = TRT;
+			static const int OP = TRT;
+			static const int IP = DIL;
+		};
+		
+		template<> struct ProductIdx<BST, TRV> {
+			static const int GP = TST;
+			static const int OP = TST;
+			static const int IP = TRV;
+		};
+		
+		template<> struct ProductIdx<BST, MTD> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = TVT;
+		};
+		
+		template<> struct ProductIdx<BST, TRS> {
+			static const int GP = TVT;
+			static const int OP = TVT;
+			static const int IP = TRS;
+		};
+		
+		template<> struct ProductIdx<BST, RTC> {
+			static const int GP = RTC;
+			static const int OP = RTC;
+			static const int IP = RTC;
+		};
+		
+		template<> struct ProductIdx<BST, MTT> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = MTT;
+		};
+		
+		template<> struct ProductIdx<BST, RTT> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = RTT;
+		};
+		
+		template<> struct ProductIdx<BST, RTD> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = TRT;
+		};
+		
+		template<> struct ProductIdx<BST, TVD> {
+			static const int GP = TST;
+			static const int OP = TST;
+			static const int IP = TVD;
+		};
+		
+		template<> struct ProductIdx<BST, TSD> {
+			static const int GP = TVT;
+			static const int OP = TVT;
+			static const int IP = TSD;
+		};
+		
+		template<> struct ProductIdx<BST, TRT> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = TRT;
+		};
+		
+		template<> struct ProductIdx<BST, RVD> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<BST, TST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = TST;
+		};
+		
+		template<> struct ProductIdx<BST, TVT> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = TVT;
+		};
+		
+		template<> struct ProductIdx<BST, BST> {
+			static const int GP = MTT;
+			static const int OP = MTT;
+			static const int IP = BST;
 		};
 		
 		

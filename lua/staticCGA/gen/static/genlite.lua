@@ -68,6 +68,7 @@ local myTypes = AllTypes
 --CONFORMAL
 local myStates = CGAStates
 local myVersors = CGAVersors
+local myPinors = Pinors
 local myTypes = CGATypes
 
 
@@ -168,6 +169,7 @@ local versionGen = function(tx, op)
 				
 		local template = [[ 
 		$make_function[=[
+
 		
 inline $lhand $fname (const $lhand& a) { 
 	return $lhand $rcombo;
@@ -248,11 +250,13 @@ local versorGen = function(tx, ty, op, ct2)
 	if op == "sp" then exp = tx.id .. "(" ..ty.id .. " * ".. tx.id .. " * " .. " !" .. ty.id..")" end
 	if op == "sp0" then exp = ty.id .. " * ".. tx.id .. " * " .. " !" .. ty.id end
 	if op == "sp1" then exp = ct2.id .. "(" ..ty.id .. " * ".. tx.id .. " * " .. " !" .. ty.id..")" end
-	if op == "re" then exp = ty.id .. " * ".. tx.id .. " * " .. " !" .. ty.id end
+	if op == "re" then exp = tx.id .. "("..ty.id .. " * #".. tx.id .. " * " .. " !" .. ty.id.. ")" end
+	if op == "re0" then exp = ty.id .. " * #".. tx.id .. " * " .. " !" .. ty.id end
 	
 	local ct = getExp(exp)
 		
 	local template = [[ $make_function[=[ 	
+template<>
 inline $rtype $fname (const $obj& $arga, const $gen& $argb) {					
 					$assemble
 }
@@ -301,12 +305,13 @@ local genIdx = function()
 	using namespace std;
 	
 	enum {
-		
+		 MUV = 0,
 		$do_enum[=[ $en 
 		]=]
 	};
 	
-	template<int A> struct Idx;
+	template<int A> struct Idx{ static const int Size = 0; static string name; };
+	template<> struct Idx<0>{ static const int Size = 0; static string name;};
 	$do_Idx[=[
 	template<> struct Idx<$idx>{ static const int Size = $num; static string name;};
 	]=]
@@ -356,6 +361,7 @@ local genNames = function()
 
 	namespace vsr {
 		
+		string Idx<0>::name = "undefined";
 		
 	    $do_names[=[
 		string Idx<$idx>::name = "$name";]=]
@@ -377,7 +383,11 @@ end
 local genProductIdx = function()
 
 	local template = [[
-		template<int A, int B> struct ProductIdx;
+		template<int A, int B> struct ProductIdx{
+            static const int GP = MUV;
+            static const int OP = MUV;
+            static const int IP = MUV;
+        };
 		$do_product[=[
 		template<> struct ProductIdx<$idxA, $idxB> {
 			static const int GP = $gpidx;
@@ -426,7 +436,7 @@ end
 local genericCast = function()
 	local template = [[
 	template<class T, class S>
-	inline T cast (const S& s ){
+	inline T const cast (const S& s ){
 		T temp;
 		if ( T::size >= S::size ) std::copy( &(s[0]), &(s[0])+S::size, &(temp[0]) );
 		else std::copy ( &(s[0]), &(s[0])+T::size, &(temp[0]) );
@@ -535,12 +545,22 @@ local genFunctions = function(dest)
 		local filename = prefix..iv.id..".h"				
 		io.output( io.open(path..filename, "a") ) -- APPEND
 		
+		--SPINORS
 		for k, kv in ipairs(myVersors) do
 			if iv.id ~= kv.id then
 				pprint ( versorGen(iv, kv, "sp"),dest )
 			end
 		--	pprint ( versorGen(iv, kv, "sp0"),dest )
 		end
+		
+		--PINORS
+		for k, kv in ipairs(myPinors) do
+			if iv.id ~= kv.id then
+				pprint ( versorGen(iv, kv, "re"),dest )
+			end
+		--	pprint ( versorGen(iv, kv, "sp0"),dest )
+		end
+		
 		io.close()
 	end
 
@@ -559,6 +579,7 @@ local genIncludes = function(dest)
 	$do_include[=[
 	#include "$type"
 	]=]
+	#include "versorFuncs.h"
 	]]
 	local code= cosmo.f(template){
 		do_include = function()
@@ -611,13 +632,23 @@ end
 
 
 
--- genVsrH("vsr")
+genVsrH("vsr")
 genVsrTypedefs("vsr_typedefs")
--- genVsrTemplateH("vsr_templates")
--- genVsrTemplateC("vsr_templates")
---genFunctions("io")
+genVsrTemplateH("vsr_templates")
+genVsrTemplateC("vsr_templates")
+genFunctions("io")
 
 
+--PINORS
+-- for i, iv in ipairs(myPinors) do
+-- 
+-- 	for k, kv in ipairs(myPinors) do
+-- 		if iv.id == kv.id then
+-- 			pprint ( versorGen(iv, kv, "re"),"" )
+-- 		end
+-- 	end
+-- 
+-- end
 --print(genProductIdx())
 --genVsrTemplate()
 --genFunctions()

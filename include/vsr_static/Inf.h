@@ -172,6 +172,12 @@ inline Inf gp (const Inf& a, const Flp& b) {
 );
 }			
 		 
+inline Drt gp (const Inf& a, const Dfp& b) { 
+	return Drt (
+ - a[0] * b[3]
+);
+}			
+		 
 inline Drb gp (const Inf& a, const Dll& b) { 
 	return Drb (
 a[0] * b[0],
@@ -246,6 +252,50 @@ inline Inf_Afp gp (const Inf& a, const Afp& b) {
 );
 }			
 		 
+inline Inf_Dap gp (const Inf& a, const Dap& b) { 
+	return Inf_Dap (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+ - a[0] * b[3],
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
+);
+}			
+		 
+inline Inf_Sph gp (const Inf& a, const Daf& b) { 
+	return Inf_Sph (
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2],
+a[0] * b[3],
+a[0] * b[3]
+);
+}			
+		 
+inline Inf_Dal gp (const Inf& a, const Dal& b) { 
+	return Inf_Dal (
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2],
+a[0] * b[3],
+a[0] * b[4],
+a[0] * b[5],
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2]
+);
+}			
+		 
+inline Drv gp (const Inf& a, const Mnv& b) { 
+	return Drv (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
+);
+}			
+		 
 inline Drv_Lin gp (const Inf& a, const Rot& b) { 
 	return Drv_Lin (
 a[0] * b[0],
@@ -270,8 +320,8 @@ a[0] * b[0] - a[0] * b[1]
 );
 }			
 		 
-inline Drt_Afp gp (const Inf& a, const Trv& b) { 
-	return Drt_Afp (
+inline Inf_Dap gp (const Inf& a, const Trv& b) { 
+	return Inf_Dap (
 a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3],
@@ -357,8 +407,8 @@ a[0] * b[3] - a[0] * b[7]
 );
 }			
 		 
-inline Drt_Afp gp (const Inf& a, const Tvd& b) { 
-	return Drt_Afp (
+inline Inf_Dap gp (const Inf& a, const Tvd& b) { 
+	return Inf_Dap (
 a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3],
@@ -433,6 +483,21 @@ a[0] * b[0] - a[0] * b[10],
 a[0] * b[1] - a[0] * b[11],
 a[0] * b[2] - a[0] * b[12],
 a[0] * b[3] - a[0] * b[13],
+a[0] * b[4],
+a[0] * b[5],
+a[0] * b[6]
+);
+}			
+		 
+inline Inf_Par gp (const Inf& a, const Bst& b) { 
+	return Inf_Par (
+a[0] * b[4],
+a[0] * b[5],
+a[0] * b[6],
+a[0] * b[0] - a[0] * b[10],
+a[0] * b[1],
+a[0] * b[2],
+a[0] * b[3],
 a[0] * b[4],
 a[0] * b[5],
 a[0] * b[6]
@@ -533,8 +598,8 @@ inline Sca op (const Inf& a, const Drt& b) {
 );
 }			
 		 
-inline Mnk_Vec op (const Inf& a, const Tnv& b) { 
-	return Mnk_Vec (
+inline Mnv op (const Inf& a, const Tnv& b) { 
+	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
@@ -567,6 +632,12 @@ inline Sca op (const Inf& a, const Pln& b) {
 		 
 inline Sca op (const Inf& a, const Flp& b) { 
 	return Sca (
+);
+}			
+		 
+inline Drt op (const Inf& a, const Dfp& b) { 
+	return Drt (
+ - a[0] * b[3]
 );
 }			
 		 
@@ -637,6 +708,33 @@ inline Pln op (const Inf& a, const Afp& b) {
 );
 }			
 		 
+inline Mnv op (const Inf& a, const Dap& b) { 
+	return Mnv (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
+);
+}			
+		 
+inline Pss op (const Inf& a, const Daf& b) { 
+	return Pss (
+a[0] * b[3]
+);
+}			
+		 
+inline Mnk_Biv op (const Inf& a, const Dal& b) { 
+	return Mnk_Biv (
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2]
+);
+}			
+		 
+inline Sca op (const Inf& a, const Mnv& b) { 
+	return Sca (
+);
+}			
+		 
 inline Sca ip (const Inf& a, const Sca& b) { 
 	return Sca (
 );
@@ -697,8 +795,8 @@ a[0] * b[8]
 );
 }			
 		 
-inline Pss_Flp ip (const Inf& a, const Sph& b) { 
-	return Pss_Flp (
+inline Dfp ip (const Inf& a, const Sph& b) { 
+	return Dfp (
  - a[0] * b[0],
  - a[0] * b[1],
  - a[0] * b[2],
@@ -773,6 +871,11 @@ inline Inf ip (const Inf& a, const Flp& b) {
 );
 }			
 		 
+inline Sca ip (const Inf& a, const Dfp& b) { 
+	return Sca (
+);
+}			
+		 
 inline Sca ip (const Inf& a, const Dll& b) { 
 	return Sca (
 );
@@ -819,7 +922,45 @@ inline Biv ip (const Inf& a, const Afp& b) {
  - a[0] * b[2]
 );
 }			
+		 
+inline Dlp ip (const Inf& a, const Dap& b) { 
+	return Dlp (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+ - a[0] * b[3]
+);
+}			
+		 
+inline Dfp ip (const Inf& a, const Daf& b) { 
+	return Dfp (
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2],
+a[0] * b[3]
+);
+}			
+		 
+inline Dll ip (const Inf& a, const Dal& b) { 
+	return Dll (
+ - a[0] * b[0],
+ - a[0] * b[1],
+ - a[0] * b[2],
+a[0] * b[3],
+a[0] * b[4],
+a[0] * b[5]
+);
+}			
+		 
+inline Drv ip (const Inf& a, const Mnv& b) { 
+	return Drv (
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
+);
+}			
 		  	
+template<>
 inline Inf sp (const Inf& inf, const Rot& rot) {					
 					
 const Rot& t1 = rot;
@@ -840,6 +981,7 @@ t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Mot& mot) {					
 					
 const Mot& t1 = mot;
@@ -860,6 +1002,7 @@ t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Dil& dil) {					
 					
 const Dil& t1 = dil;
@@ -877,11 +1020,12 @@ t3[0] * t5[0] - t3[0] * t5[1]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Trv& trv) {					
 					
 const Trv& t1 = trv;
 const Inf& t2 = inf;
-Drt_Afp t3 (
+Inf_Dap t3 (
  - t1[1] * t2[0],
  - t1[2] * t2[0],
  - t1[3] * t2[0],
@@ -900,6 +1044,7 @@ t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Mtd& mtd) {					
 					
 const Mtd& t1 = mtd;
@@ -920,6 +1065,7 @@ t3[0] * t5[0] - t3[0] * t5[7] - t3[1] * t5[1] + t3[1] * t5[8] - t3[2] * t5[2] + 
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Trs& trs) {					
 					
 const Trs& t1 = trs;
@@ -937,6 +1083,7 @@ t3[0] * t5[0]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Rtc& rtc) {					
 					
 const Rtc& t1 = rtc;
@@ -965,6 +1112,7 @@ t3[0] * t5[4] - t3[1] * t5[8] - t3[2] * t5[9] - t3[3] * t5[10] - t3[4] * t5[0] +
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Mtt& mtt) {					
 					
 const Mtt& t1 = mtt;
@@ -993,6 +1141,7 @@ t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] + t3[3] * t5[0] - t3[3] * t5[10] -
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Rtt& rtt) {					
 					
 const Rtt& t1 = rtt;
@@ -1021,6 +1170,7 @@ t3[3] * t5[0] - t3[4] * t5[1] - t3[5] * t5[2] - t3[6] * t5[3]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Rtd& rtd) {					
 					
 const Rtd& t1 = rtd;
@@ -1041,11 +1191,12 @@ t3[0] * t5[0] - t3[0] * t5[4] - t3[1] * t5[1] + t3[1] * t5[5] - t3[2] * t5[2] + 
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Tvd& tvd) {					
 					
 const Tvd& t1 = tvd;
 const Inf& t2 = inf;
-Drt_Afp t3 (
+Inf_Dap t3 (
  - t1[1] * t2[0],
  - t1[2] * t2[0],
  - t1[3] * t2[0],
@@ -1064,6 +1215,7 @@ t3[3] * t5[0] - t3[3] * t5[4]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Tsd& tsd) {					
 					
 const Tsd& t1 = tsd;
@@ -1081,6 +1233,7 @@ t3[0] * t5[0] - t3[0] * t5[4]
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Trt& trt) {					
 					
 const Trt& t1 = trt;
@@ -1107,6 +1260,7 @@ t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] + t3[3] * t5[0] - t3[3] * t5[10] -
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Rvd& rvd) {					
 					
 const Rvd& t1 = rvd;
@@ -1135,6 +1289,7 @@ t3[3] * t5[0] - t3[3] * t5[7] - t3[4] * t5[1] + t3[4] * t5[8] - t3[5] * t5[2] + 
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Tst& tst) {					
 					
 const Tst& t1 = tst;
@@ -1163,6 +1318,7 @@ t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] + t3[3] * t5[0] - t3[3] * t5[10] -
 		
 	
 	  	
+template<>
 inline Inf sp (const Inf& inf, const Tvt& tvt) {					
 					
 const Tvt& t1 = tvt;
@@ -1183,6 +1339,240 @@ const Tvt& t4 = tvt;
 Tvt t5 = reverse( t4);
 return Inf (
 t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] + t3[3] * t5[0] - t3[3] * t5[10] - t3[4] * t5[1] + t3[4] * t5[11] - t3[5] * t5[2] + t3[5] * t5[12] - t3[6] * t5[3] + t3[6] * t5[13] + t3[7] * t5[7] + t3[8] * t5[8] + t3[9] * t5[9]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf sp (const Inf& inf, const Bst& bst) {					
+					
+const Bst& t1 = bst;
+const Inf& t2 = inf;
+Inf_Par t3 (
+ - t1[4] * t2[0],
+ - t1[5] * t2[0],
+ - t1[6] * t2[0],
+t1[0] * t2[0] + t1[10] * t2[0],
+t1[1] * t2[0],
+t1[2] * t2[0],
+t1[3] * t2[0],
+t1[4] * t2[0],
+t1[5] * t2[0],
+t1[6] * t2[0]
+);
+const Bst& t4 = bst;
+Bst t5 = reverse( t4);
+return Inf (
+t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] + t3[3] * t5[0] - t3[3] * t5[10] - t3[4] * t5[1] - t3[5] * t5[2] - t3[6] * t5[3] + t3[7] * t5[7] + t3[8] * t5[8] + t3[9] * t5[9]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Vec& vec) {					
+					
+const Vec& t1 = vec;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Drv t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Vec& t5 = vec;
+Vec t6 = reverse( t5);
+return Inf (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Dlp& dlp) {					
+					
+const Dlp& t1 = dlp;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Drv t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Dlp& t5 = dlp;
+Dlp t6 = reverse( t5);
+return Inf (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Pln& pln) {					
+					
+const Pln& t1 = pln;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Drb t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Pln& t5 = pln;
+Pln t6 = reverse( t5);
+return Inf (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Dll& dll) {					
+					
+const Dll& t1 = dll;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Drb t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0]
+);
+const Dll& t5 = dll;
+Dll t6 = reverse( t5);
+return Inf (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Lin& lin) {					
+					
+const Lin& t1 = lin;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Drv t4 (
+t1[3] * t3[0],
+t1[4] * t3[0],
+t1[5] * t3[0]
+);
+const Lin& t5 = lin;
+Lin t6 = reverse( t5);
+return Inf (
+t4[0] * t6[3] + t4[1] * t6[4] + t4[2] * t6[5]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Pnt& pnt) {					
+					
+const Pnt& t1 = pnt;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Tsd t4 (
+ - t1[3] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[3] * t3[0]
+);
+const Pnt& t5 = pnt;
+Pnt t6 = reverse( t5);
+return Inf (
+t4[0] * t6[4] - t4[1] * t6[0] - t4[2] * t6[1] - t4[3] * t6[2] + t4[4] * t6[4]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Par& par) {					
+					
+const Par& t1 = par;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Inf_Par t4 (
+ - t1[3] * t3[0],
+ - t1[4] * t3[0],
+ - t1[5] * t3[0],
+t1[9] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[3] * t3[0],
+t1[4] * t3[0],
+t1[5] * t3[0]
+);
+const Par& t5 = par;
+Par t6 = reverse( t5);
+return Inf (
+t4[0] * t6[6] + t4[1] * t6[7] + t4[2] * t6[8] - t4[3] * t6[9] - t4[4] * t6[0] - t4[5] * t6[1] - t4[6] * t6[2] + t4[7] * t6[6] + t4[8] * t6[7] + t4[9] * t6[8]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Cir& cir) {					
+					
+const Cir& t1 = cir;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Inf_Cir t4 (
+ - t1[0] * t3[0],
+ - t1[1] * t3[0],
+ - t1[2] * t3[0],
+t1[6] * t3[0],
+t1[7] * t3[0],
+t1[8] * t3[0],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[9] * t3[0]
+);
+const Cir& t5 = cir;
+Cir t6 = reverse( t5);
+return Inf (
+ - t4[0] * t6[3] - t4[1] * t6[4] - t4[2] * t6[5] + t4[3] * t6[6] + t4[4] * t6[7] + t4[5] * t6[8] - t4[6] * t6[3] - t4[7] * t6[4] - t4[8] * t6[5] + t4[9] * t6[9]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Inf re (const Inf& inf, const Sph& sph) {					
+					
+const Sph& t1 = sph;
+const Inf& t2 = inf;
+Inf t3 = involute( t2);
+Inf_Sph t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+ - t1[3] * t3[0],
+t1[3] * t3[0]
+);
+const Sph& t5 = sph;
+Sph t6 = reverse( t5);
+return Inf (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2] - t4[3] * t6[4] - t4[4] * t6[4]
 );
 
 }

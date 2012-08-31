@@ -54,8 +54,8 @@ a[3] * b[1],
 );
 }			
 		 
-inline Pss_Flp gp (const Flp& a, const Pss& b) { 
-	return Pss_Flp (
+inline Dfp gp (const Flp& a, const Pss& b) { 
+	return Dfp (
 a[2] * b[0],
  - a[1] * b[0],
 a[0] * b[0],
@@ -99,8 +99,8 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0]
 );
 }			
 		 
-inline Cir_Flp gp (const Flp& a, const Cir& b) { 
-	return Cir_Flp (
+inline Par_Dfp gp (const Flp& a, const Cir& b) { 
+	return Par_Dfp (
 a[1] * b[0] + a[2] * b[1] + a[3] * b[6],
  - a[0] * b[0] + a[2] * b[2] + a[3] * b[7],
  - a[0] * b[1] - a[1] * b[2] + a[3] * b[8],
@@ -119,8 +119,8 @@ a[1] * b[0] + a[2] * b[1],
 );
 }			
 		 
-inline Sph_Flp gp (const Flp& a, const Sph& b) { 
-	return Sph_Flp (
+inline Pnt_Dfp gp (const Flp& a, const Sph& b) { 
+	return Pnt_Dfp (
 a[2] * b[3] + a[3] * b[0],
  - a[1] * b[3] + a[3] * b[1],
 a[0] * b[3] + a[3] * b[2],
@@ -193,8 +193,8 @@ a[1] * b[2] - a[2] * b[1]
 );
 }			
 		 
-inline Tnb_Flp gp (const Flp& a, const Tnb& b) { 
-	return Tnb_Flp (
+inline Tnv_Dfp gp (const Flp& a, const Tnb& b) { 
+	return Tnv_Dfp (
 a[1] * b[0] + a[2] * b[1],
  - a[0] * b[0] + a[2] * b[2],
  - a[0] * b[1] - a[1] * b[2],
@@ -209,8 +209,8 @@ a[1] * b[0] + a[2] * b[1],
 );
 }			
 		 
-inline Tnt_Flp gp (const Flp& a, const Tnt& b) { 
-	return Tnt_Flp (
+inline Ori_Dfp gp (const Flp& a, const Tnt& b) { 
+	return Ori_Dfp (
 a[2] * b[0],
  - a[1] * b[0],
 a[0] * b[0],
@@ -254,8 +254,17 @@ a[3] * b[3],
 );
 }			
 		 
-inline Flp_Dll gp (const Flp& a, const Dll& b) { 
-	return Flp_Dll (
+inline Mnk_Dfp gp (const Flp& a, const Dfp& b) { 
+	return Mnk_Dfp (
+ - a[2] * b[3] + a[3] * b[0],
+a[1] * b[3] + a[3] * b[1],
+ - a[0] * b[3] + a[3] * b[2],
+a[3] * b[3]
+);
+}			
+		 
+inline Lin_Dfp gp (const Flp& a, const Dll& b) { 
+	return Lin_Dfp (
  - a[1] * b[0] - a[2] * b[1] + a[3] * b[3],
 a[0] * b[0] - a[2] * b[2] + a[3] * b[4],
 a[0] * b[1] + a[1] * b[2] + a[3] * b[5],
@@ -266,8 +275,8 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0]
 );
 }			
 		 
-inline Flp_Dlp gp (const Flp& a, const Dlp& b) { 
-	return Flp_Dlp (
+inline Pln_Dfp gp (const Flp& a, const Dlp& b) { 
+	return Pln_Dfp (
  - a[0] * b[0] - a[1] * b[1] - a[2] * b[2] + a[3] * b[3],
  - a[0] * b[1] + a[1] * b[0],
  - a[0] * b[2] + a[2] * b[0],
@@ -278,8 +287,8 @@ a[3] * b[2]
 );
 }			
 		 
-inline Flp_Dlp gp (const Flp& a, const Vec& b) { 
-	return Flp_Dlp (
+inline Pln_Dfp gp (const Flp& a, const Vec& b) { 
+	return Pln_Dfp (
  - a[0] * b[0] - a[1] * b[1] - a[2] * b[2],
  - a[0] * b[1] + a[1] * b[0],
  - a[0] * b[2] + a[2] * b[0],
@@ -290,8 +299,8 @@ a[3] * b[2]
 );
 }			
 		 
-inline Flp_Dll gp (const Flp& a, const Biv& b) { 
-	return Flp_Dll (
+inline Lin_Dfp gp (const Flp& a, const Biv& b) { 
+	return Lin_Dfp (
  - a[1] * b[0] - a[2] * b[1],
 a[0] * b[0] - a[2] * b[2],
 a[0] * b[1] + a[1] * b[2],
@@ -302,8 +311,8 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0]
 );
 }			
 		 
-inline Flp_Tri gp (const Flp& a, const Tri& b) { 
-	return Flp_Tri (
+inline Mnk_Dfp gp (const Flp& a, const Tri& b) { 
+	return Mnk_Dfp (
  - a[2] * b[0],
 a[1] * b[0],
  - a[0] * b[0],
@@ -363,6 +372,73 @@ a[1] * b[0] + a[2] * b[1],
  - a[0] * b[1] - a[1] * b[2],
  - a[0] * b[2] + a[1] * b[1] - a[2] * b[0],
  - a[0] * b[2] + a[1] * b[1] - a[2] * b[0] + a[3] * b[3]
+);
+}			
+		 
+inline Trt gp (const Flp& a, const Dap& b) { 
+	return Trt (
+a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3],
+a[0] * b[1] - a[1] * b[0],
+a[0] * b[2] - a[2] * b[0],
+a[1] * b[2] - a[2] * b[1],
+ - a[3] * b[0],
+ - a[3] * b[1],
+ - a[3] * b[2],
+ - a[0] * b[3],
+ - a[1] * b[3],
+ - a[2] * b[3],
+a[0] * b[0] + a[1] * b[1] + a[2] * b[2],
+a[0] * b[1] - a[1] * b[0],
+a[0] * b[2] - a[2] * b[0],
+a[1] * b[2] - a[2] * b[1]
+);
+}			
+		 
+inline Pnt_Dfp gp (const Flp& a, const Daf& b) { 
+	return Pnt_Dfp (
+a[2] * b[3] + a[3] * b[0],
+ - a[1] * b[3] + a[3] * b[1],
+a[0] * b[3] + a[3] * b[2],
+a[1] * b[0] + a[2] * b[1],
+ - a[0] * b[0] + a[2] * b[2],
+ - a[0] * b[1] - a[1] * b[2],
+a[2] * b[3],
+ - a[1] * b[3],
+a[0] * b[3],
+ - a[3] * b[3],
+ - a[0] * b[2] + a[1] * b[1] - a[2] * b[0]
+);
+}			
+		 
+inline Par_Dfp gp (const Flp& a, const Dal& b) { 
+	return Par_Dfp (
+a[1] * b[0] + a[2] * b[1] + a[3] * b[3],
+ - a[0] * b[0] + a[2] * b[2] + a[3] * b[4],
+ - a[0] * b[1] - a[1] * b[2] + a[3] * b[5],
+a[0] * b[3] + a[1] * b[4] + a[2] * b[5],
+ - a[3] * b[0],
+ - a[3] * b[1],
+ - a[3] * b[2],
+a[0] * b[4] - a[1] * b[3],
+a[0] * b[5] - a[2] * b[3],
+a[1] * b[5] - a[2] * b[4],
+a[1] * b[0] + a[2] * b[1],
+ - a[0] * b[0] + a[2] * b[2],
+ - a[0] * b[1] - a[1] * b[2],
+ - a[0] * b[2] + a[1] * b[1] - a[2] * b[0],
+ - a[0] * b[2] + a[1] * b[1] - a[2] * b[0]
+);
+}			
+		 
+inline Lin_Flp gp (const Flp& a, const Mnv& b) { 
+	return Lin_Flp (
+a[3] * b[0],
+a[3] * b[1],
+a[3] * b[2],
+a[0] * b[0] + a[1] * b[1] + a[2] * b[2],
+a[0] * b[1] - a[1] * b[0],
+a[0] * b[2] - a[2] * b[0],
+a[1] * b[2] - a[2] * b[1]
 );
 }			
 		 
@@ -638,6 +714,26 @@ a[0] * b[3] - a[0] * b[13] - a[1] * b[2] + a[1] * b[12] + a[2] * b[1] - a[2] * b
 );
 }			
 		 
+inline Tvt gp (const Flp& a, const Bst& b) { 
+	return Tvt (
+a[0] * b[4] + a[1] * b[5] + a[2] * b[6] + a[3] * b[10],
+a[0] * b[5] - a[1] * b[4],
+a[0] * b[6] - a[2] * b[4],
+a[1] * b[6] - a[2] * b[5],
+ - a[3] * b[4],
+ - a[3] * b[5],
+ - a[3] * b[6],
+a[0] * b[0] - a[0] * b[10] - a[1] * b[1] - a[2] * b[2] + a[3] * b[7],
+a[0] * b[1] + a[1] * b[0] - a[1] * b[10] - a[2] * b[3] + a[3] * b[8],
+a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[2] * b[10] + a[3] * b[9],
+a[0] * b[4] + a[1] * b[5] + a[2] * b[6] + a[3] * b[0],
+a[0] * b[5] - a[1] * b[4] + a[3] * b[1],
+a[0] * b[6] - a[2] * b[4] + a[3] * b[2],
+a[1] * b[6] - a[2] * b[5] + a[3] * b[3],
+a[0] * b[3] - a[1] * b[2] + a[2] * b[1]
+);
+}			
+		 
 inline Flp op (const Flp& a, const Sca& b) { 
 	return Flp (
 a[0] * b[0],
@@ -647,8 +743,8 @@ a[3] * b[0]
 );
 }			
 		 
-inline Mnk_Vec op (const Flp& a, const Ori& b) { 
-	return Mnk_Vec (
+inline Mnv op (const Flp& a, const Ori& b) { 
+	return Mnv (
  - a[0] * b[0],
  - a[1] * b[0],
  - a[2] * b[0]
@@ -665,8 +761,8 @@ inline Sca op (const Flp& a, const Mnk& b) {
 );
 }			
 		 
-inline Mnk_Vec op (const Flp& a, const Hyp& b) { 
-	return Mnk_Vec (
+inline Mnv op (const Flp& a, const Hyp& b) { 
+	return Mnv (
  - a[0] * b[0],
  - a[1] * b[0],
  - a[2] * b[0]
@@ -767,6 +863,12 @@ inline Sca op (const Flp& a, const Flp& b) {
 );
 }			
 		 
+inline Pss op (const Flp& a, const Dfp& b) { 
+	return Pss (
+a[3] * b[3]
+);
+}			
+		 
 inline Pln op (const Flp& a, const Dll& b) { 
 	return Pln (
 a[3] * b[0],
@@ -839,6 +941,30 @@ inline Pss op (const Flp& a, const Afp& b) {
 );
 }			
 		 
+inline Mnk_Biv op (const Flp& a, const Dap& b) { 
+	return Mnk_Biv (
+a[0] * b[1] - a[1] * b[0],
+a[0] * b[2] - a[2] * b[0],
+a[1] * b[2] - a[2] * b[1]
+);
+}			
+		 
+inline Sca op (const Flp& a, const Daf& b) { 
+	return Sca (
+);
+}			
+		 
+inline Pss op (const Flp& a, const Dal& b) { 
+	return Pss (
+ - a[0] * b[2] + a[1] * b[1] - a[2] * b[0]
+);
+}			
+		 
+inline Sca op (const Flp& a, const Mnv& b) { 
+	return Sca (
+);
+}			
+		 
 inline Sca ip (const Flp& a, const Sca& b) { 
 	return Sca (
 );
@@ -865,8 +991,8 @@ inline Sca ip (const Flp& a, const Hyp& b) {
 );
 }			
 		 
-inline Pss_Flp ip (const Flp& a, const Pss& b) { 
-	return Pss_Flp (
+inline Dfp ip (const Flp& a, const Pss& b) { 
+	return Dfp (
 a[2] * b[0],
  - a[1] * b[0],
 a[0] * b[0],
@@ -974,6 +1100,11 @@ a[3] * b[3]
 );
 }			
 		 
+inline Sca ip (const Flp& a, const Dfp& b) { 
+	return Sca (
+);
+}			
+		 
 inline Sca ip (const Flp& a, const Dll& b) { 
 	return Sca (
 );
@@ -1017,7 +1148,43 @@ a[1] * b[0] + a[2] * b[1],
  - a[0] * b[1] - a[1] * b[2]
 );
 }			
+		 
+inline Sca ip (const Flp& a, const Dap& b) { 
+	return Sca (
+a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3]
+);
+}			
+		 
+inline Dll ip (const Flp& a, const Daf& b) { 
+	return Dll (
+a[2] * b[3] + a[3] * b[0],
+ - a[1] * b[3] + a[3] * b[1],
+a[0] * b[3] + a[3] * b[2],
+a[1] * b[0] + a[2] * b[1],
+ - a[0] * b[0] + a[2] * b[2],
+ - a[0] * b[1] - a[1] * b[2]
+);
+}			
+		 
+inline Dlp ip (const Flp& a, const Dal& b) { 
+	return Dlp (
+a[1] * b[0] + a[2] * b[1] + a[3] * b[3],
+ - a[0] * b[0] + a[2] * b[2] + a[3] * b[4],
+ - a[0] * b[1] - a[1] * b[2] + a[3] * b[5],
+a[0] * b[3] + a[1] * b[4] + a[2] * b[5]
+);
+}			
+		 
+inline Dlp ip (const Flp& a, const Mnv& b) { 
+	return Dlp (
+a[3] * b[0],
+a[3] * b[1],
+a[3] * b[2],
+a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+);
+}			
 		  	
+template<>
 inline Flp sp (const Flp& flp, const Rot& rot) {					
 					
 const Rot& t1 = rot;
@@ -1045,6 +1212,7 @@ t3[3] * t5[0] - t3[4] * t5[1] - t3[5] * t5[2] - t3[6] * t5[3]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Mot& mot) {					
 					
 const Mot& t1 = mot;
@@ -1072,6 +1240,7 @@ t3[3] * t5[0] - t3[4] * t5[1] - t3[5] * t5[2] - t3[6] * t5[3]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Dil& dil) {					
 					
 const Dil& t1 = dil;
@@ -1096,6 +1265,7 @@ t3[0] * t5[1] + t3[4] * t5[0]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Trv& trv) {					
 					
 const Trv& t1 = trv;
@@ -1129,6 +1299,7 @@ t3[7] * t5[1] + t3[8] * t5[2] + t3[9] * t5[3] + t3[10] * t5[0]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Mtd& mtd) {					
 					
 const Mtd& t1 = mtd;
@@ -1160,6 +1331,7 @@ t3[0] * t5[7] - t3[1] * t5[8] - t3[2] * t5[9] - t3[3] * t5[10] + t3[7] * t5[0] -
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Trs& trs) {					
 					
 const Trs& t1 = trs;
@@ -1183,6 +1355,7 @@ t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Rtc& rtc) {					
 					
 const Rtc& t1 = rtc;
@@ -1218,6 +1391,7 @@ t3[0] * t5[11] + t3[1] * t5[12] + t3[2] * t5[13] + t3[3] * t5[4] - t3[4] * t5[3]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Mtt& mtt) {					
 					
 const Mtt& t1 = mtt;
@@ -1253,6 +1427,7 @@ t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Rtt& rtt) {					
 					
 const Rtt& t1 = rtt;
@@ -1288,6 +1463,7 @@ t3[7] * t5[4] + t3[8] * t5[5] + t3[9] * t5[6] + t3[10] * t5[0] - t3[11] * t5[1] 
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Rtd& rtd) {					
 					
 const Rtd& t1 = rtd;
@@ -1319,6 +1495,7 @@ t3[0] * t5[4] - t3[1] * t5[5] - t3[2] * t5[6] - t3[3] * t5[7] + t3[7] * t5[0] - 
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Tvd& tvd) {					
 					
 const Tvd& t1 = tvd;
@@ -1352,6 +1529,7 @@ t3[0] * t5[4] + t3[7] * t5[1] + t3[8] * t5[2] + t3[9] * t5[3] + t3[10] * t5[0]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Tsd& tsd) {					
 					
 const Tsd& t1 = tsd;
@@ -1376,6 +1554,7 @@ t3[0] * t5[4] + t3[4] * t5[0]
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Trt& trt) {					
 					
 const Trt& t1 = trt;
@@ -1410,6 +1589,7 @@ t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Rvd& rvd) {					
 					
 const Rvd& t1 = rvd;
@@ -1445,6 +1625,7 @@ t3[0] * t5[7] - t3[1] * t5[8] - t3[2] * t5[9] - t3[3] * t5[10] + t3[7] * t5[4] +
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Tst& tst) {					
 					
 const Tst& t1 = tst;
@@ -1480,6 +1661,7 @@ t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7
 		
 	
 	  	
+template<>
 inline Flp sp (const Flp& flp, const Tvt& tvt) {					
 					
 const Tvt& t1 = tvt;
@@ -1508,6 +1690,317 @@ t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] - t3[3] * t5[14] + t3[7] * t5[0] -
 t3[0] * t5[8] - t3[1] * t5[7] + t3[2] * t5[14] + t3[3] * t5[9] + t3[7] * t5[1] - t3[7] * t5[11] + t3[8] * t5[0] - t3[8] * t5[10] - t3[9] * t5[3] + t3[9] * t5[13] + t3[10] * t5[8] - t3[11] * t5[7] + t3[12] * t5[14] + t3[13] * t5[9] + t3[14] * t5[2] - t3[14] * t5[12],
 t3[0] * t5[9] - t3[1] * t5[14] - t3[2] * t5[7] - t3[3] * t5[8] + t3[7] * t5[2] - t3[7] * t5[12] + t3[8] * t5[3] - t3[8] * t5[13] + t3[9] * t5[0] - t3[9] * t5[10] + t3[10] * t5[9] - t3[11] * t5[14] - t3[12] * t5[7] - t3[13] * t5[8] - t3[14] * t5[1] + t3[14] * t5[11],
 t3[0] * t5[10] - t3[1] * t5[11] - t3[2] * t5[12] - t3[3] * t5[13] - t3[4] * t5[7] - t3[5] * t5[8] - t3[6] * t5[9] + t3[7] * t5[4] + t3[8] * t5[5] + t3[9] * t5[6] + t3[10] * t5[0] - t3[11] * t5[1] - t3[12] * t5[2] - t3[13] * t5[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp sp (const Flp& flp, const Bst& bst) {					
+					
+const Bst& t1 = bst;
+const Flp& t2 = flp;
+Tvt t3 (
+t1[4] * t2[0] + t1[5] * t2[1] + t1[6] * t2[2] + t1[10] * t2[3],
+t1[4] * t2[1] - t1[5] * t2[0],
+t1[4] * t2[2] - t1[6] * t2[0],
+t1[5] * t2[2] - t1[6] * t2[1],
+t1[4] * t2[3],
+t1[5] * t2[3],
+t1[6] * t2[3],
+t1[0] * t2[0] + t1[1] * t2[1] + t1[2] * t2[2] - t1[7] * t2[3] + t1[10] * t2[0],
+t1[0] * t2[1] - t1[1] * t2[0] + t1[3] * t2[2] - t1[8] * t2[3] + t1[10] * t2[1],
+t1[0] * t2[2] - t1[2] * t2[0] - t1[3] * t2[1] - t1[9] * t2[3] + t1[10] * t2[2],
+t1[0] * t2[3] - t1[4] * t2[0] - t1[5] * t2[1] - t1[6] * t2[2],
+t1[1] * t2[3] - t1[4] * t2[1] + t1[5] * t2[0],
+t1[2] * t2[3] - t1[4] * t2[2] + t1[6] * t2[0],
+t1[3] * t2[3] - t1[5] * t2[2] + t1[6] * t2[1],
+t1[1] * t2[2] - t1[2] * t2[1] + t1[3] * t2[0]
+);
+const Bst& t4 = bst;
+Bst t5 = reverse( t4);
+return Flp (
+t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] + t3[7] * t5[0] - t3[7] * t5[10] - t3[8] * t5[1] - t3[9] * t5[2] + t3[10] * t5[7] + t3[11] * t5[8] + t3[12] * t5[9] - t3[14] * t5[3],
+t3[0] * t5[8] - t3[1] * t5[7] + t3[3] * t5[9] + t3[7] * t5[1] + t3[8] * t5[0] - t3[8] * t5[10] - t3[9] * t5[3] + t3[10] * t5[8] - t3[11] * t5[7] + t3[13] * t5[9] + t3[14] * t5[2],
+t3[0] * t5[9] - t3[2] * t5[7] - t3[3] * t5[8] + t3[7] * t5[2] + t3[8] * t5[3] + t3[9] * t5[0] - t3[9] * t5[10] + t3[10] * t5[9] - t3[12] * t5[7] - t3[13] * t5[8] - t3[14] * t5[1],
+t3[0] * t5[10] - t3[4] * t5[7] - t3[5] * t5[8] - t3[6] * t5[9] + t3[7] * t5[4] + t3[8] * t5[5] + t3[9] * t5[6] + t3[10] * t5[0] - t3[11] * t5[1] - t3[12] * t5[2] - t3[13] * t5[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Vec& vec) {					
+					
+const Vec& t1 = vec;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Pln_Dfp t4 (
+t1[0] * t3[0] + t1[1] * t3[1] + t1[2] * t3[2],
+t1[0] * t3[1] - t1[1] * t3[0],
+t1[0] * t3[2] - t1[2] * t3[0],
+t1[1] * t3[2] - t1[2] * t3[1],
+t1[0] * t3[3],
+t1[1] * t3[3],
+t1[2] * t3[3]
+);
+const Vec& t5 = vec;
+Vec t6 = reverse( t5);
+return Flp (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2],
+ - t4[0] * t6[1] + t4[1] * t6[0] - t4[3] * t6[2],
+ - t4[0] * t6[2] + t4[2] * t6[0] + t4[3] * t6[1],
+t4[4] * t6[0] + t4[5] * t6[1] + t4[6] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Dlp& dlp) {					
+					
+const Dlp& t1 = dlp;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Pln_Dfp t4 (
+t1[0] * t3[0] + t1[1] * t3[1] + t1[2] * t3[2] - t1[3] * t3[3],
+t1[0] * t3[1] - t1[1] * t3[0],
+t1[0] * t3[2] - t1[2] * t3[0],
+t1[1] * t3[2] - t1[2] * t3[1],
+t1[0] * t3[3],
+t1[1] * t3[3],
+t1[2] * t3[3]
+);
+const Dlp& t5 = dlp;
+Dlp t6 = reverse( t5);
+return Flp (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2] + t4[4] * t6[3],
+ - t4[0] * t6[1] + t4[1] * t6[0] - t4[3] * t6[2] + t4[5] * t6[3],
+ - t4[0] * t6[2] + t4[2] * t6[0] + t4[3] * t6[1] + t4[6] * t6[3],
+t4[4] * t6[0] + t4[5] * t6[1] + t4[6] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Pln& pln) {					
+					
+const Pln& t1 = pln;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Pln_Flp t4 (
+t1[0] * t3[3],
+t1[1] * t3[3],
+t1[2] * t3[3],
+t1[0] * t3[1] + t1[1] * t3[2],
+ - t1[0] * t3[0] + t1[2] * t3[2],
+ - t1[1] * t3[0] - t1[2] * t3[1],
+t1[0] * t3[2] - t1[1] * t3[1] + t1[2] * t3[0] - t1[3] * t3[3]
+);
+const Pln& t5 = pln;
+Pln t6 = reverse( t5);
+return Flp (
+ - t4[2] * t6[3] + t4[4] * t6[0] + t4[5] * t6[1] + t4[6] * t6[2],
+t4[1] * t6[3] - t4[3] * t6[0] + t4[5] * t6[2] - t4[6] * t6[1],
+ - t4[0] * t6[3] - t4[3] * t6[1] - t4[4] * t6[2] + t4[6] * t6[0],
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Dll& dll) {					
+					
+const Dll& t1 = dll;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Lin_Dfp t4 (
+t1[0] * t3[1] + t1[1] * t3[2] - t1[3] * t3[3],
+ - t1[0] * t3[0] + t1[2] * t3[2] - t1[4] * t3[3],
+ - t1[1] * t3[0] - t1[2] * t3[1] - t1[5] * t3[3],
+t1[0] * t3[3],
+t1[1] * t3[3],
+t1[2] * t3[3],
+t1[0] * t3[2] - t1[1] * t3[1] + t1[2] * t3[0]
+);
+const Dll& t5 = dll;
+Dll t6 = reverse( t5);
+return Flp (
+ - t4[1] * t6[0] - t4[2] * t6[1] + t4[3] * t6[4] + t4[4] * t6[5] - t4[6] * t6[2],
+t4[0] * t6[0] - t4[2] * t6[2] - t4[3] * t6[3] + t4[5] * t6[5] + t4[6] * t6[1],
+t4[0] * t6[1] + t4[1] * t6[2] - t4[4] * t6[3] - t4[5] * t6[4] - t4[6] * t6[0],
+ - t4[3] * t6[0] - t4[4] * t6[1] - t4[5] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Lin& lin) {					
+					
+const Lin& t1 = lin;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Lin_Flp t4 (
+t1[3] * t3[3],
+t1[4] * t3[3],
+t1[5] * t3[3],
+t1[3] * t3[0] + t1[4] * t3[1] + t1[5] * t3[2],
+ - t1[0] * t3[3] + t1[3] * t3[1] - t1[4] * t3[0],
+ - t1[1] * t3[3] + t1[3] * t3[2] - t1[5] * t3[0],
+ - t1[2] * t3[3] + t1[4] * t3[2] - t1[5] * t3[1]
+);
+const Lin& t5 = lin;
+Lin t6 = reverse( t5);
+return Flp (
+ - t4[1] * t6[0] - t4[2] * t6[1] + t4[3] * t6[3] + t4[4] * t6[4] + t4[5] * t6[5],
+t4[0] * t6[0] - t4[2] * t6[2] + t4[3] * t6[4] - t4[4] * t6[3] + t4[6] * t6[5],
+t4[0] * t6[1] + t4[1] * t6[2] + t4[3] * t6[5] - t4[5] * t6[3] - t4[6] * t6[4],
+t4[0] * t6[3] + t4[1] * t6[4] + t4[2] * t6[5]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Pnt& pnt) {					
+					
+const Pnt& t1 = pnt;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Pnt_Flp t4 (
+t1[3] * t3[0],
+t1[3] * t3[1],
+t1[3] * t3[2],
+t1[3] * t3[3],
+t1[0] * t3[0] + t1[1] * t3[1] + t1[2] * t3[2] - t1[4] * t3[3],
+t1[0] * t3[1] - t1[1] * t3[0],
+t1[0] * t3[2] - t1[2] * t3[0],
+t1[1] * t3[2] - t1[2] * t3[1],
+t1[0] * t3[3] - t1[3] * t3[0],
+t1[1] * t3[3] - t1[3] * t3[1],
+t1[2] * t3[3] - t1[3] * t3[2]
+);
+const Pnt& t5 = pnt;
+Pnt t6 = reverse( t5);
+return Flp (
+t4[0] * t6[4] - t4[4] * t6[0] - t4[5] * t6[1] - t4[6] * t6[2] + t4[8] * t6[4],
+t4[1] * t6[4] - t4[4] * t6[1] + t4[5] * t6[0] - t4[7] * t6[2] + t4[9] * t6[4],
+t4[2] * t6[4] - t4[4] * t6[2] + t4[6] * t6[0] + t4[7] * t6[1] + t4[10] * t6[4],
+t4[3] * t6[4] - t4[4] * t6[3] + t4[8] * t6[0] + t4[9] * t6[1] + t4[10] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Par& par) {					
+					
+const Par& t1 = par;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Tvt t4 (
+t1[3] * t3[0] + t1[4] * t3[1] + t1[5] * t3[2] + t1[9] * t3[3],
+t1[3] * t3[1] - t1[4] * t3[0],
+t1[3] * t3[2] - t1[5] * t3[0],
+t1[4] * t3[2] - t1[5] * t3[1],
+t1[3] * t3[3],
+t1[4] * t3[3],
+t1[5] * t3[3],
+t1[0] * t3[1] + t1[1] * t3[2] - t1[6] * t3[3] + t1[9] * t3[0],
+ - t1[0] * t3[0] + t1[2] * t3[2] - t1[7] * t3[3] + t1[9] * t3[1],
+ - t1[1] * t3[0] - t1[2] * t3[1] - t1[8] * t3[3] + t1[9] * t3[2],
+ - t1[3] * t3[0] - t1[4] * t3[1] - t1[5] * t3[2],
+t1[0] * t3[3] - t1[3] * t3[1] + t1[4] * t3[0],
+t1[1] * t3[3] - t1[3] * t3[2] + t1[5] * t3[0],
+t1[2] * t3[3] - t1[4] * t3[2] + t1[5] * t3[1],
+t1[0] * t3[2] - t1[1] * t3[1] + t1[2] * t3[0]
+);
+const Par& t5 = par;
+Par t6 = reverse( t5);
+return Flp (
+t4[0] * t6[6] + t4[1] * t6[7] + t4[2] * t6[8] - t4[7] * t6[9] - t4[8] * t6[0] - t4[9] * t6[1] + t4[10] * t6[6] + t4[11] * t6[7] + t4[12] * t6[8] - t4[14] * t6[2],
+t4[0] * t6[7] - t4[1] * t6[6] + t4[3] * t6[8] + t4[7] * t6[0] - t4[8] * t6[9] - t4[9] * t6[2] + t4[10] * t6[7] - t4[11] * t6[6] + t4[13] * t6[8] + t4[14] * t6[1],
+t4[0] * t6[8] - t4[2] * t6[6] - t4[3] * t6[7] + t4[7] * t6[1] + t4[8] * t6[2] - t4[9] * t6[9] + t4[10] * t6[8] - t4[12] * t6[6] - t4[13] * t6[7] - t4[14] * t6[0],
+t4[0] * t6[9] - t4[4] * t6[6] - t4[5] * t6[7] - t4[6] * t6[8] + t4[7] * t6[3] + t4[8] * t6[4] + t4[9] * t6[5] - t4[11] * t6[0] - t4[12] * t6[1] - t4[13] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Cir& cir) {					
+					
+const Cir& t1 = cir;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Par_Dfp t4 (
+t1[0] * t3[1] + t1[1] * t3[2] + t1[6] * t3[3],
+ - t1[0] * t3[0] + t1[2] * t3[2] + t1[7] * t3[3],
+ - t1[1] * t3[0] - t1[2] * t3[1] + t1[8] * t3[3],
+t1[6] * t3[0] + t1[7] * t3[1] + t1[8] * t3[2],
+t1[0] * t3[3],
+t1[1] * t3[3],
+t1[2] * t3[3],
+ - t1[3] * t3[3] + t1[6] * t3[1] - t1[7] * t3[0] + t1[9] * t3[2],
+ - t1[4] * t3[3] + t1[6] * t3[2] - t1[8] * t3[0] - t1[9] * t3[1],
+ - t1[5] * t3[3] + t1[7] * t3[2] - t1[8] * t3[1] + t1[9] * t3[0],
+ - t1[0] * t3[1] - t1[1] * t3[2],
+t1[0] * t3[0] - t1[2] * t3[2],
+t1[1] * t3[0] + t1[2] * t3[1],
+t1[0] * t3[2] - t1[1] * t3[1] + t1[2] * t3[0],
+ - t1[0] * t3[2] + t1[1] * t3[1] - t1[2] * t3[0] + t1[9] * t3[3]
+);
+const Cir& t5 = cir;
+Cir t6 = reverse( t5);
+return Flp (
+ - t4[1] * t6[3] - t4[2] * t6[4] + t4[3] * t6[6] + t4[7] * t6[7] + t4[8] * t6[8] + t4[9] * t6[9] - t4[11] * t6[3] - t4[12] * t6[4] - t4[13] * t6[5] - t4[14] * t6[5],
+t4[0] * t6[3] - t4[2] * t6[5] + t4[3] * t6[7] - t4[7] * t6[6] - t4[8] * t6[9] + t4[9] * t6[8] + t4[10] * t6[3] - t4[12] * t6[5] + t4[13] * t6[4] + t4[14] * t6[4],
+t4[0] * t6[4] + t4[1] * t6[5] + t4[3] * t6[8] + t4[7] * t6[9] - t4[8] * t6[6] - t4[9] * t6[7] + t4[10] * t6[4] + t4[11] * t6[5] - t4[13] * t6[3] - t4[14] * t6[3],
+t4[0] * t6[6] + t4[1] * t6[7] + t4[2] * t6[8] - t4[4] * t6[3] - t4[5] * t6[4] - t4[6] * t6[5] + t4[7] * t6[0] + t4[8] * t6[1] + t4[9] * t6[2] - t4[14] * t6[9]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Flp re (const Flp& flp, const Sph& sph) {					
+					
+const Sph& t1 = sph;
+const Flp& t2 = flp;
+Flp t3 = involute( t2);
+Pnt_Dfp t4 (
+t1[0] * t3[3] + t1[3] * t3[2],
+t1[1] * t3[3] - t1[3] * t3[1],
+t1[2] * t3[3] + t1[3] * t3[0],
+t1[0] * t3[1] + t1[1] * t3[2],
+ - t1[0] * t3[0] + t1[2] * t3[2],
+ - t1[1] * t3[0] - t1[2] * t3[1],
+ - t1[3] * t3[2],
+t1[3] * t3[1],
+ - t1[3] * t3[0],
+t1[3] * t3[3],
+t1[0] * t3[2] - t1[1] * t3[1] + t1[2] * t3[0] - t1[4] * t3[3]
+);
+const Sph& t5 = sph;
+Sph t6 = reverse( t5);
+return Flp (
+ - t4[2] * t6[4] + t4[4] * t6[0] + t4[5] * t6[1] - t4[8] * t6[4] + t4[10] * t6[2],
+t4[1] * t6[4] - t4[3] * t6[0] + t4[5] * t6[2] + t4[7] * t6[4] - t4[10] * t6[1],
+ - t4[0] * t6[4] - t4[3] * t6[1] - t4[4] * t6[2] - t4[6] * t6[4] + t4[10] * t6[0],
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2] + t4[9] * t6[4] - t4[10] * t6[3]
 );
 
 }

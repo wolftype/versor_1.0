@@ -3,8 +3,8 @@
 
 require "basictypes"
 
-homedir = os.getenv("HOME")
-
+local cwd = dofile("../util/cwd.lua")
+print(cwd)
 filename = "types.lua"
 
 
@@ -152,7 +152,7 @@ local finalOutput = function()
 
 	local all = {}
 
-	io.output(io.open(homedir.."/code/versor/branches/subspace/lua/staticCGA/tab/"..filename, "w"))
+	io.output(io.open(cwd..filename, "w"))
 
 	io.write("\nrequire \"basis\"")
 	io.write("\n--GENERATED PERMUTATIONS OF CL4,1 ON A NULL BASIS (Selected using a geometrical heuristic)")
@@ -174,6 +174,13 @@ local finalOutput = function()
 	end
 	io.write("}\n")
 
+	io.write("\nPinors = {\n")	
+	for i, iv in ipairs(pinors) do
+		io.write(iv.id..",\n")
+		print(iv.id)
+	end
+	io.write("}\n")
+
 	io.write("\nVersors = {\n")	
 	for i, iv in ipairs(generators) do
 		io.write(iv.id..",\n")
@@ -192,6 +199,15 @@ local finalOutput = function()
 		io.write(iv.id..",\n")
 	end
 	io.write("}\n")
+	
+	io.write([[for i,iv in ipairs(AllStates) do
+		iv.idx = i
+		for k,kv in ipairs(AllStates) do
+			if iv.id ~= kv.id then 
+				if iv.key == kv.key then print("keys match!!", iv.id, kv.id) end
+			end
+		end
+	end]])
 
 	io.close()
 end

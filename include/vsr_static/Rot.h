@@ -32,8 +32,8 @@ a[3] * b[0]
 );
 }			
 		 
-inline Pss_Vec_Biv gp (const Rot& a, const Mnk& b) { 
-	return Pss_Vec_Biv (
+inline Vec_Mnv gp (const Rot& a, const Mnk& b) { 
+	return Vec_Mnv (
 a[0] * b[0],
 a[1] * b[0],
 a[2] * b[0],
@@ -41,8 +41,8 @@ a[3] * b[0]
 );
 }			
 		 
-inline Pss_Hyp_Drv_Tnb gp (const Rot& a, const Hyp& b) { 
-	return Pss_Hyp_Drv_Tnb (
+inline Hyp_Vec_Mnv gp (const Rot& a, const Hyp& b) { 
+	return Hyp_Vec_Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[1] * b[0],
@@ -54,8 +54,8 @@ a[3] * b[1]
 );
 }			
 		 
-inline Mnk_Vec_Biv gp (const Rot& a, const Pss& b) { 
-	return Mnk_Vec_Biv (
+inline Biv_Mnv gp (const Rot& a, const Pss& b) { 
+	return Biv_Mnv (
  - a[3] * b[0],
 a[2] * b[0],
  - a[1] * b[0],
@@ -249,6 +249,19 @@ a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
 );
 }			
 		 
+inline Lin_Pln gp (const Rot& a, const Dfp& b) { 
+	return Lin_Pln (
+ - a[3] * b[3],
+a[2] * b[3],
+ - a[1] * b[3],
+ - a[1] * b[0] - a[2] * b[1] - a[3] * b[2],
+a[0] * b[0] - a[2] * b[2] + a[3] * b[1],
+a[0] * b[1] + a[1] * b[2] - a[3] * b[0],
+a[0] * b[2] - a[1] * b[1] + a[2] * b[0],
+a[0] * b[3]
+);
+}			
+		 
 inline Mot gp (const Rot& a, const Dll& b) { 
 	return Mot (
  - a[1] * b[0] - a[2] * b[1] - a[3] * b[2],
@@ -338,6 +351,54 @@ a[0] * b[0] - a[2] * b[2] + a[3] * b[1],
 a[0] * b[1] + a[1] * b[2] - a[3] * b[0],
 a[0] * b[2] - a[1] * b[1] + a[2] * b[0],
 a[0] * b[3]
+);
+}			
+		 
+inline Vec_Dal gp (const Rot& a, const Dap& b) { 
+	return Vec_Dal (
+a[0] * b[0] + a[1] * b[1] + a[2] * b[2],
+a[0] * b[1] - a[1] * b[0] + a[3] * b[2],
+a[0] * b[2] - a[2] * b[0] - a[3] * b[1],
+a[0] * b[3],
+a[1] * b[3],
+a[2] * b[3],
+a[3] * b[3],
+a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
+);
+}			
+		 
+inline Vec_Dal gp (const Rot& a, const Daf& b) { 
+	return Vec_Dal (
+ - a[3] * b[3],
+a[2] * b[3],
+ - a[1] * b[3],
+ - a[1] * b[0] - a[2] * b[1] - a[3] * b[2],
+a[0] * b[0] - a[2] * b[2] + a[3] * b[1],
+a[0] * b[1] + a[1] * b[2] - a[3] * b[0],
+a[0] * b[2] - a[1] * b[1] + a[2] * b[0],
+a[0] * b[3]
+);
+}			
+		 
+inline Biv_Dal gp (const Rot& a, const Dal& b) { 
+	return Biv_Dal (
+ - a[1] * b[0] - a[2] * b[1] - a[3] * b[2],
+a[0] * b[0] - a[2] * b[2] + a[3] * b[1],
+a[0] * b[1] + a[1] * b[2] - a[3] * b[0],
+a[0] * b[2] - a[1] * b[1] + a[2] * b[0],
+a[0] * b[3] + a[1] * b[4] + a[2] * b[5],
+a[0] * b[4] - a[1] * b[3] + a[3] * b[5],
+a[0] * b[5] - a[2] * b[3] - a[3] * b[4],
+a[1] * b[5] - a[2] * b[4] + a[3] * b[3]
+);
+}			
+		 
+inline Biv_Mnv gp (const Rot& a, const Mnv& b) { 
+	return Biv_Mnv (
+a[0] * b[0] + a[1] * b[1] + a[2] * b[2],
+a[0] * b[1] - a[1] * b[0] + a[3] * b[2],
+a[0] * b[2] - a[2] * b[0] - a[3] * b[1],
+a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
 );
 }			
 		 
@@ -601,6 +662,27 @@ a[0] * b[14] + a[1] * b[9] - a[2] * b[8] + a[3] * b[7]
 );
 }			
 		 
+inline Mtt gp (const Rot& a, const Bst& b) { 
+	return Mtt (
+a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3],
+a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2],
+a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1],
+a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[3] * b[0],
+a[0] * b[4] + a[1] * b[5] + a[2] * b[6],
+a[0] * b[5] - a[1] * b[4] + a[3] * b[6],
+a[0] * b[6] - a[2] * b[4] - a[3] * b[5],
+a[0] * b[7] + a[1] * b[8] + a[2] * b[9],
+a[0] * b[8] - a[1] * b[7] + a[3] * b[9],
+a[0] * b[9] - a[2] * b[7] - a[3] * b[8],
+a[0] * b[10],
+a[1] * b[10],
+a[2] * b[10],
+a[3] * b[10],
+a[1] * b[6] - a[2] * b[5] + a[3] * b[4],
+a[1] * b[9] - a[2] * b[8] + a[3] * b[7]
+);
+}			
+		 
 inline Rot ip (const Rot& a, const Rot& b) { 
 	return Rot (
 a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3],
@@ -610,6 +692,7 @@ a[0] * b[3]
 );
 }			
 		  	
+template<>
 inline Rot sp (const Rot& rot, const Mot& mot) {					
 					
 const Mot& t1 = mot;
@@ -637,6 +720,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Dil& dil) {					
 					
 const Dil& t1 = dil;
@@ -664,6 +748,7 @@ t3[3] * t5[0] + t3[7] * t5[1]
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Trv& trv) {					
 					
 const Trv& t1 = trv;
@@ -691,6 +776,7 @@ t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Mtd& mtd) {					
 					
 const Mtd& t1 = mtd;
@@ -722,6 +808,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[7] * t5[10] -
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Trs& trs) {					
 					
 const Trs& t1 = trs;
@@ -749,6 +836,7 @@ t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Rtc& rtc) {					
 					
 const Rtc& t1 = rtc;
@@ -784,6 +872,7 @@ t3[0] * t5[14] + t3[1] * t5[2] - t3[2] * t5[1] - t3[3] * t5[10] - t3[4] * t5[7] 
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Mtt& mtt) {					
 					
 const Mtt& t1 = mtt;
@@ -819,6 +908,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[4] * t5[15] +
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Rtt& rtt) {					
 					
 const Rtt& t1 = rtt;
@@ -846,6 +936,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0]
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Rtd& rtd) {					
 					
 const Rtd& t1 = rtd;
@@ -873,6 +964,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[4] * t5[7] - 
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Tvd& tvd) {					
 					
 const Tvd& t1 = tvd;
@@ -904,6 +996,7 @@ t3[3] * t5[0] + t3[10] * t5[4]
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Tsd& tsd) {					
 					
 const Tsd& t1 = tsd;
@@ -935,6 +1028,7 @@ t3[3] * t5[0] + t3[10] * t5[4]
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Trt& trt) {					
 					
 const Trt& t1 = trt;
@@ -970,6 +1064,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[5] * t5[9] - 
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Rvd& rvd) {					
 					
 const Rvd& t1 = rvd;
@@ -1001,6 +1096,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[7] * t5[10] -
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Tst& tst) {					
 					
 const Tst& t1 = tst;
@@ -1036,6 +1132,7 @@ t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[5] * t5[9] - 
 		
 	
 	  	
+template<>
 inline Rot sp (const Rot& rot, const Tvt& tvt) {					
 					
 const Tvt& t1 = tvt;
@@ -1065,6 +1162,323 @@ t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3] + t3[4] * t5[7] + 
 t3[0] * t5[1] + t3[1] * t5[0] - t3[2] * t5[3] + t3[3] * t5[2] + t3[4] * t5[8] - t3[5] * t5[7] + t3[6] * t5[14] + t3[7] * t5[5] - t3[8] * t5[4] + t3[10] * t5[11] + t3[11] * t5[10] - t3[12] * t5[13] + t3[13] * t5[12] + t3[14] * t5[9] + t3[15] * t5[6],
 t3[0] * t5[2] + t3[1] * t5[3] + t3[2] * t5[0] - t3[3] * t5[1] + t3[4] * t5[9] - t3[5] * t5[14] - t3[6] * t5[7] + t3[7] * t5[6] - t3[9] * t5[4] + t3[10] * t5[12] + t3[11] * t5[13] + t3[12] * t5[10] - t3[13] * t5[11] - t3[14] * t5[8] - t3[15] * t5[5],
 t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[4] * t5[14] + t3[5] * t5[9] - t3[6] * t5[8] + t3[8] * t5[6] - t3[9] * t5[5] + t3[10] * t5[13] - t3[11] * t5[12] + t3[12] * t5[11] + t3[13] * t5[10] + t3[14] * t5[7] + t3[15] * t5[4]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot sp (const Rot& rot, const Bst& bst) {					
+					
+const Bst& t1 = bst;
+const Rot& t2 = rot;
+Mtt t3 (
+t1[0] * t2[0] - t1[1] * t2[1] - t1[2] * t2[2] - t1[3] * t2[3],
+t1[0] * t2[1] + t1[1] * t2[0] - t1[2] * t2[3] + t1[3] * t2[2],
+t1[0] * t2[2] + t1[1] * t2[3] + t1[2] * t2[0] - t1[3] * t2[1],
+t1[0] * t2[3] - t1[1] * t2[2] + t1[2] * t2[1] + t1[3] * t2[0],
+t1[4] * t2[0] - t1[5] * t2[1] - t1[6] * t2[2],
+t1[4] * t2[1] + t1[5] * t2[0] - t1[6] * t2[3],
+t1[4] * t2[2] + t1[5] * t2[3] + t1[6] * t2[0],
+t1[7] * t2[0] - t1[8] * t2[1] - t1[9] * t2[2],
+t1[7] * t2[1] + t1[8] * t2[0] - t1[9] * t2[3],
+t1[7] * t2[2] + t1[8] * t2[3] + t1[9] * t2[0],
+t1[10] * t2[0],
+t1[10] * t2[1],
+t1[10] * t2[2],
+t1[10] * t2[3],
+t1[4] * t2[3] - t1[5] * t2[2] + t1[6] * t2[1],
+t1[7] * t2[3] - t1[8] * t2[2] + t1[9] * t2[1]
+);
+const Bst& t4 = bst;
+Bst t5 = reverse( t4);
+return Rot (
+t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3] + t3[4] * t5[7] + t3[5] * t5[8] + t3[6] * t5[9] + t3[7] * t5[4] + t3[8] * t5[5] + t3[9] * t5[6] + t3[10] * t5[10],
+t3[0] * t5[1] + t3[1] * t5[0] - t3[2] * t5[3] + t3[3] * t5[2] + t3[4] * t5[8] - t3[5] * t5[7] + t3[7] * t5[5] - t3[8] * t5[4] + t3[11] * t5[10] + t3[14] * t5[9] + t3[15] * t5[6],
+t3[0] * t5[2] + t3[1] * t5[3] + t3[2] * t5[0] - t3[3] * t5[1] + t3[4] * t5[9] - t3[6] * t5[7] + t3[7] * t5[6] - t3[9] * t5[4] + t3[12] * t5[10] - t3[14] * t5[8] - t3[15] * t5[5],
+t3[0] * t5[3] - t3[1] * t5[2] + t3[2] * t5[1] + t3[3] * t5[0] + t3[5] * t5[9] - t3[6] * t5[8] + t3[8] * t5[6] - t3[9] * t5[5] + t3[13] * t5[10] + t3[14] * t5[7] + t3[15] * t5[4]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Vec& vec) {					
+					
+const Vec& t1 = vec;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Vec_Biv t4 (
+t1[0] * t3[0] - t1[1] * t3[1] - t1[2] * t3[2],
+t1[0] * t3[1] + t1[1] * t3[0] - t1[2] * t3[3],
+t1[0] * t3[2] + t1[1] * t3[3] + t1[2] * t3[0],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1]
+);
+const Vec& t5 = vec;
+Vec t6 = reverse( t5);
+return Rot (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2],
+t4[0] * t6[1] - t4[1] * t6[0] + t4[3] * t6[2],
+t4[0] * t6[2] - t4[2] * t6[0] - t4[3] * t6[1],
+t4[1] * t6[2] - t4[2] * t6[1] + t4[3] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Dlp& dlp) {					
+					
+const Dlp& t1 = dlp;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Lin_Pln t4 (
+t1[0] * t3[0] - t1[1] * t3[1] - t1[2] * t3[2],
+t1[0] * t3[1] + t1[1] * t3[0] - t1[2] * t3[3],
+t1[0] * t3[2] + t1[1] * t3[3] + t1[2] * t3[0],
+t1[3] * t3[0],
+t1[3] * t3[1],
+t1[3] * t3[2],
+t1[3] * t3[3],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1]
+);
+const Dlp& t5 = dlp;
+Dlp t6 = reverse( t5);
+return Rot (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2],
+t4[0] * t6[1] - t4[1] * t6[0] + t4[7] * t6[2],
+t4[0] * t6[2] - t4[2] * t6[0] - t4[7] * t6[1],
+t4[1] * t6[2] - t4[2] * t6[1] + t4[7] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Pln& pln) {					
+					
+const Pln& t1 = pln;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Lin_Dlp t4 (
+ - t1[3] * t3[3],
+t1[3] * t3[2],
+ - t1[3] * t3[1],
+ - t1[0] * t3[1] - t1[1] * t3[2] - t1[2] * t3[3],
+t1[0] * t3[0] - t1[1] * t3[3] + t1[2] * t3[2],
+t1[0] * t3[3] + t1[1] * t3[0] - t1[2] * t3[1],
+ - t1[0] * t3[2] + t1[1] * t3[1] + t1[2] * t3[0],
+t1[3] * t3[0]
+);
+const Pln& t5 = pln;
+Pln t6 = reverse( t5);
+return Rot (
+ - t4[4] * t6[0] - t4[5] * t6[1] - t4[6] * t6[2],
+t4[3] * t6[0] - t4[5] * t6[2] + t4[6] * t6[1],
+t4[3] * t6[1] + t4[4] * t6[2] - t4[6] * t6[0],
+t4[3] * t6[2] - t4[4] * t6[1] + t4[5] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Dll& dll) {					
+					
+const Dll& t1 = dll;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Mot t4 (
+ - t1[0] * t3[1] - t1[1] * t3[2] - t1[2] * t3[3],
+t1[0] * t3[0] - t1[1] * t3[3] + t1[2] * t3[2],
+t1[0] * t3[3] + t1[1] * t3[0] - t1[2] * t3[1],
+ - t1[0] * t3[2] + t1[1] * t3[1] + t1[2] * t3[0],
+t1[3] * t3[0] - t1[4] * t3[1] - t1[5] * t3[2],
+t1[3] * t3[1] + t1[4] * t3[0] - t1[5] * t3[3],
+t1[3] * t3[2] + t1[4] * t3[3] + t1[5] * t3[0],
+t1[3] * t3[3] - t1[4] * t3[2] + t1[5] * t3[1]
+);
+const Dll& t5 = dll;
+Dll t6 = reverse( t5);
+return Rot (
+ - t4[1] * t6[0] - t4[2] * t6[1] - t4[3] * t6[2],
+t4[0] * t6[0] - t4[2] * t6[2] + t4[3] * t6[1],
+t4[0] * t6[1] + t4[1] * t6[2] - t4[3] * t6[0],
+t4[0] * t6[2] - t4[1] * t6[1] + t4[2] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Lin& lin) {					
+					
+const Lin& t1 = lin;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Lin_Dll t4 (
+ - t1[0] * t3[1] - t1[1] * t3[2] - t1[2] * t3[3],
+t1[0] * t3[0] - t1[1] * t3[3] + t1[2] * t3[2],
+t1[0] * t3[3] + t1[1] * t3[0] - t1[2] * t3[1],
+ - t1[0] * t3[2] + t1[1] * t3[1] + t1[2] * t3[0],
+t1[3] * t3[0] - t1[4] * t3[1] - t1[5] * t3[2],
+t1[3] * t3[1] + t1[4] * t3[0] - t1[5] * t3[3],
+t1[3] * t3[2] + t1[4] * t3[3] + t1[5] * t3[0],
+t1[3] * t3[3] - t1[4] * t3[2] + t1[5] * t3[1]
+);
+const Lin& t5 = lin;
+Lin t6 = reverse( t5);
+return Rot (
+t4[4] * t6[3] + t4[5] * t6[4] + t4[6] * t6[5],
+t4[4] * t6[4] - t4[5] * t6[3] + t4[7] * t6[5],
+t4[4] * t6[5] - t4[6] * t6[3] - t4[7] * t6[4],
+t4[5] * t6[5] - t4[6] * t6[4] + t4[7] * t6[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Pnt& pnt) {					
+					
+const Pnt& t1 = pnt;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Sta_Vec t4 (
+t1[0] * t3[0] - t1[1] * t3[1] - t1[2] * t3[2],
+t1[0] * t3[1] + t1[1] * t3[0] - t1[2] * t3[3],
+t1[0] * t3[2] + t1[1] * t3[3] + t1[2] * t3[0],
+t1[3] * t3[0],
+t1[4] * t3[0],
+t1[3] * t3[1],
+t1[3] * t3[2],
+t1[3] * t3[3],
+t1[4] * t3[1],
+t1[4] * t3[2],
+t1[4] * t3[3],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1]
+);
+const Pnt& t5 = pnt;
+Pnt t6 = reverse( t5);
+return Rot (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2] - t4[3] * t6[4] - t4[4] * t6[3],
+t4[0] * t6[1] - t4[1] * t6[0] - t4[5] * t6[4] - t4[8] * t6[3] + t4[11] * t6[2],
+t4[0] * t6[2] - t4[2] * t6[0] - t4[6] * t6[4] - t4[9] * t6[3] - t4[11] * t6[1],
+t4[1] * t6[2] - t4[2] * t6[1] - t4[7] * t6[4] - t4[10] * t6[3] + t4[11] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Par& par) {					
+					
+const Par& t1 = par;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Mtt t4 (
+ - t1[0] * t3[1] - t1[1] * t3[2] - t1[2] * t3[3],
+t1[0] * t3[0] - t1[1] * t3[3] + t1[2] * t3[2],
+t1[0] * t3[3] + t1[1] * t3[0] - t1[2] * t3[1],
+ - t1[0] * t3[2] + t1[1] * t3[1] + t1[2] * t3[0],
+t1[3] * t3[0] - t1[4] * t3[1] - t1[5] * t3[2],
+t1[3] * t3[1] + t1[4] * t3[0] - t1[5] * t3[3],
+t1[3] * t3[2] + t1[4] * t3[3] + t1[5] * t3[0],
+t1[6] * t3[0] - t1[7] * t3[1] - t1[8] * t3[2],
+t1[6] * t3[1] + t1[7] * t3[0] - t1[8] * t3[3],
+t1[6] * t3[2] + t1[7] * t3[3] + t1[8] * t3[0],
+t1[9] * t3[0],
+t1[9] * t3[1],
+t1[9] * t3[2],
+t1[9] * t3[3],
+t1[3] * t3[3] - t1[4] * t3[2] + t1[5] * t3[1],
+t1[6] * t3[3] - t1[7] * t3[2] + t1[8] * t3[1]
+);
+const Par& t5 = par;
+Par t6 = reverse( t5);
+return Rot (
+ - t4[1] * t6[0] - t4[2] * t6[1] - t4[3] * t6[2] + t4[4] * t6[6] + t4[5] * t6[7] + t4[6] * t6[8] + t4[7] * t6[3] + t4[8] * t6[4] + t4[9] * t6[5] + t4[10] * t6[9],
+t4[0] * t6[0] - t4[2] * t6[2] + t4[3] * t6[1] + t4[4] * t6[7] - t4[5] * t6[6] + t4[7] * t6[4] - t4[8] * t6[3] + t4[11] * t6[9] + t4[14] * t6[8] + t4[15] * t6[5],
+t4[0] * t6[1] + t4[1] * t6[2] - t4[3] * t6[0] + t4[4] * t6[8] - t4[6] * t6[6] + t4[7] * t6[5] - t4[9] * t6[3] + t4[12] * t6[9] - t4[14] * t6[7] - t4[15] * t6[4],
+t4[0] * t6[2] - t4[1] * t6[1] + t4[2] * t6[0] + t4[5] * t6[8] - t4[6] * t6[7] + t4[8] * t6[5] - t4[9] * t6[4] + t4[13] * t6[9] + t4[14] * t6[6] + t4[15] * t6[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Cir& cir) {					
+					
+const Cir& t1 = cir;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Rtc t4 (
+ - t1[9] * t3[3],
+t1[9] * t3[2],
+ - t1[9] * t3[1],
+ - t1[0] * t3[1] - t1[1] * t3[2] - t1[2] * t3[3],
+ - t1[3] * t3[1] - t1[4] * t3[2] - t1[5] * t3[3],
+t1[0] * t3[0] - t1[1] * t3[3] + t1[2] * t3[2],
+t1[0] * t3[3] + t1[1] * t3[0] - t1[2] * t3[1],
+ - t1[0] * t3[2] + t1[1] * t3[1] + t1[2] * t3[0],
+t1[3] * t3[0] - t1[4] * t3[3] + t1[5] * t3[2],
+t1[3] * t3[3] + t1[4] * t3[0] - t1[5] * t3[1],
+ - t1[3] * t3[2] + t1[4] * t3[1] + t1[5] * t3[0],
+t1[6] * t3[0] - t1[7] * t3[1] - t1[8] * t3[2],
+t1[6] * t3[1] + t1[7] * t3[0] - t1[8] * t3[3],
+t1[6] * t3[2] + t1[7] * t3[3] + t1[8] * t3[0],
+t1[9] * t3[0],
+t1[6] * t3[3] - t1[7] * t3[2] + t1[8] * t3[1]
+);
+const Cir& t5 = cir;
+Cir t6 = reverse( t5);
+return Rot (
+t4[5] * t6[3] + t4[6] * t6[4] + t4[7] * t6[5] + t4[8] * t6[0] + t4[9] * t6[1] + t4[10] * t6[2] + t4[11] * t6[6] + t4[12] * t6[7] + t4[13] * t6[8] - t4[14] * t6[9],
+t4[2] * t6[9] - t4[3] * t6[3] - t4[4] * t6[0] + t4[6] * t6[5] - t4[7] * t6[4] + t4[9] * t6[2] - t4[10] * t6[1] + t4[11] * t6[7] - t4[12] * t6[6] + t4[15] * t6[8],
+ - t4[1] * t6[9] - t4[3] * t6[4] - t4[4] * t6[1] - t4[5] * t6[5] + t4[7] * t6[3] - t4[8] * t6[2] + t4[10] * t6[0] + t4[11] * t6[8] - t4[13] * t6[6] - t4[15] * t6[7],
+t4[0] * t6[9] - t4[3] * t6[5] - t4[4] * t6[2] + t4[5] * t6[4] - t4[6] * t6[3] + t4[8] * t6[1] - t4[9] * t6[0] + t4[12] * t6[8] - t4[13] * t6[7] + t4[15] * t6[6]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Rot re (const Rot& rot, const Sph& sph) {					
+					
+const Sph& t1 = sph;
+const Rot& t2 = rot;
+Rot t3 = involute( t2);
+Mnk_Sta_Biv t4 (
+ - t1[3] * t3[3],
+t1[3] * t3[2],
+ - t1[3] * t3[1],
+ - t1[4] * t3[3],
+t1[4] * t3[2],
+ - t1[4] * t3[1],
+ - t1[0] * t3[1] - t1[1] * t3[2] - t1[2] * t3[3],
+t1[0] * t3[0] - t1[1] * t3[3] + t1[2] * t3[2],
+t1[0] * t3[3] + t1[1] * t3[0] - t1[2] * t3[1],
+ - t1[0] * t3[2] + t1[1] * t3[1] + t1[2] * t3[0],
+t1[3] * t3[0],
+t1[4] * t3[0]
+);
+const Sph& t5 = sph;
+Sph t6 = reverse( t5);
+return Rot (
+ - t4[7] * t6[0] - t4[8] * t6[1] - t4[9] * t6[2] - t4[10] * t6[4] - t4[11] * t6[3],
+t4[2] * t6[4] + t4[5] * t6[3] + t4[6] * t6[0] - t4[8] * t6[2] + t4[9] * t6[1],
+ - t4[1] * t6[4] - t4[4] * t6[3] + t4[6] * t6[1] + t4[7] * t6[2] - t4[9] * t6[0],
+t4[0] * t6[4] + t4[3] * t6[3] + t4[6] * t6[2] - t4[7] * t6[1] + t4[8] * t6[0]
 );
 
 }

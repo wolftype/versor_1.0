@@ -17,17 +17,29 @@
 
 #include "vsr_matrix.h"
 #include "vsr_math.h"
+
+
 #include "vsr.h"
+
+//#include "Pnt.h"
+//#include "Trs.h"
+//#include "Dil.h"
+//#include "Trv.h"
+//#include "Mot.h"
+//#include "Rot.h"
+//#include "Tri.h"
+//#include "Vec.h"
+//#include "Biv.h"
+//#include "Dll.h"
+//#include "Par.h"
+//#include "Ori.h"
+//#include "Inf.h"
+//#include "versorFuncs.h"
 
 namespace vsr {
 
 
 struct Op {
-
-//    template<class A, class B>
-//    static typename Product<A,B,float>::GP gptest ( const A& a, const B& b){
-//        return a * b;
-//    }
     
     template<class A> static A dl(const A& a)  { return a * Pss(-1); }
     template<class A> static A udl(const A& a) { return a * Pss(1); }
@@ -42,17 +54,30 @@ struct Op {
 
     template<class A, class B> static typename Product<typename Product<A,B,typename A::value_type>::IP, B,typename A::value_type >::GP 
     pj(const A& a, const B& b ){ return (a <= b ) / b; }
-    
-    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
-    sp(const A& a, const B& b){ return b * a * ~b; }
 
-    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
-    re(const A& a, const B& b){ return b * a.involution() * ~b; }
+    template<class A, class B> static A
+    sp(const A& a, const B& b){ return sp(a,b); }
+
+    template<class A, class B> static A
+    re(const A& a, const B& b){ return re(a,b); }    
+//    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
+//    sp(const A& a, const B& b){ return b * a * ~b; }
+//
+//    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
+//    re(const A& a, const B& b){ return b * a.involution() * ~b; }
     
 };
 
+/*! Operations on Round Elements */
 struct Ro {
 
+
+    /*! Null Point from Arbirtary Multivector */
+    template< class B >
+    static Pnt null( const B& b){	
+        return null( b[0], b[1], b[2] );
+    }
+    
     /*! Null Point from x, y, z */
     template< class S >
     static Pnt null( S x, S y, S z){	
@@ -77,9 +102,43 @@ struct Ro {
         return sqrt ( fabs ( Ro::size(s, false) ) );
     }
     
+    template <class T>
+    static Pnt loc( const T& s) { 
+        typename Product<Inf,T>::IP t = Inf(1) <= s; 
+        return  ( ( s * Inf(1) * s ) / ( t * t ) ) * -.5;
+    }
+
+    template<class T>
+    static Pnt cen( const T& s) {
+        return  s  / ( Inf(-1) <= s );
+    }
+
+    /// make null point from round
+    template<class T>
+    static Pnt null_cen( const T& s){
+        return null ( cen ( s ) );
+    }
+    
 };
 
+/* Spinor Generation for Transformation of Elements */
 struct Gen {
+
+    /*! Generate a Transaltor (to be applied with sp() function)
+        @param Any Vector type (typically vector or direction)
+    */
+    template<class B>
+    static Trs trs(const B& d){
+        return trs(d[0], d[1], d[2]);
+    }
+    
+    /*! Generate a Translator (to be applied with sp() function)
+        @param X Y and Z direction coordinates
+    */
+    template<class T>
+    static Trs trs(T x, T y, T z){
+        return Trs(1, x*-.5, y*-.5, z*-.5);
+    }
 
     /*! Generate a Rotor (i.e. quaternion) from a Bivector 
         @param Bivector generator (the plane of rotation, AKA dual of the axis of rotation) 
@@ -137,7 +196,7 @@ struct Gen {
         
         Vec tt = ( B.wt() == 0 ) ? t : tw * cc + tv;
 
-        Vec_Biv ts = B*tw;	
+        Vec_Biv ts(1,1,1,1);// = B*tw;	
         Mot mot;	
         mot[0] = cc;
         mot[1] = B[0]*sc;
@@ -193,9 +252,36 @@ struct Gen {
         @param x,y,z direction coordinates
     */
     template <class T>
-    static Trv trv3(T x, T y, T z){
+    static Trv trv(T x, T y, T z){
         return Trv(1.0, x, y, z);
     }
+    
+    /*! Generate a Translated Transversion 
+        @param Point Pair (typically of Zero-Size, created by Translating a Tangent Vector)
+        @param Scalar amt 
+    */
+    template <class T>
+    static Bst Gen::trv(const Par& s, T t){
+        return Bst(t, 
+                       s[0], s[1], s[2], 
+                       s[3], s[4], s[5], 
+                       s[6], s[7], s[8], s[9]);
+    } 
+    
+    /*! Generate a Translated Transversion 
+        @param Tangent Direction
+        @param Position in space
+        @param scalar amt (typically 0 or 1)
+    */
+    template <class A, class B, class T>
+    static Bst Gen::trv(const A& tnv, const B& drv, T t){
+        Par s = tnv.trs(drv);
+        return Bst(t, 
+                       s[0], s[1], s[2], 
+                       s[3], s[4], s[5], 
+                       s[6], s[7], s[8], s[9]);
+    } 
+    
     
     /*! Generate a Dilation from Origin 
         @param Amt t
@@ -212,13 +298,17 @@ struct Gen {
     static Dil dil_pnt(const Pnt& p, T t){
         return sp( Dil( cosh(t*.5), sinh(t*.5) ), Gen::trs(p) );
     }
-    
-    static Dil dil(const State& s){
+    template<int N, int IDX, class T>
+    static Dil dil(const MV<N,IDX,T>& s){
         return Gen::dil(s[0]);
     }
 
 };
 
+struct Fl {
+
+    
+};
 
 #define PT(x,y,z) Ro::null(Vec(x,y,z))
 #define PV(v) Ro::null(v)
@@ -231,13 +321,12 @@ struct Gen {
 #define F2S(f) f*1000.0
 #define S2F(f) f/1000.0
 #define LN(x,y,z) (Ori(1)^PT(x,y,z)^Inf(1))
-#define DLN(x,y,z) ( (Ori(1)^PT(x,y,z)^Inf(1)).dual() )
+#define DLN(x,y,z) ( Dll(Op::dl( (Ori(1)^PT(x,y,z)^Inf(1))) ) )
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
 #define INFTY Inf(1)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
-
 } //vsr::
 
 #endif

@@ -46,6 +46,8 @@ template<class T> T involute( const T& );
 template<class T> T conjugate( const T& );
 template<class T> T reverse( const T& );
 
+template<class A, class B> A sp(const A&, const B&);
+template<class A, class B> A re(const A&, const B&);
     
 //Type Container Struct    
 template<class A, class B, class T=float>
@@ -66,6 +68,9 @@ struct Product{
     typedef MV<IP_N, IP_IDX, T> IP;  
 
 };
+
+
+
 
 
 //Predeclare BASIC TYPES
@@ -156,12 +161,16 @@ struct Product{
 	typedef MV<6,AFL,float>  Afl;
 	
 	typedef MV<4,AFP,float>  Afp;
+    
+    typedef MV<4,DAP,float>  Dap;
+	
+	typedef MV<4,DAF,float>  Daf;
+	
+	typedef MV<6,DAL,float>  Dal;
 
 
 template < int N, int IDX, class T >
 class MV {
-
-    
 
 	T mW[N];	
 	
@@ -169,6 +178,7 @@ public:
 	
     typedef MV<N,IDX,T> self_type;
     typedef T value_type;
+    typedef T array_type[N];
     
     static const int idx = IDX;
  	static const int size =  N;    
@@ -330,6 +340,12 @@ public:
     /* T r a n s f o r m a t i o n  O p e r a t o r s  */
     /////////////////////////////////////////////////////
     
+    template<class B>
+    self_type sp (const B& b) const { return vsr::sp (*this,b);}
+
+    template<class B>
+    self_type re (const B& b) const{ return vsr::re (*this,b);}
+    
     /*! Rotation by Bivector Plane */
     self_type rot ( const Biv& b ) const ;
     
@@ -356,9 +372,11 @@ public:
     /*! Transversion (AKA Boosting) in X Y Z direction */
     self_type trv(T x, T y, T z) const;
     
-    typedef T array_type[N];
 
+    
+    /*! Pointer to Beginning of Array */
     array_type& w() { return mW; }
+    
     string name() { return Idx<IDX>::name; }
 	/*! ONE-TO-ONE TEMPLATE FUNCTION PRETTY PRINTING */
 	friend std::ostream& operator << <> (  std::ostream& os, self_type a );
@@ -366,8 +384,8 @@ public:
     
     /* PENDING .... */
     
-//    T * begin()  const  { return &(mW[0]); }
-//    T& last()  const { return mW + size; }
+    array_type& begin() { return mW; }
+//    array_type& end() { return mW + size; }
 		
 };
 

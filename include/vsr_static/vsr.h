@@ -44,6 +44,8 @@
 	
 	#include "Flp.h"
 	
+	#include "Dfp.h"
+	
 	#include "Dll.h"
 	
 	#include "Dlp.h"
@@ -59,6 +61,14 @@
 	#include "Afl.h"
 	
 	#include "Afp.h"
+	
+	#include "Dap.h"
+	
+	#include "Daf.h"
+	
+	#include "Dal.h"
+	
+	#include "Mnv.h"
 	
 	#include "Rot.h"
 	
@@ -91,7 +101,8 @@
 	#include "Tst.h"
 	
 	#include "Tvt.h"
-    
-    #include "versorFuncs.h"
 	
+	#include "Bst.h"
+	
+	#include "versorFuncs.h"
 	#endif

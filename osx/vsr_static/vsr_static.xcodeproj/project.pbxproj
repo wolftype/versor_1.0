@@ -16,6 +16,11 @@
 		9B84F53A15EC5135005CA167 /* ExpTemp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F53915EC5135005CA167 /* ExpTemp.h */; };
 		9B84F53C15EC5588005CA167 /* MV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B84F53B15EC5588005CA167 /* MV.cpp */; };
 		9B84F53E15ED55FA005CA167 /* versorFuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F53D15ED55FA005CA167 /* versorFuncs.h */; };
+		9B8DD32B15EF01EA00FB3E3B /* Daf.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8DD32815EF01E900FB3E3B /* Daf.h */; };
+		9B8DD32C15EF01EA00FB3E3B /* Dal.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8DD32915EF01E900FB3E3B /* Dal.h */; };
+		9B8DD32D15EF01EA00FB3E3B /* Dap.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8DD32A15EF01E900FB3E3B /* Dap.h */; };
+		9B8DD33015F0355700FB3E3B /* Bst.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8DD32E15F0355600FB3E3B /* Bst.h */; };
+		9B8DD33115F0355700FB3E3B /* Dfp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B8DD32F15F0355700FB3E3B /* Dfp.h */; };
 		9BBBE00215DDC1F200BDE419 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBE00115DDC1F200BDE419 /* main.cpp */; };
 		9BBBE00415DDC1F200BDE419 /* vsr_static.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBBE00315DDC1F200BDE419 /* vsr_static.1 */; };
 		9BBBE01715DDC40C00BDE419 /* MV.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BBBE01615DDC40C00BDE419 /* MV.h */; };
@@ -103,6 +108,11 @@
 		9B84F53915EC5135005CA167 /* ExpTemp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpTemp.h; sourceTree = "<group>"; };
 		9B84F53B15EC5588005CA167 /* MV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MV.cpp; sourceTree = "<group>"; };
 		9B84F53D15ED55FA005CA167 /* versorFuncs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = versorFuncs.h; sourceTree = "<group>"; };
+		9B8DD32815EF01E900FB3E3B /* Daf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Daf.h; path = ../../../include/vsr_static/Daf.h; sourceTree = "<group>"; };
+		9B8DD32915EF01E900FB3E3B /* Dal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dal.h; path = ../../../include/vsr_static/Dal.h; sourceTree = "<group>"; };
+		9B8DD32A15EF01E900FB3E3B /* Dap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dap.h; path = ../../../include/vsr_static/Dap.h; sourceTree = "<group>"; };
+		9B8DD32E15F0355600FB3E3B /* Bst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bst.h; path = ../../../include/vsr_static/Bst.h; sourceTree = "<group>"; };
+		9B8DD32F15F0355700FB3E3B /* Dfp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dfp.h; path = ../../../include/vsr_static/Dfp.h; sourceTree = "<group>"; };
 		9BBBDFFD15DDC1F100BDE419 /* vsr_static */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vsr_static; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBBE00115DDC1F200BDE419 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9BBBE00315DDC1F200BDE419 /* vsr_static.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr_static.1; sourceTree = "<group>"; };
@@ -221,6 +231,9 @@
 				9BBBE01E15DEF27700BDE419 /* vsr_templates.h */,
 				9BBBE01F15DEF27700BDE419 /* vsr_typedefs.h */,
 				9B84F53D15ED55FA005CA167 /* versorFuncs.h */,
+				9B8DD32815EF01E900FB3E3B /* Daf.h */,
+				9B8DD32915EF01E900FB3E3B /* Dal.h */,
+				9B8DD32A15EF01E900FB3E3B /* Dap.h */,
 				9BF4FDEE15DF2945000D6508 /* Aff.h */,
 				9BF4FDEF15DF2945000D6508 /* Afl.h */,
 				9BF4FDF015DF2945000D6508 /* Afp.h */,
@@ -236,6 +249,8 @@
 				9BF4FDFA15DF2946000D6508 /* Hyp.h */,
 				9BF4FDFB15DF2946000D6508 /* Inf.h */,
 				9BF4FDFC15DF2946000D6508 /* Lin.h */,
+				9B8DD32E15F0355600FB3E3B /* Bst.h */,
+				9B8DD32F15F0355700FB3E3B /* Dfp.h */,
 				9BF4FDFD15DF2946000D6508 /* Mnk.h */,
 				9BF4FDFE15DF2946000D6508 /* Mot.h */,
 				9BF4FDFF15DF2946000D6508 /* Mtd.h */,
@@ -330,6 +345,11 @@
 				9B84F53015EC3CFA005CA167 /* vsr_constants.h in Headers */,
 				9B84F53A15EC5135005CA167 /* ExpTemp.h in Headers */,
 				9B84F53E15ED55FA005CA167 /* versorFuncs.h in Headers */,
+				9B8DD32B15EF01EA00FB3E3B /* Daf.h in Headers */,
+				9B8DD32C15EF01EA00FB3E3B /* Dal.h in Headers */,
+				9B8DD32D15EF01EA00FB3E3B /* Dap.h in Headers */,
+				9B8DD33015F0355700FB3E3B /* Bst.h in Headers */,
+				9B8DD33115F0355700FB3E3B /* Dfp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +458,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -451,6 +472,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SYMROOT = ../../build;
 			};
 			name = Debug;
 		};
@@ -463,6 +485,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -470,12 +493,14 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
+				SYMROOT = ../../build;
 			};
 			name = Release;
 		};
 		9BBBE00815DDC1F200BDE419 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -483,6 +508,7 @@
 		9BBBE00915DDC1F200BDE419 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -491,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../include/**";
 			};
@@ -500,6 +527,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../include/**";
 			};

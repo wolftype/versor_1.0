@@ -54,8 +54,8 @@ a[0] * b[1],
 );
 }			
 		 
-inline Flp_Tri gp (const Trs& a, const Pss& b) { 
-	return Flp_Tri (
+inline Mnk_Dfp gp (const Trs& a, const Pss& b) { 
+	return Mnk_Dfp (
 a[3] * b[0],
  - a[2] * b[0],
 a[1] * b[0],
@@ -99,8 +99,8 @@ a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
 );
 }			
 		 
-inline Cir_Flp gp (const Trs& a, const Cir& b) { 
-	return Cir_Flp (
+inline Par_Dfp gp (const Trs& a, const Cir& b) { 
+	return Par_Dfp (
 a[2] * b[0] + a[3] * b[1],
  - a[1] * b[0] + a[3] * b[2],
  - a[1] * b[1] - a[2] * b[2],
@@ -119,8 +119,8 @@ a[0] * b[9] - a[1] * b[2] + a[2] * b[1] - a[3] * b[0],
 );
 }			
 		 
-inline Sph_Flp gp (const Trs& a, const Sph& b) { 
-	return Sph_Flp (
+inline Pnt_Dfp gp (const Trs& a, const Sph& b) { 
+	return Pnt_Dfp (
 a[3] * b[3],
  - a[2] * b[3],
 a[1] * b[3],
@@ -193,8 +193,8 @@ a[2] * b[2] - a[3] * b[1]
 );
 }			
 		 
-inline Tnb_Flp gp (const Trs& a, const Tnb& b) { 
-	return Tnb_Flp (
+inline Tnv_Dfp gp (const Trs& a, const Tnb& b) { 
+	return Tnv_Dfp (
 a[2] * b[0] + a[3] * b[1],
  - a[1] * b[0] + a[3] * b[2],
  - a[1] * b[1] - a[2] * b[2],
@@ -209,8 +209,8 @@ a[2] * b[0] + a[3] * b[1],
 );
 }			
 		 
-inline Tnt_Flp gp (const Trs& a, const Tnt& b) { 
-	return Tnt_Flp (
+inline Ori_Dfp gp (const Trs& a, const Tnt& b) { 
+	return Ori_Dfp (
 a[3] * b[0],
  - a[2] * b[0],
 a[1] * b[0],
@@ -221,8 +221,8 @@ a[0] * b[0]
 );
 }			
 		 
-inline Flp_Dlp gp (const Trs& a, const Lin& b) { 
-	return Flp_Dlp (
+inline Pln_Dfp gp (const Trs& a, const Lin& b) { 
+	return Pln_Dfp (
 a[1] * b[3] + a[2] * b[4] + a[3] * b[5],
 a[0] * b[0] + a[1] * b[4] - a[2] * b[3],
 a[0] * b[1] + a[1] * b[5] - a[3] * b[3],
@@ -233,8 +233,8 @@ a[0] * b[5]
 );
 }			
 		 
-inline Flp_Dll gp (const Trs& a, const Pln& b) { 
-	return Flp_Dll (
+inline Lin_Dfp gp (const Trs& a, const Pln& b) { 
+	return Lin_Dfp (
 a[2] * b[0] + a[3] * b[1],
  - a[1] * b[0] + a[3] * b[2],
  - a[1] * b[1] - a[2] * b[2],
@@ -250,6 +250,15 @@ inline Flp gp (const Trs& a, const Flp& b) {
 a[0] * b[0] - a[1] * b[3],
 a[0] * b[1] - a[2] * b[3],
 a[0] * b[2] - a[3] * b[3],
+a[0] * b[3]
+);
+}			
+		 
+inline Dfp gp (const Trs& a, const Dfp& b) { 
+	return Dfp (
+a[0] * b[0] - a[3] * b[3],
+a[0] * b[1] + a[2] * b[3],
+a[0] * b[2] - a[1] * b[3],
 a[0] * b[3]
 );
 }			
@@ -302,8 +311,8 @@ a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
 );
 }			
 		 
-inline Pss_Flp gp (const Trs& a, const Tri& b) { 
-	return Pss_Flp (
+inline Dfp gp (const Trs& a, const Tri& b) { 
+	return Dfp (
  - a[3] * b[0],
 a[2] * b[0],
  - a[1] * b[0],
@@ -363,6 +372,73 @@ a[2] * b[0] + a[3] * b[1],
  - a[1] * b[1] - a[2] * b[2],
 a[0] * b[3] - a[1] * b[2] + a[2] * b[1] - a[3] * b[0],
  - a[1] * b[2] + a[2] * b[1] - a[3] * b[0]
+);
+}			
+		 
+inline Trt gp (const Trs& a, const Dap& b) { 
+	return Trt (
+a[1] * b[0] + a[2] * b[1] + a[3] * b[2],
+a[1] * b[1] - a[2] * b[0],
+a[1] * b[2] - a[3] * b[0],
+a[2] * b[2] - a[3] * b[1],
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+ - a[1] * b[3],
+ - a[2] * b[3],
+ - a[3] * b[3],
+a[0] * b[3] + a[1] * b[0] + a[2] * b[1] + a[3] * b[2],
+a[1] * b[1] - a[2] * b[0],
+a[1] * b[2] - a[3] * b[0],
+a[2] * b[2] - a[3] * b[1]
+);
+}			
+		 
+inline Pnt_Dfp gp (const Trs& a, const Daf& b) { 
+	return Pnt_Dfp (
+a[3] * b[3],
+ - a[2] * b[3],
+a[1] * b[3],
+a[2] * b[0] + a[3] * b[1],
+ - a[1] * b[0] + a[3] * b[2],
+ - a[1] * b[1] - a[2] * b[2],
+a[0] * b[0] + a[3] * b[3],
+a[0] * b[1] - a[2] * b[3],
+a[0] * b[2] + a[1] * b[3],
+a[0] * b[3],
+ - a[1] * b[2] + a[2] * b[1] - a[3] * b[0]
+);
+}			
+		 
+inline Par_Dfp gp (const Trs& a, const Dal& b) { 
+	return Par_Dfp (
+a[2] * b[0] + a[3] * b[1],
+ - a[1] * b[0] + a[3] * b[2],
+ - a[1] * b[1] - a[2] * b[2],
+a[1] * b[3] + a[2] * b[4] + a[3] * b[5],
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2],
+a[1] * b[4] - a[2] * b[3],
+a[1] * b[5] - a[3] * b[3],
+a[2] * b[5] - a[3] * b[4],
+a[0] * b[3] + a[2] * b[0] + a[3] * b[1],
+a[0] * b[4] - a[1] * b[0] + a[3] * b[2],
+a[0] * b[5] - a[1] * b[1] - a[2] * b[2],
+ - a[1] * b[2] + a[2] * b[1] - a[3] * b[0],
+ - a[1] * b[2] + a[2] * b[1] - a[3] * b[0]
+);
+}			
+		 
+inline Pln_Dfp gp (const Trs& a, const Mnv& b) { 
+	return Pln_Dfp (
+a[1] * b[0] + a[2] * b[1] + a[3] * b[2],
+a[1] * b[1] - a[2] * b[0],
+a[1] * b[2] - a[3] * b[0],
+a[2] * b[2] - a[3] * b[1],
+a[0] * b[0],
+a[0] * b[1],
+a[0] * b[2]
 );
 }			
 		 
@@ -638,6 +714,26 @@ a[0] * b[14] + a[1] * b[3] - a[1] * b[13] - a[2] * b[2] + a[2] * b[12] + a[3] * 
 );
 }			
 		 
+inline Tvt gp (const Trs& a, const Bst& b) { 
+	return Tvt (
+a[0] * b[0] + a[1] * b[4] + a[2] * b[5] + a[3] * b[6],
+a[0] * b[1] + a[1] * b[5] - a[2] * b[4],
+a[0] * b[2] + a[1] * b[6] - a[3] * b[4],
+a[0] * b[3] + a[2] * b[6] - a[3] * b[5],
+a[0] * b[4],
+a[0] * b[5],
+a[0] * b[6],
+a[0] * b[7] + a[1] * b[0] - a[1] * b[10] - a[2] * b[1] - a[3] * b[2],
+a[0] * b[8] + a[1] * b[1] + a[2] * b[0] - a[2] * b[10] - a[3] * b[3],
+a[0] * b[9] + a[1] * b[2] + a[2] * b[3] + a[3] * b[0] - a[3] * b[10],
+a[0] * b[10] + a[1] * b[4] + a[2] * b[5] + a[3] * b[6],
+a[1] * b[5] - a[2] * b[4],
+a[1] * b[6] - a[3] * b[4],
+a[2] * b[6] - a[3] * b[5],
+a[1] * b[3] - a[2] * b[2] + a[3] * b[1]
+);
+}			
+		 
 inline Trs ip (const Trs& a, const Trs& b) { 
 	return Trs (
 a[0] * b[0],
@@ -647,6 +743,7 @@ a[0] * b[3]
 );
 }			
 		  	
+template<>
 inline Trs sp (const Trs& trs, const Rot& rot) {					
 					
 const Rot& t1 = rot;
@@ -674,6 +771,7 @@ t3[4] * t5[2] + t3[5] * t5[3] + t3[6] * t5[0] - t3[7] * t5[1]
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Mot& mot) {					
 					
 const Mot& t1 = mot;
@@ -701,6 +799,7 @@ t3[0] * t5[6] - t3[1] * t5[7] - t3[2] * t5[4] - t3[3] * t5[5] + t3[4] * t5[2] + 
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Dil& dil) {					
 					
 const Dil& t1 = dil;
@@ -725,6 +824,7 @@ t3[3] * t5[0] - t3[3] * t5[1]
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Trv& trv) {					
 					
 const Trv& t1 = trv;
@@ -758,6 +858,7 @@ t3[9] * t5[0]
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Mtd& mtd) {					
 					
 const Mtd& t1 = mtd;
@@ -789,6 +890,7 @@ t3[0] * t5[6] - t3[1] * t5[11] - t3[2] * t5[4] - t3[3] * t5[5] + t3[4] * t5[2] -
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Rtc& rtc) {					
 					
 const Rtc& t1 = rtc;
@@ -824,6 +926,7 @@ t3[0] * t5[9] + t3[1] * t5[10] + t3[2] * t5[4] - t3[4] * t5[2] + t3[4] * t5[13] 
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Mtt& mtt) {					
 					
 const Mtt& t1 = mtt;
@@ -859,6 +962,7 @@ t3[0] * t5[9] - t3[1] * t5[15] - t3[2] * t5[7] - t3[3] * t5[8] + t3[7] * t5[2] -
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Rtt& rtt) {					
 					
 const Rtt& t1 = rtt;
@@ -894,6 +998,7 @@ t3[7] * t5[2] + t3[8] * t5[3] + t3[9] * t5[0] - t3[15] * t5[1]
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Rtd& rtd) {					
 					
 const Rtd& t1 = rtd;
@@ -925,6 +1030,7 @@ t3[4] * t5[2] - t3[4] * t5[6] + t3[5] * t5[3] - t3[5] * t5[7] + t3[6] * t5[0] - 
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Tvd& tvd) {					
 					
 const Tvd& t1 = tvd;
@@ -958,6 +1064,7 @@ t3[9] * t5[0] - t3[9] * t5[4]
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Tsd& tsd) {					
 					
 const Tsd& t1 = tsd;
@@ -982,6 +1089,7 @@ t3[0] * t5[3] + t3[3] * t5[0] - t3[3] * t5[4] + t3[4] * t5[3]
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Trt& trt) {					
 					
 const Trt& t1 = trt;
@@ -1016,6 +1124,7 @@ t3[0] * t5[9] - t3[2] * t5[7] - t3[3] * t5[8] + t3[7] * t5[2] - t3[7] * t5[12] +
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Rvd& rvd) {					
 					
 const Rvd& t1 = rvd;
@@ -1051,6 +1160,7 @@ t3[7] * t5[2] - t3[7] * t5[9] + t3[8] * t5[3] - t3[8] * t5[10] + t3[9] * t5[0] -
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Tst& tst) {					
 					
 const Tst& t1 = tst;
@@ -1086,6 +1196,7 @@ t3[0] * t5[9] - t3[2] * t5[7] - t3[3] * t5[8] + t3[7] * t5[2] - t3[7] * t5[12] +
 		
 	
 	  	
+template<>
 inline Trs sp (const Trs& trs, const Tvt& tvt) {					
 					
 const Tvt& t1 = tvt;
@@ -1114,6 +1225,317 @@ t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3] + t3[4] * t5[7] + 
 t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] - t3[3] * t5[14] + t3[7] * t5[0] - t3[7] * t5[10] - t3[8] * t5[1] + t3[8] * t5[11] - t3[9] * t5[2] + t3[9] * t5[12] + t3[10] * t5[7] + t3[11] * t5[8] + t3[12] * t5[9] - t3[13] * t5[14] - t3[14] * t5[3] + t3[14] * t5[13],
 t3[0] * t5[8] - t3[1] * t5[7] + t3[2] * t5[14] + t3[3] * t5[9] + t3[7] * t5[1] - t3[7] * t5[11] + t3[8] * t5[0] - t3[8] * t5[10] - t3[9] * t5[3] + t3[9] * t5[13] + t3[10] * t5[8] - t3[11] * t5[7] + t3[12] * t5[14] + t3[13] * t5[9] + t3[14] * t5[2] - t3[14] * t5[12],
 t3[0] * t5[9] - t3[1] * t5[14] - t3[2] * t5[7] - t3[3] * t5[8] + t3[7] * t5[2] - t3[7] * t5[12] + t3[8] * t5[3] - t3[8] * t5[13] + t3[9] * t5[0] - t3[9] * t5[10] + t3[10] * t5[9] - t3[11] * t5[14] - t3[12] * t5[7] - t3[13] * t5[8] - t3[14] * t5[1] + t3[14] * t5[11]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs sp (const Trs& trs, const Bst& bst) {					
+					
+const Bst& t1 = bst;
+const Trs& t2 = trs;
+Tvt t3 (
+t1[0] * t2[0] + t1[4] * t2[1] + t1[5] * t2[2] + t1[6] * t2[3],
+t1[1] * t2[0] + t1[4] * t2[2] - t1[5] * t2[1],
+t1[2] * t2[0] + t1[4] * t2[3] - t1[6] * t2[1],
+t1[3] * t2[0] + t1[5] * t2[3] - t1[6] * t2[2],
+t1[4] * t2[0],
+t1[5] * t2[0],
+t1[6] * t2[0],
+t1[0] * t2[1] + t1[1] * t2[2] + t1[2] * t2[3] + t1[7] * t2[0] + t1[10] * t2[1],
+t1[0] * t2[2] - t1[1] * t2[1] + t1[3] * t2[3] + t1[8] * t2[0] + t1[10] * t2[2],
+t1[0] * t2[3] - t1[2] * t2[1] - t1[3] * t2[2] + t1[9] * t2[0] + t1[10] * t2[3],
+ - t1[4] * t2[1] - t1[5] * t2[2] - t1[6] * t2[3] + t1[10] * t2[0],
+ - t1[4] * t2[2] + t1[5] * t2[1],
+ - t1[4] * t2[3] + t1[6] * t2[1],
+ - t1[5] * t2[3] + t1[6] * t2[2],
+t1[1] * t2[3] - t1[2] * t2[2] + t1[3] * t2[1]
+);
+const Bst& t4 = bst;
+Bst t5 = reverse( t4);
+return Trs (
+t3[0] * t5[0] - t3[1] * t5[1] - t3[2] * t5[2] - t3[3] * t5[3] + t3[4] * t5[7] + t3[5] * t5[8] + t3[6] * t5[9] + t3[7] * t5[4] + t3[8] * t5[5] + t3[9] * t5[6] + t3[10] * t5[10],
+t3[0] * t5[7] + t3[1] * t5[8] + t3[2] * t5[9] + t3[7] * t5[0] - t3[7] * t5[10] - t3[8] * t5[1] - t3[9] * t5[2] + t3[10] * t5[7] + t3[11] * t5[8] + t3[12] * t5[9] - t3[14] * t5[3],
+t3[0] * t5[8] - t3[1] * t5[7] + t3[3] * t5[9] + t3[7] * t5[1] + t3[8] * t5[0] - t3[8] * t5[10] - t3[9] * t5[3] + t3[10] * t5[8] - t3[11] * t5[7] + t3[13] * t5[9] + t3[14] * t5[2],
+t3[0] * t5[9] - t3[2] * t5[7] - t3[3] * t5[8] + t3[7] * t5[2] + t3[8] * t5[3] + t3[9] * t5[0] - t3[9] * t5[10] + t3[10] * t5[9] - t3[12] * t5[7] - t3[13] * t5[8] - t3[14] * t5[1]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Vec& vec) {					
+					
+const Vec& t1 = vec;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Lin_Flp t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[0] * t3[1] + t1[1] * t3[2] + t1[2] * t3[3],
+t1[0] * t3[2] - t1[1] * t3[1],
+t1[0] * t3[3] - t1[2] * t3[1],
+t1[1] * t3[3] - t1[2] * t3[2]
+);
+const Vec& t5 = vec;
+Vec t6 = reverse( t5);
+return Trs (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2],
+ - t4[3] * t6[0] - t4[4] * t6[1] - t4[5] * t6[2],
+ - t4[3] * t6[1] + t4[4] * t6[0] - t4[6] * t6[2],
+ - t4[3] * t6[2] + t4[5] * t6[0] + t4[6] * t6[1]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Dlp& dlp) {					
+					
+const Dlp& t1 = dlp;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Lin_Flp t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[0] * t3[1] + t1[1] * t3[2] + t1[2] * t3[3] + t1[3] * t3[0],
+t1[0] * t3[2] - t1[1] * t3[1],
+t1[0] * t3[3] - t1[2] * t3[1],
+t1[1] * t3[3] - t1[2] * t3[2]
+);
+const Dlp& t5 = dlp;
+Dlp t6 = reverse( t5);
+return Trs (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2],
+t4[0] * t6[3] - t4[3] * t6[0] - t4[4] * t6[1] - t4[5] * t6[2],
+t4[1] * t6[3] - t4[3] * t6[1] + t4[4] * t6[0] - t4[6] * t6[2],
+t4[2] * t6[3] - t4[3] * t6[2] + t4[5] * t6[0] + t4[6] * t6[1]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Pln& pln) {					
+					
+const Pln& t1 = pln;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Lin_Dfp t4 (
+t1[0] * t3[2] + t1[1] * t3[3],
+ - t1[0] * t3[1] + t1[2] * t3[3],
+ - t1[1] * t3[1] - t1[2] * t3[2],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1] + t1[3] * t3[0]
+);
+const Pln& t5 = pln;
+Pln t6 = reverse( t5);
+return Trs (
+ - t4[3] * t6[0] - t4[4] * t6[1] - t4[5] * t6[2],
+t4[1] * t6[0] + t4[2] * t6[1] - t4[5] * t6[3] + t4[6] * t6[2],
+ - t4[0] * t6[0] + t4[2] * t6[2] + t4[4] * t6[3] - t4[6] * t6[1],
+ - t4[0] * t6[1] - t4[1] * t6[2] - t4[3] * t6[3] + t4[6] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Dll& dll) {					
+					
+const Dll& t1 = dll;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Pln_Flp t4 (
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[0] * t3[2] + t1[1] * t3[3] + t1[3] * t3[0],
+ - t1[0] * t3[1] + t1[2] * t3[3] + t1[4] * t3[0],
+ - t1[1] * t3[1] - t1[2] * t3[2] + t1[5] * t3[0],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1]
+);
+const Dll& t5 = dll;
+Dll t6 = reverse( t5);
+return Trs (
+ - t4[0] * t6[0] - t4[1] * t6[1] - t4[2] * t6[2],
+t4[0] * t6[4] + t4[1] * t6[5] - t4[4] * t6[0] - t4[5] * t6[1] - t4[6] * t6[2],
+ - t4[0] * t6[3] + t4[2] * t6[5] + t4[3] * t6[0] - t4[5] * t6[2] + t4[6] * t6[1],
+ - t4[1] * t6[3] - t4[2] * t6[4] + t4[3] * t6[1] + t4[4] * t6[2] - t4[6] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Lin& lin) {					
+					
+const Lin& t1 = lin;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Pln_Dfp t4 (
+t1[3] * t3[1] + t1[4] * t3[2] + t1[5] * t3[3],
+t1[0] * t3[0] + t1[3] * t3[2] - t1[4] * t3[1],
+t1[1] * t3[0] + t1[3] * t3[3] - t1[5] * t3[1],
+t1[2] * t3[0] + t1[4] * t3[3] - t1[5] * t3[2],
+t1[3] * t3[0],
+t1[4] * t3[0],
+t1[5] * t3[0]
+);
+const Lin& t5 = lin;
+Lin t6 = reverse( t5);
+return Trs (
+t4[4] * t6[3] + t4[5] * t6[4] + t4[6] * t6[5],
+t4[0] * t6[3] + t4[1] * t6[4] + t4[2] * t6[5] - t4[5] * t6[0] - t4[6] * t6[1],
+t4[0] * t6[4] - t4[1] * t6[3] + t4[3] * t6[5] + t4[4] * t6[0] - t4[6] * t6[2],
+t4[0] * t6[5] - t4[2] * t6[3] - t4[3] * t6[4] + t4[4] * t6[1] + t4[5] * t6[2]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Pnt& pnt) {					
+					
+const Pnt& t1 = pnt;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Pnt_Flp t4 (
+t1[0] * t3[0] + t1[3] * t3[1],
+t1[1] * t3[0] + t1[3] * t3[2],
+t1[2] * t3[0] + t1[3] * t3[3],
+t1[3] * t3[0],
+t1[0] * t3[1] + t1[1] * t3[2] + t1[2] * t3[3] + t1[4] * t3[0],
+t1[0] * t3[2] - t1[1] * t3[1],
+t1[0] * t3[3] - t1[2] * t3[1],
+t1[1] * t3[3] - t1[2] * t3[2],
+ - t1[3] * t3[1],
+ - t1[3] * t3[2],
+ - t1[3] * t3[3]
+);
+const Pnt& t5 = pnt;
+Pnt t6 = reverse( t5);
+return Trs (
+t4[0] * t6[0] + t4[1] * t6[1] + t4[2] * t6[2] - t4[3] * t6[4] - t4[4] * t6[3],
+t4[0] * t6[4] - t4[4] * t6[0] - t4[5] * t6[1] - t4[6] * t6[2] + t4[8] * t6[4],
+t4[1] * t6[4] - t4[4] * t6[1] + t4[5] * t6[0] - t4[7] * t6[2] + t4[9] * t6[4],
+t4[2] * t6[4] - t4[4] * t6[2] + t4[6] * t6[0] + t4[7] * t6[1] + t4[10] * t6[4]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Par& par) {					
+					
+const Par& t1 = par;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Tvt t4 (
+t1[3] * t3[1] + t1[4] * t3[2] + t1[5] * t3[3],
+t1[0] * t3[0] + t1[3] * t3[2] - t1[4] * t3[1],
+t1[1] * t3[0] + t1[3] * t3[3] - t1[5] * t3[1],
+t1[2] * t3[0] + t1[4] * t3[3] - t1[5] * t3[2],
+t1[3] * t3[0],
+t1[4] * t3[0],
+t1[5] * t3[0],
+t1[0] * t3[2] + t1[1] * t3[3] + t1[6] * t3[0] + t1[9] * t3[1],
+ - t1[0] * t3[1] + t1[2] * t3[3] + t1[7] * t3[0] + t1[9] * t3[2],
+ - t1[1] * t3[1] - t1[2] * t3[2] + t1[8] * t3[0] + t1[9] * t3[3],
+ - t1[3] * t3[1] - t1[4] * t3[2] - t1[5] * t3[3] + t1[9] * t3[0],
+ - t1[3] * t3[2] + t1[4] * t3[1],
+ - t1[3] * t3[3] + t1[5] * t3[1],
+ - t1[4] * t3[3] + t1[5] * t3[2],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1]
+);
+const Par& t5 = par;
+Par t6 = reverse( t5);
+return Trs (
+ - t4[1] * t6[0] - t4[2] * t6[1] - t4[3] * t6[2] + t4[4] * t6[6] + t4[5] * t6[7] + t4[6] * t6[8] + t4[7] * t6[3] + t4[8] * t6[4] + t4[9] * t6[5] + t4[10] * t6[9],
+t4[0] * t6[6] + t4[1] * t6[7] + t4[2] * t6[8] - t4[7] * t6[9] - t4[8] * t6[0] - t4[9] * t6[1] + t4[10] * t6[6] + t4[11] * t6[7] + t4[12] * t6[8] - t4[14] * t6[2],
+t4[0] * t6[7] - t4[1] * t6[6] + t4[3] * t6[8] + t4[7] * t6[0] - t4[8] * t6[9] - t4[9] * t6[2] + t4[10] * t6[7] - t4[11] * t6[6] + t4[13] * t6[8] + t4[14] * t6[1],
+t4[0] * t6[8] - t4[2] * t6[6] - t4[3] * t6[7] + t4[7] * t6[1] + t4[8] * t6[2] - t4[9] * t6[9] + t4[10] * t6[8] - t4[12] * t6[6] - t4[13] * t6[7] - t4[14] * t6[0]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Cir& cir) {					
+					
+const Cir& t1 = cir;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Par_Dfp t4 (
+t1[0] * t3[2] + t1[1] * t3[3],
+ - t1[0] * t3[1] + t1[2] * t3[3],
+ - t1[1] * t3[1] - t1[2] * t3[2],
+t1[6] * t3[1] + t1[7] * t3[2] + t1[8] * t3[3],
+t1[0] * t3[0],
+t1[1] * t3[0],
+t1[2] * t3[0],
+t1[3] * t3[0] + t1[6] * t3[2] - t1[7] * t3[1] + t1[9] * t3[3],
+t1[4] * t3[0] + t1[6] * t3[3] - t1[8] * t3[1] - t1[9] * t3[2],
+t1[5] * t3[0] + t1[7] * t3[3] - t1[8] * t3[2] + t1[9] * t3[1],
+ - t1[0] * t3[2] - t1[1] * t3[3] + t1[6] * t3[0],
+t1[0] * t3[1] - t1[2] * t3[3] + t1[7] * t3[0],
+t1[1] * t3[1] + t1[2] * t3[2] + t1[8] * t3[0],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1] + t1[9] * t3[0],
+ - t1[0] * t3[3] + t1[1] * t3[2] - t1[2] * t3[1]
+);
+const Cir& t5 = cir;
+Cir t6 = reverse( t5);
+return Trs (
+t4[4] * t6[3] + t4[5] * t6[4] + t4[6] * t6[5] + t4[7] * t6[0] + t4[8] * t6[1] + t4[9] * t6[2] + t4[10] * t6[6] + t4[11] * t6[7] + t4[12] * t6[8] - t4[13] * t6[9],
+ - t4[1] * t6[3] - t4[2] * t6[4] + t4[3] * t6[6] + t4[7] * t6[7] + t4[8] * t6[8] + t4[9] * t6[9] - t4[11] * t6[3] - t4[12] * t6[4] - t4[13] * t6[5] - t4[14] * t6[5],
+t4[0] * t6[3] - t4[2] * t6[5] + t4[3] * t6[7] - t4[7] * t6[6] - t4[8] * t6[9] + t4[9] * t6[8] + t4[10] * t6[3] - t4[12] * t6[5] + t4[13] * t6[4] + t4[14] * t6[4],
+t4[0] * t6[4] + t4[1] * t6[5] + t4[3] * t6[8] + t4[7] * t6[9] - t4[8] * t6[6] - t4[9] * t6[7] + t4[10] * t6[4] + t4[11] * t6[5] - t4[13] * t6[3] - t4[14] * t6[3]
+);
+
+}
+		
+	
+	  	
+template<>
+inline Trs re (const Trs& trs, const Sph& sph) {					
+					
+const Sph& t1 = sph;
+const Trs& t2 = trs;
+Trs t3 = involute( t2);
+Pnt_Dfp t4 (
+t1[3] * t3[3],
+ - t1[3] * t3[2],
+t1[3] * t3[1],
+t1[0] * t3[2] + t1[1] * t3[3],
+ - t1[0] * t3[1] + t1[2] * t3[3],
+ - t1[1] * t3[1] - t1[2] * t3[2],
+t1[0] * t3[0] - t1[3] * t3[3],
+t1[1] * t3[0] + t1[3] * t3[2],
+t1[2] * t3[0] - t1[3] * t3[1],
+t1[3] * t3[0],
+t1[0] * t3[3] - t1[1] * t3[2] + t1[2] * t3[1] + t1[4] * t3[0]
+);
+const Sph& t5 = sph;
+Sph t6 = reverse( t5);
+return Trs (
+ - t4[6] * t6[0] - t4[7] * t6[1] - t4[8] * t6[2] - t4[9] * t6[4] - t4[10] * t6[3],
+ - t4[2] * t6[4] + t4[4] * t6[0] + t4[5] * t6[1] - t4[8] * t6[4] + t4[10] * t6[2],
+t4[1] * t6[4] - t4[3] * t6[0] + t4[5] * t6[2] + t4[7] * t6[4] - t4[10] * t6[1],
+ - t4[0] * t6[4] - t4[3] * t6[1] - t4[4] * t6[2] - t4[6] * t6[4] + t4[10] * t6[0]
 );
 
 }
