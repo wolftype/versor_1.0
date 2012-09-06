@@ -5,6 +5,15 @@ AddTab = function(x,y)
 	end
 end
 
+--Table Membership
+Member = function(x,list)
+	for _, v in ipairs(list) do
+		if x.id == v.id then return true end
+	end
+	return nil
+end
+
+--string manipulation
 up = function(x)
 	return string.upper(x)
 end
