@@ -13,11 +13,13 @@ INTRODUCTION
 
 Welcome!  This package provides operations and draw routines for conformal geometric algebra. It is designed to make graphical experimentation of geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/) made by my collegues in the MAT program.  You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.  I am using it for my PhD on biological simulations.
 
-I developed "Versor" while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It's a great book.  Built to aid in my modelling of plant forms, this work was funded in large part by the Olivia Long Converse Fellowship, from the Graduate Division at the University of California in Santa Barbara.  So this is under a UC Regents General Public License.
+I developed "Versor" while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It's a great book.  Built to aid in my modelling of biological forms, this work was funded in large part by the Olivia Long Converse Fellowship, from the Graduate Division at the University of California in Santa Barbara.  So this is under a UC Regents General Public License.
 
-See also wolftype.com/versor for a link to my master's thesis on CGA and this implementation of it, and maybe take a look at wolftype channel on vimeo for a few quick demos on what kinds of animations this thing can quickly whip up.  The Doc folder has a doxygen which I periodically tidy up.
+See also wolftype.com/versor for a link to my master's thesis on CGA and this implementation of it, and maybe take a look at wolftype channel on vimeo for a few quick demos on what kinds of animations this thing can quickly whip up.  The Doc folder has a doxygen which I periodically tidy up.  Lots of test files too.  Still need to streamline the make process, etc.
 
-A tutorial is in the works . . . For now consider the test examples.  One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
+Note to speed freaks: check out the vsr_static project for a highly templatized and inlined extravaganza of function calls.  There is a trade off I am working on (in a branch to this master called "building and MVBase class") where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied but seems like a harmless trade off.   
+
+A tutorial is in the works . . . I promise!  For now consider the test examples.  One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
 
 ///
 GUI
