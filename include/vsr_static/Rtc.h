@@ -26,6 +26,11 @@ a[15] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Sca> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Sca*)(&b));
+}			
+		 
 inline Rvd gp (const Rtc& a, const Ori& b) { 
 	return Rvd (
  - a[4] * b[0],
@@ -43,6 +48,11 @@ a[14] * b[0] - a[15] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Ori> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Ori*)(&b));
+}			
+		 
 inline Mtd gp (const Rtc& a, const Inf& b) { 
 	return Mtd (
  - a[3] * b[0],
@@ -58,6 +68,11 @@ a[6] * b[0],
 a[7] * b[0],
 a[14] * b[0] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Inf> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Inf*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Mnk& b) { 
@@ -81,6 +96,11 @@ a[14] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Mnk> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Mnk*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Hyp& b) { 
 	return Mtt (
  - a[3] * b[1] - a[4] * b[0],
@@ -100,6 +120,11 @@ a[7] * b[1] - a[10] * b[0],
 a[14] * b[0] - a[15] * b[0],
 a[14] * b[1] + a[15] * b[1]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Hyp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Hyp*)(&b));
 }			
 		 
 inline Mtt gp (const Rtc& a, const Pss& b) { 
@@ -123,6 +148,11 @@ a[4] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Pss> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Pss*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Pnt& b) { 
 	return Mtt (
 a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[4] - a[4] * b[3],
@@ -142,6 +172,11 @@ a[7] * b[4] - a[10] * b[3] + a[12] * b[2] - a[13] * b[1] + a[15] * b[0],
  - a[5] * b[2] + a[6] * b[1] - a[7] * b[0] + a[14] * b[3] - a[15] * b[3],
  - a[8] * b[2] + a[9] * b[1] - a[10] * b[0] + a[14] * b[4] + a[15] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Pnt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Pnt*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Par& b) { 
@@ -165,6 +200,11 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0] + a[5] * b[8] - a[6] * b[7] + a[7] * b[6
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Par> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Par*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Cir& b) { 
 	return Mtt (
 a[5] * b[3] + a[6] * b[4] + a[7] * b[5] + a[8] * b[0] + a[9] * b[1] + a[10] * b[2] + a[11] * b[6] + a[12] * b[7] + a[13] * b[8] - a[14] * b[9],
@@ -184,6 +224,11 @@ a[1] * b[8] - a[2] * b[7] + a[3] * b[5] - a[4] * b[2] - a[5] * b[4] + a[6] * b[3
 a[0] * b[2] - a[1] * b[1] + a[2] * b[0] - a[3] * b[9] - a[5] * b[8] + a[6] * b[7] - a[7] * b[6] - a[11] * b[2] + a[12] * b[1] - a[13] * b[0],
 a[0] * b[5] - a[1] * b[4] + a[2] * b[3] - a[4] * b[9] + a[8] * b[8] - a[9] * b[7] + a[10] * b[6] + a[11] * b[5] - a[12] * b[4] + a[13] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Cir> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Cir*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Sph& b) { 
@@ -207,6 +252,11 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0] - a[3] * b[4] + a[4] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Sph> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Sph*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Sta& b) { 
 	return Rtc (
  - a[1] * b[0] - a[2] * b[1] + a[3] * b[6] + a[4] * b[3] + a[5] * b[7] + a[6] * b[8] + a[8] * b[4] + a[9] * b[5] - a[14] * b[2],
@@ -228,6 +278,11 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0] + a[5] * b[8] - a[6] * b[7] + a[7] * b[6
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Sta> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Sta*)(&b));
+}			
+		 
 inline Par_Drb gp (const Rtc& a, const Drv& b) { 
 	return Par_Drb (
 a[3] * b[0] + a[5] * b[1] + a[6] * b[2],
@@ -243,6 +298,11 @@ a[1] * b[2] - a[2] * b[1] + a[12] * b[2] - a[13] * b[1] + a[14] * b[0] + a[15] *
 a[5] * b[2] - a[6] * b[1] + a[7] * b[0],
  - a[5] * b[2] + a[6] * b[1] - a[7] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Drv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Drv*)(&b));
 }			
 		 
 inline Mtd gp (const Rtc& a, const Drb& b) { 
@@ -262,6 +322,11 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0] + a[11] * b[2] - a[12] * b[1] + a[13] * 
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Drb> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Drb*)(&b));
+}			
+		 
 inline Par_Drb gp (const Rtc& a, const Drt& b) { 
 	return Par_Drb (
  - a[7] * b[0],
@@ -277,6 +342,11 @@ a[5] * b[0],
 a[3] * b[0],
  - a[3] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Drt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Drt*)(&b));
 }			
 		 
 inline Par_Tnb gp (const Rtc& a, const Tnv& b) { 
@@ -296,6 +366,11 @@ a[8] * b[2] - a[9] * b[1] + a[10] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Tnv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tnv*)(&b));
+}			
+		 
 inline Rvd gp (const Rtc& a, const Tnb& b) { 
 	return Rvd (
 a[8] * b[0] + a[9] * b[1] + a[10] * b[2],
@@ -313,6 +388,11 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0] - a[11] * b[2] + a[12] * b[1] - a[13] * 
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Tnb> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tnb*)(&b));
+}			
+		 
 inline Par_Tnb gp (const Rtc& a, const Tnt& b) { 
 	return Par_Tnb (
  - a[10] * b[0],
@@ -328,6 +408,11 @@ a[9] * b[0],
 a[4] * b[0],
 a[4] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Tnt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tnt*)(&b));
 }			
 		 
 inline Mtt gp (const Rtc& a, const Lin& b) { 
@@ -351,6 +436,11 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0] + a[8] * b[5] - a[9] * b[4] + a[10] * b[
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Lin> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Lin*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Pln& b) { 
 	return Rtc (
  - a[7] * b[3] - a[12] * b[0] - a[13] * b[1] - a[15] * b[2],
@@ -370,6 +460,11 @@ a[0] * b[1] + a[1] * b[2] + a[5] * b[3] - a[14] * b[0],
 a[3] * b[3] + a[11] * b[2] - a[12] * b[1] + a[13] * b[0],
 a[0] * b[2] - a[1] * b[1] + a[2] * b[0] - a[3] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Pln> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Pln*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Flp& b) { 
@@ -393,6 +488,11 @@ a[5] * b[2] - a[6] * b[1] + a[7] * b[0] + a[15] * b[3],
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Flp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Flp*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Dfp& b) { 
 	return Mtt (
 a[5] * b[0] + a[6] * b[1] + a[7] * b[2] - a[14] * b[3],
@@ -412,6 +512,11 @@ a[3] * b[2] - a[5] * b[1] + a[6] * b[0] + a[11] * b[3],
  - a[3] * b[3],
 a[0] * b[2] - a[1] * b[1] + a[2] * b[0] - a[4] * b[3] + a[11] * b[2] - a[12] * b[1] + a[13] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Dfp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Dfp*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Dll& b) { 
@@ -435,6 +540,11 @@ a[0] * b[2] - a[1] * b[1] + a[2] * b[0] + a[5] * b[5] - a[6] * b[4] + a[7] * b[3
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Dll> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Dll*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Dlp& b) { 
 	return Mtt (
 a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3],
@@ -454,6 +564,11 @@ a[7] * b[3] + a[12] * b[2] - a[13] * b[1] + a[15] * b[0],
  - a[5] * b[2] + a[6] * b[1] - a[7] * b[0],
  - a[8] * b[2] + a[9] * b[1] - a[10] * b[0] + a[14] * b[3] + a[15] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Dlp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Dlp*)(&b));
 }			
 		 
 inline Mtt gp (const Rtc& a, const Vec& b) { 
@@ -477,6 +592,11 @@ a[12] * b[2] - a[13] * b[1] + a[15] * b[0],
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Vec> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Vec*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Biv& b) { 
 	return Rtc (
  - a[1] * b[0] - a[2] * b[1] - a[14] * b[2],
@@ -496,6 +616,11 @@ a[11] * b[1] + a[12] * b[2] - a[15] * b[0],
 a[0] * b[2] - a[1] * b[1] + a[2] * b[0],
 a[11] * b[2] - a[12] * b[1] + a[13] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Biv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Biv*)(&b));
 }			
 		 
 inline Mtt gp (const Rtc& a, const Tri& b) { 
@@ -519,6 +644,11 @@ a[11] * b[0],
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Tri> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tri*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Aff& b) { 
 	return Mtt (
 a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[4] * b[3],
@@ -538,6 +668,11 @@ a[2] * b[3] - a[3] * b[2] + a[6] * b[0] + a[7] * b[1] - a[13] * b[3],
  - a[5] * b[2] + a[6] * b[1] - a[7] * b[0] + a[14] * b[3] - a[15] * b[3],
  - a[8] * b[2] + a[9] * b[1] - a[10] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Aff> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Aff*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Afl& b) { 
@@ -561,6 +696,11 @@ a[8] * b[5] - a[9] * b[4] + a[10] * b[3] + a[11] * b[2] - a[12] * b[1] + a[13] *
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Afl> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Afl*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Afp& b) { 
 	return Mtt (
 a[8] * b[0] + a[9] * b[1] + a[10] * b[2] - a[14] * b[3],
@@ -580,6 +720,11 @@ a[8] * b[0] + a[9] * b[1] + a[10] * b[2] - a[15] * b[3],
 a[0] * b[2] - a[1] * b[1] + a[2] * b[0] - a[3] * b[3] - a[11] * b[2] + a[12] * b[1] - a[13] * b[0],
  - a[4] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Afp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Afp*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Dap& b) { 
@@ -603,6 +748,11 @@ a[8] * b[2] - a[9] * b[1] + a[10] * b[0] + a[14] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Dap> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Dap*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Daf& b) { 
 	return Rtc (
  - a[10] * b[3] - a[12] * b[0] - a[13] * b[1] - a[15] * b[2],
@@ -622,6 +772,11 @@ a[0] * b[1] + a[1] * b[2] - a[8] * b[3] - a[14] * b[0],
 a[4] * b[3] + a[11] * b[2] - a[12] * b[1] + a[13] * b[0],
 a[0] * b[2] - a[1] * b[1] + a[2] * b[0] + a[4] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Daf> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Daf*)(&b));
 }			
 		 
 inline Mtt gp (const Rtc& a, const Dal& b) { 
@@ -645,6 +800,11 @@ a[8] * b[5] - a[9] * b[4] + a[10] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Dal> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Dal*)(&b));
+}			
+		 
 inline Mtt gp (const Rtc& a, const Mnv& b) { 
 	return Mtt (
 a[11] * b[0] + a[12] * b[1] + a[13] * b[2],
@@ -664,6 +824,11 @@ a[1] * b[2] - a[2] * b[1] + a[14] * b[0],
  - a[5] * b[2] + a[6] * b[1] - a[7] * b[0],
 a[8] * b[2] - a[9] * b[1] + a[10] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Mnv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Mnv*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Rot& b) { 
@@ -687,6 +852,11 @@ a[11] * b[3] - a[12] * b[2] + a[13] * b[1] + a[15] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Rot> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Rot*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Mot& b) { 
 	return Rtc (
 a[0] * b[0] - a[1] * b[1] - a[2] * b[2] + a[3] * b[4] + a[5] * b[5] + a[6] * b[6] - a[7] * b[7] - a[14] * b[3],
@@ -706,6 +876,11 @@ a[0] * b[7] + a[1] * b[6] - a[2] * b[5] + a[4] * b[3] - a[8] * b[2] + a[9] * b[1
 a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[3] * b[7] + a[5] * b[6] - a[6] * b[5] + a[7] * b[4] + a[14] * b[0],
  - a[3] * b[7] - a[5] * b[6] + a[6] * b[5] - a[7] * b[4] + a[11] * b[3] - a[12] * b[2] + a[13] * b[1] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Mot> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Mot*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Dil& b) { 
@@ -729,6 +904,11 @@ a[14] * b[1] + a[15] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Dil> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Dil*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Trv& b) { 
 	return Rtc (
 a[0] * b[0] + a[4] * b[1] + a[8] * b[2] + a[9] * b[3],
@@ -748,6 +928,11 @@ a[4] * b[3] - a[9] * b[1] - a[10] * b[2] + a[13] * b[0],
 a[8] * b[3] - a[9] * b[2] + a[10] * b[1] + a[14] * b[0],
 a[8] * b[3] - a[9] * b[2] + a[10] * b[1] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Trv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Trv*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Mtd& b) { 
@@ -771,6 +956,11 @@ a[0] * b[10] - a[1] * b[9] + a[2] * b[8] - a[3] * b[11] - a[5] * b[6] + a[6] * b
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Mtd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Mtd*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Trs& b) { 
 	return Rtc (
 a[0] * b[0] + a[3] * b[1] + a[5] * b[2] + a[6] * b[3],
@@ -790,6 +980,11 @@ a[1] * b[3] - a[2] * b[2] + a[10] * b[0] + a[12] * b[3] - a[13] * b[2] + a[14] *
 a[5] * b[3] - a[6] * b[2] + a[7] * b[1] + a[14] * b[0],
  - a[5] * b[3] + a[6] * b[2] - a[7] * b[1] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Trs> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Trs*)(&b));
 }			
 		 
 inline Mtt gp (const Rtc& a, const Rtc& b) { 
@@ -813,6 +1008,11 @@ a[0] * b[10] - a[1] * b[9] + a[2] * b[8] - a[4] * b[14] + a[4] * b[15] - a[8] * 
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Rtc> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Rtc*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Mtt& b) { 
 	return Rtc (
 a[0] * b[0] - a[1] * b[1] - a[2] * b[2] + a[3] * b[7] + a[4] * b[4] + a[5] * b[8] + a[6] * b[9] - a[7] * b[15] + a[8] * b[5] + a[9] * b[6] - a[10] * b[14] + a[11] * b[10] - a[12] * b[11] - a[13] * b[12] - a[14] * b[3] - a[15] * b[13],
@@ -832,6 +1032,11 @@ a[0] * b[12] + a[1] * b[13] + a[2] * b[10] - a[3] * b[9] + a[4] * b[6] + a[5] * 
 a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[3] * b[15] + a[4] * b[14] + a[5] * b[9] - a[6] * b[8] + a[7] * b[7] + a[8] * b[6] - a[9] * b[5] + a[10] * b[4] + a[11] * b[13] - a[12] * b[12] + a[13] * b[11] + a[14] * b[0] + a[15] * b[10],
 a[0] * b[13] - a[1] * b[12] + a[2] * b[11] - a[3] * b[15] + a[4] * b[14] - a[5] * b[9] + a[6] * b[8] - a[7] * b[7] + a[8] * b[6] - a[9] * b[5] + a[10] * b[4] + a[11] * b[3] - a[12] * b[2] + a[13] * b[1] + a[14] * b[10] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Mtt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Mtt*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Rtt& b) { 
@@ -855,6 +1060,11 @@ a[4] * b[7] + a[8] * b[6] - a[9] * b[5] + a[10] * b[4] + a[11] * b[3] - a[12] * 
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Rtt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Rtt*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Rtd& b) { 
 	return Rtc (
 a[0] * b[0] - a[1] * b[1] - a[2] * b[2] + a[11] * b[4] - a[12] * b[5] - a[13] * b[6] - a[14] * b[3] - a[15] * b[7],
@@ -874,6 +1084,11 @@ a[0] * b[6] + a[1] * b[7] + a[2] * b[4] + a[11] * b[2] + a[12] * b[3] + a[13] * 
 a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[11] * b[7] - a[12] * b[6] + a[13] * b[5] + a[14] * b[0] + a[15] * b[4],
 a[0] * b[7] - a[1] * b[6] + a[2] * b[5] + a[11] * b[3] - a[12] * b[2] + a[13] * b[1] + a[14] * b[4] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Rtd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Rtd*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Tvd& b) { 
@@ -897,6 +1112,11 @@ a[8] * b[3] - a[9] * b[2] + a[10] * b[1] + a[14] * b[4] + a[15] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Tvd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tvd*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Tsd& b) { 
 	return Rtc (
 a[0] * b[0] + a[3] * b[1] + a[5] * b[2] + a[6] * b[3] + a[11] * b[4],
@@ -916,6 +1136,11 @@ a[2] * b[4] - a[3] * b[3] + a[6] * b[1] + a[7] * b[2] + a[13] * b[0],
 a[5] * b[3] - a[6] * b[2] + a[7] * b[1] + a[14] * b[0] + a[15] * b[4],
  - a[5] * b[3] + a[6] * b[2] - a[7] * b[1] + a[14] * b[4] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Tsd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tsd*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Trt& b) { 
@@ -939,6 +1164,11 @@ a[0] * b[13] - a[1] * b[12] + a[2] * b[11] - a[5] * b[9] + a[6] * b[8] - a[7] * 
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Trt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Trt*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Rvd& b) { 
 	return Rtc (
 a[0] * b[0] - a[1] * b[1] - a[2] * b[2] + a[4] * b[4] + a[8] * b[5] + a[9] * b[6] - a[10] * b[11] + a[11] * b[7] - a[12] * b[8] - a[13] * b[9] - a[14] * b[3] - a[15] * b[10],
@@ -958,6 +1188,11 @@ a[0] * b[9] + a[1] * b[10] + a[2] * b[7] + a[4] * b[6] - a[8] * b[11] - a[9] * b
 a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[4] * b[11] + a[8] * b[6] - a[9] * b[5] + a[10] * b[4] + a[11] * b[10] - a[12] * b[9] + a[13] * b[8] + a[14] * b[0] + a[15] * b[7],
 a[0] * b[10] - a[1] * b[9] + a[2] * b[8] + a[4] * b[11] + a[8] * b[6] - a[9] * b[5] + a[10] * b[4] + a[11] * b[3] - a[12] * b[2] + a[13] * b[1] + a[14] * b[7] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Rvd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Rvd*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Tst& b) { 
@@ -981,6 +1216,11 @@ a[0] * b[13] - a[1] * b[12] + a[2] * b[11] + a[4] * b[14] - a[5] * b[9] + a[6] *
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Tst> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tst*)(&b));
+}			
+		 
 inline Rtc gp (const Rtc& a, const Tvt& b) { 
 	return Rtc (
 a[0] * b[0] - a[1] * b[1] - a[2] * b[2] + a[3] * b[7] + a[4] * b[4] + a[5] * b[8] + a[6] * b[9] - a[7] * b[14] + a[8] * b[5] + a[9] * b[6] + a[11] * b[10] - a[12] * b[11] - a[13] * b[12] - a[14] * b[3] - a[15] * b[13],
@@ -1000,6 +1240,11 @@ a[0] * b[12] + a[1] * b[13] + a[2] * b[10] - a[3] * b[9] + a[4] * b[6] + a[5] * 
 a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[3] * b[14] + a[5] * b[9] - a[6] * b[8] + a[7] * b[7] + a[8] * b[6] - a[9] * b[5] + a[10] * b[4] + a[11] * b[13] - a[12] * b[12] + a[13] * b[11] + a[14] * b[0] + a[15] * b[10],
 a[0] * b[13] - a[1] * b[12] + a[2] * b[11] - a[3] * b[14] - a[5] * b[9] + a[6] * b[8] - a[7] * b[7] + a[8] * b[6] - a[9] * b[5] + a[10] * b[4] + a[11] * b[3] - a[12] * b[2] + a[13] * b[1] + a[14] * b[10] + a[15] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Rtc, Tvt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Tvt*)(&b));
 }			
 		 
 inline Rtc gp (const Rtc& a, const Bst& b) { 
@@ -1023,6 +1268,11 @@ a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[5] * b[9] - a[6] * b[8] + a[7] * b[7
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Rtc, Bst> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Rtc*)(&a),*(Bst*)(&b));
+}			
+		 
 inline Mtt ip (const Rtc& a, const Rtc& b) { 
 	return Mtt (
 a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[4] - a[4] * b[3] + a[5] * b[8] + a[6] * b[9] + a[7] * b[10] + a[8] * b[5] + a[9] * b[6] + a[10] * b[7] + a[11] * b[11] + a[12] * b[12] + a[13] * b[13] - a[14] * b[14] - a[15] * b[15],
@@ -1042,6 +1292,11 @@ a[0] * b[15],
  - a[3] * b[15],
 a[4] * b[15]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Rtc, Rtc> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Rtc*)(&a),*(Rtc*)(&b));
 }			
 		  	
 template<>

@@ -335,10 +335,14 @@
 	typedef MV<8,HYP_VEC_MNV,float>  Hyp_Vec_Mnv;
 	
 	typedef MV<11,PSS_MNK_PNT_SPH,float>  Pss_Mnk_Pnt_Sph;
+    
 	
 	
 		template<class T, class S>
 	inline T const cast (const S& s ){
+        
+        printf("generic cast\n");
+    
 		T temp;
 		if ( T::size >= S::size ) std::copy( &(s[0]), &(s[0])+S::size, &(temp[0]) );
 		else std::copy ( &(s[0]), &(s[0])+T::size, &(temp[0]) );
@@ -346,6 +350,5026 @@
 		return temp;
 	}
 	 
+		
+
+		
+inline Rot involute (const Rot& a) { 
+	return Rot (a[0],a[1],a[2],a[3]);
+}
+			
+		 
+		
+
+		
+inline Rot reverse (const Rot& a) { 
+	return Rot (a[0],-a[1],-a[2],-a[3]);
+}
+			
+		 
+		
+
+		
+inline Rot conjugate (const Rot& a) { 
+	return Rot (a[0],-a[1],-a[2],-a[3]);
+}
+			
+		 
+template<> inline const Rot cast<Rot,Mot> (const Mot& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Dil> (const Dil& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Trv> (const Trv& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Mtd> (const Mtd& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Trs> (const Trs& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Mtt> (const Mtt& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Rtt> (const Rtt& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Rtd> (const Rtd& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Tvd> (const Tvd& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Tsd> (const Tsd& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Trt> (const Trt& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Rvd> (const Rvd& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Tst> (const Tst& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Tvt> (const Tvt& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Bst> (const Bst& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Sca> (const Sca& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Par> (const Par& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Sta> (const Sta& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Dll> (const Dll& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Biv> (const Biv& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Afl> (const Afl& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Ori_Cir> (const Ori_Cir& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Ori_Drb> (const Ori_Drb& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Ori_Lin> (const Ori_Lin& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Ori_Dfp> (const Ori_Dfp& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Inf_Cir> (const Inf_Cir& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Inf_Afp> (const Inf_Afp& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Inf_Dal> (const Inf_Dal& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Mnk_Par> (const Mnk_Par& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Mnk_Sph> (const Mnk_Sph& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Mnk_Pln> (const Mnk_Pln& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Mnk_Daf> (const Mnk_Daf& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+template<> inline const Rot cast<Rot,Hyp_Cir> (const Hyp_Cir& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Hyp_Lin> (const Hyp_Lin& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pnt_Cir> (const Pnt_Cir& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pnt_Lin> (const Pnt_Lin& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pnt_Vec> (const Pnt_Vec& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pnt_Afp> (const Pnt_Afp& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pnt_Dal> (const Pnt_Dal& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Par_Biv> (const Par_Biv& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Sta_Biv> (const Sta_Biv& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Drv_Dap> (const Drv_Dap& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Tnv_Flp> (const Tnv_Flp& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pln_Pln> (const Pln_Pln& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pln_Flp> (const Pln_Flp& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Vec_Aff> (const Vec_Aff& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Vec_Afp> (const Vec_Afp& a) {
+		return Rot (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rot cast<Rot,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Rot (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rot cast<Rot,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Rot (a[0],0,0,0);
+}  
+		 
+		
+
+		
+inline Mot involute (const Mot& a) { 
+	return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}
+			
+		 
+		
+
+		
+inline Mot reverse (const Mot& a) { 
+	return Mot (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
+}
+			
+		 
+		
+
+		
+inline Mot conjugate (const Mot& a) { 
+	return Mot (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
+}
+			
+		 
+template<> inline const Mot cast<Mot,Rot> (const Rot& a) {
+		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Dil> (const Dil& a) {
+		return Mot (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Trv> (const Trv& a) {
+		return Mot (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mtd> (const Mtd& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[11]);
+}  
+		 
+template<> inline const Mot cast<Mot,Trs> (const Trs& a) {
+		return Mot (a[0],0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mtt> (const Mtt& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[15]);
+}  
+		 
+template<> inline const Mot cast<Mot,Rtt> (const Rtt& a) {
+		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Rtd> (const Rtd& a) {
+		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Tvd> (const Tvd& a) {
+		return Mot (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Tsd> (const Tsd& a) {
+		return Mot (a[0],0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Trt> (const Trt& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Rvd> (const Rvd& a) {
+		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Tst> (const Tst& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Tvt> (const Tvt& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[14]);
+}  
+		 
+template<> inline const Mot cast<Mot,Bst> (const Bst& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Sca> (const Sca& a) {
+		return Mot (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Par> (const Par& a) {
+		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Sph> (const Sph& a) {
+		return Mot (0,0,0,0,0,0,0,a[4]);
+}  
+		 
+template<> inline const Mot cast<Mot,Sta> (const Sta& a) {
+		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Drv> (const Drv& a) {
+		return Mot (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Drt> (const Drt& a) {
+		return Mot (0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pln> (const Pln& a) {
+		return Mot (0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Mot cast<Mot,Flp> (const Flp& a) {
+		return Mot (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Dll> (const Dll& a) {
+		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Biv> (const Biv& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Afl> (const Afl& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Ori_Cir> (const Ori_Cir& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Ori_Drb> (const Ori_Drb& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Ori_Lin> (const Ori_Lin& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Ori_Dfp> (const Ori_Dfp& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Inf_Cir> (const Inf_Cir& a) {
+		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9]);
+}  
+		 
+template<> inline const Mot cast<Mot,Inf_Afp> (const Inf_Afp& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,a[6]);
+}  
+		 
+template<> inline const Mot cast<Mot,Inf_Dal> (const Inf_Dal& a) {
+		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Par> (const Mnk_Par& a) {
+		return Mot (a[0],0,0,0,a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Sph> (const Mnk_Sph& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,a[4]);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Sta> (const Mnk_Sta& a) {
+		return Mot (0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Pln> (const Mnk_Pln& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,a[3]);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Dll> (const Mnk_Dll& a) {
+		return Mot (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Daf> (const Mnk_Daf& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Hyp_Pss> (const Hyp_Pss& a) {
+		return Mot (0,0,0,0,0,0,0,a[1]);
+}  
+		 
+template<> inline const Mot cast<Mot,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Mot (a[0],0,0,0,a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Hyp_Cir> (const Hyp_Cir& a) {
+		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],a[13]);
+}  
+		 
+template<> inline const Mot cast<Mot,Hyp_Lin> (const Hyp_Lin& a) {
+		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,a[7]);
+}  
+		 
+template<> inline const Mot cast<Mot,Hyp_Vec> (const Hyp_Vec& a) {
+		return Mot (0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Pnt_Cir> (const Pnt_Cir& a) {
+		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],a[14]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pnt_Lin> (const Pnt_Lin& a) {
+		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],a[13]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],a[10]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pnt_Vec> (const Pnt_Vec& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Pnt_Afp> (const Pnt_Afp& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,a[10]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pnt_Dal> (const Pnt_Dal& a) {
+		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Mot (0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Par_Biv> (const Par_Biv& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[14]);
+}  
+		 
+template<> inline const Mot cast<Mot,Sta_Biv> (const Sta_Biv& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[11]);
+}  
+		 
+template<> inline const Mot cast<Mot,Drv_Pln> (const Drv_Pln& a) {
+		return Mot (0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Mot cast<Mot,Drv_Dap> (const Drv_Dap& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Tnv_Flp> (const Tnv_Flp& a) {
+		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Lin_Dfp> (const Lin_Dfp& a) {
+		return Mot (0,0,0,0,a[0],a[1],a[2],a[6]);
+}  
+		 
+template<> inline const Mot cast<Mot,Lin_Dlp> (const Lin_Dlp& a) {
+		return Mot (0,0,0,0,a[0],a[1],a[2],a[7]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pln_Pln> (const Pln_Pln& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Pln_Flp> (const Pln_Flp& a) {
+		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pln_Biv> (const Pln_Biv& a) {
+		return Mot (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Vec_Aff> (const Vec_Aff& a) {
+		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Vec_Afp> (const Vec_Afp& a) {
+		return Mot (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[13]);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mot cast<Mot,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Mot (0,0,0,0,a[3],a[4],a[5],a[11]);
+}  
+		 
+template<> inline const Mot cast<Mot,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Mot (0,0,0,0,a[3],a[4],a[5],a[7]);
+}  
+		 
+template<> inline const Mot cast<Mot,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Mot (a[0],0,0,0,a[4],a[5],a[6],0);
+}  
+		 
+		
+
+		
+inline Dil involute (const Dil& a) { 
+	return Dil (a[0],a[1]);
+}
+			
+		 
+		
+
+		
+inline Dil reverse (const Dil& a) { 
+	return Dil (a[0],-a[1]);
+}
+			
+		 
+		
+
+		
+inline Dil conjugate (const Dil& a) { 
+	return Dil (a[0],-a[1]);
+}
+			
+		 
+template<> inline const Dil cast<Dil,Rot> (const Rot& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Mot> (const Mot& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Trv> (const Trv& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Mtd> (const Mtd& a) {
+		return Dil (a[0],a[7]);
+}  
+		 
+template<> inline const Dil cast<Dil,Trs> (const Trs& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Mtt> (const Mtt& a) {
+		return Dil (a[0],a[10]);
+}  
+		 
+template<> inline const Dil cast<Dil,Rtt> (const Rtt& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Rtd> (const Rtd& a) {
+		return Dil (a[0],a[4]);
+}  
+		 
+template<> inline const Dil cast<Dil,Tvd> (const Tvd& a) {
+		return Dil (a[0],a[4]);
+}  
+		 
+template<> inline const Dil cast<Dil,Tsd> (const Tsd& a) {
+		return Dil (a[0],a[4]);
+}  
+		 
+template<> inline const Dil cast<Dil,Trt> (const Trt& a) {
+		return Dil (a[0],a[10]);
+}  
+		 
+template<> inline const Dil cast<Dil,Rvd> (const Rvd& a) {
+		return Dil (a[0],a[7]);
+}  
+		 
+template<> inline const Dil cast<Dil,Tst> (const Tst& a) {
+		return Dil (a[0],a[10]);
+}  
+		 
+template<> inline const Dil cast<Dil,Tvt> (const Tvt& a) {
+		return Dil (a[0],a[10]);
+}  
+		 
+template<> inline const Dil cast<Dil,Bst> (const Bst& a) {
+		return Dil (a[0],a[10]);
+}  
+		 
+template<> inline const Dil cast<Dil,Sca> (const Sca& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Mnk> (const Mnk& a) {
+		return Dil (0,a[0]);
+}  
+		 
+template<> inline const Dil cast<Dil,Par> (const Par& a) {
+		return Dil (0,a[9]);
+}  
+		 
+template<> inline const Dil cast<Dil,Flp> (const Flp& a) {
+		return Dil (0,a[3]);
+}  
+		 
+template<> inline const Dil cast<Dil,Dap> (const Dap& a) {
+		return Dil (0,a[3]);
+}  
+		 
+template<> inline const Dil cast<Dil,Mnk_Par> (const Mnk_Par& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Dil (a[0],a[7]);
+}  
+		 
+template<> inline const Dil cast<Dil,Pnt_Cir> (const Pnt_Cir& a) {
+		return Dil (0,a[9]);
+}  
+		 
+template<> inline const Dil cast<Dil,Pnt_Lin> (const Pnt_Lin& a) {
+		return Dil (0,a[9]);
+}  
+		 
+template<> inline const Dil cast<Dil,Pnt_Vec> (const Pnt_Vec& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Pnt_Dal> (const Pnt_Dal& a) {
+		return Dil (0,a[9]);
+}  
+		 
+template<> inline const Dil cast<Dil,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Dil (0,a[6]);
+}  
+		 
+template<> inline const Dil cast<Dil,Par_Biv> (const Par_Biv& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Sta_Biv> (const Sta_Biv& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Drv_Dap> (const Drv_Dap& a) {
+		return Dil (a[0],a[7]);
+}  
+		 
+template<> inline const Dil cast<Dil,Tnv_Flp> (const Tnv_Flp& a) {
+		return Dil (a[0],a[7]);
+}  
+		 
+template<> inline const Dil cast<Dil,Lin_Dlp> (const Lin_Dlp& a) {
+		return Dil (0,a[3]);
+}  
+		 
+template<> inline const Dil cast<Dil,Pln_Pln> (const Pln_Pln& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Pln_Biv> (const Pln_Biv& a) {
+		return Dil (0,a[3]);
+}  
+		 
+template<> inline const Dil cast<Dil,Vec_Aff> (const Vec_Aff& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Vec_Dal> (const Vec_Dal& a) {
+		return Dil (0,a[3]);
+}  
+		 
+template<> inline const Dil cast<Dil,Vec_Mnv> (const Vec_Mnv& a) {
+		return Dil (0,a[0]);
+}  
+		 
+template<> inline const Dil cast<Dil,Biv_Daf> (const Biv_Daf& a) {
+		return Dil (0,a[3]);
+}  
+		 
+template<> inline const Dil cast<Dil,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Dil (a[0],0);
+}  
+		 
+template<> inline const Dil cast<Dil,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Dil (0,a[6]);
+}  
+		 
+template<> inline const Dil cast<Dil,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Dil (a[0],a[7]);
+}  
+		 
+		
+
+		
+inline Trv involute (const Trv& a) { 
+	return Trv (a[0],a[1],a[2],a[3]);
+}
+			
+		 
+		
+
+		
+inline Trv reverse (const Trv& a) { 
+	return Trv (a[0],-a[1],-a[2],-a[3]);
+}
+			
+		 
+		
+
+		
+inline Trv conjugate (const Trv& a) { 
+	return Trv (a[0],-a[1],-a[2],-a[3]);
+}
+			
+		 
+template<> inline const Trv cast<Trv,Rot> (const Rot& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Mot> (const Mot& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Dil> (const Dil& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Mtd> (const Mtd& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Trs> (const Trs& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Mtt> (const Mtt& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Rtt> (const Rtt& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Rtd> (const Rtd& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Tvd> (const Tvd& a) {
+		return Trv (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Trv cast<Trv,Tsd> (const Tsd& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Trt> (const Trt& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Rvd> (const Rvd& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Tst> (const Tst& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Tvt> (const Tvt& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Bst> (const Bst& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Sca> (const Sca& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Par> (const Par& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Sta> (const Sta& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Tnv> (const Tnv& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Afl> (const Afl& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Dap> (const Dap& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Ori_Cir> (const Ori_Cir& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Ori_Lin> (const Ori_Lin& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Mnk_Par> (const Mnk_Par& a) {
+		return Trv (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Trv cast<Trv,Mnk_Sta> (const Mnk_Sta& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Mnk_Afl> (const Mnk_Afl& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Trv (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Trv cast<Trv,Hyp_Cir> (const Hyp_Cir& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Hyp_Lin> (const Hyp_Lin& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Hyp_Vec> (const Hyp_Vec& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pnt_Cir> (const Pnt_Cir& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pnt_Lin> (const Pnt_Lin& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pnt_Vec> (const Pnt_Vec& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pnt_Afp> (const Pnt_Afp& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pnt_Dal> (const Pnt_Dal& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Par_Biv> (const Par_Biv& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Sta_Biv> (const Sta_Biv& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Drv_Dap> (const Drv_Dap& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Tnv_Flp> (const Tnv_Flp& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Tnv_Biv> (const Tnv_Biv& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pln_Pln> (const Pln_Pln& a) {
+		return Trv (a[0],0,0,0);
+}  
+		 
+template<> inline const Trv cast<Trv,Vec_Aff> (const Vec_Aff& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Vec_Afp> (const Vec_Afp& a) {
+		return Trv (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trv cast<Trv,Vec_Dal> (const Vec_Dal& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Biv_Dap> (const Biv_Dap& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Biv_Daf> (const Biv_Daf& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Trv (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trv cast<Trv,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Trv (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trv cast<Trv,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Trv (a[0],a[1],a[2],a[3]);
+}  
+		 
+		
+
+		
+inline Mtd involute (const Mtd& a) { 
+	return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
+}
+			
+		 
+		
+
+		
+inline Mtd reverse (const Mtd& a) { 
+	return Mtd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
+}
+			
+		 
+		
+
+		
+inline Mtd conjugate (const Mtd& a) { 
+	return Mtd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
+}
+			
+		 
+template<> inline const Mtd cast<Mtd,Rot> (const Rot& a) {
+		return Mtd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mot> (const Mot& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,a[7]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Dil> (const Dil& a) {
+		return Mtd (a[0],0,0,0,0,0,0,a[1],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Trv> (const Trv& a) {
+		return Mtd (a[0],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Trs> (const Trs& a) {
+		return Mtd (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mtt> (const Mtt& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[15]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Rtt> (const Rtt& a) {
+		return Mtd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Rtd> (const Rtd& a) {
+		return Mtd (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Tvd> (const Tvd& a) {
+		return Mtd (a[0],0,0,0,0,0,0,a[4],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Tsd> (const Tsd& a) {
+		return Mtd (a[0],0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Trt> (const Trt& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Rvd> (const Rvd& a) {
+		return Mtd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Tst> (const Tst& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Tvt> (const Tvt& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Bst> (const Bst& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Sca> (const Sca& a) {
+		return Mtd (a[0],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk> (const Mnk& a) {
+		return Mtd (0,0,0,0,0,0,0,a[0],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Par> (const Par& a) {
+		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Sph> (const Sph& a) {
+		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[4]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Sta> (const Sta& a) {
+		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Drv> (const Drv& a) {
+		return Mtd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Drt> (const Drt& a) {
+		return Mtd (0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pln> (const Pln& a) {
+		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Flp> (const Flp& a) {
+		return Mtd (0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Dll> (const Dll& a) {
+		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Biv> (const Biv& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Afl> (const Afl& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Dap> (const Dap& a) {
+		return Mtd (0,0,0,0,0,0,0,a[3],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Daf> (const Daf& a) {
+		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Ori_Cir> (const Ori_Cir& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Ori_Drb> (const Ori_Drb& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Ori_Lin> (const Ori_Lin& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Ori_Dfp> (const Ori_Dfp& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Inf_Cir> (const Inf_Cir& a) {
+		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Inf_Afp> (const Inf_Afp& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Inf_Dal> (const Inf_Dal& a) {
+		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Par> (const Mnk_Par& a) {
+		return Mtd (a[0],0,0,0,a[4],a[5],a[6],0,a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Sph> (const Mnk_Sph& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[4]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Sta> (const Mnk_Sta& a) {
+		return Mtd (0,0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Pln> (const Mnk_Pln& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Dll> (const Mnk_Dll& a) {
+		return Mtd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Biv> (const Mnk_Biv& a) {
+		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Afl> (const Mnk_Afl& a) {
+		return Mtd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Daf> (const Mnk_Daf& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Hyp_Pss> (const Hyp_Pss& a) {
+		return Mtd (0,0,0,0,0,0,0,0,0,0,0,a[1]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Mtd (a[0],0,0,0,a[4],a[5],a[6],a[7],0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Hyp_Cir> (const Hyp_Cir& a) {
+		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],0,a[9],a[10],a[11],a[13]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Hyp_Lin> (const Hyp_Lin& a) {
+		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],0,a[9],a[10],a[11],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[7]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Hyp_Vec> (const Hyp_Vec& a) {
+		return Mtd (0,0,0,0,a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pnt_Cir> (const Pnt_Cir& a) {
+		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[14]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pnt_Lin> (const Pnt_Lin& a) {
+		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[10]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pnt_Vec> (const Pnt_Vec& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pnt_Afp> (const Pnt_Afp& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],a[10]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pnt_Dal> (const Pnt_Dal& a) {
+		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Mtd (0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Par_Biv> (const Par_Biv& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,a[10],a[11],a[12],a[14]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Sta_Biv> (const Sta_Biv& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,0,0,0,a[11]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Drv_Pln> (const Drv_Pln& a) {
+		return Mtd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Drv_Dap> (const Drv_Dap& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Tnv_Flp> (const Tnv_Flp& a) {
+		return Mtd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Lin_Dfp> (const Lin_Dfp& a) {
+		return Mtd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Lin_Dlp> (const Lin_Dlp& a) {
+		return Mtd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pln_Pln> (const Pln_Pln& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pln_Flp> (const Pln_Flp& a) {
+		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pln_Biv> (const Pln_Biv& a) {
+		return Mtd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Vec_Aff> (const Vec_Aff& a) {
+		return Mtd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Vec_Afp> (const Vec_Afp& a) {
+		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Vec_Dal> (const Vec_Dal& a) {
+		return Mtd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Vec_Mnv> (const Vec_Mnv& a) {
+		return Mtd (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Biv_Dap> (const Biv_Dap& a) {
+		return Mtd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Biv_Daf> (const Biv_Daf& a) {
+		return Mtd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Mtd (0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[11]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Mtd (0,0,0,0,a[3],a[4],a[5],0,0,0,0,a[7]);
+}  
+		 
+template<> inline const Mtd cast<Mtd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Mtd (a[0],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+		
+
+		
+inline Trs involute (const Trs& a) { 
+	return Trs (a[0],a[1],a[2],a[3]);
+}
+			
+		 
+		
+
+		
+inline Trs reverse (const Trs& a) { 
+	return Trs (a[0],-a[1],-a[2],-a[3]);
+}
+			
+		 
+		
+
+		
+inline Trs conjugate (const Trs& a) { 
+	return Trs (a[0],-a[1],-a[2],-a[3]);
+}
+			
+		 
+template<> inline const Trs cast<Trs,Rot> (const Rot& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Mot> (const Mot& a) {
+		return Trs (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trs cast<Trs,Dil> (const Dil& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Trv> (const Trv& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Mtd> (const Mtd& a) {
+		return Trs (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trs cast<Trs,Mtt> (const Mtt& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Rtt> (const Rtt& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Rtd> (const Rtd& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Tvd> (const Tvd& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Tsd> (const Tsd& a) {
+		return Trs (a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Trs cast<Trs,Trt> (const Trt& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Rvd> (const Rvd& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Tst> (const Tst& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Tvt> (const Tvt& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Bst> (const Bst& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Sca> (const Sca& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Par> (const Par& a) {
+		return Trs (0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trs cast<Trs,Sta> (const Sta& a) {
+		return Trs (0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trs cast<Trs,Drv> (const Drv& a) {
+		return Trs (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trs cast<Trs,Flp> (const Flp& a) {
+		return Trs (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trs cast<Trs,Dll> (const Dll& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Inf_Cir> (const Inf_Cir& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Inf_Dal> (const Inf_Dal& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Mnk_Par> (const Mnk_Par& a) {
+		return Trs (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trs cast<Trs,Mnk_Sta> (const Mnk_Sta& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Mnk_Dll> (const Mnk_Dll& a) {
+		return Trs (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trs cast<Trs,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Trs (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trs cast<Trs,Hyp_Cir> (const Hyp_Cir& a) {
+		return Trs (0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trs cast<Trs,Hyp_Lin> (const Hyp_Lin& a) {
+		return Trs (0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trs cast<Trs,Hyp_Vec> (const Hyp_Vec& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pnt_Cir> (const Pnt_Cir& a) {
+		return Trs (0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pnt_Lin> (const Pnt_Lin& a) {
+		return Trs (0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pnt_Vec> (const Pnt_Vec& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pnt_Dal> (const Pnt_Dal& a) {
+		return Trs (0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Par_Biv> (const Par_Biv& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Sta_Biv> (const Sta_Biv& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Drv_Pln> (const Drv_Pln& a) {
+		return Trs (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trs cast<Trs,Drv_Dap> (const Drv_Dap& a) {
+		return Trs (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trs cast<Trs,Tnv_Flp> (const Tnv_Flp& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Lin_Dfp> (const Lin_Dfp& a) {
+		return Trs (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trs cast<Trs,Lin_Dlp> (const Lin_Dlp& a) {
+		return Trs (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pln_Pln> (const Pln_Pln& a) {
+		return Trs (a[0],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pln_Flp> (const Pln_Flp& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pln_Biv> (const Pln_Biv& a) {
+		return Trs (0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trs cast<Trs,Vec_Aff> (const Vec_Aff& a) {
+		return Trs (a[0],0,0,0);
+}  
+		 
+template<> inline const Trs cast<Trs,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Trs (a[0],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trs cast<Trs,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Trs (0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trs cast<Trs,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Trs (a[0],a[4],a[5],a[6]);
+}  
+		 
+		
+
+		
+inline Rtc involute (const Rtc& a) { 
+	return Rtc (-a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],-a[11],-a[12],-a[13],-a[14],-a[15]);
+}
+			
+		 
+		
+
+		
+inline Rtc reverse (const Rtc& a) { 
+	return Rtc (a[0],a[1],a[2],a[3],a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],-a[11],-a[12],-a[13],-a[14],a[15]);
+}
+			
+		 
+		
+
+		
+inline Rtc conjugate (const Rtc& a) { 
+	return Rtc (-a[0],-a[1],-a[2],-a[3],-a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],-a[15]);
+}
+			
+		 
+template<> inline const Rtc cast<Rtc,Ori> (const Ori& a) {
+		return Rtc (0,0,0,a[0],0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Inf> (const Inf& a) {
+		return Rtc (0,0,0,0,a[0],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Hyp> (const Hyp& a) {
+		return Rtc (0,0,0,a[0],a[1],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pss> (const Pss& a) {
+		return Rtc (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt> (const Pnt& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Cir> (const Cir& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Drb> (const Drb& a) {
+		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Tnb> (const Tnb& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Lin> (const Lin& a) {
+		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Dfp> (const Dfp& a) {
+		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Dlp> (const Dlp& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Vec> (const Vec& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Tri> (const Tri& a) {
+		return Rtc (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Aff> (const Aff& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Afp> (const Afp& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,a[3],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Dal> (const Dal& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnv> (const Mnv& a) {
+		return Rtc (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Ori_Par> (const Ori_Par& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Ori_Sph> (const Ori_Sph& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,a[3],a[4]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Ori_Sta> (const Ori_Sta& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,a[6],a[7],a[8],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Ori_Drv> (const Ori_Drv& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,a[3],a[4],a[5],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Ori_Drt> (const Ori_Drt& a) {
+		return Rtc (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],a[1]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Ori_Flp> (const Ori_Flp& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,a[4],a[5],a[6],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Inf_Par> (const Inf_Par& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Inf_Sph> (const Inf_Sph& a) {
+		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Inf_Sta> (const Inf_Sta& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Inf_Dap> (const Inf_Dap& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,0,0,0,a[4],a[5],a[6],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Pnt> (const Mnk_Pnt& a) {
+		return Rtc (0,0,0,a[0],a[1],0,0,0,0,0,0,a[2],a[3],a[4],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Cir> (const Mnk_Cir& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,a[9]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Lin> (const Mnk_Lin& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Dfp> (const Mnk_Dfp& a) {
+		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Dlp> (const Mnk_Dlp& a) {
+		return Rtc (0,0,0,0,a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Aff> (const Mnk_Aff& a) {
+		return Rtc (0,0,0,a[0],0,0,0,0,0,0,0,a[1],a[2],a[3],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Afp> (const Mnk_Afp& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Dal> (const Mnk_Dal& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Hyp_Par> (const Hyp_Par& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Hyp_Sph> (const Hyp_Sph& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,a[6],a[7]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Hyp_Sta> (const Hyp_Sta& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Hyp_Flp> (const Hyp_Flp& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],0,0,0,0,0,0,a[5],a[6],a[7],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Hyp_Biv> (const Hyp_Biv& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pss_Sta> (const Pss_Sta& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt_Par> (const Pnt_Par& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt_Sph> (const Pnt_Sph& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt_Flp> (const Pnt_Flp& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],0,0,0,a[5],a[6],a[7],a[8],a[9],a[10],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt_Dll> (const Pnt_Dll& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt_Biv> (const Pnt_Biv& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,a[9],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt_Afl> (const Pnt_Afl& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pnt_Dap> (const Pnt_Dap& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,a[8],a[9],a[10],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Par_Drb> (const Par_Drb& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Par_Tnb> (const Par_Tnb& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Par_Dfp> (const Par_Dfp& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Par_Afp> (const Par_Afp& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Par_Mnv> (const Par_Mnv& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,a[14]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Sph_Vec> (const Sph_Vec& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Sta_Vec> (const Sta_Vec& a) {
+		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,a[11],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Sta_Tri> (const Sta_Tri& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Sta_Mnv> (const Sta_Mnv& a) {
+		return Rtc (0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,a[11]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Drv_Tnb> (const Drv_Tnb& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Drv_Lin> (const Drv_Lin& a) {
+		return Rtc (0,0,0,0,a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Drv_Afp> (const Drv_Afp& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Tnv_Dfp> (const Tnv_Dfp& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Tnv_Vec> (const Tnv_Vec& a) {
+		return Rtc (0,0,0,a[0],0,a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Lin_Pln> (const Lin_Pln& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],0,0,0,a[7],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Lin_Flp> (const Lin_Flp& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Lin_Dll> (const Lin_Dll& a) {
+		return Rtc (0,0,0,0,a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pln_Dfp> (const Pln_Dfp& a) {
+		return Rtc (0,0,0,0,a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pln_Dlp> (const Pln_Dlp& a) {
+		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Pln_Mnv> (const Pln_Mnv& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],0,0,0,a[6],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Flp_Afp> (const Flp_Afp& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Vec_Biv> (const Vec_Biv& a) {
+		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,a[3],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Vec_Afl> (const Vec_Afl& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,0,0,0,a[7],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Vec_Dap> (const Vec_Dap& a) {
+		return Rtc (0,0,0,a[0],0,a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Vec_Daf> (const Vec_Daf& a) {
+		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Biv_Aff> (const Biv_Aff& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,0,0,0,a[6],0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Biv_Afp> (const Biv_Afp& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Biv_Dal> (const Biv_Dal& a) {
+		return Rtc (0,0,0,a[0],0,a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,a[7]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Biv_Mnv> (const Biv_Mnv& a) {
+		return Rtc (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Pnt_Sph> (const Mnk_Pnt_Sph& a) {
+		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,a[9],a[10]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Pnt_Dll> (const Mnk_Pnt_Dll& a) {
+		return Rtc (a[0],a[1],a[2],0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0,a[13]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Mnk_Pnt_Afl> (const Mnk_Pnt_Afl& a) {
+		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0,a[13]);
+}  
+		 
+template<> inline const Rtc cast<Rtc,Hyp_Vec_Mnv> (const Hyp_Vec_Mnv& a) {
+		return Rtc (0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0,0);
+}  
+		 
+		
+
+		
+inline Mtt involute (const Mtt& a) { 
+	return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15]);
+}
+			
+		 
+		
+
+		
+inline Mtt reverse (const Mtt& a) { 
+	return Mtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14],a[15]);
+}
+			
+		 
+		
+
+		
+inline Mtt conjugate (const Mtt& a) { 
+	return Mtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14],a[15]);
+}
+			
+		 
+template<> inline const Mtt cast<Mtt,Rot> (const Rot& a) {
+		return Mtt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mot> (const Mot& a) {
+		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0,a[7]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Dil> (const Dil& a) {
+		return Mtt (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Trv> (const Trv& a) {
+		return Mtt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mtd> (const Mtd& a) {
+		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,a[11]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Trs> (const Trs& a) {
+		return Mtt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Rtt> (const Rtt& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,a[7],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Rtd> (const Rtd& a) {
+		return Mtt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tvd> (const Tvd& a) {
+		return Mtt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tsd> (const Tsd& a) {
+		return Mtt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Trt> (const Trt& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Rvd> (const Rvd& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],a[11],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tst> (const Tst& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tvt> (const Tvt& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,a[14]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Bst> (const Bst& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Sca> (const Sca& a) {
+		return Mtt (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk> (const Mnk& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Par> (const Par& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Sph> (const Sph& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Sta> (const Sta& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Drv> (const Drv& a) {
+		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Drt> (const Drt& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tnv> (const Tnv& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tnt> (const Tnt& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pln> (const Pln& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Flp> (const Flp& a) {
+		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Dll> (const Dll& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Biv> (const Biv& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Afl> (const Afl& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Dap> (const Dap& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Daf> (const Daf& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Ori_Cir> (const Ori_Cir& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Ori_Drb> (const Ori_Drb& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Ori_Lin> (const Ori_Lin& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Ori_Dfp> (const Ori_Dfp& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Inf_Cir> (const Inf_Cir& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0,a[9]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Inf_Afp> (const Inf_Afp& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0,a[6]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Inf_Dal> (const Inf_Dal& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Par> (const Mnk_Par& a) {
+		return Mtt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Sph> (const Mnk_Sph& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3],a[4]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Sta> (const Mnk_Sta& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Pln> (const Mnk_Pln& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Dll> (const Mnk_Dll& a) {
+		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Biv> (const Mnk_Biv& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Afl> (const Mnk_Afl& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Daf> (const Mnk_Daf& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Hyp_Pss> (const Hyp_Pss& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],a[1]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Mtt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Hyp_Cir> (const Hyp_Cir& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Hyp_Lin> (const Hyp_Lin& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Hyp_Vec> (const Hyp_Vec& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pnt_Cir> (const Pnt_Cir& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pnt_Lin> (const Pnt_Lin& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0,a[13]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pnt_Vec> (const Pnt_Vec& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pnt_Afp> (const Pnt_Afp& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pnt_Dal> (const Pnt_Dal& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Par_Biv> (const Par_Biv& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Sta_Biv> (const Sta_Biv& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,a[10],a[11]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Drv_Pln> (const Drv_Pln& a) {
+		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Drv_Dap> (const Drv_Dap& a) {
+		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tnv_Flp> (const Tnv_Flp& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Tnv_Biv> (const Tnv_Biv& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Lin_Dfp> (const Lin_Dfp& a) {
+		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0,a[6]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Lin_Dlp> (const Lin_Dlp& a) {
+		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[7]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pln_Pln> (const Pln_Pln& a) {
+		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pln_Flp> (const Pln_Flp& a) {
+		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0,a[6]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pln_Biv> (const Pln_Biv& a) {
+		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Vec_Aff> (const Vec_Aff& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Vec_Afp> (const Vec_Afp& a) {
+		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,a[6],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Vec_Dal> (const Vec_Dal& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],a[7],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Vec_Mnv> (const Vec_Mnv& a) {
+		return Mtt (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Biv_Dap> (const Biv_Dap& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Biv_Daf> (const Biv_Daf& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0,0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],0,a[13]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7]);
+}  
+		 
+template<> inline const Mtt cast<Mtt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Mtt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0);
+}  
+		 
+		
+
+		
+inline Rtt involute (const Rtt& a) { 
+	return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}
+			
+		 
+		
+
+		
+inline Rtt reverse (const Rtt& a) { 
+	return Rtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
+}
+			
+		 
+		
+
+		
+inline Rtt conjugate (const Rtt& a) { 
+	return Rtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
+}
+			
+		 
+template<> inline const Rtt cast<Rtt,Rot> (const Rot& a) {
+		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mot> (const Mot& a) {
+		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Dil> (const Dil& a) {
+		return Rtt (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Trv> (const Trv& a) {
+		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mtd> (const Mtd& a) {
+		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Trs> (const Trs& a) {
+		return Rtt (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mtt> (const Mtt& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[14]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Rtd> (const Rtd& a) {
+		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tvd> (const Tvd& a) {
+		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tsd> (const Tsd& a) {
+		return Rtt (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Trt> (const Trt& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Rvd> (const Rvd& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[11]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tst> (const Tst& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[14]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tvt> (const Tvt& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Bst> (const Bst& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Sca> (const Sca& a) {
+		return Rtt (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Par> (const Par& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Sph> (const Sph& a) {
+		return Rtt (0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Sta> (const Sta& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tnv> (const Tnv& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tnt> (const Tnt& a) {
+		return Rtt (0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Dll> (const Dll& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Biv> (const Biv& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Afl> (const Afl& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Dap> (const Dap& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Daf> (const Daf& a) {
+		return Rtt (0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Ori_Cir> (const Ori_Cir& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Ori_Drb> (const Ori_Drb& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Ori_Lin> (const Ori_Lin& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Ori_Dfp> (const Ori_Dfp& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,a[6]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Inf_Cir> (const Inf_Cir& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Inf_Afp> (const Inf_Afp& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Inf_Dal> (const Inf_Dal& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Par> (const Mnk_Par& a) {
+		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Sph> (const Mnk_Sph& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,a[3]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Sta> (const Mnk_Sta& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Pln> (const Mnk_Pln& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Afl> (const Mnk_Afl& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Daf> (const Mnk_Daf& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,a[3]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Hyp_Pss> (const Hyp_Pss& a) {
+		return Rtt (0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Hyp_Cir> (const Hyp_Cir& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[12]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Hyp_Lin> (const Hyp_Lin& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,a[6]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Hyp_Vec> (const Hyp_Vec& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pnt_Cir> (const Pnt_Cir& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[13]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pnt_Lin> (const Pnt_Lin& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,a[9]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pnt_Vec> (const Pnt_Vec& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pnt_Afp> (const Pnt_Afp& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pnt_Dal> (const Pnt_Dal& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[13]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Par_Biv> (const Par_Biv& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[13]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Sta_Biv> (const Sta_Biv& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Drv_Dap> (const Drv_Dap& a) {
+		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tnv_Flp> (const Tnv_Flp& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Tnv_Biv> (const Tnv_Biv& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pln_Pln> (const Pln_Pln& a) {
+		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pln_Flp> (const Pln_Flp& a) {
+		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Vec_Aff> (const Vec_Aff& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Vec_Afp> (const Vec_Afp& a) {
+		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Vec_Dal> (const Vec_Dal& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],a[7]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Biv_Dap> (const Biv_Dap& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],a[6]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Biv_Daf> (const Biv_Daf& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[13]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],a[10]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Rtt (0,0,0,0,a[0],a[1],a[2],a[6]);
+}  
+		 
+template<> inline const Rtt cast<Rtt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+		
+
+		
+inline Rtd involute (const Rtd& a) { 
+	return Rtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}
+			
+		 
+		
+
+		
+inline Rtd reverse (const Rtd& a) { 
+	return Rtd (a[0],-a[1],-a[2],-a[3],-a[4],a[5],a[6],a[7]);
+}
+			
+		 
+		
+
+		
+inline Rtd conjugate (const Rtd& a) { 
+	return Rtd (a[0],-a[1],-a[2],-a[3],-a[4],a[5],a[6],a[7]);
+}
+			
+		 
+template<> inline const Rtd cast<Rtd,Rot> (const Rot& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mot> (const Mot& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Dil> (const Dil& a) {
+		return Rtd (a[0],0,0,0,a[1],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Trv> (const Trv& a) {
+		return Rtd (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mtd> (const Mtd& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Trs> (const Trs& a) {
+		return Rtd (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mtt> (const Mtt& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Rtt> (const Rtt& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Tvd> (const Tvd& a) {
+		return Rtd (a[0],0,0,0,a[4],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Tsd> (const Tsd& a) {
+		return Rtd (a[0],0,0,0,a[4],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Trt> (const Trt& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Rvd> (const Rvd& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Tst> (const Tst& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Tvt> (const Tvt& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Bst> (const Bst& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[10],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Sca> (const Sca& a) {
+		return Rtd (a[0],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk> (const Mnk& a) {
+		return Rtd (0,0,0,0,a[0],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Par> (const Par& a) {
+		return Rtd (0,a[0],a[1],a[2],a[9],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Sph> (const Sph& a) {
+		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Sta> (const Sta& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pln> (const Pln& a) {
+		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Flp> (const Flp& a) {
+		return Rtd (0,0,0,0,a[3],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Dll> (const Dll& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Biv> (const Biv& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Afl> (const Afl& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Dap> (const Dap& a) {
+		return Rtd (0,0,0,0,a[3],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Daf> (const Daf& a) {
+		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Ori_Cir> (const Ori_Cir& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Ori_Drb> (const Ori_Drb& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Ori_Lin> (const Ori_Lin& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Ori_Dfp> (const Ori_Dfp& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Inf_Cir> (const Inf_Cir& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Inf_Afp> (const Inf_Afp& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Inf_Dal> (const Inf_Dal& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Par> (const Mnk_Par& a) {
+		return Rtd (a[0],0,0,0,0,a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Sph> (const Mnk_Sph& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Sta> (const Mnk_Sta& a) {
+		return Rtd (0,0,0,0,0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Pln> (const Mnk_Pln& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Dll> (const Mnk_Dll& a) {
+		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Biv> (const Mnk_Biv& a) {
+		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Afl> (const Mnk_Afl& a) {
+		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Daf> (const Mnk_Daf& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Rtd (a[0],0,0,0,a[7],0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Hyp_Cir> (const Hyp_Cir& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Hyp_Lin> (const Hyp_Lin& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pnt_Cir> (const Pnt_Cir& a) {
+		return Rtd (0,a[0],a[1],a[2],a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pnt_Lin> (const Pnt_Lin& a) {
+		return Rtd (0,a[0],a[1],a[2],a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pnt_Vec> (const Pnt_Vec& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pnt_Afp> (const Pnt_Afp& a) {
+		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pnt_Dal> (const Pnt_Dal& a) {
+		return Rtd (0,a[0],a[1],a[2],a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Rtd (0,0,0,0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Par_Biv> (const Par_Biv& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Sta_Biv> (const Sta_Biv& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Drv_Dap> (const Drv_Dap& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Tnv_Flp> (const Tnv_Flp& a) {
+		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Lin_Dfp> (const Lin_Dfp& a) {
+		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Lin_Dlp> (const Lin_Dlp& a) {
+		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pln_Pln> (const Pln_Pln& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pln_Flp> (const Pln_Flp& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pln_Biv> (const Pln_Biv& a) {
+		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Vec_Aff> (const Vec_Aff& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Vec_Afp> (const Vec_Afp& a) {
+		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Vec_Dal> (const Vec_Dal& a) {
+		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Vec_Mnv> (const Vec_Mnv& a) {
+		return Rtd (0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Biv_Dap> (const Biv_Dap& a) {
+		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Biv_Daf> (const Biv_Daf& a) {
+		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Rtd (a[0],a[1],a[2],a[3],0,a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Rtd (0,0,0,0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Rtd cast<Rtd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Rtd (a[0],0,0,0,a[7],a[8],a[9],a[10]);
+}  
+		 
+		
+
+		
+inline Tvd involute (const Tvd& a) { 
+	return Tvd (a[0],a[1],a[2],a[3],a[4]);
+}
+			
+		 
+		
+
+		
+inline Tvd reverse (const Tvd& a) { 
+	return Tvd (a[0],-a[1],-a[2],-a[3],-a[4]);
+}
+			
+		 
+		
+
+		
+inline Tvd conjugate (const Tvd& a) { 
+	return Tvd (a[0],-a[1],-a[2],-a[3],-a[4]);
+}
+			
+		 
+template<> inline const Tvd cast<Tvd,Rot> (const Rot& a) {
+		return Tvd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mot> (const Mot& a) {
+		return Tvd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Dil> (const Dil& a) {
+		return Tvd (a[0],0,0,0,a[1]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Trv> (const Trv& a) {
+		return Tvd (a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mtd> (const Mtd& a) {
+		return Tvd (a[0],0,0,0,a[7]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Trs> (const Trs& a) {
+		return Tvd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mtt> (const Mtt& a) {
+		return Tvd (a[0],a[4],a[5],a[6],a[10]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Rtt> (const Rtt& a) {
+		return Tvd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Rtd> (const Rtd& a) {
+		return Tvd (a[0],0,0,0,a[4]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Tsd> (const Tsd& a) {
+		return Tvd (a[0],0,0,0,a[4]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Trt> (const Trt& a) {
+		return Tvd (a[0],a[4],a[5],a[6],a[10]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Rvd> (const Rvd& a) {
+		return Tvd (a[0],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Tst> (const Tst& a) {
+		return Tvd (a[0],a[4],a[5],a[6],a[10]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Tvt> (const Tvt& a) {
+		return Tvd (a[0],a[4],a[5],a[6],a[10]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Bst> (const Bst& a) {
+		return Tvd (a[0],a[4],a[5],a[6],a[10]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Sca> (const Sca& a) {
+		return Tvd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mnk> (const Mnk& a) {
+		return Tvd (0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Par> (const Par& a) {
+		return Tvd (0,a[3],a[4],a[5],a[9]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Sta> (const Sta& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Tnv> (const Tnv& a) {
+		return Tvd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Flp> (const Flp& a) {
+		return Tvd (0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Afl> (const Afl& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Dap> (const Dap& a) {
+		return Tvd (0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Ori_Cir> (const Ori_Cir& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Ori_Lin> (const Ori_Lin& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mnk_Par> (const Mnk_Par& a) {
+		return Tvd (a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mnk_Sta> (const Mnk_Sta& a) {
+		return Tvd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mnk_Afl> (const Mnk_Afl& a) {
+		return Tvd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Tvd (a[0],a[1],a[2],a[3],a[7]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Hyp_Cir> (const Hyp_Cir& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Hyp_Lin> (const Hyp_Lin& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Hyp_Vec> (const Hyp_Vec& a) {
+		return Tvd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pnt_Cir> (const Pnt_Cir& a) {
+		return Tvd (0,a[3],a[4],a[5],a[9]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pnt_Lin> (const Pnt_Lin& a) {
+		return Tvd (0,a[3],a[4],a[5],a[9]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pnt_Vec> (const Pnt_Vec& a) {
+		return Tvd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pnt_Afp> (const Pnt_Afp& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pnt_Dal> (const Pnt_Dal& a) {
+		return Tvd (0,a[3],a[4],a[5],a[9]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Tvd (0,a[0],a[1],a[2],a[6]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Par_Biv> (const Par_Biv& a) {
+		return Tvd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Sta_Biv> (const Sta_Biv& a) {
+		return Tvd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Drv_Dap> (const Drv_Dap& a) {
+		return Tvd (a[0],0,0,0,a[7]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Tnv_Flp> (const Tnv_Flp& a) {
+		return Tvd (a[0],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Tnv_Biv> (const Tnv_Biv& a) {
+		return Tvd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Lin_Dlp> (const Lin_Dlp& a) {
+		return Tvd (0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pln_Pln> (const Pln_Pln& a) {
+		return Tvd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pln_Biv> (const Pln_Biv& a) {
+		return Tvd (0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Vec_Aff> (const Vec_Aff& a) {
+		return Tvd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Vec_Afp> (const Vec_Afp& a) {
+		return Tvd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Vec_Dal> (const Vec_Dal& a) {
+		return Tvd (0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Vec_Mnv> (const Vec_Mnv& a) {
+		return Tvd (0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Biv_Dap> (const Biv_Dap& a) {
+		return Tvd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Biv_Daf> (const Biv_Daf& a) {
+		return Tvd (0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Tvd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Tvd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Tvd (0,a[0],a[1],a[2],a[6]);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Tvd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvd cast<Tvd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Tvd (a[0],a[1],a[2],a[3],a[7]);
+}  
+		 
+		
+
+		
+inline Tsd involute (const Tsd& a) { 
+	return Tsd (a[0],a[1],a[2],a[3],a[4]);
+}
+			
+		 
+		
+
+		
+inline Tsd reverse (const Tsd& a) { 
+	return Tsd (a[0],-a[1],-a[2],-a[3],-a[4]);
+}
+			
+		 
+		
+
+		
+inline Tsd conjugate (const Tsd& a) { 
+	return Tsd (a[0],-a[1],-a[2],-a[3],-a[4]);
+}
+			
+		 
+template<> inline const Tsd cast<Tsd,Rot> (const Rot& a) {
+		return Tsd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mot> (const Mot& a) {
+		return Tsd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Dil> (const Dil& a) {
+		return Tsd (a[0],0,0,0,a[1]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Trv> (const Trv& a) {
+		return Tsd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mtd> (const Mtd& a) {
+		return Tsd (a[0],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Trs> (const Trs& a) {
+		return Tsd (a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mtt> (const Mtt& a) {
+		return Tsd (a[0],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Rtt> (const Rtt& a) {
+		return Tsd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Rtd> (const Rtd& a) {
+		return Tsd (a[0],0,0,0,a[4]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Tvd> (const Tvd& a) {
+		return Tsd (a[0],0,0,0,a[4]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Trt> (const Trt& a) {
+		return Tsd (a[0],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Rvd> (const Rvd& a) {
+		return Tsd (a[0],0,0,0,a[7]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Tst> (const Tst& a) {
+		return Tsd (a[0],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Tvt> (const Tvt& a) {
+		return Tsd (a[0],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Bst> (const Bst& a) {
+		return Tsd (a[0],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Sca> (const Sca& a) {
+		return Tsd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mnk> (const Mnk& a) {
+		return Tsd (0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Par> (const Par& a) {
+		return Tsd (0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Sta> (const Sta& a) {
+		return Tsd (0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Drv> (const Drv& a) {
+		return Tsd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Flp> (const Flp& a) {
+		return Tsd (0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Dll> (const Dll& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Dap> (const Dap& a) {
+		return Tsd (0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Inf_Cir> (const Inf_Cir& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Inf_Dal> (const Inf_Dal& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mnk_Par> (const Mnk_Par& a) {
+		return Tsd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mnk_Sta> (const Mnk_Sta& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mnk_Dll> (const Mnk_Dll& a) {
+		return Tsd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Tsd (a[0],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Hyp_Cir> (const Hyp_Cir& a) {
+		return Tsd (0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Hyp_Lin> (const Hyp_Lin& a) {
+		return Tsd (0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Hyp_Vec> (const Hyp_Vec& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pnt_Cir> (const Pnt_Cir& a) {
+		return Tsd (0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pnt_Lin> (const Pnt_Lin& a) {
+		return Tsd (0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pnt_Vec> (const Pnt_Vec& a) {
+		return Tsd (a[0],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pnt_Dal> (const Pnt_Dal& a) {
+		return Tsd (0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Tsd (0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Par_Biv> (const Par_Biv& a) {
+		return Tsd (a[0],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Sta_Biv> (const Sta_Biv& a) {
+		return Tsd (a[0],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Drv_Pln> (const Drv_Pln& a) {
+		return Tsd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Drv_Dap> (const Drv_Dap& a) {
+		return Tsd (a[0],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Tnv_Flp> (const Tnv_Flp& a) {
+		return Tsd (a[0],0,0,0,a[7]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Lin_Dfp> (const Lin_Dfp& a) {
+		return Tsd (0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Lin_Dlp> (const Lin_Dlp& a) {
+		return Tsd (0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pln_Pln> (const Pln_Pln& a) {
+		return Tsd (a[0],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pln_Flp> (const Pln_Flp& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pln_Biv> (const Pln_Biv& a) {
+		return Tsd (0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Vec_Aff> (const Vec_Aff& a) {
+		return Tsd (a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Vec_Dal> (const Vec_Dal& a) {
+		return Tsd (0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Vec_Mnv> (const Vec_Mnv& a) {
+		return Tsd (0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Biv_Daf> (const Biv_Daf& a) {
+		return Tsd (0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Tsd (a[0],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Tsd (a[0],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Tsd (0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Tsd (0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tsd cast<Tsd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Tsd (a[0],a[4],a[5],a[6],a[7]);
+}  
+		 
+		
+
+		
+inline Trt involute (const Trt& a) { 
+	return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}
+			
+		 
+		
+
+		
+inline Trt reverse (const Trt& a) { 
+	return Trt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13]);
+}
+			
+		 
+		
+
+		
+inline Trt conjugate (const Trt& a) { 
+	return Trt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13]);
+}
+			
+		 
+template<> inline const Trt cast<Trt,Rot> (const Rot& a) {
+		return Trt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Mot> (const Mot& a) {
+		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Dil> (const Dil& a) {
+		return Trt (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Trv> (const Trv& a) {
+		return Trt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Mtd> (const Mtd& a) {
+		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Trt cast<Trt,Trs> (const Trs& a) {
+		return Trt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Mtt> (const Mtt& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Trt cast<Trt,Rtt> (const Rtt& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Rtd> (const Rtd& a) {
+		return Trt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Trt cast<Trt,Tvd> (const Tvd& a) {
+		return Trt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Tsd> (const Tsd& a) {
+		return Trt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Rvd> (const Rvd& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Trt cast<Trt,Tst> (const Tst& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Trt cast<Trt,Tvt> (const Tvt& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Trt cast<Trt,Bst> (const Bst& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Sca> (const Sca& a) {
+		return Trt (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk> (const Mnk& a) {
+		return Trt (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Par> (const Par& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Sph> (const Sph& a) {
+		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trt cast<Trt,Sta> (const Sta& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Drv> (const Drv& a) {
+		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Tnv> (const Tnv& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Pln> (const Pln& a) {
+		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trt cast<Trt,Flp> (const Flp& a) {
+		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Dll> (const Dll& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Biv> (const Biv& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Afl> (const Afl& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Dap> (const Dap& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Daf> (const Daf& a) {
+		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trt cast<Trt,Ori_Cir> (const Ori_Cir& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trt cast<Trt,Ori_Drb> (const Ori_Drb& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Ori_Lin> (const Ori_Lin& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trt cast<Trt,Ori_Dfp> (const Ori_Dfp& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Inf_Cir> (const Inf_Cir& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trt cast<Trt,Inf_Afp> (const Inf_Afp& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Inf_Dal> (const Inf_Dal& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Par> (const Mnk_Par& a) {
+		return Trt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Sph> (const Mnk_Sph& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Sta> (const Mnk_Sta& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Pln> (const Mnk_Pln& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Dll> (const Mnk_Dll& a) {
+		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Biv> (const Mnk_Biv& a) {
+		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Afl> (const Mnk_Afl& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Daf> (const Mnk_Daf& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Trt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Hyp_Cir> (const Hyp_Cir& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Trt cast<Trt,Hyp_Lin> (const Hyp_Lin& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Trt cast<Trt,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Hyp_Vec> (const Hyp_Vec& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Pnt_Cir> (const Pnt_Cir& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Trt cast<Trt,Pnt_Lin> (const Pnt_Lin& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Trt cast<Trt,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trt cast<Trt,Pnt_Vec> (const Pnt_Vec& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Pnt_Afp> (const Pnt_Afp& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8]);
+}  
+		 
+template<> inline const Trt cast<Trt,Pnt_Dal> (const Pnt_Dal& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Trt cast<Trt,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trt cast<Trt,Par_Biv> (const Par_Biv& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Trt cast<Trt,Sta_Biv> (const Sta_Biv& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Drv_Pln> (const Drv_Pln& a) {
+		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Drv_Dap> (const Drv_Dap& a) {
+		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Trt cast<Trt,Tnv_Flp> (const Tnv_Flp& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Trt cast<Trt,Tnv_Biv> (const Tnv_Biv& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Lin_Dfp> (const Lin_Dfp& a) {
+		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Lin_Dlp> (const Lin_Dlp& a) {
+		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trt cast<Trt,Pln_Pln> (const Pln_Pln& a) {
+		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Pln_Flp> (const Pln_Flp& a) {
+		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Pln_Biv> (const Pln_Biv& a) {
+		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trt cast<Trt,Vec_Aff> (const Vec_Aff& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Vec_Afp> (const Vec_Afp& a) {
+		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Vec_Dal> (const Vec_Dal& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trt cast<Trt,Vec_Mnv> (const Vec_Mnv& a) {
+		return Trt (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Trt cast<Trt,Biv_Dap> (const Biv_Dap& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5]);
+}  
+		 
+template<> inline const Trt cast<Trt,Biv_Daf> (const Biv_Daf& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Trt cast<Trt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Trt cast<Trt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Trt cast<Trt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Trt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+		
+
+		
+inline Rvd involute (const Rvd& a) { 
+	return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
+}
+			
+		 
+		
+
+		
+inline Rvd reverse (const Rvd& a) { 
+	return Rvd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
+}
+			
+		 
+		
+
+		
+inline Rvd conjugate (const Rvd& a) { 
+	return Rvd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
+}
+			
+		 
+template<> inline const Rvd cast<Rvd,Rot> (const Rot& a) {
+		return Rvd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mot> (const Mot& a) {
+		return Rvd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Dil> (const Dil& a) {
+		return Rvd (a[0],0,0,0,0,0,0,a[1],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Trv> (const Trv& a) {
+		return Rvd (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mtd> (const Mtd& a) {
+		return Rvd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Trs> (const Trs& a) {
+		return Rvd (a[0],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mtt> (const Mtt& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Rtt> (const Rtt& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,a[7]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Rtd> (const Rtd& a) {
+		return Rvd (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tvd> (const Tvd& a) {
+		return Rvd (a[0],0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tsd> (const Tsd& a) {
+		return Rvd (a[0],0,0,0,0,0,0,a[4],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Trt> (const Trt& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tst> (const Tst& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tvt> (const Tvt& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Bst> (const Bst& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Sca> (const Sca& a) {
+		return Rvd (a[0],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk> (const Mnk& a) {
+		return Rvd (0,0,0,0,0,0,0,a[0],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Par> (const Par& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Sph> (const Sph& a) {
+		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Sta> (const Sta& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tnv> (const Tnv& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tnt> (const Tnt& a) {
+		return Rvd (0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pln> (const Pln& a) {
+		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Flp> (const Flp& a) {
+		return Rvd (0,0,0,0,0,0,0,a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Dll> (const Dll& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Biv> (const Biv& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Afl> (const Afl& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Dap> (const Dap& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Daf> (const Daf& a) {
+		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Ori_Cir> (const Ori_Cir& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Ori_Drb> (const Ori_Drb& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Ori_Lin> (const Ori_Lin& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Ori_Dfp> (const Ori_Dfp& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Inf_Cir> (const Inf_Cir& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Inf_Afp> (const Inf_Afp& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Inf_Dal> (const Inf_Dal& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Par> (const Mnk_Par& a) {
+		return Rvd (a[0],0,0,0,a[1],a[2],a[3],0,a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Sph> (const Mnk_Sph& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Sta> (const Mnk_Sta& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Pln> (const Mnk_Pln& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Dll> (const Mnk_Dll& a) {
+		return Rvd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Biv> (const Mnk_Biv& a) {
+		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Afl> (const Mnk_Afl& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Daf> (const Mnk_Daf& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Hyp_Pss> (const Hyp_Pss& a) {
+		return Rvd (0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Rvd (a[0],0,0,0,a[1],a[2],a[3],a[7],0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Hyp_Cir> (const Hyp_Cir& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Hyp_Lin> (const Hyp_Lin& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[9],a[10],a[11],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Hyp_Vec> (const Hyp_Vec& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pnt_Cir> (const Pnt_Cir& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pnt_Lin> (const Pnt_Lin& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pnt_Vec> (const Pnt_Vec& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pnt_Afp> (const Pnt_Afp& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pnt_Dal> (const Pnt_Dal& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Par_Biv> (const Par_Biv& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Sta_Biv> (const Sta_Biv& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,a[10]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Drv_Dap> (const Drv_Dap& a) {
+		return Rvd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tnv_Flp> (const Tnv_Flp& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Tnv_Biv> (const Tnv_Biv& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Lin_Dfp> (const Lin_Dfp& a) {
+		return Rvd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Lin_Dlp> (const Lin_Dlp& a) {
+		return Rvd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pln_Pln> (const Pln_Pln& a) {
+		return Rvd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pln_Flp> (const Pln_Flp& a) {
+		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pln_Biv> (const Pln_Biv& a) {
+		return Rvd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Vec_Aff> (const Vec_Aff& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Vec_Afp> (const Vec_Afp& a) {
+		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Vec_Dal> (const Vec_Dal& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Vec_Mnv> (const Vec_Mnv& a) {
+		return Rvd (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Biv_Dap> (const Biv_Dap& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Biv_Daf> (const Biv_Daf& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[6]);
+}  
+		 
+template<> inline const Rvd cast<Rvd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Rvd (a[0],0,0,0,a[1],a[2],a[3],a[7],a[8],a[9],a[10],0);
+}  
+		 
+		
+
+		
+inline Tst involute (const Tst& a) { 
+	return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
+}
+			
+		 
+		
+
+		
+inline Tst reverse (const Tst& a) { 
+	return Tst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
+}
+			
+		 
+		
+
+		
+inline Tst conjugate (const Tst& a) { 
+	return Tst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
+}
+			
+		 
+template<> inline const Tst cast<Tst,Rot> (const Rot& a) {
+		return Tst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mot> (const Mot& a) {
+		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Dil> (const Dil& a) {
+		return Tst (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Trv> (const Trv& a) {
+		return Tst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mtd> (const Mtd& a) {
+		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Trs> (const Trs& a) {
+		return Tst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mtt> (const Mtt& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
+}  
+		 
+template<> inline const Tst cast<Tst,Rtt> (const Rtt& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,a[7]);
+}  
+		 
+template<> inline const Tst cast<Tst,Rtd> (const Rtd& a) {
+		return Tst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Tvd> (const Tvd& a) {
+		return Tst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Tsd> (const Tsd& a) {
+		return Tst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Trt> (const Trt& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Rvd> (const Rvd& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Tst cast<Tst,Tvt> (const Tvt& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Bst> (const Bst& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Sca> (const Sca& a) {
+		return Tst (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk> (const Mnk& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Par> (const Par& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Sph> (const Sph& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tst cast<Tst,Sta> (const Sta& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Drv> (const Drv& a) {
+		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Tnv> (const Tnv& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Tnt> (const Tnt& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Tst cast<Tst,Pln> (const Pln& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Flp> (const Flp& a) {
+		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Dll> (const Dll& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Biv> (const Biv& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Afl> (const Afl& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Dap> (const Dap& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Daf> (const Daf& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tst cast<Tst,Ori_Cir> (const Ori_Cir& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tst cast<Tst,Ori_Drb> (const Ori_Drb& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Ori_Lin> (const Ori_Lin& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Ori_Dfp> (const Ori_Dfp& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Tst cast<Tst,Inf_Cir> (const Inf_Cir& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Inf_Afp> (const Inf_Afp& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Inf_Dal> (const Inf_Dal& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Par> (const Mnk_Par& a) {
+		return Tst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Sph> (const Mnk_Sph& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Sta> (const Mnk_Sta& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Pln> (const Mnk_Pln& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Dll> (const Mnk_Dll& a) {
+		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Biv> (const Mnk_Biv& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Afl> (const Mnk_Afl& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Daf> (const Mnk_Daf& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tst cast<Tst,Hyp_Pss> (const Hyp_Pss& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Tst cast<Tst,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Tst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Hyp_Cir> (const Hyp_Cir& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],a[12]);
+}  
+		 
+template<> inline const Tst cast<Tst,Hyp_Lin> (const Hyp_Lin& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Tst cast<Tst,Hyp_Vec> (const Hyp_Vec& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Pnt_Cir> (const Pnt_Cir& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Tst cast<Tst,Pnt_Lin> (const Pnt_Lin& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tst cast<Tst,Pnt_Vec> (const Pnt_Vec& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Pnt_Afp> (const Pnt_Afp& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tst cast<Tst,Pnt_Dal> (const Pnt_Dal& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Tst cast<Tst,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Par_Biv> (const Par_Biv& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Tst cast<Tst,Sta_Biv> (const Sta_Biv& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,a[10]);
+}  
+		 
+template<> inline const Tst cast<Tst,Drv_Pln> (const Drv_Pln& a) {
+		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Drv_Dap> (const Drv_Dap& a) {
+		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Tnv_Flp> (const Tnv_Flp& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Tnv_Biv> (const Tnv_Biv& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tst cast<Tst,Lin_Dfp> (const Lin_Dfp& a) {
+		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Lin_Dlp> (const Lin_Dlp& a) {
+		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Pln_Pln> (const Pln_Pln& a) {
+		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Pln_Flp> (const Pln_Flp& a) {
+		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Pln_Biv> (const Pln_Biv& a) {
+		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Vec_Aff> (const Vec_Aff& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tst cast<Tst,Vec_Afp> (const Vec_Afp& a) {
+		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,a[6]);
+}  
+		 
+template<> inline const Tst cast<Tst,Vec_Dal> (const Vec_Dal& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Tst cast<Tst,Vec_Mnv> (const Vec_Mnv& a) {
+		return Tst (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Biv_Dap> (const Biv_Dap& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Tst cast<Tst,Biv_Daf> (const Biv_Daf& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Tst cast<Tst,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Tst cast<Tst,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6]);
+}  
+		 
+template<> inline const Tst cast<Tst,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Tst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+		
+
+		
+inline Tvt involute (const Tvt& a) { 
+	return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
+}
+			
+		 
+		
+
+		
+inline Tvt reverse (const Tvt& a) { 
+	return Tvt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
+}
+			
+		 
+		
+
+		
+inline Tvt conjugate (const Tvt& a) { 
+	return Tvt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
+}
+			
+		 
+template<> inline const Tvt cast<Tvt,Rot> (const Rot& a) {
+		return Tvt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mot> (const Mot& a) {
+		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,a[7]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Dil> (const Dil& a) {
+		return Tvt (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Trv> (const Trv& a) {
+		return Tvt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mtd> (const Mtd& a) {
+		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Trs> (const Trs& a) {
+		return Tvt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mtt> (const Mtt& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[15]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Rtt> (const Rtt& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Rtd> (const Rtd& a) {
+		return Tvt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Tvd> (const Tvd& a) {
+		return Tvt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Tsd> (const Tsd& a) {
+		return Tvt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Trt> (const Trt& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Rvd> (const Rvd& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Tst> (const Tst& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Bst> (const Bst& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Sca> (const Sca& a) {
+		return Tvt (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk> (const Mnk& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Par> (const Par& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Sph> (const Sph& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[4]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Sta> (const Sta& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Drv> (const Drv& a) {
+		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Drt> (const Drt& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Tnv> (const Tnv& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pln> (const Pln& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Flp> (const Flp& a) {
+		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Dll> (const Dll& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Biv> (const Biv& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Afl> (const Afl& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Dap> (const Dap& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Daf> (const Daf& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Ori_Cir> (const Ori_Cir& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Ori_Drb> (const Ori_Drb& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Ori_Lin> (const Ori_Lin& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Ori_Dfp> (const Ori_Dfp& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Inf_Cir> (const Inf_Cir& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Inf_Afp> (const Inf_Afp& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Inf_Dal> (const Inf_Dal& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Par> (const Mnk_Par& a) {
+		return Tvt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Sph> (const Mnk_Sph& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[4]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Sta> (const Mnk_Sta& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Pln> (const Mnk_Pln& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Dll> (const Mnk_Dll& a) {
+		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Biv> (const Mnk_Biv& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Afl> (const Mnk_Afl& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Daf> (const Mnk_Daf& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Hyp_Pss> (const Hyp_Pss& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[1]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Tvt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Hyp_Cir> (const Hyp_Cir& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],a[13]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Hyp_Lin> (const Hyp_Lin& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[7]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Hyp_Vec> (const Hyp_Vec& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pnt_Cir> (const Pnt_Cir& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[14]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pnt_Lin> (const Pnt_Lin& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[10]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pnt_Vec> (const Pnt_Vec& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pnt_Afp> (const Pnt_Afp& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[10]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pnt_Dal> (const Pnt_Dal& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Par_Biv> (const Par_Biv& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[14]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Sta_Biv> (const Sta_Biv& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,a[11]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Drv_Pln> (const Drv_Pln& a) {
+		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Drv_Dap> (const Drv_Dap& a) {
+		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Tnv_Flp> (const Tnv_Flp& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Tnv_Biv> (const Tnv_Biv& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Lin_Dfp> (const Lin_Dfp& a) {
+		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Lin_Dlp> (const Lin_Dlp& a) {
+		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pln_Pln> (const Pln_Pln& a) {
+		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pln_Flp> (const Pln_Flp& a) {
+		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,a[6]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pln_Biv> (const Pln_Biv& a) {
+		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Vec_Aff> (const Vec_Aff& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Vec_Afp> (const Vec_Afp& a) {
+		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Vec_Dal> (const Vec_Dal& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Vec_Mnv> (const Vec_Mnv& a) {
+		return Tvt (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Biv_Dap> (const Biv_Dap& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Biv_Daf> (const Biv_Daf& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],0);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[11]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[7]);
+}  
+		 
+template<> inline const Tvt cast<Tvt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Tvt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
+}  
+		 
+		
+
+		
+inline Bst involute (const Bst& a) { 
+	return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}
+			
+		 
+		
+
+		
+inline Bst reverse (const Bst& a) { 
+	return Bst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10]);
+}
+			
+		 
+		
+
+		
+inline Bst conjugate (const Bst& a) { 
+	return Bst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10]);
+}
+			
+		 
+template<> inline const Bst cast<Bst,Rot> (const Rot& a) {
+		return Bst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mot> (const Mot& a) {
+		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Dil> (const Dil& a) {
+		return Bst (a[0],0,0,0,0,0,0,0,0,0,a[1]);
+}  
+		 
+template<> inline const Bst cast<Bst,Trv> (const Trv& a) {
+		return Bst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mtd> (const Mtd& a) {
+		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Bst cast<Bst,Trs> (const Trs& a) {
+		return Bst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mtt> (const Mtt& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Bst cast<Bst,Rtt> (const Rtt& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Rtd> (const Rtd& a) {
+		return Bst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4]);
+}  
+		 
+template<> inline const Bst cast<Bst,Tvd> (const Tvd& a) {
+		return Bst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4]);
+}  
+		 
+template<> inline const Bst cast<Bst,Tsd> (const Tsd& a) {
+		return Bst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4]);
+}  
+		 
+template<> inline const Bst cast<Bst,Trt> (const Trt& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Bst cast<Bst,Rvd> (const Rvd& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7]);
+}  
+		 
+template<> inline const Bst cast<Bst,Tst> (const Tst& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Bst cast<Bst,Tvt> (const Tvt& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
+}  
+		 
+template<> inline const Bst cast<Bst,Sca> (const Sca& a) {
+		return Bst (a[0],0,0,0,0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk> (const Mnk& a) {
+		return Bst (0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Bst cast<Bst,Par> (const Par& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Bst cast<Bst,Sta> (const Sta& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Drv> (const Drv& a) {
+		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Tnv> (const Tnv& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Flp> (const Flp& a) {
+		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Bst cast<Bst,Dll> (const Dll& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Biv> (const Biv& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Afl> (const Afl& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Dap> (const Dap& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3]);
+}  
+		 
+template<> inline const Bst cast<Bst,Ori_Cir> (const Ori_Cir& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Ori_Drb> (const Ori_Drb& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Ori_Lin> (const Ori_Lin& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Ori_Dfp> (const Ori_Dfp& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Inf_Cir> (const Inf_Cir& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Inf_Afp> (const Inf_Afp& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Inf_Dal> (const Inf_Dal& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Par> (const Mnk_Par& a) {
+		return Bst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Sph> (const Mnk_Sph& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Sta> (const Mnk_Sta& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Pln> (const Mnk_Pln& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Dll> (const Mnk_Dll& a) {
+		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Afl> (const Mnk_Afl& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Daf> (const Mnk_Daf& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Hyp_Pnt> (const Hyp_Pnt& a) {
+		return Bst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Bst cast<Bst,Hyp_Cir> (const Hyp_Cir& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Hyp_Lin> (const Hyp_Lin& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Hyp_Dfp> (const Hyp_Dfp& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Hyp_Vec> (const Hyp_Vec& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Pnt_Cir> (const Pnt_Cir& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Bst cast<Bst,Pnt_Lin> (const Pnt_Lin& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Bst cast<Bst,Pnt_Dfp> (const Pnt_Dfp& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Pnt_Vec> (const Pnt_Vec& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Pnt_Afp> (const Pnt_Afp& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Pnt_Dal> (const Pnt_Dal& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
+}  
+		 
+template<> inline const Bst cast<Bst,Pnt_Mnv> (const Pnt_Mnv& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Bst cast<Bst,Par_Biv> (const Par_Biv& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Sta_Biv> (const Sta_Biv& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Drv_Pln> (const Drv_Pln& a) {
+		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Drv_Dap> (const Drv_Dap& a) {
+		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7]);
+}  
+		 
+template<> inline const Bst cast<Bst,Tnv_Flp> (const Tnv_Flp& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7]);
+}  
+		 
+template<> inline const Bst cast<Bst,Tnv_Biv> (const Tnv_Biv& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Lin_Dfp> (const Lin_Dfp& a) {
+		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Lin_Dlp> (const Lin_Dlp& a) {
+		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Bst cast<Bst,Pln_Pln> (const Pln_Pln& a) {
+		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Pln_Flp> (const Pln_Flp& a) {
+		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Pln_Biv> (const Pln_Biv& a) {
+		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
+}  
+		 
+template<> inline const Bst cast<Bst,Vec_Aff> (const Vec_Aff& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Vec_Afp> (const Vec_Afp& a) {
+		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Vec_Dal> (const Vec_Dal& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3]);
+}  
+		 
+template<> inline const Bst cast<Bst,Vec_Mnv> (const Vec_Mnv& a) {
+		return Bst (0,0,0,0,0,0,0,0,0,0,a[0]);
+}  
+		 
+template<> inline const Bst cast<Bst,Biv_Dap> (const Biv_Dap& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
+}  
+		 
+template<> inline const Bst cast<Bst,Biv_Daf> (const Biv_Daf& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3]);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
+		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
+}  
+		 
+template<> inline const Bst cast<Bst,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
+		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0);
+}  
+		 
+template<> inline const Bst cast<Bst,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
+		return Bst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
+}  
+		 
 		
 
 		
@@ -7344,5026 +12368,6 @@ template<> inline const Mnv cast<Mnv,Mnk_Pnt_Dll> (const Mnk_Pnt_Dll& a) {
 		 
 template<> inline const Mnv cast<Mnv,Mnk_Pnt_Afl> (const Mnk_Pnt_Afl& a) {
 		return Mnv (a[10],a[11],a[12]);
-}  
-		 
-		
-
-		
-inline Rot involute (const Rot& a) { 
-	return Rot (a[0],a[1],a[2],a[3]);
-}
-			
-		 
-		
-
-		
-inline Rot reverse (const Rot& a) { 
-	return Rot (a[0],-a[1],-a[2],-a[3]);
-}
-			
-		 
-		
-
-		
-inline Rot conjugate (const Rot& a) { 
-	return Rot (a[0],-a[1],-a[2],-a[3]);
-}
-			
-		 
-template<> inline const Rot cast<Rot,Mot> (const Mot& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Dil> (const Dil& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Trv> (const Trv& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Mtd> (const Mtd& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Trs> (const Trs& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Mtt> (const Mtt& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Rtt> (const Rtt& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Rtd> (const Rtd& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Tvd> (const Tvd& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Tsd> (const Tsd& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Trt> (const Trt& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Rvd> (const Rvd& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Tst> (const Tst& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Tvt> (const Tvt& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Bst> (const Bst& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Sca> (const Sca& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Par> (const Par& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Sta> (const Sta& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Dll> (const Dll& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Biv> (const Biv& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Afl> (const Afl& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Ori_Cir> (const Ori_Cir& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Ori_Drb> (const Ori_Drb& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Ori_Lin> (const Ori_Lin& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Ori_Dfp> (const Ori_Dfp& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Inf_Cir> (const Inf_Cir& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Inf_Afp> (const Inf_Afp& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Inf_Dal> (const Inf_Dal& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Mnk_Par> (const Mnk_Par& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Mnk_Sph> (const Mnk_Sph& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Mnk_Pln> (const Mnk_Pln& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Mnk_Daf> (const Mnk_Daf& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-template<> inline const Rot cast<Rot,Hyp_Cir> (const Hyp_Cir& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Hyp_Lin> (const Hyp_Lin& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pnt_Cir> (const Pnt_Cir& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pnt_Lin> (const Pnt_Lin& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pnt_Vec> (const Pnt_Vec& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pnt_Afp> (const Pnt_Afp& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pnt_Dal> (const Pnt_Dal& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Par_Biv> (const Par_Biv& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Sta_Biv> (const Sta_Biv& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Drv_Dap> (const Drv_Dap& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Tnv_Flp> (const Tnv_Flp& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pln_Pln> (const Pln_Pln& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pln_Flp> (const Pln_Flp& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Vec_Aff> (const Vec_Aff& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Vec_Afp> (const Vec_Afp& a) {
-		return Rot (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rot cast<Rot,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Rot (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rot cast<Rot,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Rot (a[0],0,0,0);
-}  
-		 
-		
-
-		
-inline Mot involute (const Mot& a) { 
-	return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
-}
-			
-		 
-		
-
-		
-inline Mot reverse (const Mot& a) { 
-	return Mot (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
-}
-			
-		 
-		
-
-		
-inline Mot conjugate (const Mot& a) { 
-	return Mot (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
-}
-			
-		 
-template<> inline const Mot cast<Mot,Rot> (const Rot& a) {
-		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Dil> (const Dil& a) {
-		return Mot (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Trv> (const Trv& a) {
-		return Mot (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mtd> (const Mtd& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[11]);
-}  
-		 
-template<> inline const Mot cast<Mot,Trs> (const Trs& a) {
-		return Mot (a[0],0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mtt> (const Mtt& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[15]);
-}  
-		 
-template<> inline const Mot cast<Mot,Rtt> (const Rtt& a) {
-		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Rtd> (const Rtd& a) {
-		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Tvd> (const Tvd& a) {
-		return Mot (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Tsd> (const Tsd& a) {
-		return Mot (a[0],0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Trt> (const Trt& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Rvd> (const Rvd& a) {
-		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Tst> (const Tst& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Tvt> (const Tvt& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[14]);
-}  
-		 
-template<> inline const Mot cast<Mot,Bst> (const Bst& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Sca> (const Sca& a) {
-		return Mot (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Par> (const Par& a) {
-		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Sph> (const Sph& a) {
-		return Mot (0,0,0,0,0,0,0,a[4]);
-}  
-		 
-template<> inline const Mot cast<Mot,Sta> (const Sta& a) {
-		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Drv> (const Drv& a) {
-		return Mot (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Drt> (const Drt& a) {
-		return Mot (0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pln> (const Pln& a) {
-		return Mot (0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Mot cast<Mot,Flp> (const Flp& a) {
-		return Mot (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Dll> (const Dll& a) {
-		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Biv> (const Biv& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Afl> (const Afl& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Ori_Cir> (const Ori_Cir& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Ori_Drb> (const Ori_Drb& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Ori_Lin> (const Ori_Lin& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Ori_Dfp> (const Ori_Dfp& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Inf_Cir> (const Inf_Cir& a) {
-		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9]);
-}  
-		 
-template<> inline const Mot cast<Mot,Inf_Afp> (const Inf_Afp& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,a[6]);
-}  
-		 
-template<> inline const Mot cast<Mot,Inf_Dal> (const Inf_Dal& a) {
-		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Par> (const Mnk_Par& a) {
-		return Mot (a[0],0,0,0,a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Sph> (const Mnk_Sph& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,a[4]);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Sta> (const Mnk_Sta& a) {
-		return Mot (0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Pln> (const Mnk_Pln& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,a[3]);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Dll> (const Mnk_Dll& a) {
-		return Mot (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Daf> (const Mnk_Daf& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Hyp_Pss> (const Hyp_Pss& a) {
-		return Mot (0,0,0,0,0,0,0,a[1]);
-}  
-		 
-template<> inline const Mot cast<Mot,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Mot (a[0],0,0,0,a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Hyp_Cir> (const Hyp_Cir& a) {
-		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],a[13]);
-}  
-		 
-template<> inline const Mot cast<Mot,Hyp_Lin> (const Hyp_Lin& a) {
-		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,a[7]);
-}  
-		 
-template<> inline const Mot cast<Mot,Hyp_Vec> (const Hyp_Vec& a) {
-		return Mot (0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Pnt_Cir> (const Pnt_Cir& a) {
-		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],a[14]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pnt_Lin> (const Pnt_Lin& a) {
-		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],a[13]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],a[10]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pnt_Vec> (const Pnt_Vec& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Pnt_Afp> (const Pnt_Afp& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,a[10]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pnt_Dal> (const Pnt_Dal& a) {
-		return Mot (0,a[0],a[1],a[2],a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Mot (0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Par_Biv> (const Par_Biv& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[14]);
-}  
-		 
-template<> inline const Mot cast<Mot,Sta_Biv> (const Sta_Biv& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[11]);
-}  
-		 
-template<> inline const Mot cast<Mot,Drv_Pln> (const Drv_Pln& a) {
-		return Mot (0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Mot cast<Mot,Drv_Dap> (const Drv_Dap& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Tnv_Flp> (const Tnv_Flp& a) {
-		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Lin_Dfp> (const Lin_Dfp& a) {
-		return Mot (0,0,0,0,a[0],a[1],a[2],a[6]);
-}  
-		 
-template<> inline const Mot cast<Mot,Lin_Dlp> (const Lin_Dlp& a) {
-		return Mot (0,0,0,0,a[0],a[1],a[2],a[7]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pln_Pln> (const Pln_Pln& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Pln_Flp> (const Pln_Flp& a) {
-		return Mot (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pln_Biv> (const Pln_Biv& a) {
-		return Mot (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Vec_Aff> (const Vec_Aff& a) {
-		return Mot (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Vec_Afp> (const Vec_Afp& a) {
-		return Mot (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[13]);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Mot (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mot cast<Mot,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Mot (0,0,0,0,a[3],a[4],a[5],a[11]);
-}  
-		 
-template<> inline const Mot cast<Mot,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Mot (0,0,0,0,a[3],a[4],a[5],a[7]);
-}  
-		 
-template<> inline const Mot cast<Mot,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Mot (a[0],0,0,0,a[4],a[5],a[6],0);
-}  
-		 
-		
-
-		
-inline Dil involute (const Dil& a) { 
-	return Dil (a[0],a[1]);
-}
-			
-		 
-		
-
-		
-inline Dil reverse (const Dil& a) { 
-	return Dil (a[0],-a[1]);
-}
-			
-		 
-		
-
-		
-inline Dil conjugate (const Dil& a) { 
-	return Dil (a[0],-a[1]);
-}
-			
-		 
-template<> inline const Dil cast<Dil,Rot> (const Rot& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Mot> (const Mot& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Trv> (const Trv& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Mtd> (const Mtd& a) {
-		return Dil (a[0],a[7]);
-}  
-		 
-template<> inline const Dil cast<Dil,Trs> (const Trs& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Mtt> (const Mtt& a) {
-		return Dil (a[0],a[10]);
-}  
-		 
-template<> inline const Dil cast<Dil,Rtt> (const Rtt& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Rtd> (const Rtd& a) {
-		return Dil (a[0],a[4]);
-}  
-		 
-template<> inline const Dil cast<Dil,Tvd> (const Tvd& a) {
-		return Dil (a[0],a[4]);
-}  
-		 
-template<> inline const Dil cast<Dil,Tsd> (const Tsd& a) {
-		return Dil (a[0],a[4]);
-}  
-		 
-template<> inline const Dil cast<Dil,Trt> (const Trt& a) {
-		return Dil (a[0],a[10]);
-}  
-		 
-template<> inline const Dil cast<Dil,Rvd> (const Rvd& a) {
-		return Dil (a[0],a[7]);
-}  
-		 
-template<> inline const Dil cast<Dil,Tst> (const Tst& a) {
-		return Dil (a[0],a[10]);
-}  
-		 
-template<> inline const Dil cast<Dil,Tvt> (const Tvt& a) {
-		return Dil (a[0],a[10]);
-}  
-		 
-template<> inline const Dil cast<Dil,Bst> (const Bst& a) {
-		return Dil (a[0],a[10]);
-}  
-		 
-template<> inline const Dil cast<Dil,Sca> (const Sca& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Mnk> (const Mnk& a) {
-		return Dil (0,a[0]);
-}  
-		 
-template<> inline const Dil cast<Dil,Par> (const Par& a) {
-		return Dil (0,a[9]);
-}  
-		 
-template<> inline const Dil cast<Dil,Flp> (const Flp& a) {
-		return Dil (0,a[3]);
-}  
-		 
-template<> inline const Dil cast<Dil,Dap> (const Dap& a) {
-		return Dil (0,a[3]);
-}  
-		 
-template<> inline const Dil cast<Dil,Mnk_Par> (const Mnk_Par& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Dil (a[0],a[7]);
-}  
-		 
-template<> inline const Dil cast<Dil,Pnt_Cir> (const Pnt_Cir& a) {
-		return Dil (0,a[9]);
-}  
-		 
-template<> inline const Dil cast<Dil,Pnt_Lin> (const Pnt_Lin& a) {
-		return Dil (0,a[9]);
-}  
-		 
-template<> inline const Dil cast<Dil,Pnt_Vec> (const Pnt_Vec& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Pnt_Dal> (const Pnt_Dal& a) {
-		return Dil (0,a[9]);
-}  
-		 
-template<> inline const Dil cast<Dil,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Dil (0,a[6]);
-}  
-		 
-template<> inline const Dil cast<Dil,Par_Biv> (const Par_Biv& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Sta_Biv> (const Sta_Biv& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Drv_Dap> (const Drv_Dap& a) {
-		return Dil (a[0],a[7]);
-}  
-		 
-template<> inline const Dil cast<Dil,Tnv_Flp> (const Tnv_Flp& a) {
-		return Dil (a[0],a[7]);
-}  
-		 
-template<> inline const Dil cast<Dil,Lin_Dlp> (const Lin_Dlp& a) {
-		return Dil (0,a[3]);
-}  
-		 
-template<> inline const Dil cast<Dil,Pln_Pln> (const Pln_Pln& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Pln_Biv> (const Pln_Biv& a) {
-		return Dil (0,a[3]);
-}  
-		 
-template<> inline const Dil cast<Dil,Vec_Aff> (const Vec_Aff& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Vec_Dal> (const Vec_Dal& a) {
-		return Dil (0,a[3]);
-}  
-		 
-template<> inline const Dil cast<Dil,Vec_Mnv> (const Vec_Mnv& a) {
-		return Dil (0,a[0]);
-}  
-		 
-template<> inline const Dil cast<Dil,Biv_Daf> (const Biv_Daf& a) {
-		return Dil (0,a[3]);
-}  
-		 
-template<> inline const Dil cast<Dil,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Dil (a[0],0);
-}  
-		 
-template<> inline const Dil cast<Dil,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Dil (0,a[6]);
-}  
-		 
-template<> inline const Dil cast<Dil,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Dil (a[0],a[7]);
-}  
-		 
-		
-
-		
-inline Trv involute (const Trv& a) { 
-	return Trv (a[0],a[1],a[2],a[3]);
-}
-			
-		 
-		
-
-		
-inline Trv reverse (const Trv& a) { 
-	return Trv (a[0],-a[1],-a[2],-a[3]);
-}
-			
-		 
-		
-
-		
-inline Trv conjugate (const Trv& a) { 
-	return Trv (a[0],-a[1],-a[2],-a[3]);
-}
-			
-		 
-template<> inline const Trv cast<Trv,Rot> (const Rot& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Mot> (const Mot& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Dil> (const Dil& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Mtd> (const Mtd& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Trs> (const Trs& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Mtt> (const Mtt& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Rtt> (const Rtt& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Rtd> (const Rtd& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Tvd> (const Tvd& a) {
-		return Trv (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Trv cast<Trv,Tsd> (const Tsd& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Trt> (const Trt& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Rvd> (const Rvd& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Tst> (const Tst& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Tvt> (const Tvt& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Bst> (const Bst& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Sca> (const Sca& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Par> (const Par& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Sta> (const Sta& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Tnv> (const Tnv& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Afl> (const Afl& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Dap> (const Dap& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Ori_Cir> (const Ori_Cir& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Ori_Lin> (const Ori_Lin& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Mnk_Par> (const Mnk_Par& a) {
-		return Trv (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Trv cast<Trv,Mnk_Sta> (const Mnk_Sta& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Mnk_Afl> (const Mnk_Afl& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Trv (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Trv cast<Trv,Hyp_Cir> (const Hyp_Cir& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Hyp_Lin> (const Hyp_Lin& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Hyp_Vec> (const Hyp_Vec& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pnt_Cir> (const Pnt_Cir& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pnt_Lin> (const Pnt_Lin& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pnt_Vec> (const Pnt_Vec& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pnt_Afp> (const Pnt_Afp& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pnt_Dal> (const Pnt_Dal& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Par_Biv> (const Par_Biv& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Sta_Biv> (const Sta_Biv& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Drv_Dap> (const Drv_Dap& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Tnv_Flp> (const Tnv_Flp& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Tnv_Biv> (const Tnv_Biv& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pln_Pln> (const Pln_Pln& a) {
-		return Trv (a[0],0,0,0);
-}  
-		 
-template<> inline const Trv cast<Trv,Vec_Aff> (const Vec_Aff& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Vec_Afp> (const Vec_Afp& a) {
-		return Trv (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trv cast<Trv,Vec_Dal> (const Vec_Dal& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Biv_Dap> (const Biv_Dap& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Biv_Daf> (const Biv_Daf& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Trv (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trv cast<Trv,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Trv (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trv cast<Trv,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Trv (a[0],a[1],a[2],a[3]);
-}  
-		 
-		
-
-		
-inline Mtd involute (const Mtd& a) { 
-	return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
-}
-			
-		 
-		
-
-		
-inline Mtd reverse (const Mtd& a) { 
-	return Mtd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
-}
-			
-		 
-		
-
-		
-inline Mtd conjugate (const Mtd& a) { 
-	return Mtd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
-}
-			
-		 
-template<> inline const Mtd cast<Mtd,Rot> (const Rot& a) {
-		return Mtd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mot> (const Mot& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,a[7]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Dil> (const Dil& a) {
-		return Mtd (a[0],0,0,0,0,0,0,a[1],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Trv> (const Trv& a) {
-		return Mtd (a[0],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Trs> (const Trs& a) {
-		return Mtd (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mtt> (const Mtt& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[15]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Rtt> (const Rtt& a) {
-		return Mtd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Rtd> (const Rtd& a) {
-		return Mtd (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Tvd> (const Tvd& a) {
-		return Mtd (a[0],0,0,0,0,0,0,a[4],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Tsd> (const Tsd& a) {
-		return Mtd (a[0],0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Trt> (const Trt& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Rvd> (const Rvd& a) {
-		return Mtd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Tst> (const Tst& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Tvt> (const Tvt& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Bst> (const Bst& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Sca> (const Sca& a) {
-		return Mtd (a[0],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk> (const Mnk& a) {
-		return Mtd (0,0,0,0,0,0,0,a[0],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Par> (const Par& a) {
-		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Sph> (const Sph& a) {
-		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[4]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Sta> (const Sta& a) {
-		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Drv> (const Drv& a) {
-		return Mtd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Drt> (const Drt& a) {
-		return Mtd (0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pln> (const Pln& a) {
-		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Flp> (const Flp& a) {
-		return Mtd (0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Dll> (const Dll& a) {
-		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Biv> (const Biv& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Afl> (const Afl& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Dap> (const Dap& a) {
-		return Mtd (0,0,0,0,0,0,0,a[3],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Daf> (const Daf& a) {
-		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Ori_Cir> (const Ori_Cir& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Ori_Drb> (const Ori_Drb& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Ori_Lin> (const Ori_Lin& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Ori_Dfp> (const Ori_Dfp& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Inf_Cir> (const Inf_Cir& a) {
-		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Inf_Afp> (const Inf_Afp& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Inf_Dal> (const Inf_Dal& a) {
-		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Par> (const Mnk_Par& a) {
-		return Mtd (a[0],0,0,0,a[4],a[5],a[6],0,a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Sph> (const Mnk_Sph& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[4]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Sta> (const Mnk_Sta& a) {
-		return Mtd (0,0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Pln> (const Mnk_Pln& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Dll> (const Mnk_Dll& a) {
-		return Mtd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Biv> (const Mnk_Biv& a) {
-		return Mtd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Afl> (const Mnk_Afl& a) {
-		return Mtd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Daf> (const Mnk_Daf& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Hyp_Pss> (const Hyp_Pss& a) {
-		return Mtd (0,0,0,0,0,0,0,0,0,0,0,a[1]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Mtd (a[0],0,0,0,a[4],a[5],a[6],a[7],0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Hyp_Cir> (const Hyp_Cir& a) {
-		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],0,a[9],a[10],a[11],a[13]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Hyp_Lin> (const Hyp_Lin& a) {
-		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],0,a[9],a[10],a[11],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[7]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Hyp_Vec> (const Hyp_Vec& a) {
-		return Mtd (0,0,0,0,a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pnt_Cir> (const Pnt_Cir& a) {
-		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[14]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pnt_Lin> (const Pnt_Lin& a) {
-		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[10]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pnt_Vec> (const Pnt_Vec& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pnt_Afp> (const Pnt_Afp& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],a[10]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pnt_Dal> (const Pnt_Dal& a) {
-		return Mtd (0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Mtd (0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Par_Biv> (const Par_Biv& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,a[10],a[11],a[12],a[14]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Sta_Biv> (const Sta_Biv& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,0,0,0,a[11]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Drv_Pln> (const Drv_Pln& a) {
-		return Mtd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Drv_Dap> (const Drv_Dap& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Tnv_Flp> (const Tnv_Flp& a) {
-		return Mtd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Lin_Dfp> (const Lin_Dfp& a) {
-		return Mtd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Lin_Dlp> (const Lin_Dlp& a) {
-		return Mtd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pln_Pln> (const Pln_Pln& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pln_Flp> (const Pln_Flp& a) {
-		return Mtd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pln_Biv> (const Pln_Biv& a) {
-		return Mtd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Vec_Aff> (const Vec_Aff& a) {
-		return Mtd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Vec_Afp> (const Vec_Afp& a) {
-		return Mtd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Vec_Dal> (const Vec_Dal& a) {
-		return Mtd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Vec_Mnv> (const Vec_Mnv& a) {
-		return Mtd (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Biv_Dap> (const Biv_Dap& a) {
-		return Mtd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Biv_Daf> (const Biv_Daf& a) {
-		return Mtd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Mtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],0,a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Mtd (0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[11]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Mtd (0,0,0,0,a[3],a[4],a[5],0,0,0,0,a[7]);
-}  
-		 
-template<> inline const Mtd cast<Mtd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Mtd (a[0],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-		
-
-		
-inline Trs involute (const Trs& a) { 
-	return Trs (a[0],a[1],a[2],a[3]);
-}
-			
-		 
-		
-
-		
-inline Trs reverse (const Trs& a) { 
-	return Trs (a[0],-a[1],-a[2],-a[3]);
-}
-			
-		 
-		
-
-		
-inline Trs conjugate (const Trs& a) { 
-	return Trs (a[0],-a[1],-a[2],-a[3]);
-}
-			
-		 
-template<> inline const Trs cast<Trs,Rot> (const Rot& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Mot> (const Mot& a) {
-		return Trs (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trs cast<Trs,Dil> (const Dil& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Trv> (const Trv& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Mtd> (const Mtd& a) {
-		return Trs (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trs cast<Trs,Mtt> (const Mtt& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Rtt> (const Rtt& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Rtd> (const Rtd& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Tvd> (const Tvd& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Tsd> (const Tsd& a) {
-		return Trs (a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Trs cast<Trs,Trt> (const Trt& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Rvd> (const Rvd& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Tst> (const Tst& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Tvt> (const Tvt& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Bst> (const Bst& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Sca> (const Sca& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Par> (const Par& a) {
-		return Trs (0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trs cast<Trs,Sta> (const Sta& a) {
-		return Trs (0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trs cast<Trs,Drv> (const Drv& a) {
-		return Trs (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trs cast<Trs,Flp> (const Flp& a) {
-		return Trs (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trs cast<Trs,Dll> (const Dll& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Inf_Cir> (const Inf_Cir& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Inf_Dal> (const Inf_Dal& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Mnk_Par> (const Mnk_Par& a) {
-		return Trs (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trs cast<Trs,Mnk_Sta> (const Mnk_Sta& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Mnk_Dll> (const Mnk_Dll& a) {
-		return Trs (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trs cast<Trs,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Trs (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trs cast<Trs,Hyp_Cir> (const Hyp_Cir& a) {
-		return Trs (0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trs cast<Trs,Hyp_Lin> (const Hyp_Lin& a) {
-		return Trs (0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trs cast<Trs,Hyp_Vec> (const Hyp_Vec& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pnt_Cir> (const Pnt_Cir& a) {
-		return Trs (0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pnt_Lin> (const Pnt_Lin& a) {
-		return Trs (0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pnt_Vec> (const Pnt_Vec& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pnt_Dal> (const Pnt_Dal& a) {
-		return Trs (0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Par_Biv> (const Par_Biv& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Sta_Biv> (const Sta_Biv& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Drv_Pln> (const Drv_Pln& a) {
-		return Trs (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trs cast<Trs,Drv_Dap> (const Drv_Dap& a) {
-		return Trs (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trs cast<Trs,Tnv_Flp> (const Tnv_Flp& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Lin_Dfp> (const Lin_Dfp& a) {
-		return Trs (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trs cast<Trs,Lin_Dlp> (const Lin_Dlp& a) {
-		return Trs (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pln_Pln> (const Pln_Pln& a) {
-		return Trs (a[0],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pln_Flp> (const Pln_Flp& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pln_Biv> (const Pln_Biv& a) {
-		return Trs (0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trs cast<Trs,Vec_Aff> (const Vec_Aff& a) {
-		return Trs (a[0],0,0,0);
-}  
-		 
-template<> inline const Trs cast<Trs,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Trs (a[0],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trs cast<Trs,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Trs (0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trs cast<Trs,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Trs (a[0],a[4],a[5],a[6]);
-}  
-		 
-		
-
-		
-inline Rtc involute (const Rtc& a) { 
-	return Rtc (-a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],-a[11],-a[12],-a[13],-a[14],-a[15]);
-}
-			
-		 
-		
-
-		
-inline Rtc reverse (const Rtc& a) { 
-	return Rtc (a[0],a[1],a[2],a[3],a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],-a[11],-a[12],-a[13],-a[14],a[15]);
-}
-			
-		 
-		
-
-		
-inline Rtc conjugate (const Rtc& a) { 
-	return Rtc (-a[0],-a[1],-a[2],-a[3],-a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],-a[15]);
-}
-			
-		 
-template<> inline const Rtc cast<Rtc,Ori> (const Ori& a) {
-		return Rtc (0,0,0,a[0],0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Inf> (const Inf& a) {
-		return Rtc (0,0,0,0,a[0],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Hyp> (const Hyp& a) {
-		return Rtc (0,0,0,a[0],a[1],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pss> (const Pss& a) {
-		return Rtc (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt> (const Pnt& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Cir> (const Cir& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Drb> (const Drb& a) {
-		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Tnb> (const Tnb& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Lin> (const Lin& a) {
-		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Dfp> (const Dfp& a) {
-		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Dlp> (const Dlp& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Vec> (const Vec& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Tri> (const Tri& a) {
-		return Rtc (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Aff> (const Aff& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Afp> (const Afp& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,a[3],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Dal> (const Dal& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnv> (const Mnv& a) {
-		return Rtc (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Ori_Par> (const Ori_Par& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Ori_Sph> (const Ori_Sph& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,a[3],a[4]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Ori_Sta> (const Ori_Sta& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,a[6],a[7],a[8],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Ori_Drv> (const Ori_Drv& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,a[3],a[4],a[5],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Ori_Drt> (const Ori_Drt& a) {
-		return Rtc (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],a[1]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Ori_Flp> (const Ori_Flp& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,a[4],a[5],a[6],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Inf_Par> (const Inf_Par& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Inf_Sph> (const Inf_Sph& a) {
-		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Inf_Sta> (const Inf_Sta& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Inf_Dap> (const Inf_Dap& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,0,0,0,a[4],a[5],a[6],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Pnt> (const Mnk_Pnt& a) {
-		return Rtc (0,0,0,a[0],a[1],0,0,0,0,0,0,a[2],a[3],a[4],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Cir> (const Mnk_Cir& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,a[9]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Lin> (const Mnk_Lin& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Dfp> (const Mnk_Dfp& a) {
-		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Dlp> (const Mnk_Dlp& a) {
-		return Rtc (0,0,0,0,a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Aff> (const Mnk_Aff& a) {
-		return Rtc (0,0,0,a[0],0,0,0,0,0,0,0,a[1],a[2],a[3],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Afp> (const Mnk_Afp& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Dal> (const Mnk_Dal& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Hyp_Par> (const Hyp_Par& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Hyp_Sph> (const Hyp_Sph& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,a[6],a[7]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Hyp_Sta> (const Hyp_Sta& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Hyp_Flp> (const Hyp_Flp& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],0,0,0,0,0,0,a[5],a[6],a[7],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Hyp_Biv> (const Hyp_Biv& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pss_Sta> (const Pss_Sta& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt_Par> (const Pnt_Par& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt_Sph> (const Pnt_Sph& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt_Flp> (const Pnt_Flp& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],0,0,0,a[5],a[6],a[7],a[8],a[9],a[10],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt_Dll> (const Pnt_Dll& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt_Biv> (const Pnt_Biv& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,a[9],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt_Afl> (const Pnt_Afl& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pnt_Dap> (const Pnt_Dap& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,a[8],a[9],a[10],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Par_Drb> (const Par_Drb& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Par_Tnb> (const Par_Tnb& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Par_Dfp> (const Par_Dfp& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Par_Afp> (const Par_Afp& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Par_Mnv> (const Par_Mnv& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,a[14]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Sph_Vec> (const Sph_Vec& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Sta_Vec> (const Sta_Vec& a) {
-		return Rtc (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,a[11],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Sta_Tri> (const Sta_Tri& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Sta_Mnv> (const Sta_Mnv& a) {
-		return Rtc (0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,a[11]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Drv_Tnb> (const Drv_Tnb& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Drv_Lin> (const Drv_Lin& a) {
-		return Rtc (0,0,0,0,a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Drv_Afp> (const Drv_Afp& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Tnv_Dfp> (const Tnv_Dfp& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Tnv_Vec> (const Tnv_Vec& a) {
-		return Rtc (0,0,0,a[0],0,a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Lin_Pln> (const Lin_Pln& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],0,0,0,a[7],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Lin_Flp> (const Lin_Flp& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Lin_Dll> (const Lin_Dll& a) {
-		return Rtc (0,0,0,0,a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pln_Dfp> (const Pln_Dfp& a) {
-		return Rtc (0,0,0,0,a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pln_Dlp> (const Pln_Dlp& a) {
-		return Rtc (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Pln_Mnv> (const Pln_Mnv& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,a[3],a[4],a[5],0,0,0,a[6],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Flp_Afp> (const Flp_Afp& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Vec_Biv> (const Vec_Biv& a) {
-		return Rtc (a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,a[3],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Vec_Afl> (const Vec_Afl& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,0,0,0,a[7],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Vec_Dap> (const Vec_Dap& a) {
-		return Rtc (0,0,0,a[0],0,a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Vec_Daf> (const Vec_Daf& a) {
-		return Rtc (0,0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Biv_Aff> (const Biv_Aff& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],0,0,0,0,0,0,a[6],0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Biv_Afp> (const Biv_Afp& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Biv_Dal> (const Biv_Dal& a) {
-		return Rtc (0,0,0,a[0],0,a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,a[7]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Biv_Mnv> (const Biv_Mnv& a) {
-		return Rtc (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Pnt_Sph> (const Mnk_Pnt_Sph& a) {
-		return Rtc (a[0],a[1],a[2],0,0,a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,a[9],a[10]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Pnt_Dll> (const Mnk_Pnt_Dll& a) {
-		return Rtc (a[0],a[1],a[2],0,a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0,a[13]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Mnk_Pnt_Afl> (const Mnk_Pnt_Afl& a) {
-		return Rtc (a[0],a[1],a[2],a[3],0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0,a[13]);
-}  
-		 
-template<> inline const Rtc cast<Rtc,Hyp_Vec_Mnv> (const Hyp_Vec_Mnv& a) {
-		return Rtc (0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0,0);
-}  
-		 
-		
-
-		
-inline Mtt involute (const Mtt& a) { 
-	return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15]);
-}
-			
-		 
-		
-
-		
-inline Mtt reverse (const Mtt& a) { 
-	return Mtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14],a[15]);
-}
-			
-		 
-		
-
-		
-inline Mtt conjugate (const Mtt& a) { 
-	return Mtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14],a[15]);
-}
-			
-		 
-template<> inline const Mtt cast<Mtt,Rot> (const Rot& a) {
-		return Mtt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mot> (const Mot& a) {
-		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0,a[7]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Dil> (const Dil& a) {
-		return Mtt (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Trv> (const Trv& a) {
-		return Mtt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mtd> (const Mtd& a) {
-		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,a[11]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Trs> (const Trs& a) {
-		return Mtt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Rtt> (const Rtt& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,a[7],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Rtd> (const Rtd& a) {
-		return Mtt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tvd> (const Tvd& a) {
-		return Mtt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tsd> (const Tsd& a) {
-		return Mtt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Trt> (const Trt& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Rvd> (const Rvd& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],a[11],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tst> (const Tst& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tvt> (const Tvt& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0,a[14]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Bst> (const Bst& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Sca> (const Sca& a) {
-		return Mtt (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk> (const Mnk& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Par> (const Par& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Sph> (const Sph& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Sta> (const Sta& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Drv> (const Drv& a) {
-		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Drt> (const Drt& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tnv> (const Tnv& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tnt> (const Tnt& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pln> (const Pln& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Flp> (const Flp& a) {
-		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Dll> (const Dll& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Biv> (const Biv& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Afl> (const Afl& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Dap> (const Dap& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Daf> (const Daf& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Ori_Cir> (const Ori_Cir& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Ori_Drb> (const Ori_Drb& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Ori_Lin> (const Ori_Lin& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Ori_Dfp> (const Ori_Dfp& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Inf_Cir> (const Inf_Cir& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0,a[9]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Inf_Afp> (const Inf_Afp& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0,a[6]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Inf_Dal> (const Inf_Dal& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Par> (const Mnk_Par& a) {
-		return Mtt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Sph> (const Mnk_Sph& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3],a[4]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Sta> (const Mnk_Sta& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Pln> (const Mnk_Pln& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Dll> (const Mnk_Dll& a) {
-		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Biv> (const Mnk_Biv& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Afl> (const Mnk_Afl& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Daf> (const Mnk_Daf& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Hyp_Pss> (const Hyp_Pss& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0],a[1]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Mtt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Hyp_Cir> (const Hyp_Cir& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Hyp_Lin> (const Hyp_Lin& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Hyp_Vec> (const Hyp_Vec& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pnt_Cir> (const Pnt_Cir& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pnt_Lin> (const Pnt_Lin& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0,a[13]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pnt_Vec> (const Pnt_Vec& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pnt_Afp> (const Pnt_Afp& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pnt_Dal> (const Pnt_Dal& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Par_Biv> (const Par_Biv& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Sta_Biv> (const Sta_Biv& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,a[10],a[11]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Drv_Pln> (const Drv_Pln& a) {
-		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Drv_Dap> (const Drv_Dap& a) {
-		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tnv_Flp> (const Tnv_Flp& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Tnv_Biv> (const Tnv_Biv& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Lin_Dfp> (const Lin_Dfp& a) {
-		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0,a[6]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Lin_Dlp> (const Lin_Dlp& a) {
-		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[7]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pln_Pln> (const Pln_Pln& a) {
-		return Mtt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pln_Flp> (const Pln_Flp& a) {
-		return Mtt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0,a[6]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pln_Biv> (const Pln_Biv& a) {
-		return Mtt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Vec_Aff> (const Vec_Aff& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Vec_Afp> (const Vec_Afp& a) {
-		return Mtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,a[6],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Vec_Dal> (const Vec_Dal& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],a[7],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Vec_Mnv> (const Vec_Mnv& a) {
-		return Mtt (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Biv_Dap> (const Biv_Dap& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Biv_Daf> (const Biv_Daf& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0,0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],0,a[13]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Mtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Mtt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7]);
-}  
-		 
-template<> inline const Mtt cast<Mtt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Mtt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0);
-}  
-		 
-		
-
-		
-inline Rtt involute (const Rtt& a) { 
-	return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
-}
-			
-		 
-		
-
-		
-inline Rtt reverse (const Rtt& a) { 
-	return Rtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
-}
-			
-		 
-		
-
-		
-inline Rtt conjugate (const Rtt& a) { 
-	return Rtt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],a[7]);
-}
-			
-		 
-template<> inline const Rtt cast<Rtt,Rot> (const Rot& a) {
-		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mot> (const Mot& a) {
-		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Dil> (const Dil& a) {
-		return Rtt (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Trv> (const Trv& a) {
-		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mtd> (const Mtd& a) {
-		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Trs> (const Trs& a) {
-		return Rtt (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mtt> (const Mtt& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[14]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Rtd> (const Rtd& a) {
-		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tvd> (const Tvd& a) {
-		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tsd> (const Tsd& a) {
-		return Rtt (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Trt> (const Trt& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Rvd> (const Rvd& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[11]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tst> (const Tst& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[14]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tvt> (const Tvt& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Bst> (const Bst& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Sca> (const Sca& a) {
-		return Rtt (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Par> (const Par& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Sph> (const Sph& a) {
-		return Rtt (0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Sta> (const Sta& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tnv> (const Tnv& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tnt> (const Tnt& a) {
-		return Rtt (0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Dll> (const Dll& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Biv> (const Biv& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Afl> (const Afl& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Dap> (const Dap& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Daf> (const Daf& a) {
-		return Rtt (0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Ori_Cir> (const Ori_Cir& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Ori_Drb> (const Ori_Drb& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Ori_Lin> (const Ori_Lin& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Ori_Dfp> (const Ori_Dfp& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,a[6]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Inf_Cir> (const Inf_Cir& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Inf_Afp> (const Inf_Afp& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Inf_Dal> (const Inf_Dal& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Par> (const Mnk_Par& a) {
-		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Sph> (const Mnk_Sph& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,a[3]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Sta> (const Mnk_Sta& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Pln> (const Mnk_Pln& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Afl> (const Mnk_Afl& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Daf> (const Mnk_Daf& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,a[3]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Hyp_Pss> (const Hyp_Pss& a) {
-		return Rtt (0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Hyp_Cir> (const Hyp_Cir& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[12]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Hyp_Lin> (const Hyp_Lin& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,a[6]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Hyp_Vec> (const Hyp_Vec& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pnt_Cir> (const Pnt_Cir& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[13]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pnt_Lin> (const Pnt_Lin& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,a[9]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pnt_Vec> (const Pnt_Vec& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pnt_Afp> (const Pnt_Afp& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pnt_Dal> (const Pnt_Dal& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[13]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Par_Biv> (const Par_Biv& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[13]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Sta_Biv> (const Sta_Biv& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Drv_Dap> (const Drv_Dap& a) {
-		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tnv_Flp> (const Tnv_Flp& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Tnv_Biv> (const Tnv_Biv& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pln_Pln> (const Pln_Pln& a) {
-		return Rtt (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pln_Flp> (const Pln_Flp& a) {
-		return Rtt (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Vec_Aff> (const Vec_Aff& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Vec_Afp> (const Vec_Afp& a) {
-		return Rtt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Vec_Dal> (const Vec_Dal& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],a[7]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Biv_Dap> (const Biv_Dap& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],a[6]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Biv_Daf> (const Biv_Daf& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Rtt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[13]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],a[10]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Rtt (0,0,0,0,a[0],a[1],a[2],a[6]);
-}  
-		 
-template<> inline const Rtt cast<Rtt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Rtt (a[0],0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-		
-
-		
-inline Rtd involute (const Rtd& a) { 
-	return Rtd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
-}
-			
-		 
-		
-
-		
-inline Rtd reverse (const Rtd& a) { 
-	return Rtd (a[0],-a[1],-a[2],-a[3],-a[4],a[5],a[6],a[7]);
-}
-			
-		 
-		
-
-		
-inline Rtd conjugate (const Rtd& a) { 
-	return Rtd (a[0],-a[1],-a[2],-a[3],-a[4],a[5],a[6],a[7]);
-}
-			
-		 
-template<> inline const Rtd cast<Rtd,Rot> (const Rot& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mot> (const Mot& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Dil> (const Dil& a) {
-		return Rtd (a[0],0,0,0,a[1],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Trv> (const Trv& a) {
-		return Rtd (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mtd> (const Mtd& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Trs> (const Trs& a) {
-		return Rtd (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mtt> (const Mtt& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Rtt> (const Rtt& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Tvd> (const Tvd& a) {
-		return Rtd (a[0],0,0,0,a[4],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Tsd> (const Tsd& a) {
-		return Rtd (a[0],0,0,0,a[4],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Trt> (const Trt& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Rvd> (const Rvd& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Tst> (const Tst& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Tvt> (const Tvt& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Bst> (const Bst& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[10],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Sca> (const Sca& a) {
-		return Rtd (a[0],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk> (const Mnk& a) {
-		return Rtd (0,0,0,0,a[0],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Par> (const Par& a) {
-		return Rtd (0,a[0],a[1],a[2],a[9],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Sph> (const Sph& a) {
-		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Sta> (const Sta& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pln> (const Pln& a) {
-		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Flp> (const Flp& a) {
-		return Rtd (0,0,0,0,a[3],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Dll> (const Dll& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Biv> (const Biv& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Afl> (const Afl& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Dap> (const Dap& a) {
-		return Rtd (0,0,0,0,a[3],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Daf> (const Daf& a) {
-		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Ori_Cir> (const Ori_Cir& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Ori_Drb> (const Ori_Drb& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Ori_Lin> (const Ori_Lin& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Ori_Dfp> (const Ori_Dfp& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Inf_Cir> (const Inf_Cir& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Inf_Afp> (const Inf_Afp& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Inf_Dal> (const Inf_Dal& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Par> (const Mnk_Par& a) {
-		return Rtd (a[0],0,0,0,0,a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Sph> (const Mnk_Sph& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Sta> (const Mnk_Sta& a) {
-		return Rtd (0,0,0,0,0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Pln> (const Mnk_Pln& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Dll> (const Mnk_Dll& a) {
-		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Biv> (const Mnk_Biv& a) {
-		return Rtd (0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Afl> (const Mnk_Afl& a) {
-		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Daf> (const Mnk_Daf& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Rtd (a[0],0,0,0,a[7],0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Hyp_Cir> (const Hyp_Cir& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Hyp_Lin> (const Hyp_Lin& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pnt_Cir> (const Pnt_Cir& a) {
-		return Rtd (0,a[0],a[1],a[2],a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pnt_Lin> (const Pnt_Lin& a) {
-		return Rtd (0,a[0],a[1],a[2],a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pnt_Vec> (const Pnt_Vec& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pnt_Afp> (const Pnt_Afp& a) {
-		return Rtd (0,a[0],a[1],a[2],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pnt_Dal> (const Pnt_Dal& a) {
-		return Rtd (0,a[0],a[1],a[2],a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Rtd (0,0,0,0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Par_Biv> (const Par_Biv& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Sta_Biv> (const Sta_Biv& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Drv_Dap> (const Drv_Dap& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Tnv_Flp> (const Tnv_Flp& a) {
-		return Rtd (a[0],a[1],a[2],a[3],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Lin_Dfp> (const Lin_Dfp& a) {
-		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Lin_Dlp> (const Lin_Dlp& a) {
-		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pln_Pln> (const Pln_Pln& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pln_Flp> (const Pln_Flp& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pln_Biv> (const Pln_Biv& a) {
-		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Vec_Aff> (const Vec_Aff& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Vec_Afp> (const Vec_Afp& a) {
-		return Rtd (0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Vec_Dal> (const Vec_Dal& a) {
-		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Vec_Mnv> (const Vec_Mnv& a) {
-		return Rtd (0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Biv_Dap> (const Biv_Dap& a) {
-		return Rtd (0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Biv_Daf> (const Biv_Daf& a) {
-		return Rtd (0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Rtd (a[0],a[1],a[2],a[3],0,a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Rtd (0,0,0,0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Rtd cast<Rtd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Rtd (a[0],0,0,0,a[7],a[8],a[9],a[10]);
-}  
-		 
-		
-
-		
-inline Tvd involute (const Tvd& a) { 
-	return Tvd (a[0],a[1],a[2],a[3],a[4]);
-}
-			
-		 
-		
-
-		
-inline Tvd reverse (const Tvd& a) { 
-	return Tvd (a[0],-a[1],-a[2],-a[3],-a[4]);
-}
-			
-		 
-		
-
-		
-inline Tvd conjugate (const Tvd& a) { 
-	return Tvd (a[0],-a[1],-a[2],-a[3],-a[4]);
-}
-			
-		 
-template<> inline const Tvd cast<Tvd,Rot> (const Rot& a) {
-		return Tvd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mot> (const Mot& a) {
-		return Tvd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Dil> (const Dil& a) {
-		return Tvd (a[0],0,0,0,a[1]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Trv> (const Trv& a) {
-		return Tvd (a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mtd> (const Mtd& a) {
-		return Tvd (a[0],0,0,0,a[7]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Trs> (const Trs& a) {
-		return Tvd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mtt> (const Mtt& a) {
-		return Tvd (a[0],a[4],a[5],a[6],a[10]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Rtt> (const Rtt& a) {
-		return Tvd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Rtd> (const Rtd& a) {
-		return Tvd (a[0],0,0,0,a[4]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Tsd> (const Tsd& a) {
-		return Tvd (a[0],0,0,0,a[4]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Trt> (const Trt& a) {
-		return Tvd (a[0],a[4],a[5],a[6],a[10]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Rvd> (const Rvd& a) {
-		return Tvd (a[0],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Tst> (const Tst& a) {
-		return Tvd (a[0],a[4],a[5],a[6],a[10]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Tvt> (const Tvt& a) {
-		return Tvd (a[0],a[4],a[5],a[6],a[10]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Bst> (const Bst& a) {
-		return Tvd (a[0],a[4],a[5],a[6],a[10]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Sca> (const Sca& a) {
-		return Tvd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mnk> (const Mnk& a) {
-		return Tvd (0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Par> (const Par& a) {
-		return Tvd (0,a[3],a[4],a[5],a[9]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Sta> (const Sta& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Tnv> (const Tnv& a) {
-		return Tvd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Flp> (const Flp& a) {
-		return Tvd (0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Afl> (const Afl& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Dap> (const Dap& a) {
-		return Tvd (0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Ori_Cir> (const Ori_Cir& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Ori_Lin> (const Ori_Lin& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mnk_Par> (const Mnk_Par& a) {
-		return Tvd (a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mnk_Sta> (const Mnk_Sta& a) {
-		return Tvd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mnk_Afl> (const Mnk_Afl& a) {
-		return Tvd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Tvd (a[0],a[1],a[2],a[3],a[7]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Hyp_Cir> (const Hyp_Cir& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Hyp_Lin> (const Hyp_Lin& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Hyp_Vec> (const Hyp_Vec& a) {
-		return Tvd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pnt_Cir> (const Pnt_Cir& a) {
-		return Tvd (0,a[3],a[4],a[5],a[9]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pnt_Lin> (const Pnt_Lin& a) {
-		return Tvd (0,a[3],a[4],a[5],a[9]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pnt_Vec> (const Pnt_Vec& a) {
-		return Tvd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pnt_Afp> (const Pnt_Afp& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pnt_Dal> (const Pnt_Dal& a) {
-		return Tvd (0,a[3],a[4],a[5],a[9]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Tvd (0,a[0],a[1],a[2],a[6]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Par_Biv> (const Par_Biv& a) {
-		return Tvd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Sta_Biv> (const Sta_Biv& a) {
-		return Tvd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Drv_Dap> (const Drv_Dap& a) {
-		return Tvd (a[0],0,0,0,a[7]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Tnv_Flp> (const Tnv_Flp& a) {
-		return Tvd (a[0],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Tnv_Biv> (const Tnv_Biv& a) {
-		return Tvd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Lin_Dlp> (const Lin_Dlp& a) {
-		return Tvd (0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pln_Pln> (const Pln_Pln& a) {
-		return Tvd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pln_Biv> (const Pln_Biv& a) {
-		return Tvd (0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Vec_Aff> (const Vec_Aff& a) {
-		return Tvd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Vec_Afp> (const Vec_Afp& a) {
-		return Tvd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Vec_Dal> (const Vec_Dal& a) {
-		return Tvd (0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Vec_Mnv> (const Vec_Mnv& a) {
-		return Tvd (0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Biv_Dap> (const Biv_Dap& a) {
-		return Tvd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Biv_Daf> (const Biv_Daf& a) {
-		return Tvd (0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Tvd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Tvd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Tvd (0,a[0],a[1],a[2],a[6]);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Tvd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvd cast<Tvd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Tvd (a[0],a[1],a[2],a[3],a[7]);
-}  
-		 
-		
-
-		
-inline Tsd involute (const Tsd& a) { 
-	return Tsd (a[0],a[1],a[2],a[3],a[4]);
-}
-			
-		 
-		
-
-		
-inline Tsd reverse (const Tsd& a) { 
-	return Tsd (a[0],-a[1],-a[2],-a[3],-a[4]);
-}
-			
-		 
-		
-
-		
-inline Tsd conjugate (const Tsd& a) { 
-	return Tsd (a[0],-a[1],-a[2],-a[3],-a[4]);
-}
-			
-		 
-template<> inline const Tsd cast<Tsd,Rot> (const Rot& a) {
-		return Tsd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mot> (const Mot& a) {
-		return Tsd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Dil> (const Dil& a) {
-		return Tsd (a[0],0,0,0,a[1]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Trv> (const Trv& a) {
-		return Tsd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mtd> (const Mtd& a) {
-		return Tsd (a[0],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Trs> (const Trs& a) {
-		return Tsd (a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mtt> (const Mtt& a) {
-		return Tsd (a[0],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Rtt> (const Rtt& a) {
-		return Tsd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Rtd> (const Rtd& a) {
-		return Tsd (a[0],0,0,0,a[4]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Tvd> (const Tvd& a) {
-		return Tsd (a[0],0,0,0,a[4]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Trt> (const Trt& a) {
-		return Tsd (a[0],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Rvd> (const Rvd& a) {
-		return Tsd (a[0],0,0,0,a[7]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Tst> (const Tst& a) {
-		return Tsd (a[0],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Tvt> (const Tvt& a) {
-		return Tsd (a[0],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Bst> (const Bst& a) {
-		return Tsd (a[0],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Sca> (const Sca& a) {
-		return Tsd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mnk> (const Mnk& a) {
-		return Tsd (0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Par> (const Par& a) {
-		return Tsd (0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Sta> (const Sta& a) {
-		return Tsd (0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Drv> (const Drv& a) {
-		return Tsd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Flp> (const Flp& a) {
-		return Tsd (0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Dll> (const Dll& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Dap> (const Dap& a) {
-		return Tsd (0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Inf_Cir> (const Inf_Cir& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Inf_Dal> (const Inf_Dal& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mnk_Par> (const Mnk_Par& a) {
-		return Tsd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mnk_Sta> (const Mnk_Sta& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mnk_Dll> (const Mnk_Dll& a) {
-		return Tsd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Tsd (a[0],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Hyp_Cir> (const Hyp_Cir& a) {
-		return Tsd (0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Hyp_Lin> (const Hyp_Lin& a) {
-		return Tsd (0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Hyp_Vec> (const Hyp_Vec& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pnt_Cir> (const Pnt_Cir& a) {
-		return Tsd (0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pnt_Lin> (const Pnt_Lin& a) {
-		return Tsd (0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pnt_Vec> (const Pnt_Vec& a) {
-		return Tsd (a[0],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pnt_Dal> (const Pnt_Dal& a) {
-		return Tsd (0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Tsd (0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Par_Biv> (const Par_Biv& a) {
-		return Tsd (a[0],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Sta_Biv> (const Sta_Biv& a) {
-		return Tsd (a[0],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Drv_Pln> (const Drv_Pln& a) {
-		return Tsd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Drv_Dap> (const Drv_Dap& a) {
-		return Tsd (a[0],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Tnv_Flp> (const Tnv_Flp& a) {
-		return Tsd (a[0],0,0,0,a[7]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Lin_Dfp> (const Lin_Dfp& a) {
-		return Tsd (0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Lin_Dlp> (const Lin_Dlp& a) {
-		return Tsd (0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pln_Pln> (const Pln_Pln& a) {
-		return Tsd (a[0],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pln_Flp> (const Pln_Flp& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pln_Biv> (const Pln_Biv& a) {
-		return Tsd (0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Vec_Aff> (const Vec_Aff& a) {
-		return Tsd (a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Vec_Dal> (const Vec_Dal& a) {
-		return Tsd (0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Vec_Mnv> (const Vec_Mnv& a) {
-		return Tsd (0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Biv_Daf> (const Biv_Daf& a) {
-		return Tsd (0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Tsd (a[0],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Tsd (a[0],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Tsd (0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Tsd (0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tsd cast<Tsd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Tsd (a[0],a[4],a[5],a[6],a[7]);
-}  
-		 
-		
-
-		
-inline Trt involute (const Trt& a) { 
-	return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}
-			
-		 
-		
-
-		
-inline Trt reverse (const Trt& a) { 
-	return Trt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13]);
-}
-			
-		 
-		
-
-		
-inline Trt conjugate (const Trt& a) { 
-	return Trt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13]);
-}
-			
-		 
-template<> inline const Trt cast<Trt,Rot> (const Rot& a) {
-		return Trt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Mot> (const Mot& a) {
-		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Dil> (const Dil& a) {
-		return Trt (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Trv> (const Trv& a) {
-		return Trt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Mtd> (const Mtd& a) {
-		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Trt cast<Trt,Trs> (const Trs& a) {
-		return Trt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Mtt> (const Mtt& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Trt cast<Trt,Rtt> (const Rtt& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Rtd> (const Rtd& a) {
-		return Trt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Trt cast<Trt,Tvd> (const Tvd& a) {
-		return Trt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Tsd> (const Tsd& a) {
-		return Trt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Rvd> (const Rvd& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Trt cast<Trt,Tst> (const Tst& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Trt cast<Trt,Tvt> (const Tvt& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Trt cast<Trt,Bst> (const Bst& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Sca> (const Sca& a) {
-		return Trt (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk> (const Mnk& a) {
-		return Trt (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Par> (const Par& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Sph> (const Sph& a) {
-		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trt cast<Trt,Sta> (const Sta& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Drv> (const Drv& a) {
-		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Tnv> (const Tnv& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Pln> (const Pln& a) {
-		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trt cast<Trt,Flp> (const Flp& a) {
-		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Dll> (const Dll& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Biv> (const Biv& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Afl> (const Afl& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Dap> (const Dap& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Daf> (const Daf& a) {
-		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trt cast<Trt,Ori_Cir> (const Ori_Cir& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trt cast<Trt,Ori_Drb> (const Ori_Drb& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Ori_Lin> (const Ori_Lin& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trt cast<Trt,Ori_Dfp> (const Ori_Dfp& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Inf_Cir> (const Inf_Cir& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trt cast<Trt,Inf_Afp> (const Inf_Afp& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Inf_Dal> (const Inf_Dal& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Par> (const Mnk_Par& a) {
-		return Trt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Sph> (const Mnk_Sph& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Sta> (const Mnk_Sta& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Pln> (const Mnk_Pln& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Dll> (const Mnk_Dll& a) {
-		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Biv> (const Mnk_Biv& a) {
-		return Trt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Afl> (const Mnk_Afl& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Daf> (const Mnk_Daf& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Trt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Hyp_Cir> (const Hyp_Cir& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Trt cast<Trt,Hyp_Lin> (const Hyp_Lin& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Trt cast<Trt,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Hyp_Vec> (const Hyp_Vec& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Pnt_Cir> (const Pnt_Cir& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Trt cast<Trt,Pnt_Lin> (const Pnt_Lin& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Trt cast<Trt,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trt cast<Trt,Pnt_Vec> (const Pnt_Vec& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Pnt_Afp> (const Pnt_Afp& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8]);
-}  
-		 
-template<> inline const Trt cast<Trt,Pnt_Dal> (const Pnt_Dal& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Trt cast<Trt,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trt cast<Trt,Par_Biv> (const Par_Biv& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Trt cast<Trt,Sta_Biv> (const Sta_Biv& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Drv_Pln> (const Drv_Pln& a) {
-		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Drv_Dap> (const Drv_Dap& a) {
-		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Trt cast<Trt,Tnv_Flp> (const Tnv_Flp& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Trt cast<Trt,Tnv_Biv> (const Tnv_Biv& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Lin_Dfp> (const Lin_Dfp& a) {
-		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Lin_Dlp> (const Lin_Dlp& a) {
-		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trt cast<Trt,Pln_Pln> (const Pln_Pln& a) {
-		return Trt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Pln_Flp> (const Pln_Flp& a) {
-		return Trt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Pln_Biv> (const Pln_Biv& a) {
-		return Trt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trt cast<Trt,Vec_Aff> (const Vec_Aff& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Vec_Afp> (const Vec_Afp& a) {
-		return Trt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Vec_Dal> (const Vec_Dal& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trt cast<Trt,Vec_Mnv> (const Vec_Mnv& a) {
-		return Trt (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Trt cast<Trt,Biv_Dap> (const Biv_Dap& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5]);
-}  
-		 
-template<> inline const Trt cast<Trt,Biv_Daf> (const Biv_Daf& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Trt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Trt cast<Trt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Trt cast<Trt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Trt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Trt cast<Trt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Trt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-		
-
-		
-inline Rvd involute (const Rvd& a) { 
-	return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
-}
-			
-		 
-		
-
-		
-inline Rvd reverse (const Rvd& a) { 
-	return Rvd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
-}
-			
-		 
-		
-
-		
-inline Rvd conjugate (const Rvd& a) { 
-	return Rvd (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],a[8],a[9],a[10],a[11]);
-}
-			
-		 
-template<> inline const Rvd cast<Rvd,Rot> (const Rot& a) {
-		return Rvd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mot> (const Mot& a) {
-		return Rvd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Dil> (const Dil& a) {
-		return Rvd (a[0],0,0,0,0,0,0,a[1],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Trv> (const Trv& a) {
-		return Rvd (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mtd> (const Mtd& a) {
-		return Rvd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Trs> (const Trs& a) {
-		return Rvd (a[0],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mtt> (const Mtt& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Rtt> (const Rtt& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,a[7]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Rtd> (const Rtd& a) {
-		return Rvd (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tvd> (const Tvd& a) {
-		return Rvd (a[0],0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tsd> (const Tsd& a) {
-		return Rvd (a[0],0,0,0,0,0,0,a[4],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Trt> (const Trt& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tst> (const Tst& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tvt> (const Tvt& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Bst> (const Bst& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[10],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Sca> (const Sca& a) {
-		return Rvd (a[0],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk> (const Mnk& a) {
-		return Rvd (0,0,0,0,0,0,0,a[0],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Par> (const Par& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Sph> (const Sph& a) {
-		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Sta> (const Sta& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tnv> (const Tnv& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tnt> (const Tnt& a) {
-		return Rvd (0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pln> (const Pln& a) {
-		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Flp> (const Flp& a) {
-		return Rvd (0,0,0,0,0,0,0,a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Dll> (const Dll& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Biv> (const Biv& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Afl> (const Afl& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Dap> (const Dap& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Daf> (const Daf& a) {
-		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Ori_Cir> (const Ori_Cir& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Ori_Drb> (const Ori_Drb& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Ori_Lin> (const Ori_Lin& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Ori_Dfp> (const Ori_Dfp& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Inf_Cir> (const Inf_Cir& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Inf_Afp> (const Inf_Afp& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Inf_Dal> (const Inf_Dal& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Par> (const Mnk_Par& a) {
-		return Rvd (a[0],0,0,0,a[1],a[2],a[3],0,a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Sph> (const Mnk_Sph& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Sta> (const Mnk_Sta& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Pln> (const Mnk_Pln& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Dll> (const Mnk_Dll& a) {
-		return Rvd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Biv> (const Mnk_Biv& a) {
-		return Rvd (0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Afl> (const Mnk_Afl& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Daf> (const Mnk_Daf& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Hyp_Pss> (const Hyp_Pss& a) {
-		return Rvd (0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Rvd (a[0],0,0,0,a[1],a[2],a[3],a[7],0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Hyp_Cir> (const Hyp_Cir& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Hyp_Lin> (const Hyp_Lin& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[9],a[10],a[11],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Hyp_Vec> (const Hyp_Vec& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pnt_Cir> (const Pnt_Cir& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pnt_Lin> (const Pnt_Lin& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pnt_Vec> (const Pnt_Vec& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pnt_Afp> (const Pnt_Afp& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pnt_Dal> (const Pnt_Dal& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Par_Biv> (const Par_Biv& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Sta_Biv> (const Sta_Biv& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,a[10]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Drv_Dap> (const Drv_Dap& a) {
-		return Rvd (a[0],a[1],a[2],a[3],0,0,0,a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tnv_Flp> (const Tnv_Flp& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Tnv_Biv> (const Tnv_Biv& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Lin_Dfp> (const Lin_Dfp& a) {
-		return Rvd (0,0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Lin_Dlp> (const Lin_Dlp& a) {
-		return Rvd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pln_Pln> (const Pln_Pln& a) {
-		return Rvd (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pln_Flp> (const Pln_Flp& a) {
-		return Rvd (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pln_Biv> (const Pln_Biv& a) {
-		return Rvd (0,0,0,0,0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Vec_Aff> (const Vec_Aff& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Vec_Afp> (const Vec_Afp& a) {
-		return Rvd (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Vec_Dal> (const Vec_Dal& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Vec_Mnv> (const Vec_Mnv& a) {
-		return Rvd (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Biv_Dap> (const Biv_Dap& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Biv_Daf> (const Biv_Daf& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Rvd (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Rvd (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[6]);
-}  
-		 
-template<> inline const Rvd cast<Rvd,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Rvd (a[0],0,0,0,a[1],a[2],a[3],a[7],a[8],a[9],a[10],0);
-}  
-		 
-		
-
-		
-inline Tst involute (const Tst& a) { 
-	return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
-}
-			
-		 
-		
-
-		
-inline Tst reverse (const Tst& a) { 
-	return Tst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
-}
-			
-		 
-		
-
-		
-inline Tst conjugate (const Tst& a) { 
-	return Tst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
-}
-			
-		 
-template<> inline const Tst cast<Tst,Rot> (const Rot& a) {
-		return Tst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mot> (const Mot& a) {
-		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Dil> (const Dil& a) {
-		return Tst (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Trv> (const Trv& a) {
-		return Tst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mtd> (const Mtd& a) {
-		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Trs> (const Trs& a) {
-		return Tst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mtt> (const Mtt& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
-}  
-		 
-template<> inline const Tst cast<Tst,Rtt> (const Rtt& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,a[7]);
-}  
-		 
-template<> inline const Tst cast<Tst,Rtd> (const Rtd& a) {
-		return Tst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Tvd> (const Tvd& a) {
-		return Tst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Tsd> (const Tsd& a) {
-		return Tst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Trt> (const Trt& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Rvd> (const Rvd& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Tst cast<Tst,Tvt> (const Tvt& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Bst> (const Bst& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Sca> (const Sca& a) {
-		return Tst (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk> (const Mnk& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Par> (const Par& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Sph> (const Sph& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tst cast<Tst,Sta> (const Sta& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Drv> (const Drv& a) {
-		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Tnv> (const Tnv& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Tnt> (const Tnt& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Tst cast<Tst,Pln> (const Pln& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Flp> (const Flp& a) {
-		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Dll> (const Dll& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Biv> (const Biv& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Afl> (const Afl& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Dap> (const Dap& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Daf> (const Daf& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tst cast<Tst,Ori_Cir> (const Ori_Cir& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tst cast<Tst,Ori_Drb> (const Ori_Drb& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Ori_Lin> (const Ori_Lin& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Ori_Dfp> (const Ori_Dfp& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Tst cast<Tst,Inf_Cir> (const Inf_Cir& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Inf_Afp> (const Inf_Afp& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Inf_Dal> (const Inf_Dal& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Par> (const Mnk_Par& a) {
-		return Tst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Sph> (const Mnk_Sph& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Sta> (const Mnk_Sta& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Pln> (const Mnk_Pln& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Dll> (const Mnk_Dll& a) {
-		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Biv> (const Mnk_Biv& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Afl> (const Mnk_Afl& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Daf> (const Mnk_Daf& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tst cast<Tst,Hyp_Pss> (const Hyp_Pss& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Tst cast<Tst,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Tst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Hyp_Cir> (const Hyp_Cir& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],a[12]);
-}  
-		 
-template<> inline const Tst cast<Tst,Hyp_Lin> (const Hyp_Lin& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Tst cast<Tst,Hyp_Vec> (const Hyp_Vec& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Pnt_Cir> (const Pnt_Cir& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Tst cast<Tst,Pnt_Lin> (const Pnt_Lin& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tst cast<Tst,Pnt_Vec> (const Pnt_Vec& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Pnt_Afp> (const Pnt_Afp& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tst cast<Tst,Pnt_Dal> (const Pnt_Dal& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Tst cast<Tst,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Par_Biv> (const Par_Biv& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Tst cast<Tst,Sta_Biv> (const Sta_Biv& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,a[10]);
-}  
-		 
-template<> inline const Tst cast<Tst,Drv_Pln> (const Drv_Pln& a) {
-		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Drv_Dap> (const Drv_Dap& a) {
-		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Tnv_Flp> (const Tnv_Flp& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Tnv_Biv> (const Tnv_Biv& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tst cast<Tst,Lin_Dfp> (const Lin_Dfp& a) {
-		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Lin_Dlp> (const Lin_Dlp& a) {
-		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Pln_Pln> (const Pln_Pln& a) {
-		return Tst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Pln_Flp> (const Pln_Flp& a) {
-		return Tst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Pln_Biv> (const Pln_Biv& a) {
-		return Tst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Vec_Aff> (const Vec_Aff& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tst cast<Tst,Vec_Afp> (const Vec_Afp& a) {
-		return Tst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,a[6]);
-}  
-		 
-template<> inline const Tst cast<Tst,Vec_Dal> (const Vec_Dal& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Tst cast<Tst,Vec_Mnv> (const Vec_Mnv& a) {
-		return Tst (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Biv_Dap> (const Biv_Dap& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Tst cast<Tst,Biv_Daf> (const Biv_Daf& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Tst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Tst cast<Tst,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Tst cast<Tst,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Tst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6]);
-}  
-		 
-template<> inline const Tst cast<Tst,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Tst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-		
-
-		
-inline Tvt involute (const Tvt& a) { 
-	return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]);
-}
-			
-		 
-		
-
-		
-inline Tvt reverse (const Tvt& a) { 
-	return Tvt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
-}
-			
-		 
-		
-
-		
-inline Tvt conjugate (const Tvt& a) { 
-	return Tvt (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10],a[11],a[12],a[13],a[14]);
-}
-			
-		 
-template<> inline const Tvt cast<Tvt,Rot> (const Rot& a) {
-		return Tvt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mot> (const Mot& a) {
-		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,a[7]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Dil> (const Dil& a) {
-		return Tvt (a[0],0,0,0,0,0,0,0,0,0,a[1],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Trv> (const Trv& a) {
-		return Tvt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mtd> (const Mtd& a) {
-		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Trs> (const Trs& a) {
-		return Tvt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mtt> (const Mtt& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[15]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Rtt> (const Rtt& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Rtd> (const Rtd& a) {
-		return Tvt (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4],a[5],a[6],a[7],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Tvd> (const Tvd& a) {
-		return Tvt (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Tsd> (const Tsd& a) {
-		return Tvt (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Trt> (const Trt& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Rvd> (const Rvd& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Tst> (const Tst& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Bst> (const Bst& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Sca> (const Sca& a) {
-		return Tvt (a[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk> (const Mnk& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,a[0],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Par> (const Par& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Sph> (const Sph& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[4]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Sta> (const Sta& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Drv> (const Drv& a) {
-		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Drt> (const Drt& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Tnv> (const Tnv& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pln> (const Pln& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Flp> (const Flp& a) {
-		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Dll> (const Dll& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Biv> (const Biv& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Afl> (const Afl& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Dap> (const Dap& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Daf> (const Daf& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Ori_Cir> (const Ori_Cir& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Ori_Drb> (const Ori_Drb& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Ori_Lin> (const Ori_Lin& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Ori_Dfp> (const Ori_Dfp& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Inf_Cir> (const Inf_Cir& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Inf_Afp> (const Inf_Afp& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Inf_Dal> (const Inf_Dal& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Par> (const Mnk_Par& a) {
-		return Tvt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0,a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Sph> (const Mnk_Sph& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[4]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Sta> (const Mnk_Sta& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Pln> (const Mnk_Pln& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Dll> (const Mnk_Dll& a) {
-		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Biv> (const Mnk_Biv& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Afl> (const Mnk_Afl& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Daf> (const Mnk_Daf& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Hyp_Pss> (const Hyp_Pss& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,0,0,0,0,a[1]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Tvt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Hyp_Cir> (const Hyp_Cir& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],a[13]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Hyp_Lin> (const Hyp_Lin& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0,a[9],a[10],a[11],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,0,0,0,0,a[3],a[4],a[5],a[7]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Hyp_Vec> (const Hyp_Vec& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pnt_Cir> (const Pnt_Cir& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[14]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pnt_Lin> (const Pnt_Lin& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,a[6],a[7],a[8],a[10]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pnt_Vec> (const Pnt_Vec& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pnt_Afp> (const Pnt_Afp& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[6],a[7],a[8],a[10]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pnt_Dal> (const Pnt_Dal& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Par_Biv> (const Par_Biv& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[14]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Sta_Biv> (const Sta_Biv& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,0,0,0,a[11]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Drv_Pln> (const Drv_Pln& a) {
-		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Drv_Dap> (const Drv_Dap& a) {
-		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Tnv_Flp> (const Tnv_Flp& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7],a[8],a[9],a[10],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Tnv_Biv> (const Tnv_Biv& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Lin_Dfp> (const Lin_Dfp& a) {
-		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],0,a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Lin_Dlp> (const Lin_Dlp& a) {
-		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pln_Pln> (const Pln_Pln& a) {
-		return Tvt (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pln_Flp> (const Pln_Flp& a) {
-		return Tvt (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0,0,0,0,a[6]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pln_Biv> (const Pln_Biv& a) {
-		return Tvt (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Vec_Aff> (const Vec_Aff& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Vec_Afp> (const Vec_Afp& a) {
-		return Tvt (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Vec_Dal> (const Vec_Dal& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Vec_Mnv> (const Vec_Mnv& a) {
-		return Tvt (0,0,0,0,0,0,0,0,0,0,a[0],a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Biv_Dap> (const Biv_Dap& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Biv_Daf> (const Biv_Daf& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],a[13]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Tvt (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0,a[10],a[11],a[12],0);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[11]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Tvt (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0,a[7]);
-}  
-		 
-template<> inline const Tvt cast<Tvt,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Tvt (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],0);
-}  
-		 
-		
-
-		
-inline Bst involute (const Bst& a) { 
-	return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}
-			
-		 
-		
-
-		
-inline Bst reverse (const Bst& a) { 
-	return Bst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10]);
-}
-			
-		 
-		
-
-		
-inline Bst conjugate (const Bst& a) { 
-	return Bst (a[0],-a[1],-a[2],-a[3],-a[4],-a[5],-a[6],-a[7],-a[8],-a[9],-a[10]);
-}
-			
-		 
-template<> inline const Bst cast<Bst,Rot> (const Rot& a) {
-		return Bst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mot> (const Mot& a) {
-		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Dil> (const Dil& a) {
-		return Bst (a[0],0,0,0,0,0,0,0,0,0,a[1]);
-}  
-		 
-template<> inline const Bst cast<Bst,Trv> (const Trv& a) {
-		return Bst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mtd> (const Mtd& a) {
-		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Bst cast<Bst,Trs> (const Trs& a) {
-		return Bst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mtt> (const Mtt& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Bst cast<Bst,Rtt> (const Rtt& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Rtd> (const Rtd& a) {
-		return Bst (a[0],a[1],a[2],a[3],0,0,0,0,0,0,a[4]);
-}  
-		 
-template<> inline const Bst cast<Bst,Tvd> (const Tvd& a) {
-		return Bst (a[0],0,0,0,a[1],a[2],a[3],0,0,0,a[4]);
-}  
-		 
-template<> inline const Bst cast<Bst,Tsd> (const Tsd& a) {
-		return Bst (a[0],0,0,0,0,0,0,a[1],a[2],a[3],a[4]);
-}  
-		 
-template<> inline const Bst cast<Bst,Trt> (const Trt& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Bst cast<Bst,Rvd> (const Rvd& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7]);
-}  
-		 
-template<> inline const Bst cast<Bst,Tst> (const Tst& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Bst cast<Bst,Tvt> (const Tvt& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]);
-}  
-		 
-template<> inline const Bst cast<Bst,Sca> (const Sca& a) {
-		return Bst (a[0],0,0,0,0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk> (const Mnk& a) {
-		return Bst (0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Bst cast<Bst,Par> (const Par& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Bst cast<Bst,Sta> (const Sta& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Drv> (const Drv& a) {
-		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Tnv> (const Tnv& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Flp> (const Flp& a) {
-		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Bst cast<Bst,Dll> (const Dll& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Biv> (const Biv& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Afl> (const Afl& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Dap> (const Dap& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3]);
-}  
-		 
-template<> inline const Bst cast<Bst,Ori_Cir> (const Ori_Cir& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Ori_Drb> (const Ori_Drb& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Ori_Lin> (const Ori_Lin& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Ori_Dfp> (const Ori_Dfp& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Inf_Cir> (const Inf_Cir& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Inf_Afp> (const Inf_Afp& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Inf_Dal> (const Inf_Dal& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Par> (const Mnk_Par& a) {
-		return Bst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Sph> (const Mnk_Sph& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Sta> (const Mnk_Sta& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Pln> (const Mnk_Pln& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Dll> (const Mnk_Dll& a) {
-		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Afl> (const Mnk_Afl& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Daf> (const Mnk_Daf& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Hyp_Pnt> (const Hyp_Pnt& a) {
-		return Bst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Bst cast<Bst,Hyp_Cir> (const Hyp_Cir& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Hyp_Lin> (const Hyp_Lin& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Hyp_Dfp> (const Hyp_Dfp& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Hyp_Vec> (const Hyp_Vec& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Pnt_Cir> (const Pnt_Cir& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Bst cast<Bst,Pnt_Lin> (const Pnt_Lin& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Bst cast<Bst,Pnt_Dfp> (const Pnt_Dfp& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Pnt_Vec> (const Pnt_Vec& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Pnt_Afp> (const Pnt_Afp& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Pnt_Dal> (const Pnt_Dal& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]);
-}  
-		 
-template<> inline const Bst cast<Bst,Pnt_Mnv> (const Pnt_Mnv& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Bst cast<Bst,Par_Biv> (const Par_Biv& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Sta_Biv> (const Sta_Biv& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Drv_Pln> (const Drv_Pln& a) {
-		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Drv_Dap> (const Drv_Dap& a) {
-		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],a[7]);
-}  
-		 
-template<> inline const Bst cast<Bst,Tnv_Flp> (const Tnv_Flp& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,a[7]);
-}  
-		 
-template<> inline const Bst cast<Bst,Tnv_Biv> (const Tnv_Biv& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Lin_Dfp> (const Lin_Dfp& a) {
-		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Lin_Dlp> (const Lin_Dlp& a) {
-		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Bst cast<Bst,Pln_Pln> (const Pln_Pln& a) {
-		return Bst (a[0],a[1],a[2],a[3],0,0,0,a[4],a[5],a[6],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Pln_Flp> (const Pln_Flp& a) {
-		return Bst (0,a[0],a[1],a[2],0,0,0,a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Pln_Biv> (const Pln_Biv& a) {
-		return Bst (0,0,0,0,0,0,0,a[0],a[1],a[2],a[3]);
-}  
-		 
-template<> inline const Bst cast<Bst,Vec_Aff> (const Vec_Aff& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Vec_Afp> (const Vec_Afp& a) {
-		return Bst (0,a[0],a[1],a[2],a[3],a[4],a[5],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Vec_Dal> (const Vec_Dal& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3]);
-}  
-		 
-template<> inline const Bst cast<Bst,Vec_Mnv> (const Vec_Mnv& a) {
-		return Bst (0,0,0,0,0,0,0,0,0,0,a[0]);
-}  
-		 
-template<> inline const Bst cast<Bst,Biv_Dap> (const Biv_Dap& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,0);
-}  
-		 
-template<> inline const Bst cast<Bst,Biv_Daf> (const Biv_Daf& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],0,0,0,a[3]);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Pnt_Lin> (const Mnk_Pnt_Lin& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Pnt_Dal> (const Mnk_Pnt_Dal& a) {
-		return Bst (a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Mnk_Sta_Biv> (const Mnk_Sta_Biv& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],a[6]);
-}  
-		 
-template<> inline const Bst cast<Bst,Hyp_Drv_Tnb> (const Hyp_Drv_Tnb& a) {
-		return Bst (0,0,0,0,a[0],a[1],a[2],a[3],a[4],a[5],0);
-}  
-		 
-template<> inline const Bst cast<Bst,Pss_Mnk_Pnt_Sph> (const Pss_Mnk_Pnt_Sph& a) {
-		return Bst (a[0],0,0,0,a[1],a[2],a[3],a[4],a[5],a[6],a[7]);
 }  
 			
 	} //vsr::

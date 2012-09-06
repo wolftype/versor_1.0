@@ -25,7 +25,7 @@ namespace vsr{
     inline A re (const A& a, const B& b) { printf("re error!\n"); cout << a << b << endl; return a; }
 
     template<class A, class B>
-    inline A gp (const A& a, const B& b) { printf("gp error!\n"); cout << a << b; printf("gp error!\n");  return a; }
+    inline A gp (const A& a, const B& b) { printf("///////////////\ngp error!\n"); cout << a << b; printf("gp error!\n//////////////////\n");  return a; }
 
     template<class A, class B>
     inline A ip (const A& a, const B& b) { printf("ip error!\n");  return a; }

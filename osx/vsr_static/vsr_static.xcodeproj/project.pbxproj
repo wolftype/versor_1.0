@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B84F52715EBFB79005CA167 /* vsr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B84F52615EBFB79005CA167 /* vsr.cpp */; };
 		9B84F52A15EC3C8F005CA167 /* vsr_op.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52915EC3C8F005CA167 /* vsr_op.h */; };
 		9B84F52D15EC3CEF005CA167 /* vsr_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52B15EC3CEF005CA167 /* vsr_math.h */; };
 		9B84F52E15EC3CEF005CA167 /* vsr_matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */; };
@@ -99,7 +98,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9B84F52615EBFB79005CA167 /* vsr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr.cpp; sourceTree = "<group>"; };
 		9B84F52915EC3C8F005CA167 /* vsr_op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_op.h; sourceTree = "<group>"; };
 		9B84F52B15EC3CEF005CA167 /* vsr_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_math.h; sourceTree = "<group>"; };
 		9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_matrix.h; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				9BBBE01615DDC40C00BDE419 /* MV.h */,
 				9B84F53B15EC5588005CA167 /* MV.cpp */,
 				9BF4FDDC15DF151B000D6508 /* vsr.h */,
-				9B84F52615EBFB79005CA167 /* vsr.cpp */,
 				9B84F53315EC3D5A005CA167 /* vsr_op.cpp */,
 				9B84F52915EC3C8F005CA167 /* vsr_op.h */,
 				9BF4FE4615DF295B000D6508 /* multivectors */,
@@ -431,7 +428,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBBE02515DEF27700BDE419 /* vsr_templates.cpp in Sources */,
-				9B84F52715EBFB79005CA167 /* vsr.cpp in Sources */,
 				9B84F53415EC3D5A005CA167 /* vsr_op.cpp in Sources */,
 				9B84F53C15EC5588005CA167 /* MV.cpp in Sources */,
 			);
@@ -516,8 +512,12 @@
 		9BBBE01015DDC20500BDE419 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../include/**";
 			};
@@ -526,8 +526,12 @@
 		9BBBE01115DDC20500BDE419 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../include/**";
 			};

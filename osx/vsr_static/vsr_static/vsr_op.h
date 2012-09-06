@@ -19,22 +19,22 @@
 #include "vsr_math.h"
 
 
-#include "vsr.h"
+//#include "vsr.h"
 
-//#include "Pnt.h"
-//#include "Trs.h"
-//#include "Dil.h"
-//#include "Trv.h"
-//#include "Mot.h"
-//#include "Rot.h"
-//#include "Tri.h"
-//#include "Vec.h"
-//#include "Biv.h"
-//#include "Dll.h"
-//#include "Par.h"
-//#include "Ori.h"
-//#include "Inf.h"
-//#include "versorFuncs.h"
+#include "Pnt.h"
+#include "Trs.h"
+#include "Dil.h"
+#include "Trv.h"
+#include "Mot.h"
+#include "Rot.h"
+#include "Tri.h"
+#include "Vec.h"
+#include "Biv.h"
+#include "Dll.h"
+#include "Par.h"
+#include "Ori.h"
+#include "Inf.h"
+#include "versorFuncs.h"
 
 namespace vsr {
 

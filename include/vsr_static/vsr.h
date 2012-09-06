@@ -4,6 +4,40 @@
 	#include <string>
 
 		
+	#include "Rot.h"
+	
+	#include "Mot.h"
+	
+	#include "Dil.h"
+	
+	#include "Trv.h"
+	
+	#include "Mtd.h"
+	
+	#include "Trs.h"
+	
+	#include "Rtc.h"
+	
+	#include "Mtt.h"
+	
+	#include "Rtt.h"
+	
+	#include "Rtd.h"
+	
+	#include "Tvd.h"
+	
+	#include "Tsd.h"
+	
+	#include "Trt.h"
+	
+	#include "Rvd.h"
+	
+	#include "Tst.h"
+	
+	#include "Tvt.h"
+	
+	#include "Bst.h"
+	
 	#include "Sca.h"
 	
 	#include "Ori.h"
@@ -69,40 +103,6 @@
 	#include "Dal.h"
 	
 	#include "Mnv.h"
-	
-	#include "Rot.h"
-	
-	#include "Mot.h"
-	
-	#include "Dil.h"
-	
-	#include "Trv.h"
-	
-	#include "Mtd.h"
-	
-	#include "Trs.h"
-	
-	#include "Rtc.h"
-	
-	#include "Mtt.h"
-	
-	#include "Rtt.h"
-	
-	#include "Rtd.h"
-	
-	#include "Tvd.h"
-	
-	#include "Tsd.h"
-	
-	#include "Trt.h"
-	
-	#include "Rvd.h"
-	
-	#include "Tst.h"
-	
-	#include "Tvt.h"
-	
-	#include "Bst.h"
 	
 	#include "versorFuncs.h"
 	#endif

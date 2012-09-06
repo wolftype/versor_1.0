@@ -11,10 +11,20 @@ a[0] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Sca> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Sca*)(&b));
+}			
+		 
 inline Ori gp (const Sca& a, const Ori& b) { 
 	return Ori (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Ori> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Ori*)(&b));
 }			
 		 
 inline Inf gp (const Sca& a, const Inf& b) { 
@@ -23,10 +33,20 @@ a[0] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Inf> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Inf*)(&b));
+}			
+		 
 inline Mnk gp (const Sca& a, const Mnk& b) { 
 	return Mnk (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Mnk> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Mnk*)(&b));
 }			
 		 
 inline Hyp gp (const Sca& a, const Hyp& b) { 
@@ -36,10 +56,20 @@ a[0] * b[1]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Hyp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Hyp*)(&b));
+}			
+		 
 inline Pss gp (const Sca& a, const Pss& b) { 
 	return Pss (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Pss> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Pss*)(&b));
 }			
 		 
 inline Pnt gp (const Sca& a, const Pnt& b) { 
@@ -50,6 +80,11 @@ a[0] * b[2],
 a[0] * b[3],
 a[0] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Pnt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Pnt*)(&b));
 }			
 		 
 inline Par gp (const Sca& a, const Par& b) { 
@@ -67,6 +102,11 @@ a[0] * b[9]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Par> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Par*)(&b));
+}			
+		 
 inline Cir gp (const Sca& a, const Cir& b) { 
 	return Cir (
 a[0] * b[0],
@@ -82,6 +122,11 @@ a[0] * b[9]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Cir> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Cir*)(&b));
+}			
+		 
 inline Sph gp (const Sca& a, const Sph& b) { 
 	return Sph (
 a[0] * b[0],
@@ -90,6 +135,11 @@ a[0] * b[2],
 a[0] * b[3],
 a[0] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Sph> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Sph*)(&b));
 }			
 		 
 inline Sta gp (const Sca& a, const Sta& b) { 
@@ -106,12 +156,22 @@ a[0] * b[8]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Sta> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Sta*)(&b));
+}			
+		 
 inline Drv gp (const Sca& a, const Drv& b) { 
 	return Drv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Drv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Drv*)(&b));
 }			
 		 
 inline Drb gp (const Sca& a, const Drb& b) { 
@@ -122,10 +182,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Drb> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Drb*)(&b));
+}			
+		 
 inline Drt gp (const Sca& a, const Drt& b) { 
 	return Drt (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Drt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Drt*)(&b));
 }			
 		 
 inline Tnv gp (const Sca& a, const Tnv& b) { 
@@ -136,6 +206,11 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Tnv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tnv*)(&b));
+}			
+		 
 inline Tnb gp (const Sca& a, const Tnb& b) { 
 	return Tnb (
 a[0] * b[0],
@@ -144,10 +219,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Tnb> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tnb*)(&b));
+}			
+		 
 inline Tnt gp (const Sca& a, const Tnt& b) { 
 	return Tnt (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Tnt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tnt*)(&b));
 }			
 		 
 inline Lin gp (const Sca& a, const Lin& b) { 
@@ -161,6 +246,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Lin> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Lin*)(&b));
+}			
+		 
 inline Pln gp (const Sca& a, const Pln& b) { 
 	return Pln (
 a[0] * b[0],
@@ -168,6 +258,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Pln> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Pln*)(&b));
 }			
 		 
 inline Flp gp (const Sca& a, const Flp& b) { 
@@ -179,6 +274,11 @@ a[0] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Flp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Flp*)(&b));
+}			
+		 
 inline Dfp gp (const Sca& a, const Dfp& b) { 
 	return Dfp (
 a[0] * b[0],
@@ -186,6 +286,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Dfp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Dfp*)(&b));
 }			
 		 
 inline Dll gp (const Sca& a, const Dll& b) { 
@@ -199,6 +304,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Dll> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Dll*)(&b));
+}			
+		 
 inline Dlp gp (const Sca& a, const Dlp& b) { 
 	return Dlp (
 a[0] * b[0],
@@ -206,6 +316,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Dlp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Dlp*)(&b));
 }			
 		 
 inline Vec gp (const Sca& a, const Vec& b) { 
@@ -216,6 +331,11 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Vec> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Vec*)(&b));
+}			
+		 
 inline Biv gp (const Sca& a, const Biv& b) { 
 	return Biv (
 a[0] * b[0],
@@ -224,10 +344,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Biv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Biv*)(&b));
+}			
+		 
 inline Tri gp (const Sca& a, const Tri& b) { 
 	return Tri (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Tri> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tri*)(&b));
 }			
 		 
 inline Aff gp (const Sca& a, const Aff& b) { 
@@ -237,6 +367,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Aff> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Aff*)(&b));
 }			
 		 
 inline Afl gp (const Sca& a, const Afl& b) { 
@@ -250,6 +385,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Afl> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Afl*)(&b));
+}			
+		 
 inline Afp gp (const Sca& a, const Afp& b) { 
 	return Afp (
 a[0] * b[0],
@@ -257,6 +397,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Afp> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Afp*)(&b));
 }			
 		 
 inline Dap gp (const Sca& a, const Dap& b) { 
@@ -268,6 +413,11 @@ a[0] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Dap> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Dap*)(&b));
+}			
+		 
 inline Daf gp (const Sca& a, const Daf& b) { 
 	return Daf (
 a[0] * b[0],
@@ -275,6 +425,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Daf> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Daf*)(&b));
 }			
 		 
 inline Dal gp (const Sca& a, const Dal& b) { 
@@ -288,12 +443,22 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Dal> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Dal*)(&b));
+}			
+		 
 inline Mnv gp (const Sca& a, const Mnv& b) { 
 	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Mnv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Mnv*)(&b));
 }			
 		 
 inline Rot gp (const Sca& a, const Rot& b) { 
@@ -303,6 +468,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Rot> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Rot*)(&b));
 }			
 		 
 inline Mot gp (const Sca& a, const Mot& b) { 
@@ -318,11 +488,21 @@ a[0] * b[7]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Mot> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Mot*)(&b));
+}			
+		 
 inline Dil gp (const Sca& a, const Dil& b) { 
 	return Dil (
 a[0] * b[0],
 a[0] * b[1]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Dil> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Dil*)(&b));
 }			
 		 
 inline Trv gp (const Sca& a, const Trv& b) { 
@@ -332,6 +512,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Trv> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Trv*)(&b));
 }			
 		 
 inline Mtd gp (const Sca& a, const Mtd& b) { 
@@ -351,6 +536,11 @@ a[0] * b[11]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Mtd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Mtd*)(&b));
+}			
+		 
 inline Trs gp (const Sca& a, const Trs& b) { 
 	return Trs (
 a[0] * b[0],
@@ -358,6 +548,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Trs> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Trs*)(&b));
 }			
 		 
 inline Rtc gp (const Sca& a, const Rtc& b) { 
@@ -381,6 +576,11 @@ a[0] * b[15]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Rtc> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Rtc*)(&b));
+}			
+		 
 inline Mtt gp (const Sca& a, const Mtt& b) { 
 	return Mtt (
 a[0] * b[0],
@@ -402,6 +602,11 @@ a[0] * b[15]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Mtt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Mtt*)(&b));
+}			
+		 
 inline Rtt gp (const Sca& a, const Rtt& b) { 
 	return Rtt (
 a[0] * b[0],
@@ -413,6 +618,11 @@ a[0] * b[5],
 a[0] * b[6],
 a[0] * b[7]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Rtt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Rtt*)(&b));
 }			
 		 
 inline Rtd gp (const Sca& a, const Rtd& b) { 
@@ -428,6 +638,11 @@ a[0] * b[7]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Rtd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Rtd*)(&b));
+}			
+		 
 inline Tvd gp (const Sca& a, const Tvd& b) { 
 	return Tvd (
 a[0] * b[0],
@@ -438,6 +653,11 @@ a[0] * b[4]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Tvd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tvd*)(&b));
+}			
+		 
 inline Tsd gp (const Sca& a, const Tsd& b) { 
 	return Tsd (
 a[0] * b[0],
@@ -446,6 +666,11 @@ a[0] * b[2],
 a[0] * b[3],
 a[0] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Tsd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tsd*)(&b));
 }			
 		 
 inline Trt gp (const Sca& a, const Trt& b) { 
@@ -467,6 +692,11 @@ a[0] * b[13]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Trt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Trt*)(&b));
+}			
+		 
 inline Rvd gp (const Sca& a, const Rvd& b) { 
 	return Rvd (
 a[0] * b[0],
@@ -482,6 +712,11 @@ a[0] * b[9],
 a[0] * b[10],
 a[0] * b[11]
 );
+}			
+		 
+		
+template<> inline MVBase gp_gen<Sca, Rvd> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Rvd*)(&b));
 }			
 		 
 inline Tst gp (const Sca& a, const Tst& b) { 
@@ -504,6 +739,11 @@ a[0] * b[14]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Tst> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tst*)(&b));
+}			
+		 
 inline Tvt gp (const Sca& a, const Tvt& b) { 
 	return Tvt (
 a[0] * b[0],
@@ -524,6 +764,11 @@ a[0] * b[14]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Tvt> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Tvt*)(&b));
+}			
+		 
 inline Bst gp (const Sca& a, const Bst& b) { 
 	return Bst (
 a[0] * b[0],
@@ -540,10 +785,20 @@ a[0] * b[10]
 );
 }			
 		 
+		
+template<> inline MVBase gp_gen<Sca, Bst> (const MVBase& a, const MVBase& b) { 
+	return gp(*(Sca*)(&a),*(Bst*)(&b));
+}			
+		 
 inline Sca op (const Sca& a, const Sca& b) { 
 	return Sca (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Sca> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Sca*)(&b));
 }			
 		 
 inline Ori op (const Sca& a, const Ori& b) { 
@@ -552,16 +807,31 @@ a[0] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Ori> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Ori*)(&b));
+}			
+		 
 inline Inf op (const Sca& a, const Inf& b) { 
 	return Inf (
 a[0] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Inf> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Inf*)(&b));
+}			
+		 
 inline Mnk op (const Sca& a, const Mnk& b) { 
 	return Mnk (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Mnk> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Mnk*)(&b));
 }			
 		 
 inline Hyp op (const Sca& a, const Hyp& b) { 
@@ -571,10 +841,20 @@ a[0] * b[1]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Hyp> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Hyp*)(&b));
+}			
+		 
 inline Pss op (const Sca& a, const Pss& b) { 
 	return Pss (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Pss> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Pss*)(&b));
 }			
 		 
 inline Pnt op (const Sca& a, const Pnt& b) { 
@@ -585,6 +865,11 @@ a[0] * b[2],
 a[0] * b[3],
 a[0] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Pnt> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Pnt*)(&b));
 }			
 		 
 inline Par op (const Sca& a, const Par& b) { 
@@ -602,6 +887,11 @@ a[0] * b[9]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Par> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Par*)(&b));
+}			
+		 
 inline Cir op (const Sca& a, const Cir& b) { 
 	return Cir (
 a[0] * b[0],
@@ -617,6 +907,11 @@ a[0] * b[9]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Cir> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Cir*)(&b));
+}			
+		 
 inline Sph op (const Sca& a, const Sph& b) { 
 	return Sph (
 a[0] * b[0],
@@ -625,6 +920,11 @@ a[0] * b[2],
 a[0] * b[3],
 a[0] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Sph> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Sph*)(&b));
 }			
 		 
 inline Sta op (const Sca& a, const Sta& b) { 
@@ -641,12 +941,22 @@ a[0] * b[8]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Sta> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Sta*)(&b));
+}			
+		 
 inline Drv op (const Sca& a, const Drv& b) { 
 	return Drv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Drv> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Drv*)(&b));
 }			
 		 
 inline Drb op (const Sca& a, const Drb& b) { 
@@ -657,10 +967,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Drb> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Drb*)(&b));
+}			
+		 
 inline Drt op (const Sca& a, const Drt& b) { 
 	return Drt (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Drt> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Drt*)(&b));
 }			
 		 
 inline Tnv op (const Sca& a, const Tnv& b) { 
@@ -671,6 +991,11 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Tnv> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Tnv*)(&b));
+}			
+		 
 inline Tnb op (const Sca& a, const Tnb& b) { 
 	return Tnb (
 a[0] * b[0],
@@ -679,10 +1004,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Tnb> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Tnb*)(&b));
+}			
+		 
 inline Tnt op (const Sca& a, const Tnt& b) { 
 	return Tnt (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Tnt> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Tnt*)(&b));
 }			
 		 
 inline Lin op (const Sca& a, const Lin& b) { 
@@ -696,6 +1031,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Lin> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Lin*)(&b));
+}			
+		 
 inline Pln op (const Sca& a, const Pln& b) { 
 	return Pln (
 a[0] * b[0],
@@ -703,6 +1043,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Pln> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Pln*)(&b));
 }			
 		 
 inline Flp op (const Sca& a, const Flp& b) { 
@@ -714,6 +1059,11 @@ a[0] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Flp> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Flp*)(&b));
+}			
+		 
 inline Dfp op (const Sca& a, const Dfp& b) { 
 	return Dfp (
 a[0] * b[0],
@@ -721,6 +1071,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Dfp> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Dfp*)(&b));
 }			
 		 
 inline Dll op (const Sca& a, const Dll& b) { 
@@ -734,6 +1089,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Dll> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Dll*)(&b));
+}			
+		 
 inline Dlp op (const Sca& a, const Dlp& b) { 
 	return Dlp (
 a[0] * b[0],
@@ -741,6 +1101,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Dlp> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Dlp*)(&b));
 }			
 		 
 inline Vec op (const Sca& a, const Vec& b) { 
@@ -751,6 +1116,11 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Vec> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Vec*)(&b));
+}			
+		 
 inline Biv op (const Sca& a, const Biv& b) { 
 	return Biv (
 a[0] * b[0],
@@ -759,10 +1129,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Biv> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Biv*)(&b));
+}			
+		 
 inline Tri op (const Sca& a, const Tri& b) { 
 	return Tri (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Tri> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Tri*)(&b));
 }			
 		 
 inline Aff op (const Sca& a, const Aff& b) { 
@@ -772,6 +1152,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Aff> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Aff*)(&b));
 }			
 		 
 inline Afl op (const Sca& a, const Afl& b) { 
@@ -785,6 +1170,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Afl> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Afl*)(&b));
+}			
+		 
 inline Afp op (const Sca& a, const Afp& b) { 
 	return Afp (
 a[0] * b[0],
@@ -792,6 +1182,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Afp> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Afp*)(&b));
 }			
 		 
 inline Dap op (const Sca& a, const Dap& b) { 
@@ -803,6 +1198,11 @@ a[0] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Dap> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Dap*)(&b));
+}			
+		 
 inline Daf op (const Sca& a, const Daf& b) { 
 	return Daf (
 a[0] * b[0],
@@ -810,6 +1210,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase op_gen<Sca, Daf> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Daf*)(&b));
 }			
 		 
 inline Dal op (const Sca& a, const Dal& b) { 
@@ -823,6 +1228,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Dal> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Dal*)(&b));
+}			
+		 
 inline Mnv op (const Sca& a, const Mnv& b) { 
 	return Mnv (
 a[0] * b[0],
@@ -831,10 +1241,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase op_gen<Sca, Mnv> (const MVBase& a, const MVBase& b) { 
+	return op(*(Sca*)(&a),*(Mnv*)(&b));
+}			
+		 
 inline Sca ip (const Sca& a, const Sca& b) { 
 	return Sca (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Sca> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Sca*)(&b));
 }			
 		 
 inline Ori ip (const Sca& a, const Ori& b) { 
@@ -843,16 +1263,31 @@ a[0] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Ori> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Ori*)(&b));
+}			
+		 
 inline Inf ip (const Sca& a, const Inf& b) { 
 	return Inf (
 a[0] * b[0]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Inf> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Inf*)(&b));
+}			
+		 
 inline Mnk ip (const Sca& a, const Mnk& b) { 
 	return Mnk (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Mnk> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Mnk*)(&b));
 }			
 		 
 inline Hyp ip (const Sca& a, const Hyp& b) { 
@@ -862,10 +1297,20 @@ a[0] * b[1]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Hyp> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Hyp*)(&b));
+}			
+		 
 inline Pss ip (const Sca& a, const Pss& b) { 
 	return Pss (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Pss> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Pss*)(&b));
 }			
 		 
 inline Pnt ip (const Sca& a, const Pnt& b) { 
@@ -876,6 +1321,11 @@ a[0] * b[2],
 a[0] * b[3],
 a[0] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Pnt> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Pnt*)(&b));
 }			
 		 
 inline Par ip (const Sca& a, const Par& b) { 
@@ -893,6 +1343,11 @@ a[0] * b[9]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Par> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Par*)(&b));
+}			
+		 
 inline Cir ip (const Sca& a, const Cir& b) { 
 	return Cir (
 a[0] * b[0],
@@ -908,6 +1363,11 @@ a[0] * b[9]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Cir> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Cir*)(&b));
+}			
+		 
 inline Sph ip (const Sca& a, const Sph& b) { 
 	return Sph (
 a[0] * b[0],
@@ -916,6 +1376,11 @@ a[0] * b[2],
 a[0] * b[3],
 a[0] * b[4]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Sph> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Sph*)(&b));
 }			
 		 
 inline Sta ip (const Sca& a, const Sta& b) { 
@@ -932,12 +1397,22 @@ a[0] * b[8]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Sta> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Sta*)(&b));
+}			
+		 
 inline Drv ip (const Sca& a, const Drv& b) { 
 	return Drv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Drv> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Drv*)(&b));
 }			
 		 
 inline Drb ip (const Sca& a, const Drb& b) { 
@@ -948,10 +1423,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Drb> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Drb*)(&b));
+}			
+		 
 inline Drt ip (const Sca& a, const Drt& b) { 
 	return Drt (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Drt> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Drt*)(&b));
 }			
 		 
 inline Tnv ip (const Sca& a, const Tnv& b) { 
@@ -962,6 +1447,11 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Tnv> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Tnv*)(&b));
+}			
+		 
 inline Tnb ip (const Sca& a, const Tnb& b) { 
 	return Tnb (
 a[0] * b[0],
@@ -970,10 +1460,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Tnb> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Tnb*)(&b));
+}			
+		 
 inline Tnt ip (const Sca& a, const Tnt& b) { 
 	return Tnt (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Tnt> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Tnt*)(&b));
 }			
 		 
 inline Lin ip (const Sca& a, const Lin& b) { 
@@ -987,6 +1487,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Lin> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Lin*)(&b));
+}			
+		 
 inline Pln ip (const Sca& a, const Pln& b) { 
 	return Pln (
 a[0] * b[0],
@@ -994,6 +1499,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Pln> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Pln*)(&b));
 }			
 		 
 inline Flp ip (const Sca& a, const Flp& b) { 
@@ -1005,6 +1515,11 @@ a[0] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Flp> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Flp*)(&b));
+}			
+		 
 inline Dfp ip (const Sca& a, const Dfp& b) { 
 	return Dfp (
 a[0] * b[0],
@@ -1012,6 +1527,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Dfp> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Dfp*)(&b));
 }			
 		 
 inline Dll ip (const Sca& a, const Dll& b) { 
@@ -1025,6 +1545,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Dll> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Dll*)(&b));
+}			
+		 
 inline Dlp ip (const Sca& a, const Dlp& b) { 
 	return Dlp (
 a[0] * b[0],
@@ -1032,6 +1557,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Dlp> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Dlp*)(&b));
 }			
 		 
 inline Vec ip (const Sca& a, const Vec& b) { 
@@ -1042,6 +1572,11 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Vec> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Vec*)(&b));
+}			
+		 
 inline Biv ip (const Sca& a, const Biv& b) { 
 	return Biv (
 a[0] * b[0],
@@ -1050,10 +1585,20 @@ a[0] * b[2]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Biv> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Biv*)(&b));
+}			
+		 
 inline Tri ip (const Sca& a, const Tri& b) { 
 	return Tri (
 a[0] * b[0]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Tri> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Tri*)(&b));
 }			
 		 
 inline Aff ip (const Sca& a, const Aff& b) { 
@@ -1063,6 +1608,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Aff> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Aff*)(&b));
 }			
 		 
 inline Afl ip (const Sca& a, const Afl& b) { 
@@ -1076,6 +1626,11 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Afl> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Afl*)(&b));
+}			
+		 
 inline Afp ip (const Sca& a, const Afp& b) { 
 	return Afp (
 a[0] * b[0],
@@ -1083,6 +1638,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Afp> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Afp*)(&b));
 }			
 		 
 inline Dap ip (const Sca& a, const Dap& b) { 
@@ -1094,6 +1654,11 @@ a[0] * b[3]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Dap> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Dap*)(&b));
+}			
+		 
 inline Daf ip (const Sca& a, const Daf& b) { 
 	return Daf (
 a[0] * b[0],
@@ -1101,6 +1666,11 @@ a[0] * b[1],
 a[0] * b[2],
 a[0] * b[3]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Daf> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Daf*)(&b));
 }			
 		 
 inline Dal ip (const Sca& a, const Dal& b) { 
@@ -1114,12 +1684,22 @@ a[0] * b[5]
 );
 }			
 		 
+		
+template<> inline MVBase ip_gen<Sca, Dal> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Dal*)(&b));
+}			
+		 
 inline Mnv ip (const Sca& a, const Mnv& b) { 
 	return Mnv (
 a[0] * b[0],
 a[0] * b[1],
 a[0] * b[2]
 );
+}			
+		 
+		
+template<> inline MVBase ip_gen<Sca, Mnv> (const MVBase& a, const MVBase& b) { 
+	return ip(*(Sca*)(&a),*(Mnv*)(&b));
 }			
 		  	
 template<>
