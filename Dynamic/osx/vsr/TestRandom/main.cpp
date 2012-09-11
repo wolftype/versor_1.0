@@ -9,16 +9,26 @@
 #include <iostream>
 #include "vsr.h"
 
+    
+    using namespace vsr;
+    using namespace std;
+
 int main (int argc, const char * argv[])
 {
-
+    /* Bind CGA Framework */
+	CongaTypes::BindAll();
+    
     // insert code here...
     std::cout << "Hello, World!\n";
   
     
+
     
-    using namespace vsr;
+    Dll dll(0,1,0,1,1,1);
+    Dll dlls = dll;
     
+    cout << Biv(dll) << endl; 
+
     cout << DLN(0,1,0) << endl; 
     
       return 0;

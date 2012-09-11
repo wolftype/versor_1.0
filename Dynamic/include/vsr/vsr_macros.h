@@ -25,8 +25,8 @@ namespace vsr {
 #define CYZ(f) (PY(f)^PY(-f)^PZ(f))
 #define F2S(f) f*1000.0
 #define S2F(f) f/1000.0
-#define LN(x,y,z) (Ori(1)^PT(x,y,z)^Inf(1))
-#define DLN(x,y,z) ( Op::dl(Ori(1)^PT(x,y,z)^Inf(1)) )
+#define LN(x,y,z) ( PT(0,0,0)^PT(x,y,z)^Inf(1))
+#define DLN(x,y,z) ( Op::dl(PT(0,0,0)^PT(x,y,z)^Inf(1)) )
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
 #define INF Inf(1)

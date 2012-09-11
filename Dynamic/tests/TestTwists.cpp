@@ -641,11 +641,12 @@ void simple(GLVApp& app){
 
 void GLVApp :: onDraw(){
 
-    cout << DLN(0,1,0) <<endl; 
-
-    twist(*this);
+    Dll dll(1,1,1,1,1,1);
     
-  // twistedBoost(*this);
+    cout << Biv(dll) << DLN(0,1,0) << dll << endl; 
+//    twist(*this);
+    
+   twistedBoost(*this);
     
   // interpolated(*this);
    
