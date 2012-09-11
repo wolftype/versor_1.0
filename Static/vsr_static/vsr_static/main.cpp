@@ -63,6 +63,8 @@ int main (int argc, const char * argv[])
     Rot r(1,1,1,1);
     Trs trs (1,2,2,2);
     
+    cout << DLN(0,1,0) << endl; 
+    
     return 0; 
 }
 

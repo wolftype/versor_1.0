@@ -7,8 +7,9 @@
 //
 /*
  *  MV.h
- *  Operations
- *
+ *  Operations with a BASE class for abstraction (the base class requires
+ *  generation of function pointers which slows down compilation time -- it will
+    likely be implemented in a separate static_base branch on github)
  *  Created by Pablo Colapinto on 10/3/11.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
  *
@@ -72,6 +73,15 @@ struct Product{
     typedef MV<IP_N, IP_IDX, T> IP;  
 
 };
+
+class MVBase;
+
+template< class A, class B >
+MVBase gp_gen ( const MVBase& a, const MVBase& b);  // { printf("///////////////\ngp error!\n"); }//( const A<NUM,IDX,T>&, const B<NUM2,IDX2,T2>&);
+template< class A, class B >
+MVBase op_gen ( const MVBase& a, const MVBase& b);  // { printf("///////////////\ngp error!\n"); }//( const A<NUM,IDX,T>&, const B<NUM2,IDX2,T2>&);
+template< class A, class B >
+MVBase ip_gen ( const MVBase& a, const MVBase& b);  // { printf("///////////////\ngp error!\n"); }//( const A<NUM,IDX,T>&, const B<NUM2,IDX2,T2>&);
 
 
 //Predeclare BASIC TYPES
@@ -178,33 +188,103 @@ struct Product{
 
 
 
+
+
+
+typedef MVBase(*CB) (const MVBase&, const MVBase&);
+
+class MVBase {
+
+
+
+    //protected:
+     public:
+     
+    CB * gpfuncsptr, * opfuncsptr, * ipfuncsptr;
+     
+    int num, idx;
+    float * W;
+    float& operator[] (int n) { return W[n]; }
+    float operator[] (int n) const { return W[n]; }
+    
+    MVBase(int n, int x, float * _w = NULL) : num(n), idx(x), W(_w) {}
+
+    MVBase( const MVBase& mv) : num(mv.num), idx(mv.idx), W(mv.W) { 
+        TPRINT("base class copy constructor\n"); 
+        W = new float[num];
+        gpfuncsptr = mv.gpfuncsptr;
+        opfuncsptr = mv.opfuncsptr;
+        ipfuncsptr = mv.ipfuncsptr;
+        std::copy(mv.W, mv.W + num, W);
+    }
+    
+    const MVBase& operator = (const MVBase& mv) {
+            TPRINT("base class assignment operator\n");
+            if (this == &mv) return *this;	
+            
+            num  = mv.num;
+            idx = mv.idx;
+            W = mv.W;
+            gpfuncsptr = mv.gpfuncsptr;
+            opfuncsptr = mv.opfuncsptr;
+            ipfuncsptr = mv.ipfuncsptr;
+            
+            return *this;
+    }
+    
+    MVBase operator * (const MVBase& b) { return gpfuncsptr[b.idx-1](*this, b); } 
+    MVBase operator <= (const MVBase& b); 
+    MVBase operator ^ (const MVBase& b); 
+
+    //return funcs[mIdx-1][b.mIdx-1][0](*this, b);
+ 
+
+    friend std::ostream& operator << (std::ostream& os, const MVBase&);
+
+};
+
+
+
+
 template < int N, int IDX, class T >
-class MV {
+class MV : public MVBase {
 
 	T mW[N];	
-
+    
+    
+    void _init() { this->W = mW; this->gpfuncsptr = gpfuncs; this->opfuncsptr = opfuncs;  this->ipfuncsptr = ipfuncs; }
 public:
 	
     typedef MV<N,IDX,T> self_type;
     typedef T value_type;
     typedef T array_type[N];
     
+    static  CB gpfuncs[50];
+
+    static  CB opfuncs[50];
+
+    static  CB ipfuncs[50];
+
+    
     static const int idx = IDX;
  	static const int size =  N;    
 
     //Feed in a value_type
-	MV(const T& v = T())  { std::fill(mW, mW + N, v);  }
+	MV(const T& v = T()) : MVBase(N,IDX) { std::fill(mW, mW + N, v); _init(); }
+    
+    //Copy Constructor from generic
+    MV(const MVBase& mv) : MVBase(N,IDX) { TPRINT("Derived Copy Constructor General\n"); std::copy(mW, mW + N, mv.W); _init(); }
     
     //Copy Constructor -- same MV
-    MV(const MV<N, IDX, T>& mv)  {TPRINT(" Constructor Same Type \n"); set(mv);  }
+    MV(const MV<N, IDX, T>& mv) : MVBase(N,IDX) {TPRINT("Derived Constructor Same Type \n"); set(mv); _init(); }
 
     //Copy Constructor -- same MV, different value_type
     template <class T2>
-    MV(const MV<N, IDX, T2>& mv)  {TPRINT(" Constructor Same Type \n"); set(mv);  }
+    MV(const MV<N, IDX, T2>& mv) : MVBase(N,IDX) {TPRINT("Derived Constructor Same Type \n"); set(mv); _init(); }
 
     //Copy Constructor -- Different MV
     template <int N2, int IDX2, class T2>
-    MV(const MV<N2, IDX2, T2>& mv) { TPRINT( " Copy Constructor Different Type \n") ;set( cast< self_type, MV<N2, IDX2, T2> >( mv ) );}
+    MV(const MV<N2, IDX2, T2>& mv) : MVBase(N,IDX) { TPRINT( "Derived Copy Constructor Different Type \n") ;set( cast< self_type, MV<N2, IDX2, T2> >( mv ) ); _init();}
     
     template <class T2>
     MV& set(const MV<N, IDX, T2>& mv) {
@@ -212,54 +292,54 @@ public:
         return *this;
     }
     
-    const MV& operator = (const MV& mv) { TPRINT(" Assignment Operator Same Type\n"); return set(mv); }
+    const MV& operator = (const MV& mv) { TPRINT("Derived Assignment Operator Same Type\n"); this->W = mv.W; return set(mv); }
     
     template< class A >
-    const MV& operator = ( A a) { TPRINT(" Assignment Operator Different Type\n"); return cast< self_type, A > ( a ); } 
+    const MV& operator = ( A a) { TPRINT("Derived Assignment Operator Different Type\n"); MVBase::operator = (a); return cast< self_type, A > ( a ); } 
 	
-	MV( const T& a0, const T& a1 )  { set( a0,a1 ); }
+	MV( const T& a0, const T& a1 ) : MVBase(N,IDX)  { set( a0,a1 ); _init();}
 	void set( const T& a0, const T& a1 ) { mW[0]=a0; mW[1]=a1;  }
 	
-	MV( const T& a0, const T& a1, const T& a2 )  { set( a0,a1,a2 );  }
+	MV( const T& a0, const T& a1, const T& a2 ) : MVBase(N,IDX) { set( a0,a1,a2 ); _init(); }
 	void set( const T& a0, const T& a1, const T& a2 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2;  }
 	
-	MV( const T& a0, const T& a1, const T& a2, const T& a3 )  { set( a0,a1,a2,a3 );  }
+	MV( const T& a0, const T& a1, const T& a2, const T& a3 ): MVBase(N,IDX)  { set( a0,a1,a2,a3 ); _init(); }
 	void set( const T& a0, const T& a1, const T& a2, const T& a3 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3;  }
 	
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4 )  { set( a0,a1,a2,a3,a4 );  }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4 ) : MVBase(N,IDX)  { set( a0,a1,a2,a3,a4 ); _init(); }
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5 )  { set( a0,a1,a2,a3,a4,a5 );  }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5 ) : MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5 ); _init(); }
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6 )  { set( a0,a1,a2,a3,a4,a5,a6 );   }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6 ) : MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5,a6 ); _init();  }
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7 ) { set( a0,a1,a2,a3,a4,a5,a6,a7 ); }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7 ) : MVBase(N,IDX){ set( a0,a1,a2,a3,a4,a5,a6,a7 ); _init(); }
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8 )  { set( a0,a1,a2,a3,a4,a5,a6,a7,a8 );  }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8 ): MVBase(N,IDX)  { set( a0,a1,a2,a3,a4,a5,a6,a7,a8 ); _init(); }
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9 )  { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9 ); }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9 ) : MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9 );_init(); }
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10 )  { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10 ); }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10 ) : MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10 ); _init();}
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9; mW[10]=a10;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11 ){ set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11 ); }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11 ) : MVBase(N,IDX){ set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11 ); _init();}
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9; mW[10]=a10; mW[11]=a11;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12 )   { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12 );}
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12 )  : MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12 ); _init();}
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9; mW[10]=a10; mW[11]=a11; mW[12]=a12;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13 ) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13 );}
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13 ) : MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13 ); _init();}
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9; mW[10]=a10; mW[11]=a11; mW[12]=a12; mW[13]=a13;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13, const T& a14 ) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14 ); }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13, const T& a14 ) : MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14 ); _init();}
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13, const T& a14 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9; mW[10]=a10; mW[11]=a11; mW[12]=a12; mW[13]=a13; mW[14]=a14;  }
     
-    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13, const T& a14, const T& a15 ) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15 ); }
+    MV( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13, const T& a14, const T& a15 ): MVBase(N,IDX) { set( a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15 ); _init();}
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13, const T& a14, const T& a15 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9; mW[10]=a10; mW[11]=a11; mW[12]=a12; mW[13]=a13; mW[14]=a14; mW[15]=a15;  }
 
 	
@@ -333,9 +413,8 @@ public:
     self_type runit() const { double t = rnorm(); if (t == 0) return self_type(); return *this / t; }
     self_type tunit() const { double t = norm(); if (t == 0) return self_type(); return *this / t; }
     
-    
-    typename Product<self_type, Pss, value_type>::GP dual() const;
-    typename Product<self_type, Pss, value_type>::GP undual() const;
+    self_type dual() const;
+    self_type undual() const;
 
     /////////////////////////////////////////////////////
     /* T r a n s f o r m a t i o n  O p e r a t o r s  */
@@ -389,6 +468,175 @@ public:
 		
 };
 
+//DEFAULTS FOR MVBASE Operations (abstract base class)
+template< class A, class B >
+MVBase gp_gen ( const MVBase& a, const MVBase& b) { printf("///////////////\ngp error!\n"); return a; }//( const A<NUM,IDX,T>&, const B<NUM2,IDX2,T2>&);
+template< class A, class B >
+MVBase op_gen ( const MVBase& a, const MVBase& b) { printf("///////////////\nop error!\n"); return a; }//( const A<NUM,IDX,T>&, const B<NUM2,IDX2,T2>&);
+template< class A, class B >
+MVBase ip_gen ( const MVBase& a, const MVBase& b){ printf("///////////////\nip error!\n"); return a; }
+
+template<int NUM, int IDX, class T>
+ CB MV<NUM,IDX,T>::gpfuncs[50] = {  
+gp_gen< self_type,Rot> ,  
+gp_gen< self_type,Mot> ,  
+gp_gen< self_type,Dil> ,  
+gp_gen< self_type,Trv> ,  
+gp_gen< self_type,Mtd> ,  
+gp_gen< self_type,Trs> ,  
+gp_gen< self_type,Rtc> ,  
+gp_gen< self_type,Mtt> ,  
+gp_gen< self_type,Rtt> ,  
+gp_gen< self_type,Rtd> ,  
+gp_gen< self_type,Tvd> ,  
+gp_gen< self_type,Tsd> ,  
+gp_gen< self_type,Trt> ,  
+gp_gen< self_type,Rvd> ,  
+gp_gen< self_type,Tst> ,  
+gp_gen< self_type,Tvt> ,  
+gp_gen< self_type,Bst> ,  
+gp_gen< self_type,Sca> ,  
+gp_gen< self_type,Ori> ,  
+gp_gen< self_type,Inf> ,  
+gp_gen< self_type,Mnk> ,  
+gp_gen< self_type,Hyp> ,  
+gp_gen< self_type,Pss> ,  
+gp_gen< self_type,Pnt> ,  
+gp_gen< self_type,Par> ,  
+gp_gen< self_type,Cir> ,  
+gp_gen< self_type,Sph> ,  
+gp_gen< self_type,Sta> ,  
+gp_gen< self_type,Drv> ,  
+gp_gen< self_type,Drb> ,  
+gp_gen< self_type,Drt> ,  
+gp_gen< self_type,Tnv> ,  
+gp_gen< self_type,Tnb> ,  
+gp_gen< self_type,Tnt> ,  
+gp_gen< self_type,Lin> ,  
+gp_gen< self_type,Pln> ,  
+gp_gen< self_type,Flp> ,  
+gp_gen< self_type,Dfp> ,  
+gp_gen< self_type,Dll> ,  
+gp_gen< self_type,Dlp> ,  
+gp_gen< self_type,Vec> ,  
+gp_gen< self_type,Biv> ,  
+gp_gen< self_type,Tri> ,  
+gp_gen< self_type,Aff> ,  
+gp_gen< self_type,Afl> ,  
+gp_gen< self_type,Afp> ,  
+gp_gen< self_type,Dap> ,  
+gp_gen< self_type,Daf> ,  
+gp_gen< self_type,Dal> ,  
+gp_gen< self_type,Mnv>   
+};
+    
+template<int NUM, int IDX, class T>
+ CB MV<NUM,IDX,T>::opfuncs[50] = {  
+op_gen< self_type,Rot> ,  
+op_gen< self_type,Mot> ,  
+op_gen< self_type,Dil> ,  
+op_gen< self_type,Trv> ,  
+op_gen< self_type,Mtd> ,  
+op_gen< self_type,Trs> ,  
+op_gen< self_type,Rtc> ,  
+op_gen< self_type,Mtt> ,  
+op_gen< self_type,Rtt> ,  
+op_gen< self_type,Rtd> ,  
+op_gen< self_type,Tvd> ,  
+op_gen< self_type,Tsd> ,  
+op_gen< self_type,Trt> ,  
+op_gen< self_type,Rvd> ,  
+op_gen< self_type,Tst> ,  
+op_gen< self_type,Tvt> ,  
+op_gen< self_type,Bst> ,  
+op_gen< self_type,Sca> ,  
+op_gen< self_type,Ori> ,  
+op_gen< self_type,Inf> ,  
+op_gen< self_type,Mnk> ,  
+op_gen< self_type,Hyp> ,  
+op_gen< self_type,Pss> ,  
+op_gen< self_type,Pnt> ,  
+op_gen< self_type,Par> ,  
+op_gen< self_type,Cir> ,  
+op_gen< self_type,Sph> ,  
+op_gen< self_type,Sta> ,  
+op_gen< self_type,Drv> ,  
+op_gen< self_type,Drb> ,  
+op_gen< self_type,Drt> ,  
+op_gen< self_type,Tnv> ,  
+op_gen< self_type,Tnb> ,  
+op_gen< self_type,Tnt> ,  
+op_gen< self_type,Lin> ,  
+op_gen< self_type,Pln> ,  
+op_gen< self_type,Flp> ,  
+op_gen< self_type,Dfp> ,  
+op_gen< self_type,Dll> ,  
+op_gen< self_type,Dlp> ,  
+op_gen< self_type,Vec> ,  
+op_gen< self_type,Biv> ,  
+op_gen< self_type,Tri> ,  
+op_gen< self_type,Aff> ,  
+op_gen< self_type,Afl> ,  
+op_gen< self_type,Afp> ,  
+op_gen< self_type,Dap> ,  
+op_gen< self_type,Daf> ,  
+op_gen< self_type,Dal> ,  
+op_gen< self_type,Mnv>   
+};
+    
+template<int NUM, int IDX, class T>
+ CB MV<NUM,IDX,T>::ipfuncs[50] = {  
+ip_gen< self_type,Rot> ,  
+ip_gen< self_type,Mot> ,  
+ip_gen< self_type,Dil> ,  
+ip_gen< self_type,Trv> ,  
+ip_gen< self_type,Mtd> ,  
+ip_gen< self_type,Trs> ,  
+ip_gen< self_type,Rtc> ,  
+ip_gen< self_type,Mtt> ,  
+ip_gen< self_type,Rtt> ,  
+ip_gen< self_type,Rtd> ,  
+ip_gen< self_type,Tvd> ,  
+ip_gen< self_type,Tsd> ,  
+ip_gen< self_type,Trt> ,  
+ip_gen< self_type,Rvd> ,  
+ip_gen< self_type,Tst> ,  
+ip_gen< self_type,Tvt> ,  
+ip_gen< self_type,Bst> ,  
+ip_gen< self_type,Sca> ,  
+ip_gen< self_type,Ori> ,  
+ip_gen< self_type,Inf> ,  
+ip_gen< self_type,Mnk> ,  
+ip_gen< self_type,Hyp> ,  
+ip_gen< self_type,Pss> ,  
+ip_gen< self_type,Pnt> ,  
+ip_gen< self_type,Par> ,  
+ip_gen< self_type,Cir> ,  
+ip_gen< self_type,Sph> ,  
+ip_gen< self_type,Sta> ,  
+ip_gen< self_type,Drv> ,  
+ip_gen< self_type,Drb> ,  
+ip_gen< self_type,Drt> ,  
+ip_gen< self_type,Tnv> ,  
+ip_gen< self_type,Tnb> ,  
+ip_gen< self_type,Tnt> ,  
+ip_gen< self_type,Lin> ,  
+ip_gen< self_type,Pln> ,  
+ip_gen< self_type,Flp> ,  
+ip_gen< self_type,Dfp> ,  
+ip_gen< self_type,Dll> ,  
+ip_gen< self_type,Dlp> ,  
+ip_gen< self_type,Vec> ,  
+ip_gen< self_type,Biv> ,  
+ip_gen< self_type,Tri> ,  
+ip_gen< self_type,Aff> ,  
+ip_gen< self_type,Afl> ,  
+ip_gen< self_type,Afp> ,  
+ip_gen< self_type,Dap> ,  
+ip_gen< self_type,Daf> ,  
+ip_gen< self_type,Dal> ,  
+ip_gen< self_type,Mnv>   
+};
 
 template<int NUM, int IDX, typename T>
 inline std::ostream& operator << ( std::ostream& os, MV< NUM, IDX, T > a ){
