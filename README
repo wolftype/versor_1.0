@@ -11,7 +11,7 @@ INTRODUCTION | ELEMENTS AND OPERATORS | COMPILATION | DEPENDENCIES
 INTRODUCTION
 ------------
 
-Welcome!  This package provides operations and draw routines for conformal geometric algebra. It is designed to make graphical experimentation of geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/) made by my collegues in the MAT program.  You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.  I am using it for my PhD on biological simulations.
+Welcome to Versor!  This package provides operations and draw routines for conformal geometric algebra. It is designed to make graphical experimentation of geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/) made by my colleagues in the MAT program.  You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.  I am using it for my PhD on biological simulations.
 
 I developed "Versor" while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It's a great book.  Built to aid in my modelling of biological forms, this work was funded in large part by the Olivia Long Converse Fellowship, from the Graduate Division at the University of California in Santa Barbara.  So this is under a UC Regents General Public License.
 
