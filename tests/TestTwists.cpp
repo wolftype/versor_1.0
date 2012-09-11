@@ -600,7 +600,7 @@ void simple(GLVApp& app){
     static Dll tdll;
     tdll.set(0,0,0,0,0,0);
     int it = 0;
-    IT (f.num())
+    TIT (f.num())
     
         Cir c = f[i] ^ pt;
         c.draw();
@@ -641,7 +641,9 @@ void simple(GLVApp& app){
 
 void GLVApp :: onDraw(){
 
-    //twist(*this);
+    cout << DLN(0,1,0) <<endl; 
+
+    twist(*this);
     
   // twistedBoost(*this);
     
@@ -652,7 +654,7 @@ void GLVApp :: onDraw(){
  //   twisties(*this);
   
 //   twistSelf(*this);
-   twistCircle(*this);
+ //  twistCircle(*this);
   //  twistLines(*this);
    
 //    leaves(*this);
