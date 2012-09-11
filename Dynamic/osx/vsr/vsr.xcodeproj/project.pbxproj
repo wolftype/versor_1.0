@@ -2829,6 +2829,7 @@
 		9B2A5080159CF0A000A9F12C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B2A5082159CF0A000A9F12C /* DemoAgacse.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DemoAgacse.1; sourceTree = "<group>"; };
 		9B2A508F159CF0F800A9F12C /* DemoAgacse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoAgacse.cpp; path = ../../tests/DemoAgacse.cpp; sourceTree = "<group>"; };
+		9B3F22F615FFF7F60071E210 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = ../../../README; sourceTree = "<group>"; };
 		9B403336152E6A1200FBBCC8 /* scratch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scratch.h; sourceTree = "<group>"; };
 		9B40333B152E879100FBBCC8 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		9B403340152E882000FBBCC8 /* bunny.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = bunny.obj; path = ../../resources/meshes/bunny.obj; sourceTree = "<group>"; };
@@ -2868,7 +2869,6 @@
 		9B66D94E153638FD00CB3D68 /* GraphicsMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsMatrix.h; sourceTree = "<group>"; };
 		9B66D950153639C700CB3D68 /* AssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssetManager.cpp; path = ../../include/vsr/AssetManager.cpp; sourceTree = "<group>"; };
 		9B66D951153639C700CB3D68 /* AssetManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
-		9B69B97B1523DE0100C308D4 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = ../../README; sourceTree = "<group>"; };
 		9B69B9801523E9FC00C308D4 /* TestVsrGlv2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestVsrGlv2; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B69B9831523E9FC00C308D4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B69B9851523E9FC00C308D4 /* TestVsrGlv2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestVsrGlv2.1; sourceTree = "<group>"; };
@@ -5335,8 +5335,8 @@
 			children = (
 				9B6FDF4615545DAE0070D3E3 /* AudioUnit.framework */,
 				9B6FDF4415545DA40070D3E3 /* AudioToolbox.framework */,
+				9B3F22F615FFF7F60071E210 /* README */,
 				9B6FDF4215545D970070D3E3 /* CoreAudio.framework */,
-				9B69B97B1523DE0100C308D4 /* README */,
 				9B47803D1523CA2C008A3481 /* tests */,
 				08FB7795FE84155DC02AAC07 /* vsr */,
 				9B403341152E882400FBBCC8 /* meshes */,
