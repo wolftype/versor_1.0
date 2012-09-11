@@ -55,9 +55,11 @@ int main(int argc, char **argv) {
 	CongaTypes::BindAll();
     
     int numit = 1000;
-    int numop = 100;
+    int numop = 1000;
 
-    int total = 0;
+    int total;
+    
+     total = 0;
     
     for (int i = 0; i < numit; ++i){
       
@@ -66,21 +68,44 @@ int main(int argc, char **argv) {
       
       for (int j = 0; j < numop; ++j){
         
-        Dll dll(1.,1.,1.,1.,1.,1.);
-        Mot m = Gen::mot(dll);
+//        Dll dll(1.,1.,1.,1.,1.,1.);
+//        Mot m = Gen::mot(dll);
+
+        Pnt a(1,1,1,1,1);
+        Pnt b(2,2,2,2,2);
+        a * b;
       
       }
       
 
       uTime(&end);
+      
+      total += end.tv_nsec - beg.tv_nsec;
+      
+      }
+      
+      printf("AVG lapse: %lu\n", total / numit);
+      
+           total = 0;
+    
+    for (int i = 0; i < numit; ++i){
+      
+      struct timespec beg, end;
+      uTime(&beg);
+      
+      for (int j = 0; j < numop; ++j){
+        
+//        Dll dll(1.,1.,1.,1.,1.,1.);
+//        Mot m = Gen::mot(dll);
 
-//      printf("s:  %lu\n", beg.tv_sec);
-//      printf("ns: %lu\n", beg.tv_nsec);
-//      printf("s:  %lu\n", end.tv_sec);
-//      printf("ns: %lu\n", end.tv_nsec);
-//      
-//      printf("lapse: %lu\n", end.tv_sec - beg.tv_sec);
-//      printf("lapse: %lu\n", end.tv_nsec - beg.tv_nsec);
+        Pnt a(1,1,1,1,1);
+        Pnt b(2,2,2,2,2);
+        a * b;
+      
+      }
+      
+
+      uTime(&end);
       
       total += end.tv_nsec - beg.tv_nsec;
       
