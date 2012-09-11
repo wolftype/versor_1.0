@@ -1738,6 +1738,18 @@
 		9B415E72159F4DBB0089BE8E /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B415E69159F4DBB0089BE8E /* NetworkingUtils.cpp */; };
 		9B415E73159F4DBB0089BE8E /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B415E6A159F4DBB0089BE8E /* UdpSocket.cpp */; };
 		9B4780381523C7DE008A3481 /* TestVesrGlv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */; };
+		9B638BB615FEBA6200C74AF7 /* TestSpeed.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B638BB515FEBA6200C74AF7 /* TestSpeed.1 */; };
+		9B638BBA15FEBF4100C74AF7 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
+		9B638BCA15FEC00200C74AF7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
+		9B638BCB15FEC00700C74AF7 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
+		9B638BD215FEC1D200C74AF7 /* glv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFC3F152026A4009E322F /* glv.framework */; };
+		9B638BD415FEC4DB00C74AF7 /* TestSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B638BD315FEC4DB00C74AF7 /* TestSpeed.cpp */; };
+		9B638BDD15FECA2B00C74AF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B638BDC15FECA2B00C74AF7 /* main.cpp */; };
+		9B638BDF15FECA2B00C74AF7 /* TestRandom.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B638BDE15FECA2B00C74AF7 /* TestRandom.1 */; };
+		9B638BE715FECA4500C74AF7 /* glv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFC3F152026A4009E322F /* glv.framework */; };
+		9B638BE815FECA4900C74AF7 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D0E651442A5330032E5A3 /* libvsr.a */; };
+		9B638BE915FECA5600C74AF7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
+		9B638BEA15FECA5B00C74AF7 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
 		9B66D94C1536382400CB3D68 /* DrawNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D94A1536382300CB3D68 /* DrawNode.cpp */; };
 		9B66D94D1536382400CB3D68 /* DrawNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B66D94B1536382400CB3D68 /* DrawNode.h */; };
 		9B66D94F153638FD00CB3D68 /* GraphicsMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B66D94E153638FD00CB3D68 /* GraphicsMatrix.h */; };
@@ -2376,6 +2388,34 @@
 			remoteGlobalIDString = 9B6FDECE15545D190070D3E3;
 			remoteInfo = Gamma;
 		};
+		9B638BCE15FEC0BA00C74AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B9D0E641442A5330032E5A3;
+			remoteInfo = vsr;
+		};
+		9B638BD015FEC1CE00C74AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B8AFC3E152026A4009E322F;
+			remoteInfo = glv;
+		};
+		9B638BE315FECA3700C74AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B9D0E641442A5330032E5A3;
+			remoteInfo = vsr;
+		};
+		9B638BE515FECA3D00C74AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B8AFC3E152026A4009E322F;
+			remoteInfo = glv;
+		};
 		9B69B9901523ED7100C308D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
@@ -2599,6 +2639,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9B638BAE15FEBA6100C74AF7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9B638BB615FEBA6200C74AF7 /* TestSpeed.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		9B638BD715FECA2B00C74AF7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9B638BDF15FECA2B00C74AF7 /* TestRandom.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9B69B97E1523E9FC00C308D4 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2774,6 +2834,13 @@
 		9B415E6A159F4DBB0089BE8E /* UdpSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocket.cpp; sourceTree = "<group>"; };
 		9B415E6C159F4DBB0089BE8E /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TestVesrGlv.cpp; path = ../../tests/TestVesrGlv.cpp; sourceTree = "<group>"; };
+		9B638BB015FEBA6100C74AF7 /* TestSpeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestSpeed; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B638BB315FEBA6200C74AF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9B638BB515FEBA6200C74AF7 /* TestSpeed.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestSpeed.1; sourceTree = "<group>"; };
+		9B638BD315FEC4DB00C74AF7 /* TestSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestSpeed.cpp; path = ../../tests/TestSpeed.cpp; sourceTree = "<group>"; };
+		9B638BD915FECA2B00C74AF7 /* TestRandom */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestRandom; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B638BDC15FECA2B00C74AF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9B638BDE15FECA2B00C74AF7 /* TestRandom.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestRandom.1; sourceTree = "<group>"; };
 		9B66D94A1536382300CB3D68 /* DrawNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DrawNode.cpp; path = ../../include/vsr/DrawNode.cpp; sourceTree = "<group>"; };
 		9B66D94B1536382400CB3D68 /* DrawNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawNode.h; sourceTree = "<group>"; };
 		9B66D94E153638FD00CB3D68 /* GraphicsMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsMatrix.h; sourceTree = "<group>"; };
@@ -5070,6 +5137,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B638BAD15FEBA6100C74AF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B638BD215FEC1D200C74AF7 /* glv.framework in Frameworks */,
+				9B638BCB15FEC00700C74AF7 /* GLUT.framework in Frameworks */,
+				9B638BCA15FEC00200C74AF7 /* OpenGL.framework in Frameworks */,
+				9B638BBA15FEBF4100C74AF7 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B638BD615FECA2B00C74AF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B638BEA15FECA5B00C74AF7 /* GLUT.framework in Frameworks */,
+				9B638BE915FECA5600C74AF7 /* OpenGL.framework in Frameworks */,
+				9B638BE815FECA4900C74AF7 /* libvsr.a in Frameworks */,
+				9B638BE715FECA4500C74AF7 /* glv.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B69B97D1523E9FC00C308D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -5255,13 +5344,7 @@
 				9B0D3DC0152CD65600AD875C /* shader */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				9B4780361523C77B008A3481 /* external lib */,
-				9BA4B2FA1547491700C15100 /* TestField */,
-				9B6FDEB1155216AF0070D3E3 /* TestStat */,
-				9B6FDF5215545E6F0070D3E3 /* TestAudio */,
-				9BCEBA8B15671D4900FFE99E /* TestOptics */,
-				9BCEBAA415681C8D00FFE99E /* TestTwists */,
-				9BCEBABA15681CEA00FFE99E /* TestWarp */,
-				9B2A507F159CF0A000A9F12C /* DemoAgacse */,
+				9B638BDB15FECA2B00C74AF7 /* TestRandom */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = vsr;
@@ -5298,6 +5381,8 @@
 				9BCEBAA215681C8D00FFE99E /* TestTwists */,
 				9BCEBAB815681CEA00FFE99E /* TestWarp */,
 				9B2A507D159CF0A000A9F12C /* DemoAgacse */,
+				9B638BB015FEBA6100C74AF7 /* TestSpeed */,
+				9B638BD915FECA2B00C74AF7 /* TestRandom */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5558,11 +5643,20 @@
 		9B47803D1523CA2C008A3481 /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				9BA4B2FA1547491700C15100 /* TestField */,
+				9B6FDEB1155216AF0070D3E3 /* TestStat */,
+				9B6FDF5215545E6F0070D3E3 /* TestAudio */,
+				9BCEBA8B15671D4900FFE99E /* TestOptics */,
+				9BCEBAA415681C8D00FFE99E /* TestTwists */,
+				9BCEBABA15681CEA00FFE99E /* TestWarp */,
+				9B2A507F159CF0A000A9F12C /* DemoAgacse */,
+				9B638BB215FEBA6200C74AF7 /* TestSpeed */,
 				9B0D3DBD152CD5AD00AD875C /* Tests.1 */,
 				9B2A508F159CF0F800A9F12C /* DemoAgacse.cpp */,
 				9B4780371523C7DE008A3481 /* TestVesrGlv.cpp */,
 				9B69B98A1523EA1700C308D4 /* TestVsrGlv2.cpp */,
 				9BCECCE3152675C600589E30 /* TestLinkage.cpp */,
+				9B638BD315FEC4DB00C74AF7 /* TestSpeed.cpp */,
 				9B6FDF6A15545EFF0070D3E3 /* TestAudio.cpp */,
 				9BCEBA9B15671D9600FFE99E /* TestOptics.cpp */,
 				9BA4B30A1547497300C15100 /* TestField.cpp */,
@@ -5583,6 +5677,24 @@
 				9BCECCC61524FCFF00589E30 /* GLVInterfaceImpl.h */,
 			);
 			name = impl;
+			sourceTree = "<group>";
+		};
+		9B638BB215FEBA6200C74AF7 /* TestSpeed */ = {
+			isa = PBXGroup;
+			children = (
+				9B638BB315FEBA6200C74AF7 /* main.cpp */,
+				9B638BB515FEBA6200C74AF7 /* TestSpeed.1 */,
+			);
+			path = TestSpeed;
+			sourceTree = "<group>";
+		};
+		9B638BDB15FECA2B00C74AF7 /* TestRandom */ = {
+			isa = PBXGroup;
+			children = (
+				9B638BDC15FECA2B00C74AF7 /* main.cpp */,
+				9B638BDE15FECA2B00C74AF7 /* TestRandom.1 */,
+			);
+			path = TestRandom;
 			sourceTree = "<group>";
 		};
 		9B69B9821523E9FC00C308D4 /* TestVsrGlv2 */ = {
@@ -9307,6 +9419,44 @@
 			productReference = 9B2A507D159CF0A000A9F12C /* DemoAgacse */;
 			productType = "com.apple.product-type.tool";
 		};
+		9B638BAF15FEBA6100C74AF7 /* TestSpeed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B638BB915FEBA6200C74AF7 /* Build configuration list for PBXNativeTarget "TestSpeed" */;
+			buildPhases = (
+				9B638BAC15FEBA6100C74AF7 /* Sources */,
+				9B638BAD15FEBA6100C74AF7 /* Frameworks */,
+				9B638BAE15FEBA6100C74AF7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B638BD115FEC1CE00C74AF7 /* PBXTargetDependency */,
+				9B638BCF15FEC0BA00C74AF7 /* PBXTargetDependency */,
+			);
+			name = TestSpeed;
+			productName = TestSpeed;
+			productReference = 9B638BB015FEBA6100C74AF7 /* TestSpeed */;
+			productType = "com.apple.product-type.tool";
+		};
+		9B638BD815FECA2B00C74AF7 /* TestRandom */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B638BE015FECA2B00C74AF7 /* Build configuration list for PBXNativeTarget "TestRandom" */;
+			buildPhases = (
+				9B638BD515FECA2B00C74AF7 /* Sources */,
+				9B638BD615FECA2B00C74AF7 /* Frameworks */,
+				9B638BD715FECA2B00C74AF7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B638BE615FECA3D00C74AF7 /* PBXTargetDependency */,
+				9B638BE415FECA3700C74AF7 /* PBXTargetDependency */,
+			);
+			name = TestRandom;
+			productName = TestRandom;
+			productReference = 9B638BD915FECA2B00C74AF7 /* TestRandom */;
+			productType = "com.apple.product-type.tool";
+		};
 		9B69B97F1523E9FC00C308D4 /* TestVsrGlv2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B69B9871523E9FD00C308D4 /* Build configuration list for PBXNativeTarget "TestVsrGlv2" */;
@@ -9627,6 +9777,8 @@
 				9BCEBAA115681C8D00FFE99E /* TestTwists */,
 				9BCEBAB715681CEA00FFE99E /* TestWarp */,
 				9B2A507C159CF0A000A9F12C /* DemoAgacse */,
+				9B638BAF15FEBA6100C74AF7 /* TestSpeed */,
+				9B638BD815FECA2B00C74AF7 /* TestRandom */,
 			);
 		};
 /* End PBXProject section */
@@ -10519,6 +10671,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B638BAC15FEBA6100C74AF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B638BD415FEC4DB00C74AF7 /* TestSpeed.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B638BD515FECA2B00C74AF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B638BDD15FECA2B00C74AF7 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B69B97C1523E9FC00C308D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -10898,6 +11066,26 @@
 			target = 9B6FDECE15545D190070D3E3 /* Gamma */;
 			targetProxy = 9B2A5091159CFFD100A9F12C /* PBXContainerItemProxy */;
 		};
+		9B638BCF15FEC0BA00C74AF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B9D0E641442A5330032E5A3 /* vsr */;
+			targetProxy = 9B638BCE15FEC0BA00C74AF7 /* PBXContainerItemProxy */;
+		};
+		9B638BD115FEC1CE00C74AF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B8AFC3E152026A4009E322F /* glv */;
+			targetProxy = 9B638BD015FEC1CE00C74AF7 /* PBXContainerItemProxy */;
+		};
+		9B638BE415FECA3700C74AF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B9D0E641442A5330032E5A3 /* vsr */;
+			targetProxy = 9B638BE315FECA3700C74AF7 /* PBXContainerItemProxy */;
+		};
+		9B638BE615FECA3D00C74AF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B8AFC3E152026A4009E322F /* glv */;
+			targetProxy = 9B638BE515FECA3D00C74AF7 /* PBXContainerItemProxy */;
+		};
 		9B69B9911523ED7100C308D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9B9D0E641442A5330032E5A3 /* vsr */;
@@ -11191,6 +11379,84 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../externals/gamma-0.9.5\" \"$(SRCROOT)/../../externals/**";
+			};
+			name = Release;
+		};
+		9B638BB715FEBA6200C74AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9B638BB815FEBA6200C74AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9B638BE115FECA2B00C74AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9B638BE215FECA2B00C74AF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -11853,6 +12119,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9B638BB915FEBA6200C74AF7 /* Build configuration list for PBXNativeTarget "TestSpeed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B638BB715FEBA6200C74AF7 /* Debug */,
+				9B638BB815FEBA6200C74AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9B638BE015FECA2B00C74AF7 /* Build configuration list for PBXNativeTarget "TestRandom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B638BE115FECA2B00C74AF7 /* Debug */,
+				9B638BE215FECA2B00C74AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		9B69B9871523E9FD00C308D4 /* Build configuration list for PBXNativeTarget "TestVsrGlv2" */ = {
 			isa = XCConfigurationList;

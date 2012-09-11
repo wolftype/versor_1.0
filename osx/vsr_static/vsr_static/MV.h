@@ -231,11 +231,6 @@ class MVBase {
             return *this;
     }
     
-  //  virtual void f(){}
-    
-
- 
-    
     MVBase operator * (const MVBase& b) { return gpfuncsptr[b.idx-1](*this, b); } 
     MVBase operator <= (const MVBase& b); 
     MVBase operator ^ (const MVBase& b); 

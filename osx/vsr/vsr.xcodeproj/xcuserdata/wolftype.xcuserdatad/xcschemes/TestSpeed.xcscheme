@@ -13,10 +13,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9BBBDFFC15DDC1F100BDE419"
-               BuildableName = "vsr_static"
-               BlueprintName = "vsr_static"
-               ReferencedContainer = "container:vsr_static.xcodeproj">
+               BlueprintIdentifier = "9B638BAF15FEBA6100C74AF7"
+               BuildableName = "TestSpeed"
+               BlueprintName = "TestSpeed"
+               ReferencedContainer = "container:vsr.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,10 +31,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9BBBDFFC15DDC1F100BDE419"
-            BuildableName = "vsr_static"
-            BlueprintName = "vsr_static"
-            ReferencedContainer = "container:vsr_static.xcodeproj">
+            BlueprintIdentifier = "9B638BAF15FEBA6100C74AF7"
+            BuildableName = "TestSpeed"
+            BlueprintName = "TestSpeed"
+            ReferencedContainer = "container:vsr.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -43,16 +43,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9BBBDFFC15DDC1F100BDE419"
-            BuildableName = "vsr_static"
-            BlueprintName = "vsr_static"
-            ReferencedContainer = "container:vsr_static.xcodeproj">
+            BlueprintIdentifier = "9B638BAF15FEBA6100C74AF7"
+            BuildableName = "TestSpeed"
+            BlueprintName = "TestSpeed"
+            ReferencedContainer = "container:vsr.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -67,10 +67,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9BBBDFFC15DDC1F100BDE419"
-            BuildableName = "vsr_static"
-            BlueprintName = "vsr_static"
-            ReferencedContainer = "container:vsr_static.xcodeproj">
+            BlueprintIdentifier = "9B638BAF15FEBA6100C74AF7"
+            BuildableName = "TestSpeed"
+            BlueprintName = "TestSpeed"
+            ReferencedContainer = "container:vsr.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

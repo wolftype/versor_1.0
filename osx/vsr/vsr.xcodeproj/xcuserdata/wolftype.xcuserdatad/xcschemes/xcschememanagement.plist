@@ -44,10 +44,20 @@
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
+		<key>TestRandom.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
 		<key>TestShader.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>TestSpeed.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 		<key>TestStat.xcscheme</key>
 		<dict>
@@ -136,6 +146,16 @@
 			<true/>
 		</dict>
 		<key>9B2A507C159CF0A000A9F12C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B638BAF15FEBA6100C74AF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B638BD815FECA2B00C74AF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
