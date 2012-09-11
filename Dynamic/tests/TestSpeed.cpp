@@ -54,8 +54,10 @@ int main(int argc, char **argv) {
         /* Bind CGA Framework */
 	CongaTypes::BindAll();
     
-    int numit = 100000;
-    int numop = 100;
+    
+    int counter = 0;
+    int numit = 1000;
+    int numop = 10000;
 
     int total;
     
@@ -80,38 +82,16 @@ int main(int argc, char **argv) {
 
       uTime(&end);
       
-      total += end.tv_nsec - beg.tv_nsec;
+        if (end.tv_sec == beg.tv_sec){
+        counter++;
+        total += end.tv_nsec - beg.tv_nsec;
+       
+      }
       
       }
       
-      printf("AVG lapse: %lu\n", total / numit);
+      printf("AVG lapse: %lu\n", total / counter);
       
-           total = 0;
-    
-    for (int i = 0; i < numit; ++i){
-      
-      struct timespec beg, end;
-      uTime(&beg);
-      
-      for (int j = 0; j < numop; ++j){
-        
-//        Dll dll(1.,1.,1.,1.,1.,1.);
-//        Mot m = Gen::mot(dll);
-
-        Pnt a(1,1,1,1,1);
-        Pnt b(2,2,2,2,2);
-        a * b;
-      
-      }
-      
-
-      uTime(&end);
-      
-      total += end.tv_nsec - beg.tv_nsec;
-      
-      }
-      
-      printf("AVG lapse: %lu\n", total / numit);
       
   return 0;
 

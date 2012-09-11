@@ -338,7 +338,7 @@ struct Fl {
 #define F2S(f) f*1000.0
 #define S2F(f) f/1000.0
 #define LN(x,y,z) ( Pnt(0,0,0,1,.5)^PT(x,y,z)^Inf(1) )
-#define DLN(x,y,z) ( Op::dl(LN(x,y,z)))
+#define DLN(x,y,z) ( Op::dl(LN(x,y,z)) )
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
 #define INFTY Inf(1)

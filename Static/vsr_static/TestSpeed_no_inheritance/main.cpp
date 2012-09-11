@@ -52,12 +52,14 @@ int main(int argc, char **argv) {
     //Dll dll = DLN(0,1,0);
 //    cout << (Ori(1)^PT(0,1,0)) << endl; 
 //    cout << (Ori(1)^PT(0,1,0)^Inf(1)) << endl; 
-    
-    int numit = 100000;
-    int numop = 100;
+    int counter = 0;
+    int numit = 1000;
+    int numop = 10000;
 
     int total = 0;
     int totalsec = 0;
+    
+    struct timespec tbeg, tend;
     
     for (int i = 0; i < numit; ++i){
       
@@ -79,14 +81,16 @@ int main(int argc, char **argv) {
 
       uTime(&end);
 
-      total += end.tv_nsec - beg.tv_nsec;
-      totalsec += end.tv_sec - beg.tv_sec;
-      
-      
+      if (end.tv_sec == beg.tv_sec){
+        counter++;
+        total += end.tv_nsec - beg.tv_nsec;
+        totalsec += end.tv_sec - beg.tv_sec;
       }
       
-      printf("AVG lapse nsec: %lu\n", total / numit);
-      printf("AVG lapse sec: %lu\n", totalsec / numit);
+      }
+
+      printf("AVG lapse nsec: %lu\n", total / counter);
+      printf("AVG lapse sec: %lu\n", totalsec / counter);
      
       
     
