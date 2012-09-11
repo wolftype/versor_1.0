@@ -14,7 +14,9 @@
     Results:
 */
 
-#include "vsr_op.h"
+//#include "vsr_op.h"
+#include "Pnt.h"
+
 
 #include <time.h>
 #include <sys/time.h>
@@ -48,13 +50,14 @@ void uTime(struct timespec *ts) {
 int main(int argc, char **argv) {
 
     //Dll dll = DLN(0,1,0);
-    cout << (Ori(1)^PT(0,1,0)) << endl; 
-    cout << (Ori(1)^PT(0,1,0)^Inf(1)) << endl; 
+//    cout << (Ori(1)^PT(0,1,0)) << endl; 
+//    cout << (Ori(1)^PT(0,1,0)^Inf(1)) << endl; 
     
     int numit = 1000;
-    int numop = 100;
+    int numop = 1000;
 
     int total = 0;
+    int totalsec = 0;
     
     for (int i = 0; i < numit; ++i){
       
@@ -63,27 +66,67 @@ int main(int argc, char **argv) {
       
       for (int j = 0; j < numop; ++j){
         
-        Dll dll(1.,1.,1.,1.,1.,1.);
-        Mot m = Gen::mot(dll);
+//        Dll dll(1.,1.,1.,1.,1.,1.);
+//        Mot m = Gen::mot(dll);
+
+            Pnt a(1,1,1,1,1);
+            Pnt b(2,2,2,2,2);
+            
+            a * b;
       
       }
       
 
       uTime(&end);
 
-//      printf("s:  %lu\n", beg.tv_sec);
-//      printf("ns: %lu\n", beg.tv_nsec);
-//      printf("s:  %lu\n", end.tv_sec);
-//      printf("ns: %lu\n", end.tv_nsec);
-//      
-//      printf("lapse: %lu\n", end.tv_sec - beg.tv_sec);
-//      printf("lapse: %lu\n", end.tv_nsec - beg.tv_nsec);
-      
       total += end.tv_nsec - beg.tv_nsec;
+      totalsec += end.tv_sec - beg.tv_sec;
+      
       
       }
       
-      printf("AVG lapse: %lu\n", total / numit);
+      printf("AVG lapse nsec: %lu\n", total / numit);
+      printf("AVG lapse sec: %lu\n", totalsec / numit);
+     
+      
+        
+    total = 0;
+
+    totalsec = 0;
+    
+    for (int i = 0; i < numit; ++i){
+      
+      struct timespec beg, end;
+      uTime(&beg);
+      
+      for (int j = 0; j < numop; ++j){
+//        
+//        Dll dll(1.,1.,1.,1.,1.,1.);
+//        MVBase * m = &dll;
+//        Mot mot = Gen::mot(*m);
+//      
+
+            Pnt a(1,1,1,1,1);
+            Pnt b(2,2,2,2,2);
+            MVBase * m1 = &a;
+            MVBase * m2 = &b;
+            
+            (*m1) * (*m2);
+      }
+      
+
+      uTime(&end);
+
+      
+      total += end.tv_nsec - beg.tv_nsec;
+            totalsec += end.tv_sec - beg.tv_sec;
+
+      
+      }
+      
+      printf("AVG lapse nsec: %lu\n", total / numit);
+      printf("AVG lapse sec: %lu\n", totalsec / numit);
+  
   
   return 0;
 
