@@ -24,8 +24,8 @@ require "headers"
 --SET FILE WRITE PATH
 --local env = os.getenv("HOME")
 local cwd = dofile("../../util/cwd.lua")
-local path = cwd.."../../../../include/vsr_static/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/include/"
-local cpath = cwd.."../../../../src/vsr_static/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/src/"
+local path = cwd.."../../../../include/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/include/"
+local cpath = cwd.."../../../../src/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/src/"
 local prefix = ""
 --print (env)
 print (path)
@@ -648,7 +648,7 @@ local genFunctions = function(dest)
 		for k, kv in ipairs(GPTypes) do
 			if (Member( getProductType(iv,kv,"gp"), myTypes) ) then
 			pprint(productGen(iv,kv, "gp"),dest)
-			pprint(productGenTemplated2(iv,kv, "gp"),dest)
+			--pprint(productGenTemplated2(iv,kv, "gp"),dest)
 			end			
 		end
 		
@@ -664,7 +664,7 @@ local genFunctions = function(dest)
 		for k, kv in ipairs(OPTypes) do
 			if (Member( getProductType(iv,kv,"op"), myTypes) ) then
 			pprint(productGen(iv,kv, "op"),dest)
-			pprint(productGenTemplated2(iv,kv, "op"),dest)
+			--pprint(productGenTemplated2(iv,kv, "op"),dest)
 			end
 		end
 		
@@ -680,7 +680,7 @@ local genFunctions = function(dest)
 		for k, kv in ipairs(IPTypes) do
 			if (Member( getProductType(iv,kv,"ip"), myTypes) ) then
 			pprint(productGen(iv,kv, "ip"),dest)
-			pprint(productGenTemplated2(iv,kv, "ip"),dest)
+			--pprint(productGenTemplated2(iv,kv, "ip"),dest)
 			end
 		end
 		
@@ -694,7 +694,7 @@ local genFunctions = function(dest)
 		io.output( io.open(path..filename, "a") ) -- APPEND
 
 		pprint(productGen(iv,iv, "ip"),dest)
-		pprint(productGenTemplated2(iv,iv, "ip"),dest)
+		--pprint(productGenTemplated2(iv,iv, "ip"),dest)
 		
 		io.close();
 		

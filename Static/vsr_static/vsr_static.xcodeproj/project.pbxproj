@@ -62,6 +62,9 @@
 		9B092C0415FF2F620075A46B /* vsr_typedefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B092BCF15FF2F620075A46B /* vsr_typedefs.h */; };
 		9B092C0615FF2F9A0075A46B /* vsr.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B092C0515FF2F9A0075A46B /* vsr.h */; };
 		9B092C0915FF30570075A46B /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
+		9B3F22DB15FFEDE70071E210 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B3F22DA15FFEDE70071E210 /* main.cpp */; };
+		9B3F22DD15FFEDE70071E210 /* TestSpeed_no_inheritance.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B3F22DC15FFEDE70071E210 /* TestSpeed_no_inheritance.1 */; };
+		9B3F22E315FFEDF50071E210 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
 		9B638BC315FEBF6100C74AF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B638BC215FEBF6100C74AF7 /* main.cpp */; };
 		9B638BC515FEBF6100C74AF7 /* TestSpeed.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B638BC415FEBF6100C74AF7 /* TestSpeed.1 */; };
 		9B84F52A15EC3C8F005CA167 /* vsr_op.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52915EC3C8F005CA167 /* vsr_op.h */; };
@@ -86,6 +89,13 @@
 			remoteGlobalIDString = 9BBBE00D15DDC20500BDE419;
 			remoteInfo = vsr;
 		};
+		9B3F22E115FFEDF00071E210 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BBBDFF415DDC1F100BDE419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BBBE00D15DDC20500BDE419;
+			remoteInfo = vsr;
+		};
 		9BBBE02815DEF2FC00BDE419 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9BBBDFF415DDC1F100BDE419 /* Project object */;
@@ -96,6 +106,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9B3F22D515FFEDE70071E210 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9B3F22DD15FFEDE70071E210 /* TestSpeed_no_inheritance.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9B638BBD15FEBF6100C74AF7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -173,6 +193,11 @@
 		9B092BCE15FF2F620075A46B /* vsr_templates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vsr_templates.h; path = ../../include/vsr_templates.h; sourceTree = "<group>"; };
 		9B092BCF15FF2F620075A46B /* vsr_typedefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vsr_typedefs.h; path = ../../include/vsr_typedefs.h; sourceTree = "<group>"; };
 		9B092C0515FF2F9A0075A46B /* vsr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vsr.h; path = ../../include/vsr.h; sourceTree = "<group>"; };
+		9B3F22D015FFEAC20071E210 /* MVBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MVBase.h; sourceTree = "<group>"; };
+		9B3F22D215FFEAD10071E210 /* MVBase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MVBase.cpp; sourceTree = "<group>"; };
+		9B3F22D715FFEDE70071E210 /* TestSpeed_no_inheritance */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestSpeed_no_inheritance; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B3F22DA15FFEDE70071E210 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9B3F22DC15FFEDE70071E210 /* TestSpeed_no_inheritance.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestSpeed_no_inheritance.1; sourceTree = "<group>"; };
 		9B638BBF15FEBF6100C74AF7 /* TestSpeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestSpeed; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B638BC215FEBF6100C74AF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B638BC415FEBF6100C74AF7 /* TestSpeed.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestSpeed.1; sourceTree = "<group>"; };
@@ -192,6 +217,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9B3F22D415FFEDE70071E210 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B3F22E315FFEDF50071E210 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B638BBC15FEBF6100C74AF7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,6 +251,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B3F22D915FFEDE70071E210 /* TestSpeed_no_inheritance */ = {
+			isa = PBXGroup;
+			children = (
+				9B3F22DA15FFEDE70071E210 /* main.cpp */,
+				9B3F22DC15FFEDE70071E210 /* TestSpeed_no_inheritance.1 */,
+			);
+			path = TestSpeed_no_inheritance;
+			sourceTree = "<group>";
+		};
 		9B638BC115FEBF6100C74AF7 /* TestSpeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +274,7 @@
 			children = (
 				9BBBE00015DDC1F100BDE419 /* vsr_static */,
 				9B638BC115FEBF6100C74AF7 /* TestSpeed */,
+				9B3F22D915FFEDE70071E210 /* TestSpeed_no_inheritance */,
 				9BBBDFFE15DDC1F100BDE419 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -242,6 +285,7 @@
 				9BBBDFFD15DDC1F100BDE419 /* vsr_static */,
 				9BBBE00E15DDC20500BDE419 /* libvsr.a */,
 				9B638BBF15FEBF6100C74AF7 /* TestSpeed */,
+				9B3F22D715FFEDE70071E210 /* TestSpeed_no_inheritance */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -252,6 +296,8 @@
 				9BBBE00115DDC1F200BDE419 /* main.cpp */,
 				9BBBE01615DDC40C00BDE419 /* MV.h */,
 				9B84F53B15EC5588005CA167 /* MV.cpp */,
+				9B3F22D015FFEAC20071E210 /* MVBase.h */,
+				9B3F22D215FFEAD10071E210 /* MVBase.cpp */,
 				9B092C0515FF2F9A0075A46B /* vsr.h */,
 				9B84F53315EC3D5A005CA167 /* vsr_op.cpp */,
 				9B84F52915EC3C8F005CA167 /* vsr_op.h */,
@@ -399,6 +445,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		9B3F22D615FFEDE70071E210 /* TestSpeed_no_inheritance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B3F22DE15FFEDE70071E210 /* Build configuration list for PBXNativeTarget "TestSpeed_no_inheritance" */;
+			buildPhases = (
+				9B3F22D315FFEDE70071E210 /* Sources */,
+				9B3F22D415FFEDE70071E210 /* Frameworks */,
+				9B3F22D515FFEDE70071E210 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B3F22E215FFEDF00071E210 /* PBXTargetDependency */,
+			);
+			name = TestSpeed_no_inheritance;
+			productName = TestSpeed_no_inheritance;
+			productReference = 9B3F22D715FFEDE70071E210 /* TestSpeed_no_inheritance */;
+			productType = "com.apple.product-type.tool";
+		};
 		9B638BBE15FEBF6100C74AF7 /* TestSpeed */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B638BC815FEBF6100C74AF7 /* Build configuration list for PBXNativeTarget "TestSpeed" */;
@@ -475,11 +539,20 @@
 				9BBBDFFC15DDC1F100BDE419 /* vsr_static */,
 				9BBBE00D15DDC20500BDE419 /* vsr */,
 				9B638BBE15FEBF6100C74AF7 /* TestSpeed */,
+				9B3F22D615FFEDE70071E210 /* TestSpeed_no_inheritance */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9B3F22D315FFEDE70071E210 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B3F22DB15FFEDE70071E210 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B638BBB15FEBF6100C74AF7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,6 +587,11 @@
 			target = 9BBBE00D15DDC20500BDE419 /* vsr */;
 			targetProxy = 9B092C0715FF30510075A46B /* PBXContainerItemProxy */;
 		};
+		9B3F22E215FFEDF00071E210 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BBBE00D15DDC20500BDE419 /* vsr */;
+			targetProxy = 9B3F22E115FFEDF00071E210 /* PBXContainerItemProxy */;
+		};
 		9BBBE02915DEF2FC00BDE419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9BBBE00D15DDC20500BDE419 /* vsr */;
@@ -522,6 +600,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		9B3F22DF15FFEDE70071E210 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9B3F22E015FFEDE70071E210 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		9B638BC615FEBF6100C74AF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -632,6 +724,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9B3F22DE15FFEDE70071E210 /* Build configuration list for PBXNativeTarget "TestSpeed_no_inheritance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B3F22DF15FFEDE70071E210 /* Debug */,
+				9B3F22E015FFEDE70071E210 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		9B638BC815FEBF6100C74AF7 /* Build configuration list for PBXNativeTarget "TestSpeed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

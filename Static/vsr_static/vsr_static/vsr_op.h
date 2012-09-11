@@ -30,10 +30,12 @@
 #include "Tri.h"
 #include "Vec.h"
 #include "Biv.h"
+#include "Lin.h"
 #include "Dll.h"
 #include "Par.h"
 #include "Ori.h"
 #include "Inf.h"
+#include "Pss.h"
 #include "versorFuncs.h"
 
 namespace vsr {
@@ -41,11 +43,11 @@ namespace vsr {
 
 struct Op {
     
-    template<class A> static A dl(const A& a)  { return a * Pss(-1); }
-    template<class A> static A udl(const A& a) { return a * Pss(1); }
-    
-    template<class A> static A dle(const A& a)  { return a * Tri(-1); }
-    template<class A> static A udle(const A& a) { return a * Tri(1); }
+//    template<class A> static A dl(const A& a)  { return a * Pss(-1); }
+//    template<class A> static A udl(const A& a) { return a * Pss(1); }
+//    
+//    template<class A> static A dle(const A& a)  { return a * Tri(-1); }
+//    template<class A> static A udle(const A& a) { return a * Tri(1); }
     
     
     template<class A, class B> 
@@ -59,7 +61,15 @@ struct Op {
     sp(const A& a, const B& b){ return sp(a,b); }
 
     template<class A, class B> static A
-    re(const A& a, const B& b){ return re(a,b); }    
+    re(const A& a, const B& b){ return re(a,b); }  
+    
+    template<class B>
+    static typename Product< B, Pss, typename B::value_type>::GP dl(const B& b) { return b * Pss(1); } 
+
+    template<class B>
+    static typename Product< B, Pss, typename B::value_type>::GP udl(const B& b) { return b * Pss(-1); } 
+
+
 //    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
 //    sp(const A& a, const B& b){ return b * a * ~b; }
 //
@@ -174,6 +184,13 @@ struct Gen {
         double s = atan2( n, t );
         return b * ( s / n);
     }
+    
+    /*! Generate a Rotor interpolation between two Rotors 
+        @param Rotor a
+        @param Rotor b
+    */
+    
+    
     
     /*! Generate a Motor from a Dual Line Axis
         @param Dual Line Generator (the axis of rotation, including pitch and period)
@@ -320,8 +337,8 @@ struct Fl {
 #define CYZ(f) (PY(f)^PY(-f)^PZ(f))
 #define F2S(f) f*1000.0
 #define S2F(f) f/1000.0
-#define LN(x,y,z) (Ori(1)^PT(x,y,z)^Inf(1))
-#define DLN(x,y,z) ( Dll(Op::dl( (Ori(1)^PT(x,y,z)^Inf(1))) ) )
+#define LN(x,y,z) ( Pnt(0,0,0,1,.5)^PT(x,y,z)^Inf(1) )
+#define DLN(x,y,z) ( Op::dl(LN(x,y,z)))
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
 #define INFTY Inf(1)
