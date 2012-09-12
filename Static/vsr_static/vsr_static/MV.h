@@ -53,7 +53,7 @@ template<class T> T reverse( const T& );
 template<class A, class B> A sp(const A&, const B&);
 template<class A, class B> A re(const A&, const B&);
     
-//Type Container Struct    
+////Type Container Struct    
 template<class A, class B, class T=float>
 struct Product{
     
@@ -72,6 +72,24 @@ struct Product{
     typedef MV<IP_N, IP_IDX, T> IP;  
 
 };
+
+//Type Container Struct    
+template<int A, int B, class T=float>
+struct ProductN{
+    
+    static const int GP_IDX = ProductIdx<A,B>::GP; 
+    static const int GP_N = Idx<GP_IDX>::Size;
+    static const int OP_IDX = ProductIdx<A,B>::OP; 
+    static const int OP_N = Idx<OP_IDX>::Size;
+    static const int IP_IDX = ProductIdx<A,B>::IP; 
+    static const int IP_N = Idx<IP_IDX>::Size;
+    
+    typedef MV<GP_N, GP_IDX, T> GP;  
+    typedef MV<OP_N, OP_IDX, T> OP;  
+    typedef MV<IP_N, IP_IDX, T> IP;  
+
+};
+
 
 
 //Predeclare BASIC TYPES
@@ -176,6 +194,8 @@ struct Product{
 	typedef MV<3,MNV,float>  Mnv;
 
 
+//template< int N, class T >
+
 
 
 template < int N, int IDX, class T >
@@ -185,9 +205,11 @@ class MV {
 
 public:
 	
+    void test();
+    
     typedef MV<N,IDX,T> self_type;
     typedef T value_type;
-    typedef T array_type[N];
+    typedef const T array_type[N];
     
     static const int idx = IDX;
  	static const int size =  N;    
@@ -263,8 +285,15 @@ public:
     void set( const T& a0, const T& a1, const T& a2, const T& a3, const T& a4, const T& a5, const T& a6, const T& a7, const T& a8, const T& a9, const T& a10, const T& a11, const T& a12, const T& a13, const T& a14, const T& a15 ) { mW[0]=a0; mW[1]=a1; mW[2]=a2; mW[3]=a3; mW[4]=a4; mW[5]=a5; mW[6]=a6; mW[7]=a7; mW[8]=a8; mW[9]=a9; mW[10]=a10; mW[11]=a11; mW[12]=a12; mW[13]=a13; mW[14]=a14; mW[15]=a15;  }
 
 	
+    /* Array Manipulation */
 	T& operator[] (int idx) { return mW[idx]; }
 	const T& operator[]  (int idx) const { return mW[idx]; }
+
+    /*! Pointer to Beginning of Array */
+    array_type& w() { return mW; }
+    
+    array_type& begin() const { return mW; }
+//    array_type& end() { return mW + size; }
     
     /////////////////////////////////////////////////////
     /* OPERATORS */ 
@@ -280,22 +309,24 @@ public:
     template< class B >
     MV& operator /= ( const B& v) { IT(N){ mW[i] *= v; } return *this; }
     
-//    //MULT
     template < int N2, int IDX2, class T2 >
-    typename Product<self_type, MV<N2,IDX2,T2>, T>::GP operator * ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, rh ); }
+    typename ProductN<idx, IDX2, T>::GP operator * ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, rh ); }
     
     template< int N2, int IDX2, class T2 >
-    typename Product<self_type, MV<N2,IDX2,T2>, T>::GP operator / ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, !rh ); }
+    typename ProductN<idx, IDX2, T>::GP operator / ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, !rh ); }
 
      template< int N2, int IDX2, class T2 >
-    typename Product<self_type, MV<N2,IDX2,T2>, T>::OP operator ^ ( const MV<N2,IDX2,T2>& rh ) const { return op ( *this, rh ); }
+    typename ProductN<idx, IDX2, T>::OP operator ^ ( const MV<N2,IDX2,T2>& rh ) const { return op ( *this, rh ); }
 
     template< int N2, int IDX2, class T2 >
-    typename Product<self_type, MV<N2,IDX2,T2>, T>::IP operator <= ( const MV<N2,IDX2,T2>& rh ) const { return ip ( *this, rh ); }
+    typename ProductN<idx, IDX2, T>::IP operator <= ( const MV<N2,IDX2,T2>& rh ) const { return ip ( *this, rh ); }
+    
+    template<class B>
+    MV operator %(const B& b) { return ( (*this) * b - b * (*this) ) * .5; }
     
     MV operator !() const {
             self_type sr = (~(*this));
-			typename Product<self_type, self_type>::GP s = (*this) * sr;
+			typename ProductN<idx, idx>::GP s = (*this) * sr;
 			if (s[0] == 0 ) return sr;
 			return ( sr / s[0] ); 
     }
@@ -305,12 +336,21 @@ public:
     MV operator ~() const { return reverse(*this); }
     
     //ADD/SUB
-    MV operator += (const MV& rh) { IT(N){ (*this)[i] += rh[i]; } return *this; }
-    MV operator + ( const MV& rh) { return MV(*this) += rh; }
+    MV& operator += (const MV& rh) { IT(N){ (*this)[i] += rh[i]; } return *this; }
+    MV operator + ( const MV& rh) const { return MV(*this) += rh; }
     
-    MV operator -= (const MV& rh) { IT(N){ (*this)[i] -= rh[i]; } return *this; }
-    MV operator - ( const MV& rh) { return MV(*this) -= rh; }
+    MV& operator -= (const MV& rh) { IT(N){ (*this)[i] -= rh[i]; } return *this; }
+    MV operator - ( const MV& rh) const { return MV(*this) -= rh; }
 
+
+    template< class B >
+    MV& operator +=(const B& rh) { return *this += MV<N,IDX,T>(rh); }
+    template< class B >
+    MV& operator -=(const B& rh) { return *this -= MV<N,IDX,T>(rh); }
+    template< class B >
+    MV& operator + (const B& rh) const { return *this + MV<N,IDX,T>(rh); }
+    template< class B >
+    MV& operator - (const B& rh) const { return *this - MV<N,IDX,T>(rh); }
     
     /////////////////////////////////////////////////////
     /* U T I L I T Y  F U N C T I O N S */
@@ -320,9 +360,9 @@ public:
     Pnt null() const;
 
     /*! Dot Product */
-    typename Product<self_type, self_type, T>::IP dot() const { return *this <= *this; }
+    typename ProductN<idx, idx, T>::IP dot() const { return *this <= *this; }
     /*! Reverse Dot Product */
-    typename Product<self_type, self_type, T>::IP rdot() const { return *this <= ~(*this); }
+    typename ProductN<idx, idx, T>::IP rdot() const { return *this <= ~(*this); }
     /*! Weight */
     T wt() const { return dot()[0]; }
     /*! Reverse Weight */
@@ -334,22 +374,37 @@ public:
     self_type tunit() const { double t = norm(); if (t == 0) return self_type(); return *this / t; }
     
     
-    typename Product<self_type, Pss, value_type>::GP dual() const;
-    typename Product<self_type, Pss, value_type>::GP undual() const;
+    typename Product<self_type, Pss, T>::GP dual() const;
+    typename Product<self_type, Pss, T>::GP undual() const;
 
     /////////////////////////////////////////////////////
     /* T r a n s f o r m a t i o n  O p e r a t o r s  */
     /////////////////////////////////////////////////////
-    
+
+    /*! Spin Element by Rotor b 
+        @param Rot, Trs, Mot, Dil, Trv, Bst, or some concatenation of these
+    */
     template<class B>
     self_type sp (const B& b) const { return vsr::sp (*this,b);}
+    
+    /*! Spin Element by Rotor b 
+        @param Rot, Trs, Mot, Dil, Trv, Bst, or some concatenation of these
+    */
+    template<class B>
+    self_type spin (const B& b) const { return vsr::sp (*this,b);}
 
-//    template<class B>
-//    self_type sp (const B& b) const { return vsr::sp (*this,b);}
-
+    /*! Reflect Element over Versor b 
+        @param Dll, Lin, Vec, Dlp, Pln, Pnt, Par, Cir, or Sph
+    */
     template<class B>
     self_type re (const B& b) const{ return vsr::re (*this,b);}
     
+    /*! Reflect Element over Versor b 
+        @param Dll, Lin, Vec, Dlp, Pln, Pnt, Par, Cir, or Sph
+    */
+    template<class B>
+    self_type pin (const B& b) const{ return vsr::re (*this,b);}
+
     /*! Rotation by Bivector Plane */
     self_type rot ( const Biv& b ) const ;
     
@@ -380,13 +435,19 @@ public:
 	/*! ONE-TO-ONE TEMPLATE FUNCTION PRETTY PRINTING */
 	friend std::ostream& operator << <> (  std::ostream& os, self_type a );
     
-    /* PENDING .... */
-    /*! Pointer to Beginning of Array */
-    array_type& w() { return mW; }
-    
-    array_type& begin() { return mW; }
-//    array_type& end() { return mW + size; }
-		
+
+
+    template<class B>
+    bool operator == (const B& mv) const{
+        int t = N <= B::size ? N : B::size;
+        int n = memcmp(mW, mv.begin(), t * sizeof(T) );
+        if (n != 0) return false;
+        else return true;
+    }
+	
+        
+    static MV x, y, z, xy, xz, yz;  
+//    static MV e1(T t) { MV<N,IDX,T> mv; mv[ Idx<IDX>::E1 ] = t; return mv; }   	
 };
 
 
@@ -400,6 +461,19 @@ inline std::ostream& operator << ( std::ostream& os, MV< NUM, IDX, T > a ){
     return os;
 }
 
+
+template<int N, int I, class T>
+MV<N,I,T> MV<N,I,T>::x = MV<N,I,T>(1,0,0); 
+template<int N, int I, class T>
+MV<N,I,T> MV<N,I,T>::y = MV<N,I,T>(0,1,0); 
+template<int N, int I, class T>
+MV<N,I,T> MV<N,I,T>::z = MV<N,I,T>(0,0,1); 
+template<int N, int I, class T>
+MV<N,I,T> MV<N,I,T>::xy = MV<N,I,T>(1,0,0); 
+template<int N, int I, class T>
+MV<N,I,T> MV<N,I,T>::xz = MV<N,I,T>(0,1,0); 
+template<int N, int I, class T>
+MV<N,I,T> MV<N,I,T>::yz = MV<N,I,T>(0,0,1); 
     
 #undef IT
     

@@ -9,62 +9,36 @@
 #include <iostream>
 
 #include "vsr_op.h"
+#include "Dll.h"
 
 using namespace vsr;
 
 int main (int argc, const char * argv[])
 {
 
-    
-   // cout << Vec(1,0,0).rot( Biv(1,0,0) ) << endl; 
-   
-   Pnt p1 = PT(1,0,0);
-   Pnt p2 = PT(1,1,0);
-   Pnt p3 = PT(1,-1,0);
-   Pnt p4 = PT(1,-1,1);
-   
-//   Par par = p1 ^ p2;
-//   Cir cir = p1 ^ p2 ^ p3;
-//   Sph sph = cir ^ p4;
-//
-//   MVBase * m1 = &p1;
-//   MVBase * m2 = &p3;
-    
-    Dll dll(1,1,1,1,1,1);
-    double  c = ( sqrt( fabs ( Biv(dll).wt() ) ) );
-    double sc = sin(c);
-    double cc = cos(c);
+    Dll dll, dll2;
 
-    Dll b = dll;
-    Biv B(b[0],b[1],b[2]); //Biv B(dll);
-    B = B.unit();
-    Vec t(b[3],b[4],b[5]);
+    dll2 = Dll(2,3,0,0,0,1);
     
-    Vec tv = Op::pj(t,B) ;
-    Vec tw = Op::rj(t,B) ;
+    dll += Biv(1,0,0);
+    dll += Drv(1,0,0);
+    dll += dll2;
     
-    tv *= Math::sinc(c);
+    cout << dll << dll2 << endl; 
     
-    Vec tt =  ( B.wt() == 0 ) ? t : tw * cc + tv;
-//
-    Vec_Biv ts(1,1,1,1);// = B*tw;	
-    Mot mot;	
-    mot[0] = cc;
-    mot[1] = B[0]*sc;
-    mot[2] = B[1]*sc;
-    mot[3] = B[2]*sc;	
-    mot[4] = tt[0];
-    mot[5] = tt[1];
-    mot[6] = tt[2];
-    mot[7] = ts[3] * sc;
-
-    Dll dll_list[1000];
+    Pnt p = Ro::null(2,2,2);
     
-    Rot r(1,1,1,1);
-    Trs trs (1,2,2,2);
+    Pnt_Dll pd1 = p * dll;
+    Pnt_Dll pd2 = dll * p;
     
-    cout << DLN(0,1,0) << endl; 
+//    dll.test();
+    cout << dll.dual() << endl; 
+   cout << pd1 << pd2 << pd1 - pd2 << (pd1 -pd2)*.5 << p % dll << (p%dll).null() << endl; 
+      
+    cout << Point( Ro::null(12,1,1) ) << endl;   
     
+    cout << Round::dls( 1,1,1,2.0) << Ro::dls( PT(1,1,1) )  << endl; 
+      
     return 0; 
 }
 

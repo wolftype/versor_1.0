@@ -105,17 +105,22 @@ local genTypedefs = function()
 	namespace vsr{
 	
 	$make_type[=[
+	/*! $desc */
 	typedef MV<$num,$idx,float>  $name;
+	typedef $name $longname;
 	]=]
-	
+	typedef Pnt Dls;
 	]]
 	
 	local code = cosmo.f(template){
 		make_type = function()
 		for i, iv in ipairs(myTypes) do
 				--print (iv.id)
+				--tname = ""
 				cosmo.yield{
+					desc = iv.desc,
 					name = iv.id,
+					longname = iv.desc:gsub("%s",""),
 					num = #iv.bases,
 					idx = up(iv.id)
 				}
@@ -805,8 +810,9 @@ end
 -- genVsrTypedefs("vsr_typedefs")
 -- genVsrTemplateH("vsr_templates")
 -- genVsrTemplateC("vsr_templates")
-genFunctions("io")
+--genFunctions("io")
 
+print(genTypedefs())
 -- for i, iv in ipairs(myMV) do
 -- print( BaseClass(Hyp,iv,"gp") )
 -- end
