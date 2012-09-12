@@ -71,7 +71,6 @@
 		9B84F52D15EC3CEF005CA167 /* vsr_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52B15EC3CEF005CA167 /* vsr_math.h */; };
 		9B84F52E15EC3CEF005CA167 /* vsr_matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */; };
 		9B84F53015EC3CFA005CA167 /* vsr_constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52F15EC3CFA005CA167 /* vsr_constants.h */; };
-		9B84F53415EC3D5A005CA167 /* vsr_op.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B84F53315EC3D5A005CA167 /* vsr_op.cpp */; };
 		9B84F53A15EC5135005CA167 /* ExpTemp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F53915EC5135005CA167 /* ExpTemp.h */; };
 		9B84F53C15EC5588005CA167 /* MV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B84F53B15EC5588005CA167 /* MV.cpp */; };
 		9B84F53E15ED55FA005CA167 /* versorFuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F53D15ED55FA005CA167 /* versorFuncs.h */; };
@@ -205,7 +204,6 @@
 		9B84F52B15EC3CEF005CA167 /* vsr_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_math.h; sourceTree = "<group>"; };
 		9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_matrix.h; sourceTree = "<group>"; };
 		9B84F52F15EC3CFA005CA167 /* vsr_constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_constants.h; sourceTree = "<group>"; };
-		9B84F53315EC3D5A005CA167 /* vsr_op.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_op.cpp; sourceTree = "<group>"; };
 		9B84F53915EC5135005CA167 /* ExpTemp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpTemp.h; sourceTree = "<group>"; };
 		9B84F53B15EC5588005CA167 /* MV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MV.cpp; sourceTree = "<group>"; };
 		9B84F53D15ED55FA005CA167 /* versorFuncs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = versorFuncs.h; sourceTree = "<group>"; };
@@ -260,6 +258,22 @@
 			path = TestSpeed_no_inheritance;
 			sourceTree = "<group>";
 		};
+		9B3F22F7160019550071E210 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = helper;
+			sourceTree = "<group>";
+		};
+		9B3F22F8160019880071E210 /* Abstraction */ = {
+			isa = PBXGroup;
+			children = (
+				9B3F22D015FFEAC20071E210 /* MVBase.h */,
+				9B3F22D215FFEAD10071E210 /* MVBase.cpp */,
+			);
+			name = Abstraction;
+			sourceTree = "<group>";
+		};
 		9B638BC115FEBF6100C74AF7 /* TestSpeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,16 +310,15 @@
 				9BBBE00115DDC1F200BDE419 /* main.cpp */,
 				9BBBE01615DDC40C00BDE419 /* MV.h */,
 				9B84F53B15EC5588005CA167 /* MV.cpp */,
-				9B3F22D015FFEAC20071E210 /* MVBase.h */,
-				9B3F22D215FFEAD10071E210 /* MVBase.cpp */,
+				9B3F22F8160019880071E210 /* Abstraction */,
 				9B092C0515FF2F9A0075A46B /* vsr.h */,
-				9B84F53315EC3D5A005CA167 /* vsr_op.cpp */,
 				9B84F52915EC3C8F005CA167 /* vsr_op.h */,
-				9BF4FE4615DF295B000D6508 /* multivectors */,
 				9B84F53915EC5135005CA167 /* ExpTemp.h */,
+				9B3F22F7160019550071E210 /* helper */,
 				9B84F52B15EC3CEF005CA167 /* vsr_math.h */,
 				9B84F52F15EC3CFA005CA167 /* vsr_constants.h */,
 				9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */,
+				9BF4FE4615DF295B000D6508 /* multivectors */,
 				9BBBE00315DDC1F200BDE419 /* vsr_static.1 */,
 			);
 			path = vsr_static;
@@ -573,7 +586,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B84F53415EC3D5A005CA167 /* vsr_op.cpp in Sources */,
 				9B84F53C15EC5588005CA167 /* MV.cpp in Sources */,
 				9B092C0215FF2F620075A46B /* vsr_templates.cpp in Sources */,
 			);

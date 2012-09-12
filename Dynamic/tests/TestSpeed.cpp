@@ -55,9 +55,14 @@ int main(int argc, char **argv) {
 	CongaTypes::BindAll();
     
     
+    //cout << PT(0,0,0) * DLN(0,1,0) << endl; 
+    State s = PT(1,0,0) * PT(-1,0,0) / Dlp(1,1,1,1);
+    
+    cout << s << endl; 
+    
     int counter = 0;
     int numit = 1000;
-    int numop = 10000;
+    int numop = 1000;
 
     int total;
     

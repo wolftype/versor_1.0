@@ -63,8 +63,8 @@ local buildTypes = function(xlist, ylist, operation, switchName)
 					name = iv.id .. "_"
 					if operation ~= "gp" then name = name..operation.."_" end
 					name = name .. jv.id 
-					allTypes[idx] =  {id = name, desc = name, bases = ty.bases, key = ty.key}
-					genTypes[idxgen] = {id = name, desc = name, bases = ty.bases, key = ty.key}
+					allTypes[idx] =  {id = name, desc = iv.desc.." "..jv.desc, bases = ty.bases, key = ty.key}
+					genTypes[idxgen] = {id = name, desc = iv.desc.." "..jv.desc, bases = ty.bases, key = ty.key}
 				end
 		end
 	end

@@ -44,7 +44,7 @@ Without going into too much detail, there are three overloaded binary operators:
 ^    The Outer Product
 <=   The Inner Product
 
-[There is also % which is a commutator product]
+There is also % which is a commutator product
 
 And a few overloaded operations:
 
@@ -61,7 +61,7 @@ A * B   multiplies two elements together (and, in the case of A * !B (or A * -B)
 A ^ B   wedges two elements together ( builds up higher dimensional elements )
 A <= B  contracts A out of B ( returns the part of B least like A )
 
-Operators act on the elements of the algebra.  The elements are geometric entities.  To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long.
+Operators act on the elements of the algebra.  The elements are geometric entities.  To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long. In an upcoming version, you'll also be able to use the longname.
 
 "EUCLIDEAN ELEMENTS"
 Sca -- Scalar       (A real number)

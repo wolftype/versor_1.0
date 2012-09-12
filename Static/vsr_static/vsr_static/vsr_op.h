@@ -43,12 +43,6 @@ namespace vsr {
 
 struct Op {
     
-//    template<class A> static A dl(const A& a)  { return a * Pss(-1); }
-//    template<class A> static A udl(const A& a) { return a * Pss(1); }
-//    
-//    template<class A> static A dle(const A& a)  { return a * Tri(-1); }
-//    template<class A> static A udle(const A& a) { return a * Tri(1); }
-    
     
     template<class A, class B> 
     static typename Product< typename Product<A,B,typename A::value_type>::OP, B,typename A::value_type >::GP 
@@ -68,6 +62,17 @@ struct Op {
 
     template<class B>
     static typename Product< B, Pss, typename B::value_type>::GP udl(const B& b) { return b * Pss(-1); } 
+    
+    template<class B>
+    static typename Product< B, Tri, typename B::value_type>::GP dle(const B& b) { return b * Tri(-1); } 
+
+    template<class B>
+    static typename Product< B, Tri, typename B::value_type>::GP udle(const B& b) { return b * Tri(-1); }     
+    
+
+    
+
+
 
 
 //    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
@@ -94,6 +99,82 @@ struct Ro {
         return Pnt(x, y, z, 1 , (x*x + y*y + z*z) / 2.0 );
     }
     
+    /*! Dual Sphere from Element and Radius
+        @param Any input MV v (function will take first 3 weights)
+        @param Radius (enter a negative radius for an imaginary sphere)
+    */
+    template< class S >
+    static Dls dls( const S& v, double r = 1.0 ) {
+        Dls s = Ro::null(v);
+        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
+        return s;
+    }
+    
+    /*! Dual Sphere from Coordinate Center and Radius
+        @param Any input MV v (function will take first 3 weights)
+        @param Radius (enter a negative radius for an imaginary sphere)
+    */
+    template< class T>
+    static Dls dls( T x, T y, T z, double r = 1.0 ) {
+        Dls s = Ro::null(x,y,z);
+        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
+        return s;
+    }
+
+    /*! Dual Sphere from Point and Radius
+        @param Point
+        @param Radius (enter a negative radius for an imaginary sphere)
+    */
+    static Dls dls_pnt( const Pnt& p, double r = 1.0 ) {
+        Dls s = p;
+        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
+        return s;
+    }    
+    
+    /*! Sphere At center c through point p */
+    Dls Ro::dls( const Pnt& c, const Pnt& p){
+        return Dls( p <= ( c^Inf(1) ) );
+    }
+    
+    /*! Split Points from Point Pair 
+        @param PointPair input
+    */
+    static std::vector<Pnt> split(const Par& pp){
+        std::vector<Pnt> pair;
+        
+        double r = sqrt( fabs( ( pp <= pp )[0] ) );
+        
+        Dlp dlp = Inf(-1) <= pp;
+
+        Bst bstA(pp);        
+        Bst bstB(pp);        
+        bstA += Sca(r);
+        bstB -= Sca(r);
+                
+        Pnt pA = ( bstA ) / dlp;
+        Pnt pB = ( bstB ) / dlp;
+                
+        pair.push_back(pA);
+        pair.push_back(pB);
+        return pair;
+    }  
+    
+    /*! Split Points from Point Pair 
+        @param PointPair input
+    */
+    static Pnt split(const Par& pp, bool bFirst){
+        
+        double r = sqrt( fabs( ( pp <= pp )[0] ) );
+        
+        Dlp dlp = Inf(-1) <= pp;
+
+        Bst bst(pp); 
+        bst += bFirst ? Sca(r) : Sca(-r);
+        
+        return ( bst ) / dlp;
+    }
+    
+    
     /*! Returns Squared Size of a Round Element
         @param input round (dual sphere, point pair, circle, or direct sphere)
         @param duality flag 
@@ -108,7 +189,7 @@ struct Ro {
         @param input round (dual sphere, point pair, circle, or direct sphere)
     */
     template< class T >
-    static typename T::value_type radius( const T& s ){
+    static typename T::value_type rad( const T& s ){
         return sqrt ( fabs ( Ro::size(s, false) ) );
     }
     
@@ -128,6 +209,33 @@ struct Ro {
     static Pnt null_cen( const T& s){
         return null ( cen ( s ) );
     }
+    
+    /*! Direction of Round Element */
+    template<class A>
+    static typename Product< typename Product<Inf, A, typename A::value_type>::IP, Inf, typename A::value_type>::OP  dir( const A& s ) {
+        return ( Inf(-1) <= s ) ^ Inf(1);
+    }
+    
+    /*! Carrier Flat of Round Element */
+    template<class A>
+    static typename Product<A, Inf, typename A::value_type>::OP car(const A& s) {
+        return s ^ Inf(1);
+    }
+    
+    template<class A>
+    static Dls sur( const A& s) {
+        return Dls( s / ( s ^ Inf(1) ));
+    }
+    
+//    /*! Point Pair on Circle at Theta */
+//    Par Ro::par_cir( const Cir& cir, double theta){
+//        return Op::dl( Fl::dlp_ortho_cir(cir,theta) ^ Op::dl(cir) ); 					//Meet with Circle
+//    }
+//    
+//    /*! Point on Circle at theta */
+//    static Pnt pnt_cir( const Cir& cir, double theta){
+//        return Ro::null_cen( Ro::split2( Ro::par_cir( cir, theta) ) );
+//    }
     
 };
 
@@ -163,8 +271,8 @@ struct Gen {
     /*! Get Bivector Generator from a Rotor 
         @param Rotor r
     */
-    static Biv log_rot(const Rot& r){
-        //typedef typename r::value_type TYP;     //<--- Precision depends on Rotor
+    static Biv log(const Rot& r){
+        //typedef typename r::value_type TYP;     //<--- Precision depends on Rotor?
     	
         double t = r[0];                           //<--- Scalar Value from Rotor
         
@@ -185,12 +293,77 @@ struct Gen {
         return b * ( s / n);
     }
     
+    /*! Bivector plane of Rotation from Rotor 
+        @param Rotor r
+    */
+    static Biv pl( const Rot& r) {
+        Biv b ( r );
+        double t = b.rnorm(); // use rnorm or norm here?
+        if (t == 0 ) return Biv(1,0,0);
+        return b / t;
+    }
+    
+    /*! Angle of Rotation from Rotor 
+        @param Rotor r
+    */
+    static double iphi( const Rot& r) {
+        return Biv ( Gen::log(r) * -2 ).norm();
+    }
+    
     /*! Generate a Rotor interpolation between two Rotors 
         @param Rotor a
         @param Rotor b
     */
+    static Rot slerp( const Rot& a, const Rot& b, double t){    
+       	
+        Rot r1 =  !(a) * (b);       //  Ratio	        
+        Biv r2 = log( r1 ) * t;     //  Log 
+        return Gen::rot(r2) * a;    //  Exponential Form (q: switch check?)	
+    }
+
+
+    /*! Ratio Rotor From Two Vecs (assumes unit?) 
+        @param Vec a
+        @param Vec b
+    */
+    Rot Gen::ratio(const Vec& a, const Vec& b){
+        double s = ( a <= b )[0];
+        
+        //180 degree check
+        if (a == b.conjugation() ) return Rot(0,0,1,0);
+        
+        double ss = 2 * (s+1);
+        double n = ( ss >= 0 ? sqrt ( ss ) : 0 );
+        
+        Rot r = ( b * a ) ; //cout << r << endl;
+        r[0] += 1;	
+        if (n != 0 ) r /= n;
+        if (r == Rot(0,0,0,0) ) return Rot(1,0,0,0);//else cout << r << endl; //printf("0 in gen::ratio\n");
+        return r;
+    }    
     
+    /*! Axis Angle from Rotor
+        @param Rotor input
+    */
+    static Vec4<> aa (const Rot& r) {
+
+        Vec v = Op::dle(Gen::pl( r ) ) ;		
+        double deg = iphi(r) * ( -180 / PI );
+        			
+        return Vec4<>(v[0], v[1], v[2], deg);
+    }
     
+    static Mat4<> mat( const Rot& r) {
+      
+        Vec xi = Vec::x.sp(r);
+        Vec yi = Vec::y.sp(r);
+        Vec zi = Vec::z.sp(r);
+        
+        return Mat4<>(xi[0], xi[1], xi[2], 0, 
+                      yi[0], yi[1], yi[2], 0,
+                      zi[0], zi[1], zi[2], 0,
+                      0   ,   0 ,   0 ,    1 );
+    }
     
     /*! Generate a Motor from a Dual Line Axis
         @param Dual Line Generator (the axis of rotation, including pitch and period)
@@ -230,7 +403,7 @@ struct Gen {
     /*! Dual Line Generator from a Motor 
         @param Motor m (a concatenation of rotation and translation)
     */
-    static Dll log_mot( const Mot& m){
+    static Dll log( const Mot& m){
     	Dll rq;						//tmp dll
         Drv cperp, cpara;
         Dll q = m;						//extract grade 2 part
@@ -253,7 +426,9 @@ struct Gen {
         
         Drv c = cperp + cpara;
         rq += (b);
-        copy(c.w(), c.w() + 3, &(rq.w()[3]));
+        rq += c;
+        
+//        copy(c.begin(), c.begin() + 3, &(rq.w()[3]));
             
         return rq;
     }
@@ -326,6 +501,9 @@ struct Fl {
 
     
 };
+
+
+typedef Ro Round;
 
 #define PT(x,y,z) Ro::null(Vec(x,y,z))
 #define PV(v) Ro::null(v)
