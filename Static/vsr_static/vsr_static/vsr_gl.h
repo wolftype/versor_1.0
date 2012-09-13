@@ -15,14 +15,13 @@
 #include <string>
 #include <vector>
 
-#include    "vsr_gxlib.h"
-#include "Matrix.h"
+#include "vsr_gxlib.h"
+#include "vsr_matrix.h"
 //#include    "vsr_gfxdata.h"
 
 namespace vsr {
     
 	class Vec;
-    class State;
 	class Camera;  
     
     using std::string;
@@ -271,9 +270,9 @@ namespace vsr {
         
         //			static int getError();
         //FIXED PIPELINE STUFF
-         void Line(const vsr::State &a, const vsr::State &b);
-         void Tri(const vsr::State &a, const vsr::State &b, const vsr::State &c);
-         void Quad(const State& a, const State& b, const State& c, const State& d);
+        template<class A> void Line(const A &a, const A &b);
+         template<class A>  void Tri(const A &a, const A &b, const A &c);
+         template<class A> void Quad(const A& a, const A& b, const A& c, const A& d);
 		
     
     inline void GL::ability(Ability a, bool v) { v ? enable(a) : disable(a); }

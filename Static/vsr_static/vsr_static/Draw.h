@@ -33,15 +33,11 @@
 
 using namespace std;
 
-#include "Matrix.h"
+#include "vsr_matrix.h"
 #include <sstream>
-//namespace glv {
-//	class Scene;
-//}
+
 
 namespace vsr {
-
-//		using glv::Scene;
 
 		//Forward Declarations
         class Vec;
@@ -52,7 +48,6 @@ namespace vsr {
 		class Trv;
 		class Cir;
 		class Pnt;
-		class State;
         class Frame;
     
         
@@ -113,7 +108,7 @@ namespace vsr {
 				//static void Helix(float radius = 1.0, float height = 1.0, bool clockwise = 0);
 								
 				//point in space (origin is default)
-				static void Point(const State& );
+				template<class A> static void Point(const A& );
 				static void Point(const Vec3<>& );
 				
 				static void Axes( const Vec&, const Vec&, const Vec&);
@@ -158,24 +153,37 @@ namespace vsr {
                 static void SegPnts(const Cir& K, const Pnt& a, const Pnt& b, int res = 20);
 				
 				/* Draw State, Label, and Node Info */
-				static void S(const State&);
-                static void S(const State&, float, float, float,float a = 1.0);
-
+                template< class A > static void S(const A&);
+                template< class A > static void S(const A&, float, float, float,float a = 1.0);
+                template< class A > static void R(const A&);
+                template< class A > static void R(const A&, float, float, float,float a = 1.0);
 //				static void L(const State&);				
 //				static void L(const State&, Scene&);
 //				static void L(const State&, Scene&, const std::string&, int ofx = 15, int ofy = 15);
 				
-				static void N(const State&);
-				
-				static void S(const State&, int style);
-				static State pos(const State&);
-				
-				static void clickTest(State& s, double x, double y, double z);
+//				static void N(const State&);				
+//				static void MV(const State&, int style);
+//				static State pos(const State&);				
+//				static void clickTest(State& s, double x, double y, double z);
 //				static Vec  screenCoord(const State& s );
 
-				static void PushPosition(const State&);
-				static void Push(const State& p, const State& r, const double& s);
-				static void Pop();
+                template<class A>
+                static void Push( const A& pos, const Rot& rot, const double& scale ){
+                    glPushMatrix();
+                        Vec4<> t = Op::aa(rot);
+                        glTranslated(pos[0], pos[1], pos[2]);
+                        glRotated(t.w,t.x,t.y,t.z);
+                        glScaled(scale,scale,scale);
+                }
+                
+                template<class A>
+                static void PushPosition( const A& pos){
+                    glPushMatrix();
+                        glTranslated(pos[0], pos[1], pos[2]);
+                }
+
+                static void Pop(){ glPopMatrix(); }
+
 				
 		//void drawLabel(double, double, double);
 		//virtual void drawLoop();
@@ -184,37 +192,37 @@ namespace vsr {
 		
 		};
     
-    struct Print {
-    
-        enum Style {
-            None = 0,
-            Smooth = 1,
-            Tension = 1 << 1,
-            Cycle = 1 << 2,
-            Dotted = 1 << 3,
-            Dashed = 1 << 4,
-            Fill  = 1 << 5
-        };
-        inline static string Begin() { return "\\begin{tikzpicture}\n"; }
-        inline static string End()   { return "\\end{tikzpicture}";}
-        
-        inline static string DrawEnd() { return ";"; }
-        inline static string PlotEnd() { return "};"; }
-
-        static string DrawBegin(Style s = None);        
-        static string PlotBegin(float tension, bool cycle, bool smooth = false);
-        
-        static string frame(const Frame& f, const Camera& cam);
-        static string Cube(const Frame& f, const Camera& cam);
-        static string Circle(const State& cir, const Camera& cam);
-        static string CircleSeg( const State& cir, const State&, const State&, const Camera& cam);
-        static string Coord(const State & s, const Camera& cam);
-        static string Line(const State& pa, const State& pb, const Camera& cam);
-        static string Tikz( const State&, const Camera& );
-        static string TikzSeg( const State&, const State&, const State&, const Camera& );
-        static string  TikzSeg2( vector<State> pa, const Camera& cam);
-        static string TikzPerspective( const State&, const Camera& );
-    };
+//    struct Print {
+//    
+//        enum Style {
+//            None = 0,
+//            Smooth = 1,
+//            Tension = 1 << 1,
+//            Cycle = 1 << 2,
+//            Dotted = 1 << 3,
+//            Dashed = 1 << 4,
+//            Fill  = 1 << 5
+//        };
+//        inline static string Begin() { return "\\begin{tikzpicture}\n"; }
+//        inline static string End()   { return "\\end{tikzpicture}";}
+//        
+//        inline static string DrawEnd() { return ";"; }
+//        inline static string PlotEnd() { return "};"; }
+//
+//        static string DrawBegin(Style s = None);        
+//        static string PlotBegin(float tension, bool cycle, bool smooth = false);
+//        
+//        static string frame(const Frame& f, const Camera& cam);
+//        static string Cube(const Frame& f, const Camera& cam);
+//        static string Circle(const State& cir, const Camera& cam);
+//        static string CircleSeg( const State& cir, const State&, const State&, const Camera& cam);
+//        static string Coord(const State & s, const Camera& cam);
+//        static string Line(const State& pa, const State& pb, const Camera& cam);
+//        static string Tikz( const State&, const Camera& );
+//        static string TikzSeg( const State&, const State&, const State&, const Camera& );
+//        static string  TikzSeg2( vector<State> pa, const Camera& cam);
+//        static string TikzPerspective( const State&, const Camera& );
+//    };
     
         
 } //vsr::

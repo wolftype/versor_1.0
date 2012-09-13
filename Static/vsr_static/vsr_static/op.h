@@ -41,6 +41,8 @@
 namespace vsr {
 
 
+//#define TYP typename Product
+
 struct Op {
     
     
@@ -69,7 +71,10 @@ struct Op {
     template<class B>
     static typename Product< B, Tri, typename B::value_type>::GP udle(const B& b) { return b * Tri(-1); }     
     
-
+    template<class A>
+    static bool sn(const A& a, const A& b) {
+        return (a / b)[0] > 0 ? 1 : 0;
+    }   
     
 
 
@@ -83,161 +88,6 @@ struct Op {
     
 };
 
-/*! Operations on Round Elements */
-struct Ro {
-
-
-    /*! Null Point from Arbirtary Multivector */
-    template< class B >
-    static Pnt null( const B& b){	
-        return null( b[0], b[1], b[2] );
-    }
-    
-    /*! Null Point from x, y, z */
-    template< class S >
-    static Pnt null( S x, S y, S z){	
-        return Pnt(x, y, z, 1 , (x*x + y*y + z*z) / 2.0 );
-    }
-    
-    /*! Dual Sphere from Element and Radius
-        @param Any input MV v (function will take first 3 weights)
-        @param Radius (enter a negative radius for an imaginary sphere)
-    */
-    template< class S >
-    static Dls dls( const S& v, double r = 1.0 ) {
-        Dls s = Ro::null(v);
-        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
-        return s;
-    }
-    
-    /*! Dual Sphere from Coordinate Center and Radius
-        @param Any input MV v (function will take first 3 weights)
-        @param Radius (enter a negative radius for an imaginary sphere)
-    */
-    template< class T>
-    static Dls dls( T x, T y, T z, double r = 1.0 ) {
-        Dls s = Ro::null(x,y,z);
-        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
-        return s;
-    }
-
-    /*! Dual Sphere from Point and Radius
-        @param Point
-        @param Radius (enter a negative radius for an imaginary sphere)
-    */
-    static Dls dls_pnt( const Pnt& p, double r = 1.0 ) {
-        Dls s = p;
-        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
-        return s;
-    }    
-    
-    /*! Sphere At center c through point p */
-    Dls Ro::dls( const Pnt& c, const Pnt& p){
-        return Dls( p <= ( c^Inf(1) ) );
-    }
-    
-    /*! Split Points from Point Pair 
-        @param PointPair input
-    */
-    static std::vector<Pnt> split(const Par& pp){
-        std::vector<Pnt> pair;
-        
-        double r = sqrt( fabs( ( pp <= pp )[0] ) );
-        
-        Dlp dlp = Inf(-1) <= pp;
-
-        Bst bstA(pp);        
-        Bst bstB(pp);        
-        bstA += Sca(r);
-        bstB -= Sca(r);
-                
-        Pnt pA = ( bstA ) / dlp;
-        Pnt pB = ( bstB ) / dlp;
-                
-        pair.push_back(pA);
-        pair.push_back(pB);
-        return pair;
-    }  
-    
-    /*! Split Points from Point Pair 
-        @param PointPair input
-    */
-    static Pnt split(const Par& pp, bool bFirst){
-        
-        double r = sqrt( fabs( ( pp <= pp )[0] ) );
-        
-        Dlp dlp = Inf(-1) <= pp;
-
-        Bst bst(pp); 
-        bst += bFirst ? Sca(r) : Sca(-r);
-        
-        return ( bst ) / dlp;
-    }
-    
-    
-    /*! Returns Squared Size of a Round Element
-        @param input round (dual sphere, point pair, circle, or direct sphere)
-        @param duality flag 
-    */
-    template< class T >
-    static typename T::value_type size( const T& r, bool dual){
-        typename Product<T, Inf, typename T::value_type>::IP s = Inf(1) <= r;
-        return ( r * r.involution() / ( s * s ) * ( (dual) ? -1.0 : 1.0 ) )[0];
-    }
-    
-    /*! Returns Radius of a Round Element 
-        @param input round (dual sphere, point pair, circle, or direct sphere)
-    */
-    template< class T >
-    static typename T::value_type rad( const T& s ){
-        return sqrt ( fabs ( Ro::size(s, false) ) );
-    }
-    
-    template <class T>
-    static Pnt loc( const T& s) { 
-        typename Product<Inf,T>::IP t = Inf(1) <= s; 
-        return  ( ( s * Inf(1) * s ) / ( t * t ) ) * -.5;
-    }
-
-    template<class T>
-    static Pnt cen( const T& s) {
-        return  s  / ( Inf(-1) <= s );
-    }
-
-    /// make null point from round
-    template<class T>
-    static Pnt null_cen( const T& s){
-        return null ( cen ( s ) );
-    }
-    
-    /*! Direction of Round Element */
-    template<class A>
-    static typename Product< typename Product<Inf, A, typename A::value_type>::IP, Inf, typename A::value_type>::OP  dir( const A& s ) {
-        return ( Inf(-1) <= s ) ^ Inf(1);
-    }
-    
-    /*! Carrier Flat of Round Element */
-    template<class A>
-    static typename Product<A, Inf, typename A::value_type>::OP car(const A& s) {
-        return s ^ Inf(1);
-    }
-    
-    template<class A>
-    static Dls sur( const A& s) {
-        return Dls( s / ( s ^ Inf(1) ));
-    }
-    
-//    /*! Point Pair on Circle at Theta */
-//    Par Ro::par_cir( const Cir& cir, double theta){
-//        return Op::dl( Fl::dlp_ortho_cir(cir,theta) ^ Op::dl(cir) ); 					//Meet with Circle
-//    }
-//    
-//    /*! Point on Circle at theta */
-//    static Pnt pnt_cir( const Cir& cir, double theta){
-//        return Ro::null_cen( Ro::split2( Ro::par_cir( cir, theta) ) );
-//    }
-    
-};
 
 /* Spinor Generation for Transformation of Elements */
 struct Gen {
@@ -497,14 +347,306 @@ struct Gen {
 
 };
 
-struct Fl {
+/*! Operations on Round Elements */
+struct Ro {
 
+
+    /*! Null Point from Arbirtary Multivector */
+    template< class B >
+    static Pnt null( const B& b){	
+        return null( b[0], b[1], b[2] );
+    }
+    
+    /*! Null Point from x, y, z */
+    template< class S >
+    static Pnt null( S x, S y, S z){	
+        return Pnt(x, y, z, 1 , (x*x + y*y + z*z) / 2.0 );
+    }
+    
+    /*! Dual Sphere from Element and Radius
+        @param Any input MV v (function will take first 3 weights)
+        @param Radius (enter a negative radius for an imaginary sphere)
+    */
+    template< class S >
+    static Dls dls( const S& v, double r = 1.0 ) {
+        Dls s = Ro::null(v);
+        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
+        return s;
+    }
+    
+    /*! Dual Sphere from Coordinate Center and Radius
+        @param Any input MV v (function will take first 3 weights)
+        @param Radius (enter a negative radius for an imaginary sphere)
+    */
+    template< class T>
+    static Dls dls( T x, T y, T z, double r = 1.0 ) {
+        Dls s = Ro::null(x,y,z);
+        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
+        return s;
+    }
+
+    /*! Dual Sphere from Point and Radius
+        @param Point
+        @param Radius (enter a negative radius for an imaginary sphere)
+    */
+    static Dls dls_pnt( const Pnt& p, double r = 1.0 ) {
+        Dls s = p;
+        (r > 0) ? s[4] -= .5 * (r * r) : s[4] += .5 * (r*r);
+        return s;
+    }    
+    
+    /*! Sphere At center c through point p */
+    static Dls dls( const Pnt& c, const Pnt& p){
+        return Dls( p <= ( c^Inf(1) ) );
+    }
+    
+    /*! Split Points from Point Pair 
+        @param PointPair input
+    */
+    static std::vector<Pnt> split(const Par& pp){
+        std::vector<Pnt> pair;
+        
+        double r = sqrt( fabs( ( pp <= pp )[0] ) );
+        
+        Dlp dlp = Inf(-1) <= pp;
+
+        Bst bstA(pp);        
+        Bst bstB(pp);        
+        bstA += Sca(r);
+        bstB -= Sca(r);
+                
+        Pnt pA = ( bstA ) / dlp;
+        Pnt pB = ( bstB ) / dlp;
+                
+        pair.push_back(pA);
+        pair.push_back(pB);
+        return pair;
+    }  
+    
+    /*! Split Points from Point Pair 
+        @param PointPair input
+    */
+    static Pnt split(const Par& pp, bool bFirst){
+        
+        double r = sqrt( fabs( ( pp <= pp )[0] ) );
+        
+        Dlp dlp = Inf(-1) <= pp;
+
+        Bst bst(pp); 
+        bst += bFirst ? Sca(r) : Sca(-r);
+        
+        return ( bst ) / dlp;
+    }
+    
+    
+    
+    /*! Returns Squared Size of a General Round Element
+        @param input normalized round (dual sphere, point pair, circle, or direct sphere)
+        @param duality flag 
+    */
+    template< class T >
+    static typename T::value_type size( const T& r, bool dual){
+        typename Product<T, Inf, typename T::value_type>::IP s = Inf(1) <= r;
+        return ( r * r.involution() / ( s * s ) * ( (dual) ? -1.0 : 1.0 ) )[0];
+    }
+    
+    /*! Squared Size of Normalized Dual Sphere (faster than general case)
+        @param Normalized Dual Sphere
+    */
+    static double size( const Dls& dls, bool dual = false){
+        return (dls * dls)[0];
+    }
+    
+    /*! Returns Radius of a Round Element 
+        @param input round (dual sphere, point pair, circle, or direct sphere)
+    */
+    template< class T >
+    static typename T::value_type rad( const T& s ){
+        return sqrt ( fabs ( Ro::size(s, false) ) );
+    }
+    
+    //deprecated (too slow)
+//    template <class T>
+//    static Pnt loc( const T& s) { 
+//        typename Product<Inf,T>::IP t = Inf(1) <= s; 
+//        return  ( ( s * Inf(1) * s ) / ( t * t ) ) * -.5;
+//    }
+
+//    template<class A>
+//    static typename Product< typename Product< Inf,A, typename A::value_type>::IP, Inf,  typename A::value_type >::OP 
+
+    template<class T>
+    static Dls cen( const T& s) {
+        return  s  / ( Inf(-1) <= s );
+    }
+    
+    template<class A>
+    static Dls sur( const A& s) {
+        return Dls( s / ( s ^ Inf(1) ));
+    }
+
+    /// make null point from round
+    template<class T>
+    static Pnt loc( const T& s){
+        return null ( cen ( s ) );
+    }
+    
+    /*! Direction of Round Element 
+        @param Direct Round
+    */
+    template<class A>
+    static typename Product< typename Product<Inf, A, typename A::value_type>::IP, Inf, typename A::value_type>::OP  
+    dir( const A& s ) {
+        return ( Inf(-1) <= s ) ^ Inf(1);
+    }
+    
+    /*! Carrier Flat of Round Element */
+    template<class A>
+    static typename Product<A, Inf, typename A::value_type>::OP car(const A& s) {
+        return s ^ Inf(1);
+    }
+    
+
+    
+//    /*! Point Pair on Circle at Theta */
+//    Par Ro::par_cir( const Cir& cir, double theta){
+//        return Op::dl( Fl::dlp_ortho_cir(cir,theta) ^ Op::dl(cir) ); 					//Meet with Circle
+//    }
+//    
+//    /*! Point on Circle at theta */
+//    static Pnt pnt_cir( const Cir& cir, double theta){
+//        return Ro::null_cen( Ro::split2( Ro::par_cir( cir, theta) ) );
+//    }
+
+    /*!
+     Direct (imaginary?) Round From Dual Sphere and Euclidean Carrier Flat
+     */    
+     static Cir cir(const Dls& dls, const Biv& flat){
+        return dls ^ ( ( dls <= ( flat.involution() * Inf(1) ) )  * -1.0 );  
+     }
+    /*!
+     Direct (imaginary?) Round From Dual Sphere and Euclidean Carrier Flat
+     */    
+     static Par par(const Dls& dls, const Vec& flat){
+        return dls ^ ( ( dls <= ( flat.involution() * Inf(1) ) )  * -1.0 );  
+     }
+    
+    /*! Direct Circle from Point and Euclidean Carrier Flat 
+        @param Center pnt 
+        @param Carrier Bivector 
+        @param Radius r
+    */
+    static Cir cir(const Pnt& pnt, const Biv& flat, double r){
+        //return Ro::dls_pnt(pnt,r) * ( (pnt * -1.0) <= (Inf(1)*flat));
+        return cir( Ro::dls_pnt(pnt,r),flat);// ^ ( (pnt <= (flat.involute() * Inf(1))) * -1.0 );
+    }
+
+    /*! Direct Point Pair from Point and Euclidean Carrier Flat 
+        @param Center pnt 
+        @param Carrier Vector 
+        @param Radius r
+    */
+    static Par par(const Pnt& pnt, const Vec& flat, double r){
+        //return Ro::dls_pnt(pnt,r) * ( (pnt * -1.0) <= (Inf(1)*flat));
+        return par( Ro::dls_pnt(pnt,r), flat);// ^ ( (pnt <= (flat.involute() * Inf(1))) * -1.0 );
+    }
+
+//    /*! Dual Round from Point and Euclidean Carrier Flat
+//        @param Center pnt
+//        @param Carrier flat
+//        @param Radius r
+//    */
+//    State Ro::pnt_flat_dl(const State& pnt, const State& flat, double r){
+//    //	return Ro::dls_pnt(pnt,r) * ( (pnt*-1.0) <= ( Op::dl(flat.involute()) * Inf(1) ));
+//        return Ro::dls_pnt(pnt,r) ^ ( (pnt*-1.0) <= ( Op::dl(flat.involute()) * Inf(1) ));
+//    }
+//    
+
+    /*! Curvature of Round 
+        @param Round Element
+    */
+    template<class A>
+    static double  cur(const A& s){
+        double r = Ro::rad( s);
+        
+        return (r==0) ? 10000 : 1.0 / Ro::rad(s);
+    }
+    
     
 };
 
 
-typedef Ro Round;
 
+struct Fl {
+
+    /*! Direction of Direct Flat 
+        @param Direct Flat [ Plane (Pln) or Line (Lin) ]
+    */
+    template<class A> 
+    static typename Product<Inf, A, typename A::value_type>::IP dir( const A& f){
+        return Inf(-1) <= f;
+    }
+    
+    /*! Location of Flat A closest to Point p 
+        @param Dual or Direct Flat [ DualLine (Dll), Line (Lin), DualPlane (Dlp), or Plane (Pln) ]
+        @param Point p
+        @param Duality Flag
+    */
+    template<class A>
+    static Pnt loc(const A& f, const Pnt& p, bool dual){
+        return dual ? ( p ^ f ) / f : ( p <= f ) / f;
+    }
+    
+    
+    /*! Weight of Flat 
+        @param Dual or Direct Flat
+        @param boolean flag for duality
+    */
+    template<class A>
+    double Fl::wt(const A& f, bool dual){
+//		return (Ori(1) <= Fl::dir(s,dual)).sqwt();
+		return dual ? ( Ori(1) <= Fl::dir( f.undual() ) ).wt() : ( Ori(1) <= Fl::dir(f) ).wt();
+    }
+    
+};
+
+struct Ta {
+
+    /*! Direction of Tangent Element (similar formulation to Rounds) 
+        @param Direct Tangent Element
+    */
+    template< class A >
+    static typename Product< typename Product<Inf, A, typename A::value_type>::IP, Inf, typename A::value_type>::OP  
+    dir( const A& s){
+        return ( Inf(-1) <= s ) ^ Inf(1);
+    }
+    
+    /*! Location of Tangent Element (similar formulation to Rounds) */
+    template< class A >
+    Pnt loc( const A& s){
+        return ( s / Inf(-1) <= s );
+    }
+
+    /*! Tangent Element of Round r at Point p
+        @param Direct Round Element r
+        @param Point p
+    */
+    template< class A >
+    static typename Product< Pnt, A, typename A::value_type>::IP 
+    at( const A& r, const Pnt& p){
+        return p <= r.involute();
+    }
+    /*! Weight of Tangent Element */
+    template<class A>
+    double Ta::wt(const A& s){
+        return ( Ori(1) <= dir(s) ).sqwt();
+    }
+};
+
+
+typedef Ro Round;
+typedef Fl Flat;
+typedef Ta Tangent;
 #define PT(x,y,z) Ro::null(Vec(x,y,z))
 #define PV(v) Ro::null(v)
 #define PX(f) Ro::null(Vec(f,0,0))
@@ -519,6 +661,7 @@ typedef Ro Round;
 #define DLN(x,y,z) ( Op::dl(LN(x,y,z)) )
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
+#define PAO PT(0,0,0,1,.5)
 #define INFTY Inf(1)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
