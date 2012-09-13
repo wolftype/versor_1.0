@@ -8,8 +8,7 @@
 
 #include <iostream>
 
-#include "vsr_op.h"
-#include "Dll.h"
+#include "op.h"
 
 using namespace vsr;
 

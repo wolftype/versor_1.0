@@ -552,7 +552,8 @@ void Glyph :: Pin(const Vec& v2) {
 	
 }
 
-void Glyph :: Point(const State& v) {
+template<class A>
+void Glyph :: Point(const A& v) {
 //	glPointSize(5.0);
 	glBegin(GL_POINTS);	
 		glNormal3f(v[0], v[1], v[2]);
@@ -735,7 +736,7 @@ void Draw :: SegOff(const Cir& K, double t, double off, bool dir, int res){
 
     //POINT POSITION AND RADIUS
 	Pnt v = Ro::cen(K);                                 //Center of Circle
-	double siz = Ro::siz(K,false);                       //Squared Radius
+	double siz = Ro::size(K,false);                       //Squared Radius
 	double rad = sqrt ( fabs (siz) );                   //Radius
 	                           
 	bool sign = Op::sn(b, Biv::xy);
@@ -760,7 +761,7 @@ void Draw :: SegTo(const Cir& K, double st, double t, int res){
     
     //POINT POSITION AND RADIUS
     Pnt v = Ro::cen(K);                                 //Center of Circle
-    double siz = Ro::siz(K,false);                            //Squared Radius
+    double siz = Ro::size(K,false);                            //Squared Radius
     double rad = sqrt ( fabs (siz) );                   //Radius
     
     bool sign = Op::sn(b, Biv::xy);
@@ -882,272 +883,213 @@ Vec Draw :: screenCoord(const State& s ){
 }
 */
 	
-void Draw :: N (const State&) {
+//void Draw :: N (const State&) {
+//
+//}
+//	
+//void Draw :: S (const State& s){
+//    S(s,1,1,1);
+//}
 
-}
-	
-void Draw :: S (const State& s){
-    S(s,1,1,1);
-}
-    
-void Draw :: S (const State& s, float r, float g, float b, float a){
-	glPushMatrix();
-	
+template <class A>
+void Draw :: R (const A& s, float r, float g, float b, float a){
+	glPushMatrix();	
     glColor4f(r,g,b,a);
-    if (s.isSelected()) glColor4f(1,0,0,a );
     
+    Draw :: S(s,r,g,b,a);
+    
+    glPopMatrix();
+}
+    
+template<> void Draw :: S (const Vec& s, float r, float g, float b, float a){
+    Glyph::Dir( s);
+}
 
-	switch(s.idx()){
+template<> void Draw :: S (const Drv& s, float r, float g, float b, float a){
+    Glyph::Arr( s, 1 );
+}
+
+template<> void Draw :: S (const Biv& s, float r, float g, float b, float a){
+    Vec4<> t = Op::aa( Gen::ratio( Vec::z, Op::dle( s ).unit() ) );
+    
+    double a = s.norm(); 
+    bool sn = Op::sn( s , Biv::xy * (-1));
+    
+    glRotated(t.w, t.x, t.y, t.z);
+    
+    Glyph::DirCircle(a, sn);
+}
+
+template<> void Draw :: S (const Pnt& s, float r, float g, float b, float a){
+
+    double a = Ro::size( s, true );
+
+    //Draw as dual Sphere (if |radius| > 0.000001);
+    if ( fabs(a) >  FPERROR ) {
+        
+        Pnt p = Ro::cen( s );
+        double t = sqrt ( fabs ( a ) );
+        bool real = a > 0 ? 1 : 0;			
+        glTranslatef(p[0], p[1], p[2]);
+        (real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
+    } else {
+        Glyph::Point(s);
+    }
+}
+
+template<> void Draw :: S (const Par& s, float r, float g, float b, float a){
+        //Is Imaginary?
+        double size = Ro::size( s, true );
+        std::vector<Pnt> pp = Ro::split( s );
+        
+        double a = Ro::size( pp[0], true );
+        if ( fabs(a) >  FPERROR ) {				
+            Pnt p1 = Ro::cen( pp[0] );
+            Pnt p2 = Ro::cen( pp[1] );
+            double t = sqrt ( fabs ( size ) );
+            bool real = size > 0 ? 1 : 0;	
             
-        case _SCA:
-        {
-//            glColor3f(s[0],
-            Glyph::Point(Vec(0,0,0));
+            glPushMatrix();
+            glTranslatef(p1[0], p1[1], p1[2]);
+            (real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
+            glPopMatrix();
+            glTranslatef(p2[0], p2[1], p2[2]);
+            (real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
+        
+        } else {
+            Glyph::Point(pp[0]);
+            Glyph::Point(pp[1]);
         }
-	
-		case _VEC:
-		{
-			Glyph::Dir( s);
-			break;
-		}
-		
-		case _DRV:
-		{
-			Glyph::Arr( s, 1 );
-			break;
-		}
-		
-		case _BIV:
-		{
-			
-			Vec4<> t = Op::aa( Gen::ratio( Vec::z, Op::dle( s ).unit() ) );
-			
-			double a = s.norm(); 
-			bool sn = Op::sn( s , Biv::e12(-1));
-			
-			glRotated(t.w, t.x, t.y, t.z);
-			
-			Glyph::DirCircle(a, sn);
-			//Glyph::Circular(s, sn);
-			
-			break;
-		}
-		
-		case _DRB:
-		{
-			
-			break;
-		}
-		case _TRI:
-		{
-			break;
-		}						
-		case _PNT:
-		{
-			//if (bLabel) drawLabel(p[0], p[1], p[2]);
-			double a = Ro::siz( s, -1 );
-			//Draw as dual Sphere (if |radius| > 0.000001);
-			if ( fabs(a) >  FPERROR ) {
-				
-                Pnt p = Ro::cen( s );
-				double t = sqrt ( fabs ( a ) );
-				bool real = a > 0 ? 1 : 0;			
-				glTranslatef(p[0], p[1], p[2]);
-				(real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
-			} else {
-				Glyph::Point(s);
-			}
-								
-			break;
-		}
-		
-		case _PAR:
-		{
-            
-            //Is Imaginary?
-            double siz = Ro::siz( s, true );
-			std::vector<Pnt> pp = Ro::split( s );
-			
-//			pp[0].draw(r,g,b,a);
-// 			pp[1].draw(r,g,b,a);
-			double a = Ro::siz( pp[0], -1 );
-            if ( fabs(a) >  FPERROR ) {				
-                Pnt p1 = Ro::cen( pp[0] );
-                Pnt p2 = Ro::cen( pp[1] );
-				double t = sqrt ( fabs ( siz ) );
-				bool real = siz > 0 ? 1 : 0;	
-                
-                glPushMatrix();
-				glTranslatef(p1[0], p1[1], p1[2]);
-				(real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
-                glPopMatrix();
-				glTranslatef(p2[0], p2[1], p2[2]);
-				(real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
-			
-            } else {
-				Glyph::Point(pp[0]);
-				Glyph::Point(pp[1]);
-			}
-			
-			break;
-		}
-		
-		case _CIR:
-		{
-			Biv b = Biv(Ro::dir( s, false ));
-			Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );  //can this be done directly to Biv b?
-			Pnt v = Ro::cen( s );	
-			
-			//drawLabel(v[0], v[1], v[2]);
-							
-			double siz = Ro::siz( s, false );
-			double rad = Ro::rad( s );
-			Vec4<> t = Op::aa(r);
-			bool sn = Op::sn(b, Biv::xy);
-			
-			glTranslated(v[0],v[1],v[2]);
-			glRotated(t.w, t.x, t.y, t.z);
+}
 
-//			/* Is it imaginary */
-			bool im = siz > 0 ? 1 : 0;
+template<> void Draw :: S (const Cir& s, float r, float g, float b, float a){
+        Biv b = Ro::dir( s );
+        Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() ); 
+        Pnt v = Ro::cen( s );	
 
+                        
+        double size = Ro::size( s, false );
+        double rad = Ro::rad( s );
+        Vec4<> t = Op::aa(r);
+        
+        /* Get Sign */
+        bool sn = Op::sn(b, Biv::xy);
+        
+        glTranslated(v[0],v[1],v[2]);
+        glRotated(t.w, t.x, t.y, t.z);
+
+        /* Is it imaginary */
+        bool im = siz > 0 ? 1 : 0;
+
+        if (bDir) {im ? Glyph::DirCircle(rad,sn) : Glyph::DirDashedCircle(rad,sn);}
+        else { im ? Glyph::Circle(rad) : Glyph::DashedCircle(rad);}
+
+        //Style Flags
 //			if(mStyle) {
 //				if (mStyle & Style::FILL) (im==1) ? Glyph::DirFillCircle(rad, sn, getStyle(Style::ANIMATE) ) : Glyph::DirDashedCircle(rad,sn,getStyle(Style::ANIMATE));
 //				if (mStyle & Style::OUTLINE)(im==1) ? Glyph::DirCircle(rad, sn,getStyle(Style::ANIMATE) ) : Glyph::DirDashedCircle(rad,sn,getStyle(Style::ANIMATE));
 //			} else { //default case
 
-			if (bDir) {im ? Glyph::DirCircle(rad,sn) : Glyph::DirDashedCircle(rad,sn);}
-			else { im ? Glyph::Circle(rad) : Glyph::DashedCircle(rad);}
 
 //			}
-			//siz > 0 ? Glyph::DirSegment(2.0 * PI/rad , rad, sn ) : Glyph::DirSegment(2.0 * PI/rad , rad, sn );
-			break;
-		}
-		case _SPH:
-		{
-			Dls ts = Op::dl( s );
-			Pnt p = Ro::cen(ts);
-			Glyph::Point(p);
-            			
-			//Sphere (if radius not 0);
-			double st = Ro::siz( ts, false );
-			double t = sqrt ( fabs ( st ) );;
-			bool real = st > 0 ? 1 : 0;			
-			glTranslatef(p[0], p[1], p[2]);
-			real ? Glyph::SolidSphere(t,20,20) : Glyph::Sphere(t,20,20);			
-			break;
-		}
-		case _PLN:
-		{
-			Drv d	= Fl::dir( s, false );
-			Sph v	= Fl::loc( s , Ori(1), false );
-			Rot r = Gen::ratio( Vec::z, Op::dle( Biv( s ) ).unit() );
-			glTranslated(v[0],v[1],v[2]);
-			glMultMatrixd(&(Op::mat(r)[0][0]));
-			Glyph::SolidGrid();			
-			break;
-		}
-		case _DLP:
-		{
-			Drv d	= Fl::dir(s , 1 );
-			Sph v   = Fl::loc( s , Ori(1), 1 );
-			Rot r = Gen::ratio( Vec::z, Vec( s ).unit() );
-			Vec4<> t = Op::aa(r);
-			glTranslated(v[0],v[1],v[2]);
-			//Glyph::Pin(Vec(s[0], s[1], s[2]));
-			glRotated(t.w, t.x, t.y, t.z);
-			Glyph::SolidGrid();
-			break;
-		}
-		case _LIN:
-		{
-			Drv d	= Fl::dir( s, false );
-			Sph v	= Fl::loc( s , Ori(1), false );
-			glTranslated(v[0],v[1],v[2]);
-			Glyph::Line(d * 10, d * -10);			
-			break;
-		}
-		case _DLL:
-		{
-			Drv d = Fl::dir( s , true);
-			Sph v = Fl::loc( s , Ori(1), 1);
-			glTranslated(v[0],v[1],v[2]);
-			Glyph::DashedLine(d * 10, d * -10);			
-			break;
-
-		}
-		case _TNV: //at origin . . .
-		{
-			Glyph::DashedLine( s );
-			glTranslated(s[0], s[1], s[2]);
-			Glyph::SolidSphere(.1,5,5);
-			break;
-		}
-		case _TNB: //homogenous . . .
-		{
-            Biv b(s); b.draw(0,0,1,.5);
-            break;
-		}
-        case _FLP:
-        {
-            s.null().draw(r,g,b,a);
-            break;
-        }
-		case _ROT:
-		{
-			break;
-		}			
-	}	
-	glPopMatrix();
+        //siz > 0 ? Glyph::DirSegment(2.0 * PI/rad , rad, sn ) : Glyph::DirSegment(2.0 * PI/rad , rad, sn );
 }
 
-State Draw :: pos(const State& s){
+template<> void Draw :: S (const Sph& s, float r, float g, float b, float a){
+    Dls ts = Op::dl( s );
+    Pnt p = Ro::cen(ts);
+    Glyph::Point(p);
+                
+    double st = Ro::size( ts, true );
+    double t = sqrt ( fabs ( st ) );;
+    bool real = st > 0 ? 1 : 0;			
+    glTranslatef(p[0], p[1], p[2]);
+    real ? Glyph::SolidSphere(t,20,20) : Glyph::Sphere(t,20,20);
+}
+		
 
-	switch(s.idx()){
-
-		case _PNT:
-		case _CIR:
-		case _PAR:
-		case _SPH:
-		{	
-			return Ro::loc(s);							
-			break;
-		}	
-		case _FLP:
-		case _LIN:
-		case _PLN:
-		{
-			Sph v   = Fl::loc( s , Ori(1), false  );
-			return Op::dl(v);
-			break;
-		}
-		case _DLL:
-		case _DLP:
-		{
-			Sph v   = Fl::loc( s , Ori(1), true );
-			return Op::dl(v);
-			break;
-		}	
-	}
+template<> void Draw :: S (const Pln& s, float r, float g, float b, float a){
+//    Drv d	= Fl::dir( s );
+    Dls v	= Fl::loc( s , PAO, false ); //Sph?
+    Rot r = Gen::ratio( Vec::z, Op::dle( Biv( s ) ).unit() );
+    glTranslated(v[0],v[1],v[2]);
+    glMultMatrixd(&(Op::mat(r)[0][0]));
+    Glyph::SolidGrid();		
 }
 
-void Draw :: Push( const State& pos, const State& rot, const double& scale ){
-	glPushMatrix();
-		Vec4<> t = Op::aa(rot);
-		glTranslated(pos[0], pos[1], pos[2]);
-		glRotated(t.w,t.x,t.y,t.z);
-		glScaled(scale,scale,scale);
+template<> void Draw :: S (const Dlp& s, float r, float g, float b, float a){
+//    Drv d = Fl::dir( s.undual() );
+    Dls v = Fl::loc( s , PAO, true );
+    Rot r = Gen::ratio( Vec::z, Vec( s ).unit() );
+    Vec4<> t = Op::aa(r);
+    glTranslated(v[0],v[1],v[2]);
+    glRotated(t.w, t.x, t.y, t.z);
+    Glyph::SolidGrid();
 }
 
-void Draw :: PushPosition( const State& pos){
-	glPushMatrix();
-		glTranslated(pos[0], pos[1], pos[2]);
+
+template<> void Draw :: S (const Lin& s, float r, float g, float b, float a){
+    Drv d	= Fl::dir( s );
+    Dls v	= Fl::loc( s , PAO, false );
+    glTranslated(v[0],v[1],v[2]);
+    Glyph::Line(d * 10, d * -10);	
 }
 
-void Draw :: Pop(){
-	glPopMatrix();
+
+template<> void Draw :: S (const Dll& s, float r, float g, float b, float a){
+    Drv d = Fl::dir( s );
+    Dls v = Fl::loc( s , PAO, true);
+    glTranslated(v[0],v[1],v[2]);
+    Glyph::DashedLine(d * 10, d * -10);	
 }
 
+
+template<> void Draw :: S (const Tnv& s, float r, float g, float b, float a){
+    Glyph::DashedLine( s );
+    glTranslated(s[0], s[1], s[2]);
+    Glyph::SolidSphere(.1,5,5);
+}
+
+template<> void Draw :: S (const Tnb& s, float r, float g, float b, float a){
+//    Biv b(s); b.draw(0,0,1,.5);
+}
+
+template<> void Draw :: S (const Flp& s, float r, float g, float b, float a){
+//    s.null().draw(r,g,b,a);
+}
+
+//State Draw :: pos(const State& s){
+//
+//	switch(s.idx()){
+//
+//		case _PNT:
+//		case _CIR:
+//		case _PAR:
+//		case _SPH:
+//		{	
+//			return Ro::loc(s);							
+//			break;
+//		}	
+//		case _FLP:
+//		case _LIN:
+//		case _PLN:
+//		{
+//			Sph v   = Fl::loc( s , Ori(1), false  );
+//			return Op::dl(v);
+//			break;
+//		}
+//		case _DLL:
+//		case _DLP:
+//		{
+//			Sph v   = Fl::loc( s , Ori(1), true );
+//			return Op::dl(v);
+//			break;
+//		}	
+//	}
+//}
+
+
+/*
 ////////////// VERY PRETTY PRINTING USING TIKZ ///////////////////
 string Print :: DrawBegin(Style style){
 
@@ -1520,7 +1462,7 @@ string Print :: PlotBegin(float tension, bool smooth, bool cycle){
     }
     
     
-/*
+
 //passing in space coordinates
 void Draw :: clickTest( State& s, double x, double y, double z ) {
 

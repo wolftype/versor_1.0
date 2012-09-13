@@ -67,7 +67,7 @@
 		9B3F22E315FFEDF50071E210 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
 		9B638BC315FEBF6100C74AF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B638BC215FEBF6100C74AF7 /* main.cpp */; };
 		9B638BC515FEBF6100C74AF7 /* TestSpeed.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B638BC415FEBF6100C74AF7 /* TestSpeed.1 */; };
-		9B84F52A15EC3C8F005CA167 /* vsr_op.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52915EC3C8F005CA167 /* vsr_op.h */; };
+		9B84F52A15EC3C8F005CA167 /* op.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52915EC3C8F005CA167 /* op.h */; };
 		9B84F52D15EC3CEF005CA167 /* vsr_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52B15EC3CEF005CA167 /* vsr_math.h */; };
 		9B84F52E15EC3CEF005CA167 /* vsr_matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */; };
 		9B84F53015EC3CFA005CA167 /* vsr_constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52F15EC3CFA005CA167 /* vsr_constants.h */; };
@@ -77,6 +77,17 @@
 		9BBBE00215DDC1F200BDE419 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBE00115DDC1F200BDE419 /* main.cpp */; };
 		9BBBE00415DDC1F200BDE419 /* vsr_static.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBBE00315DDC1F200BDE419 /* vsr_static.1 */; };
 		9BBBE01715DDC40C00BDE419 /* MV.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BBBE01615DDC40C00BDE419 /* MV.h */; };
+		9BD758CC16015C330003B8EE /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758CB16015C330003B8EE /* Draw.h */; };
+		9BD758CF16015C460003B8EE /* GraphicsMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758CE16015C460003B8EE /* GraphicsMatrix.h */; };
+		9BD758D116015C600003B8EE /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD758D016015C600003B8EE /* Draw.cpp */; };
+		9BD758D316015C710003B8EE /* vsr_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD758D216015C710003B8EE /* vsr_gl.cpp */; };
+		9BD758D516015C830003B8EE /* vsr_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758D416015C830003B8EE /* vsr_gl.h */; };
+		9BD758D716015CE10003B8EE /* vsr_gxlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758D616015CE10003B8EE /* vsr_gxlib.h */; };
+		9BD758DB16015E080003B8EE /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758DA16015E080003B8EE /* Camera.h */; };
+		9BD758DE16015E2E0003B8EE /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD758DC16015E2E0003B8EE /* Camera.cpp */; };
+		9BD758DF16015E2E0003B8EE /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD758DD16015E2E0003B8EE /* Frame.cpp */; };
+		9BD758E116015E460003B8EE /* Frame.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758E016015E460003B8EE /* Frame.h */; };
+		9BD758E316015E610003B8EE /* vsr_interp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758E216015E610003B8EE /* vsr_interp.h */; };
 		9BF4FDDA15DF1016000D6508 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
 /* End PBXBuildFile section */
 
@@ -200,7 +211,7 @@
 		9B638BBF15FEBF6100C74AF7 /* TestSpeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestSpeed; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B638BC215FEBF6100C74AF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B638BC415FEBF6100C74AF7 /* TestSpeed.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestSpeed.1; sourceTree = "<group>"; };
-		9B84F52915EC3C8F005CA167 /* vsr_op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_op.h; sourceTree = "<group>"; };
+		9B84F52915EC3C8F005CA167 /* op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = op.h; sourceTree = "<group>"; };
 		9B84F52B15EC3CEF005CA167 /* vsr_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_math.h; sourceTree = "<group>"; };
 		9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_matrix.h; sourceTree = "<group>"; };
 		9B84F52F15EC3CFA005CA167 /* vsr_constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_constants.h; sourceTree = "<group>"; };
@@ -212,6 +223,17 @@
 		9BBBE00315DDC1F200BDE419 /* vsr_static.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr_static.1; sourceTree = "<group>"; };
 		9BBBE00E15DDC20500BDE419 /* libvsr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvsr.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBBE01615DDC40C00BDE419 /* MV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MV.h; sourceTree = "<group>"; };
+		9BD758CB16015C330003B8EE /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
+		9BD758CE16015C460003B8EE /* GraphicsMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsMatrix.h; sourceTree = "<group>"; };
+		9BD758D016015C600003B8EE /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Draw.cpp; sourceTree = "<group>"; };
+		9BD758D216015C710003B8EE /* vsr_gl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl.cpp; sourceTree = "<group>"; };
+		9BD758D416015C830003B8EE /* vsr_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_gl.h; sourceTree = "<group>"; };
+		9BD758D616015CE10003B8EE /* vsr_gxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_gxlib.h; sourceTree = "<group>"; };
+		9BD758DA16015E080003B8EE /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		9BD758DC16015E2E0003B8EE /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		9BD758DD16015E2E0003B8EE /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
+		9BD758E016015E460003B8EE /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
+		9BD758E216015E610003B8EE /* vsr_interp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_interp.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +283,8 @@
 		9B3F22F7160019550071E210 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				9BD758DD16015E2E0003B8EE /* Frame.cpp */,
+				9BD758E016015E460003B8EE /* Frame.h */,
 			);
 			name = helper;
 			sourceTree = "<group>";
@@ -308,20 +332,45 @@
 			isa = PBXGroup;
 			children = (
 				9BBBE00115DDC1F200BDE419 /* main.cpp */,
+				9BD758D916015D210003B8EE /* gfx */,
+				9BD758CE16015C460003B8EE /* GraphicsMatrix.h */,
 				9BBBE01615DDC40C00BDE419 /* MV.h */,
 				9B84F53B15EC5588005CA167 /* MV.cpp */,
 				9B3F22F8160019880071E210 /* Abstraction */,
 				9B092C0515FF2F9A0075A46B /* vsr.h */,
-				9B84F52915EC3C8F005CA167 /* vsr_op.h */,
+				9B84F52915EC3C8F005CA167 /* op.h */,
 				9B84F53915EC5135005CA167 /* ExpTemp.h */,
 				9B3F22F7160019550071E210 /* helper */,
-				9B84F52B15EC3CEF005CA167 /* vsr_math.h */,
-				9B84F52F15EC3CFA005CA167 /* vsr_constants.h */,
-				9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */,
+				9BD758D816015D0F0003B8EE /* util */,
 				9BF4FE4615DF295B000D6508 /* multivectors */,
 				9BBBE00315DDC1F200BDE419 /* vsr_static.1 */,
 			);
 			path = vsr_static;
+			sourceTree = "<group>";
+		};
+		9BD758D816015D0F0003B8EE /* util */ = {
+			isa = PBXGroup;
+			children = (
+				9B84F52B15EC3CEF005CA167 /* vsr_math.h */,
+				9B84F52F15EC3CFA005CA167 /* vsr_constants.h */,
+				9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */,
+				9BD758E216015E610003B8EE /* vsr_interp.h */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		9BD758D916015D210003B8EE /* gfx */ = {
+			isa = PBXGroup;
+			children = (
+				9BD758DA16015E080003B8EE /* Camera.h */,
+				9BD758DC16015E2E0003B8EE /* Camera.cpp */,
+				9BD758CB16015C330003B8EE /* Draw.h */,
+				9BD758D016015C600003B8EE /* Draw.cpp */,
+				9BD758D216015C710003B8EE /* vsr_gl.cpp */,
+				9BD758D416015C830003B8EE /* vsr_gl.h */,
+				9BD758D616015CE10003B8EE /* vsr_gxlib.h */,
+			);
+			name = gfx;
 			sourceTree = "<group>";
 		};
 		9BF4FE4615DF295B000D6508 /* multivectors */ = {
@@ -393,7 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBBE01715DDC40C00BDE419 /* MV.h in Headers */,
-				9B84F52A15EC3C8F005CA167 /* vsr_op.h in Headers */,
+				9B84F52A15EC3C8F005CA167 /* op.h in Headers */,
 				9B84F52D15EC3CEF005CA167 /* vsr_math.h in Headers */,
 				9B84F52E15EC3CEF005CA167 /* vsr_matrix.h in Headers */,
 				9B84F53015EC3CFA005CA167 /* vsr_constants.h in Headers */,
@@ -452,6 +501,13 @@
 				9B092C0315FF2F620075A46B /* vsr_templates.h in Headers */,
 				9B092C0415FF2F620075A46B /* vsr_typedefs.h in Headers */,
 				9B092C0615FF2F9A0075A46B /* vsr.h in Headers */,
+				9BD758CC16015C330003B8EE /* Draw.h in Headers */,
+				9BD758CF16015C460003B8EE /* GraphicsMatrix.h in Headers */,
+				9BD758D516015C830003B8EE /* vsr_gl.h in Headers */,
+				9BD758D716015CE10003B8EE /* vsr_gxlib.h in Headers */,
+				9BD758DB16015E080003B8EE /* Camera.h in Headers */,
+				9BD758E116015E460003B8EE /* Frame.h in Headers */,
+				9BD758E316015E610003B8EE /* vsr_interp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +644,10 @@
 			files = (
 				9B84F53C15EC5588005CA167 /* MV.cpp in Sources */,
 				9B092C0215FF2F620075A46B /* vsr_templates.cpp in Sources */,
+				9BD758D116015C600003B8EE /* Draw.cpp in Sources */,
+				9BD758D316015C710003B8EE /* vsr_gl.cpp in Sources */,
+				9BD758DE16015E2E0003B8EE /* Camera.cpp in Sources */,
+				9BD758DF16015E2E0003B8EE /* Frame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,6 +803,7 @@
 				9B3F22E015FFEDE70071E210 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B638BC815FEBF6100C74AF7 /* Build configuration list for PBXNativeTarget "TestSpeed" */ = {
 			isa = XCConfigurationList;

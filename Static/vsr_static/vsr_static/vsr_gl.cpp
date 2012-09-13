@@ -8,8 +8,9 @@
  */
 
 #include "vsr_gl.h"
+
+#include "op.h"
 #include "Camera.h"
-#include "vsr.h"
 
 namespace vsr {
     //NEW

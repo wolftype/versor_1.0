@@ -25,14 +25,13 @@
 #ifndef FRAME_H_INCLUDED
 #define FRAME_H_INCLUDED
 
-#include "CongaHeaders.h"
-#include "Op.h"
+#include "op.h"
 #include "vsr_interp.h"
 #include "vsr_macros.h"
 
 namespace vsr {
 
-	class Frame : public Touchable {
+	class Frame { //: public Touchable {
 	
 		protected:
 		
@@ -160,9 +159,9 @@ namespace vsr {
 			Lin xl()  const { return mPos ^ x() ^ Inf(1); } ///< x direction direct line
 			Lin yl()  const { return mPos ^ y() ^ Inf(1); }	///< y direction direct line
 			Lin zl()  const { return mPos ^ z() ^ Inf(1); }	///< z direction direct line			
-			Dll xld() const { return Op::dl(xl()); }		///< x direction dual line
-			Dll yld() const { return Op::dl(yl()); }		///< y direction dual line
-			Dll zld() const { return Op::dl(zl()); }		///< z direction dual line
+			Dll xld() const { return xl().dual(); }		///< x direction dual line
+			Dll yld() const { return yl().dual(); }		///< y direction dual line
+			Dll zld() const { return zl().dual(); }		///< z direction dual line
 			
 			/* Hyperbolic Lines */
 			Cir hxl() const { return mPos ^ x() ^ EP; }	///< x direction h-line
@@ -185,21 +184,21 @@ namespace vsr {
             /* Local YZ Circle */
 			Cir cyz() const { return Op::ud( pyz() ); }			///< yz circle	
 			/* Local Tangents */
-			Par tx() const { return Op::sp0( Tnv( right() ), trs() ); }		///< x tangent generator in global space
-			Par ty() const { return Op::sp0( Tnv( up() ), trs() ); }		///< y tangent generator in global space
-			Par tz() const { return Op::sp0( Tnv( forward() ), trs() ); }	///< z tangent generator in global space
+			Par tx() const { return Par( Tnv( right() ) ).sp( trs() ); }		///< x tangent generator in global space
+			Par ty() const { return Par( Tnv( up() ) ).sp( trs() ); }		///< y tangent generator in global space
+			Par tz() const { return Par( Tnv( forward() ) ).sp( trs() ); }	///< z tangent generator in global space
             /* Local Tangents */
-            Par tx(double t) const { return Op::sp0( Tnv( right() * t), trs() ); }		///< x tangent generator in global space * t
-            Par ty(double t) const { return Op::sp0( Tnv( up() * t ), trs() ); }		///< y tangent generator in global space * t
-            Par tz(double t) const { return Op::sp0( Tnv( forward() * t ), trs() ); }	///< z tangent generator in global space * t
+            Par tx(double t) const { return Par( Tnv( right() * t) ).sp( trs() ); }		///< x tangent generator in global space * t
+            Par ty(double t) const { return Par( Tnv( up() * t ) ).sp( trs() ); ); }		///< y tangent generator in global space * t
+            Par tz(double t) const { return Par( Tnv( forward() * t ) ).sp( trs() ); }	///< z tangent generator in global space * t
 			/* Local Boost Tranformations */
-			Pnt_Pnt ppx() { return Gen::tpar(tx()); }			///< x tangent space boost versor
-			Pnt_Pnt ppy() { return Gen::tpar(ty()); }			///< y tangent space boost versor
-			Pnt_Pnt ppz() { return Gen::tpar(tz()); }			///< z tangent space boost versor
+			Pnt_Pnt ppx() { return Gen::bst(tx()); }			///< x tangent space boost versor
+			Pnt_Pnt ppy() { return Gen::bst(ty()); }			///< y tangent space boost versor
+			Pnt_Pnt ppz() { return Gen::bst(tz()); }			///< z tangent space boost versor
             /* Local Boost Tranformations */
-            Pnt_Pnt ppx(double t) { return Gen::tpar(tx(t)); }			///< x tangent space boost versor
-            Pnt_Pnt ppy(double t) { return Gen::tpar(ty(t)); }			///< y tangent space boost versor
-            Pnt_Pnt ppz(double t) { return Gen::tpar(tz(t)); }			///< z tangent space boost versor			
+            Pnt_Pnt ppx(double t) { return Gen::bst(tx(t)); }			///< x tangent space boost versor
+            Pnt_Pnt ppy(double t) { return Gen::bst(ty(t)); }			///< y tangent space boost versor
+            Pnt_Pnt ppz(double t) { return Gen::bst(tz(t)); }			///< z tangent space boost versor			
 			Pnt pos() const { return mPos; }					///< get position point
 			void pos(const Pnt& p) { mPos = p; }				///< set position point 
 			Pnt& pos() { return mPos; }							///< set position point
@@ -209,13 +208,13 @@ namespace vsr {
 			void rot(const Rot& r) { mRot = r; orient(); }		///< set orientation rotot
 			Rot& rot() { return mRot; }							///< set orientation rotor
 			Trs trs() const { return Gen::trs(mPos); }			///< get translation versor
-			void trs(const Trs& t) { mPos = Op::sp0(Ori(1),t); }///< set translation versor
+			void trs(const Trs& t) { mPos = Pnt(0,0,0,1,.5).sp(t); }///< set translation versor
 			Vec vec() const { return mPos; }					///< get position vector
 			Mot mot() const { Mot m(trs() * rot()); return m / m.rnorm(); }							 ///< get normalized motor relative to origin
-			void mot(const State m) { mPos = Op::sp0(Ori(1), m); mRot = Gen::rot_mot(m); orient(); } ///< set position and orientation by motor
+			void mot(const Mot m) { mPos = PAO.sp(m); mRot = m; orient(); } ///< set position and orientation by motor
 			
             /*! Orient Towards Point p  */
-            void orientX(const State& p){
+            void orientX(const Pnt& p){
                 mRot = Gen::ratio(Vec::x, (Vec(p) - Vec(mPos)).unit());
                 orient();
             }
@@ -239,13 +238,13 @@ namespace vsr {
                 orientZ( Vec(x,y,z) );
             }
 			/*! Absolute Twist Transformation (based on global frame) */
-			Frame& twista(const State& m)		{ mPos = Op::sp0(Ori(1), m); mRot = Gen::rot_mot(m); return orient(); }
+			Frame& twista(const State& m)		{ mPos = PAO.sp(m); mRot = m; return orient(); }
             /*! Absolute boost Transformation (based on global frame) */
-			Frame& boosta(const State& trv)		{ mPos = Op::sp0(Ori(1),trv); return *this; }
+			Frame& boosta(const State& trv)		{ mPos = PAO.sp(trv); return *this; }
 
 			//absolute rotor (relative to Rot(1,0,0,0))
 			Rot arot() const { 
-				return Gen::rot(Op::lg(rot())* - 1.0);
+				return Gen::rot( Rot::log(rot())* - 1.0);
 				//Gen::log_rot((Rot(1,0,0,0))*rot()));
 				//return Rot(Op::slerp(Rot::e12(0), rot(), 1.0));
 			}
@@ -254,14 +253,14 @@ namespace vsr {
 			Dls bound() const { return Ro::dls_pnt(mPos,mScale); }
 			
 			/*! Get Dual Line Relative to Origin */
-			Dll dll() const { return Gen::log_mot( mot() ); }
+			Dll dll() const { return Gen::log( mot() ); }
 			/*! Get Bivector Relative to Origin */
-			Biv biv() const { return Gen::log_rot( arot() ); } //?
+			Biv biv() const { return Gen::log( arot() ); } //?
 
 			/*! Pass in Biv (Euclidean Bivector) Generator and reorient*/
 			void biv(const Biv& b) { rot( Gen::rot(b) ); }
 			/*! Pass in Dll (Dual Line) Generator and reorient*/
-			void dll(const Dll& d ) { mot( Gen::mot_dll( d ) ); }
+			void dll(const Dll& d ) { mot( Gen::mot( d ) ); }
 			
 			/* Set Time Step Accelerators */
 			/*! Set Velocity dVec */
@@ -340,7 +339,7 @@ namespace vsr {
 			/*! Twist Step (Global Rotation) */
 			void twist() {
 				Mot tm = Gen::mot_dll(dDll);
-				mPos = Op::sp0(mPos, tm); mRot = Gen::rot_mot(tm) * mRot;
+				mPos = Op::sp(mPos, tm); mRot = Rot(tm) * mRot;
 				orient();
 				dDll *= aDll;
 			}
@@ -349,7 +348,7 @@ namespace vsr {
 			void boost() {
 				dTnv *= aTnv;
 				Trv trv = Gen::trv(dTnv);
-				mPos = Ro::loc( Op::sp0(bound(),trv) );
+				mPos = Ro::loc( Op::sp(bound(),trv) );
 								
 				//mRot = Op::sp0(mRot, trv) * mRot;
 				//orient();
@@ -358,12 +357,12 @@ namespace vsr {
 			/*! Boost Step (rel to dPar) */			
 			void bboost() {
 				dPar *= aPar;
-				Pnt_Pnt trp(1, 
+				Bst trp(1, 
 						dPar[0], dPar[1], dPar[2], 
 						dPar[3], dPar[4], dPar[5], 
 						dPar[6], dPar[7], dPar[8], dPar[9]);
 				
-				Dls td = Op::sp0( bound(),trp );
+				Dls td = Op::sp( bound(),trp );
 				
 //				Par npx = Op::sp0( tx(), trp );
 //				Par npy = Op::sp0( tx(), trp );
@@ -382,7 +381,7 @@ namespace vsr {
 //			Frame& dilate(const State& dx) { dMnk = dx*dMnk; return *this; }
 
 			Frame& dilate(double t) { 
-				Dls s = Op::sp0( bound(), Gen::dil(t) );
+				Dls s = Op::sp( bound(), Gen::dil(t) );
 				//mPos = Ro::loc(s);
 				mScale = Ro::rad(s);
 				return *this;
@@ -390,7 +389,7 @@ namespace vsr {
 
 			void dilate() { 
 				dMnk *= aMnk; 
-				Dls s = Op::sp0( bound(), Gen::dil(dMnk) );  
+				Dls s = Op::sp( bound(), Gen::dil(dMnk) );  
 				//mPos = Ro::loc(s);
 				mScale = Ro::rad(s);
 			}
@@ -417,15 +416,15 @@ namespace vsr {
 			}
 			
 			/* Local Transformations */
-			Frame& move (const State& dx) { mPos = Op::sp0(mPos,dx); return *this; }
-			Frame& spin (const State& dx) { mRot = dx*mRot; return orient(); }
-			Frame& twist(const State& dx) { mPos = Op::sp0(mPos,dx); mRot = Gen::rot_mot(dx) * mRot; return orient(); } 
-			Frame& boost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(),dx) ); return *this; }
-			Frame& bboost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(), dx) ); return *this; }
+			template <class A> Frame& move (const A& dx) { mPos = mPos.sp( Gen::trs(dx) ); return *this; }
+			Frame& spin (const Rot& r) { mRot = r*mRot; return orient(); }
+			Frame& twist(const Mot& m) { mPos = mPos.sp(m); mRot = Rot(m) * mRot; return orient(); } 
+//			Frame& boost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(),dx) ); return *this; }
+//			Frame& bboost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(), dx) ); return *this; }
 			
 			Frame& twist2(const Frame& f, double t) {
-				Dll tdz = Gen::log_mot( f.zl() / zl() ) * t * .5;
-				return twista( Gen::mot_dll( tdz ) );				
+				Dll tdz = Gen::log( f.zl() / zl() ) * t * .5;
+				return twista( Gen::mot( tdz ) );				
 			}
 
 			/*! interpolate between frames
@@ -450,7 +449,7 @@ namespace vsr {
 					case QUADRIC : 
 					{
 						Dll dll = Interp::quad<Dll>(dlf,num,t);
-						fr.twist( Gen::mot_dll(dll) );
+						fr.twist( Gen::mot(dll) );
 						break;
 					}
 					case CUBIC :
@@ -481,37 +480,31 @@ namespace vsr {
 			Frame& twistb(const State& dx) { mPos = Op::sp(mPos,dx); mRot = Op::sp(mRot,dx); return orient(); } 
 			
 			//Feed in a Line to which to "twist" axis X Y or Z
-			Frame& twistX(const State& dll, double t = 1.0){ 
-				Dll tdx = Gen::log_mot( dll/xl() ) * t * .5;
-				return twist( Gen::mot_dll(tdx) );
+			Frame& twistX(const Dll& dll, double t = 1.0){ 
+				Dll tdx = Gen::log( dll/xl() ) * t * .5;
+				return twist( Gen::mot(tdx) );
 			}
-			Frame& twistY(const State& dll, double t = 1.0){ 
-				Dll tdy = Gen::log_mot( dll/yl() ) * t * .5;
-				return twist( Gen::mot_dll(tdy) );
+			Frame& twistY(const Dll& dll, double t = 1.0){ 
+				Dll tdy = Gen::log( dll/yl() ) * t * .5;
+				return twist( Gen::mot(tdy) );
 			}
-			Frame& twistZ(const State& dll, double t = 1.0){ 
-				Dll tdz = Gen::log_mot( dll/zl() ) * t * .5;
-				return twist( Gen::mot_dll(tdz) );
+			Frame& twistZ(const Dll& dll, double t = 1.0){ 
+				Dll tdz = Gen::log( dll/zl() ) * t * .5;
+				return twist( Gen::mot(tdz) );
 			}
 			//Feed in a vector to which to "spin" particular axis
 			Frame& spinX(const Vec& v, double t = 1.0){
-				Biv tbx = Gen::log_rot(v/x()) * t * .5;
+				Biv tbx = Gen::log(v/x()) * t * .5;
 				return spin( Gen::rot(tbx) );
 			}
 			Frame& spinY(const Vec& v, double t = 1.0){
-				Biv tby = Gen::log_rot(v/y()) * t * .5;
+				Biv tby = Gen::log(v/y()) * t * .5;
 				return spin( Gen::rot(tby) );
 			}
 			Frame& spinZ(const Vec& v, double t = 1.0){
-				Biv tbz = Gen::log_rot(v/z()) * t * .5;
+				Biv tbz = Gen::log(v/z()) * t * .5;
 				return spin( Gen::rot(tbz) );
 			}
-
-			//others (spin to)
-//			Frame& spin2(const Vec& v, double t = 1.0){
-//			
-//			}
-
 			
 			void ang(const State& v, double dv) {
 				Vec n = (Vec(mPos) - v);
@@ -523,11 +516,6 @@ namespace vsr {
             Frame& scale(double s) { mScale = s; return *this; }
 			
 			bool clicked();
-//			
-//			bool clickedRay(Dll ray){
-//				Cir c = ray ^ bound();
-//				return (Ro::siz( c ) < 0 ) ? true : false;
-//			}			
 
 			virtual void pushPos();		
 			virtual void push();
@@ -540,11 +528,10 @@ namespace vsr {
             void drawZ(float r=1.0, float g=1.0, float b=1.0, float a = 1.0);
             virtual void draw(float r, float g, float b, float a = 1.0);
             virtual void draw(){ draw(1,1,1); }
+            
 			void drawBound() { bound().draw(); }	
 
-			
-//			virtual void printPS();
-//			virtual void clickTest(double, double );			
+					
 	};
 
 } //con::
