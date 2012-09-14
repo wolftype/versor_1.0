@@ -7,16 +7,7 @@
  *
  */
 
-#include "vsr_gl.h"
 #include "Draw.h"
-#include "vsr.h"
-#include "Frame.h"
-#include "Param.h"
-#include "Camera.h"
-
-#include "vsr_gxlib.h"
-
-#include <sstream>
 
 
 namespace vsr {
@@ -433,7 +424,7 @@ void Glyph :: Helix(float radius, float height, bool clockwise) {
 			Trs tw = Trs::e3(t);
 			Trs tv = Trs::x;
 			
-			Mot m = tw * ( tv * rn * (-(tv)) );
+			Mot m = tw * ( tv * rn * (!(tv)) );
 			
 			Vec v = Op::sp( Vec::x, m);
 						
@@ -491,7 +482,7 @@ void Glyph :: DashedLine(const Vec& v2, int num) {
 void Glyph :: Dir(const Vec& v2) {
 
 	Rot r2 = Gen::ratio( Vec::z, v2.unit() );	
-	Vec4<> t = Op::aa(r2);
+	Vec4<> t = Gen::aa(r2);
 	
 	Line(v2);
 	glPushMatrix();	
@@ -505,7 +496,7 @@ void Glyph :: Dir(const Vec& v2) {
 void Glyph :: Arr(const Vec& v2, bool line) {
 
 	Rot r2 = Gen::ratio( Vec::z, v2.unit() );	
-	Vec4<> t = Op::aa(r2);
+	Vec4<> t = Gen::aa(r2);
 	
 	if (line) DashedLine(v2);
 	glPushMatrix();
@@ -523,7 +514,7 @@ void Glyph :: Dir(const Vec& v1, const Vec& v2) {
 	Rot r2 = Gen::ratio( Vec::z, v3 );
 	
 //	double * m = &(Op::mat(r2)[0][0]);
-	Vec4<> t = Op::aa(r2);
+	Vec4<> t = Gen::aa(r2);
 	
 	glPushMatrix();	
 		glTranslated(v2[0], v2[1], v2[2]);
@@ -705,13 +696,13 @@ void Draw :: SegRad( const Cir& k){
 void Draw :: Seg(const Cir& K, double t, bool dir, int res){
 
     //ORIENTATION
-	Biv b = Biv(Ro::dir(K,false));							//Extract Euclidean Bivector
+	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
 	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
-    Vec4<> v4 = Op::aa(r);  
+    Vec4<> v4 = Gen::aa(r);  
 
     //POINT POSITION AND RADIUS
 	Pnt v = Ro::cen(K);                                 //Center of Circle
-	double siz = Ro::siz(K,false);                            //Squared Radius
+	double siz = Ro::size(K,false);                            //Squared Radius
 	double rad = sqrt ( fabs (siz) );                   //Radius
 	                           
 	bool sign = Op::sn(b, Biv::xy);
@@ -730,9 +721,9 @@ void Draw :: Seg(const Cir& K, double t, bool dir, int res){
 void Draw :: SegOff(const Cir& K, double t, double off, bool dir, int res){
 
     //ORIENTATION
-	Biv b = Biv(Ro::dir(K,false));							//Extract Euclidean Bivector
+	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
 	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
-    Vec4<> v4 = Op::aa(r);  
+    Vec4<> v4 = Gen::aa(r);  
 
     //POINT POSITION AND RADIUS
 	Pnt v = Ro::cen(K);                                 //Center of Circle
@@ -748,7 +739,7 @@ void Draw :: SegOff(const Cir& K, double t, double off, bool dir, int res){
 	glPopMatrix();
 
 }
-
+/*
 void Draw :: SegTo(const Cir& K, double st, double t, int res){
     
     Rot roff = Gen::rot_biv_ang(Biv::xy, st);
@@ -757,7 +748,7 @@ void Draw :: SegTo(const Cir& K, double st, double t, int res){
     //ORIENTATION
     Biv b = Biv(Ro::dir(K,false));							//Extract Euclidean Bivector
     Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );// * roff;	//Determine Orientation
-    Vec4<> v4 = Op::aa(r);  
+    Vec4<> v4 = Geqn::aa(r);  
     
     //POINT POSITION AND RADIUS
     Pnt v = Ro::cen(K);                                 //Center of Circle
@@ -777,11 +768,11 @@ void Draw :: SegTo(const Cir& K, double st, double t, int res){
     
 void Draw :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
 //	glColor3f(K.red(), K.green(), K.blue());
-	Biv bi = Biv(Ro::dir(K, false));							//Extract Euclidean Bivector
+	Biv bi = Biv(Ro::dir(K));							//Extract Euclidean Bivector
 	Rot r = Gen::ratio(Vec::z, Op::dle( bi ).unit() );	//Determine Orientation
 	Pnt v = Ro::cen(K);			
-	Vec4<> v4 = Op::aa(r);
-	double siz = Ro::siz(K,false);
+	Vec4<> v4 = Gen::aa(r);
+	double siz = Ro::size(K,false);
 	double rad = Ro::rad(K);
 	bool sn = Op::sn(bi, Biv::xy);
 
@@ -792,8 +783,8 @@ void Draw :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
 	Dlp dy = Ro::noon(K);
 	dy = dy.unit();
 	
-	double t1 = Op::sca( da <= dy);
-	double t2 = Op::sca( db <= dy);
+	double t1 = ( da <= dy)[0];
+	double t2 = ( db <= dy)[0];
 	
 	glPushMatrix();
 		glTranslated( v[0], v[1], v[2] );
@@ -802,28 +793,28 @@ void Draw :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
 	glPopMatrix();
 }
 
-    void Draw :: SegPnts(const Cir& K, const Pnt& a, const Pnt& b, int res){
-        static Pnt tp, cen;
-        static Dll da, db, rat;
-        
-        bool sn = 0;//Op::sn ( Ro::dir(K, false ), Biv::xy );
-        
-        cen = Ro::null_cen(K);
-        da = ( cen ^ a ^ Inf(1) ).dual(); 
-        db = ( cen ^ b ^ Inf(1) ).dual(); 
+void Draw :: SegPnts(const Cir& K, const Pnt& a, const Pnt& b, int res){
+    static Pnt tp, cen;
+    static Dll da, db, rat;
     
-        rat = (sn) ? Gen::dll_ratio(db, da) : Gen::dll_ratio(da, db);
-       
-        glBegin(GL_LINE_STRIP);
-        for (int i = 0; i <= res; ++i){
-            double t = 1.0 * i/res;
-            tp = a.mot( rat * t ); 
-            glVertex3f(tp[0], tp[1], tp[2]);
-        }
-        glEnd();
-        
+    bool sn = 0;//Op::sn ( Ro::dir(K, false ), Biv::xy );
+    
+    cen = Ro::loc(K);
+    da = ( cen ^ a ^ Inf(1) ).dual(); 
+    db = ( cen ^ b ^ Inf(1) ).dual(); 
+
+    rat = (sn) ? Gen::dll_ratio(db, da) : Gen::dll_ratio(da, db);
+   
+    glBegin(GL_LINE_STRIP);
+    for (int i = 0; i <= res; ++i){
+        double t = 1.0 * i/res;
+        tp = a.mot( rat * t ); 
+        glVertex3f(tp[0], tp[1], tp[2]);
     }
+    glEnd();
     
+}
+    */
     
     
 /*
@@ -896,40 +887,42 @@ void Draw :: R (const A& s, float r, float g, float b, float a){
 	glPushMatrix();	
     glColor4f(r,g,b,a);
     
-    Draw :: S(s,r,g,b,a);
+    Draw :: S(s);
     
     glPopMatrix();
 }
     
-template<> void Draw :: S (const Vec& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Vec& s){
     Glyph::Dir( s);
 }
 
-template<> void Draw :: S (const Drv& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Drv& s){
     Glyph::Arr( s, 1 );
 }
 
-template<> void Draw :: S (const Biv& s, float r, float g, float b, float a){
-    Vec4<> t = Op::aa( Gen::ratio( Vec::z, Op::dle( s ).unit() ) );
+template<> void Draw :: S (const Biv& s){
+    Vec4<> t = Gen::aa( Gen::ratio( Vec::z, Op::dle( s ).unit() ) );
     
-    double a = s.norm(); 
+    double ta = s.norm(); 
     bool sn = Op::sn( s , Biv::xy * (-1));
     
     glRotated(t.w, t.x, t.y, t.z);
     
-    Glyph::DirCircle(a, sn);
+    Glyph::DirCircle(ta, sn);
 }
 
-template<> void Draw :: S (const Pnt& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Pnt& s){
 
-    double a = Ro::size( s, true );
+    double ta = Ro::size( s, true );
 
     //Draw as dual Sphere (if |radius| > 0.000001);
-    if ( fabs(a) >  FPERROR ) {
+    if ( fabs(ta) >  FPERROR ) {
+        
+        bool real = ta > 0 ? 1 : 0;	
         
         Pnt p = Ro::cen( s );
-        double t = sqrt ( fabs ( a ) );
-        bool real = a > 0 ? 1 : 0;			
+        double t = sqrt ( fabs ( ta ) );
+        		
         glTranslatef(p[0], p[1], p[2]);
         (real) ? Glyph::SolidSphere(t, 5+ floor(t*30), 5+floor(t*30)) : Glyph::Sphere(t);	
     } else {
@@ -937,13 +930,13 @@ template<> void Draw :: S (const Pnt& s, float r, float g, float b, float a){
     }
 }
 
-template<> void Draw :: S (const Par& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Par& s){
         //Is Imaginary?
         double size = Ro::size( s, true );
         std::vector<Pnt> pp = Ro::split( s );
         
-        double a = Ro::size( pp[0], true );
-        if ( fabs(a) >  FPERROR ) {				
+        double ta = Ro::size( pp[0], true );
+        if ( fabs(ta) >  FPERROR ) {				
             Pnt p1 = Ro::cen( pp[0] );
             Pnt p2 = Ro::cen( pp[1] );
             double t = sqrt ( fabs ( size ) );
@@ -962,7 +955,7 @@ template<> void Draw :: S (const Par& s, float r, float g, float b, float a){
         }
 }
 
-template<> void Draw :: S (const Cir& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Cir& s){
         Biv b = Ro::dir( s );
         Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() ); 
         Pnt v = Ro::cen( s );	
@@ -970,7 +963,7 @@ template<> void Draw :: S (const Cir& s, float r, float g, float b, float a){
                         
         double size = Ro::size( s, false );
         double rad = Ro::rad( s );
-        Vec4<> t = Op::aa(r);
+        Vec4<> t = Gen::aa(r);
         
         /* Get Sign */
         bool sn = Op::sn(b, Biv::xy);
@@ -979,7 +972,7 @@ template<> void Draw :: S (const Cir& s, float r, float g, float b, float a){
         glRotated(t.w, t.x, t.y, t.z);
 
         /* Is it imaginary */
-        bool im = siz > 0 ? 1 : 0;
+        bool im = size > 0 ? 1 : 0;
 
         if (bDir) {im ? Glyph::DirCircle(rad,sn) : Glyph::DirDashedCircle(rad,sn);}
         else { im ? Glyph::Circle(rad) : Glyph::DashedCircle(rad);}
@@ -995,7 +988,7 @@ template<> void Draw :: S (const Cir& s, float r, float g, float b, float a){
         //siz > 0 ? Glyph::DirSegment(2.0 * PI/rad , rad, sn ) : Glyph::DirSegment(2.0 * PI/rad , rad, sn );
 }
 
-template<> void Draw :: S (const Sph& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Sph& s){
     Dls ts = Op::dl( s );
     Pnt p = Ro::cen(ts);
     Glyph::Point(p);
@@ -1008,20 +1001,20 @@ template<> void Draw :: S (const Sph& s, float r, float g, float b, float a){
 }
 		
 
-template<> void Draw :: S (const Pln& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Pln& s){
 //    Drv d	= Fl::dir( s );
-    Dls v	= Fl::loc( s , PAO, false ); //Sph?
+    Dls v = Fl::loc( s , PAO, false ); //Sph?
     Rot r = Gen::ratio( Vec::z, Op::dle( Biv( s ) ).unit() );
     glTranslated(v[0],v[1],v[2]);
-    glMultMatrixd(&(Op::mat(r)[0][0]));
+    glMultMatrixd(&(Gen::mat(r)[0][0]));
     Glyph::SolidGrid();		
 }
 
-template<> void Draw :: S (const Dlp& s, float r, float g, float b, float a){
+template<> void Draw :: S (const Dlp& s){
 //    Drv d = Fl::dir( s.undual() );
-    Dls v = Fl::loc( s , PAO, true );
+    Dls v = Fl::locd( s , PAO);// true );
     Rot r = Gen::ratio( Vec::z, Vec( s ).unit() );
-    Vec4<> t = Op::aa(r);
+    Vec4<> t = Gen::aa(r);
     glTranslated(v[0],v[1],v[2]);
     glRotated(t.w, t.x, t.y, t.z);
     Glyph::SolidGrid();

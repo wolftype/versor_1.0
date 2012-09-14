@@ -10,9 +10,7 @@
 #ifndef VSR_INTERP_INCLUDED
 #define VSR_INTERP_INCLUDED
 
-
-#include "State.h"
-#include "Matrix.h"
+#include "vsr_matrix.h"
 
 using namespace std;
 

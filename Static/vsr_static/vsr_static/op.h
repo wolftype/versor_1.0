@@ -176,7 +176,7 @@ struct Gen {
         @param Vec a
         @param Vec b
     */
-    Rot Gen::ratio(const Vec& a, const Vec& b){
+    static Rot ratio(const Vec& a, const Vec& b){
         double s = ( a <= b )[0];
         
         //180 degree check
@@ -594,11 +594,15 @@ struct Fl {
     */
     template<class A>
     static Pnt loc(const A& f, const Pnt& p, bool dual){
-        return dual ? ( p ^ f ) / f : ( p <= f ) / f;
+        return dual ? Pnt( ( p ^ f ) / f ) : Pnt ( ( p <= f ) / f );
     }
     
     
-    /*! Weight of Flat 
+    template<class A>
+    static Pnt locd(const A& f, const Pnt& p){
+        return ( p ^ f ) / f;
+    }
+        /*! Weight of Flat 
         @param Dual or Direct Flat
         @param boolean flag for duality
     */
@@ -661,7 +665,7 @@ typedef Ta Tangent;
 #define DLN(x,y,z) ( Op::dl(LN(x,y,z)) )
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
-#define PAO PT(0,0,0,1,.5)
+#define PAO Pnt(0,0,0,1,.5)
 #define INFTY Inf(1)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
