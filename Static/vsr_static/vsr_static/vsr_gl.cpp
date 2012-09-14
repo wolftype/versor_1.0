@@ -9,8 +9,8 @@
 
 #include "vsr_gl.h"
 
-#include "op.h"
-#include "Camera.h"
+//#include "op.h"
+//#include "Camera.h"
 
 namespace vsr {
     //NEW
@@ -157,6 +157,27 @@ namespace vsr {
         
     }
     
+ 
+    
+    
+    
+    Vec GL :: unproject(double _x, double _y, double _z, GLdouble* model_view, GLdouble* projection, GLint* viewport){
+        
+        // arrays to hold matrix information
+        GLdouble posX, posY, posZ;
+        
+        gluUnProject(_x, _y, _z,
+                     model_view,
+                     projection,
+                     viewport,
+                     &posX,
+                     &posY,
+                     &posZ );
+        
+        return Vec(posX, posY, posZ);
+    }
+    
+    /*
     Vec GL :: project(double * p, const Camera& cam) {
         
         // arrays to hold matrix information
@@ -181,22 +202,6 @@ namespace vsr {
         return Vec(v[0] / cam.width(), v[1] / cam.height(), v[2] / cam.depth() );
     }
     
-    Vec GL :: unproject(double _x, double _y, double _z, GLdouble* model_view, GLdouble* projection, GLint* viewport){
-        
-        // arrays to hold matrix information
-        GLdouble posX, posY, posZ;
-        
-        gluUnProject(_x, _y, _z,
-                     model_view,
-                     projection,
-                     viewport,
-                     &posX,
-                     &posY,
-                     &posZ );
-        
-        return Vec(posX, posY, posZ);
-    }
-    
     Vec GL :: project (double _x, double _y, double _z, const Camera& cam){
         // arrays to hold matrix information
         GLdouble winX, winY, winZ;
@@ -211,6 +216,7 @@ namespace vsr {
         
         return Vec(winX, winY, winZ);
     }
+    
     Vec GL :: unproject (double _x, double _y, double _z, const Camera& cam){
         GLdouble posX, posY, posZ;
         //posZ = 0;
@@ -237,6 +243,8 @@ namespace vsr {
             Vec diff = tr - bl;    
             return Vec( diff[0] / w, diff[1] /h, 0);
     }
+    
+    */
         
     void GL :: translate (double * p){
         glTranslated(p[0], p[1], p[2]);
@@ -399,18 +407,18 @@ namespace vsr {
     }
 
 
-    void GL :: Line(const vsr::State &a, const vsr::State &b){
+    template<class A> void GL :: Line(const A &a, const A &b){
         glVertex3f( a[0], a[1], a[2]);
         glVertex3f( b[0], b[1], b[2]);
     }
     
-    void GL :: Tri(const vsr::State &a, const vsr::State &b, const vsr::State &c){
+    template<class A> void GL :: Tri(const A &a, const A &b, const A &c){
         glVertex3f( a[0], a[1], a[2]);
         glVertex3f( b[0], b[1], b[2]);
         glVertex3f( c[0], c[1], c [2]);
     }
         
-    void GL :: Quad(const State &a, const State &b, const State &c, const State &d){
+    template<class A> void GL :: Quad(const A &a, const A &b, const A &c, const A &d){
         glVertex3f( a[0], a[1], a[2]);
         glVertex3f( b[0], b[1], b[2]);
         glVertex3f( c[0], c[1], c [2]);

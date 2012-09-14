@@ -447,7 +447,13 @@ public:
 	
         
     static MV x, y, z, xy, xz, yz;  
-//    static MV e1(T t) { MV<N,IDX,T> mv; mv[ Idx<IDX>::E1 ] = t; return mv; }   	
+    
+    static MV e1(T t) { return MV<N,IDX,T>(t,0,0); }   	
+    static MV e2(T t) { return MV<N,IDX,T>(0,t,0); }   	
+    static MV e3(T t) { return MV<N,IDX,T>(0,0,t); }   
+    static MV e12(T t) { return MV<N,IDX,T>(t,0,0); }   	
+    static MV e13(T t) { return MV<N,IDX,T>(0,t,0); }   	
+    static MV e23(T t) { return MV<N,IDX,T>(0,0,t); }   	
 };
 
 

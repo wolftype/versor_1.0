@@ -29,29 +29,37 @@
 //#include "glv.h"
 //#include <GLUT/glut.h>
 
+
+
 #include <vector>
+#include <sstream>
+
+
+
+
+#include "vsr_gl.h"
+#include "vsr_gxlib.h"
+#include "op.h"
+#include "vsr_matrix.h"
 
 using namespace std;
-
-#include "vsr_matrix.h"
-#include <sstream>
 
 
 namespace vsr {
 
-		//Forward Declarations
-        class Vec;
-		class Rot;
-		class Trs;
-		class Mot;
-		class Dil;
-		class Trv;
-		class Cir;
-		class Pnt;
-        class Frame;
+//		//Forward Declarations
+//        class Vec;
+//		class Rot;
+//		class Trs;
+//		class Mot;
+//		class Dil;
+//		class Trv;
+//		class Cir;
+//		class Pnt;
+//        class Frame;
     
         
-        class Camera;
+//        class Camera;
 		
         //GL BUILTIN PIPELINE
 		class Glyph {
@@ -170,7 +178,7 @@ namespace vsr {
                 template<class A>
                 static void Push( const A& pos, const Rot& rot, const double& scale ){
                     glPushMatrix();
-                        Vec4<> t = Op::aa(rot);
+                        Vec4<> t = Gen::aa(rot);
                         glTranslated(pos[0], pos[1], pos[2]);
                         glRotated(t.w,t.x,t.y,t.z);
                         glScaled(scale,scale,scale);

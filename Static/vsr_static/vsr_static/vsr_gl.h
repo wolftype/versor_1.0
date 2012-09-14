@@ -17,12 +17,12 @@
 
 #include "vsr_gxlib.h"
 #include "vsr_matrix.h"
-//#include    "vsr_gfxdata.h"
+#include "op.h"
 
 namespace vsr {
     
-	class Vec;
-	class Camera;  
+//	class Vec;
+//	class Camera;  
     
     using std::string;
     
@@ -213,7 +213,8 @@ namespace vsr {
          Vec project(double _x, double _y, double _z, GLdouble*, GLdouble*, GLint*);
         /// Project FROM Screen Coordinates
          Vec unproject(double _x, double _y, double _z, GLdouble*, GLdouble*, GLint*);
-        
+
+/*        
         /// Pass in points and camera return 2d vec
          Vec project( double _x, double _y, double _z, const Camera&);
         /// Pass in point on screen, get point in space
@@ -223,6 +224,10 @@ namespace vsr {
         Vec sproject( double * p, const Camera&);
         
         Vec ratio( double w, double h, const Camera& c);
+  */      
+        
+        
+        
         
         void translate(double *);
         void rotate(double *);
