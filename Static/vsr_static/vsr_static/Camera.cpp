@@ -63,7 +63,7 @@ void Camera :: push3D(){
 	glLoadIdentity();
 	gluLookAt(mPos[0], mPos[1], mPos[2], v[0], v[1],  v[2], u[0], u[1], u[2]);
 		
-	Vec4<> t = Op::aa( mvm() );
+	Vec4<> t = Gen::aa( mvm() );
 	
 	glRotatef(t.w,t.x,t.y,t.z);
 

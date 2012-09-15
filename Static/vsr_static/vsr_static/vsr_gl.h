@@ -17,11 +17,14 @@
 
 #include "vsr_gxlib.h"
 #include "vsr_matrix.h"
-#include "op.h"
+#include "vsr_templates.h"
 
 namespace vsr {
     
-//	class Vec;
+    //Predeclare MV class
+    template< int NUM, int IDX, class T > class MV;
+    //Forward Typedefs 
+    typedef MV<3,VEC,float>  Vec;
 //	class Camera;  
     
     using std::string;

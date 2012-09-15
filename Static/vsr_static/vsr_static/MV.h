@@ -23,7 +23,10 @@
 #include <utility>
 #include <math.h>
 
+
 #include "vsr_templates.h"
+#include "Drawable.h"
+#include "Draw.h"
 
 #define SANITYCHECK 0
 #define TPRINT(x) if(SANITYCHECK)printf(x)
@@ -199,7 +202,7 @@ struct ProductN{
 
 
 template < int N, int IDX, class T >
-class MV {
+class MV : public Drawable {
 
 	T mW[N];	
 
@@ -376,6 +379,8 @@ public:
     
     typename Product<self_type, Pss, T>::GP dual() const;
     typename Product<self_type, Pss, T>::GP undual() const;
+    typename Product<self_type, Tri, T>::GP duale() const;
+    typename Product<self_type, Tri, T>::GP unduale() const;
 
     /////////////////////////////////////////////////////
     /* T r a n s f o r m a t i o n  O p e r a t o r s  */
@@ -454,8 +459,15 @@ public:
     static MV e12(T t) { return MV<N,IDX,T>(t,0,0); }   	
     static MV e13(T t) { return MV<N,IDX,T>(0,t,0); }   	
     static MV e23(T t) { return MV<N,IDX,T>(0,0,t); }   	
+    
+   void draw(float r = 1.0 , float g= 1.0 , float b= 1.0 , float a= 1.0 );
 };
 
+
+template<int N, int IDX, class T>
+void MV<N, IDX, T>::draw(float r, float g, float b, float a){
+    Draw::R(*this,r,g,b,a);
+}
 
 template<int NUM, int IDX, typename T>
 inline std::ostream& operator << ( std::ostream& os, MV< NUM, IDX, T > a ){

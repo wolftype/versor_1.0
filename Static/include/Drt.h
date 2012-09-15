@@ -1,7 +1,7 @@
 		#ifndef DRT_H_INCLUDED
 		#define DRT_H_INCLUDED
 		
-		#include "vsr_typedefs.h"
+		#include "vsr_casts.h"
 		
 		namespace vsr{
 	 

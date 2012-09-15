@@ -5,6 +5,12 @@
  *  Created by x on 3/22/10.
  *  Copyright 2010 x. All rights reserved.
  *
+ 
+ TO DO : Set up spin operations for Origin, Tangents, and other elements that will turn into Points, Point Pairs, etc 
+ when transformed (so that the functions return this elements and not input - type elements ).  Currently this is
+ side-stepped by casting the necessary input elements, but that is not efficient and leads to unnecessary multiplies.
+ Note: will have to replace or re-define PAO (Point At Origin)
+ 
  */
  
 #ifndef OP_H_INCLUDED
@@ -36,6 +42,7 @@
 #include "Ori.h"
 #include "Inf.h"
 #include "Pss.h"
+#include "Sta.h"
 #include "versorFuncs.h"
 
 namespace vsr {
@@ -77,7 +84,7 @@ struct Op {
     }   
     
 
-
+    static Sta statest() { return Sta(); }
 
 
 //    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
@@ -190,7 +197,11 @@ struct Gen {
         if (n != 0 ) r /= n;
         if (r == Rot(0,0,0,0) ) return Rot(1,0,0,0);//else cout << r << endl; //printf("0 in gen::ratio\n");
         return r;
-    }    
+    } 
+    
+    static Rot ratio(const Biv& a, const Biv& b){
+        return ratio( a.duale(), b.duale() );
+    }
     
     /*! Axis Angle from Rotor
         @param Rotor input
@@ -303,7 +314,7 @@ struct Gen {
         @param Scalar amt 
     */
     template <class T>
-    static Bst Gen::trv(const Par& s, T t){
+    static Bst trv(T t, const Par& s){
         return Bst(t, 
                        s[0], s[1], s[2], 
                        s[3], s[4], s[5], 
@@ -316,7 +327,7 @@ struct Gen {
         @param scalar amt (typically 0 or 1)
     */
     template <class A, class B, class T>
-    static Bst Gen::trv(const A& tnv, const B& drv, T t){
+    static Bst trv(const A& tnv, const B& drv, T t){
         Par s = tnv.trs(drv);
         return Bst(t, 
                        s[0], s[1], s[2], 
@@ -607,7 +618,7 @@ struct Fl {
         @param boolean flag for duality
     */
     template<class A>
-    double Fl::wt(const A& f, bool dual){
+    double wt(const A& f, bool dual){
 //		return (Ori(1) <= Fl::dir(s,dual)).sqwt();
 		return dual ? ( Ori(1) <= Fl::dir( f.undual() ) ).wt() : ( Ori(1) <= Fl::dir(f) ).wt();
     }
@@ -642,7 +653,7 @@ struct Ta {
     }
     /*! Weight of Tangent Element */
     template<class A>
-    double Ta::wt(const A& s){
+    double wt(const A& s){
         return ( Ori(1) <= dir(s) ).sqwt();
     }
 };

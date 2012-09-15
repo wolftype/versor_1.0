@@ -34,28 +34,33 @@
 #include <vector>
 #include <sstream>
 
-
-
-
 #include "vsr_gl.h"
 #include "vsr_gxlib.h"
-#include "op.h"
 #include "vsr_matrix.h"
+
+#include "vsr_templates.h"
+
 
 using namespace std;
 
-
 namespace vsr {
 
-//		//Forward Declarations
-//        class Vec;
-//		class Rot;
+//		
+
+        //Predeclare MV class
+        template< int NUM, int IDX, class T > class MV;
+        //Forward Typedefs 
+        typedef MV<3,VEC,float>  Vec;
+        typedef MV<4,ROT,float>  Rot;
+        typedef MV<5,PNT,float>  Pnt;
+        typedef MV<10,CIR,float>  Cir;
+        typedef MV<9,STA,float>  Sta;
 //		class Trs;
 //		class Mot;
 //		class Dil;
 //		class Trv;
 //		class Cir;
-//		class Pnt;
+
 //        class Frame;
     
         
@@ -175,20 +180,13 @@ namespace vsr {
 //				static void clickTest(State& s, double x, double y, double z);
 //				static Vec  screenCoord(const State& s );
 
+                static Sta statest();
+
                 template<class A>
-                static void Push( const A& pos, const Rot& rot, const double& scale ){
-                    glPushMatrix();
-                        Vec4<> t = Gen::aa(rot);
-                        glTranslated(pos[0], pos[1], pos[2]);
-                        glRotated(t.w,t.x,t.y,t.z);
-                        glScaled(scale,scale,scale);
-                }
+                static void Push( const A& pos, const Rot& rot, const double& scale );
                 
                 template<class A>
-                static void PushPosition( const A& pos){
-                    glPushMatrix();
-                        glTranslated(pos[0], pos[1], pos[2]);
-                }
+                static void PushPosition( const A& pos);
 
                 static void Pop(){ glPopMatrix(); }
 

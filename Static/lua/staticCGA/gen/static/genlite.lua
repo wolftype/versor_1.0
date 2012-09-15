@@ -810,9 +810,9 @@ end
 -- genVsrTypedefs("vsr_typedefs")
 -- genVsrTemplateH("vsr_templates")
 -- genVsrTemplateC("vsr_templates")
---genFunctions("io")
+genFunctions("io")
 
-print(genTypedefs())
+--print(genTypedefs())
 -- for i, iv in ipairs(myMV) do
 -- print( BaseClass(Hyp,iv,"gp") )
 -- end

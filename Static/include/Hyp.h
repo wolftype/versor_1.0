@@ -1,7 +1,7 @@
 		#ifndef HYP_H_INCLUDED
 		#define HYP_H_INCLUDED
 		
-		#include "vsr_typedefs.h"
+		#include "vsr_casts.h"
 		
 		namespace vsr{
 	 
