@@ -8,8 +8,8 @@
  */
 
 #include "vsr_gl.h"
+#include "op.h"
 
-//#include "op.h"
 //#include "Camera.h"
 
 namespace vsr {
@@ -115,6 +115,7 @@ namespace vsr {
             default:            return 3;
                 
         }
+        return 0;
     }
     // bytes/px
     int GL :: bpp(GLenum type) {

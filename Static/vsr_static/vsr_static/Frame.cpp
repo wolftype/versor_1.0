@@ -11,18 +11,18 @@
 
 namespace vsr {
 
-Frame :: Frame() : Touchable(),
+Frame :: Frame() : //Touchable(),
 mPos(0,0,0,1,0), mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
 mRot(1,0,0,0), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9), aPar(.9)
 { orient(); }
 
-Frame :: Frame(const State& p, const State& r)  : Touchable(),
+Frame :: Frame(const Pnt& p, const Rot& r)  : //Touchable(),
 mPos( p ), mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
 mRot( r ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9), aPar(.9)
 { orient(); }
 
-Frame :: Frame(const State& m) : Touchable(),
-mPos( Op::sp0(Ori(1),m) ), mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
+Frame :: Frame(const Mot& m) : //Touchable(),
+mPos( Op::sp(PAO,m) ), mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
 mRot( Op::sp(Rot::e12(0),m) ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9),  aPar(.9)
 { orient(); }
 
@@ -36,8 +36,8 @@ Frame Frame :: twist(const Frame& f1, const Frame& f2, double t){
 //	return fr;
 	
 	//or direct motors
-	Dll tdz = Gen::log_mot( f2.mot() / f1.mot() ) * t;
-	fr.twist( Gen::mot_dll(tdz) );
+	Dll tdz = Gen::log( f2.mot() / f1.mot() ) * t;
+	fr.twist( Gen::mot(tdz) );
 	return fr;	
 }
 
@@ -70,22 +70,22 @@ Frame Frame :: spin(const Frame& f1, const Frame& f2, double t){
 }
 
 void Frame :: pushPos(){
-	Draw :: PushPosition ( mPos );
+//	Draw :: PushPosition ( mPos );
 }
 
 void Frame :: push(){
-	Draw :: Push ( mPos, mRot, mScale );
+//	Draw :: Push ( mPos, mRot, mScale );
 }
 
 void Frame :: pop(){
-	Draw :: Pop();
+//	Draw :: Pop();
 }
 
 void Frame :: drawLite(){
 //    push();
-        Glyph::Line(Vec(pos()), x());
-        Glyph::Line(Vec(pos()), y());
-        Glyph::Line(Vec(pos()), z());
+//        Glyph::Line(Vec(pos()), x());
+//        Glyph::Line(Vec(pos()), y());
+//        Glyph::Line(Vec(pos()), z());
 //    pop();
 }
 

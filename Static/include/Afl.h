@@ -1,7 +1,7 @@
 		#ifndef AFL_H_INCLUDED
 		#define AFL_H_INCLUDED
 		
-		#include "vsr_typedefs.h"
+		#include "vsr_casts.h"
 		
 		namespace vsr{
 	 

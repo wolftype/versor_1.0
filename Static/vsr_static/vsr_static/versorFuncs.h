@@ -13,7 +13,7 @@
 #ifndef vsr_static_extraFunctions_h
 #define vsr_static_extraFunctions_h
 
-#include "vsr_typedefs.h"
+#include "vsr_casts.h"
 
 namespace vsr{
 

@@ -10,6 +10,9 @@
 
 #include "op.h"
 
+#include "Mtd.h"
+#include "Rtc.h"
+
 using namespace vsr;
 
 int main (int argc, const char * argv[])
@@ -22,21 +25,37 @@ int main (int argc, const char * argv[])
     dll += Biv(1,0,0);
     dll += Drv(1,0,0);
     dll += dll2;
-    
-    cout << dll << dll2 << endl; 
-    
+//    
+//    cout << dll << dll2 << endl; 
+//    
     Pnt p = Ro::null(2,2,2);
+
+    Bst b = p * p;
     
-    Pnt_Dll pd1 = p * dll;
-    Pnt_Dll pd2 = dll * p;
+    Par pp;
     
-//    dll.test();
-    cout << dll.dual() << endl; 
-   cout << pd1 << pd2 << pd1 - pd2 << (pd1 -pd2)*.5 << p % dll << (p%dll).null() << endl; 
-      
-    cout << Point( Ro::null(12,1,1) ) << endl;   
-    
-    cout << Round::dls( 1,1,1,2.0) << Ro::dls( PT(1,1,1) )  << endl; 
+//    Sta sta;
+//    cout << p % dll << endl; 
+//    
+//    Par pa;
+//    Par pb;
+//    
+//    Mnk m;
+//    Mtd mtd;
+//    Rtc rtc;
+//
+ //   cout << Mtd(2) * Rtc(1) << endl; 
+//    
+//    Pnt_Dll pd1 = p * dll;
+//    Pnt_Dll pd2 = dll * p;
+//    
+////    dll.test();
+//    cout << dll.dual() << endl; 
+//   cout << pd1 << pd2 << pd1 - pd2 << (pd1 -pd2)*.5 << p % dll << (p%dll).null() << endl; 
+//      
+//    cout << Point( Ro::null(12,1,1) ) << endl;   
+//    
+//    cout << Round::dls( 1,1,1,2.0) << Ro::dls( PT(1,1,1) )  << endl; 
       
     return 0; 
 }

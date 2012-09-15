@@ -96,7 +96,7 @@ class Camera : public Frame {
 		bool& perspective()  {return bOrtho; }
 		bool  perspective() const {return bOrtho; }
 										
-		void lookAt( const State& v ) { mLook = v; }
+		template <class A> void lookAt( const A& v ) { mLook = v; }
 						
 		Vec  look() { mLook = Vec(mPos) + forward();  return mLook; }		
 
@@ -108,12 +108,12 @@ class Camera : public Frame {
 		Frame& modelView() { return mModelView; }					///< Get Model View Matrix Frame
 		Frame  modelView() const { return mModelView; }				///< Set Model View Matrix Frame
 		
-		Rot rat() const { return -mRot * mModelView.rot(); }		///< Ratio Rotor taking camera to mvm 
-		Rot rrat() const { return -mModelView.rot() * mRot; }		///< Reverse Ratio taking mvm to camera 
+		Rot rat() const { return !mRot * mModelView.rot(); }		///< Ratio Rotor taking camera to mvm 
+		Rot rrat() const { return !mModelView.rot() * mRot; }		///< Reverse Ratio taking mvm to camera 
 		
-		Rot ryz() { return Gen::ratio_biv( modelView().yz(), yz() ); }	///< Get Ratio of YZ plane between Camera and MVM
-		Rot rxz() { return Gen::ratio_biv( modelView().xz(), xz() ); }	///< Get Ratio of XZ plane between Camera and MVM
-		Rot rxy() { return Gen::ratio_biv( modelView().xy(), xy() ); }	///< Get Ratio of XY plane between Camera and MVM
+		Rot ryz() { return Gen::ratio( modelView().yz(), yz() ); }	///< Get Ratio of YZ plane between Camera and MVM
+		Rot rxz() { return Gen::ratio( modelView().xz(), xz() ); }	///< Get Ratio of XZ plane between Camera and MVM
+		Rot rxy() { return Gen::ratio( modelView().xy(), xy() ); }	///< Get Ratio of XY plane between Camera and MVM
 				
 		void reset() { mvm( Rot(1,0,0,0) ); rot( Rot(1,0,0,0) ); pos(0,0,5); orient(); } 
 
@@ -140,14 +140,15 @@ class Camera : public Frame {
     Frustrum frustrum() const { return mFrustrum; }
     
     Frustrum frustrum(){
-           mFrustrum.box.bl = GL::unproject(0,0,0.0, *this);
-           mFrustrum.box.blb = GL::unproject(0,0,1.0, *this);
-           mFrustrum.box.tr = GL::unproject( width(), height(), 0.0, *this);    
-           mFrustrum.box.trb = GL::unproject( width(), height(), 1.0, *this );        
-           mFrustrum.box.br = GL::unproject(width(),0,0.0, *this);
-           mFrustrum.box.brb = GL::unproject(width(),0,1.0, *this);
-           mFrustrum.box.tl = GL::unproject( 0, height(), 0.0, *this );    
-           mFrustrum.box.tlb = GL::unproject( 0,height(), 1.0, *this );  
+    
+//           mFrustrum.box.bl = GL::unproject(0,0,0.0, *this);
+//           mFrustrum.box.blb = GL::unproject(0,0,1.0, *this);
+//           mFrustrum.box.tr = GL::unproject( width(), height(), 0.0, *this);    
+//           mFrustrum.box.trb = GL::unproject( width(), height(), 1.0, *this );        
+//           mFrustrum.box.br = GL::unproject(width(),0,0.0, *this);
+//           mFrustrum.box.brb = GL::unproject(width(),0,1.0, *this);
+//           mFrustrum.box.tl = GL::unproject( 0, height(), 0.0, *this );    
+//           mFrustrum.box.tlb = GL::unproject( 0,height(), 1.0, *this );  
                  
             mFrustrum.calc();
         

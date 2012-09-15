@@ -8,7 +8,8 @@
  */
 
 #include "Draw.h"
-
+#include "op.h"
+//#include "Pnt_Dll.h"
 
 namespace vsr {
 
@@ -296,7 +297,7 @@ void Glyph ::  DashedSegment (float angle, float radius, bool sign, int res){
 
 		for (int i = 0; i < num; ++ i){
 
-			float rad = ( angle * i / num ) - angle/2 + (sign)? PI : 0;
+			float rad = ( angle * i / num ) - angle/2 + ( (sign)? PI : 0 );
 			Vec2<> t ( cos(rad), sin(rad) );
 			t *= radius;
 			glVertex2f(t.x, t.y);			
@@ -739,6 +740,22 @@ void Draw :: SegOff(const Cir& K, double t, double off, bool dir, int res){
 	glPopMatrix();
 
 }
+
+template<class A>
+void Draw::Push( const A& pos, const Rot& rot, const double& scale ){
+    glPushMatrix();
+        Vec4<> t = Gen::aa(rot);
+        glTranslated(pos[0], pos[1], pos[2]);
+        glRotated(t.w,t.x,t.y,t.z);
+        glScaled(scale,scale,scale);
+}
+
+template<class A>
+void Draw::PushPosition( const A& pos){
+    glPushMatrix();
+        glTranslated(pos[0], pos[1], pos[2]);
+}
+
 /*
 void Draw :: SegTo(const Cir& K, double st, double t, int res){
     
@@ -882,6 +899,8 @@ Vec Draw :: screenCoord(const State& s ){
 //    S(s,1,1,1);
 //}
 
+//Sta Draw::statest() { return Sta(); }
+
 template <class A>
 void Draw :: R (const A& s, float r, float g, float b, float a){
 	glPushMatrix();	
@@ -892,6 +911,12 @@ void Draw :: R (const A& s, float r, float g, float b, float a){
     glPopMatrix();
 }
     
+
+template<class A> void Draw::S( const A& a) { cout << "no draw routine found for " << endl; }
+
+template<> void Draw::S( const Pnt_Dll& a) { cout << "no draw routine found for " << endl; }
+
+
 template<> void Draw :: S (const Vec& s){
     Glyph::Dir( s);
 }
@@ -1050,6 +1075,8 @@ template<> void Draw :: S (const Tnb& s, float r, float g, float b, float a){
 template<> void Draw :: S (const Flp& s, float r, float g, float b, float a){
 //    s.null().draw(r,g,b,a);
 }
+
+
 
 //State Draw :: pos(const State& s){
 //
@@ -1543,5 +1570,7 @@ void Draw :: clickTest( State& s, double x, double y, double z ) {
 
 }
 */
+
+//#include "vsr_instantiation.cpp"
 
 } //GA::

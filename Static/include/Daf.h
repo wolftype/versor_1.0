@@ -1,7 +1,7 @@
 		#ifndef DAF_H_INCLUDED
 		#define DAF_H_INCLUDED
 		
-		#include "vsr_typedefs.h"
+		#include "vsr_casts.h"
 		
 		namespace vsr{
 	 
