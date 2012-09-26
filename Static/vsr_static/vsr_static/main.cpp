@@ -10,53 +10,58 @@
 
 #include "op.h"
 
-#include "Mtd.h"
-#include "Rtc.h"
+//#include "Mtt.h"
+//#include "Mtd.h"
+//#include "Rtc.h"
+
+#include "GLVInterfaceImpl.h"
+#include "Draw.h"
 
 using namespace vsr;
+using namespace glv;
+
+Window * win;
+GLVApp * app;
+
+void GLVApp :: onDraw(){
+    
+
+
+    
+    static Pnt p(0,0,0,1,.5);
+    
+    static int t = 0;
+    t++;
+    
+//    Draw::R(Vec::x,1,0,0);
+//    Draw::R(Vec::y,0,1,0);
+//    Draw::R(Vec::z,0,0,1);
+    float r =  sin( (t * PI ) / 180.0 );
+    cout << r<< endl; 
+    Trs trs = Gen::trs(r, 0.f, 0.f );
+    cout << trs << endl; 
+    Pnt p2 = Op::sp(p, trs  );
+    cout << p2 << endl; 
+    
+    Draw::R( p2 );
+
+}
 
 int main (int argc, const char * argv[])
 {
 
-    Dll dll, dll2;
-
-    dll2 = Dll(2,3,0,0,0,1);
+    /* Set Up GLV hierarchy */
+	GLV glv(0,0);	
+	glv.colors().back.set(.3,.3,.3);		
+	win = new Window(500,500,"VSR",&glv);    
+    app = new GLVApp(win);    
+    glv << app;
     
-    dll += Biv(1,0,0);
-    dll += Drv(1,0,0);
-    dll += dll2;
-//    
-//    cout << dll << dll2 << endl; 
-//    
-    Pnt p = Ro::null(2,2,2);
-
-    Bst b = p * p;
+  //  Rand::Seed();
     
-    Par pp;
+    Application::run();
     
-//    Sta sta;
-//    cout << p % dll << endl; 
-//    
-//    Par pa;
-//    Par pb;
-//    
-//    Mnk m;
-//    Mtd mtd;
-//    Rtc rtc;
-//
- //   cout << Mtd(2) * Rtc(1) << endl; 
-//    
-//    Pnt_Dll pd1 = p * dll;
-//    Pnt_Dll pd2 = dll * p;
-//    
-////    dll.test();
-//    cout << dll.dual() << endl; 
-//   cout << pd1 << pd2 << pd1 - pd2 << (pd1 -pd2)*.5 << p % dll << (p%dll).null() << endl; 
-//      
-//    cout << Point( Ro::null(12,1,1) ) << endl;   
-//    
-//    cout << Round::dls( 1,1,1,2.0) << Ro::dls( PT(1,1,1) )  << endl; 
-      
-    return 0; 
+    return 0;
 }
+
 

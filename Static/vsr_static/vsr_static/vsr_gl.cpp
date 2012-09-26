@@ -9,8 +9,7 @@
 
 #include "vsr_gl.h"
 #include "op.h"
-
-//#include "Camera.h"
+#include "Camera.h"
 
 namespace vsr {
     //NEW
@@ -178,7 +177,7 @@ namespace vsr {
         return Vec(posX, posY, posZ);
     }
     
-    /*
+    /* */
     Vec GL :: project(double * p, const Camera& cam) {
         
         // arrays to hold matrix information
@@ -245,7 +244,7 @@ namespace vsr {
             return Vec( diff[0] / w, diff[1] /h, 0);
     }
     
-    */
+   
         
     void GL :: translate (double * p){
         glTranslated(p[0], p[1], p[2]);

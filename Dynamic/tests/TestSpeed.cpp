@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
     
     int counter = 0;
     int numit = 1000;
-    int numop = 1000;
+    int numop = 10000;
 
     int total;
     

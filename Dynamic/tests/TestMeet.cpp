@@ -21,6 +21,14 @@ GLVApp * app;
 //Two Circles
 void circles(GLVApp& app){
     
+    Cir x = CXY(1);
+    Dll dll = (Inf(1) <= x); 
+    Mot_Trv mtt = x * x.involute(); 
+    cout << mtt / (dll * dll) * -1.0 << endl;
+    
+    cout << Ro::siz(x, false ) << endl; 
+    x.draw();
+    
     //CIRCLE in XY Plane translated to 1,0,0
     static Cir c1 = CXY(1).trs(1,0,0);
     //CIRCLE in XY Plane translated to -1,0,0

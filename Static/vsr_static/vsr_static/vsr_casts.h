@@ -18,7 +18,7 @@ namespace vsr{
 template<class T, class S>
 inline T const cast (const S& s ){
     
-    printf("generic cast\n");
+    TPRINT("generic cast\n");
 
     T temp;
     if ( T::size >= S::size ) std::copy( &(s[0]), &(s[0])+S::size, &(temp[0]) );

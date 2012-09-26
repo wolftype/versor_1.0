@@ -19,13 +19,18 @@
 #include "vsr_matrix.h"
 #include "vsr_templates.h"
 
+#ifndef VSR_PRECISION
+typedef double VSR_PRECISION; 
+#endif
+
 namespace vsr {
     
     //Predeclare MV class
     template< int NUM, int IDX, class T > class MV;
     //Forward Typedefs 
-    typedef MV<3,VEC,float>  Vec;
-//	class Camera;  
+    typedef MV<3,VEC,VSR_PRECISION>  Vec;
+
+	class Camera;  
     
     using std::string;
     
@@ -217,7 +222,7 @@ namespace vsr {
         /// Project FROM Screen Coordinates
          Vec unproject(double _x, double _y, double _z, GLdouble*, GLdouble*, GLint*);
 
-/*        
+/*    */       
         /// Pass in points and camera return 2d vec
          Vec project( double _x, double _y, double _z, const Camera&);
         /// Pass in point on screen, get point in space
@@ -227,7 +232,7 @@ namespace vsr {
         Vec sproject( double * p, const Camera&);
         
         Vec ratio( double w, double h, const Camera& c);
-  */      
+     
         
         
         

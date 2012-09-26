@@ -25,11 +25,15 @@
 
 
 #include "vsr_templates.h"
-#include "Drawable.h"
-#include "Draw.h"
+//#include "Drawable.h"
+//#include "Draw.h"
 
 #define SANITYCHECK 0
 #define TPRINT(x) if(SANITYCHECK)printf(x)
+
+#ifndef VSR_PRECISION
+typedef double VSR_PRECISION; 
+#endif
 
 namespace vsr {
 
@@ -96,105 +100,105 @@ struct ProductN{
 
 
 //Predeclare BASIC TYPES
-	typedef MV<4,ROT,float>  Rot;
+	typedef MV<4,ROT,VSR_PRECISION>  Rot;
 	
-	typedef MV<8,MOT,float>  Mot;
+	typedef MV<8,MOT,VSR_PRECISION>  Mot;
 	
-	typedef MV<2,DIL,float>  Dil;
+	typedef MV<2,DIL,VSR_PRECISION>  Dil;
 	
-	typedef MV<4,TRV,float>  Trv;
+	typedef MV<4,TRV,VSR_PRECISION>  Trv;
 	
-	typedef MV<12,MTD,float>  Mtd;
+	typedef MV<12,MTD,VSR_PRECISION>  Mtd;
 	
-	typedef MV<4,TRS,float>  Trs;
+	typedef MV<4,TRS,VSR_PRECISION>  Trs;
 	
-	typedef MV<16,RTC,float>  Rtc;
+	typedef MV<16,RTC,VSR_PRECISION>  Rtc;
 	
-	typedef MV<16,MTT,float>  Mtt;
+	typedef MV<16,MTT,VSR_PRECISION>  Mtt;
 	
-	typedef MV<8,RTT,float>  Rtt;
+	typedef MV<8,RTT,VSR_PRECISION>  Rtt;
 	
-	typedef MV<8,RTD,float>  Rtd;
+	typedef MV<8,RTD,VSR_PRECISION>  Rtd;
 	
-	typedef MV<5,TVD,float>  Tvd;
+	typedef MV<5,TVD,VSR_PRECISION>  Tvd;
 	
-	typedef MV<5,TSD,float>  Tsd;
+	typedef MV<5,TSD,VSR_PRECISION>  Tsd;
 	
-	typedef MV<14,TRT,float>  Trt;
+	typedef MV<14,TRT,VSR_PRECISION>  Trt;
 	
-	typedef MV<12,RVD,float>  Rvd;
+	typedef MV<12,RVD,VSR_PRECISION>  Rvd;
 	
-	typedef MV<15,TST,float>  Tst;
+	typedef MV<15,TST,VSR_PRECISION>  Tst;
 	
-	typedef MV<15,TVT,float>  Tvt;
+	typedef MV<15,TVT,VSR_PRECISION>  Tvt;
 	
-	typedef MV<11,BST,float>  Bst;
+	typedef MV<11,BST,VSR_PRECISION>  Bst;
 	
-	typedef MV<1,SCA,float>  Sca;
+	typedef MV<1,SCA,VSR_PRECISION>  Sca;
 	
-	typedef MV<1,ORI,float>  Ori;
+	typedef MV<1,ORI,VSR_PRECISION>  Ori;
 	
-	typedef MV<1,INF,float>  Inf;
+	typedef MV<1,INF,VSR_PRECISION>  Inf;
 	
-	typedef MV<1,MNK,float>  Mnk;
+	typedef MV<1,MNK,VSR_PRECISION>  Mnk;
 	
-	typedef MV<2,HYP,float>  Hyp;
+	typedef MV<2,HYP,VSR_PRECISION>  Hyp;
 	
-	typedef MV<1,PSS,float>  Pss;
+	typedef MV<1,PSS,VSR_PRECISION>  Pss;
 	
-	typedef MV<5,PNT,float>  Pnt;
+	typedef MV<5,PNT,VSR_PRECISION>  Pnt;
 	
-	typedef MV<10,PAR,float>  Par;
+	typedef MV<10,PAR,VSR_PRECISION>  Par;
 	
-	typedef MV<10,CIR,float>  Cir;
+	typedef MV<10,CIR,VSR_PRECISION>  Cir;
 	
-	typedef MV<5,SPH,float>  Sph;
+	typedef MV<5,SPH,VSR_PRECISION>  Sph;
 	
-	typedef MV<9,STA,float>  Sta;
+	typedef MV<9,STA,VSR_PRECISION>  Sta;
 	
-	typedef MV<3,DRV,float>  Drv;
+	typedef MV<3,DRV,VSR_PRECISION>  Drv;
 	
-	typedef MV<3,DRB,float>  Drb;
+	typedef MV<3,DRB,VSR_PRECISION>  Drb;
 	
-	typedef MV<1,DRT,float>  Drt;
+	typedef MV<1,DRT,VSR_PRECISION>  Drt;
 	
-	typedef MV<3,TNV,float>  Tnv;
+	typedef MV<3,TNV,VSR_PRECISION>  Tnv;
 	
-	typedef MV<3,TNB,float>  Tnb;
+	typedef MV<3,TNB,VSR_PRECISION>  Tnb;
 	
-	typedef MV<1,TNT,float>  Tnt;
+	typedef MV<1,TNT,VSR_PRECISION>  Tnt;
 	
-	typedef MV<6,LIN,float>  Lin;
+	typedef MV<6,LIN,VSR_PRECISION>  Lin;
 	
-	typedef MV<4,PLN,float>  Pln;
+	typedef MV<4,PLN,VSR_PRECISION>  Pln;
 	
-	typedef MV<4,FLP,float>  Flp;
+	typedef MV<4,FLP,VSR_PRECISION>  Flp;
 	
-	typedef MV<4,DFP,float>  Dfp;
+	typedef MV<4,DFP,VSR_PRECISION>  Dfp;
 	
-	typedef MV<6,DLL,float>  Dll;
+	typedef MV<6,DLL,VSR_PRECISION>  Dll;
 	
-	typedef MV<4,DLP,float>  Dlp;
+	typedef MV<4,DLP,VSR_PRECISION>  Dlp;
 	
-	typedef MV<3,VEC,float>  Vec;
+	typedef MV<3,VEC,VSR_PRECISION>  Vec;
 	
-	typedef MV<3,BIV,float>  Biv;
+	typedef MV<3,BIV,VSR_PRECISION>  Biv;
 	
-	typedef MV<1,TRI,float>  Tri;
+	typedef MV<1,TRI,VSR_PRECISION>  Tri;
 	
-	typedef MV<4,AFF,float>  Aff;
+	typedef MV<4,AFF,VSR_PRECISION>  Aff;
 	
-	typedef MV<6,AFL,float>  Afl;
+	typedef MV<6,AFL,VSR_PRECISION>  Afl;
 	
-	typedef MV<4,AFP,float>  Afp;
+	typedef MV<4,AFP,VSR_PRECISION>  Afp;
 	
-	typedef MV<4,DAP,float>  Dap;
+	typedef MV<4,DAP,VSR_PRECISION>  Dap;
 	
-	typedef MV<4,DAF,float>  Daf;
+	typedef MV<4,DAF,VSR_PRECISION>  Daf;
 	
-	typedef MV<6,DAL,float>  Dal;
+	typedef MV<6,DAL,VSR_PRECISION>  Dal;
 	
-	typedef MV<3,MNV,float>  Mnv;
+	typedef MV<3,MNV,VSR_PRECISION>  Mnv;
 
 
 //template< int N, class T >
@@ -202,7 +206,7 @@ struct ProductN{
 
 
 template < int N, int IDX, class T >
-class MV : public Drawable {
+class MV {//: public Drawable {
 
 	T mW[N];	
 
@@ -305,12 +309,12 @@ public:
     template< class B >    
     MV operator * ( const B& v) const { self_type mv = *this;  IT(N){ mv[i] *= v; } return mv; }
     template< class B >
-    MV operator / ( const B& v) const { self_type mv = *this;  IT(N){ mv[i] *= v; } return mv; }
+    MV operator / ( const B& v) const { self_type mv = *this;  IT(N){ mv[i] /= v; } return mv; }
 
     template< class B >
     MV& operator *= ( const B& v) { IT(N){ mW[i] *= v; } return *this; }
     template< class B >
-    MV& operator /= ( const B& v) { IT(N){ mW[i] *= v; } return *this; }
+    MV& operator /= ( const B& v) { IT(N){ mW[i] /= v; } return *this; }
     
     template < int N2, int IDX2, class T2 >
     typename ProductN<idx, IDX2, T>::GP operator * ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, rh ); }
@@ -363,7 +367,7 @@ public:
     Pnt null() const;
 
     /*! Dot Product */
-    typename ProductN<idx, idx, T>::IP dot() const { return *this <= *this; }
+    typename ProductN<idx, idx, T>::IP dot() const { return (*this) <= (*this); }
     /*! Reverse Dot Product */
     typename ProductN<idx, idx, T>::IP rdot() const { return *this <= ~(*this); }
     /*! Weight */
@@ -460,14 +464,16 @@ public:
     static MV e13(T t) { return MV<N,IDX,T>(0,t,0); }   	
     static MV e23(T t) { return MV<N,IDX,T>(0,0,t); }   	
     
-   void draw(float r = 1.0 , float g= 1.0 , float b= 1.0 , float a= 1.0 );
+    //virtual void draw() { draw(1.0,1.0,1.0); }
+   //void draw(float r , float g , float b, float a= 1.0 );
 };
 
 
-template<int N, int IDX, class T>
-void MV<N, IDX, T>::draw(float r, float g, float b, float a){
-    Draw::R(*this,r,g,b,a);
-}
+
+//    template<int N, int IDX, class T>
+//void MV<N, IDX, T>::draw(float r, float g, float b, float a){
+//    Draw::R(*this,r,g,b,a);
+//}
 
 template<int NUM, int IDX, typename T>
 inline std::ostream& operator << ( std::ostream& os, MV< NUM, IDX, T > a ){
