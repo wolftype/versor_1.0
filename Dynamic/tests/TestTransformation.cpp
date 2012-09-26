@@ -503,7 +503,9 @@ void GLVApp :: onDraw(){
 
     //cirdir(*this);
     
-    reflections(*this);
+  //  reflections(*this);
+  
+    cout << DLN(0,1,0) << endl; 
 }
 
 
