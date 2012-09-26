@@ -14,15 +14,30 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>glv.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>vsr.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>vsrGL.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>vsr_static.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>vsr_test.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -33,6 +48,21 @@
 			<true/>
 		</dict>
 		<key>9B638BBE15FEBF6100C74AF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B6D98171612759000E0EB9C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B6D982E161276B900E0EB9C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BB0114F160527D5002AD56D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

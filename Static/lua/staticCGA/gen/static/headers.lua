@@ -9,7 +9,7 @@ genMVHeader = function(tx)
 		#ifndef $guard
 		#define $guard
 		
-		#include "vsr_typedefs.h"
+		#include "vsr_casts.h"
 		
 		namespace vsr{
 	]]

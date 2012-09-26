@@ -1,7 +1,7 @@
 		#ifndef MTT_H_INCLUDED
 		#define MTT_H_INCLUDED
 		
-		#include "vsr_typedefs.h"
+		#include "vsr_casts.h"
 		
 		namespace vsr{
 	 

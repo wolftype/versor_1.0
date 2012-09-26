@@ -996,11 +996,14 @@ void Draw :: S (const State& s, float r, float g, float b, float a){
 		{
 			Biv b = Biv(Ro::dir( s, false ));
 			Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );  //can this be done directly to Biv b?
+          //cout << Op::dle( b ).unit() << endl; 
+            
 			Pnt v = Ro::cen( s );	
 			
 			//drawLabel(v[0], v[1], v[2]);
 							
 			double siz = Ro::siz( s, false );
+           // cout << siz << endl; 
 			double rad = Ro::rad( s );
 			Vec4<> t = Op::aa(r);
 			bool sn = Op::sn(b, Biv::xy);

@@ -53,7 +53,8 @@ int main(int argc, char **argv) {
 
         /* Bind CGA Framework */
 	CongaTypes::BindAll();
-    
+
+    cout << Par() << endl; 
     
     int counter = 0;
     int numit = 1000;

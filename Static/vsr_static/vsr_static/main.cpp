@@ -8,63 +8,60 @@
 
 #include <iostream>
 
-#include "vsr_op.h"
+#include "op.h"
+
+//#include "Mtt.h"
+//#include "Mtd.h"
+//#include "Rtc.h"
+
+#include "GLVInterfaceImpl.h"
+#include "Draw.h"
 
 using namespace vsr;
+using namespace glv;
+
+Window * win;
+GLVApp * app;
+
+void GLVApp :: onDraw(){
+    
+
+
+    
+    static Pnt p(0,0,0,1,.5);
+    
+    static int t = 0;
+    t++;
+    
+//    Draw::R(Vec::x,1,0,0);
+//    Draw::R(Vec::y,0,1,0);
+//    Draw::R(Vec::z,0,0,1);
+    float r =  sin( (t * PI ) / 180.0 );
+    cout << r<< endl; 
+    Trs trs = Gen::trs(r, 0.f, 0.f );
+    cout << trs << endl; 
+    Pnt p2 = Op::sp(p, trs  );
+    cout << p2 << endl; 
+    
+    Draw::R( p2 );
+
+}
 
 int main (int argc, const char * argv[])
 {
 
+    /* Set Up GLV hierarchy */
+	GLV glv(0,0);	
+	glv.colors().back.set(.3,.3,.3);		
+	win = new Window(500,500,"VSR",&glv);    
+    app = new GLVApp(win);    
+    glv << app;
     
-   // cout << Vec(1,0,0).rot( Biv(1,0,0) ) << endl; 
-   
-   Pnt p1 = PT(1,0,0);
-   Pnt p2 = PT(1,1,0);
-   Pnt p3 = PT(1,-1,0);
-   Pnt p4 = PT(1,-1,1);
-   
-//   Par par = p1 ^ p2;
-//   Cir cir = p1 ^ p2 ^ p3;
-//   Sph sph = cir ^ p4;
-//
-//   MVBase * m1 = &p1;
-//   MVBase * m2 = &p3;
+  //  Rand::Seed();
     
-    Dll dll(1,1,1,1,1,1);
-    double  c = ( sqrt( fabs ( Biv(dll).wt() ) ) );
-    double sc = sin(c);
-    double cc = cos(c);
-
-    Dll b = dll;
-    Biv B(b[0],b[1],b[2]); //Biv B(dll);
-    B = B.unit();
-    Vec t(b[3],b[4],b[5]);
+    Application::run();
     
-    Vec tv = Op::pj(t,B) ;
-    Vec tw = Op::rj(t,B) ;
-    
-    tv *= Math::sinc(c);
-    
-    Vec tt =  ( B.wt() == 0 ) ? t : tw * cc + tv;
-//
-    Vec_Biv ts(1,1,1,1);// = B*tw;	
-    Mot mot;	
-    mot[0] = cc;
-    mot[1] = B[0]*sc;
-    mot[2] = B[1]*sc;
-    mot[3] = B[2]*sc;	
-    mot[4] = tt[0];
-    mot[5] = tt[1];
-    mot[6] = tt[2];
-    mot[7] = ts[3] * sc;
-
-    Dll dll_list[1000];
-    
-    Rot r(1,1,1,1);
-    Trs trs (1,2,2,2);
-    
-    cout << DLN(0,1,0) << endl; 
-    
-    return 0; 
+    return 0;
 }
+
 

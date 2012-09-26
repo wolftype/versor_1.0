@@ -67,18 +67,99 @@
 		9B3F22E315FFEDF50071E210 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
 		9B638BC315FEBF6100C74AF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B638BC215FEBF6100C74AF7 /* main.cpp */; };
 		9B638BC515FEBF6100C74AF7 /* TestSpeed.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B638BC415FEBF6100C74AF7 /* TestSpeed.1 */; };
-		9B84F52A15EC3C8F005CA167 /* vsr_op.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52915EC3C8F005CA167 /* vsr_op.h */; };
+		9B6D9821161275AB00E0EB9C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758E91604091D0003B8EE /* OpenGL.framework */; };
+		9B6D9822161275B200E0EB9C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758EB160409240003B8EE /* GLUT.framework */; };
+		9B6D9823161275B800E0EB9C /* libglv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB01150160527D5002AD56D /* libglv.a */; };
+		9B6D9824161275B800E0EB9C /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
+		9B6D98251612760000E0EB9C /* gl2ps.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011C7160548D3002AD56D /* gl2ps.c */; };
+		9B6D98261612760B00E0EB9C /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD758DC16015E2E0003B8EE /* Camera.cpp */; };
+		9B6D98271612761600E0EB9C /* vsr_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD758D216015C710003B8EE /* vsr_gl.cpp */; };
+		9B6D982A1612765800E0EB9C /* libvsrGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6D98181612759000E0EB9C /* libvsrGL.a */; };
+		9B6D9833161276B900E0EB9C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D9832161276B900E0EB9C /* main.cpp */; };
+		9B6D9835161276B900E0EB9C /* vsr_test.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B6D9834161276B900E0EB9C /* vsr_test.1 */; };
+		9B6D983B161276DF00E0EB9C /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
+		9B84F52A15EC3C8F005CA167 /* op.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52915EC3C8F005CA167 /* op.h */; };
 		9B84F52D15EC3CEF005CA167 /* vsr_math.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52B15EC3CEF005CA167 /* vsr_math.h */; };
 		9B84F52E15EC3CEF005CA167 /* vsr_matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */; };
 		9B84F53015EC3CFA005CA167 /* vsr_constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F52F15EC3CFA005CA167 /* vsr_constants.h */; };
-		9B84F53415EC3D5A005CA167 /* vsr_op.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B84F53315EC3D5A005CA167 /* vsr_op.cpp */; };
 		9B84F53A15EC5135005CA167 /* ExpTemp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F53915EC5135005CA167 /* ExpTemp.h */; };
 		9B84F53C15EC5588005CA167 /* MV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B84F53B15EC5588005CA167 /* MV.cpp */; };
 		9B84F53E15ED55FA005CA167 /* versorFuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B84F53D15ED55FA005CA167 /* versorFuncs.h */; };
+		9BB0113516052403002AD56D /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD758DD16015E2E0003B8EE /* Frame.cpp */; };
+		9BB0116E16052822002AD56D /* glv.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115516052822002AD56D /* glv.h */; };
+		9BB0116F16052822002AD56D /* glv_behavior.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115616052822002AD56D /* glv_behavior.h */; };
+		9BB0117016052822002AD56D /* glv_binding.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115716052822002AD56D /* glv_binding.h */; };
+		9BB0117116052822002AD56D /* glv_buttons.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115816052822002AD56D /* glv_buttons.h */; };
+		9BB0117216052822002AD56D /* glv_color.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115916052822002AD56D /* glv_color.h */; };
+		9BB0117316052822002AD56D /* glv_color_controls.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115A16052822002AD56D /* glv_color_controls.h */; };
+		9BB0117416052822002AD56D /* glv_conf.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115B16052822002AD56D /* glv_conf.h */; };
+		9BB0117516052822002AD56D /* glv_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115C16052822002AD56D /* glv_core.h */; };
+		9BB0117616052822002AD56D /* glv_draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115D16052822002AD56D /* glv_draw.h */; };
+		9BB0117716052822002AD56D /* glv_font.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115E16052822002AD56D /* glv_font.h */; };
+		9BB0117816052822002AD56D /* glv_grid.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0115F16052822002AD56D /* glv_grid.h */; };
+		9BB0117916052822002AD56D /* glv_icon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116016052822002AD56D /* glv_icon.h */; };
+		9BB0117A16052822002AD56D /* glv_layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116116052822002AD56D /* glv_layout.h */; };
+		9BB0117B16052822002AD56D /* glv_model.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116216052822002AD56D /* glv_model.h */; };
+		9BB0117C16052822002AD56D /* glv_notification.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116316052822002AD56D /* glv_notification.h */; };
+		9BB0117D16052822002AD56D /* glv_plots.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116416052822002AD56D /* glv_plots.h */; };
+		9BB0117E16052822002AD56D /* glv_preset_controls.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116516052822002AD56D /* glv_preset_controls.h */; };
+		9BB0117F16052822002AD56D /* glv_rect.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116616052822002AD56D /* glv_rect.h */; };
+		9BB0118016052822002AD56D /* glv_sliders.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116716052822002AD56D /* glv_sliders.h */; };
+		9BB0118116052822002AD56D /* glv_sono.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116816052822002AD56D /* glv_sono.h */; };
+		9BB0118216052822002AD56D /* glv_texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116916052822002AD56D /* glv_texture.h */; };
+		9BB0118316052822002AD56D /* glv_textview.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116A16052822002AD56D /* glv_textview.h */; };
+		9BB0118416052822002AD56D /* glv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116B16052822002AD56D /* glv_util.h */; };
+		9BB0118516052822002AD56D /* glv_view3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116C16052822002AD56D /* glv_view3D.h */; };
+		9BB0118616052822002AD56D /* glv_widget.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0116D16052822002AD56D /* glv_widget.h */; };
+		9BB0119F1605282E002AD56D /* glv_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011881605282E002AD56D /* glv_binding.cpp */; };
+		9BB011A01605282E002AD56D /* glv_binding_glut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011891605282E002AD56D /* glv_binding_glut.cpp */; };
+		9BB011A11605282E002AD56D /* glv_buttons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0118A1605282E002AD56D /* glv_buttons.cpp */; };
+		9BB011A21605282E002AD56D /* glv_color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0118B1605282E002AD56D /* glv_color.cpp */; };
+		9BB011A31605282E002AD56D /* glv_color_controls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0118C1605282E002AD56D /* glv_color_controls.cpp */; };
+		9BB011A41605282E002AD56D /* glv_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0118D1605282E002AD56D /* glv_core.cpp */; };
+		9BB011A51605282E002AD56D /* glv_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0118E1605282E002AD56D /* glv_draw.cpp */; };
+		9BB011A61605282E002AD56D /* glv_font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0118F1605282E002AD56D /* glv_font.cpp */; };
+		9BB011A71605282E002AD56D /* glv_glv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011901605282E002AD56D /* glv_glv.cpp */; };
+		9BB011A81605282E002AD56D /* glv_grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011911605282E002AD56D /* glv_grid.cpp */; };
+		9BB011A91605282E002AD56D /* glv_inputdevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011921605282E002AD56D /* glv_inputdevice.cpp */; };
+		9BB011AA1605282E002AD56D /* glv_layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011931605282E002AD56D /* glv_layout.cpp */; };
+		9BB011AB1605282E002AD56D /* glv_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011941605282E002AD56D /* glv_model.cpp */; };
+		9BB011AC1605282E002AD56D /* glv_notification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011951605282E002AD56D /* glv_notification.cpp */; };
+		9BB011AD1605282E002AD56D /* glv_plots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011961605282E002AD56D /* glv_plots.cpp */; };
+		9BB011AE1605282E002AD56D /* glv_preset_controls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011971605282E002AD56D /* glv_preset_controls.cpp */; };
+		9BB011AF1605282E002AD56D /* glv_sliders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011981605282E002AD56D /* glv_sliders.cpp */; };
+		9BB011B01605282E002AD56D /* glv_sono.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011991605282E002AD56D /* glv_sono.cpp */; };
+		9BB011B11605282E002AD56D /* glv_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0119A1605282E002AD56D /* glv_texture.cpp */; };
+		9BB011B21605282E002AD56D /* glv_textview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0119B1605282E002AD56D /* glv_textview.cpp */; };
+		9BB011B31605282E002AD56D /* glv_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0119C1605282E002AD56D /* glv_view.cpp */; };
+		9BB011B41605282E002AD56D /* glv_view3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0119D1605282E002AD56D /* glv_view3D.cpp */; };
+		9BB011B51605282E002AD56D /* glv_widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB0119E1605282E002AD56D /* glv_widget.cpp */; };
+		9BB011B616052843002AD56D /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758EB160409240003B8EE /* GLUT.framework */; };
+		9BB011B71605284A002AD56D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758E91604091D0003B8EE /* OpenGL.framework */; };
+		9BB011BA16052866002AD56D /* libglv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB01150160527D5002AD56D /* libglv.a */; };
+		9BB011C0160528C7002AD56D /* Set.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB011BF160528C7002AD56D /* Set.h */; };
+		9BB011C216052905002AD56D /* xTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB011C116052905002AD56D /* xTypes.h */; };
 		9BBBE00215DDC1F200BDE419 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBE00115DDC1F200BDE419 /* main.cpp */; };
 		9BBBE00415DDC1F200BDE419 /* vsr_static.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBBE00315DDC1F200BDE419 /* vsr_static.1 */; };
 		9BBBE01715DDC40C00BDE419 /* MV.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BBBE01615DDC40C00BDE419 /* MV.h */; };
-		9BF4FDDA15DF1016000D6508 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
+		9BD758E116015E460003B8EE /* Frame.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758E016015E460003B8EE /* Frame.h */; };
+		9BD758E316015E610003B8EE /* vsr_interp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758E216015E610003B8EE /* vsr_interp.h */; };
+		9BD758E8160405AE0003B8EE /* vsr_casts.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758E7160405AE0003B8EE /* vsr_casts.h */; };
+		9BD758EA1604091D0003B8EE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758E91604091D0003B8EE /* OpenGL.framework */; };
+		9BD758EC160409240003B8EE /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758EB160409240003B8EE /* GLUT.framework */; };
+		9BD758ED160409820003B8EE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758E91604091D0003B8EE /* OpenGL.framework */; };
+		9BD758EE160409890003B8EE /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758EB160409240003B8EE /* GLUT.framework */; };
+		9BF2F2471612789B00F36F7B /* Gui.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0114816052796002AD56D /* Gui.hpp */; };
+		9BF2F2481612789B00F36F7B /* GLVInterfaceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB0114916052796002AD56D /* GLVInterfaceImpl.h */; };
+		9BF2F2491612789B00F36F7B /* GraphicsMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758CE16015C460003B8EE /* GraphicsMatrix.h */; };
+		9BF2F24A1612789B00F36F7B /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758DA16015E080003B8EE /* Camera.h */; };
+		9BF2F24B1612789B00F36F7B /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758CB16015C330003B8EE /* Draw.h */; };
+		9BF2F24C1612789B00F36F7B /* vsr_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758D416015C830003B8EE /* vsr_gl.h */; };
+		9BF2F24D1612789B00F36F7B /* vsr_gxlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758D616015CE10003B8EE /* vsr_gxlib.h */; };
+		9BF2F24E1612789B00F36F7B /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD758E41603F1CE0003B8EE /* Drawable.h */; };
+		9BF2F24F1612789B00F36F7B /* gl2ps.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB011C8160548D3002AD56D /* gl2ps.h */; };
+		9BF2F251161278DF00F36F7B /* Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB011BC160528A7002AD56D /* Interface.h */; };
+		9BF2F252161278FE00F36F7B /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB011BB160528A7002AD56D /* Interface.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +177,28 @@
 			remoteGlobalIDString = 9BBBE00D15DDC20500BDE419;
 			remoteInfo = vsr;
 		};
-		9BBBE02815DEF2FC00BDE419 /* PBXContainerItemProxy */ = {
+		9B6D981D1612759B00E0EB9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BBBDFF415DDC1F100BDE419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BBBE00D15DDC20500BDE419;
+			remoteInfo = vsr;
+		};
+		9B6D981F161275A000E0EB9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BBBDFF415DDC1F100BDE419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BB0114F160527D5002AD56D;
+			remoteInfo = glv;
+		};
+		9B6D98281612764900E0EB9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BBBDFF415DDC1F100BDE419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B6D98171612759000E0EB9C;
+			remoteInfo = vsrGL;
+		};
+		9B6D9839161276DA00E0EB9C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9BBBDFF415DDC1F100BDE419 /* Project object */;
 			proxyType = 1;
@@ -123,6 +225,16 @@
 			dstSubfolderSpec = 0;
 			files = (
 				9B638BC515FEBF6100C74AF7 /* TestSpeed.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		9B6D982D161276B900E0EB9C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9B6D9835161276B900E0EB9C /* vsr_test.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -201,19 +313,104 @@
 		9B638BBF15FEBF6100C74AF7 /* TestSpeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestSpeed; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B638BC215FEBF6100C74AF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B638BC415FEBF6100C74AF7 /* TestSpeed.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestSpeed.1; sourceTree = "<group>"; };
-		9B84F52915EC3C8F005CA167 /* vsr_op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_op.h; sourceTree = "<group>"; };
+		9B6D98181612759000E0EB9C /* libvsrGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvsrGL.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B6D982F161276B900E0EB9C /* vsr_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vsr_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B6D9832161276B900E0EB9C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9B6D9834161276B900E0EB9C /* vsr_test.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr_test.1; sourceTree = "<group>"; };
+		9B84F52915EC3C8F005CA167 /* op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = op.h; sourceTree = "<group>"; };
 		9B84F52B15EC3CEF005CA167 /* vsr_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_math.h; sourceTree = "<group>"; };
 		9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_matrix.h; sourceTree = "<group>"; };
 		9B84F52F15EC3CFA005CA167 /* vsr_constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_constants.h; sourceTree = "<group>"; };
-		9B84F53315EC3D5A005CA167 /* vsr_op.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_op.cpp; sourceTree = "<group>"; };
 		9B84F53915EC5135005CA167 /* ExpTemp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpTemp.h; sourceTree = "<group>"; };
 		9B84F53B15EC5588005CA167 /* MV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MV.cpp; sourceTree = "<group>"; };
 		9B84F53D15ED55FA005CA167 /* versorFuncs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = versorFuncs.h; sourceTree = "<group>"; };
+		9BB0114816052796002AD56D /* Gui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Gui.hpp; path = ../Gui.hpp; sourceTree = "<group>"; };
+		9BB0114916052796002AD56D /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLVInterfaceImpl.h; path = ../GLVInterfaceImpl.h; sourceTree = "<group>"; };
+		9BB01150160527D5002AD56D /* libglv.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libglv.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB0115516052822002AD56D /* glv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv.h; sourceTree = "<group>"; };
+		9BB0115616052822002AD56D /* glv_behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_behavior.h; sourceTree = "<group>"; };
+		9BB0115716052822002AD56D /* glv_binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_binding.h; sourceTree = "<group>"; };
+		9BB0115816052822002AD56D /* glv_buttons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_buttons.h; sourceTree = "<group>"; };
+		9BB0115916052822002AD56D /* glv_color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_color.h; sourceTree = "<group>"; };
+		9BB0115A16052822002AD56D /* glv_color_controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_color_controls.h; sourceTree = "<group>"; };
+		9BB0115B16052822002AD56D /* glv_conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_conf.h; sourceTree = "<group>"; };
+		9BB0115C16052822002AD56D /* glv_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_core.h; sourceTree = "<group>"; };
+		9BB0115D16052822002AD56D /* glv_draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_draw.h; sourceTree = "<group>"; };
+		9BB0115E16052822002AD56D /* glv_font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_font.h; sourceTree = "<group>"; };
+		9BB0115F16052822002AD56D /* glv_grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_grid.h; sourceTree = "<group>"; };
+		9BB0116016052822002AD56D /* glv_icon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_icon.h; sourceTree = "<group>"; };
+		9BB0116116052822002AD56D /* glv_layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_layout.h; sourceTree = "<group>"; };
+		9BB0116216052822002AD56D /* glv_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_model.h; sourceTree = "<group>"; };
+		9BB0116316052822002AD56D /* glv_notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_notification.h; sourceTree = "<group>"; };
+		9BB0116416052822002AD56D /* glv_plots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_plots.h; sourceTree = "<group>"; };
+		9BB0116516052822002AD56D /* glv_preset_controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_preset_controls.h; sourceTree = "<group>"; };
+		9BB0116616052822002AD56D /* glv_rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_rect.h; sourceTree = "<group>"; };
+		9BB0116716052822002AD56D /* glv_sliders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_sliders.h; sourceTree = "<group>"; };
+		9BB0116816052822002AD56D /* glv_sono.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_sono.h; sourceTree = "<group>"; };
+		9BB0116916052822002AD56D /* glv_texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_texture.h; sourceTree = "<group>"; };
+		9BB0116A16052822002AD56D /* glv_textview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_textview.h; sourceTree = "<group>"; };
+		9BB0116B16052822002AD56D /* glv_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_util.h; sourceTree = "<group>"; };
+		9BB0116C16052822002AD56D /* glv_view3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_view3D.h; sourceTree = "<group>"; };
+		9BB0116D16052822002AD56D /* glv_widget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glv_widget.h; sourceTree = "<group>"; };
+		9BB011881605282E002AD56D /* glv_binding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_binding.cpp; sourceTree = "<group>"; };
+		9BB011891605282E002AD56D /* glv_binding_glut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_binding_glut.cpp; sourceTree = "<group>"; };
+		9BB0118A1605282E002AD56D /* glv_buttons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_buttons.cpp; sourceTree = "<group>"; };
+		9BB0118B1605282E002AD56D /* glv_color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_color.cpp; sourceTree = "<group>"; };
+		9BB0118C1605282E002AD56D /* glv_color_controls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_color_controls.cpp; sourceTree = "<group>"; };
+		9BB0118D1605282E002AD56D /* glv_core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_core.cpp; sourceTree = "<group>"; };
+		9BB0118E1605282E002AD56D /* glv_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_draw.cpp; sourceTree = "<group>"; };
+		9BB0118F1605282E002AD56D /* glv_font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_font.cpp; sourceTree = "<group>"; };
+		9BB011901605282E002AD56D /* glv_glv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_glv.cpp; sourceTree = "<group>"; };
+		9BB011911605282E002AD56D /* glv_grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_grid.cpp; sourceTree = "<group>"; };
+		9BB011921605282E002AD56D /* glv_inputdevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_inputdevice.cpp; sourceTree = "<group>"; };
+		9BB011931605282E002AD56D /* glv_layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_layout.cpp; sourceTree = "<group>"; };
+		9BB011941605282E002AD56D /* glv_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_model.cpp; sourceTree = "<group>"; };
+		9BB011951605282E002AD56D /* glv_notification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_notification.cpp; sourceTree = "<group>"; };
+		9BB011961605282E002AD56D /* glv_plots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_plots.cpp; sourceTree = "<group>"; };
+		9BB011971605282E002AD56D /* glv_preset_controls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_preset_controls.cpp; sourceTree = "<group>"; };
+		9BB011981605282E002AD56D /* glv_sliders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_sliders.cpp; sourceTree = "<group>"; };
+		9BB011991605282E002AD56D /* glv_sono.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_sono.cpp; sourceTree = "<group>"; };
+		9BB0119A1605282E002AD56D /* glv_texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_texture.cpp; sourceTree = "<group>"; };
+		9BB0119B1605282E002AD56D /* glv_textview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_textview.cpp; sourceTree = "<group>"; };
+		9BB0119C1605282E002AD56D /* glv_view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_view.cpp; sourceTree = "<group>"; };
+		9BB0119D1605282E002AD56D /* glv_view3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_view3D.cpp; sourceTree = "<group>"; };
+		9BB0119E1605282E002AD56D /* glv_widget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glv_widget.cpp; sourceTree = "<group>"; };
+		9BB011BB160528A7002AD56D /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Interface.cpp; path = ../Interface.cpp; sourceTree = "<group>"; };
+		9BB011BC160528A7002AD56D /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = ../Interface.h; sourceTree = "<group>"; };
+		9BB011BF160528C7002AD56D /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Set.h; path = ../Set.h; sourceTree = "<group>"; };
+		9BB011C116052905002AD56D /* xTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xTypes.h; path = ../xTypes.h; sourceTree = "<group>"; };
+		9BB011C4160548D3002AD56D /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		9BB011C5160548D3002AD56D /* COPYING.GL2PS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.GL2PS; sourceTree = "<group>"; };
+		9BB011C6160548D3002AD56D /* COPYING.LGPL */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LGPL; sourceTree = "<group>"; };
+		9BB011C7160548D3002AD56D /* gl2ps.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl2ps.c; sourceTree = "<group>"; };
+		9BB011C8160548D3002AD56D /* gl2ps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl2ps.h; sourceTree = "<group>"; };
+		9BB011C9160548D3002AD56D /* gl2ps.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = gl2ps.pdf; sourceTree = "<group>"; };
+		9BB011CA160548D3002AD56D /* gl2ps.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gl2ps.tex; sourceTree = "<group>"; };
+		9BB011CB160548D3002AD56D /* gl2psTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl2psTest.c; sourceTree = "<group>"; };
+		9BB011CC160548D3002AD56D /* gl2psTestSimple.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl2psTestSimple.c; sourceTree = "<group>"; };
+		9BB011CD160548D3002AD56D /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		9BB011CE160548D3002AD56D /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		9BBBDFFD15DDC1F100BDE419 /* vsr_static */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vsr_static; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBBE00115DDC1F200BDE419 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9BBBE00315DDC1F200BDE419 /* vsr_static.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vsr_static.1; sourceTree = "<group>"; };
 		9BBBE00E15DDC20500BDE419 /* libvsr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvsr.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBBE01615DDC40C00BDE419 /* MV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MV.h; sourceTree = "<group>"; };
+		9BD758CB16015C330003B8EE /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
+		9BD758CE16015C460003B8EE /* GraphicsMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsMatrix.h; sourceTree = "<group>"; };
+		9BD758D016015C600003B8EE /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Draw.cpp; sourceTree = "<group>"; };
+		9BD758D216015C710003B8EE /* vsr_gl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl.cpp; sourceTree = "<group>"; };
+		9BD758D416015C830003B8EE /* vsr_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_gl.h; sourceTree = "<group>"; };
+		9BD758D616015CE10003B8EE /* vsr_gxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_gxlib.h; sourceTree = "<group>"; };
+		9BD758DA16015E080003B8EE /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		9BD758DC16015E2E0003B8EE /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		9BD758DD16015E2E0003B8EE /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
+		9BD758E016015E460003B8EE /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
+		9BD758E216015E610003B8EE /* vsr_interp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_interp.h; sourceTree = "<group>"; };
+		9BD758E41603F1CE0003B8EE /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
+		9BD758E7160405AE0003B8EE /* vsr_casts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_casts.h; sourceTree = "<group>"; };
+		9BD758E91604091D0003B8EE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		9BD758EB160409240003B8EE /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		9BD758EF160413740003B8EE /* vsr_instantiation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_instantiation.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,11 +430,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B6D98151612759000E0EB9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B6D9823161275B800E0EB9C /* libglv.a in Frameworks */,
+				9B6D9824161275B800E0EB9C /* libvsr.a in Frameworks */,
+				9B6D9822161275B200E0EB9C /* GLUT.framework in Frameworks */,
+				9B6D9821161275AB00E0EB9C /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B6D982C161276B900E0EB9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B6D983B161276DF00E0EB9C /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BB0114D160527D5002AD56D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BB011B71605284A002AD56D /* OpenGL.framework in Frameworks */,
+				9BB011B616052843002AD56D /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BBBDFFA15DDC1F100BDE419 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BF4FDDA15DF1016000D6508 /* libvsr.a in Frameworks */,
+				9B6D982A1612765800E0EB9C /* libvsrGL.a in Frameworks */,
+				9BD758EC160409240003B8EE /* GLUT.framework in Frameworks */,
+				9BD758EA1604091D0003B8EE /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +472,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BB011BA16052866002AD56D /* libglv.a in Frameworks */,
+				9BD758EE160409890003B8EE /* GLUT.framework in Frameworks */,
+				9BD758ED160409820003B8EE /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +490,25 @@
 			path = TestSpeed_no_inheritance;
 			sourceTree = "<group>";
 		};
+		9B3F22F7160019550071E210 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				9BB011BF160528C7002AD56D /* Set.h */,
+				9BD758DD16015E2E0003B8EE /* Frame.cpp */,
+				9BD758E016015E460003B8EE /* Frame.h */,
+			);
+			name = helper;
+			sourceTree = "<group>";
+		};
+		9B3F22F8160019880071E210 /* Abstraction (deprecated) */ = {
+			isa = PBXGroup;
+			children = (
+				9B3F22D015FFEAC20071E210 /* MVBase.h */,
+				9B3F22D215FFEAD10071E210 /* MVBase.cpp */,
+			);
+			name = "Abstraction (deprecated)";
+			sourceTree = "<group>";
+		};
 		9B638BC115FEBF6100C74AF7 /* TestSpeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,12 +518,110 @@
 			path = TestSpeed;
 			sourceTree = "<group>";
 		};
+		9B6D9831161276B900E0EB9C /* vsr_test */ = {
+			isa = PBXGroup;
+			children = (
+				9B6D9832161276B900E0EB9C /* main.cpp */,
+				9B6D9834161276B900E0EB9C /* vsr_test.1 */,
+			);
+			path = vsr_test;
+			sourceTree = "<group>";
+		};
+		9BB0115416052822002AD56D /* GLV */ = {
+			isa = PBXGroup;
+			children = (
+				9BB011871605282E002AD56D /* src */,
+				9BB0115516052822002AD56D /* glv.h */,
+				9BB0115616052822002AD56D /* glv_behavior.h */,
+				9BB0115716052822002AD56D /* glv_binding.h */,
+				9BB0115816052822002AD56D /* glv_buttons.h */,
+				9BB0115916052822002AD56D /* glv_color.h */,
+				9BB0115A16052822002AD56D /* glv_color_controls.h */,
+				9BB0115B16052822002AD56D /* glv_conf.h */,
+				9BB0115C16052822002AD56D /* glv_core.h */,
+				9BB0115D16052822002AD56D /* glv_draw.h */,
+				9BB0115E16052822002AD56D /* glv_font.h */,
+				9BB0115F16052822002AD56D /* glv_grid.h */,
+				9BB0116016052822002AD56D /* glv_icon.h */,
+				9BB0116116052822002AD56D /* glv_layout.h */,
+				9BB0116216052822002AD56D /* glv_model.h */,
+				9BB0116316052822002AD56D /* glv_notification.h */,
+				9BB0116416052822002AD56D /* glv_plots.h */,
+				9BB0116516052822002AD56D /* glv_preset_controls.h */,
+				9BB0116616052822002AD56D /* glv_rect.h */,
+				9BB0116716052822002AD56D /* glv_sliders.h */,
+				9BB0116816052822002AD56D /* glv_sono.h */,
+				9BB0116916052822002AD56D /* glv_texture.h */,
+				9BB0116A16052822002AD56D /* glv_textview.h */,
+				9BB0116B16052822002AD56D /* glv_util.h */,
+				9BB0116C16052822002AD56D /* glv_view3D.h */,
+				9BB0116D16052822002AD56D /* glv_widget.h */,
+			);
+			name = GLV;
+			path = ../../externals/glv/GLV;
+			sourceTree = "<group>";
+		};
+		9BB011871605282E002AD56D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9BB011881605282E002AD56D /* glv_binding.cpp */,
+				9BB011891605282E002AD56D /* glv_binding_glut.cpp */,
+				9BB0118A1605282E002AD56D /* glv_buttons.cpp */,
+				9BB0118B1605282E002AD56D /* glv_color.cpp */,
+				9BB0118C1605282E002AD56D /* glv_color_controls.cpp */,
+				9BB0118D1605282E002AD56D /* glv_core.cpp */,
+				9BB0118E1605282E002AD56D /* glv_draw.cpp */,
+				9BB0118F1605282E002AD56D /* glv_font.cpp */,
+				9BB011901605282E002AD56D /* glv_glv.cpp */,
+				9BB011911605282E002AD56D /* glv_grid.cpp */,
+				9BB011921605282E002AD56D /* glv_inputdevice.cpp */,
+				9BB011931605282E002AD56D /* glv_layout.cpp */,
+				9BB011941605282E002AD56D /* glv_model.cpp */,
+				9BB011951605282E002AD56D /* glv_notification.cpp */,
+				9BB011961605282E002AD56D /* glv_plots.cpp */,
+				9BB011971605282E002AD56D /* glv_preset_controls.cpp */,
+				9BB011981605282E002AD56D /* glv_sliders.cpp */,
+				9BB011991605282E002AD56D /* glv_sono.cpp */,
+				9BB0119A1605282E002AD56D /* glv_texture.cpp */,
+				9BB0119B1605282E002AD56D /* glv_textview.cpp */,
+				9BB0119C1605282E002AD56D /* glv_view.cpp */,
+				9BB0119D1605282E002AD56D /* glv_view3D.cpp */,
+				9BB0119E1605282E002AD56D /* glv_widget.cpp */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		9BB011C3160548D3002AD56D /* gl2ps */ = {
+			isa = PBXGroup;
+			children = (
+				9BB011C4160548D3002AD56D /* CMakeLists.txt */,
+				9BB011C5160548D3002AD56D /* COPYING.GL2PS */,
+				9BB011C6160548D3002AD56D /* COPYING.LGPL */,
+				9BB011C7160548D3002AD56D /* gl2ps.c */,
+				9BB011C8160548D3002AD56D /* gl2ps.h */,
+				9BB011C9160548D3002AD56D /* gl2ps.pdf */,
+				9BB011CA160548D3002AD56D /* gl2ps.tex */,
+				9BB011CB160548D3002AD56D /* gl2psTest.c */,
+				9BB011CC160548D3002AD56D /* gl2psTestSimple.c */,
+				9BB011CD160548D3002AD56D /* README.txt */,
+				9BB011CE160548D3002AD56D /* TODO.txt */,
+			);
+			path = gl2ps;
+			sourceTree = "<group>";
+		};
 		9BBBDFF215DDC1F100BDE419 = {
 			isa = PBXGroup;
 			children = (
+				9BD758EB160409240003B8EE /* GLUT.framework */,
+				9BD758E91604091D0003B8EE /* OpenGL.framework */,
+				9BF2F2531612794C00F36F7B /* VERSOR */,
 				9BBBE00015DDC1F100BDE419 /* vsr_static */,
+				9B6D9831161276B900E0EB9C /* vsr_test */,
 				9B638BC115FEBF6100C74AF7 /* TestSpeed */,
 				9B3F22D915FFEDE70071E210 /* TestSpeed_no_inheritance */,
+				9BB011C3160548D3002AD56D /* gl2ps */,
+				9BB0115416052822002AD56D /* GLV */,
 				9BBBDFFE15DDC1F100BDE419 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -286,6 +633,9 @@
 				9BBBE00E15DDC20500BDE419 /* libvsr.a */,
 				9B638BBF15FEBF6100C74AF7 /* TestSpeed */,
 				9B3F22D715FFEDE70071E210 /* TestSpeed_no_inheritance */,
+				9BB01150160527D5002AD56D /* libglv.a */,
+				9B6D98181612759000E0EB9C /* libvsrGL.a */,
+				9B6D982F161276B900E0EB9C /* vsr_test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,20 +644,58 @@
 			isa = PBXGroup;
 			children = (
 				9BBBE00115DDC1F200BDE419 /* main.cpp */,
-				9BBBE01615DDC40C00BDE419 /* MV.h */,
-				9B84F53B15EC5588005CA167 /* MV.cpp */,
-				9B3F22D015FFEAC20071E210 /* MVBase.h */,
-				9B3F22D215FFEAD10071E210 /* MVBase.cpp */,
-				9B092C0515FF2F9A0075A46B /* vsr.h */,
-				9B84F53315EC3D5A005CA167 /* vsr_op.cpp */,
-				9B84F52915EC3C8F005CA167 /* vsr_op.h */,
-				9BF4FE4615DF295B000D6508 /* multivectors */,
-				9B84F53915EC5135005CA167 /* ExpTemp.h */,
+				9BD758D916015D210003B8EE /* gfx */,
+				9BD758E41603F1CE0003B8EE /* Drawable.h */,
+				9BBBE00315DDC1F200BDE419 /* vsr_static.1 */,
+			);
+			path = vsr_static;
+			sourceTree = "<group>";
+		};
+		9BD758D816015D0F0003B8EE /* util */ = {
+			isa = PBXGroup;
+			children = (
+				9BB011C116052905002AD56D /* xTypes.h */,
 				9B84F52B15EC3CEF005CA167 /* vsr_math.h */,
 				9B84F52F15EC3CFA005CA167 /* vsr_constants.h */,
 				9B84F52C15EC3CEF005CA167 /* vsr_matrix.h */,
-				9BBBE00315DDC1F200BDE419 /* vsr_static.1 */,
+				9BD758E216015E610003B8EE /* vsr_interp.h */,
 			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		9BD758D916015D210003B8EE /* gfx */ = {
+			isa = PBXGroup;
+			children = (
+				9BB0114816052796002AD56D /* Gui.hpp */,
+				9BB0114916052796002AD56D /* GLVInterfaceImpl.h */,
+				9BB011BB160528A7002AD56D /* Interface.cpp */,
+				9BB011BC160528A7002AD56D /* Interface.h */,
+				9BD758CE16015C460003B8EE /* GraphicsMatrix.h */,
+				9BD758DA16015E080003B8EE /* Camera.h */,
+				9BD758DC16015E2E0003B8EE /* Camera.cpp */,
+				9BD758CB16015C330003B8EE /* Draw.h */,
+				9BD758D016015C600003B8EE /* Draw.cpp */,
+				9BD758D216015C710003B8EE /* vsr_gl.cpp */,
+				9BD758D416015C830003B8EE /* vsr_gl.h */,
+				9BD758D616015CE10003B8EE /* vsr_gxlib.h */,
+			);
+			name = gfx;
+			sourceTree = "<group>";
+		};
+		9BF2F2531612794C00F36F7B /* VERSOR */ = {
+			isa = PBXGroup;
+			children = (
+				9BBBE01615DDC40C00BDE419 /* MV.h */,
+				9B84F53B15EC5588005CA167 /* MV.cpp */,
+				9B84F52915EC3C8F005CA167 /* op.h */,
+				9B84F53915EC5135005CA167 /* ExpTemp.h */,
+				9B092C0515FF2F9A0075A46B /* vsr.h */,
+				9BF4FE4615DF295B000D6508 /* multivectors */,
+				9B3F22F7160019550071E210 /* helper */,
+				9BD758D816015D0F0003B8EE /* util */,
+				9B3F22F8160019880071E210 /* Abstraction (deprecated) */,
+			);
+			name = VERSOR;
 			path = vsr_static;
 			sourceTree = "<group>";
 		};
@@ -367,6 +755,8 @@
 				9B092BCD15FF2F620075A46B /* vsr_templates.cpp */,
 				9B092BCE15FF2F620075A46B /* vsr_templates.h */,
 				9B092BCF15FF2F620075A46B /* vsr_typedefs.h */,
+				9BD758EF160413740003B8EE /* vsr_instantiation.cpp */,
+				9BD758E7160405AE0003B8EE /* vsr_casts.h */,
 				9B84F53D15ED55FA005CA167 /* versorFuncs.h */,
 			);
 			name = multivectors;
@@ -375,12 +765,61 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		9B6D98161612759000E0EB9C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BF2F251161278DF00F36F7B /* Interface.h in Headers */,
+				9BF2F2471612789B00F36F7B /* Gui.hpp in Headers */,
+				9BF2F2481612789B00F36F7B /* GLVInterfaceImpl.h in Headers */,
+				9BF2F2491612789B00F36F7B /* GraphicsMatrix.h in Headers */,
+				9BF2F24A1612789B00F36F7B /* Camera.h in Headers */,
+				9BF2F24B1612789B00F36F7B /* Draw.h in Headers */,
+				9BF2F24C1612789B00F36F7B /* vsr_gl.h in Headers */,
+				9BF2F24D1612789B00F36F7B /* vsr_gxlib.h in Headers */,
+				9BF2F24E1612789B00F36F7B /* Drawable.h in Headers */,
+				9BF2F24F1612789B00F36F7B /* gl2ps.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BB0114E160527D5002AD56D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BB0116E16052822002AD56D /* glv.h in Headers */,
+				9BB0116F16052822002AD56D /* glv_behavior.h in Headers */,
+				9BB0117016052822002AD56D /* glv_binding.h in Headers */,
+				9BB0117116052822002AD56D /* glv_buttons.h in Headers */,
+				9BB0117216052822002AD56D /* glv_color.h in Headers */,
+				9BB0117316052822002AD56D /* glv_color_controls.h in Headers */,
+				9BB0117416052822002AD56D /* glv_conf.h in Headers */,
+				9BB0117516052822002AD56D /* glv_core.h in Headers */,
+				9BB0117616052822002AD56D /* glv_draw.h in Headers */,
+				9BB0117716052822002AD56D /* glv_font.h in Headers */,
+				9BB0117816052822002AD56D /* glv_grid.h in Headers */,
+				9BB0117916052822002AD56D /* glv_icon.h in Headers */,
+				9BB0117A16052822002AD56D /* glv_layout.h in Headers */,
+				9BB0117B16052822002AD56D /* glv_model.h in Headers */,
+				9BB0117C16052822002AD56D /* glv_notification.h in Headers */,
+				9BB0117D16052822002AD56D /* glv_plots.h in Headers */,
+				9BB0117E16052822002AD56D /* glv_preset_controls.h in Headers */,
+				9BB0117F16052822002AD56D /* glv_rect.h in Headers */,
+				9BB0118016052822002AD56D /* glv_sliders.h in Headers */,
+				9BB0118116052822002AD56D /* glv_sono.h in Headers */,
+				9BB0118216052822002AD56D /* glv_texture.h in Headers */,
+				9BB0118316052822002AD56D /* glv_textview.h in Headers */,
+				9BB0118416052822002AD56D /* glv_util.h in Headers */,
+				9BB0118516052822002AD56D /* glv_view3D.h in Headers */,
+				9BB0118616052822002AD56D /* glv_widget.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BBBE00C15DDC20500BDE419 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9BBBE01715DDC40C00BDE419 /* MV.h in Headers */,
-				9B84F52A15EC3C8F005CA167 /* vsr_op.h in Headers */,
+				9B84F52A15EC3C8F005CA167 /* op.h in Headers */,
 				9B84F52D15EC3CEF005CA167 /* vsr_math.h in Headers */,
 				9B84F52E15EC3CEF005CA167 /* vsr_matrix.h in Headers */,
 				9B84F53015EC3CFA005CA167 /* vsr_constants.h in Headers */,
@@ -439,6 +878,11 @@
 				9B092C0315FF2F620075A46B /* vsr_templates.h in Headers */,
 				9B092C0415FF2F620075A46B /* vsr_typedefs.h in Headers */,
 				9B092C0615FF2F9A0075A46B /* vsr.h in Headers */,
+				9BD758E116015E460003B8EE /* Frame.h in Headers */,
+				9BD758E316015E610003B8EE /* vsr_interp.h in Headers */,
+				9BD758E8160405AE0003B8EE /* vsr_casts.h in Headers */,
+				9BB011C0160528C7002AD56D /* Set.h in Headers */,
+				9BB011C216052905002AD56D /* xTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +925,60 @@
 			productReference = 9B638BBF15FEBF6100C74AF7 /* TestSpeed */;
 			productType = "com.apple.product-type.tool";
 		};
+		9B6D98171612759000E0EB9C /* vsrGL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B6D981B1612759000E0EB9C /* Build configuration list for PBXNativeTarget "vsrGL" */;
+			buildPhases = (
+				9B6D98141612759000E0EB9C /* Sources */,
+				9B6D98151612759000E0EB9C /* Frameworks */,
+				9B6D98161612759000E0EB9C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B6D9820161275A000E0EB9C /* PBXTargetDependency */,
+				9B6D981E1612759B00E0EB9C /* PBXTargetDependency */,
+			);
+			name = vsrGL;
+			productName = vsrGL;
+			productReference = 9B6D98181612759000E0EB9C /* libvsrGL.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9B6D982E161276B900E0EB9C /* vsr_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B6D9836161276B900E0EB9C /* Build configuration list for PBXNativeTarget "vsr_test" */;
+			buildPhases = (
+				9B6D982B161276B900E0EB9C /* Sources */,
+				9B6D982C161276B900E0EB9C /* Frameworks */,
+				9B6D982D161276B900E0EB9C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B6D983A161276DA00E0EB9C /* PBXTargetDependency */,
+			);
+			name = vsr_test;
+			productName = vsr_test;
+			productReference = 9B6D982F161276B900E0EB9C /* vsr_test */;
+			productType = "com.apple.product-type.tool";
+		};
+		9BB0114F160527D5002AD56D /* glv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BB01151160527D5002AD56D /* Build configuration list for PBXNativeTarget "glv" */;
+			buildPhases = (
+				9BB0114C160527D5002AD56D /* Sources */,
+				9BB0114D160527D5002AD56D /* Frameworks */,
+				9BB0114E160527D5002AD56D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = glv;
+			productName = glv;
+			productReference = 9BB01150160527D5002AD56D /* libglv.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		9BBBDFFC15DDC1F100BDE419 /* vsr_static */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BBBE00715DDC1F200BDE419 /* Build configuration list for PBXNativeTarget "vsr_static" */;
@@ -492,7 +990,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				9BBBE02915DEF2FC00BDE419 /* PBXTargetDependency */,
+				9B6D98291612764900E0EB9C /* PBXTargetDependency */,
 			);
 			name = vsr_static;
 			productName = vsr_static;
@@ -536,10 +1034,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				9B6D982E161276B900E0EB9C /* vsr_test */,
 				9BBBDFFC15DDC1F100BDE419 /* vsr_static */,
-				9BBBE00D15DDC20500BDE419 /* vsr */,
 				9B638BBE15FEBF6100C74AF7 /* TestSpeed */,
 				9B3F22D615FFEDE70071E210 /* TestSpeed_no_inheritance */,
+				9BB0114F160527D5002AD56D /* glv */,
+				9BBBE00D15DDC20500BDE419 /* vsr */,
+				9B6D98171612759000E0EB9C /* vsrGL */,
 			);
 		};
 /* End PBXProject section */
@@ -561,6 +1062,55 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B6D98141612759000E0EB9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BF2F252161278FE00F36F7B /* Interface.cpp in Sources */,
+				9B6D98271612761600E0EB9C /* vsr_gl.cpp in Sources */,
+				9B6D98261612760B00E0EB9C /* Camera.cpp in Sources */,
+				9B6D98251612760000E0EB9C /* gl2ps.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B6D982B161276B900E0EB9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B6D9833161276B900E0EB9C /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BB0114C160527D5002AD56D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BB0119F1605282E002AD56D /* glv_binding.cpp in Sources */,
+				9BB011A01605282E002AD56D /* glv_binding_glut.cpp in Sources */,
+				9BB011A11605282E002AD56D /* glv_buttons.cpp in Sources */,
+				9BB011A21605282E002AD56D /* glv_color.cpp in Sources */,
+				9BB011A31605282E002AD56D /* glv_color_controls.cpp in Sources */,
+				9BB011A41605282E002AD56D /* glv_core.cpp in Sources */,
+				9BB011A51605282E002AD56D /* glv_draw.cpp in Sources */,
+				9BB011A61605282E002AD56D /* glv_font.cpp in Sources */,
+				9BB011A71605282E002AD56D /* glv_glv.cpp in Sources */,
+				9BB011A81605282E002AD56D /* glv_grid.cpp in Sources */,
+				9BB011A91605282E002AD56D /* glv_inputdevice.cpp in Sources */,
+				9BB011AA1605282E002AD56D /* glv_layout.cpp in Sources */,
+				9BB011AB1605282E002AD56D /* glv_model.cpp in Sources */,
+				9BB011AC1605282E002AD56D /* glv_notification.cpp in Sources */,
+				9BB011AD1605282E002AD56D /* glv_plots.cpp in Sources */,
+				9BB011AE1605282E002AD56D /* glv_preset_controls.cpp in Sources */,
+				9BB011AF1605282E002AD56D /* glv_sliders.cpp in Sources */,
+				9BB011B01605282E002AD56D /* glv_sono.cpp in Sources */,
+				9BB011B11605282E002AD56D /* glv_texture.cpp in Sources */,
+				9BB011B21605282E002AD56D /* glv_textview.cpp in Sources */,
+				9BB011B31605282E002AD56D /* glv_view.cpp in Sources */,
+				9BB011B41605282E002AD56D /* glv_view3D.cpp in Sources */,
+				9BB011B51605282E002AD56D /* glv_widget.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BBBDFF915DDC1F100BDE419 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -573,7 +1123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B84F53415EC3D5A005CA167 /* vsr_op.cpp in Sources */,
+				9BB0113516052403002AD56D /* Frame.cpp in Sources */,
 				9B84F53C15EC5588005CA167 /* MV.cpp in Sources */,
 				9B092C0215FF2F620075A46B /* vsr_templates.cpp in Sources */,
 			);
@@ -592,10 +1142,25 @@
 			target = 9BBBE00D15DDC20500BDE419 /* vsr */;
 			targetProxy = 9B3F22E115FFEDF00071E210 /* PBXContainerItemProxy */;
 		};
-		9BBBE02915DEF2FC00BDE419 /* PBXTargetDependency */ = {
+		9B6D981E1612759B00E0EB9C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9BBBE00D15DDC20500BDE419 /* vsr */;
-			targetProxy = 9BBBE02815DEF2FC00BDE419 /* PBXContainerItemProxy */;
+			targetProxy = 9B6D981D1612759B00E0EB9C /* PBXContainerItemProxy */;
+		};
+		9B6D9820161275A000E0EB9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BB0114F160527D5002AD56D /* glv */;
+			targetProxy = 9B6D981F161275A000E0EB9C /* PBXContainerItemProxy */;
+		};
+		9B6D98291612764900E0EB9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B6D98171612759000E0EB9C /* vsrGL */;
+			targetProxy = 9B6D98281612764900E0EB9C /* PBXContainerItemProxy */;
+		};
+		9B6D983A161276DA00E0EB9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BBBE00D15DDC20500BDE419 /* vsr */;
+			targetProxy = 9B6D9839161276DA00E0EB9C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -624,6 +1189,52 @@
 		9B638BC715FEBF6100C74AF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9B6D98191612759000E0EB9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9B6D981A1612759000E0EB9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9B6D9837161276B900E0EB9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9B6D9838161276B900E0EB9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9BB01152160527D5002AD56D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9BB01153160527D5002AD56D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -731,12 +1342,40 @@
 				9B3F22E015FFEDE70071E210 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B638BC815FEBF6100C74AF7 /* Build configuration list for PBXNativeTarget "TestSpeed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B638BC615FEBF6100C74AF7 /* Debug */,
 				9B638BC715FEBF6100C74AF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B6D981B1612759000E0EB9C /* Build configuration list for PBXNativeTarget "vsrGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B6D98191612759000E0EB9C /* Debug */,
+				9B6D981A1612759000E0EB9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B6D9836161276B900E0EB9C /* Build configuration list for PBXNativeTarget "vsr_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B6D9837161276B900E0EB9C /* Debug */,
+				9B6D9838161276B900E0EB9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BB01151160527D5002AD56D /* Build configuration list for PBXNativeTarget "glv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BB01152160527D5002AD56D /* Debug */,
+				9BB01153160527D5002AD56D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
