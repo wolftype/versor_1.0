@@ -11,13 +11,15 @@ INTRODUCTION | ELEMENTS AND OPERATORS | COMPILATION | DEPENDENCIES
 INTRODUCTION
 ------------
 
-Welcome to Versor!  This package provides operations and draw routines for conformal geometric algebra. It is designed to make graphical experimentation of geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/) made by my colleagues in the MAT program.  You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.  I am using it for my PhD on biological simulations.
+Welcome to Versor!  This package provides operations and draw routines for conformal geometric algebra. It is designed to make graphical experimentation of geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/) made by my colleagues in the MAT program.  You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.  I am using it for my PhD on bio-inspired engineering.
 
-I developed "Versor" while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It's a great book.  Built to aid in my modelling of biological forms, this work was funded in large part by the Olivia Long Converse Fellowship, from the Graduate Division at the University of California in Santa Barbara.  So this is under a UC Regents General Public License.
+I developed "Versor" while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It's a great book and if you're reading this you should read that.  
 
-See also wolftype.com/versor for a link to my master's thesis on CGA and this implementation of it, and maybe take a look at wolftype channel on vimeo for a few quick demos on what kinds of animations this thing can quickly whip up.  The Doc folder has a doxygen which I periodically tidy up.  Lots of test files too.  Still need to streamline the make process, etc.
+Built to aid in my modelling of biological forms, this work was funded in large part by the Olivia Long Converse Fellowship, from the Graduate Division at the University of California in Santa Barbara.  So this is under a UC Regents General Public License.
 
-NOTE TO SPEED FREAKS: The STATIC version of this library, which gives up abstraction in exchange for a 5x speed boost, is in development and currently in the STATIC folder.  It is a highly templatized and inlined extravaganza of function calls.  Additionally, there is a trade off I am working on (in a branch to this master called "building and MVBase class") where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  The C++11 standards should help (for instance, "auto" return types), but are not implemented here.   
+See also wolftype.com/versor for a link to my master's thesis on CGA and version 1.0 of this implementation of it, and maybe take a look at wolftype channel on vimeo for a few quick demos on what kinds of animations this thing can quickly whip up.  The Doc folder has a doxygen which I periodically tidy up.  Lots of test files too.  Still need to streamline the make process, etc.
+
+NOTE TO SPEED FREAKS: The STATIC version of this library, which gives up abstraction in exchange for a 5x speed boost (and 10x decrease in file size), is in development and currently in the STATIC folder.   It currently works perfectly well, just isn't quite as developed (with all those algorithms and the Frame class) and still no draw routines. It is a highly templatized and inlined extravaganza of function calls.  Additionally, there is a trade off I am working on (in a branch to this master called "building and MVBase class") where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  The C++11 standards should help (for instance, "auto" return types), but are not implemented here.   
 
 A tutorial is in the works . . . I promise!  For now consider the test examples.  One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
 
@@ -44,7 +46,7 @@ Without going into too much detail, there are three overloaded binary operators:
 ^    The Outer Product
 <=   The Inner Product
 
-[There is also % which is a commutator product]
+There is also % which is a commutator product
 
 And a few overloaded operations:
 
@@ -61,7 +63,7 @@ A * B   multiplies two elements together (and, in the case of A * !B (or A * -B)
 A ^ B   wedges two elements together ( builds up higher dimensional elements )
 A <= B  contracts A out of B ( returns the part of B least like A )
 
-Operators act on the elements of the algebra.  The elements are geometric entities.  To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long.
+Operators act on the elements of the algebra.  The elements are geometric entities.  To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long. In an upcoming version, you'll also be able to use the longname.
 
 "EUCLIDEAN ELEMENTS"
 Sca -- Scalar       (A real number)

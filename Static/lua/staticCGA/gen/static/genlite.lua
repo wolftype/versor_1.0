@@ -101,21 +101,28 @@ local genTypedefs = function()
 	#define VSR_TYPEDEFS_H_INCLUDED
 	 
 	#include "MV.h"
-	
+	#ifndef VSR_PRECISION
+	typdef float VSR_PRECISION 
+	#endif
 	namespace vsr{
 	
 	$make_type[=[
-	typedef MV<$num,$idx,float>  $name;
+	/*! $desc */
+	typedef MV<$num,$idx,VSR_PRECISION>  $name;
+	typedef $name $longname;
 	]=]
-	
+	typedef Pnt Dls;
 	]]
 	
 	local code = cosmo.f(template){
 		make_type = function()
 		for i, iv in ipairs(myTypes) do
 				--print (iv.id)
+				--tname = ""
 				cosmo.yield{
+					desc = iv.desc,
 					name = iv.id,
+					longname = iv.desc:gsub("%s",""),
 					num = #iv.bases,
 					idx = up(iv.id)
 				}
@@ -529,8 +536,16 @@ local genVsrTypedefs = function (dest)
 	local filename = prefix..dest..".h"
 	io.output( io.open(path..filename, "w") )
 
-
 	pprint(genTypedefs(), dest)
+	
+	io.write(genFooter())
+	io.close();
+
+end
+
+local genVsrCasts = function(dest)
+	local filename = prefix..dest..".h"
+	io.output( io.open(path..filename, "w") )
 	io.write ( genericCast() )
 
 	--MAKE VERSIONS
@@ -551,8 +566,6 @@ local genVsrTypedefs = function (dest)
 	io.write(genFooter())
 	io.close();
 end
-
-
 -----
 --GENERAL ADD ON
 
@@ -802,11 +815,12 @@ end
 
 
 -- genVsrH("vsr")
--- genVsrTypedefs("vsr_typedefs")
+genVsrTypedefs("vsr_typedefs")
 -- genVsrTemplateH("vsr_templates")
 -- genVsrTemplateC("vsr_templates")
-genFunctions("io")
+--genFunctions("io")
 
+--print(genTypedefs())
 -- for i, iv in ipairs(myMV) do
 -- print( BaseClass(Hyp,iv,"gp") )
 -- end
