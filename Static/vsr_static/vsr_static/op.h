@@ -25,25 +25,28 @@
 #include "vsr_math.h"
 
 
-//#include "vsr.h"
+#include "vsr.h"
 
-#include "Pnt.h"
-#include "Trs.h"
-#include "Dil.h"
-#include "Trv.h"
-#include "Mot.h"
-#include "Rot.h"
-#include "Tri.h"
-#include "Vec.h"
-#include "Biv.h"
-#include "Lin.h"
-#include "Dll.h"
-#include "Par.h"
-#include "Ori.h"
-#include "Inf.h"
-#include "Pss.h"
-#include "Sta.h"
-#include "versorFuncs.h"
+//#include "Sca.h"
+//#include "Pnt.h"
+//#include "Trs.h"
+//#include "Dil.h"
+//#include "Trv.h"
+//#include "Mot.h"
+//#include "Rot.h"
+//#include "Tri.h"
+//#include "Vec.h"
+//#include "Biv.h"
+//#include "Lin.h"
+//#include "Cir.h"
+//#include "Dll.h"
+//#include "Par.h"
+//#include "Ori.h"
+//#include "Inf.h"
+//#include "Pss.h"
+//#include "Sta.h"
+//#include "Mtt.h"
+//#include "versorFuncs.h"
 
 namespace vsr {
 
@@ -61,10 +64,10 @@ struct Op {
     pj(const A& a, const B& b ){ return (a <= b ) / b; }
 
     template<class A, class B> static A
-    sp(const A& a, const B& b){ return sp(a,b); }
+    sp(const A& a, const B& b){ return vsr::sp(a,b); }
 
     template<class A, class B> static A
-    re(const A& a, const B& b){ return re(a,b); }  
+    re(const A& a, const B& b){ return vsr::re(a,b); }  
     
     template<class B>
     static typename Product< B, Pss, typename B::value_type>::GP dl(const B& b) { return b * Pss(1); } 
@@ -457,8 +460,8 @@ struct Ro {
     */
     template< class T >
     static typename T::value_type size( const T& r, bool dual){
-        typename Product<T, Inf, typename T::value_type>::IP s = Inf(1) <= r;
-        return ( r * r.involution() / ( s * s ) * ( (dual) ? -1.0 : 1.0 ) )[0];
+        typename Product<Inf, T, typename T::value_type>::IP s = Inf(1) <= r;
+        return ( ( r * r.involution() ) / ( s * s ) * ( (dual) ? -1.0 : 1.0 )  )[0];
     }
     
     /*! Squared Size of Normalized Dual Sphere (faster than general case)
@@ -676,7 +679,7 @@ typedef Ta Tangent;
 #define DLN(x,y,z) ( Op::dl(LN(x,y,z)) )
 #define EP Dls(0,0,0,1,-.5)
 #define EM Dls(0,0,0,1,.5)
-#define PAO Pnt(0,0,0,1,.5)
+#define PAO Pnt(0,0,0,1,0)
 #define INFTY Inf(1)
 #define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))

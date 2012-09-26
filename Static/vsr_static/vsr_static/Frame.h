@@ -27,10 +27,11 @@
 
 #include "op.h"
 #include "vsr_interp.h"
+//#include "Drawable.h"
 
 namespace vsr {
 
-	class Frame { //: public Touchable {
+	class Frame {//: public Touchable {
 	
 		protected:
 		

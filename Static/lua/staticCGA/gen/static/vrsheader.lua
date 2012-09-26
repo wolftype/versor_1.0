@@ -15,7 +15,8 @@ AddTab(tMV, Versors)
 
 
 local template = [[
-#include "vsr.h"
+#include "MV.h"
+#include "vsr_casts.h"
 namespace vsr{
 	$createTypes[=[
 	template class MV<$num,$name,$type>;]=]
@@ -29,7 +30,7 @@ local code = cosmo.f(template){
 			cosmo.yield{
 				num = #iv.bases,
 				name = up(iv.id),
-				type = "float"
+				type = "VSR_PRECISION"
 			}
 		end
 	end	
