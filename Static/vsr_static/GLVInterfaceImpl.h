@@ -131,8 +131,6 @@ namespace vsr {
             interface.view().getData(&glv);
             interface.view().fit();
             
-            cout << camera().pos() << endl; 
-            cout << camera().dx() << endl; 
             //Update Camera Physics
             camera().step();
                         

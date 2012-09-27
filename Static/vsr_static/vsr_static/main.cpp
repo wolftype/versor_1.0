@@ -25,25 +25,25 @@ GLVApp * app;
 
 void GLVApp :: onDraw(){
     
-
-
+    int num = 100;
+    int spacing = 5;
     
-    static Pnt p(0,0,0,1,.5);
+    static int time = 0; time++;
     
-    static int t = 0;
-    t++;
+    for (int i = 0; i < num; ++i){
+        float u = 1.0 * i/num;
+        for (int j = 0; j < num; ++j){
+            
+            float v = 1.0 * j/num;
+                        
+            Cir tc = CXY(1).trs(u*spacing, v*spacing,0);
+        
+            tc = tc.rot( Biv::xy * time * .1 );
+            Draw::R(tc);
+        
+        }
     
-//    Draw::R(Vec::x,1,0,0);
-//    Draw::R(Vec::y,0,1,0);
-//    Draw::R(Vec::z,0,0,1);
-    float r =  sin( (t * PI ) / 180.0 );
-    cout << r<< endl; 
-    Trs trs = Gen::trs(r, 0.f, 0.f );
-    cout << trs << endl; 
-    Pnt p2 = Op::sp(p, trs  );
-    cout << p2 << endl; 
-    
-    Draw::R( p2 );
+    }
 
 }
 
