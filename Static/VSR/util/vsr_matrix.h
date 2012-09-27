@@ -16,7 +16,7 @@
 #define MATRIX_H_INCLUDED
 
 #include <iostream>
-#include "vsr_constants.h"
+#include "constants.h"
 #include <math.h>
 
 using std::ostream;

@@ -25,8 +25,6 @@
 
 
 #include "vsr_templates.h"
-//#include "Drawable.h"
-//#include "Draw.h"
 
 #define SANITYCHECK 0
 #define TPRINT(x) if(SANITYCHECK)printf(x)

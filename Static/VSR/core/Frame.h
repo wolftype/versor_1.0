@@ -26,7 +26,7 @@
 #define FRAME_H_INCLUDED
 
 #include "op.h"
-#include "vsr_interp.h"
+#include "interp.h"
 //#include "Drawable.h"
 
 namespace vsr {
