@@ -13,7 +13,7 @@
 #include "glv.h"
 #include "glv_color_controls.h"
 
-#include "xTypes.h"
+#include "vsr_types.h"
 
 #include <iostream>
 #include <string.h>
