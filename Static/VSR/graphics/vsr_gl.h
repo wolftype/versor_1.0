@@ -167,15 +167,24 @@ namespace vsr {
         static bool    AttributeNormalizeBoolean[4] = {GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE};
         static GLenum  AttributeType[4] = {GL::FLOAT, GL::FLOAT, GL::UBYTE, GL::FLOAT};
         
-        static void enable(Ability);
-        static void disable(Ability);
-        static void ability(Ability, bool);
-        static void depthTesting(bool);
-        static void blending(bool);
-        static void blendMode(BlendFunc, BlendFunc, BlendEq);
-        static void depthMask(bool);
-        static void pointSize(GLfloat);
-        static void shadeModel(ShadeModel);
+//        static void enable(Ability);
+//        static void disable(Ability);
+//        static void ability(Ability, bool);
+//        static void depthTesting(bool);
+//        static void blending(bool);
+//        static void blendMode(BlendFunc, BlendFunc, BlendEq);
+//        static void depthMask(bool);
+//        static void pointSize(GLfloat);
+//        static void shadeModel(ShadeModel);
+//         void enable(Ability);
+//         void disable(Ability);
+//         void ability(Ability, bool);
+//         void depthTesting(bool);
+//         void blending(bool);
+//         void blendMode(BlendFunc, BlendFunc, BlendEq);
+//         void depthMask(bool);
+//         void pointSize(GLfloat);
+//         void shadeModel(ShadeModel);
         
         //       }
          GLenum type(GLenum); //type from vectype
@@ -288,18 +297,30 @@ namespace vsr {
          template<class A> void Quad(const A& a, const A& b, const A& c, const A& d);
 		
     
-    inline void GL::ability(Ability a, bool v) { v ? enable(a) : disable(a); }
-    inline void GL::enable(Ability a) { glEnable(a); }
-    inline void GL::disable(Ability a) { glDisable(a); }
-    inline void GL::depthTesting(bool b) { ability(DEPTH_TEST,b); }
-    inline void GL::blending(bool b){ ability(BLEND, b); }
-    inline void GL::blendMode(BlendFunc src, BlendFunc dst, BlendEq eq) {
+//    inline void GL::enable(Ability a) { glEnable(a); }
+//    inline void GL::disable(Ability a) { glDisable(a); }
+//    inline void GL::ability(Ability a, bool v) { v ? enable(a) : disable(a); }
+//    inline void GL::depthTesting(bool b) { ability(DEPTH_TEST,b); }
+//    inline void GL::blending(bool b){ ability(BLEND, b); }
+//    inline void GL::blendMode(BlendFunc src, BlendFunc dst, BlendEq eq) {
+//        glBlendEquation(eq);
+//        glBlendFunc(src, dst);
+//    }
+//    inline void GL::depthMask(bool b) { glDepthMask(b?GL_TRUE : GL_FALSE); }
+//    inline void GL::pointSize(GLfloat f) { glPointSize(f); }
+//    inline void GL::shadeModel(ShadeModel sm) { glShadeModel(sm); } 
+     inline void enable(Ability a) { glEnable(a); }
+     inline void disable(Ability a) { glDisable(a); }
+     inline void ability(Ability a, bool v) { v ? enable(a) : disable(a); }
+     inline void depthTesting(bool b) { ability(DEPTH_TEST,b); }
+     inline void blending(bool b){ ability(BLEND, b); }
+     inline void blendMode(BlendFunc src, BlendFunc dst, BlendEq eq) {
         glBlendEquation(eq);
         glBlendFunc(src, dst);
     }
-    inline void GL::depthMask(bool b) { glDepthMask(b?GL_TRUE : GL_FALSE); }
-    inline void GL::pointSize(GLfloat f) { glPointSize(f); }
-    inline void GL::shadeModel(ShadeModel sm) { glShadeModel(sm); } 
+     inline void depthMask(bool b) { glDepthMask(b?GL_TRUE : GL_FALSE); }
+     inline void pointSize(GLfloat f) { glPointSize(f); }
+     inline void shadeModel(ShadeModel sm) { glShadeModel(sm); } 
     
     }
      
