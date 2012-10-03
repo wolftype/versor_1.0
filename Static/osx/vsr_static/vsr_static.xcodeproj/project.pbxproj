@@ -375,15 +375,6 @@
 		9B9C095916150D5E0063AF9C /* set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = set.h; sourceTree = "<group>"; };
 		9B9C095A16150D5E0063AF9C /* vsr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr.h; sourceTree = "<group>"; };
 		9B9C095C16150D5E0063AF9C /* MVBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVBase.h; sourceTree = "<group>"; };
-		9B9C095E16150D5E0063AF9C /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
-		9B9C095F16150D5E0063AF9C /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
-		9B9C096016150D5E0063AF9C /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
-		9B9C096116150D5E0063AF9C /* GLVInterfaceImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVInterfaceImpl.h; sourceTree = "<group>"; };
-		9B9C096216150D5E0063AF9C /* GraphicsMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsMatrix.h; sourceTree = "<group>"; };
-		9B9C096316150D5E0063AF9C /* Gui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Gui.hpp; sourceTree = "<group>"; };
-		9B9C096416150D5E0063AF9C /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
-		9B9C096516150D5E0063AF9C /* vsr_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_gl.h; sourceTree = "<group>"; };
-		9B9C096616150D5E0063AF9C /* vsr_gxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_gxlib.h; sourceTree = "<group>"; };
 		9B9C096816150D5E0063AF9C /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		9B9C096916150D5E0063AF9C /* interp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interp.h; sourceTree = "<group>"; };
 		9B9C096A16150D5E0063AF9C /* vsr_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_math.h; sourceTree = "<group>"; };
@@ -392,10 +383,6 @@
 		9B9C09BD16150D9C0063AF9C /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
 		9B9C09BE16150D9C0063AF9C /* MV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MV.cpp; sourceTree = "<group>"; };
 		9B9C09C016150D9C0063AF9C /* MVBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MVBase.cpp; sourceTree = "<group>"; };
-		9B9C09C216150D9C0063AF9C /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
-		9B9C09C316150D9C0063AF9C /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Draw.cpp; sourceTree = "<group>"; };
-		9B9C09C416150D9C0063AF9C /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
-		9B9C09C516150D9C0063AF9C /* vsr_gl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl.cpp; sourceTree = "<group>"; };
 		9B9C09D0161510D50063AF9C /* vsr_instantiation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_instantiation.cpp; sourceTree = "<group>"; };
 		9B9C09D3161511930063AF9C /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		9B9C09D4161511930063AF9C /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
@@ -620,7 +607,6 @@
 				9B9C091C16150D5E0063AF9C /* codegen */,
 				9B9C095416150D5E0063AF9C /* core */,
 				9B9C095B16150D5E0063AF9C /* deprecated */,
-				9B9C095D16150D5E0063AF9C /* graphics */,
 				9B9C096716150D5E0063AF9C /* util */,
 			);
 			name = VSR;
@@ -718,22 +704,6 @@
 			path = deprecated;
 			sourceTree = "<group>";
 		};
-		9B9C095D16150D5E0063AF9C /* graphics */ = {
-			isa = PBXGroup;
-			children = (
-				9B9C095E16150D5E0063AF9C /* Camera.h */,
-				9B9C095F16150D5E0063AF9C /* Draw.h */,
-				9B9C096016150D5E0063AF9C /* Drawable.h */,
-				9B9C096116150D5E0063AF9C /* GLVInterfaceImpl.h */,
-				9B9C096216150D5E0063AF9C /* GraphicsMatrix.h */,
-				9B9C096316150D5E0063AF9C /* Gui.hpp */,
-				9B9C096416150D5E0063AF9C /* Interface.h */,
-				9B9C096516150D5E0063AF9C /* vsr_gl.h */,
-				9B9C096616150D5E0063AF9C /* vsr_gxlib.h */,
-			);
-			path = graphics;
-			sourceTree = "<group>";
-		};
 		9B9C096716150D5E0063AF9C /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,7 +722,6 @@
 				9B9C09E5161511B90063AF9C /* graphics */,
 				9B9C09BC16150D9C0063AF9C /* core */,
 				9B9C09BF16150D9C0063AF9C /* deprecated */,
-				9B9C09C116150D9C0063AF9C /* graphics */,
 				9B9C09C616150D9C0063AF9C /* util */,
 			);
 			name = src;
@@ -775,17 +744,6 @@
 				9B9C09C016150D9C0063AF9C /* MVBase.cpp */,
 			);
 			path = deprecated;
-			sourceTree = "<group>";
-		};
-		9B9C09C116150D9C0063AF9C /* graphics */ = {
-			isa = PBXGroup;
-			children = (
-				9B9C09C216150D9C0063AF9C /* Camera.cpp */,
-				9B9C09C316150D9C0063AF9C /* Draw.cpp */,
-				9B9C09C416150D9C0063AF9C /* Interface.cpp */,
-				9B9C09C516150D9C0063AF9C /* vsr_gl.cpp */,
-			);
-			path = graphics;
 			sourceTree = "<group>";
 		};
 		9B9C09C616150D9C0063AF9C /* util */ = {
@@ -1364,7 +1322,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1386,7 +1344,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

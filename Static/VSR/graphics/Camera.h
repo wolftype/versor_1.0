@@ -10,10 +10,10 @@
  #ifndef CAMERA_H_INCLUDED
  #define CAMERA_H_INCLUDED
  
-#include "vsr_gxlib.h"
 #include "vsr_gl.h"
 #include "Frame.h"
 
+// #include "vsr_gxlib.h"
 // #include <OPENGL/gl.h>
 // #include <GLUT/glut.h>
  

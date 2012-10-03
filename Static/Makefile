@@ -53,8 +53,7 @@ CCFLAGS += -Wno-deprecated
 #Link to system
 LDFLAGS	+= -lm -lstdc++ -L/usr/lib -L$(LIB_DIR) -L$(BASE_DIR)GLV/build/lib/
 #Graphics
-LINK_LDFLAGS += -framework OpenGL -framework GLUT -lvsr -lglv
-LDFLAGS += $(LINK_LDFLAGS)
+LINK_LDFLAGS += -framework OpenGL -framework GLUT -lvsr -lvsrGL -lglv
 
 #Dependencies
 DEPFLAGS = -MMD -MF $(basename $@).dep
@@ -137,6 +136,6 @@ vsrGL: vsr $(addprefix $(OBJ_DIR), $(OBJS_GL))
 glv: 
 	
 test: testGL.cpp vsrGL
-	$(CC) $(CCFLAGS) $(HPATH) $(LDFLAGS) -o $(BUILD_DIR)test $<
+	$(CC) $(CCFLAGS) $(HPATH) $(LDFLAGS) $(LINK_LDFLAGS) -o $(BUILD_DIR)test $<
 
 	
