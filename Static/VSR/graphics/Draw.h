@@ -35,7 +35,6 @@
 #include <sstream>
 
 #include "vsr_gl.h"
-#include "vsr_gxlib.h"
 #include "vsr_matrix.h"
 
 #include "op.h"

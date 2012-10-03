@@ -242,7 +242,7 @@ public:
     const MV& operator = (const MV& mv) { TPRINT(" Assignment Operator Same Type\n"); return set(mv); }
     
     template< class A >
-    const MV& operator = ( A a) { TPRINT(" Assignment Operator Different Type\n"); return cast< self_type, A > ( a ); } 
+    const MV operator = ( A a) { TPRINT(" Assignment Operator Different Type\n"); return cast< self_type, A > ( a ); } 
 	
 	MV( const T& a0, const T& a1 )  { set( a0,a1 ); }
 	void set( const T& a0, const T& a1 ) { mW[0]=a0; mW[1]=a1;  }
