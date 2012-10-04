@@ -7,8 +7,10 @@
  *
  */
 
+//#include "op.h"
+#include "vsr.h"
+
 #include "vsr_gl.h"
-#include "op.h"
 #include "Camera.h"
 
 namespace vsr {

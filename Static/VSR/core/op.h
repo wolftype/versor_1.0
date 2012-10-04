@@ -16,15 +16,6 @@
 #ifndef OP_H_INCLUDED
 #define OP_H_INCLUDED 
 
-#include <iostream.h>
-#include <vector>
-#include <map>
-#include <string>
-
-#include "vsr_matrix.h"
-#include "vsr_math.h"
-
-
 #include "vsr.h"
 
 //#include "Sca.h"
@@ -47,6 +38,14 @@
 //#include "Sta.h"
 //#include "Mtt.h"
 //#include "versorFuncs.h"
+
+#include <iostream.h>
+#include <vector>
+#include <map>
+#include <string>
+
+#include "vsr_matrix.h"
+#include "vsr_math.h"
 
 namespace vsr {
 
@@ -372,8 +371,8 @@ struct Ro {
     }
     
     /*! Null Point from x, y, z */
-    template< class S >
-    static Pnt null( S x, S y, S z){	
+    template< class A, class B, class C >
+    static Pnt null( A x, B y, C z){	
         return Pnt(x, y, z, 1 , (x*x + y*y + z*z) / 2.0 );
     }
     

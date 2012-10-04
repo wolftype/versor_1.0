@@ -5,17 +5,13 @@
 //  Created by Pablo Colapinto on 8/16/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
+#include "vsr.h"
+#include "op.h"
+#include "Draw.h"
+#include "GLVInterfaceImpl.h"
 
 #include <iostream>
 
-#include "op.h"
-
-//#include "Mtt.h"
-//#include "Mtd.h"
-//#include "Rtc.h"
-
-#include "GLVInterfaceImpl.h"
-#include "Draw.h"
 
 using namespace vsr;
 using namespace glv;
@@ -25,26 +21,16 @@ GLVApp * app;
 
 void GLVApp :: onDraw(){
     
-    int num = 100;
-    int spacing = 5;
-    
-    static int time = 0; time++;
-    
-    for (int i = 0; i < num; ++i){
-        float u = 1.0 * i/num;
-        for (int j = 0; j < num; ++j){
-            
-            float v = 1.0 * j/num;
-                        
-            Cir tc = CXY(1).trs(u*spacing, v*spacing,0);
-        
-            tc = tc.rot( Biv::xy * time * .1 );
-            Draw::R(tc);
-        
-        }
-    
-    }
-
+	Dls a = Ro::dls(-1,0,0);
+	Dls b = Ro::dls(1,0,0);
+	
+	static int c = 0; c++;
+	double rad = sin(PI * c / 90.0);
+//	cout << rad << endl; 
+	a = a.trs(rad,0,0);
+	b = b.trs(-rad,0,0);
+	Cir cir = (a ^ b).dual();
+	Draw::R(a,0,1,0); Draw::R(b,0,1,0); Draw::R(cir,1,0,0);	
 }
 
 int main (int argc, const char * argv[])

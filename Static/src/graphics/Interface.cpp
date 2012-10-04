@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#include "vsr.h"
+#include "op.h"
+
 #include <iostream>
 #include "Interface.h"
 

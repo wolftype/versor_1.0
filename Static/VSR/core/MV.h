@@ -19,12 +19,12 @@
 
 #include <iostream>
 #include <sstream>
-#include <map>
-#include <utility>
 #include <math.h>
-
-
 #include "vsr_templates.h"
+
+//#include <map>
+//#include <utility>
+
 
 #define SANITYCHECK 0
 #define TPRINT(x) if(SANITYCHECK)printf(x)

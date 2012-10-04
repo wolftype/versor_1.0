@@ -7,6 +7,9 @@
  *
  */
 
+#include "vsr.h"
+#include "op.h"
+
 #include "Frame.h"
 
 namespace vsr {

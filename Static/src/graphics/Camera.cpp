@@ -7,6 +7,8 @@
  *
  */
 
+#include "vsr.h"
+#include "op.h"
 #include "Camera.h"
 //#include "GL.h"
 
