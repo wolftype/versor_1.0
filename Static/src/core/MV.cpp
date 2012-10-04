@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#include "vsr.h"
+#include "op.h"
+
 #include <iostream>
 #include "MV.h"
-#include "op.h"
 
 
 namespace vsr{

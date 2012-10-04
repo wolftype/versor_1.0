@@ -17,19 +17,11 @@
  
  */
 
+
 #ifndef DRAW_H_INCLUDED
 #define DRAW_H_INCLUDED
 
-#define MAXLEFT  -100
-#define MAXRIGHT 100
-#define MAXNEAR 1
-#define MAXFAR 100
-
-//Macros for Near and Far -- how to draw infinite planes and lines for instance?
-//#include "glv.h"
-//#include <GLUT/glut.h>
-
-
+#include "op.h"
 
 #include <vector>
 #include <sstream>
@@ -37,9 +29,17 @@
 #include "vsr_gl.h"
 #include "vsr_matrix.h"
 
-#include "op.h"
 //#include "Camera.h"
 
+
+//Macros for Near and Far -- how to draw infinite planes and lines for instance?
+//#include "glv.h"
+//#include <GLUT/glut.h>
+
+#define MAXLEFT  -100
+#define MAXRIGHT 100
+#define MAXNEAR 1
+#define MAXFAR 100
 
 using namespace std;
 

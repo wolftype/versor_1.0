@@ -3,6 +3,7 @@
 	
 	#include <string>
 
+    #include "vsr_casts.h"
 		
 	#include "Rot.h"
 	

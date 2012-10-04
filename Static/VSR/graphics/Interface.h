@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+
+
 #ifndef vsr_Interface_h
 #define vsr_Interface_h
 
 #include "vsr_gl.h"
-#include "op.h"
 #include "Set.h"
-//#include "Draw.h"
 #include "Drawable.h"
 #include "Camera.h"
 
