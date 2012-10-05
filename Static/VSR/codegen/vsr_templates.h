@@ -5,7 +5,7 @@
 	
 	namespace vsr{
 		
-	using namespace std;
+	using std::string;
 	
 	enum {
 		 MUV = 0,
@@ -178,6 +178,10 @@
 	};
 	
 	template<int A> struct Idx{ static const int Size = 0; static string name; };
+	
+	//define static member
+	template<int A> string Idx<A> :: name;
+	
 	template<> struct Idx<0>{ static const int Size = 0; static string name;};
 	
 	template<> struct Idx<ROT>{ static const int Size = 4; static string name;};
@@ -261,6 +265,7 @@
 	template<> struct Idx<DLP>{ static const int Size = 4; static string name;};
 	
 	template<> struct Idx<VEC>{ static const int Size = 3; static string name;};
+	
 	
 	template<> struct Idx<BIV>{ static const int Size = 3; static string name;};
 	
