@@ -440,7 +440,7 @@ public:
     /*! Transversion (AKA Boosting) in X Y Z direction */
     self_type trv(T x, T y, T z) const;
     
-    string name() { return Idx<IDX>::name; }
+    string name() { return Idx<IDX>::name(); }
 	/*! ONE-TO-ONE TEMPLATE FUNCTION PRETTY PRINTING */
 	friend std::ostream& operator << <> (  std::ostream& os, self_type a );
     

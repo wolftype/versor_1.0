@@ -1,10 +1,10 @@
-	#ifndef DEST_H_INCLUDED
-	#define DEST_H_INCLUDED
+	#ifndef VSR_TEMPLATES_H_INCLUDED
+	#define VSR_TEMPLATES_H_INCLUDED
 	
 	#include <string>
 	
 	namespace vsr{
-		#include <string>
+		
 	using std::string;
 	
 	enum {
@@ -177,339 +177,343 @@
 		
 	};
 	
-	template<int A> struct Idx{ static const int Size; static string name(); };
+	template<int A> struct Idx{ static const int Size = 0; static string name; };
 	
-	template<> struct Idx<0>{ static const int Size = 0; inline static string name() { return "undefined"; } };
+	//define static member
+	template<int A> string Idx<A> :: name;
 	
-	template<> struct Idx<ROT>{ static const int Size = 4; inline static string name() { return "Rot"; } };
+	template<> struct Idx<0>{ static const int Size = 0; static string name;};
 	
-	template<> struct Idx<MOT>{ static const int Size = 8; inline static string name() { return "Mot"; } };
+	template<> struct Idx<ROT>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<DIL>{ static const int Size = 2; inline static string name() { return "Dil"; } };
+	template<> struct Idx<MOT>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<TRV>{ static const int Size = 4; inline static string name() { return "Trv"; } };
+	template<> struct Idx<DIL>{ static const int Size = 2; static string name;};
 	
-	template<> struct Idx<MTD>{ static const int Size = 12; inline static string name() { return "Mtd"; } };
+	template<> struct Idx<TRV>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<TRS>{ static const int Size = 4; inline static string name() { return "Trs"; } };
+	template<> struct Idx<MTD>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<RTC>{ static const int Size = 16; inline static string name() { return "Rtc"; } };
+	template<> struct Idx<TRS>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<MTT>{ static const int Size = 16; inline static string name() { return "Mtt"; } };
+	template<> struct Idx<RTC>{ static const int Size = 16; static string name;};
 	
-	template<> struct Idx<RTT>{ static const int Size = 8; inline static string name() { return "Rtt"; } };
+	template<> struct Idx<MTT>{ static const int Size = 16; static string name;};
 	
-	template<> struct Idx<RTD>{ static const int Size = 8; inline static string name() { return "Rtd"; } };
+	template<> struct Idx<RTT>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<TVD>{ static const int Size = 5; inline static string name() { return "Tvd"; } };
+	template<> struct Idx<RTD>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<TSD>{ static const int Size = 5; inline static string name() { return "Tsd"; } };
+	template<> struct Idx<TVD>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<TRT>{ static const int Size = 14; inline static string name() { return "Trt"; } };
+	template<> struct Idx<TSD>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<RVD>{ static const int Size = 12; inline static string name() { return "Rvd"; } };
+	template<> struct Idx<TRT>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<TST>{ static const int Size = 15; inline static string name() { return "Tst"; } };
+	template<> struct Idx<RVD>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<TVT>{ static const int Size = 15; inline static string name() { return "Tvt"; } };
+	template<> struct Idx<TST>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<BST>{ static const int Size = 11; inline static string name() { return "Bst"; } };
+	template<> struct Idx<TVT>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<SCA>{ static const int Size = 1; inline static string name() { return "Sca"; } };
+	template<> struct Idx<BST>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<ORI>{ static const int Size = 1; inline static string name() { return "Ori"; } };
+	template<> struct Idx<SCA>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<INF>{ static const int Size = 1; inline static string name() { return "Inf"; } };
+	template<> struct Idx<ORI>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<MNK>{ static const int Size = 1; inline static string name() { return "Mnk"; } };
+	template<> struct Idx<INF>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<HYP>{ static const int Size = 2; inline static string name() { return "Hyp"; } };
+	template<> struct Idx<MNK>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<PSS>{ static const int Size = 1; inline static string name() { return "Pss"; } };
+	template<> struct Idx<HYP>{ static const int Size = 2; static string name;};
 	
-	template<> struct Idx<PNT>{ static const int Size = 5; inline static string name() { return "Pnt"; } };
+	template<> struct Idx<PSS>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<PAR>{ static const int Size = 10; inline static string name() { return "Par"; } };
+	template<> struct Idx<PNT>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<CIR>{ static const int Size = 10; inline static string name() { return "Cir"; } };
+	template<> struct Idx<PAR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<SPH>{ static const int Size = 5; inline static string name() { return "Sph"; } };
+	template<> struct Idx<CIR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<STA>{ static const int Size = 9; inline static string name() { return "Sta"; } };
+	template<> struct Idx<SPH>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<DRV>{ static const int Size = 3; inline static string name() { return "Drv"; } };
+	template<> struct Idx<STA>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<DRB>{ static const int Size = 3; inline static string name() { return "Drb"; } };
+	template<> struct Idx<DRV>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<DRT>{ static const int Size = 1; inline static string name() { return "Drt"; } };
+	template<> struct Idx<DRB>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<TNV>{ static const int Size = 3; inline static string name() { return "Tnv"; } };
+	template<> struct Idx<DRT>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<TNB>{ static const int Size = 3; inline static string name() { return "Tnb"; } };
+	template<> struct Idx<TNV>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<TNT>{ static const int Size = 1; inline static string name() { return "Tnt"; } };
+	template<> struct Idx<TNB>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<LIN>{ static const int Size = 6; inline static string name() { return "Lin"; } };
+	template<> struct Idx<TNT>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<PLN>{ static const int Size = 4; inline static string name() { return "Pln"; } };
+	template<> struct Idx<LIN>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<FLP>{ static const int Size = 4; inline static string name() { return "Flp"; } };
+	template<> struct Idx<PLN>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<DFP>{ static const int Size = 4; inline static string name() { return "Dfp"; } };
+	template<> struct Idx<FLP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<DLL>{ static const int Size = 6; inline static string name() { return "Dll"; } };
+	template<> struct Idx<DFP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<DLP>{ static const int Size = 4; inline static string name() { return "Dlp"; } };
+	template<> struct Idx<DLL>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<VEC>{ static const int Size = 3; inline static string name() { return "Vec"; } };
+	template<> struct Idx<DLP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<BIV>{ static const int Size = 3; inline static string name() { return "Biv"; } };
+	template<> struct Idx<VEC>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<TRI>{ static const int Size = 1; inline static string name() { return "Tri"; } };
 	
-	template<> struct Idx<AFF>{ static const int Size = 4; inline static string name() { return "Aff"; } };
+	template<> struct Idx<BIV>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<AFL>{ static const int Size = 6; inline static string name() { return "Afl"; } };
+	template<> struct Idx<TRI>{ static const int Size = 1; static string name;};
 	
-	template<> struct Idx<AFP>{ static const int Size = 4; inline static string name() { return "Afp"; } };
+	template<> struct Idx<AFF>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<DAP>{ static const int Size = 4; inline static string name() { return "Dap"; } };
+	template<> struct Idx<AFL>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<DAF>{ static const int Size = 4; inline static string name() { return "Daf"; } };
+	template<> struct Idx<AFP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<DAL>{ static const int Size = 6; inline static string name() { return "Dal"; } };
+	template<> struct Idx<DAP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<MNV>{ static const int Size = 3; inline static string name() { return "Mnv"; } };
+	template<> struct Idx<DAF>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<ORI_ORI>{ static const int Size = 0; inline static string name() { return "Ori_Ori"; } };
+	template<> struct Idx<DAL>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<ORI_PAR>{ static const int Size = 10; inline static string name() { return "Ori_Par"; } };
+	template<> struct Idx<MNV>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<ORI_CIR>{ static const int Size = 10; inline static string name() { return "Ori_Cir"; } };
+	template<> struct Idx<ORI_ORI>{ static const int Size = 0; static string name;};
 	
-	template<> struct Idx<ORI_SPH>{ static const int Size = 5; inline static string name() { return "Ori_Sph"; } };
+	template<> struct Idx<ORI_PAR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<ORI_STA>{ static const int Size = 9; inline static string name() { return "Ori_Sta"; } };
+	template<> struct Idx<ORI_CIR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<ORI_DRV>{ static const int Size = 6; inline static string name() { return "Ori_Drv"; } };
+	template<> struct Idx<ORI_SPH>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<ORI_DRB>{ static const int Size = 6; inline static string name() { return "Ori_Drb"; } };
+	template<> struct Idx<ORI_STA>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<ORI_DRT>{ static const int Size = 2; inline static string name() { return "Ori_Drt"; } };
+	template<> struct Idx<ORI_DRV>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<ORI_LIN>{ static const int Size = 9; inline static string name() { return "Ori_Lin"; } };
+	template<> struct Idx<ORI_DRB>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<ORI_FLP>{ static const int Size = 7; inline static string name() { return "Ori_Flp"; } };
+	template<> struct Idx<ORI_DRT>{ static const int Size = 2; static string name;};
 	
-	template<> struct Idx<ORI_DFP>{ static const int Size = 7; inline static string name() { return "Ori_Dfp"; } };
+	template<> struct Idx<ORI_LIN>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<INF_PAR>{ static const int Size = 10; inline static string name() { return "Inf_Par"; } };
+	template<> struct Idx<ORI_FLP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<INF_CIR>{ static const int Size = 10; inline static string name() { return "Inf_Cir"; } };
+	template<> struct Idx<ORI_DFP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<INF_SPH>{ static const int Size = 5; inline static string name() { return "Inf_Sph"; } };
+	template<> struct Idx<INF_PAR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<INF_STA>{ static const int Size = 9; inline static string name() { return "Inf_Sta"; } };
+	template<> struct Idx<INF_CIR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<INF_AFP>{ static const int Size = 7; inline static string name() { return "Inf_Afp"; } };
+	template<> struct Idx<INF_SPH>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<INF_DAP>{ static const int Size = 7; inline static string name() { return "Inf_Dap"; } };
+	template<> struct Idx<INF_STA>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<INF_DAL>{ static const int Size = 9; inline static string name() { return "Inf_Dal"; } };
+	template<> struct Idx<INF_AFP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<MNK_PNT>{ static const int Size = 5; inline static string name() { return "Mnk_Pnt"; } };
+	template<> struct Idx<INF_DAP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<MNK_PAR>{ static const int Size = 10; inline static string name() { return "Mnk_Par"; } };
+	template<> struct Idx<INF_DAL>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<MNK_CIR>{ static const int Size = 10; inline static string name() { return "Mnk_Cir"; } };
+	template<> struct Idx<MNK_PNT>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<MNK_SPH>{ static const int Size = 5; inline static string name() { return "Mnk_Sph"; } };
+	template<> struct Idx<MNK_PAR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<MNK_STA>{ static const int Size = 9; inline static string name() { return "Mnk_Sta"; } };
+	template<> struct Idx<MNK_CIR>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<MNK_LIN>{ static const int Size = 6; inline static string name() { return "Mnk_Lin"; } };
+	template<> struct Idx<MNK_SPH>{ static const int Size = 5; static string name;};
 	
-	template<> struct Idx<MNK_PLN>{ static const int Size = 4; inline static string name() { return "Mnk_Pln"; } };
+	template<> struct Idx<MNK_STA>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<MNK_DFP>{ static const int Size = 4; inline static string name() { return "Mnk_Dfp"; } };
+	template<> struct Idx<MNK_LIN>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<MNK_DLL>{ static const int Size = 6; inline static string name() { return "Mnk_Dll"; } };
+	template<> struct Idx<MNK_PLN>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<MNK_DLP>{ static const int Size = 4; inline static string name() { return "Mnk_Dlp"; } };
+	template<> struct Idx<MNK_DFP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<MNK_BIV>{ static const int Size = 3; inline static string name() { return "Mnk_Biv"; } };
+	template<> struct Idx<MNK_DLL>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<MNK_AFF>{ static const int Size = 4; inline static string name() { return "Mnk_Aff"; } };
+	template<> struct Idx<MNK_DLP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<MNK_AFL>{ static const int Size = 6; inline static string name() { return "Mnk_Afl"; } };
+	template<> struct Idx<MNK_BIV>{ static const int Size = 3; static string name;};
 	
-	template<> struct Idx<MNK_AFP>{ static const int Size = 4; inline static string name() { return "Mnk_Afp"; } };
+	template<> struct Idx<MNK_AFF>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<MNK_DAF>{ static const int Size = 4; inline static string name() { return "Mnk_Daf"; } };
+	template<> struct Idx<MNK_AFL>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<MNK_DAL>{ static const int Size = 6; inline static string name() { return "Mnk_Dal"; } };
+	template<> struct Idx<MNK_AFP>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<HYP_PSS>{ static const int Size = 2; inline static string name() { return "Hyp_Pss"; } };
+	template<> struct Idx<MNK_DAF>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<HYP_PNT>{ static const int Size = 8; inline static string name() { return "Hyp_Pnt"; } };
+	template<> struct Idx<MNK_DAL>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<HYP_PAR>{ static const int Size = 14; inline static string name() { return "Hyp_Par"; } };
+	template<> struct Idx<HYP_PSS>{ static const int Size = 2; static string name;};
 	
-	template<> struct Idx<HYP_CIR>{ static const int Size = 14; inline static string name() { return "Hyp_Cir"; } };
+	template<> struct Idx<HYP_PNT>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<HYP_SPH>{ static const int Size = 8; inline static string name() { return "Hyp_Sph"; } };
+	template<> struct Idx<HYP_PAR>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<HYP_STA>{ static const int Size = 12; inline static string name() { return "Hyp_Sta"; } };
+	template<> struct Idx<HYP_CIR>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<HYP_LIN>{ static const int Size = 12; inline static string name() { return "Hyp_Lin"; } };
+	template<> struct Idx<HYP_SPH>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<HYP_FLP>{ static const int Size = 8; inline static string name() { return "Hyp_Flp"; } };
+	template<> struct Idx<HYP_STA>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<HYP_DFP>{ static const int Size = 8; inline static string name() { return "Hyp_Dfp"; } };
+	template<> struct Idx<HYP_LIN>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<HYP_VEC>{ static const int Size = 6; inline static string name() { return "Hyp_Vec"; } };
+	template<> struct Idx<HYP_FLP>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<HYP_BIV>{ static const int Size = 6; inline static string name() { return "Hyp_Biv"; } };
+	template<> struct Idx<HYP_DFP>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<PSS_STA>{ static const int Size = 9; inline static string name() { return "Pss_Sta"; } };
+	template<> struct Idx<HYP_VEC>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<PNT_PAR>{ static const int Size = 15; inline static string name() { return "Pnt_Par"; } };
+	template<> struct Idx<HYP_BIV>{ static const int Size = 6; static string name;};
 	
-	template<> struct Idx<PNT_CIR>{ static const int Size = 15; inline static string name() { return "Pnt_Cir"; } };
+	template<> struct Idx<PSS_STA>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<PNT_SPH>{ static const int Size = 11; inline static string name() { return "Pnt_Sph"; } };
+	template<> struct Idx<PNT_PAR>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<PNT_LIN>{ static const int Size = 14; inline static string name() { return "Pnt_Lin"; } };
+	template<> struct Idx<PNT_CIR>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<PNT_FLP>{ static const int Size = 11; inline static string name() { return "Pnt_Flp"; } };
+	template<> struct Idx<PNT_SPH>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<PNT_DFP>{ static const int Size = 11; inline static string name() { return "Pnt_Dfp"; } };
+	template<> struct Idx<PNT_LIN>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<PNT_DLL>{ static const int Size = 14; inline static string name() { return "Pnt_Dll"; } };
+	template<> struct Idx<PNT_FLP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<PNT_VEC>{ static const int Size = 10; inline static string name() { return "Pnt_Vec"; } };
+	template<> struct Idx<PNT_DFP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<PNT_BIV>{ static const int Size = 10; inline static string name() { return "Pnt_Biv"; } };
+	template<> struct Idx<PNT_DLL>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<PNT_AFL>{ static const int Size = 14; inline static string name() { return "Pnt_Afl"; } };
+	template<> struct Idx<PNT_VEC>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<PNT_AFP>{ static const int Size = 11; inline static string name() { return "Pnt_Afp"; } };
+	template<> struct Idx<PNT_BIV>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<PNT_DAP>{ static const int Size = 11; inline static string name() { return "Pnt_Dap"; } };
+	template<> struct Idx<PNT_AFL>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<PNT_DAL>{ static const int Size = 14; inline static string name() { return "Pnt_Dal"; } };
+	template<> struct Idx<PNT_AFP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<PNT_MNV>{ static const int Size = 10; inline static string name() { return "Pnt_Mnv"; } };
+	template<> struct Idx<PNT_DAP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<PAR_DRB>{ static const int Size = 12; inline static string name() { return "Par_Drb"; } };
+	template<> struct Idx<PNT_DAL>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<PAR_TNB>{ static const int Size = 12; inline static string name() { return "Par_Tnb"; } };
+	template<> struct Idx<PNT_MNV>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<PAR_DFP>{ static const int Size = 15; inline static string name() { return "Par_Dfp"; } };
+	template<> struct Idx<PAR_DRB>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<PAR_BIV>{ static const int Size = 15; inline static string name() { return "Par_Biv"; } };
+	template<> struct Idx<PAR_TNB>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<PAR_AFP>{ static const int Size = 15; inline static string name() { return "Par_Afp"; } };
+	template<> struct Idx<PAR_DFP>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<PAR_MNV>{ static const int Size = 15; inline static string name() { return "Par_Mnv"; } };
+	template<> struct Idx<PAR_BIV>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<SPH_VEC>{ static const int Size = 10; inline static string name() { return "Sph_Vec"; } };
+	template<> struct Idx<PAR_AFP>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<STA_VEC>{ static const int Size = 12; inline static string name() { return "Sta_Vec"; } };
+	template<> struct Idx<PAR_MNV>{ static const int Size = 15; static string name;};
 	
-	template<> struct Idx<STA_BIV>{ static const int Size = 12; inline static string name() { return "Sta_Biv"; } };
+	template<> struct Idx<SPH_VEC>{ static const int Size = 10; static string name;};
 	
-	template<> struct Idx<STA_TRI>{ static const int Size = 9; inline static string name() { return "Sta_Tri"; } };
+	template<> struct Idx<STA_VEC>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<STA_MNV>{ static const int Size = 12; inline static string name() { return "Sta_Mnv"; } };
+	template<> struct Idx<STA_BIV>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<DRV_TNB>{ static const int Size = 8; inline static string name() { return "Drv_Tnb"; } };
+	template<> struct Idx<STA_TRI>{ static const int Size = 9; static string name;};
 	
-	template<> struct Idx<DRV_LIN>{ static const int Size = 4; inline static string name() { return "Drv_Lin"; } };
+	template<> struct Idx<STA_MNV>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<DRV_PLN>{ static const int Size = 4; inline static string name() { return "Drv_Pln"; } };
+	template<> struct Idx<DRV_TNB>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<DRV_AFP>{ static const int Size = 11; inline static string name() { return "Drv_Afp"; } };
+	template<> struct Idx<DRV_LIN>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<DRV_DAP>{ static const int Size = 11; inline static string name() { return "Drv_Dap"; } };
+	template<> struct Idx<DRV_PLN>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<TNV_FLP>{ static const int Size = 11; inline static string name() { return "Tnv_Flp"; } };
+	template<> struct Idx<DRV_AFP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<TNV_DFP>{ static const int Size = 11; inline static string name() { return "Tnv_Dfp"; } };
+	template<> struct Idx<DRV_DAP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<TNV_VEC>{ static const int Size = 4; inline static string name() { return "Tnv_Vec"; } };
+	template<> struct Idx<TNV_FLP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<TNV_BIV>{ static const int Size = 4; inline static string name() { return "Tnv_Biv"; } };
+	template<> struct Idx<TNV_DFP>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<LIN_PLN>{ static const int Size = 8; inline static string name() { return "Lin_Pln"; } };
+	template<> struct Idx<TNV_VEC>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<LIN_FLP>{ static const int Size = 7; inline static string name() { return "Lin_Flp"; } };
+	template<> struct Idx<TNV_BIV>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<LIN_DFP>{ static const int Size = 7; inline static string name() { return "Lin_Dfp"; } };
+	template<> struct Idx<LIN_PLN>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<LIN_DLL>{ static const int Size = 8; inline static string name() { return "Lin_Dll"; } };
+	template<> struct Idx<LIN_FLP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<LIN_DLP>{ static const int Size = 8; inline static string name() { return "Lin_Dlp"; } };
+	template<> struct Idx<LIN_DFP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<PLN_PLN>{ static const int Size = 7; inline static string name() { return "Pln_Pln"; } };
+	template<> struct Idx<LIN_DLL>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<PLN_FLP>{ static const int Size = 7; inline static string name() { return "Pln_Flp"; } };
+	template<> struct Idx<LIN_DLP>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<PLN_DFP>{ static const int Size = 7; inline static string name() { return "Pln_Dfp"; } };
+	template<> struct Idx<PLN_PLN>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<PLN_DLP>{ static const int Size = 7; inline static string name() { return "Pln_Dlp"; } };
+	template<> struct Idx<PLN_FLP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<PLN_BIV>{ static const int Size = 7; inline static string name() { return "Pln_Biv"; } };
+	template<> struct Idx<PLN_DFP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<PLN_MNV>{ static const int Size = 7; inline static string name() { return "Pln_Mnv"; } };
+	template<> struct Idx<PLN_DLP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<FLP_AFP>{ static const int Size = 14; inline static string name() { return "Flp_Afp"; } };
+	template<> struct Idx<PLN_BIV>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<VEC_BIV>{ static const int Size = 4; inline static string name() { return "Vec_Biv"; } };
+	template<> struct Idx<PLN_MNV>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<VEC_AFF>{ static const int Size = 7; inline static string name() { return "Vec_Aff"; } };
+	template<> struct Idx<FLP_AFP>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<VEC_AFL>{ static const int Size = 8; inline static string name() { return "Vec_Afl"; } };
+	template<> struct Idx<VEC_BIV>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<VEC_AFP>{ static const int Size = 7; inline static string name() { return "Vec_Afp"; } };
+	template<> struct Idx<VEC_AFF>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<VEC_DAP>{ static const int Size = 7; inline static string name() { return "Vec_Dap"; } };
+	template<> struct Idx<VEC_AFL>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<VEC_DAF>{ static const int Size = 7; inline static string name() { return "Vec_Daf"; } };
+	template<> struct Idx<VEC_AFP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<VEC_DAL>{ static const int Size = 8; inline static string name() { return "Vec_Dal"; } };
+	template<> struct Idx<VEC_DAP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<VEC_MNV>{ static const int Size = 4; inline static string name() { return "Vec_Mnv"; } };
+	template<> struct Idx<VEC_DAF>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<BIV_AFF>{ static const int Size = 7; inline static string name() { return "Biv_Aff"; } };
+	template<> struct Idx<VEC_DAL>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<BIV_AFP>{ static const int Size = 7; inline static string name() { return "Biv_Afp"; } };
+	template<> struct Idx<VEC_MNV>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<BIV_DAP>{ static const int Size = 7; inline static string name() { return "Biv_Dap"; } };
+	template<> struct Idx<BIV_AFF>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<BIV_DAF>{ static const int Size = 7; inline static string name() { return "Biv_Daf"; } };
+	template<> struct Idx<BIV_AFP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<BIV_DAL>{ static const int Size = 8; inline static string name() { return "Biv_Dal"; } };
+	template<> struct Idx<BIV_DAP>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<BIV_MNV>{ static const int Size = 4; inline static string name() { return "Biv_Mnv"; } };
+	template<> struct Idx<BIV_DAF>{ static const int Size = 7; static string name;};
 	
-	template<> struct Idx<MNK_PNT_SPH>{ static const int Size = 11; inline static string name() { return "Mnk_Pnt_Sph"; } };
+	template<> struct Idx<BIV_DAL>{ static const int Size = 8; static string name;};
 	
-	template<> struct Idx<MNK_PNT_LIN>{ static const int Size = 14; inline static string name() { return "Mnk_Pnt_Lin"; } };
+	template<> struct Idx<BIV_MNV>{ static const int Size = 4; static string name;};
 	
-	template<> struct Idx<MNK_PNT_DLL>{ static const int Size = 14; inline static string name() { return "Mnk_Pnt_Dll"; } };
+	template<> struct Idx<MNK_PNT_SPH>{ static const int Size = 11; static string name;};
 	
-	template<> struct Idx<MNK_PNT_AFL>{ static const int Size = 14; inline static string name() { return "Mnk_Pnt_Afl"; } };
+	template<> struct Idx<MNK_PNT_LIN>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<MNK_PNT_DAL>{ static const int Size = 14; inline static string name() { return "Mnk_Pnt_Dal"; } };
+	template<> struct Idx<MNK_PNT_DLL>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<MNK_STA_BIV>{ static const int Size = 12; inline static string name() { return "Mnk_Sta_Biv"; } };
+	template<> struct Idx<MNK_PNT_AFL>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<HYP_DRV_TNB>{ static const int Size = 8; inline static string name() { return "Hyp_Drv_Tnb"; } };
+	template<> struct Idx<MNK_PNT_DAL>{ static const int Size = 14; static string name;};
 	
-	template<> struct Idx<HYP_VEC_MNV>{ static const int Size = 8; inline static string name() { return "Hyp_Vec_Mnv"; } };
+	template<> struct Idx<MNK_STA_BIV>{ static const int Size = 12; static string name;};
 	
-	template<> struct Idx<PSS_MNK_PNT_SPH>{ static const int Size = 11; inline static string name() { return "Pss_Mnk_Pnt_Sph"; } };
+	template<> struct Idx<HYP_DRV_TNB>{ static const int Size = 8; static string name;};
+	
+	template<> struct Idx<HYP_VEC_MNV>{ static const int Size = 8; static string name;};
+	
+	template<> struct Idx<PSS_MNK_PNT_SPH>{ static const int Size = 11; static string name;};
 	
 			template<int A, int B> struct ProductIdx{
             static const int GP = MUV;

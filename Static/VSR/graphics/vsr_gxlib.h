@@ -34,17 +34,18 @@
 
         //#include "vsr_gl.h"
 
-    #else if defined(__APPLE__) || (__osx__)
-
-        #include <OpenGL/OpenGL.h>
-        #include <GLUT/GLUT.h>
-
-	#else if defined(__linux__)
+	#elseif defined(__linux__)
 		
 		#include <GL/glew.h>
 		#include <GL/gl.h>
 		#include <GL/glut.h>
 		#include <GL/glext.h>
+
+    #else //defined(__APPLE__) || defined(__OSX__)
+
+        //printf("APPLE SYSTEM\n");
+        #include <OpenGL/OpenGL.h>
+        #include <GLUT/GLUT.h>
 
     #endif
 
