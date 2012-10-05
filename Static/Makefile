@@ -75,11 +75,11 @@ DEPFLAGS = -MMD -MF $(basename $@).dep
 #Link
 LDFLAGS	+= -L$(LIB_DIR) 
 #Graphics (Only added to LDFLAGS if GFX=1)
-LINK_LDFLAGS += -L$(BASE_DIR)GLV/build/lib/ -lglv
+LINK_LDFLAGS += -L$(BASE_DIR)GLV/build/lib/ 
 ifeq ($(PLATFORM), linux)
-	LINK_LDFLAGS += -lGLEW -lGLU -lGL -lglut
+	LINK_LDFLAGS += -lGLEW -lGLU -lGL -lglut -lGLV
 else ifeq ($(PLATFORM), macosx)
-	LINK_LDFLAGS += -framework OpenGL -framework GLUT 
+	LINK_LDFLAGS += -framework OpenGL -framework GLUT -lglv 
 else ifeq ($(PLATFORM), windows)
 	LINK_LDFLAGS += -lglew32 -lglu32 -lopengl32 -lglut32
 endif
@@ -118,7 +118,7 @@ CXXFLAGS	:= $(CFLAGS) $(CXXFLAGS)
 
 
 #COMPILATION of CPP (no linking) 
-$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) )#$(PCH_DIR)$(PCH_FILE) $(PCH_DIR)%.h.gch
+$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
 	@echo 
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo compiling $< to $@

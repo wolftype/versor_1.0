@@ -1,12 +1,11 @@
 	#include "vsr_templates.h"
+	#include <string>
 
 	using namespace std;
 
 	namespace vsr {
 		
 		string Idx<0>::name = "undefined";
-		
-	    
 		string Idx<ROT>::name = "Rot";
 		string Idx<MOT>::name = "Mot";
 		string Idx<DIL>::name = "Dil";
@@ -171,6 +170,6 @@
 		string Idx<MNK_STA_BIV>::name = "Mnk_Sta_Biv";
 		string Idx<HYP_DRV_TNB>::name = "Hyp_Drv_Tnb";
 		string Idx<HYP_VEC_MNV>::name = "Hyp_Vec_Mnv";
-		string Idx<PSS_MNK_PNT_SPH>::name = "Pss_Mnk_Pnt_Sph";
+		std::string Idx<PSS_MNK_PNT_SPH>::name = "Pss_Mnk_Pnt_Sph";
 	}
 	

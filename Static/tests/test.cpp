@@ -8,6 +8,7 @@
 
 #include "vsr.h"
 #include "op.h"
+#include "vsr_templates.h"
 #include <iostream>
 
 
@@ -24,7 +25,7 @@ int main (int argc, const char * argv[])
 		Pnt p1 = Ro::null( 1.0 * i/1000,0,0);
 		Pnt p2 = Ro::null( 0, 1.0 * i/1000,0);
 		
-		cout << p1 * p2 << endl; 
+		//cout << p1 * p2 << endl; 
 	}
 
     // insert code here...

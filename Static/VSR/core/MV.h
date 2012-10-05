@@ -17,6 +17,8 @@
 #ifndef MV_INCLUDED
 #define MV_INCLUDED
 
+#include <stdio.h>
+#include <string.h>
 #include <iostream>
 #include <sstream>
 #include <math.h>
