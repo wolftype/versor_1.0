@@ -58,7 +58,7 @@ EXT_DIR		= ../externals/
 #Warnings
 CFLAGS += -Wno-deprecated
 
-OBJS := MV.o Frame.o vsr_templates.o
+OBJS := MV.o Frame.o 
 OBJS_GL := Camera.o Interface.o vsr_gl.o gl2ps.o
 
 # HEAD = 	MV.h Frame.h vsr_templates.h op.h Draw.h GLVInterfaceImpl.h \
@@ -161,7 +161,7 @@ vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
 
 testGL: testGL.cpp vsr
-	$(CC) $(CXXFLAGS) $(HPATH) $(LDFLAGS) -H -l$(LIB_NAME) -o $(BUILD_DIR)test $<
+	$(CC) $(CXXFLAGS) $(HPATH) $(LDFLAGS) -H -l$(LIB_NAME) -o $(BUILD_DIR)testGL $<
 
 test: test.cpp vsr
 		$(CC) $(CXXFLAGS) $(HPATH) $(LDFLAGS) -H -l$(LIB_NAME) -o $(BUILD_DIR)test $<

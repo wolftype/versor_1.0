@@ -13,7 +13,7 @@
 		9B3F22E315FFEDF50071E210 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
 		9B638BC315FEBF6100C74AF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B638BC215FEBF6100C74AF7 /* main.cpp */; };
 		9B638BC515FEBF6100C74AF7 /* TestSpeed.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B638BC415FEBF6100C74AF7 /* TestSpeed.1 */; };
-		9B6D9823161275B800E0EB9C /* libglv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB01150160527D5002AD56D /* libglv.a */; };
+		9B685A94161F663C00D9B258 /* libglv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB01150160527D5002AD56D /* libglv.a */; };
 		9B6D9824161275B800E0EB9C /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBBE00E15DDC20500BDE419 /* libvsr.a */; };
 		9B6D982A1612765800E0EB9C /* libvsrGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B6D98181612759000E0EB9C /* libvsrGL.a */; };
 		9B6D9833161276B900E0EB9C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D9832161276B900E0EB9C /* main.cpp */; };
@@ -149,7 +149,6 @@
 		9B9C09EB161511B90063AF9C /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C09E7161511B90063AF9C /* Draw.cpp */; };
 		9B9C09EC161511B90063AF9C /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C09E8161511B90063AF9C /* Interface.cpp */; };
 		9B9C09ED161511B90063AF9C /* vsr_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C09E9161511B90063AF9C /* vsr_gl.cpp */; };
-		9BB968C5161A731D00419383 /* vsr_templates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB968C4161A731D00419383 /* vsr_templates.cpp */; };
 		9BBBE00215DDC1F200BDE419 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBE00115DDC1F200BDE419 /* main.cpp */; };
 		9BBBE00415DDC1F200BDE419 /* vsr_static.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBBE00315DDC1F200BDE419 /* vsr_static.1 */; };
 		9BD758EA1604091D0003B8EE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD758E91604091D0003B8EE /* OpenGL.framework */; };
@@ -428,7 +427,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B6D9823161275B800E0EB9C /* libglv.a in Frameworks */,
 				9B6D9824161275B800E0EB9C /* libvsr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,6 +450,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B685A94161F663C00D9B258 /* libglv.a in Frameworks */,
 				9B6D982A1612765800E0EB9C /* libvsrGL.a in Frameworks */,
 				9BD758EC160409240003B8EE /* GLUT.framework in Frameworks */,
 				9BD758EA1604091D0003B8EE /* OpenGL.framework in Frameworks */,
@@ -1192,7 +1191,6 @@
 			files = (
 				9B9C09CA16150D9C0063AF9C /* MV.cpp in Sources */,
 				9B9C09C916150D9C0063AF9C /* Frame.cpp in Sources */,
-				9BB968C5161A731D00419383 /* vsr_templates.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

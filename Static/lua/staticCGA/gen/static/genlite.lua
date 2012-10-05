@@ -24,7 +24,7 @@ require "headers"
 --SET FILE WRITE PATH
 --local env = os.getenv("HOME")
 local cwd = dofile("../../util/cwd.lua")
-local path = cwd.."../../../../include/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/include/"
+local path = cwd.."../../../../VSR/codegen/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/include/"
 local cpath = cwd.."../../../../src/"--env.."/code/versor/branches/subspace/lua/staticCGA/gen/vsr/src/"
 local prefix = ""
 --print (env)
@@ -385,6 +385,65 @@ local genIdx = function()
 	
 	
 	local template = [[
+	#include <string>
+	using std::string;
+	
+	enum {
+		 MUV = 0,
+		$do_enum[=[ $en 
+		]=]
+	};
+	
+	template<int A> struct Idx{ static const int Size; static string name(); };
+	
+	template<> struct Idx<0>{ static const int Size = 0; inline static string name() { return "undefined"; } };
+	$do_Idx[=[
+	template<> struct Idx<$idx>{ static const int Size = $num; inline static string name() { return "$nm"; } };
+	]=]
+	]]
+	
+	
+	local code = cosmo.f(template){
+		do_enum = function()
+			for i, iv in ipairs(myTypes) do
+				local out = string.upper(iv.id).." = " .. iv.idx
+				if i < #myTypes then out = out .. "," end
+				cosmo.yield{
+					en = out
+				}
+				
+			end
+		end,
+		do_names = function()
+			for i, iv in ipairs(myTypes) do
+				local out = string.upper(iv.id).." = " .. iv.idx
+				if i < #myTypes then out = out .. "," end
+				cosmo.yield{
+					en = out
+				}
+				
+			end
+		end,
+		do_Idx = function()
+			for i,iv in ipairs(myTypes) do
+				cosmo.yield{
+					idx = string.upper(iv.id),
+					num = #iv.bases,
+					nm = iv.id
+				}
+			end
+		end	
+	}
+	
+	return code
+
+end
+
+local genIdxOld = function()
+
+	
+	
+	local template = [[
 	
 	using namespace std;
 	
@@ -395,6 +454,7 @@ local genIdx = function()
 	};
 	
 	template<int A> struct Idx{ static const int Size = 0; static string name; };
+
 	template<> struct Idx<0>{ static const int Size = 0; static string name;};
 	$do_Idx[=[
 	template<> struct Idx<$idx>{ static const int Size = $num; static string name;};
@@ -788,11 +848,13 @@ end
 	
 local genVsrTemplateH = function (dest)
 	if dest == "" then
+		print (genHeader("vsr_templates"))
 		print( genIdx() )
 		print( genProductIdx() )
+		print ( genFooter() )
 	else
 		io.output( io.open(path..dest..".h", "w") )
-		io.write( genHeader(dest))
+		io.write( genHeader("dest"))
 		io.write( genIdx() )
 		io.write( genProductIdx() )
 		io.write( genFooter(dest) )
@@ -815,8 +877,8 @@ end
 
 
 -- genVsrH("vsr")
-genVsrTypedefs("vsr_typedefs")
--- genVsrTemplateH("vsr_templates")
+--genVsrTypedefs("vsr_typedefs")
+ genVsrTemplateH("vsr_templates")--vsr_templates
 -- genVsrTemplateC("vsr_templates")
 --genFunctions("io")
 
