@@ -1,0 +1,54 @@
+DOWNLOAD
+
+For best results, cd into a common directory for all your code repositories -- 
+For instance, assuming you have a directory called code with all your git repos . . . 
+
+cd code
+git clone git://github.com/AlloSphere-Research-Group/GLV.git
+git clone git://github.com/wolftype/vsr.git
+
+BUILD
+
+Typically you should be able to just type: 
+
+make test
+
+And the makefile will do the rest.
+
+for a list of make options:
+make help
+
+
+UNIX / OSX:
+
+
+Linux (Ubuntu)
+
+Make sure you have glut and glew installed:
+
+A) install glut*:
+sudo apt-get install freeglut3 freeglut3-dev
+
+
+*note on newer versions of ubuntu (11.10 and greater) you may also have to do:
+sudo apt-get install binutils-gold
+
+B) install glew:
+
+1. on ubuntu, first do:
+sudo apt-get install libxmu-dev libxi-dev
+
+2. download tar or zip from http://glew.sourceforge.net/ 
+cd into glew and type
+sudo make install
+
+or clone from current repos
+
+git clone git://glew.git.sourceforge.net/gitroot/glew/glew
+cd glew
+make extensions
+sudo make install
+
+
+
+
