@@ -12,7 +12,7 @@
 #define vsr_Interface_h
 
 #include "vsr_gl.h"
-#include "Set.h"
+#include "set.h"
 #include "Drawable.h"
 #include "Camera.h"
 

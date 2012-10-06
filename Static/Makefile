@@ -75,7 +75,7 @@ DEPFLAGS = -MMD -MF $(basename $@).dep
 #Link
 LDFLAGS	+= -L$(LIB_DIR) 
 #Graphics (Only added to LDFLAGS if GFX=1)
-LINK_LDFLAGS += -L$(BASE_DIR)GLV/build/lib/ 
+#LINK_LDFLAGS += -L$(BASE_DIR)GLV/build/lib/ 
 ifeq ($(PLATFORM), linux)
 	LINK_LDFLAGS += -lGLEW -lGLU -lGL -lglut -lGLV
 else ifeq ($(PLATFORM), macosx)
@@ -106,9 +106,9 @@ HPATH = -I$(PCH_DIR) \
 		-I$(INC_DIR)codegen/products/ \
 		-I$(INC_DIR)codegen \
 		-I$(INC_DIR)util \
-		-I$(BASE_DIR)GLV/GLV \
 		-I$(EXT_DIR)gl2ps
 
+		# -I$(BASE_DIR)GLV/GLV \
 
 CPPFLAGS	+= $(LINK_CPPFLAGS)
 LDFLAGS		+= $(LINK_LDFLAGS)
@@ -142,11 +142,6 @@ $(PCH_DIR)%.h.gch: %.h
 	@echo precompiling $< to $@
 	$(CC) $(CXXFLAGS) $(HPATH) -H -x c++-header -c $< -o $@
 
-#-x c++ -Winvalid-pch 
-
-# pch: $(HEAD)
-# 	@echo precompiling %<
-# 	$(CC) $(CCFLAGS) $(HPATH) -x c++ -Winvalid-pch -c $< -o $@
 
 dir:
 	@mkdir -p $(OBJ_DIR)
