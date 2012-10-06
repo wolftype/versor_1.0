@@ -34,7 +34,7 @@
 
         //#include "vsr_gl.h"
 
-	#elseif defined(__linux__)
+	#elif defined(__linux__)
 		
 		#include <GL/glew.h>
 		#include <GL/gl.h>

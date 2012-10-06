@@ -10,8 +10,8 @@
  #ifndef GLV_GUI_H_INCLUDED
  #define GLV_GUI_H_INCLUDED
 
-#include "glv.h"
-#include "glv_color_controls.h"
+#include "GLV/glv.h"
+#include "GLV/glv_color_controls.h"
 
 #include "vsr_types.h"
 
