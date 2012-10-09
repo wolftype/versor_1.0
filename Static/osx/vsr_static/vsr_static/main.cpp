@@ -17,11 +17,16 @@
 #include "GLVInterfaceImpl.h"
 #include "Draw.h"
 
+
+
 using namespace vsr;
-using namespace glv;
+
+using glv::GLV;
+using glv::Window;
 
 Window * win;
 GLVApp * app;
+
 
 void GLVApp :: onDraw(){
     
@@ -39,7 +44,7 @@ void GLVApp :: onDraw(){
             Cir tc = CXY(1).trs(u*spacing, v*spacing,0);
         
             tc = tc.rot( Biv::xy * time * .1 );
-            Draw::R(tc);
+            GL::Draw::Render(tc);
         
         }
     

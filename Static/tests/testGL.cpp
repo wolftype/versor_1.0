@@ -15,7 +15,9 @@
 
 
 using namespace vsr;
-using namespace glv;
+
+using glv::GLV;
+using glv::Window;
 
 Window * win;
 GLVApp * app;
@@ -27,11 +29,16 @@ void GLVApp :: onDraw(){
 	
 	static int c = 0; c++;
 	double rad = sin(PI * c / 90.0);
-//	cout << rad << endl; 
 	a = a.trs(rad,0,0);
 	b = b.trs(-rad,0,0);
 	Cir cir = (a ^ b).dual();
-	Draw(a,0,1,0); Draw(b,0,1,0); Draw(cir,1,0,0);	
+    
+    static Cir sc= CXY(3);
+    
+    DRAW(sc);
+    interface.touch(sc);
+
+	DRAW3(a,0,1,0); DRAW3(b,0,1,0); DRAW3(cir,1,0,0);	
 }
 
 int main (int argc, const char * argv[])
@@ -40,12 +47,11 @@ int main (int argc, const char * argv[])
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
 	glv.colors().back.set(.3,.3,.3);		
-	win = new Window(500,500,"VSR",&glv);    
+	
+    win = new Window(500,500,"VERSOR",&glv);    
     app = new GLVApp(win);    
-    glv << app;
     
-  //  Rand::Seed();
-    
+    glv << app;        
     Application::run();
     
     return 0;

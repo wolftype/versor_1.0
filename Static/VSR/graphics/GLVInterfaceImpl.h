@@ -97,7 +97,10 @@ namespace vsr {
         }
     };
     
-    
+    /*! Application implementation using GLV
+        Has an TOUCH INTERFACE, a GUI TABLE, and a VIEW
+        Stores Mouse Data . . .
+    */
     struct GLVApp : public View3D{
         
         GLVInterface interface;
