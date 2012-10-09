@@ -1,4 +1,0 @@
-build/obj/glv_textview.o: src/glv_textview.cpp GLV/glv_textview.h \
-  GLV/glv_core.h GLV/glv_rect.h GLV/glv_notification.h GLV/glv_color.h \
-  GLV/glv_util.h GLV/glv_draw.h GLV/glv_conf.h GLV/glv_font.h \
-  GLV/glv_model.h GLV/glv_widget.h
