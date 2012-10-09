@@ -22,61 +22,6 @@ namespace vsr {
     
     Touchable& Interface :: current()  { return *( model -> active()); }
     
-    template <class A> void Interface :: touch( A& s, double t){
-        
-        Dls dls = Ro::dls(0,0,0);
-        
-        switch ( s.idx ){
-            case VEC:
-            case TNV:
-            case DRV:
-                dls = Ro::dls(s, .5);
-                break;
-            case CIR:
-            case PAR:
-                dls = Ro::sur(s);
-                break;
-            case PNT:
-                //dls = Ro::dls_vec(Vec(s), .2);
-                dls = Ro::dls_pnt( Ro::loc(s), .2);
-                break;
-            case LIN:
-            case PLN:
-                dls = Ro::dls_pnt( Fl::loc(s, Ori(1), 0) );
-                break;
-            case DLL:
-            case DLP:
-                dls = Ro::dls_pnt( Fl::loc(s, Ori(1), 1) );
-                break;			
-        }
-        
-        touch( s, dls, t);	
-    }
-    
-    
-    template <class A> void Interface :: touch( A& s, Pnt& x, double t){
-
-        //s.color(1,1,0);
-        
-        //physics
-        static double dt = 1;
-        static double acc = .9;
-        dt *= acc;
-		
-        if ( mouse.isDown ){
-            dt = t; // Reset acc
-            if ( pntClicked( x ) ) {
-                cout << "clicked" << s << endl; 
-                s.select();
-            }
-        }
-        
-        if (s.isSelected()){
-            xf(&s,x,dt);
-            //s.select();
-        }
-        
-    }
     
     void Interface :: touch( Frame& f, double t){
         
@@ -108,27 +53,6 @@ namespace vsr {
 //        if (f.isSelected()){
 //            xfFrame(&f, &e, dt);
 //        }
-    }
-    
-    template <class A> Vec Interface :: screenCoord(const A& p){
-        
-        Vec sc = GL::project(p[0], p[1], p[2], camera() );
-        sc[0] /= vd().w; sc[1] /= vd().h; sc[2] = 0;
-        //sc[1] = 1 - sc[1];
-        
-        return sc;
-    }
-    
-    template <class A> bool Interface :: pntClicked( const A& x, double rad ) {
-        Vec v = mouse.click;
-        
-        Vec p = Ro::loc(x);
-        
-        //Screen Coordinates of Target point
-        Vec sc = screenCoord(p);
-    
-        Vec dist = (v - sc);
-        return (dist.norm() < rad) ? 1 : 0;
     }
     
     void Interface :: onMouseMove(){
@@ -283,95 +207,9 @@ namespace vsr {
         }
                 
     }
-        
-    //State, Center Point, Amt
-    template <class A> 
-    void Interface :: xf ( A * s, Pnt& pos, double t ) {
-
-        //Address of State
-        A& ts = *s;
-        
-        //Center of Defining Sphere
-        Vec tv ( Ro::loc(pos) );   
-        
-        //2D coordinates of Defining Sphere
-        Vec sc = screenCoord(tv);//GL::project(tv[0], tv[1], tv[2], camera() ); 
-        
-        //Point in 3D space on Projection Ray closest to sphere.
-        Pnt cp  = Fl::loc( vd().ray, Ro::loc(pos), 1);        
-        
-        switch(keyboard.code){
-            case 's': //scale
-            {
-                //printf("scale\n");s
-                Vec tm1 = mouse.pos + mouse.drag - sc;
-                Vec tm2 = mouse.pos - sc; 
-                
-                //Drag towards or away from element
-                int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                ts = Op::sp( ts, Gen::dil_pnt( Ro::loc(pos), mouse.drag.norm() * t * neg ) );
-                break;
-            }
-            case 'g': //translate
-            {
-                ts = Op::sp (ts, Gen::trs( mouse.dragCat * t ) );
-                break;
-            }
-            case 'r': //rotate about local line
-            {
-                Dll td = pos <= Drb( mouse.dragBivCat * t );
-                ts = Op::sp ( ts, Gen::mot( td ) );
-                break;
-            }
-            case 'a': //scale
-            {
-                //printf("scale\n");s
-                Vec tm1 = mouse.pos + mouse.drag - sc;
-                Vec tm2 = mouse.pos - sc; 
-                
-                //Drag towards or away from element
-                int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                ts = Op::sp( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
-                break;
-            }
-            case 'f': //translate
-            {
-                ts = Op::sp(ts, Gen::trs( mouse.dragCat * t ) );
-                break;
-            }
-            case 'e': //rotate about local line
-            {
-                Dll td = pos <= Drb( mouse.dragBivCat * t );
-                ts = Op::sp( ts, Gen::mot( td ) );
-                break;
-            }           
-            case 'b': //boost by drag (not working)
-            {
-                Tnv tnv( mouse.dragCat );
-                
-                Bst pp = Gen::trv( Op::sp( tnv, Gen::trs( cp ) ) * t );
-                ts = Op::sp (ts, pp);
-                glPushMatrix();
-				glTranslated(cp[0],cp[1],cp[2]);
-				//tnv.draw();
-                glPopMatrix();
-                break;
-            }
-            case 't': // twist about global line
-            {
-                Dll td = Op::dl( mouse.origin ^ mouse.dragCat ^ Inf(1) );
-                ts = Op::sp ( ts, Gen::mot(td) );
-                break;
-            }
-
-            case 'q':
-            {
-                //cout << "deselect all" << endl;
-                s -> toggle();
-                break;
-            }
-        }
-    }
+    
+    
+ 
 
     void Interface :: xfFrame( Frame * frame, Frame * eframe, double t){
         //	if ( frame->isSelected() ) {
