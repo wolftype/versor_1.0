@@ -7,7 +7,6 @@
 //
 
 #include "vsr.h"
-#include "op.h"
 
 #include <iostream>
 #include "Interface.h"
