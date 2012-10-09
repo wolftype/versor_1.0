@@ -10,6 +10,7 @@
 #define vsr_vsr_types_h
 
 #include <map>
+#include <typeinfo>
 
 namespace vsr {
     

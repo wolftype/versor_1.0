@@ -7,6 +7,7 @@
 //
 #include "vsr.h"
 #include "op.h"
+
 #include "Draw.h"
 #include "GLVInterfaceImpl.h"
 
@@ -30,7 +31,7 @@ void GLVApp :: onDraw(){
 	a = a.trs(rad,0,0);
 	b = b.trs(-rad,0,0);
 	Cir cir = (a ^ b).dual();
-	Draw::R(a,0,1,0); Draw::R(b,0,1,0); Draw::R(cir,1,0,0);	
+	Draw(a,0,1,0); Draw(b,0,1,0); Draw(cir,1,0,0);	
 }
 
 int main (int argc, const char * argv[])

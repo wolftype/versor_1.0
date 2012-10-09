@@ -37,7 +37,7 @@ CORE_DIR	= core/
 GFX_DIR		= graphics/
 UTIL_DIR	= util/
 
-#Locations of External Libaries
+#Locations of Libaries
 LIB_DIR		= $(BUILD_DIR)lib/
 EXT_DIR		= ../externals/
 
@@ -61,21 +61,19 @@ CFLAGS += -Wno-deprecated
 OBJS := MV.o Frame.o 
 OBJS_GL := Camera.o Interface.o vsr_gl.o gl2ps.o
 
-# HEAD = 	MV.h Frame.h vsr_templates.h op.h Draw.h GLVInterfaceImpl.h \
-# 		Sca.h Rot.h Mot.h Vec.h Cir.h Sph.h Biv.h Par.h Dll.h Dil.h Trs.h Trv.h
-
 HEAD = vsr.h
 		
 PCH_DIR = $(BUILD_DIR)pch/
 PCH = $(addsuffix .gch, $(HEAD))
-# PCH_FILE = op.h.gch
+
 #Dependencies
 DEPFLAGS = -MMD -MF $(basename $@).dep
 
 #Link
 LDFLAGS	+= -L$(LIB_DIR) 
-#Graphics (Only added to LDFLAGS if GFX=1)
-#LINK_LDFLAGS += -L$(BASE_DIR)GLV/build/lib/ 
+
+#Graphics only added to LDFLAGS if GFX=1 - (default)
+
 ifeq ($(PLATFORM), linux)
 	LINK_LDFLAGS += -lGLEW -lGLU -lGL -lglut -lGLV
 else ifeq ($(PLATFORM), macosx)
@@ -89,7 +87,7 @@ ifeq ($(GFX),1)
 	LDFLAGS += $(LINK_LDFLAGS)
 endif
 
-VPATH = $(PCH_DIR):\
+VPATH = 	$(PCH_DIR):\
 		$(SRC_DIR)core:\
 		$(SRC_DIR)graphics:\
 		$(EXT_DIR)gl2ps: \
@@ -101,14 +99,13 @@ VPATH = $(PCH_DIR):\
 		$(INC_DIR)util:
 
 HPATH = -I$(PCH_DIR) \
-		-I$(INC_DIR)core \
-		-I$(INC_DIR)graphics \
+		-I$(INC_DIR)core/ \
+		-I$(INC_DIR)graphics/ \
 		-I$(INC_DIR)codegen/products/ \
-		-I$(INC_DIR)codegen \
-		-I$(INC_DIR)util \
-		-I$(EXT_DIR)gl2ps
-
-		# -I$(BASE_DIR)GLV/GLV \
+		-I$(INC_DIR)codegen/ \
+		-I$(INC_DIR)util/ \
+		-I$(EXT_DIR)gl2ps/ \
+		-I/usr/local/include/
 
 CPPFLAGS	+= $(LINK_CPPFLAGS)
 LDFLAGS		+= $(LINK_LDFLAGS)
@@ -124,7 +121,7 @@ $(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
 	@echo compiling $< to $@
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo
-	$(CC) $(CXXFLAGS) $(HPATH) -H -c $< -o $@ 
+	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@ 
 
 #COMPILATION of C (no linking)
 $(OBJ_DIR)%.o: %.c
@@ -135,12 +132,12 @@ $(OBJ_DIR)%.o: %.c
 	@echo
 	$(CC) $(CFLAGS) $(HPATH) -c $< -o $@ 
 
-#Precompiling Wildcard
+#Precompiling 
 .PRECIOUS: $(PCH_DIR)%.h.gch
 
 $(PCH_DIR)%.h.gch: %.h
 	@echo precompiling $< to $@
-	$(CC) $(CXXFLAGS) $(HPATH) -H -x c++-header -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(HPATH) -x c++-header -c $< -o $@
 
 
 dir:
@@ -156,9 +153,9 @@ vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
 
 testGL: testGL.cpp vsr
-	$(CC) $(CXXFLAGS) $(HPATH) $(LDFLAGS) -H -l$(LIB_NAME) -o $(BUILD_DIR)testGL $<
+	$(CXX) $(CXXFLAGS) $(HPATH) $< -o $(BUILD_DIR)testGL $(LDFLAGS) -l$(LIB_NAME)
 
 test: test.cpp vsr
-		$(CC) $(CXXFLAGS) $(HPATH) $(LDFLAGS) -H -l$(LIB_NAME) -o $(BUILD_DIR)test $<
+	$(CXX) $(CXXFLAGS) $(HPATH) $< -o $(BUILD_DIR)test $(LDFLAGS) -l$(LIB_NAME)
 
 	

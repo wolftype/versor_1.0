@@ -9,8 +9,6 @@
 #ifndef vsr_GLVInterfaceImpl_h
 #define vsr_GLVInterfaceImpl_h
 
-#include "vsr.h"
-
 //ABSTRACT BASE CLASS
 #include "Interface.h"
 

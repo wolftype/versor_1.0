@@ -156,7 +156,12 @@ namespace vsr {
 			static bool bDir; //draw directions?
 		
 			public:
-				static void dir(bool b);
+			
+			template<class T>
+			void operator() (const T& s) { R(s); }		
+			template<class T, class V>
+			void operator() (const T& s, V r, V g, V b, V a = 1.0) { R(s,r,g,b,a); }
+		static void dir(bool b);
 			
 				static void Seg(const Cir&, double t, bool dir = 1, int res = 20);
                 static void SegOff(const Cir& K, double t, double off, bool dir = 1, int res = 20);
