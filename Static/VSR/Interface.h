@@ -15,7 +15,7 @@
 #include "set.h"
 #include "Drawable.h"
 #include "Camera.h"
-#include <Map>
+#include <map>
 
 namespace vsr  {
     

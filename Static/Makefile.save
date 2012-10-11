@@ -136,7 +136,9 @@ $(PCH_DIR)%.h.gch: %.h
 
 
 linkfile:
-	@printf "%b\n" "CPPFLAGS +=$(LINK_CPPFLAGS)\r\nLDFLAGS +=$(LINK_LDFLAGS) -l$(LIB_NAME)" > Makefile.link
+        @printf "hello\n"
+
+#"%b\n" "CPPFLAGS +=$(LINK_CPPFLAGS)\r\nLDFLAGS +=$(LINK_LDFLAGS) -l$(LIB_NAME)" #> Makefile.link
 
 dir:
 	@mkdir -p $(OBJ_DIR)
@@ -166,4 +168,7 @@ install: vsr
 #endif
 	@$(INSTALL) -m 644 $(INC_DIR)*.h $(DESTDIR)/include/$(LIB_NAME)
 	@$(INSTALL) -m 644 $(INC_DIR)/codegen/*.h $(DESTDIR)/include/$(LIB_NAME)/codegen/
-	@$(INSTALL) -m 644 $(INC_DIR)/codegen/products/*.h $(DESTDIR)/include/$(LIB_NAME)/codegen/products/
+	@$(INSTALL) -m 644 $(INC_DIR)/codegen/products/*.h $(DESTDIR)/include/$(LIB_NAME)/codegen/products/ 	
+vv
+v
+v

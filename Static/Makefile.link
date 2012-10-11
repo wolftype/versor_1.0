@@ -1,0 +1,2 @@
+CPPFLAGS +=
+LDFLAGS += -lGLEW -lGLU -lGL -lglut -lGLV -lvsr
