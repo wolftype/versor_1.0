@@ -473,6 +473,15 @@ void reflections(GLVApp& app){
     
 }
 
+void spin(GLVApp& app){
+
+    static Cir cir = CXY(1);
+    
+    cir.draw();
+    
+    app.interface.touch(cir);
+}
+
 void GLVApp :: onDraw(){
      //   trv(*this);
     //tangentFrame(*this);
@@ -505,7 +514,9 @@ void GLVApp :: onDraw(){
     
   //  reflections(*this);
   
-    cout << DLN(0,1,0) << endl; 
+        spin(*this);
+  
+   // cout << DLN(0,1,0) << endl; 
 }
 
 

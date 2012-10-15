@@ -18,7 +18,7 @@
 #include "Gui.hpp"
 
 //GL2PS
-#include "gl2ps.h"
+#include "gl2ps/gl2ps.h"
 
 
 namespace vsr {
@@ -97,7 +97,10 @@ namespace vsr {
         }
     };
     
-    
+    /*! Application implementation using GLV
+        Has an TOUCH INTERFACE, a GUI TABLE, and a VIEW
+        Stores Mouse Data . . .
+    */
     struct GLVApp : public View3D{
         
         GLVInterface interface;
@@ -133,13 +136,14 @@ namespace vsr {
             
             //Update Camera Physics
             camera().step();
-            
+                        
             //Update ModelView Physics
             camera().modelView().step();
             
             //Push into Active Camera Settings (viewport bit, etc)
             camera().push3D();
             
+                //cout << "push" << endl; 
                 //Default Color
                 glColor3f(1,1,1);
                             
@@ -160,11 +164,11 @@ namespace vsr {
             interface.view().fit();
             GL::enablePreset();
             camera().push3D();
-			gl2ps();
+			//gl2ps();
             camera().pop3D();
             GL::disablePreset();
         }
-        
+        /*
         string printTikz(const State& s){
             interface.view().fit();
             camera().push3D();
@@ -197,7 +201,8 @@ namespace vsr {
             
             return ts;
         }       
-        
+      
+        */
         
         /*
         const char *title, const char *producer, GLint viewport[4], 
@@ -206,6 +211,9 @@ namespace vsr {
         GLint nr, GLint ng, GLint nb, GLint buffersize, FILE *stream, const char *filename )
 
         */
+        
+        
+        /*
         virtual void gl2ps(){
             FILE *fp;
             int state = GL2PS_OVERFLOW, buffsize = 0;
@@ -239,6 +247,7 @@ namespace vsr {
             fclose(fp);
             printf("Done!\n");
         }
+        */
       
         Camera& camera() { return interface.view().active(); }
         
@@ -294,6 +303,10 @@ namespace vsr {
         }
         
     };
+    
+    
+    
+    /*  SCENE GRAPH MODEL . . .
     
     struct GLVScene : public View3D {
         
@@ -366,6 +379,7 @@ namespace vsr {
         GLVInterface interface;
         
     };
+    */
 } // vsr::
     
 #endif

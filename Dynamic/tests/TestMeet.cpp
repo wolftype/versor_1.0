@@ -45,7 +45,9 @@ void circles(GLVApp& app){
  
     //Meet is Dual of Wedge Product Between Duals.
     Par p = (c2.dual() ^ s1).dual();
-        
+    
+    cout << Fl::dlp_ortho_cir(c1, PI) << endl;    
+                
     p.draw(1,0,1);
 }
 
