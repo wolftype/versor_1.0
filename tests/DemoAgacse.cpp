@@ -45,8 +45,8 @@ void basic(GLVApp& app){
     app.interface.touch(c);
 
     SET
-        //static Gui gui;
-        //app.subgui["basic"] = &gui;
+        static Gui gui;
+        app.subgui["basic"] = &gui;
         app.gui(num,"num",1,100)(amt,"amt")(bSkin, "skin");
         
         amt = 1;
@@ -82,8 +82,6 @@ void basic2(GLVApp& app){
     app.interface.touch(c);
 
     SET
-        //static Gui gui;
-        //app.subgui["basic"] = &gui;
         app.gui(num,"num",1,100)(amt,"amt")(bSkin, "skin");
         
         amt = 1;
@@ -118,10 +116,10 @@ void origin(GLVApp& app){
     static bool bDraw;
     static double val, amt,err,brt,num, lz;
     SET 
-        static Gui gui;
-        app.subgui["origin"] = &gui;
-        gui(num,"num",1,100)(val,"val",-10,10)(amt, "amt",-10,10)(err,"err"); 
-        gui(lz, "lz",-100,100)(bDraw);
+//        static Gui gui;
+//        app.subgui["origin"] = &gui;
+        app.gui(num,"num",1,100)(val,"val",-10,10)(amt, "amt",-10,10)(err,"err"); 
+        app.gui(lz, "lz",-100,100)(bDraw);
         
         num = 20;
         val = 1;
@@ -689,7 +687,9 @@ void demo (GLVApp& app){
 
 void GLVApp :: onDraw(){
 
+
     basic2(*this);
+ //   origin(*this);
  //   demo(*this);
 // if (bDemo) 
     

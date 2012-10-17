@@ -48,7 +48,7 @@ template< int NUM, int IDX, class T > class MV;
 
 //Predeclare Template Friends
 template< int NUM, int IDX, class T >
-std::ostream& operator << ( std::ostream& os, MV< NUM, IDX, T > a );
+std::ostream& operator << ( std::ostream& os, const MV< NUM, IDX, T >& a );
 
 //Predeclare FUNCTION templates
 template<class R, class T> const R cast ( const T& );
@@ -256,8 +256,10 @@ public:
     
     const MV& operator = (const MV& mv) { TPRINT(" Assignment Operator Same Type\n"); return set(mv); }
     
-    template< class A >
-    const MV operator = ( A a) { TPRINT(" Assignment Operator Different Type\n"); return cast< self_type, A > ( a ); } 
+//    template< class A >
+//    const MV& operator = ( A a) { TPRINT(" Assignment Operator Different Type\n"); return cast< self_type, A > ( a ); } 
+    template <int N2, int IDX2, class T2>
+    const MV& operator = (const MV<N2, IDX2, T2>& mv) { TPRINT(" Assignment Operator Different Type\n"); return set( cast< self_type,  MV<N2, IDX2, T2> > ( mv ) ); } 
 	
 	MV( const T& a0, const T& a1 )  BASECONST { set( a0,a1 ); }
 	void set( const T& a0, const T& a1 ) { mW[0]=a0; mW[1]=a1;  }
@@ -444,8 +446,8 @@ public:
     self_type mot( const Dll& d ) const;
     
     /*! Dilation from P by amt v */
-    template<class B>
-    self_type dil(const B& b, T v) const;
+    //template<class B>
+    self_type dil(const Pnt& b, T v) const;
     /*! Dilation from origin by amt v */
     self_type dil(T v) const;
     
@@ -456,9 +458,9 @@ public:
     /*! Transversion (AKA Boosting) in X Y Z direction */
     self_type trv(T x, T y, T z) const;
     
-    string name() { return Idx<IDX>::name(); }
+    string name() const { return Idx<IDX>::name(); }
 	/*! ONE-TO-ONE TEMPLATE FUNCTION PRETTY PRINTING */
-	friend std::ostream& operator << <> (  std::ostream& os, self_type a );
+	friend std::ostream& operator << <> (  std::ostream& os, const self_type& a );
     
 
 
@@ -492,10 +494,10 @@ public:
 //}
 
 template<int NUM, int IDX, typename T>
-inline std::ostream& operator << ( std::ostream& os, MV< NUM, IDX, T > a ){
+inline std::ostream& operator << ( std::ostream& os, const MV< NUM, IDX, T >& a ){
     os << a.name() << "\t";
     for (int i = 0 ; i < a.size; ++i){
-        os << a.mW[i] << " ";
+        os << a[i] << " ";
     }
     os << "\n";
     return os;

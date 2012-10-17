@@ -21,16 +21,20 @@
 
 #include "Frame.h"
 
+#include "Draw.h"
+#include "Glyph.h"
+
 namespace vsr {
 
 	class Chain : public Frame {
 		
         
-		Frame * mFrame;			///< Absolute frames of Joints = joint * prev link * prev frame
         
+		Frame * mJoint;			///< In Socket Transformation (RDHC, etc) SET THIS directly (all others follow)
 		Frame * mLink;			///< Relative Link (to next joint)
-		Frame * mJoint;			///< In Socket Transformation (RDHC, etc)
 		
+		Frame * mFrame;			///< Absolute frames of Joints = joint * prev link * prev frame
+
 		int mNum;
 		
 		void _init(){
@@ -70,6 +74,10 @@ namespace vsr {
 				mLink  = new Frame[n];
 				mJoint = new Frame[n];
 				_init();	        
+            }
+            
+            void frameSet(){
+                mJoint[0].set( mPos, mRot ); fk();
             }
         
 			/* GETTERS AND SETTERS */
@@ -182,7 +190,7 @@ namespace vsr {
                 int n = 0;
                 
                 //repeat until distance is decreased below threshold, or give up after 20 iterations
-                while (s > err){
+                while (s[0] > err){
                     
                     Pnt tmpGoal = goal;
                     Pnt tmpBase = base;
@@ -198,7 +206,7 @@ namespace vsr {
                         dls = nextDls(i);               //set boundary sphere through i-1 th frame;
                         dll = linf(i);                  //get line from tmp to i-1th frame
                         par = (dll ^ dls).dual();       //get point pair intersection of line and boundary sphere
-                        tmpGoal = Ro::split1(par);         //extract point from point pair intersection
+                        tmpGoal = Ro::split(par,true);         //extract point from point pair intersection
                     }
                     
                     //backward correction
@@ -206,7 +214,7 @@ namespace vsr {
                         dls = prevDls(i);                   //set boundary sphere through i+1 th frame
                         dll = linb(i);                      //get line to i+1th frame;
                         par = (dll ^ dls).dual();           //get point pair intersection of line and boundary sphere
-                        tmpBase = Ro::split1(par);
+                        tmpBase = Ro::split(par,true);
                         mFrame[i-1].pos(tmpBase);             //set position of i+1th frame
                     }
                     
@@ -219,7 +227,7 @@ namespace vsr {
                 //calculate joint angles
                 joints();               
             }
-            /// "FABRIK" Iterative Solver [see paper] feed target point, end frame and beginning frame,
+            /// "FABRIK" Iterative Solver [see paper "Inverse Kinematic Solutions using Conformal Geometric Algebra", by Aristodou and Lasenby] feed target point, end frame and beginning frame,
             void fabrik(const Pnt& p, int end, int begin, double err = .01){
                 
                 //squared distance between last frame and goal p
@@ -232,7 +240,7 @@ namespace vsr {
                 int n = 0;
                 
                 //repeat until distance is decreased below threshold, or give up after 20 iterations
-                while (s > err){
+                while (s[0] > err){
                     
                     Pnt tmpGoal = goal;
                     Pnt tmpBase = base;
@@ -247,7 +255,7 @@ namespace vsr {
                         dls = prevDls(i);               //set boundary sphere through i-1 th frame;
                         dll = linb(i);                  //get line from tmp to i-1th frame
                         par = (dll ^ dls).dual();       //get point pair intersection of line and boundary sphere
-                        tmpGoal = Ro::split1(par);         //extract point from point pair intersection
+                        tmpGoal = Ro::split(par,true);         //extract point from point pair intersection
                     }
                     
                     //forward correction
@@ -255,7 +263,7 @@ namespace vsr {
                         dls = nextDls(i);                   //set boundary sphere through i+1 th frame
                         dll = linf(i);                      //get line to i+1th frame;
                         par = (dll ^ dls).dual();           //get point pair intersection of line and boundary sphere
-                        tmpBase = Ro::split1(par);
+                        tmpBase = Ro::split(par,true);
                         mFrame[i+1].pos(tmpBase);             //set position of i+1th frame
                     }
                     
@@ -279,7 +287,7 @@ namespace vsr {
 
                 for (int i = 0; i < mNum-1; ++i){
                     //DRV of LINK
-                    Vec b = Biv( linf(i) ).unit().edual();                    
+                    Vec b = Biv( linf(i) ).unit().duale();                    
                     Rot nr = Gen::ratio(t, b); //What it takes to turn it there
                     //mJoint[i].rot( nr );
                     R = nr * R;
@@ -292,7 +300,7 @@ namespace vsr {
                 
                 for (int i = 1; i < mNum; ++i){                    
                     //disassemble
-                    Rot Rt = (-mFrame[i-1].rot()) * mFrame[i].rot();
+                    Rot Rt = (!mFrame[i-1].rot()) * mFrame[i].rot();
                     mJoint[i].rot( Rt ); 
                 }
 
@@ -302,16 +310,15 @@ namespace vsr {
             void angle(int k, double theta){
                 
                 Rot R =  mJoint[k].rot();
-                double t = Op::iphi ( R );
-                
-                cout << t << endl ;
-                
+                double t = Gen::iphi ( R );
+                                
                 Biv b = Biv( R ) * -1;// * ( (t > 1) ? ); // note: check Op:lg and Gen::log_rot (maybe mult by -1 there as well)
-                cout << b << endl; 
-                cout << Op::lg( R ) << endl; 
-                cout << Op :: pl( R ) << endl; 
+
+//                cout << b << endl; 
+//                cout << Op::lg( R ) << endl; 
+//                cout << Op :: pl( R ) << endl; 
                 
-                Rot nr = Gen::rot_biv_ang( b, theta );
+                Rot nr = Gen::rot( b.unit() * theta );
                 
                 mJoint[k].rot( nr );
                 
@@ -319,10 +326,7 @@ namespace vsr {
                 fk(k,mNum);
                 
             }
-        
-//            void step(){
-//                
-//            }
+    
 			
 			/// Derive Link Frames from current Positions
 			void links(){
@@ -334,14 +338,14 @@ namespace vsr {
         
         virtual void drawLinkages(bool dashed = true){
             for (int i = 0; i < mNum-1; ++i){
-                (dashed) ? Glyph::DashedLine(mFrame[i].pos(), mFrame[i+1].pos() ) : Glyph::Line(mFrame[i].pos(), mFrame[i+1].pos() );
+                (dashed) ? GL::Glyph::DashedLine(mFrame[i].pos(), mFrame[i+1].pos() ) : GL::Glyph::Line(mFrame[i].pos(), mFrame[i+1].pos() );
             }            
         }
         
         virtual void drawJoints(){
             for (int i = 0; i < mNum; ++i){
-//                mFrame[i].draw();
-                mFrame[i].cxy().draw();
+                DRAW( mFrame[i] );
+                DRAW( mFrame[i].cxy() );
             }           
         }
         

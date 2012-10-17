@@ -348,20 +348,20 @@ struct Gen {
     } 
     
     
-    /*! Generate a Dilation from Origin 
+    /*! Generate a Dilation from Origin [[[ uses Dil ( log(t) * .5 ) ]]]
         @param Amt t
     */
     template<class T>
     static Dil dil(T t){
-        return Dil( cosh(t*.5), sinh(t*.5) );
+        return Dil( cosh( std::log(t) *.5 ), sinh( std::log(t) * .5 ) );
     }
-    /*! Generate a Dilation from a point p 
-        @param Point p
+    /*! Generate a Dilation from a point p by amt t 
+        @param Point p (or Vec)
         @param Amt t
     */
-    template<class T>
-    static Tsd dil_pnt(const Pnt& p, T t){
-        return sp( Tsd ( Dil( cosh(t*.5), sinh(t*.5) ) ), Gen::trs(p) );
+    template<class P, class T>
+    static Tsd dil(const P& p, T t){
+        return sp( Tsd ( Dil( cosh( std::log(t)*.5 ), sinh( std::log(t)*.5 ) ) ), Gen::trs(p) );
     }
     template<int N, int IDX, class T>
     static Dil dil(const MV<N,IDX,T>& s){
@@ -484,7 +484,7 @@ struct Ro {
     /*! Squared Size of Normalized Dual Sphere (faster than general case)
         @param Normalized Dual Sphere
     */
-    static double size( const Dls& dls, bool dual = false){
+    static double dsize( const Dls& dls ){
         return (dls * dls)[0];
     }
     
@@ -644,9 +644,10 @@ struct Fl {
 		return dual ? ( Ori(1) <= Fl::dir( f.undual() ) ).wt() : ( Ori(1) <= Fl::dir(f) ).wt();
     }
     
-    static Par dlp_ortho_cir( const Cir& cir, double theta){
+    /*! Plane Orthogonal to Circle at angle theta */
+    static Dlp ortho_cir( const Cir& cir, double theta){
         Drv drvHome(0,0,1);
-        Dll dllHome = Op::dl(Ori(1) ^ Vec(0,1,0) ^ Inf(1) );
+        Dll dllHome = Op::dl( Ori(1) ^ Vec(0,1,0) ^ Inf(1) );
         
         Drv drv;
         Dlp dlp;
@@ -657,8 +658,8 @@ struct Fl {
         axis = axis.runit();
         mot = Gen::ratio( dllHome, axis);
         drv = Op::sp(drvHome, mot);
-	
-        return Op::sp(Ro::loc(cir) <= drv, Gen::mot( axis * theta/2.0) );
+            
+        return Op::sp( Ro::loc(cir) <= drv, Gen::mot( axis * theta/2.0) );
 }
   
     /*! Dual Plane from DRV and PNT */
@@ -703,7 +704,7 @@ struct Ta {
 
 
 inline Par Ro::par_cir(const Cir& c, double t){
-    return ( Fl::dlp_ortho_cir(c,t) ^ c.dual() ).dual();
+    return ( Fl::ortho_cir(c,t) ^ c.dual() ).dual();
 }
 
 //Point on Circle at theta

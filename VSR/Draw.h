@@ -22,6 +22,7 @@
 #define DRAW_H_INCLUDED
 
 #include "op.h"
+#include "Frame.h"
 
 #include <vector>
 #include <sstream>
@@ -68,7 +69,7 @@ namespace vsr {
                 template<> void Immediate( const Tnv& );
                 template<> void Immediate( const Tnb& );
                 template<> void Immediate( const Flp& );
-
+                template<> void Immediate( const Frame& );
                                                 
                 template< class A > void Render(const A&, float, float, float,float a = 1.0);
                 template< class A > void Render(const A& a) { Draw::Render(a, 1,1,1); }
@@ -88,13 +89,15 @@ namespace vsr {
                 template<class A> void PushPosition( const A& pos);
 
                 inline void Pop(){ glPopMatrix(); }
+                
+                
 
 				
 		//void drawLabel(double, double, double);
 		//virtual void drawLoop();
 		//virtual void clickTest(double,double);
 		//void printPS();
-		
+        		
 		} // Draw :: 
     
 
@@ -156,11 +159,16 @@ inline void Draw :: SegOff(const Cir& K, double t, double off, bool dir, int res
 template<class A>
 inline void Draw::Push( const A& pos, const Rot& rot, const double& scale ){
     glPushMatrix();
-        Vec4<> t = Gen::aa(rot);
+        Vec4<> t = Gen::aa(rot);  
         glTranslated(pos[0], pos[1], pos[2]);
         glRotated(t.w,t.x,t.y,t.z);
         glScaled(scale,scale,scale);
 }
+
+//template<class A>
+//inline void Draw::Scale( const double& scale ){
+//        glScaled(scale,scale,scale);
+//}
 
 template<class A>
 inline void Draw::PushPosition( const A& pos){
@@ -372,7 +380,17 @@ template<> inline void Draw :: Immediate (const Flp& s){
 //    s.null().draw(r,g,b,a);
 }        
 
-
+template<> inline void Draw :: Immediate (const Frame& s){
+    Draw :: PushPosition( s.pos() );
+        GL::scale( s.scale() );
+        
+        Draw :: Render ( s.x(), 1,0,0 );
+        Draw :: Render ( s.y(), 0,1,0 );
+        Draw :: Render ( s.z(), 0,0,1 );
+    Draw :: Pop();
+    
+    
+}  
 
 //    struct Print {
 //    

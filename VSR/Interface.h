@@ -372,7 +372,7 @@ namespace vsr  {
                 
                 //Drag towards or away from element
                 int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                Tsd tsd = Gen::dil_pnt( Ro::loc(pos), mouse.drag.norm() * t * neg );
+                Tsd tsd = Gen::dil( Ro::loc(pos), mouse.drag.norm() * t );//* neg );
                 //cout << tsd << endl; 
                 ts = Op::sp( ts,  tsd);
                 
@@ -397,7 +397,7 @@ namespace vsr  {
                 
                 //Drag towards or away from element
                 int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                ts = Op::sp( ts, Gen::dil_pnt( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
+                ts = Op::sp( ts, Gen::dil( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
                 break;
             }
             case 'f': //translate

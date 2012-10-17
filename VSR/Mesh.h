@@ -279,11 +279,11 @@ namespace vsr {
                 vp.push_back( Ro::pnt_cir(vc[j], t * TWOPI) );
             }
         }
-    
     }
+    
     void draw(float r = .5, float g=.5, float b=.5, float a = 1.0) {
         for(int i = 0; i < res; ++i){
-            for(int j = 0; i < res-2; ++j){
+            for(int j = 0; j < res-2; ++j){
                 glColor4f(r,g,b,a);
                 glBegin(GL_QUADS);
                 int a = i * (res) + j;

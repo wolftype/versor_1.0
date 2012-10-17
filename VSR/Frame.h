@@ -134,7 +134,8 @@ namespace vsr {
 			
 			Mat4<> image() const { return mImage; }										///< get matrix image 		
 			Frame& orient()	{ mImage = Gen::mat(mRot); return *this; }					///< load matrix image with current rotor
-			void reset()	{ mRot.set(1,0,0,0); mPos.set(0,0,0,1,0); orient(); }		///< reset position and orientation
+			void set(const Pnt&p, const Rot& r = Rot(1,0,0,0) ) { mPos = p; mRot = r; orient(); }
+            void reset()	{ mRot.set(1,0,0,0); mPos.set(0,0,0,1,0); orient(); }		///< reset position and orientation
 			
 			/*! Local Z Axis Euclidean Vector */
 			Vec forward()	const { return Vec(mImage[2][0],mImage[2][1],mImage[2][2]) * - 1; }
@@ -215,7 +216,12 @@ namespace vsr {
             Bst ppy(double t) { return Gen::trv(1,ty(t)); }			///< y tangent space boost versor
             Bst ppz(double t) { return Gen::trv(1,tz(t)); }			///< z tangent space boost versor			
 
-			void mot(const Mot m) { mPos = PAO.sp(m); mRot = m; orient(); } ///< set position and orientation by motor
+			void mot(const Mot& m) { 
+                mPos = PAO.sp(m); 
+                mRot = m; 
+                cout << m << mRot << endl; 
+                orient(); 
+            } ///< set position and orientation by motor
 			
             /*! Orient Towards Point p  
                 @param a target pnt or vector

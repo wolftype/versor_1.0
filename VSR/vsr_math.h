@@ -10,7 +10,7 @@
 #ifndef VSR_MATH_INCLUDED
 #define VSR_MATH_INCLUDED
 
-#include <math.h>
+#include <cmath>
 
 namespace vsr {
 	
@@ -30,6 +30,9 @@ namespace vsr {
         inline static bool Error(T v, T goal, T error){
             return Range(v, goal - error, goal + error);
         }
+        
+//        template<typename T>
+//        inline static T log(T v) { return log(v); }
         
 	};
     
