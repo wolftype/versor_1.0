@@ -1136,7 +1136,7 @@ State Draw :: pos(const State& s){
 
 void Draw :: Push( const State& pos, const State& rot, const double& scale ){
 	glPushMatrix();
-		Vec4<> t = Op::aa(rot);
+		Vec4<> t = Op::aa(rot);  
 		glTranslated(pos[0], pos[1], pos[2]);
 		glRotated(t.w,t.x,t.y,t.z);
 		glScaled(scale,scale,scale);

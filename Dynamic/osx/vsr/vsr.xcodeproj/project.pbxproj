@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9B092D9B153CB028003E03F2 /* Linkage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B092D9A153CB027003E03F2 /* Linkage.h */; };
-		9B0C7583162CA5FA0037F835 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0C7582162CA5FA0037F835 /* libGLV.a */; };
 		9B0D3D8A152BD00000AD875C /* vsr_gl_fbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D3D82152BD00000AD875C /* vsr_gl_fbo.h */; };
 		9B0D3D8B152BD00000AD875C /* vsr_gl_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D3D83152BD00000AD875C /* vsr_gl_material.h */; };
 		9B0D3D8C152BD00000AD875C /* vsr_gl_pbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D3D84152BD00000AD875C /* vsr_gl_pbo.h */; };
@@ -1716,6 +1715,7 @@
 		9B23AF17151FD58D009304D6 /* conga_op_Trv_Vec.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D0ACE144298370032E5A3 /* conga_op_Trv_Vec.c */; };
 		9B23AF18151FD58D009304D6 /* conga_op_Vec.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D0ACF144298370032E5A3 /* conga_op_Vec.c */; };
 		9B23AF19151FD58D009304D6 /* conga_op_Vec_Aff.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9D0AD0144298370032E5A3 /* conga_op_Vec_Aff.c */; };
+		9B2529B0162E34B400DD9FC2 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AF162E34B400DD9FC2 /* libGLV.a */; };
 		9B2A5083159CF0A000A9F12C /* DemoAgacse.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B2A5082159CF0A000A9F12C /* DemoAgacse.1 */; };
 		9B2A508B159CF0C700A9F12C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9D116C1442AB280032E5A3 /* OpenGL.framework */; };
 		9B2A508C159CF0CC00A9F12C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8AFCB915202B6E009E322F /* GLUT.framework */; };
@@ -2600,7 +2600,6 @@
 
 /* Begin PBXFileReference section */
 		9B092D9A153CB027003E03F2 /* Linkage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Linkage.h; sourceTree = "<group>"; };
-		9B0C7582162CA5FA0037F835 /* libGLV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLV.a; path = ../../../../GLV/build/lib/libGLV.a; sourceTree = "<group>"; };
 		9B0D3D82152BD00000AD875C /* vsr_gl_fbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vsr_gl_fbo.h; path = gfx/vsr_gl_fbo.h; sourceTree = "<group>"; };
 		9B0D3D83152BD00000AD875C /* vsr_gl_material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vsr_gl_material.h; path = gfx/vsr_gl_material.h; sourceTree = "<group>"; };
 		9B0D3D84152BD00000AD875C /* vsr_gl_pbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vsr_gl_pbo.h; path = gfx/vsr_gl_pbo.h; sourceTree = "<group>"; };
@@ -2631,6 +2630,7 @@
 		9B23A846151E83D0009304D6 /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
 		9B23A848151E85AF009304D6 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
 		9B23A85E151FD339009304D6 /* cga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = cga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2529AF162E34B400DD9FC2 /* libGLV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLV.a; path = ../../../../GLV/build/lib/libGLV.a; sourceTree = "<group>"; };
 		9B2A507D159CF0A000A9F12C /* DemoAgacse */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoAgacse; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2A5080159CF0A000A9F12C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B2A5082159CF0A000A9F12C /* DemoAgacse.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DemoAgacse.1; sourceTree = "<group>"; };
@@ -4902,7 +4902,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B0C7583162CA5FA0037F835 /* libGLV.a in Frameworks */,
 				9B2A5093159CFFD700A9F12C /* libGamma.a in Frameworks */,
 				9B2A5096159D04DB00A9F12C /* AudioToolbox.framework in Frameworks */,
 				9B2A5097159D04DB00A9F12C /* AudioUnit.framework in Frameworks */,
@@ -5065,6 +5064,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B2529B0162E34B400DD9FC2 /* libGLV.a in Frameworks */,
 				9BCECD061527886F00589E30 /* OpenGL.framework in Frameworks */,
 				9BCECD051527886700589E30 /* GLUT.framework in Frameworks */,
 				9BCECD041527886100589E30 /* libvsr.a in Frameworks */,
@@ -5087,7 +5087,7 @@
 		08FB7794FE84155DC02AAC07 /* vsr */ = {
 			isa = PBXGroup;
 			children = (
-				9B0C7582162CA5FA0037F835 /* libGLV.a */,
+				9B2529AF162E34B400DD9FC2 /* libGLV.a */,
 				9B6FDF4615545DAE0070D3E3 /* AudioUnit.framework */,
 				9B6FDF4415545DA40070D3E3 /* AudioToolbox.framework */,
 				9B3F22F615FFF7F60071E210 /* README */,
@@ -11490,6 +11490,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../GLV/build/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -11507,6 +11511,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../GLV/build/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

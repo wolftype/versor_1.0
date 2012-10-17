@@ -225,6 +225,7 @@ namespace vsr {
             /*! Orient Towards Point p  */
             void orientY(const State& p){
                 mRot = Gen::ratio(Vec::y, (Vec(p) - Vec(mPos)).unit());
+                //cout << mRot << endl; 
                 orient();
             }
             void orientY(double x, double y, double z){

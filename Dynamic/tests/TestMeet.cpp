@@ -230,7 +230,14 @@ void GLVApp :: onDraw(){
 //        if (bCirSph) circle_sphere(*this);
 //        if (bLines) lines(*this);
 
-    circles(*this);
+    static Frame f;
+    Pnt p = mouse().origin;
+    f.orientY(Vec(p).unit());
+//    f.orientY(Vec::x);
+    
+    f.draw();
+
+//    circles(*this);
 //    circle_line(*this);
  //   two_points(*this);
 //    circle_clock(*this);

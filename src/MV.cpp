@@ -68,16 +68,14 @@ namespace vsr{
         return  Op::sp(*this, Gen::trv(x,y,z)); 
     }
      
-    template<int N, int IDX, class T> template<class B>
-    MV<N, IDX, T> MV<N, IDX, T>::dil(const B& b, T v) const {
-        return Op::sp(*this, Gen::dil(b,v) ); 
+    template<int N, int IDX, class T> //template<class B>
+    MV<N, IDX, T> MV<N, IDX, T>::dil(const Pnt& b, T v) const {
+        return Op::sp( *this, Gen::dil(b,v) ); 
     }
     template<int N, int IDX, class T>
     MV<N, IDX, T> MV<N, IDX, T>::dil(T v) const {
         return  Op::sp(*this, Gen::dil(v) ); 
     }
-
-
 
 
 //    #include "vsr_instantiation.cpp"

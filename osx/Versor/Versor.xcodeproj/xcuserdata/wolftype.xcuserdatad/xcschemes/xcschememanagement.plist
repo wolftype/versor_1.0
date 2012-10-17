@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>DemoMotors.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>OpGraph.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +33,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>9B0C756A162C9B9C0037F835</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B25299C162DF3E500DD9FC2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -14,6 +14,12 @@
 		9B0C757A162C9BC30037F835 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF41628AB050064FF35 /* libGLV.a */; };
 		9B0C757C162C9BDF0037F835 /* DemoAgacse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B0C757B162C9BDF0037F835 /* DemoAgacse.cpp */; };
 		9B0C7581162CA55A0037F835 /* Lattice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B0C7580162CA55A0037F835 /* Lattice.cpp */; };
+		9B2529A3162DF3E500DD9FC2 /* DemoMotors.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B2529A2162DF3E500DD9FC2 /* DemoMotors.1 */; };
+		9B2529A9162DF41F00DD9FC2 /* DemoMotors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */; };
+		9B2529AA162DF42800DD9FC2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9B2529AB162DF43400DD9FC2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9B2529AD162DF44300DD9FC2 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
+		9B2529AE162DF44900DD9FC2 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B76CC181628A9390064FF35 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B76CC171628A9390064FF35 /* main.cpp */; };
 		9B76CC1A1628A9390064FF35 /* Versor.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9B76CC191628A9390064FF35 /* Versor.1 */; };
 		9B76CC841628A9540064FF35 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B76CC291628A9540064FF35 /* Camera.cpp */; };
@@ -136,6 +142,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9B25299B162DF3E500DD9FC2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9B2529A3162DF3E500DD9FC2 /* DemoMotors.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9B76CC111628A9390064FF35 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -170,6 +186,11 @@
 		9B0C757E162C9F580037F835 /* vsr_gfxdata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gfxdata.h; sourceTree = "<group>"; };
 		9B0C757F162CA41F0037F835 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		9B0C7580162CA55A0037F835 /* Lattice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lattice.cpp; sourceTree = "<group>"; };
+		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoMotors; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2529A0162DF3E500DD9FC2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9B2529A2162DF3E500DD9FC2 /* DemoMotors.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DemoMotors.1; sourceTree = "<group>"; };
+		9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoMotors.cpp; path = ../../tests/DemoMotors.cpp; sourceTree = "<group>"; };
+		9B2529AC162DF44300DD9FC2 /* libGLV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLV.a; path = ../../../GLV/build/lib/libGLV.a; sourceTree = "<group>"; };
 		9B76CC131628A9390064FF35 /* Versor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Versor; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B76CC171628A9390064FF35 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B76CC191628A9390064FF35 /* Versor.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Versor.1; sourceTree = "<group>"; };
@@ -292,6 +313,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B25299A162DF3E500DD9FC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B2529AE162DF44900DD9FC2 /* libvsr.a in Frameworks */,
+				9B2529AD162DF44300DD9FC2 /* libGLV.a in Frameworks */,
+				9B2529AB162DF43400DD9FC2 /* GLUT.framework in Frameworks */,
+				9B2529AA162DF42800DD9FC2 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B76CC101628A9390064FF35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -329,9 +361,19 @@
 			path = DemoAgacse;
 			sourceTree = "<group>";
 		};
+		9B25299F162DF3E500DD9FC2 /* DemoMotors */ = {
+			isa = PBXGroup;
+			children = (
+				9B2529A0162DF3E500DD9FC2 /* main.cpp */,
+				9B2529A2162DF3E500DD9FC2 /* DemoMotors.1 */,
+			);
+			path = DemoMotors;
+			sourceTree = "<group>";
+		};
 		9B76CC081628A9380064FF35 = {
 			isa = PBXGroup;
 			children = (
+				9B2529AC162DF44300DD9FC2 /* libGLV.a */,
 				9B76CCF41628AB050064FF35 /* libGLV.a */,
 				9B76CCF21628AAF70064FF35 /* GLUT.framework */,
 				9B76CCF01628AAF00064FF35 /* OpenGL.framework */,
@@ -339,10 +381,12 @@
 				9B76CCEA1628AACF0064FF35 /* testGL.cpp */,
 				9B76CCEB1628AAD00064FF35 /* testGraph.cpp */,
 				9B0C757B162C9BDF0037F835 /* DemoAgacse.cpp */,
+				9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */,
 				9B0C757D162C9C5E0037F835 /* vsr_tests.h */,
 				9B76CC161628A9390064FF35 /* Versor */,
 				9B76CCF61628ABD30064FF35 /* gl2ps */,
 				9B0C756D162C9B9C0037F835 /* DemoAgacse */,
+				9B25299F162DF3E500DD9FC2 /* DemoMotors */,
 				9B76CC141628A9390064FF35 /* Products */,
 				9B76CC281628A9540064FF35 /* src */,
 				9B76CC321628A9540064FF35 /* VSR */,
@@ -356,6 +400,7 @@
 				9B76CC241628A9440064FF35 /* libvsr.a */,
 				9B76CCDF1628AA810064FF35 /* OpGraph */,
 				9B0C756B162C9B9C0037F835 /* DemoAgacse */,
+				9B25299D162DF3E500DD9FC2 /* DemoMotors */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -631,6 +676,23 @@
 			productReference = 9B0C756B162C9B9C0037F835 /* DemoAgacse */;
 			productType = "com.apple.product-type.tool";
 		};
+		9B25299C162DF3E500DD9FC2 /* DemoMotors */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B2529A6162DF3E500DD9FC2 /* Build configuration list for PBXNativeTarget "DemoMotors" */;
+			buildPhases = (
+				9B252999162DF3E500DD9FC2 /* Sources */,
+				9B25299A162DF3E500DD9FC2 /* Frameworks */,
+				9B25299B162DF3E500DD9FC2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DemoMotors;
+			productName = DemoMotors;
+			productReference = 9B25299D162DF3E500DD9FC2 /* DemoMotors */;
+			productType = "com.apple.product-type.tool";
+		};
 		9B76CC121628A9390064FF35 /* Versor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B76CC1D1628A9390064FF35 /* Build configuration list for PBXNativeTarget "Versor" */;
@@ -707,6 +769,7 @@
 				9B76CC231628A9440064FF35 /* vsr */,
 				9B76CCDE1628AA810064FF35 /* OpGraph */,
 				9B0C756A162C9B9C0037F835 /* DemoAgacse */,
+				9B25299C162DF3E500DD9FC2 /* DemoMotors */,
 			);
 		};
 /* End PBXProject section */
@@ -717,6 +780,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B0C757C162C9BDF0037F835 /* DemoAgacse.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B252999162DF3E500DD9FC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B2529A9162DF41F00DD9FC2 /* DemoMotors.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +847,28 @@
 		9B0C7574162C9B9C0037F835 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9B2529A4162DF3E500DD9FC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9B2529A5162DF3E500DD9FC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -883,6 +976,15 @@
 			buildConfigurations = (
 				9B0C7573162C9B9C0037F835 /* Debug */,
 				9B0C7574162C9B9C0037F835 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B2529A6162DF3E500DD9FC2 /* Build configuration list for PBXNativeTarget "DemoMotors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B2529A4162DF3E500DD9FC2 /* Debug */,
+				9B2529A5162DF3E500DD9FC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
