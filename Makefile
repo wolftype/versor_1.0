@@ -42,7 +42,7 @@ BIN_DIR		=$(BUILD_DIR)bin/
 CFLAGS += -Wno-deprecated
 
 OBJS := vsr_mv.o vsr_frame.o 
-OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o gl2ps.o
+OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o vsr_gl_shader.o gl2ps.o 
 
 HEAD = vsr.h
 PCH_DIR = $(BUILD_DIR)pch/
@@ -74,6 +74,7 @@ endif
 VPATH = $(PCH_DIR):\
 		$(SRC_DIR):\
 		$(EXT_DIR): \
+		$(EXT_DIR)gl2ps: \
 		$(TST_DIR):\
 		$(DEMO_DIR):\
 		$(INC_DIR):\

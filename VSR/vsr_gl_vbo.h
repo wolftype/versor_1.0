@@ -45,48 +45,109 @@ namespace vsr {
 		        
             GLuint id() const { return mId; }
         
-			VBO();
+            VBO() : mId(0) ,
+            mType(GL::FLOAT),
+            mFormat(GL::RGB), 
+            mTarget(GL::VERTEXBUFFER),
+            mUsage(GL::DYNAMIC),
+            mOffset(0),
+            mNum(0),
+            mDataSize(0),
+            mData(NULL)
+            { }
 			
 //            VBO(GLvoid * udata, int num,  GLsizeiptr s, GL::BUFFER = GL::VERTEXBUFFER, GL::USAGE use = GL::STATIC);
-            VBO(GLvoid * udata, int num, GLsizeiptr s, GL::BUFFER = GL::VERTEXBUFFER, GL::USAGE use = GL::STATIC);
-            void set(GLvoid * udata, int num, GLsizeiptr s, GL::BUFFER = GL::VERTEXBUFFER );
+            VBO(GLvoid * udata, int num, GLsizeiptr s, GL::BUFFER b = GL::VERTEXBUFFER, GL::USAGE use = GL::STATIC)
+            : mId(0),
+            mType(GL::FLOAT),
+            mFormat(GL::RGB), 
+            mTarget(b),
+            mUsage(use),
+            mNum(num),
+            mOffset(0),
+            mDataSize(s),
+            mData(udata)
+
+            {
+                generate();        
+            }
+            
         
-//            void set(GLvoid * udata, int num,  GLsizeiptr s, GL::BUFFER = GL::VERTEXBUFFER );
             void target(GL::BUFFER t) { mTarget = t; }
         
             void generate(GLvoid * udata,  GLsizeiptr s, GL::BUFFER = GL::VERTEXBUFFER);
-			void generate();
+            
+			void generate() {
+                glGenBuffers(1, &mId);	
+                cout << "GENERATING VBO id " << mId << endl; 
+                GL::error( "vbo gen");
+                bind();
+                buffer();
+                unbind();
+            }
 		
-			void buffer();
+            void bind() {
+                glBindBuffer(mTarget, mId);//arb?
+                GL::error( "vbo bind");
+            }
 
-			void bind();
-			void unbind();
-            void null();
+            void buffer(){
+            //    mDataSize = GL :: dataSize( mFormat, mType, mNum );
+                glBufferData(mTarget, mDataSize, mData, mUsage);
+                GL::error( "vbo buffer data");
+            }    
+
+            void set(GLvoid* udata, int num, GLsizeiptr s, GL::BUFFER t){
+                mData = udata;
+                mNum = num;
+                mTarget = t;
+                mDataSize = s;//GL::dataSize(mFormat, mType, mNum);
+            }
+
+            void null(){
+                mData = NULL;
+            }
+
+            void unbind() {
+                glBindBuffer(mTarget, 0);//arb?
+                GL::error("vbo ubind");
+            }
+
+            void update() {
+
+                bind();
+                glBufferSubData( mTarget, 0, mDataSize, mData );
+                unbind();
+                GL::error( "vbo update data");
+
+            }
+            
             void offset(GLuint n ) { mOffset = n; }
             
             void usage(GL::USAGE u) { mUsage = u; }
 			
-            void update();
 			void draw(GLenum);
-            void drawArray(GLenum = GL_LINE_LOOP);
-            void drawElements(GLenum = GL_TRIANGLES, int num = -1, int off = 0);
+            void drawArray(GLenum mode = GL_LINE_LOOP){
+                glDrawArrays  (mode, 0, mNum);	
+                GL::error("vbo draw arrays");
+            }
+            void drawElements(GLenum mode = GL_TRIANGLES, int num = -1, int off = 0){
+                glDrawElements ( mode, (num==-1) ? mNum - off : num, GL::UINT, (GLvoid *) ( sizeof( GLuint ) * off ) );	
+                GL::error("vbo draw elements");
+            }
             void enable();
             void disable();
             
             GLsizeiptr size() const { return mDataSize; }
             GLuint num() const { return mNum; }
             
-//            static void DrawElements(GLenum, GLvoid *);
 //			void map(GLenum);
 //			void unmap();
             
 	};
 	
-//    void VBO::DrawElements(GLenum g, GLvoid * offset){
-//        
-//    }
     
-    /// Double Buffer (vertex and elements)
+    /// Two Buffer (vertex and elements)
     struct DBO{
         VBO vertex, index;
         VBO& operator [] (int idx) { return (&vertex)[idx]; }
