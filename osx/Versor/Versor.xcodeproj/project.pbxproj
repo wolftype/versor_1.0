@@ -71,7 +71,6 @@
 		9BB1083D1638840A009F3070 /* Curvature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB1083C1638840A009F3070 /* Curvature.cpp */; };
 		9BBF0ADA163B087800146CA6 /* col.frag in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
 		9BBF0ADB163B087B00146CA6 /* pos.vert in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
-		9BBF0ADC163B117A00146CA6 /* vsr_gl_vbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C791636037800A864DC /* vsr_gl_vbo.cpp */; };
 		9BBF0ADD163B118000146CA6 /* vsr_gl_shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C751636037800A864DC /* vsr_gl_shader.cpp */; };
 		9BBF0ADF163B11AA00146CA6 /* col.frag in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
 		9BBF0AE0163B11AC00146CA6 /* pos.vert in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
@@ -248,7 +247,7 @@
 		9B2529AC162DF44300DD9FC2 /* libGLV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLV.a; path = ../../../GLV/build/lib/libGLV.a; sourceTree = "<group>"; };
 		9B456BB51640B261008E5EA2 /* To Do */ = {isa = PBXFileReference; lastKnownFileType = text; name = "To Do"; path = "../../To Do"; sourceTree = "<group>"; };
 		9B456BB71640C2BB008E5EA2 /* vsr_stat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_stat.h; sourceTree = "<group>"; };
-		9B5890381641A69B0096B491 /* Graphics copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Graphics copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B5890381641A69B0096B491 /* Graphics copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Graphics copy"; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B58903B1641A6D90096B491 /* Meet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Meet.cpp; path = ../../examples/Meet.cpp; sourceTree = "<group>"; };
 		9B680148163F349E004A850F /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = Graphics; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B68014A163F34D1004A850F /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Graphics.cpp; path = ../../tests/Graphics.cpp; sourceTree = "<group>"; };
@@ -370,7 +369,6 @@
 		9BDA7C5D1636035300A864DC /* vsr_gl_shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_shader.h; sourceTree = "<group>"; };
 		9BDA7C5E1636035300A864DC /* vsr_gl_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_texture.h; sourceTree = "<group>"; };
 		9BDA7C5F1636035300A864DC /* vsr_gl_vao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_vao.h; sourceTree = "<group>"; };
-		9BDA7C601636035300A864DC /* vsr_gl_varray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_varray.h; sourceTree = "<group>"; };
 		9BDA7C611636035300A864DC /* vsr_gl_vbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_vbo.h; sourceTree = "<group>"; };
 		9BDA7C621636035300A864DC /* vsr_GLVInterfaceImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_GLVInterfaceImpl.h; sourceTree = "<group>"; };
 		9BDA7C631636035300A864DC /* vsr_glyph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_glyph.h; sourceTree = "<group>"; };
@@ -393,8 +391,6 @@
 		9BDA7C751636037800A864DC /* vsr_gl_shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl_shader.cpp; sourceTree = "<group>"; };
 		9BDA7C761636037800A864DC /* vsr_gl_texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl_texture.cpp; sourceTree = "<group>"; };
 		9BDA7C771636037800A864DC /* vsr_gl_vao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl_vao.cpp; sourceTree = "<group>"; };
-		9BDA7C781636037800A864DC /* vsr_gl_varray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl_varray.cpp; sourceTree = "<group>"; };
-		9BDA7C791636037800A864DC /* vsr_gl_vbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_gl_vbo.cpp; sourceTree = "<group>"; };
 		9BDA7C7A1636037800A864DC /* vsr_interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_interface.cpp; sourceTree = "<group>"; };
 		9BDA7C7B1636037800A864DC /* vsr_lattice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_lattice.cpp; sourceTree = "<group>"; };
 		9BDA7C7C1636037800A864DC /* vsr_mv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vsr_mv.cpp; sourceTree = "<group>"; };
@@ -596,8 +592,6 @@
 				9BDA7C751636037800A864DC /* vsr_gl_shader.cpp */,
 				9BDA7C761636037800A864DC /* vsr_gl_texture.cpp */,
 				9BDA7C771636037800A864DC /* vsr_gl_vao.cpp */,
-				9BDA7C781636037800A864DC /* vsr_gl_varray.cpp */,
-				9BDA7C791636037800A864DC /* vsr_gl_vbo.cpp */,
 				9BDA7C7A1636037800A864DC /* vsr_interface.cpp */,
 				9BDA7C7B1636037800A864DC /* vsr_lattice.cpp */,
 				9BDA7C7C1636037800A864DC /* vsr_mv.cpp */,
@@ -710,7 +704,6 @@
 				9BDA7C5D1636035300A864DC /* vsr_gl_shader.h */,
 				9BDA7C5E1636035300A864DC /* vsr_gl_texture.h */,
 				9BDA7C5F1636035300A864DC /* vsr_gl_vao.h */,
-				9BDA7C601636035300A864DC /* vsr_gl_varray.h */,
 				9BBDCA35163A1C590082FBAE /* vsr_gl_vattrib.h */,
 				9BDA7C611636035300A864DC /* vsr_gl_vbo.h */,
 				9BDA7C631636035300A864DC /* vsr_glyph.h */,
@@ -1123,7 +1116,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBF0ADD163B118000146CA6 /* vsr_gl_shader.cpp in Sources */,
-				9BBF0ADC163B117A00146CA6 /* vsr_gl_vbo.cpp in Sources */,
 				9B76CC8A1628A9540064FF35 /* vsr_gl.cpp in Sources */,
 				9BDA7C7D1636037800A864DC /* vsr_camera.cpp in Sources */,
 				9BDA7C7F1636037800A864DC /* vsr_draw.cpp in Sources */,

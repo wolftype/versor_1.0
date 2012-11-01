@@ -13,119 +13,119 @@
 namespace vsr {
 
 
-VBO :: VBO() : mId(0) ,
-mType(GL::FLOAT),
-mFormat(GL::RGB), 
-mTarget(GL::VERTEXBUFFER),
-mUsage(GL::DYNAMIC),
-mOffset(0),
-mNum(0),
-mDataSize(0),
-mData(NULL)
-{ }
+//VBO :: VBO() : mId(0) ,
+//mType(GL::FLOAT),
+//mFormat(GL::RGB), 
+//mTarget(GL::VERTEXBUFFER),
+//mUsage(GL::DYNAMIC),
+//mOffset(0),
+//mNum(0),
+//mDataSize(0),
+//mData(NULL)
+//{ }
 	
-VBO :: VBO (GLvoid * udata, int num, GLsizeiptr s, GL::BUFFER b, GL::USAGE use) : mId(0),
-mType(GL::FLOAT),
-mFormat(GL::RGB), 
-mTarget(b),
-mUsage(use),
-mNum(num),
-mOffset(0),
-mDataSize(s),
-mData(udata)
+//VBO :: VBO (GLvoid * udata, int num, GLsizeiptr s, GL::BUFFER b, GL::USAGE use) : mId(0),
+//mType(GL::FLOAT),
+//mFormat(GL::RGB), 
+//mTarget(b),
+//mUsage(use),
+//mNum(num),
+//mOffset(0),
+//mDataSize(s),
+//mData(udata)
+//
+//{
+////    set(udata, n, s,  b);
+//    generate();        
+//}
 
-{
-//    set(udata, n, s,  b);
-    generate();        
-}
-
-void VBO :: generate(void * udata, GLsizeiptr s, GL::BUFFER b){
-//	set(udata, n, s, b);
-	generate();
-}
-	
-void VBO :: generate() {
-	glGenBuffers(1, &mId);	
-    cout << "GENERATING VBO id " << mId << endl; 
-	GL::error( "vbo gen");
-    bind();
-    buffer();
-    unbind();
-}
-
-void VBO :: bind() {
-	glBindBuffer(mTarget, mId);//arb?
-	GL::error( "vbo bind");
-}
-
-void VBO :: buffer(){
-//    mDataSize = GL :: dataSize( mFormat, mType, mNum );
-    glBufferData(mTarget, mDataSize, mData, mUsage);
-    GL::error( "vbo buffer data");
-}    
-
-void VBO :: set(GLvoid* udata, int num, GLsizeiptr s, GL::BUFFER t){
-	mData = udata;
-    mNum = num;
-    mTarget = t;
-	mDataSize = s;//GL::dataSize(mFormat, mType, mNum);
-}
-
-void VBO :: null(){
-	mData = NULL;
-}
-
-void VBO :: unbind() {
-	glBindBuffer(mTarget, 0);//arb?
-    GL::error("vbo ubind");
-}
-
-void VBO :: update() {
-
-	bind();
-	glBufferSubData( mTarget, 0, mDataSize, mData );
-	unbind();
-	GL::error( "vbo update data");
-
-}
-
-void VBO :: drawArray(GLenum mode) {
- //   bind();
- 
-//        glEnableClientState(GL_VERTEX_ARRAY);
-    
-            //glVertexPointer (3, mType, 0, (GLvoid*)mOffset);    
-//            enable();
-            
-            glDrawArrays  (mode, 0, mNum);	
-            GL::error("vbo draw arrays");
-    
-//            disable();
-//        glDisableClientState(GL_VERTEX_ARRAY);
-
-//    unbind();
-}
-
-void VBO :: drawElements(GLenum mode, int num, int off) {
+//void VBO :: generate(void * udata, GLsizeiptr s, GL::BUFFER b){
+////	set(udata, n, s, b);
+//	generate();
+//}
+//	
+//void VBO :: generate() {
+//	glGenBuffers(1, &mId);	
+//    cout << "GENERATING VBO id " << mId << endl; 
+//	GL::error( "vbo gen");
 //    bind();
-    
-//    glEnableClientState(GL_VERTEX_ARRAY);
-//    glVertexPointer(3, GL_FLOAT, 0, 0);  
-
- //   enable();
-//    int adjust = *(int*)off; 
-//    cout << mNum-adjust << endl; 
-
-
-    
-    glDrawElements ( mode, (num==-1) ? mNum - off : num, GL::UINT, (GLvoid *) ( sizeof( GLuint ) * off ) );	
-    GL::error("vbo draw elements");
-//    disable();
-    
-//    glDisableClientState(GL_VERTEX_ARRAY);
-    
+//    buffer();
 //    unbind();
-}
+//}
+
+//void VBO :: bind() {
+//	glBindBuffer(mTarget, mId);//arb?
+//	GL::error( "vbo bind");
+//}
+//
+//void VBO :: buffer(){
+////    mDataSize = GL :: dataSize( mFormat, mType, mNum );
+//    glBufferData(mTarget, mDataSize, mData, mUsage);
+//    GL::error( "vbo buffer data");
+//}    
+//
+//void VBO :: set(GLvoid* udata, int num, GLsizeiptr s, GL::BUFFER t){
+//	mData = udata;
+//    mNum = num;
+//    mTarget = t;
+//	mDataSize = s;//GL::dataSize(mFormat, mType, mNum);
+//}
+//
+//void VBO :: null(){
+//	mData = NULL;
+//}
+//
+//void VBO :: unbind() {
+//	glBindBuffer(mTarget, 0);//arb?
+//    GL::error("vbo ubind");
+//}
+//
+//void VBO :: update() {
+//
+//	bind();
+//	glBufferSubData( mTarget, 0, mDataSize, mData );
+//	unbind();
+//	GL::error( "vbo update data");
+//
+//}
+
+//void VBO :: drawArray(GLenum mode) {
+// //   bind();
+// 
+////        glEnableClientState(GL_VERTEX_ARRAY);
+//    
+//            //glVertexPointer (3, mType, 0, (GLvoid*)mOffset);    
+////            enable();
+//            
+//            glDrawArrays  (mode, 0, mNum);	
+//            GL::error("vbo draw arrays");
+//    
+////            disable();
+////        glDisableClientState(GL_VERTEX_ARRAY);
+//
+////    unbind();
+//}
+
+//void VBO :: drawElements(GLenum mode, int num, int off) {
+////    bind();
+//    
+////    glEnableClientState(GL_VERTEX_ARRAY);
+////    glVertexPointer(3, GL_FLOAT, 0, 0);  
+//
+// //   enable();
+////    int adjust = *(int*)off; 
+////    cout << mNum-adjust << endl; 
+//
+//
+//    
+//    glDrawElements ( mode, (num==-1) ? mNum - off : num, GL::UINT, (GLvoid *) ( sizeof( GLuint ) * off ) );	
+//    GL::error("vbo draw elements");
+////    disable();
+//    
+////    glDisableClientState(GL_VERTEX_ARRAY);
+//    
+////    unbind();
+//}
 
 //void VBO :: enable(){
 //    attrib.pointer(mOffset);
