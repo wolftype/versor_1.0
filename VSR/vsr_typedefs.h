@@ -1,7 +1,7 @@
 	#ifndef VSR_TYPEDEFS_H_INCLUDED
 	#define VSR_TYPEDEFS_H_INCLUDED
 	 
-	#include "MV.h"
+	#include "vsr_mv.h"
 
 	namespace vsr{
 	

@@ -217,6 +217,27 @@ void two_points(GLVApp& app){
     
 }
 
+void htest(GLVApp& app){
+    static Dls dls = Ro::dls3(0,0,0);
+    //DRAW4(dls,1,0,0,.1);
+    
+    int num = 20;
+    for (int i = 0; i < num; ++i){
+        double t = 1.0 * i/num ;
+        Par p = Ro::par( dls, Vec::y.rot( Biv::xy * t * PI) );
+        Pnt pnt =  Ro::split1(p);
+        Cir tc = Ta::at(dls.undual(),pnt.null(), false);
+        cout << ( Inf(1) <= tc )  << endl; 
+        
+        ( Inf(1) <= tc ).draw();
+        
+        //DRAW3( pnt.null(),0,1,0 );
+        //DRAW4(pnt,1,0,0,.05);
+    }
+}
+
+
+
 void GLVApp :: onDraw(){
 //    static bool bCir, bCirSph, bLines;
 //    
@@ -230,13 +251,19 @@ void GLVApp :: onDraw(){
 //        if (bCirSph) circle_sphere(*this);
 //        if (bLines) lines(*this);
 
-    static Frame f;
-    Pnt p = mouse().origin;
-    f.orientY(Vec(p).unit());
-//    f.orientY(Vec::x);
-    
-    f.draw();
+//    htest(*this);
 
+    Cir c = CXY(1); c.draw();
+    Par p  = Tnv(1,1,0).trs(0,1,0);
+    
+    for(int i = 0; i < 100; ++i){
+        double t = 1.0 * i/100;
+        Cir nc = c.sp( Gen::tpar( p  * -t ) );
+        nc.draw();
+    }
+    
+//    cout << p << endl; 
+    //Ta::at(ca,Ro::null(1,
 //    circles(*this);
 //    circle_line(*this);
  //   two_points(*this);

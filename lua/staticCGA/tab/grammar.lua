@@ -359,9 +359,9 @@ getExp = function(tmp)
 end
 
 
--- local out =  "Vec ( Vec * Biv ) * Vec (Biv * Vec) "
+--local exp =  "Vec ( Vec * Biv ) * Vec (Biv * Vec) "
 -- local exp =  "Rot * #Vec * !Rot"
--- print ( makeExp(exp) )
+--ctPrint ( parse(exp) )
 --evalGA(ct)
 --print (makeExp() )
 

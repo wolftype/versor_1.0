@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Curvature.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>DemoAgacse.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,26 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+		<key>Graphics.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>Hopf.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>Knots.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Meet.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>OpGraph.xcscheme</key>
 		<dict>
@@ -42,6 +67,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9B5890251641A69B0096B491</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B680135163F349E004A850F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9B76CC121628A9390064FF35</key>
 		<dict>
 			<key>primary</key>
@@ -53,6 +88,21 @@
 			<true/>
 		</dict>
 		<key>9B76CCDE1628AA810064FF35</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B9F32B91631E8A10075D685</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BB1081A1638836A009F3070</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BB10829163883B5009F3070</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -10,14 +10,14 @@
 #include <iostream>
 
 #include "vsr.h"
-#include "GLVInterfaceImpl.h"
+#include "vsr_GLVInterfaceImpl.h"
 
-#include "Lattice.h"
-#include "MotorCouple.h"
-#include "Boost.h"
+#include "vsr_lattice.h"
+#include "vsr_motor.h"
+#include "vsr_boost.h"
 
-#include "Mesh.h"
-#include "Draw.h"
+#include "vsr_mesh.h"
+#include "vsr_draw.h"
 
 #include "vsr_tests.h"
 
@@ -44,9 +44,9 @@ void basic(GLVApp& app){
     
     app.interface.touch(c);
 
-    SET
-        static Gui gui;
-        app.subgui["basic"] = &gui;
+    SETGUI("basic")
+//        static Gui gui;
+//        app.subgui["basic"] = &gui;
         app.gui(num,"num",1,100)(amt,"amt")(bSkin, "skin");
         
         amt = 1;
@@ -116,8 +116,8 @@ void origin(GLVApp& app){
     static bool bDraw;
     static double val, amt,err,brt,num, lz;
     SET 
-//        static Gui gui;
-//        app.subgui["origin"] = &gui;
+        static Gui gui;
+        app.subgui["origin"] = &gui;
         app.gui(num,"num",1,100)(val,"val",-10,10)(amt, "amt",-10,10)(err,"err"); 
         app.gui(lz, "lz",-100,100)(bDraw);
         
@@ -232,7 +232,6 @@ void lineToCircle(GLVApp& app){
 
     static Frame frame(PT(1,0,0), Rot(1,0,0,0));
     
-    //static Lin lin = LN(0,1,0);
     app.interface.touch(frame);
     
     Lin lin = frame.ly();
@@ -688,9 +687,9 @@ void demo (GLVApp& app){
 void GLVApp :: onDraw(){
 
 
-    basic2(*this);
+ //   basic2(*this);
  //   origin(*this);
- //   demo(*this);
+    demo(*this);
 // if (bDemo) 
     
 //    dini(*this);

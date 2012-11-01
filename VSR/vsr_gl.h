@@ -30,7 +30,8 @@ namespace vsr {
     //Forward Typedefs 
     typedef MV<3,VEC,VSR_PRECISION>  Vec;
 
-	class Camera;  
+	//class Camera;  
+    class XformMat;
     
     using std::string;
     
@@ -233,14 +234,14 @@ namespace vsr {
 
 /*    */       
         /// Pass in points and camera return 2d vec
-         Vec project( double _x, double _y, double _z, const Camera&);
+         Vec project( double _x, double _y, double _z, const XformMat& );//const Camera&);
         /// Pass in point on screen, get point in space
-         Vec unproject( double _x, double _y, double _z, const Camera&);
+         Vec unproject( double _x, double _y, double _z, const XformMat& );//const Camera&);
         
-        Vec project( double * p, const Camera&);
-        Vec sproject( double * p, const Camera&);
+        Vec project( double * p, const XformMat& );//const Camera&);
+        Vec sproject( double * p, const XformMat& );//onst Camera&);
         
-        Vec ratio( double w, double h, const Camera& c);
+        Vec ratio( double w, double h, const XformMat& xf);//const Camera& c);
         
         
         template<class T>
@@ -250,6 +251,7 @@ namespace vsr {
         void normal(T*);
         
         template<class T> void translate(T*);
+        template<class T> void translate(T x, T y, T z);
         
         template<class T>
         void rotate(T*);

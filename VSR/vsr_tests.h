@@ -1,10 +1,19 @@
 #ifndef VSR_TESTS_H_INCLUDED
 #define VSR_TESTS_H_INCLUDED
 
+#include "vsr_draw.h"
+
 #define SET \
 static bool bSet = 0; \
 if (!bSet){ \
 bSet = 1;
+
+#define SETGUI(x) \
+static bool bSet = 0; \
+if (!bSet){ \
+    bSet = 1;\
+    static Gui gui; \
+    app.subgui[x] = &gui;
  
 #define END }
 #define END2 }}

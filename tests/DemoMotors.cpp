@@ -10,10 +10,10 @@
 #include <iostream>
 
 #include "vsr.h"
-#include "GLVInterfaceImpl.h"
+#include "vsr_GLVInterfaceImpl.h"
 #include "vsr_tests.h"
 
-#include "Chain.h"
+#include "vsr_chain.h"
 
 using namespace vsr;
 using namespace glv;
@@ -32,38 +32,31 @@ void frame(GLVApp & app){
 
 void articulated (GLVApp& app){
 
-//    static int num = 5;    
-//    static Chain chain(num);
-//    static Chain chainB(num);
-//    
-//    static Frame f;
-//    static Frame f2;
-//    SET
-//        //chain[0].pos() = PT(-1,-1,0);
-//        //chainB[0].pos() = PT(-1,1,0);
-//        f.set( PT(0,0,0) ); f.orientY( Vec::x );
-//        chain.set( PT(-1,-1,0) ); chain.orientY( Vec::x ); chain.frameSet();
-//        chainB.set( PT(-1,1,0) ); chainB.orientY( Vec::x );chainB.frameSet();
-//    END
-//    
-//    f2.mot ( f.mot() );
-////    cout << f.rot() << endl;
-////    cout << f2.rot() << endl;
-//    
-//    DRAW (f2);
-//    chain.draw(); //chainB.draw();
-//
-//        
-//    for (int i = 0; i < chain.num(); ++i){
-//        Dls dls = chain.nextDls(i);        
-//        Dls tdls = dls.dil(dls,.5);
-//        DRAW3( Ro::cir(tdls, Biv::xy), 1,0,0);
-//    }
+    static int num = 5;    
+    static Chain chainA(num);
+    static Chain chainB(num);
+    
+    static int iter = 0; iter ++;
+    double rad = sin( PI * iter / 180.0 );
+    
+    SET
+        chainA.set( PT(-1,-1,0) ); chainA.orientY( Vec::x ); chainA.frameSet();
+        chainB.set( PT(-1,1,0) ); chainB.orientY( Vec::x );chainB.frameSet();
+    END
+    
+    chainB.pos( PT(-1,rad,0 ) ); chainB.frameSet();
+    chainA.draw(); 
+    chainB.draw();
 
-
-
-//    r = m;
-    //cout << m << r << endl; 
+    for (int i = 0; i < num; ++i){
+        Dls dlsA = chainA.nextDls(i);        
+        Dls dlsB = chainB.nextDls(i);        
+        Dls tdlsa = dlsA.dil(dlsA,.5);
+        Dls tdlsb = dlsB.dil(dlsB,.5);
+        
+       Par p = ( tdlsa ^ tdlsb ^ Dlp(0,0,1,0) ).dual(); 
+        DRAW ( p ); 
+    }
 
 }
 
@@ -79,23 +72,15 @@ void GLVApp :: onDraw(){
 int main() {
         
     /* Set Up GLV hierarchy */
-//	GLV glv(0,0);	
-//	glv.colors().back.set(.3,.3,.3);
-//    		
-//	Window * win = new Window(500,500,"VSR",&glv);
-//    GLVApp * app = new GLVApp(win);    
-//    
-//    glv << app;
-//        
-//    Application::run();
+	GLV glv(0,0);	
+	glv.colors().back.set(.3,.3,.3);
+    		
+	Window * win = new Window(500,500,"VSR",&glv);
+    GLVApp * app = new GLVApp(win);    
+    
+    glv << app;
+        
+    Application::run();
 
-    Mot m (1,1,1,1,1,1,0,1,1);
-    Trs r;
-    r = m;
-    cout << m << r << endl; 
-    
-    Rot r2(m);
-     cout << m << r2 << endl; 
-    
     return 0;
 }

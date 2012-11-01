@@ -3,16 +3,23 @@
 Pablo Colapinto
 wolftype@gmail.com
 
+    "As long as algebra and geometry have been separated, their progress have been slow and their uses limited; but when these two sciences have been united, they have lent each mutual forces, and have marched together towards perfection."  Joseph Louis Lagrange (1736–1813)
+
 
 ---
 # README CONTENTS: INTRODUCTION | ELEMENTS AND OPERATORS | COMPILATION | DEPENDENCIES
 ---
 
+
+To INSTALL please read the INSTALL file
+
+
+
 ---
 # 1. INTRODUCTION
 ---
 
-Welcome to Versor!  This package provides operations and draw routines for conformal geometric algebra. It is designed to make graphical experimentation of geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/) made by my colleagues in the MAT program.  You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.  I am using it for my PhD on bio-inspired engineering.
+Welcome to Versor!  This package provides operations and draw routines for conformal geometric algebra, a revolutionizing spatial computing model. VERSOR is designed to make graphical experimentation of conformal geometric algebra within a C++ environment easier.  It comes bundled with a GPL gui builder (mat.ucsb.edu/glv/) made by my colleagues in the MAT program.  You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.  I am using it for my PhD on bio-inspired engineering.
 
 I first developed "Versor" while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It's a great book and if you're reading this you should read that.  
 
@@ -20,9 +27,9 @@ Built to aid in my modelling of biological forms, this work was funded in large 
 
 See also wolftype.com/versor for a link to my master's thesis on CGA and version 1.0 of this implementation of it, and maybe take a look at wolftype channel on vimeo for a few quick demos on what kinds of animations this thing can quickly whip up.  The Doc folder has a doxygen which I periodically tidy up.  Lots of test files too.  Still need to streamline the make process, etc.
 
-NOTE TO SPEED FREAKS: The makefile builds the STATIC version of this library, which gives up abstraction (no inherted generic Multivector class) in exchange for a 5x speed boost (and 10x decrease in file size), is in development and currently in the STATIC folder.   It currently works perfectly well, just isn't quite as developed (with all those algorithms and the Frame class) and still no draw routines. It is a highly templatized and inlined extravaganza of function calls.  Additionally, there is a trade off I am working on (in a branch to this master called "building and MVBase class") where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  The C++11 standards should help (for instance, "auto" return types), but are not implemented here.   
+NOTE TO SPEED FREAKS: The makefile builds the STATIC version of this library, which gives up abstraction (no inherted generic Multivector class) in exchange for a 5x speed boost (and 10x decrease in file size).  It is a highly templatized and inlined extravaganza of function calls.  Additionally, there is a trade off I am working on (in a branch to this master called "building and MVBase class") where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  The C++11 standards should help (for instance, "auto" return types), but are not implemented here.   
 
-A tutorial is in the works.  
+A tutorial is in the works . . . but a basic intro follows  
 
 
 One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
@@ -38,34 +45,35 @@ The TestExamples include bindings to the GLV framework, along with a GLVApp clas
     Hit "~" to toggle full screen.
     
     Holding down the "SHIFT" key while navigating with the arrow buttons moves the camera around.
+    Holding down the "CONTROL" key navigates in the cameras Y direction
     Holding down the "OPTION" key while navigating with the arrow buttons spins the model view around.
 
 ---
 # 3. ELEMENTS AND OPERATIONS
 ---
 
-Without going into too much detail, there are three overloaded binary operators: 
+There are three overloaded binary operators: 
 
 *    The Geometric Product
 ^    The Outer Product
 <=   The Inner Product
 
-There is also % which is a commutator product
+There is also % which is a commutator product (differential)
 
 And a few overloaded operations:
 
-! or -  Inverse
+!       Inverse
 ~       Reverse
 
 And finally, since I ran out of overloadable operators, some basic methods
 
-conjugate()
-involute()
+conjugation()
+involution()
 
 
-A * B   multiplies two elements together (and, in the case of A * !B (or A * -B), finds ratios between elements)
+A * B   multiplies two elements together (and, in the case of A * !B finds ratios between elements)
 A ^ B   wedges two elements together ( builds up higher dimensional elements )
-A <= B  contracts A out of B ( returns the part of B least like A )
+A <= B  contracts A out of B ( returns the part of B least like A ).  Often times, A is infinity, written as Inf(1) 
 
 Operators act on the elements of the algebra.  The elements are geometric entities.  To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long. In an upcoming version, you'll also be able to use the longname.
 
@@ -83,7 +91,7 @@ Sph -- Sphere           (Pnt a ^ Pnt b ^ Pnt c ^ Pnt d)
 Dls -- Dual Sphere      (same as a point, so: typedef Pnt Dls)
 
 "FLAT ELEMENTS"
-Lin -- Line
+Lin -- Line             
 Dll -- Dual Line
 Pln -- Plane
 Dlp -- Dual Plane

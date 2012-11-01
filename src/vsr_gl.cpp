@@ -11,7 +11,7 @@
 #include "vsr.h"
 
 #include "vsr_gl.h"
-#include "Camera.h"
+#include "vsr_camera.h"
 
 namespace vsr {
     //NEW
@@ -96,8 +96,8 @@ namespace vsr {
         }
     }
     
-    GLenum GL::type(GLenum typ){
-        switch(typ){
+    GLenum GL::type(GLenum t){
+        switch(t){
             case GL_FLOAT_MAT2:
             case GL_FLOAT_MAT4:
             case GL_FLOAT_VEC2: 
@@ -180,15 +180,15 @@ namespace vsr {
     }
     
     /* */
-    Vec GL :: project(double * p, const Camera& cam) {
+    Vec GL :: project(double * p, const XformMat& xf){//Camera& cam) {
         
         // arrays to hold matrix information
         GLdouble winX, winY, winZ;
         
         gluProject(p[0], p[1], p[2],
-                   cam.model(),
-                   cam.proj(),
-                   cam.view(),
+                   xf.modelViewd,
+                   xf.projd,
+                   xf.viewport,
                    &winX,
                    &winY,
                    &winZ );
@@ -197,21 +197,21 @@ namespace vsr {
         
     }
     
-    //scaled project
-    Vec GL :: sproject(double * p, const Camera& cam) {
-        Vec v = project(p,cam);
-
-        return Vec(v[0] / cam.width(), v[1] / cam.height(), v[2] / cam.depth() );
-    }
+//    //scaled project
+//    Vec GL :: sproject(double * p, const Camera& cam) {
+//        Vec v = project(p,cam);
+//
+//        return Vec(v[0] / cam.width(), v[1] / cam.height(), v[2] / cam.depth() );
+//    }
     
-    Vec GL :: project (double _x, double _y, double _z, const Camera& cam){
+    Vec GL :: project (double _x, double _y, double _z, const XformMat& xf){//const Camera& cam){
         // arrays to hold matrix information
         GLdouble winX, winY, winZ;
         
         gluProject(_x, _y, _z,
-                   cam.model(),
-                   cam.proj(),
-                   cam.view(),
+                   xf.modelViewd,
+                   xf.projd,
+                   xf.viewport,
                    &winX,
                    &winY,
                    &winZ );
@@ -219,16 +219,16 @@ namespace vsr {
         return Vec(winX, winY, winZ);
     }
     
-    Vec GL :: unproject (double _x, double _y, double _z, const Camera& cam){
+    Vec GL :: unproject (double _x, double _y, double _z, const XformMat& xf){//const Camera& cam){
         GLdouble posX, posY, posZ;
         //posZ = 0;
         //	double tz;
         //	glReadPixels((int)_x, (int)_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &tz);
         //cout << "DEPTH: " << tz << endl;
         gluUnProject(_x, _y, _z,//_z,
-                     cam.model(),
-                     cam.proj(),
-                     cam.view(),
+                   xf.modelViewd,
+                   xf.projd,
+                   xf.viewport,
                      &posX,
                      &posY,
                      &posZ );
@@ -239,9 +239,9 @@ namespace vsr {
 
     
     //Ratio of Screen Pixel width to 3D coordinates
-    Vec GL :: ratio( double w, double h, const Camera& c){
-            Vec bl = GL::unproject(0, 0, 1.0, c );
-            Vec tr = GL::unproject(w, h, 1.0, c );
+    Vec GL :: ratio( double w, double h, const XformMat& xf){
+            Vec bl = GL::unproject(0, 0, 1.0, xf );
+            Vec tr = GL::unproject(w, h, 1.0, xf );
             Vec diff = tr - bl;    
             return Vec( diff[0] / w, diff[1] /h, 0);
     }
@@ -395,6 +395,7 @@ namespace vsr {
 
     
 namespace GL {
+
        template<>  void translate (double const * p){
             glTranslated(p[0], p[1], p[2]);
         }
@@ -409,6 +410,13 @@ namespace GL {
 
         template<>  void translate (float const * p){
             glTranslatef(p[0], p[1], p[2]);
+        }
+
+        template<>  void translate (float x, float y, float z){
+            glTranslatef(x,y,z);
+        }
+        template<>  void translate (double x, double y, double z){
+            glTranslated(x,y,z);
         }
     
         template<>  void rotate (float const * p){
