@@ -1,9 +1,18 @@
+-- MAIN FUNCTIONS FOR ANALYSIS OF GENERATION OF GA RETURN TYPES
+
 --require "basis"
 
 require "types"
-module("funcs", package.seeall)
---PRINTING
 
+local pairs = pairs
+local ipairs = ipairs
+local table = table
+local print = print
+local string = string
+
+module("funcs", package.seeall)
+
+--PRINTING
 pretty = function(tx)
 	print(tx.id, #tx.bases, "\n")
 	for k, kv in ipairs(tx.bases) do
@@ -24,7 +33,7 @@ end
 --x is a table of blades.  For each k in x, find order
 --w1 and w2 are "words" -- i.e. instruction lists for calculating specific blades
 --"order" is the order of basis blades
-compare = function(w1, w2) 
+local compare = function(w1, w2) 
 	a = 0
 	b = 0
 	for k, kv in pairs(w1) do
@@ -64,8 +73,6 @@ gradeShare = function(tx, ty)
 end
 
 
-
-
 --Find name string of type from string (by comparing key value n to list of types x)
 getType = function(n,x)
 
@@ -96,8 +103,8 @@ getTypeDesc = function(n,x)
 	return "Multivector"
 end
 
---Convert String s to Type culled from List x of types
-getTypeFromString = function(s,x)
+--Convert String s of BASES to Type culled from List x of types
+getTypeFromBasisString = function(s,x)
 	local n = 0
 	local out = ""
 	local ba = {}
@@ -132,30 +139,7 @@ getTypeFromTable = function(t)
 	return getTypeFromString( tableToString(t,""), States );
 end
 
---Experimental: Looks For Difference in Type between two Types and looks up in list x
-diffType = function(tx, ty, x)
-	local n = 0 
-	if tx.key == ty.key then n = tx.key end
-	if tx.key > ty.key then
-		n = tx.key - ty.key
-	end
-	if tx.key < ty.key then
-		n = ty.key - tx.key
-	end
---	print(n)
-	return _G[getType(n, x)]
---	return getType(n,x)
-end
 
---not sure what use this is
-vers = function(tx, operation)
-	local tmp = ""
-	for i,iv in ipairs(tx.bases) do
-		res = iv[operation]
-		tmp = tmp .. res.id
-	end
-	return getTypeFromString(tmp)
-end
 
 --STRING RETURNING FUNCTIONS (version, cast, product)
 --operations that always return same type 
@@ -236,8 +220,11 @@ directCast = function(tx)
 	return out
 end	
 
+
 --returns a table with instructions and type
+--basis blades are keys to lists of 
 productList = function(tx, ty, operation) 	
+	
 	--list of instructions
 	local tally = {} 		--running tally
 	local combined = {}		--compressed tally
@@ -255,7 +242,7 @@ productList = function(tx, ty, operation)
 		end
 	end
 
-	--check for similar ids, or if weight is 0	
+	--check for similar ids in the tally, or if weight is 0	
 	for i,v in pairs(tally) do
 		exists = 0
 		--if basis already in a table, insert additional instruction
@@ -277,11 +264,7 @@ productList = function(tx, ty, operation)
 			end
 		end
 	end
-	
---	for i, iv in pairs(combined) do
---		print(i)
---	end
-	
+		
 	--  convert to ordered list _e1 = inst, _e2 = inst, etc.
 	local Ordered = toNumberedList(combined)
 	table.sort(Ordered, compare)
@@ -315,143 +298,32 @@ versionTypeString = function (result)
 	return mvtype
 end
 
+
+
 -- getTYPE of productList from States
 getProductListType = function (list)
-	return getTypeFromString( productTypeString(list), AllStates )
+	return getTypeFromBasisString( productTypeString(list), AllStates )
 end
 
 getVersionListType = function (list)
-	return getTypeFromString( versionTypeString(list), AllStates)
+	return getTypeFromBasisString( versionTypeString(list), AllStates)
 end
+
+
 
 getProductType = function( tx, ty, op)
 	return getProductListType( productList(tx,ty,op) )
 end
 
---WRITE BASIS BLADE from INPUTS a AND b
-makePToken = function(tx, lhid, rhid)
- 	out = ""
-	for k, kv in pairs(tx) do
-	 	if kv.r.w == -1 then out = out .. " - "
-		else
-			if k ~= 1 then out = out .. " + " end
-		end
-		out = out .. lhid.."["..kv.a.."] * "..rhid.."["..kv.b.."]"		
-	end
-	return out
-end
-
-makeVToken = function (tx)
-	out = ""
-	for k, kv in ipairs (tx) do
-		if kv.w == -1 then out = out .. "-" end
-		out = out .. "a[" .. k-1 .. "]"
-	end
-	return out
-end
-
---unrolled type from argument
-makeAType = function(tx, id, td)
-	return "const "..tx.id .. "& "..td.." = "..id..";"
-end
-
---unrolled type from productList
-makePType = function(tx, lhid, rhid)
-
-	local res = getProductListType(tx)
-	local out = "(\n"
-	local sep = ","	
-	
-	--for each result blade
-	for i, iv in ipairs(tx) do
-		for j, jv in pairs(iv) do			
-			out = out .. makePToken(jv, lhid, rhid)
-			if ( i < #tx ) then out = out .. sep end
-			out = out .."\n"					
-		end	
-	end
-	
-	return out .. ")"
-	
---	local typ = "MV<" ..#res.bases..">"	
---	return typ .. " ".. string.lower(res.id).." " .. out .. ")"
-	
-end
-
---unrolled type from versionList
-makeVType = function (tx, lhid)
-	local res = getVersionListType(tx)
-
-	out = "("
-	local sep = ","	
-	
-	for k, kv in ipairs (tx) do
-		if kv.w == -1 then out = out .. "-" end
-		out = out .. lhid.."[" .. k-1 .. "]"
-		if ( k < #tx ) then out = out .. sep end
-	end
-	out = out .. ")"
-	return out		
-end
-
---casting
-makeCType = function (ctype, tx, rhid)
-
-	local out = "("
-	local sep = ","	
-	local res = {}
-	
-	for i = 1, #ctype.bases, 1 do
-		table.insert(res,-1)
-	end
-	
-	for i, iv in ipairs(tx)do
-		res[ iv[1] + 1 ] = iv[2]
-	end
-
-	for i = 1, #res, 1 do
-
-		if res[i] == -1 then out = out .. "0"
-		else out = out .. rhid .. "["..res[i].."]" end 	
-		if ( i < #res ) then out = out .. sep end
-		
-	end
-	
-	out = out .. ")"	
-	
-	return out	
-end
-
-makeSType = function(tx, lhid, rhid)
-	local out = "("
-	local sep = ","	
-	for i, iv in ipairs(tx) do
-		out = out .. lhid .. "["..iv[1].."] ".. iv[3] .. rhid .. "["..iv[2].."]"
-		if ( i < #tx ) then out = out .. sep end
-	end
-	out = out .. ")"	
-return out
-end
-
-
---CREATE LIST AND TURN INTO STRING
-product = function(tx, ty, operation) 
-
-	local Final = productList(tx,ty,operation)
-	local word = productComputeTable(Final)
-
-	return word
-end
-
---TURNS RESULT INTO STRING
-productComputeTable = function(result)	
+--TURNS RESULT OF PRODUCTLIST INTO STRING OF INSTRUCTIONS
+productCompute = function(result)	
 
 	local bases = {}
 	local words = {}
 	
 	for i, iv in ipairs(result) do
 		
-		--words will store a lhs result and a rhs expression
+		--words will store a lhs basis result and a rhs expression
 		words[i] = {"",""}
 
 		for j, jv in pairs(iv)do
@@ -480,10 +352,20 @@ productComputeTable = function(result)
 	end
 	
 	local t = {}
+	t["type"] = getProductListType(result)--productTypeString(result)
 	t["inst"] = words
-	t["type"] = productTypeString(result)
 	return t
 end
+
+--CREATE LIST AND TURN INTO Table with ["type"] and ["inst"]
+product = function(tx, ty, operation) 
+
+	local tlist = productList(tx,ty,operation)
+	local phrase = productCompute(tlist)
+
+	return phrase
+end
+
 
 -- GEN KEYS  --
 getKey = function(x) 
@@ -495,22 +377,33 @@ getKey = function(x)
 end
 
 calcKeys = function(x)
---	print(" TYPE KEYS ")
 	x.key = getKey(x.bases)
---	print(x.id, "\t", x.key)		
 end
 
 
-sym = {"op","ip", "gp"}
+--- DEPRECATED ---
 
+--Experimental: Looks For Difference in Type between two Types and looks up in list x
+diffType = function(tx, ty, x)
+	local n = 0 
+	if tx.key == ty.key then n = tx.key end
+	if tx.key > ty.key then
+		n = tx.key - ty.key
+	end
+	if tx.key < ty.key then
+		n = ty.key - tx.key
+	end
+--	print(n)
+	return getType(n, x)
+--	return getType(n,x)
+end
 
---print ( makeCType(Pnt, castList(Pnt,Vec), "a") )
-
---TEST REQUIRE--
---for i, iv in ipairs(States) do
---	for k, kv in ipairs(States) do
-		--t = product(iv,kv,"gp")
-		--print(t.type)
---	end
---end
---END TEST--
+--not sure what use this is
+vers = function(tx, operation)
+	local tmp = ""
+	for i,iv in ipairs(tx.bases) do
+		res = iv[operation]
+		tmp = tmp .. res.id
+	end
+	return getTypeFromString(tmp)
+end

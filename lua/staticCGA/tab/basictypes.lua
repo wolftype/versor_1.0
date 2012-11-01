@@ -36,8 +36,9 @@ local Daf = { id = "Daf", desc = "Dual Affine Point", bases = {_e12noni,  _e13no
 local Dal = { id = "Dal", desc = "Dual Affine Line", bases = {_e12no, _e13no, _e23no, _e1noni, _e2noni, _e3noni}}
 
 --
-Dfp = { id = "Dfp", desc = "Dual Flat Point", bases = {_e12ni, _e13ni, _e23ni, _e123, }, key = 6815872 }
-Bst = { id = "Bst", desc = "Booster", bases = {_s, _e12, _e13, _e23, _e1no, _e2no, _e3no, _e1ni, _e2ni, _e3ni, _noni, }, key = 18224745 }
+local Dfp = { id = "Dfp", desc = "Dual Flat Point", bases = {_e12ni, _e13ni, _e23ni, _e123, }, key = 6815872 }
+local Bst = { id = "Bst", desc = "Booster", bases = {_s, _e12, _e13, _e23, _e1no, _e2no, _e3no, _e1ni, _e2ni, _e3ni, _noni, }, key = 18224745 }
+--local Pls = {id = "Pls", desc = "Pure Motor", bases = {_s, _e12, _e13, _e23, _e1ni, _e2ni, _e3ni }, }
 
 --PARAVECTOR
 local Prv = { id = "Prv", desc = "Paravector", bases = {_s, _e1, _e2, _e3}}

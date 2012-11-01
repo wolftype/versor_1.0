@@ -73,6 +73,9 @@ namespace vsr {
 			T x,y,z;
 			Vec3() : x(0), y(0), z(0) {}
 			Vec3(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
+            
+            template< class A >
+            Vec3(const A& a) : x(a[0]), y(a[1]), z(a[2]) {}
 
 			void set(T _x, T _y, T _z) { x=_x; y = _y; z = _z; }	
 			//set and get
@@ -243,7 +246,7 @@ namespace vsr {
 			Vec4<T> & operator [] (int i) { return col[i]; }
 			Vec4<T>   operator [] (int i) const { return col[i]; }
 		
-        Mat4& transpose(){
+        Mat4 transpose(){
             return Mat4<T>( 
                            col[0][0], col[1][0], col[2][0], col[3][0],
                            col[0][1], col[1][1], col[2][1], col[3][1],
@@ -403,15 +406,14 @@ namespace vsr {
 		}
 	};
 	
-	typedef Vec2<float> Vec2f; 	typedef Vec2<int> Vec2i;
-    
-	typedef Vec3<float> Vec3f;  typedef Vec3<int> Vec3i;
-	typedef Vec4<float> Vec4f;  typedef Vec4<int> Vec4i;
+	typedef Vec2<float> Vec2f; 	typedef Vec2<int> Vec2i; typedef Vec2<double> Vec2d;    
+	typedef Vec3<float> Vec3f;  typedef Vec3<int> Vec3i; typedef Vec3<double> Vec3d;
+	typedef Vec4<float> Vec4f;  typedef Vec4<int> Vec4i; typedef Vec4<double> Vec4d;
 	typedef Vec4<unsigned char> Vec4u;
     
-    typedef Mat2<float> Mat2f;
-    typedef Mat3<float> Mat3f;
-    typedef Mat4<float> Mat4f;
+    typedef Mat2<float> Mat2f;      typedef Mat2<double> Mat2d;
+    typedef Mat3<float> Mat3f;      typedef Mat3<double> Mat3d;
+    typedef Mat4<float> Mat4f;      typedef Mat4<double> Mat4d;
     typedef Mat4<unsigned char > Mat4u;
 	
 	//template <typename T>

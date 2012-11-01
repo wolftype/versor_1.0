@@ -2,6 +2,9 @@
 --module("basis", package.seeall)
 
 --"x" is a blade with a weight of 1, returns a blade with weight of "sign"
+sym = {"op","ip", "gp"}
+
+--a blade maker
 local blade = function(x, sign)	
 	tmp = {}	
 	for k,v in pairs(x) do

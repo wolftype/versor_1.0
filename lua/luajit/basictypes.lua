@@ -1,4 +1,5 @@
--- H E U R I S T I C S   F O R   T H E  S T A T E   M A C H I N E
+-- H E U R I S T I C S   F O R   T H E  F I N I T E  S T A T E   M A C H I N E 
+-- (MANUALLY ENTERED types which get automatically combined into types.lua)
 
 
 require "basis"

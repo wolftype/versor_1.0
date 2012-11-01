@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 #include "vsr.h"
-#include "op.h"
+#include "vsr_op.h"
 
-#include "Draw.h"
-#include "GLVInterfaceImpl.h"
+#include "vsr_draw.h"
+#include "vsr_GLVInterfaceImpl.h"
 
 #include <iostream>
 
