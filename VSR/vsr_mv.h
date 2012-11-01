@@ -29,8 +29,8 @@
 //#include <utility>
 
 
-#define SANITYCHECK 0
-#define TPRINT(x) if(SANITYCHECK)printf(x)
+#define SANITYCHECK false
+#define TPRINT(x) if(SANITYCHECK)cout<<x<<endl;
 
 #ifndef VSR_PRECISION
 typedef double VSR_PRECISION; 

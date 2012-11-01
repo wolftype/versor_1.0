@@ -7,8 +7,10 @@
  *
  */
 
+
 #include "vsr_gl_shader.h"
-#include <iostream.h>
+#include <iostream>
+#include <stdio.h>
 
 namespace vsr {
 

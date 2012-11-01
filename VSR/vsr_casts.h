@@ -9,7 +9,7 @@
 #ifndef vsr_static_vsr_casts_h
 #define vsr_static_vsr_casts_h
 
-
+#include <stdio.h>
 #include "vsr_typedefs.h"
 //#include "MV.h"
 

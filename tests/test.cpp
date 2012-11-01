@@ -7,7 +7,7 @@
 //
 
 #include "vsr.h"
-#include "op.h"
+#include "vsr_op.h"
 
 #include "vsr_templates.h"
 #include <iostream>
