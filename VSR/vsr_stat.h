@@ -82,7 +82,7 @@ namespace vsr{
         /// Power Law Distribution
         inline static double Pareto(double scale, double shape=1.0){
             //return exp( Exponential(rate) );
-            return scale / ( pow( 1 - Num(), 1.0 / shape ) );
+            return scale / ( std::pow( 1 - Num(), 1.0 / shape ) );
         }
         
     };
@@ -105,7 +105,7 @@ namespace vsr{
         }
         
         inline static bool Power(double p, double k, double a = 1){
-            return Prob( a * pow(p,k) );
+            return Prob( a * std::pow(p,k) );
         }
         
         /// Bernoulli: Returns true with a probability of p

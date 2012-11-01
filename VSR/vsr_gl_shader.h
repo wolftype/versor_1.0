@@ -11,8 +11,9 @@
 
 #include "vsr_gl.h"
 #include "vsr_file.h"
-#include <string.h>
-#include <iostream.h>
+#include <string>
+#include <stdio.h>
+#include <iostream>
 #include <vector>
 
 //#include <fstream>
