@@ -10,6 +10,7 @@
 #define opengles_00_GraphicsMatrix_h
 
 #include "vsr_matrix.h"
+#include "vsr_frame.h"
 #include <math.h>
 
 using namespace std;
@@ -24,7 +25,8 @@ namespace vsr{
         static Mat4f ortho (float X, float Y0); 
         static Mat4f rot( Rot );
         static Mat4f rotXY(float rad) ;
-        static Mat4f trans(Vec3f v);
+        template< typename T> static Mat4f trans(T v);
+        template<typename T> static Mat4f trans(T x, T y, T z);
     //    static Mat4f lookAt(const Vec3f eye, const Vec3f target, const Vec3f up );
     
         
@@ -47,7 +49,10 @@ namespace vsr{
                          -(ux.dot(eye)), -(uy.dot(eye)), -(uz.dot(eye)), 1
                          );
         }
-        
+        //transposed version
+        static const Mat4f lookAt(const Frame& f) {
+            return lookAt(f.x(), f.y(), f.z(), f.pos() );
+        }        
 
         static const Mat4f lookAt(const Vec3f eye, const Vec3f target, const Vec3f up ){
             Vec3f z = (target - eye).unit();	
@@ -97,8 +102,8 @@ namespace vsr{
             float d = 2 * far * near / tb;
             
             return Mat4f( 
-                f, 0, 0, 0,
-                0, a, 0, 0,
+                a, 0, 0, 0,
+                0, f, 0, 0,
                 0, 0, c, -1,
                 0, 0, d, 0        
             );
@@ -156,13 +161,24 @@ namespace vsr{
             );
     }
     
-    inline Mat4f XMat::trans(Vec3f v){
+    template< typename T>
+    inline Mat4f XMat::trans(T v){
         return Mat4f (
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
             v[0], v[1], v[2], 1
         );
+    }
+    
+    template<typename T>
+    inline Mat4f XMat::trans(T x, T y, T z){
+        return Mat4f (
+            1,0,0,0,
+            0,1,0,0,
+            0,0,1,0,
+            x, y, z, 1
+        );    
     }
 
 //

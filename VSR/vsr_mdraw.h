@@ -10,9 +10,9 @@
 #define Versor_vsr_mdraw_h
 
 #include "vsr.h"
-#include "vsr_gl_varray.h"
 #include "vsr_gl_vattrib.h"
 #include "vsr_gl_vbo.h"
+#include "vsr_mesh.h"
 //#include "vsr_mglyph.h"
 
 namespace vsr{
@@ -112,7 +112,7 @@ namespace vsr{
                     GL::translate( Pos(c).w() );
                     GL::rotate( AA(c).w() );
                     GL::scale( Ro::rad(c) );
-                    VArray :: DrawElements( cir );
+//                    VArray :: DrawElements( cir );
                 }
 
 //                template<> void Array( const Sph& ); 

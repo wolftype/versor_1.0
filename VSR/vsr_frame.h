@@ -28,22 +28,20 @@
 
 #include "vsr_op.h"
 #include "vsr_interp.h"
-//#include "Drawable.h"
 
 namespace vsr {
 
-	class Frame {//: public Touchable {
-	
+	class Frame {
+    
 		protected:
 		
-			Pnt mPos; 			/*!< Position Point */
-			
-            Rot mRot;			/*!< Orientation Versor */ 
-			Trs mTrs;			/*!< Translation Versor */ 
-								
-			Vec mX;				/*!< Global X */	
-			Vec mY;				/*!< Global Y */
-			Vec mZ;				/*!< Global Z */
+			Pnt mPos; 			/*!< Position Point */			
+            Rot mRot;			/*!< Orientation Versor */
+             
+//			Trs mTrs;			/*!< Translation Versor */ 								
+//			Vec mX;				/*!< Global X */	
+//			Vec mY;				/*!< Global Y */
+//			Vec mZ;				/*!< Global Z */
 
 			/*! Direction Vector Generator (Position Momentum) */			
 			Vec dVec;		
@@ -55,9 +53,9 @@ namespace vsr {
 			Tnv dTnv;
 			/*! Point Pair Generator (Global Boost) */	
 			Par	dPar; 
+
 			/*! Minkowski Plane Generator (Dilation) */	
-			Mnk dMnk;
-			
+			Mnk dMnk;			
 			
 			double aBiv;	/*!< Acceleration Coefficient */
 			double aVec;	/*!< Acceleration Coefficient */
@@ -75,6 +73,8 @@ namespace vsr {
 		public:
 		
 			Frame();
+            
+            Frame( const Pnt& pos );
 			/*! Constructor
 				@param[in] pos		Point position 
 				@param[in] rot		Rotor orientation
@@ -96,8 +96,8 @@ namespace vsr {
 				aMnk = f.aMnk;
 				mPos = f.mPos;
 				mRot = f.mRot;
-				mTrs = f.mTrs;
-				mX = f.mX; mY = f.mY; mZ = f.mZ;
+//				mTrs = f.mTrs;
+//				mX = f.mX; mY = f.mY; mZ = f.mZ;
 				dBiv = f.dBiv;
 				dVec = f.dVec;
 				dDll = f.dDll;
@@ -119,8 +119,8 @@ namespace vsr {
 				aMnk = f.aMnk;
 				mPos = f.mPos;
 				mRot = f.mRot;
-				mTrs = f.mTrs;				
-				mX = f.mX; mY = f.mY; mZ = f.mZ;
+//				mTrs = f.mTrs;				
+//				mX = f.mX; mY = f.mY; mZ = f.mZ;
 				dBiv = f.dBiv;
 				dVec = f.dVec;
 				dDll = f.dDll;
@@ -195,6 +195,11 @@ namespace vsr {
 			Par pxz() const { return dxz() ^ bound(); }			///< xz point pair
 			Par pyz() const { return dyz() ^ bound(); }			///< yz point pair
 			
+			/* Local X Pair (real or imaginary */
+			Par px(bool real) const { return Ro::par( (real) ? ibound() : bound() , x() ); }			///< xy point pair
+			Par py(bool real) const { return Ro::par( (real) ? ibound() : bound() , y() ); }			///< xz point pair
+			Par pz(bool real) const { return Ro::par( (real) ? ibound() : bound() , z() ); }			///< yz point pair
+
             /* Local XY Circle */
 			Cir cxy() const { return Op::udl( pxy() ); }			///< xy circle
             /* Local XZ Circle */
@@ -271,6 +276,8 @@ namespace vsr {
 
 			/*! Surrounding Dual Sphere */
 			Dls bound() const { return Ro::dls_pnt(mPos,mScale); }
+			/*! Surrounding Dual Imaginary Sphere */
+			Dls ibound() const { return Ro::dls_pnt(mPos,-mScale); }
 			
 			/*! Get Dual Line Relative to Origin */
 			Dll dll() const { return Gen::log( mot() ); }
@@ -365,44 +372,23 @@ namespace vsr {
 			}
 
 			/*! Boost Step (dTnv rel to origin) */
-			void boost() {
+			void rboost() {
 				dTnv *= aTnv;
 				Trv trv = Gen::trv(dTnv);
 				mPos = Ro::loc( Op::sp(bound(),trv) );
-								
-				//mRot = Op::sp0(mRot, trv) * mRot;
-				//orient();
 			}
 			
 			/*! Boost Step (rel to dPar) */			
-			void bboost() {
+			void boost() {
 				dPar *= aPar;
-				Bst trp(1, 
-						dPar[0], dPar[1], dPar[2], 
-						dPar[3], dPar[4], dPar[5], 
-						dPar[6], dPar[7], dPar[8], dPar[9]);
-				
-				Dls td = Op::sp( bound(),trp );
-				
-//				Par npx = Op::sp0( tx(), trp );
-//				Par npy = Op::sp0( tx(), trp );
-//				Par npz = Op::sp0( tx(), trp );
-
-				mPos = Ro::loc( td );
-//				rot ( Gen::rot_mot( Op::sp( mot(), trp ) ) );
-//				Biv b(dPar[0], dPar[1], dPar[2]); 
-//				mRot = Gen::rot_biv( b ) * mRot; orient();
-//				mRot = Rot(trp) * mRot; orient(); 
-//				dll( Op::sp0( dll(), trp ) );		
-//				mScale = Ro::rad( td);
-				
+				Bst bst = Gen::bst(dPar);				
+				Dls td = bound().sp( bst ); //spin surround or position?
+                mPos = Ro::loc( td );				
 			}
-			
-//			Frame& dilate(const State& dx) { dMnk = dx*dMnk; return *this; }
+
 
 			Frame& dilate(double t) { 
 				Dls s = Op::sp( bound(), Gen::dil(t) );
-				//mPos = Ro::loc(s);
 				mScale = Ro::rad(s);
 				return *this;
 			}
@@ -413,8 +399,31 @@ namespace vsr {
 				//mPos = Ro::loc(s);
 				mScale = Ro::rad(s);
 			}
+		
+			void step(){
+				//twist(); 
+				spin(); move(); //acc();
+			}
+			
+                    		
+			
+			/*! Local Transformations */
+			template <class A> Frame& nudge (const A& dx) { mPos = mPos.sp( Gen::trs(dx) ); return *this; }
+			Frame& spin (const Rot& r) { mRot = r*mRot; return orient(); }
+			Frame& twist(const Mot& m) { mPos = mPos.sp(m); mRot = Rot(m) * mRot; return orient(); } 
+//			Frame& boost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(),dx) ); return *this; }
+//			Frame& bboost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(), dx) ); return *this; }
+			
+            /*! Twist to another Frame f by amount t */
+			Frame& twist2(const Frame& f, double t = 1.0) {
+				Dll tdz = Gen::log( f.lz() / lz() ) * t * .5;
+				return twista( Gen::mot( tdz ) );				
+			}
 
-
+			/* Orbit Control (in progress) */
+			void around(const Pnt& p) {
+				orient();
+			}
 			///accelerate all generators (deprecated, individual xforms do it)
 			void acc() {
 				dBiv *= aBiv;
@@ -424,29 +433,6 @@ namespace vsr {
 				dPar *= aPar;
 				dMnk *= aMnk;
 			}
-			
-			void step(){
-				//twist(); 
-				spin(); move(); //acc();
-			}
-					
-			/* Orbit Control */
-			void around(const Pnt& p) {
-				orient();
-			}
-			
-			/* Local Transformations */
-			template <class A> Frame& move (const A& dx) { mPos = mPos.sp( Gen::trs(dx) ); return *this; }
-			Frame& spin (const Rot& r) { mRot = r*mRot; return orient(); }
-			Frame& twist(const Mot& m) { mPos = mPos.sp(m); mRot = Rot(m) * mRot; return orient(); } 
-//			Frame& boost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(),dx) ); return *this; }
-//			Frame& bboost(const State& dx) { mPos = Ro::loc( Op::sp0(bound(), dx) ); return *this; }
-			
-			Frame& twist2(const Frame& f, double t) {
-				Dll tdz = Gen::log( f.lz() / lz() ) * t * .5;
-				return twista( Gen::mot( tdz ) );				
-			}
-
 			/*! interpolate between frames
 				@param[in] f1 Start Frame
 				@param[in] f2 End Frame
@@ -480,8 +466,6 @@ namespace vsr {
 			}
 
 			/* Relative Transformations (given a second Frame and an interpolation value) */
-			
-			void boost2(const Frame& f) {}
 			
 			/*! Absolute Rotations */
 			template <class A> void lookat(const A& v) {
@@ -537,23 +521,9 @@ namespace vsr {
 			
 			bool clicked();
 
-			virtual void pushPos();		
-			virtual void push();
-			virtual void pop();			
-
-            void drawLite();
-            void drawBox();
-            void drawX(float r=1.0, float g=1.0, float b=1.0, float a = 1.0);
-            void drawY(float r=1.0, float g=1.0, float b=1.0, float a = 1.0);
-            void drawZ(float r=1.0, float g=1.0, float b=1.0, float a = 1.0);
-            virtual void draw(float r, float g, float b, float a = 1.0);
-            virtual void draw(){ draw(1,1,1); }
-            
-			void drawBound() { }//bound().draw(); }	
-
 					
 	};
-
+    
 } //con::
 
 #endif

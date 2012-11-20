@@ -78,7 +78,6 @@ namespace vsr  {
 		float w, h; 
         Vec z; 
         Dll ray, clickray; 
-        //Camera camera;
 	};
     
 	struct KeyboardData {
@@ -97,31 +96,31 @@ namespace vsr  {
     
         
         typedef std::map<string,bool> SBMap;
-        SBMap selectMap;                            // Map of object addresses and whether they are selected
+        /// Map of object addresses and whether they are selected
+        SBMap selectMap;                            
         
         
         /*! Abstract View Implementation Data to store info from Windowing System */
         struct ViewImpl {
                         
             
-            // Register with Interface upon construction and create a new camera
-            ViewImpl(Interface * i ) : interface(i) {}
+            ViewImpl(Interface * i ) : interface(i) {}          // Register with Interface upon construction
             Interface * interface;   
             
+            //A Scene has a camera (which has a lens), a model frame, a set of matrix transformations, and stereographic data
             Scene scene;
+            //ViewData holds Window Information
             ViewData data;            
             
-			/* Set camera size to view Size */
+			/* Set Lens size to view Size */
 			void fit() { 
 				scene.camera.width( data.w ); scene.camera.height( data.h ); 
 			}
 
             // All Subclasses must define fullScreenToggle method and getData method
-            virtual void fullScreenToggle() = 0;            
-            virtual void getData( void * udata) = 0;
+            virtual void fullScreenToggle() {};            
+            virtual void getData( void * udata){};
             
-//            Camera * camera;            
-//            Camera& active() { return *camera; }    // Currently Active Camera
         };
         
         /*! Abstract Input Device Implementation */
@@ -129,16 +128,20 @@ namespace vsr  {
             Interface * interface;
             InputImpl(Interface * i) : interface(i){} 
             // All Subclasses must define getData() method
-            virtual void getData( void * udata) = 0;
+            virtual void getData( void * udata){};
+            virtual void getKeyboardData( void * udata){};
+            virtual void getMouseData( void * udata){};
         };
         
         
         Interface();
         
         virtual void init() = 0;
-        void viewCalc();
         
-        ViewImpl * vimpl;           
+        void inputCalc();        ///< Calculate Mouse Movements based on x and dx
+        void viewCalc();        ///< Calculate Window Matrices, Screen Coordinates of Mouse
+        
+        ViewImpl * vimpl;       ///< Window Information (Width, Height)
         InputImpl * iimpl;      ///< Inputs (Keyboard, Mouse, OSC, etc) ? more than one?
         
         MouseData       mouse;
@@ -149,13 +152,13 @@ namespace vsr  {
         KeyboardData& kd() { return keyboard; }
         MouseData& md() { return mouse; }
 
-        Touchable& current();
+//        Touchable& current();
 
         Scene& scene() { return vimpl -> scene; }
         Camera& camera() { return vimpl -> scene.camera;}//vimpl -> active(); }
         Frame& model() { return vimpl -> scene.model; }
         
-        template <class A> Vec screenCoord(const A& p);
+        template <class A> static Vec screenCoord(const A& p, const XformMat& );
         template <class A> bool pntClicked(const A&, double rad = .05);
         
         /// Executes onTouch
@@ -187,20 +190,22 @@ namespace vsr  {
         template <class A > void toggleSelect( A * );
 
         void touch( Frame& f, double t = 1.0);
+        ///Maniupulate Frame e by clicking on Frame f
         void touch( Frame& f, Frame& e, double t = 1.0);
  
         void windowTransform();
         void stateTransform();
-        void camSpin();
-        void camTranslate();
-        void modelTransform();
+        void camSpin(float acc = .9);
+        void camTranslate(float acc = .9);
+        void modelTransform(float acc = .9);
+
         
         void onMouseMove();        
         void onMouseDown();
         void onMouseDrag();
         void onMouseUp(){ mouse.isDown = 0; }        
         void onKeyDown();
-        void onKeyUp(){}
+        void onKeyUp();
         
         Vec click(){ return mouse.click;   }
         Vec pos(){ return mouse.pos;     }
@@ -240,13 +245,13 @@ namespace vsr  {
         }
         
         if (isSelected( &s )){
-            cout << "selected" << &s << endl; 
+//            cout << "selected" << &s << endl; 
             xf(&s,x,dt);
         }
         
     }
     
-    // GENERIC METHOD
+    // GENERIC METHOD (BACKUP)
     template<class A> void Interface ::touch (A& s, double t){
         //cout << "generic touch" << endl; 
         switch (s.id){
@@ -264,11 +269,6 @@ namespace vsr  {
         }
     }
     
-
-
-
-
-
 
     template< class A > bool Interface :: isSelected ( A * a ){
         stringstream s; s << a;
@@ -290,14 +290,11 @@ namespace vsr  {
         stringstream s; s << a;
         selectMap[ s.str() ] = !selectMap[ s.str() ];
     }    
-    
-    
-    
-    /// Screen Coordinates of Target point
-    template <class A> Vec Interface :: screenCoord(const A& p){
         
-        Vec sc = GL::project(p[0], p[1], p[2], scene().xf );
-        sc[0] /= vd().w; sc[1] /= vd().h; sc[2] = 0;
+    /// Screen Coordinates of Target point
+    template <class A> Vec Interface :: screenCoord(const A& p, const XformMat& xf){
+        Vec sc = GL::project(p[0], p[1], p[2], xf );
+        sc[0] /= xf.viewport[2]; sc[1] /= xf.viewport[3]; sc[2] = 0;
         
         return sc;
     }
@@ -306,13 +303,12 @@ namespace vsr  {
         Vec v = mouse.click;  // [0,0] is bottom left corner [1.0,1.0] is top right
         Vec p = Ro::loc(x);
         
-        Vec sc = screenCoord(p);
+        Vec sc = screenCoord(p, scene().xf);
     
         Vec dist = (v - sc);
         return (dist.norm() < rad) ? true : false;
     }
     
-
         
     //Element, Center Point, Amt
     template <class A> 
@@ -323,36 +319,32 @@ namespace vsr  {
         
         //Center of Defining Sphere
         Vec tv ( Ro::loc(pos) );   
-        
-        //cout << tv << endl; 
-        
+                
         //2D coordinates of Defining Sphere
-        Vec sc = screenCoord(tv);//GL::project(tv[0], tv[1], tv[2], camera() ); 
+        Vec sc = screenCoord(tv, scene().xf );
         
         //Point in 3D space on Projection Ray closest to sphere.
         Pnt cp  = Fl::loc( vd().ray, Ro::loc(pos), 1);        
         
         switch(keyboard.code){
-            case 's': //scale
+            case 's': //SCALE
             {
-                //printf("scale\n");s
                 Vec tm1 = mouse.pos + mouse.drag - sc;
                 Vec tm2 = mouse.pos - sc; 
                 
-                //Drag towards or away from element
+                //Drag towards or away from element . . . 
                 int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
                 Tsd tsd = Gen::dil( Ro::loc(pos), mouse.drag.norm() * t * neg );
-                //cout << tsd << endl; 
                 ts = Op::sp( ts,  tsd);
                 
                 break;
             }
-            case 'g': //translate
+            case 'g': //TRANSLATE
             {
                 ts = Op::sp (ts, Gen::trs( mouse.dragCat * t ) );
                 break;
             }
-            case 'r': //rotate about local line
+            case 'r': //ROTATE local line
             {
                 Dll td = pos <= Drb( mouse.dragBivCat * t );
                 ts = Op::sp ( ts, Gen::mot( td ) );
@@ -369,17 +361,6 @@ namespace vsr  {
                 ts = Op::sp( ts, Gen::dil( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
                 break;
             }
-            case 'f': //translate
-            {
-                ts = Op::sp(ts, Gen::trs( mouse.dragCat * t ) );
-                break;
-            }
-            case 'e': //rotate about local line
-            {
-                Dll td = pos <= Drb( mouse.dragBivCat * t );
-                ts = Op::sp( ts, Gen::mot( td ) );
-                break;
-            }           
 //            case 'b': //boost by drag (not working)
 //            {
 //                Tnv tnv( mouse.dragCat );
@@ -399,83 +380,14 @@ namespace vsr  {
                 break;
             }
 
-            case 'q':
+            case 'q': //DESELECT
             {
-                //cout << "deselect all" << endl;
                 toggleSelect(s);
                 break;
             }
         }
     }
-    
-//    class Model { //: public Set<Touchable*> { //public Touchable {
-//        
-//    public:
-//        
-//        Interface * interface;
-//        
-//        Model(Interface * i) : interface(i) {}
-//        
-//        virtual void draw(){
-//            for (int i = 0; i < mData.size(); ++i){
-//                //mData[i]->draw();
-//            }
-//        }
-//        
-//        virtual void touch(){
-//             for (int i = 0; i < mData.size(); ++i){
-//                 //interface -> touch( mData[i] ); 
-//             }
-//        }
-//    };
 
-    
-    //    inline Camera Interface::camera()   { 
-    
-    //        Dls dls = Ro::dls(0,0,0);
-//        
-//        switch ( s.idx ){
-//            case VEC:
-//            case TNV:
-//            case DRV:
-//                dls = Ro::dls(s, .5);
-//                break;
-//            case CIR:
-//            case PAR:
-//                dls = Ro::sur(s);
-//                break;
-//            case PNT:
-//                //dls = Ro::dls_vec(Vec(s), .2);
-//                dls = Ro::dls_pnt( Ro::loc(s), .2);
-//                break;
-//            case LIN:
-//            case PLN:
-//                dls = Ro::dls_pnt( Fl::loc(s, Ori(1), 0) );
-//                break;
-//            case DLL:
-//            case DLP:
-//                dls = Ro::dls_pnt( Fl::loc(s, Ori(1), 1) );
-//                break;			
-//        }
-//        
-//        touch( s, dls, t);	
-//    }
-    // SPECIFIC TEMPLATED METHODS INSTANTIATIONS
-//    template <> void Interface :: touch ( Vec& s, double t){ touch(s, Ro::dls(s,.5), t); }
-//    template <> void Interface :: touch( Tnv& s, double t){ touch(s, Ro::dls(s,.5), t); }
-//    template <> void Interface :: touch( Drv& s, double t){ touch(s, Ro::dls(s,.5), t); }
-//    
-//    template <> void Interface :: touch ( Pnt& s, double t) { touch(s, Ro::dls_pnt( Ro::loc(s), .2), t); }
-//    template <> void Interface :: touch ( Sph& s, double t) { touch(s, s, t); }
-//
-//    template <> void Interface :: touch( Cir& s, double t){ touch(s, Ro::sur(s), t); }
-//    template <> void Interface :: touch( Par& s, double t){ touch(s, Ro::sur(s), t); }
-//
-//    template <> void Interface :: touch( Lin& s, double t){ touch(s, Ro::dls_pnt( Fl::loc(s, Ori(1), 0) ), t); }
-//    template <> void Interface :: touch( Pln& s, double t){ touch(s, Ro::dls_pnt( Fl::loc(s, Ori(1), 0) ), t); }
-//
-//    template <> void Interface :: touch( Dll& s, double t){ touch(s, Ro::dls_pnt( Fl::loc(s, Ori(1), 1) ), t); }
-//    template <> void Interface :: touch( Dlp& s, double t){ touch(s, Ro::dls_pnt( Fl::loc(s, Ori(1), 1) ), t); }
     
 }
 

@@ -107,6 +107,8 @@ void Scene::push3D(){
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     
+//    glLoadMatrixf( xf.proj );
+    
     glLoadIdentity();
     if ( camera.lens().bOrtho ){
         float oz = camera.pos()[2];
@@ -116,14 +118,17 @@ void Scene::push3D(){
         gluPerspective( lens.mFocal, lens.mWidth/lens.mHeight, lens.mNear, lens.mFar);				
     }
     
+    
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
+//    glLoadMatrixf( xf.modelView );
     
     glLoadIdentity();
     gluLookAt(camera.pos()[0], camera.pos()[1], camera.pos()[2], v[0], v[1], v[2], u[0], u[1], u[2]);
     
     Rot t = Gen::aa( model.rot() );
     GL::rotate(t.w());
+
 
 }
 

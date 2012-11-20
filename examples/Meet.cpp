@@ -9,7 +9,7 @@
 #include <iostream>
 
 #include "vsr.h"
-#include "GLVInterfaceImpl.h"
+#include "vsr_GLVInterfaceImpl.h"
 
 void circle(GLVApp& app){
 

@@ -25,7 +25,7 @@
 #include "vsr_gl_vbo.h"
 
 #include "vsr_stat.h"
-
+#include "vsr_knot.h"
 
 #include <iostream>
 
@@ -61,124 +61,6 @@ void circle(GLVApp& app){
 }
 
 
-//Imaginary Point Pairs
-void imaginary(GLVApp& app){
-
-
-    //This is the point we are transforming
-    static Pnt p = PT(1,0,0);
-    DRAW(p);
-    app.interface.touch(p);
-
-    //Some Variables we can control onscreen
-    static float val, m, n, iter, dense;
-    static bool bReset, bDrawCoord, bDrawGen;
-    static Pnt tp[100];
-    
-    SET 
-        app.gui(val,"val",-10,10)(dense,"dense",0,100)(m, "m", -10,10)(n,"n",-10,10)(bReset)(bDrawCoord)(bDrawGen);
-        //app.gui(iter,"iter",1,10);         
-
-//        Rand::Seed(10);
-//        for (int i = 0; i < 100; ++i){
-//            tp[i] = Ro::null(Rand::Num() * 1, Rand::Num()*1, Rand::Num()*1);            
-//        }
-
-    END
-
-//    if (bReset){
-//        Rand::Seed(10);
-//        for (int i = 0; i < 100; ++i){
-//            tp[i] = Ro::null(Rand::Num() * 1, Rand::Num()*1, Rand::Num()*1);            
-//        }
-//    }
-
-    //The Position of the Point Pair Generators
-    static Dls d1 = EP;    
-    static Dls d2 = EP.trs(0,0,1);    
-
-    app.interface.touch(d1);
-    app.interface.touch(d2);
-
-
-    //Point Pair Generators (Imaginary)
-    Par para = Ro::par( d1, Vec::y );
-    Par parb = Ro::par( d2, Vec::x );
-    
-    
-    Par Bp = para * PI/m;
-    Par Bm = parb * PI/n;
-
-    Bst Vp = Gen::bst(Bp * val);
-    Bst Vm = Gen::bst(Bm * val);
-    
-    int num = m * n / ( (val>0)?val:1);
-   // cout << num << endl; 
-    
-        Pnt tmpa = p;
-        ITJi(i,num)
-            Pnt np = tmpa;
-            if (bDrawCoord){
-                DRAW3( np ^ Bp, 1,1,0); 
-                DRAW3( np ^ Bm, 0,1,1); 
-            }
-            tmpa = Ro::loc( np.sp( Vm * Vp ) );
-            DRAW3(tmpa, 1,1,1);
-        END
-    
-//    cout << app.scene().xf << endl; 
-    Par parc = Bp + Bm;
-    Par tpar = parc * val/dense;
-    Bst bst = Gen::bst(tpar);
-    
-    Pnt tmp = p;
-    glColor3f(1,1,1);
-    glBegin(GL_LINE_STRIP);    
-    ITJi(i, dense * num);
-        Pnt np = Ro::loc( tmp.sp(bst) );
-        tmp = np;
-        GL::vertex(np.w());
-    END
-    glEnd();
-    
-    
-    
-//    for (int i = 0; i < 100; ++i){
-//            tp[i] = Ro::loc( tp[i].sp(bst) );
-//            DRAW( tp[i] );            
-//    }
-
-//    DRAW3(parb,0,0,1);
-//    DRAW3(para,1,0,0);
-//   
- 
-    if (bDrawGen){
-        DRAW3(para.dual(),1,0,0);    
-        DRAW3(parb.dual(),0,0,1);
-    }
-    
-}
-
-
-void test(GLVApp& app){
-
-    static Cir cxy = CXY(1);
-    app.interface.touch(cxy);
-    
-    static Dll dll = DLN(1,0,0).trs(2,0,0);
-    static Par par = PT(1,0,0) ^ PT(-1,0,0);
-    
-    static float val;
-    SET
-        app.gui(val,"val",-10,10);
-    END
-    
-    ITJi(i,100)
-        Cir tcxy = cxy.sp( Gen::bst(par * t * val * PI) );    
-        DRAW3(tcxy,1,0,0);
-    END
-}
-
 void weighted(GLVApp& app){
 
     
@@ -195,7 +77,7 @@ void weighted(GLVApp& app){
     static Pnt pd = PT(0,1,0);
 
     pa[3] = wa; pb[3] = wb;
-//    pc[3] = wc; pd[3] = wd;
+    pc[3] = wc; pd[3] = wd;
 
     Par para = pa ^ pb;
     Par parb = pc ^ pd;
@@ -203,11 +85,13 @@ void weighted(GLVApp& app){
     DRAW3(para.dual(),1,0,0);
     DRAW3(parb.dual(),0,1,0) ;
     
-//    cout << "A: " << para.dot() << endl;
-//    cout << "B: " << parb.dot() << endl;
+    cout << "A: " << para.dot() << endl;
+    cout << "B: " << parb.dot() << endl;
 
-    Par tp = para * m;// + parb * n;
-    Bst b = Gen::bst(tp * val);      
+    Par tpa = para * PI/m;// + parb * n;
+    Par tpb = parb * PI/n;// + parb * n;
+
+    Bst b = Gen::bst((tpa )* val);      
 
     if(bPnt){
         static Pnt src = PT(1,1,0); 
@@ -229,19 +113,190 @@ void weighted(GLVApp& app){
         Cir tmp = csrc;
         ITJi(i,1000);
             Cir nc = tmp.sp(b);
-//            DRAW3(nc,t,0,1-t);
-            DRAWV(nc);
+            DRAW(nc);
             tmp = nc;
         END        
         
     }
 }
 
+void twoknots(GLVApp& app){
+    const int num = 2;
+    static Knot k[num];
+    
+    ITJ(i, num) 
+        DRAW3( k[i].ca(), 1,0,0 );
+        DRAW3( k[i].cb(), 0,0,1 );
+        k[i].calc();
+        app.interface.touch( *(Frame*)&k[i] );
+    END
+    
+    static float vAmt;
+    
+    SET
+        app.gui(vAmt);
+        k[0].pos() = PT(-2,0,0);
+        k[1].pos() = PT(2,0,0);
+    END
+    
+    static Pnt pnt = PT(1,1,1);
+}
+
+void knot(GLVApp & app) {
+
+    static Knot k;
+    
+    static double vAmt, vM, vN, num, vYa, vYb;
+    static bool bReset, bReal, bNullA, bNullB;
+    static bool bDrawCoord, bDrawCir;
+    SET
+        app.gui(vAmt)(vM,"m",0,100)(vN,"n",0,100)(num,"num",0,10000);
+        app.gui(vYa,"Dist",0,10)(bReset);
+        app.gui(bReal,"Real")(bNullA, "nullA")(bNullB, "nullB")(bDrawCoord,"DrawCoord")(bDrawCir, "bDrawCir");
+        vAmt = .01; vM = 3; vN = 3; num = 100; vYa = ROOT2;
+    END
+    
+    k.dist() = vYa;
+    k.amt() = vAmt;
+    k.m() = vM;
+    k.n() = vN;
+    k.ra() = bReal;
+    k.ba() = bNullA;
+    k.bb() = bNullB; 
+    k.calc();
+    
+    DRAW3(k.ca(),1,0,0); DRAW3(k.cb(),0,0,1);
+    
+    static Pnt pnt = PT(1,1,1);
+    static Frame f(pnt, Rot(1,0,0,0));
+    static Cir c = Ro::cir(pnt, Biv::xz, .2);
+    
+    app.interface.touch(pnt);
+    
+    Pnt p = pnt;
+    static Pnt p2 = pnt;
+    Pnt p3 = Ro::loc( k(p2) ); 
+    p2 = p3;
+    DRAW3(p3,1,0,0);
+    
+    if (bReset) {
+        p2 = pnt;
+        c = Ro::cir(pnt, Biv::xz, .2);
+    }
+
+    if (bDrawCir) {
+        c = k(c);
+        Cir tc = c;
+        ITJi(i,num)
+            tc = k(tc);
+            DRAW3(tc,1,t,t);
+        END 
+    }
+    
+    if (bNullA) {
+        cout << k.fa().tx() << endl; 
+        DRAW( k.fa() );
+//        DRAW3(,1,1,0);
+    }
+    
+    ITJi(i,num)
+         Pnt tmp = Ro::loc( k(p) );
+         DRAW3(tmp,t,0,1-t);
+         if (bDrawCoord) { DRAW3(tmp^k.pa(bReal), 1,0,0); DRAW3(tmp^k.pb(), 0,0,1); }
+         p = tmp;
+    END
+    
+    
+}
+
+//Orthogonality of Point Pair
+void ortho(GLVApp& app){
+
+    static Cir cir = CXY(1);
+    
+    
+    
+    static Pnt p = PT(1,1,1);
+    static Pnt p2 = PT(0,2,2);
+    app.interface.touch(p);
+     app.interface.touch(p2);
+    
+    static double m, n;
+    static double val, iter;
+    static bool bDrawCoord;
+    SET
+        app.gui(m,"m",0,100)(n,"n",0,100)(val,"val",0,10)(iter,"iter",1,10000)(bDrawCoord,"coord");
+    END
+    
+    Par pa = cir.dual();
+    Par pb = (p^pa).dual();
+    
+    DRAW(cir);
+    DRAW(p);    
+    DRAW3( p ^ pa,1,0,0 );
+    
+    Par tpar =  ( pa * PI/m + pb * PI/n ) * val;
+    
+    cout << "A: " << pa.dot()[0] << " B: " << pb.dot()[0] << " C: " << tpar.dot()[0] << endl; 
+    
+    Bst bst = Gen::bst(tpar);
+    
+    Pnt pnt = p2;
+    ITJi(i, iter)
+        pnt = Ro::loc( pnt.sp(bst) );
+        DRAW(pnt);
+        if (bDrawCoord) DRAW3( pnt ^ pa, 1,1,0);
+        if (bDrawCoord) DRAW3( pnt ^ pb, 0,1,1);
+    END
+ 
+       
+}
+
+
+void orbits(GLVApp& app){
+    static Orbit a, b;
+    
+    app.interface.touch( a.sf() );
+    app.interface.touch( b.sf() );
+    
+    static double iter, amt, m, n;
+    static bool bNullA, bNullB, bRealA, bRealB;
+    SET
+        a.sf().pos( -1, 0,0 );
+        b.sf().pos( 1, 0,0 );
+        app.gui(iter, "iter",0,10000)(amt,"amt",0,10)(bNullA, "nullA")(bNullB)(bRealA, "realA")(bRealB);
+        
+        Rand::Seed(10);
+        
+    END
+    
+    a.real() = bRealA; b.real() = bRealB; 
+    a.null() = bNullA; b.null() = bNullB;
+    
+    a.calc(); b.calc();
+    DRAW( a.f() ); DRAW( b.f() );
+    DRAW( a.cir() ); DRAW( b.cir() );
+    
+    static Pnt p = PT(1,1,1);
+    app.interface.touch(p);
+    Pnt pnt = p;
+    ITJi(i,iter)
+        
+        Bst bst = Gen::bst( a.par(b,t) * amt );
+        pnt = Ro::loc( pnt.sp (bst) );
+        DRAW(pnt);
+    END
+
+}
 
 void GLVApp :: onDraw(){
-//    test(*this);
-    imaginary(*this);
+
 //    weighted(*this);
+//    twoknots(*this);
+//      knot(*this);
+//      ortho(*this);
+        orbits(*this);
+        
 //    text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }
 
@@ -262,3 +317,119 @@ int main(int argc, const char * argv[]) {
 
     return 0;
 }
+
+//Imaginary Point Pairs
+//void imaginary(GLVApp& app){
+//
+//    //This is the point we are transforming
+//    static Pnt p = PT(1,1,1);
+//    DRAW(p);
+//    app.interface.touch(p);
+//
+//    //Some Variables we can control onscreen
+//    static float val, m, n, dense;
+//    static bool bReset, bDrawCoord, bDrawGen, bDrawMany, bPa, bPb;
+//    
+//    
+//    
+//    static Frame fa, fb;
+//    app.interface.touch(fa);
+//    app.interface.touch(fb);    
+//    DRAW(fa); DRAW(fb);
+//    
+//    const int numrand = 30;
+//    static Pnt tp[numrand];
+//    static Pnt np[numrand];
+//    
+//    SET 
+//        app.gui(val,"val",-10,10)(dense,"dense",0,100)(m, "m", -10,10)(n,"n",-10,10)(bReset)(bDrawCoord)(bDrawGen)(bDrawMany, "fibers")(bPa,"a_real")(bPb,"b_real");
+//        
+//        val = .001; dense = 3; m = 3; n = 2; bPa = true; bPb = true; 
+//
+//        Rand::Seed(10);
+//        for (int i = 0; i < numrand; ++i){
+//            tp[i] = Ro::null(Rand::Num() * 1, Rand::Num()*1, Rand::Num()*1);            
+//        }
+//        
+//        fa.set(PT(-.5,0,0)); fb.set(PT(.5,0,0));
+//
+//    END
+//
+//
+//
+//    //Orthogonal Point Pair Generators (Imaginary)
+//    Par para = fa.px( bPa );//Ro::par( Ro::dls(fa.pos(), 1), fa.y() ); //RED
+//    Par parb = fb.py( bPb  );//Ro::par( Ro::dls(fb.pos(), 1), fb.x() ); //BLUE
+//    
+//    Par Bp = para * PI/m; //RED
+//    Par Bm = parb * PI/n; //BLUE
+//
+//    Bst Vp = Gen::bst(Bp * val);
+//    Bst Vm = Gen::bst(Bm * val);
+//    
+//    //Add up Generators
+//    Par parc = Bp + Bm;
+//    Par tpar = parc * val/dense;
+//    Bst bst = Gen::bst(tpar);
+//    
+//    int num = m * n / ( (val>0.001)?val:1);
+//    
+//    Pnt tmpa = p;
+//    ITJi(i,num)
+//        Pnt np = tmpa;
+//        if (bDrawCoord){
+//            DRAW3( np ^ Bp, 1,.2,.2); //RED
+//            DRAW3( np ^ Bm, .2,.2,1); //BLUE
+//        }
+//        tmpa = Ro::loc( np.sp( Vm * Vp ) );
+//        DRAW3(tmpa, 1,1,1);
+//    END
+//    
+//    Pnt tmp = p;
+//    glColor3f(1,1,1);
+//    glBegin(GL_LINE_STRIP);    
+//    ITJi(i, dense * num);
+//        Pnt np = Ro::loc( tmp.sp(bst) );
+//        tmp = np;
+//        GL::vertex(np.w());
+//    END
+//    glEnd();
+//    
+//    
+//    if (bReset){
+//        Rand::Seed(10);
+//        for (int i = 0; i < numrand; ++i){
+//            tp[i] = Ro::null(Rand::Num() * 1, Rand::Num()*1, Rand::Num()*1);
+//            np[i] = tp[i];            
+//        }
+//    }
+//    
+//    static double time = 0; time += 1.0; double st = sin( time / 180.0 );
+//    
+//
+//    if (bDrawMany){
+//        Pnt pp;
+//        for (int i = 0; i < numrand; ++i){
+//                Pnt tmp = tp[i];
+//                glBegin(GL_LINE_STRIP);
+//                for (int j = 0; j < dense * num; ++j){
+//                    Pnt pt = Ro::loc( tmp.sp(bst) );
+//                    glColor3f(0,1,1);
+//                    GL::vertex( pt.w() ); 
+//                    tmp = pt;
+//                }
+//                glEnd();
+//                pp = Ro::loc( np[i].sp(bst) );
+//                DRAW3( pp, 1,0,1 );
+//                np[i] = pp;
+//        }
+//    }
+//    
+//    //Draw Generating Circles
+//    if (bDrawGen){
+//        DRAW3(para.dual(),1,0,0);    
+//        DRAW3(parb.dual(),0,0,1);
+//    }
+//    
+//}
+

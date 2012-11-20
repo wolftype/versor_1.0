@@ -17,11 +17,7 @@ namespace vsr {
 
     //DEFAULT IS NAVIGATION AND SELECTION MODES
     Interface :: Interface()  : mMode( Mode::Navigate | Mode::Select ){
- //       model = new Model(this);
     }
-    
-//    Touchable& Interface :: current()  { return *( model -> active()); }
-    
     
     void Interface :: touch( Frame& f, double t){
         
@@ -39,21 +35,21 @@ namespace vsr {
         }
     }
     
-//    void Interface :: touch( Frame& f, Frame& e, double t){
-//        
-//        static double dt = 5;
-//        static double acc = .9;
-//        dt *= acc;
-//        if ( mouse.isDown ){
-//            dt = t;// scene().ma() / scene().width();
-//            if (pntClicked ( f.pos() ) ){
-//               // f.select();
-//            }
-//        }
-////        if (f.isSelected()){
-////            xfFrame(&f, &e, dt);
-////        }
-//    }
+    void Interface :: touch( Frame& f, Frame& e, double t){
+        
+        static double dt = 5;
+        static double acc = .9;
+        dt *= acc;
+        if ( mouse.isDown ){
+            dt = t;// scene().ma() / scene().width();
+            if (pntClicked ( f.pos() ) ){
+               select(&f);
+            }
+        }
+        if (isSelected( &f )){
+            xfFrame(&f, &e, dt);
+        }
+    }
     
     void Interface :: onMouseMove(){
         
@@ -97,7 +93,6 @@ namespace vsr {
     }
 
     void Interface :: onMouseDrag(){			
-			
                        
 //            if (key.alt)   enable(Mode::CamArb);
 //            if (key.caps)  enable(Mode::CamTrack);
@@ -120,8 +115,8 @@ namespace vsr {
             //cout << "DX: " << dx << " DY: " << dy << endl;
             
             //current position relative to top left (0.0 - 1.0)
-            float cx = mouse.xrel;
-            float cy = mouse.yrel;//changed
+            float cx = mouse.pos[0];//mouse.xrel;
+            float cy = mouse.pos[1];//mouse.yrel;//changed
             
             //Accumulated Movement
             nx += dx; //+ or -?
@@ -133,7 +128,7 @@ namespace vsr {
             
             mouse.dragAccum = Vec(nx,ny,0);							//total dvector since program launch
             mouse.drag		= Vec(tdx,tdy,0);						//vector from last click and hold to current position
-            mouse.dragCat = Op::sp(mouse.drag, !scene().cat());  //rotate drag by concatenated camera position
+            mouse.dragCat = Op::sp(mouse.drag, !scene().cat());     //rotate drag by inverse concatenated orientation
             mouse.dragBivCat = vd().z ^ mouse.dragCat;
             mouse.dragBiv = Vec::z ^ (Vec(nx,ny,0)); // nx*-1 ?
             
@@ -178,204 +173,57 @@ namespace vsr {
         windowTransform();
                 
         //stateTransform();
-            
+        switch(keyboard.code){
+            case 'c':
+                camera().reset(); break;
+                
+        }
+                
         //Camera Controls			
         if (keyboard.alt) {	
-            cout << "alt" << endl; 
-            modelTransform();
+            modelTransform(1.0);
         }
         
         if (keyboard.shift){   
-            cout << "shift" << endl;
-            camTranslate();
+            camTranslate(1.0);
         }  
-        
-//        if (keyboard.
-                
+                        
         if (keyboard.ctrl){	
-            cout << "ctrl" << endl; 
-            camSpin();
+            camSpin(1.0);
         }				
                 
-        if (keyboard.caps){
-            
-            switch(keyboard.code){
-                    //Camera Controls Forward, Left, Right, Up, Down							
-                case Key::Up:    camera().dx() += camera().up() * .1;	break;
-                case Key::Down:  camera().dx() -= camera().up() * .1; break;
-                case Key::Left:  camera().dx() -= camera().right() * .1; break;
-                case Key::Right: camera().dx() += camera().right() * .1; break;							
-            }
-        }
                 
     }
-    
-    
- 
 
-    void Interface :: xfFrame( Frame * frame, Frame * eframe, double t){
-        //	if ( frame->isSelected() ) {
-		Pnt& tp = frame->pos();
-//		Rot& tr = frame->rot();
-		Vec tv ( tp );
-		Vec sc = GL::project(tv[0], tv[1], tv[2], scene().xf);
-		switch(keyboard.code){
-			case 's': //scale
-			{
-                //printf("scale\n");s
-                Vec tm1 = mouse.pos + mouse.drag - sc;
-                Vec tm2 = mouse.pos - sc; 
-				int neg = (tm1.norm() > tm2.norm()) ? -1 : 1; //Drag towards or away from element
-				
-				eframe->dd( mouse.drag.norm()*t*neg );
-				eframe->dilate();
-				//ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
-				break;
-			}
-			case 'g': //translate
-			{
-                //			tp = Op::sp(tp, Gen::trs(scene().mdc()*t));
-				eframe->dx() = mouse.dragCat * t;
-				eframe->move();
-				break;
-			}
-			case 'r': //rotate about local line
-			{
-                //			Dll td = tp <= Drb(scene().dbc()*t);
-                //			tr = Op::sp(tr, Gen::mot_dll(td));
-				eframe->db() =  mouse.dragBivCat * t; //scene().mp().unit() ^ scene().md();
-				eframe->spin();
-				break;
-			}
-			case 'b': //boost by drag
-			{
-				//ts = Op::sp(ts, Gen::trv(scene().mdc()*t));
-				break;
-			}
-			case 'a': //all transformations
-			{
-				double neg = mouse.drag[0];
-                //			Dll td = pos <= Drb(scene().dbc()*t);
-                //			ts = Op::sp(ts, Gen::mot_dll(td));
-                //			ts = Op::sp(ts, Gen::trs(scene().mdc()*t));
-                //			ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
-				break;
-			}
-			case 'q':
-			{
-				//cout << "deselect all" << endl;
-			}
-		}
-		eframe ->acc();
-        //		}
+
+    void Interface :: onKeyUp(){
+            
+        //Camera Controls			
+        if (keyboard.alt) {	
+            modelTransform(.9);
+        }
+        
+        if (keyboard.shift){   
+            camTranslate(.9);
+        }  
+                        
+        if (keyboard.ctrl){	
+            camSpin(.9);
+        }				
+                    
     }    
     
-    void Interface :: xfFrame( Frame * frame, double t){
-        //	if ( frame->isSelected() ) {
-		Pnt& tp = frame->pos();
-		Rot& tr = frame->rot();
-		Vec tv ( tp );
-		Vec sc = GL::project(tv[0], tv[1], tv[2], scene().xf);
-		switch(keyboard.code){
-			case 's': //scale
-			{
-                //printf("scale\n");s
-                Vec tm1 = mouse.pos + mouse.drag - sc;
-                Vec tm2 = mouse.pos - sc; 
-				int neg = (tm1.norm() > tm2.norm()) ? -1 : 1; //Drag towards or away from element
-				
-				frame->dd( mouse.drag.norm()*t*neg );
-				frame->dilate();
-				//ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
-				break;
-			}
-			case 'g': //translate
-			{
-                //			tp = Op::sp(tp, Gen::trs(scene().mdc()*t));
-				frame->dx() = mouse.dragCat * t;
-				frame->move();
-				break;
-			}
-			case 'r': //rotate about local line
-			{
-                //			Dll td = tp <= Drb(scene().dbc()*t);
-                //			tr = Op::sp(tr, Gen::mot_dll(td));
-				frame->db() =  mouse.dragBivCat * t; //scene().mp().unit() ^ scene().md();
-				frame->spin();
-				break;
-			}
-			case 'b': //boost by drag
-			{
-				//ts = Op::sp(ts, Gen::trv(scene().mdc()*t));
-				break;
-			}
-			case 'a': //all transformations
-			{
-				double neg = mouse.drag[0];
-                //			Dll td = pos <= Drb(scene().dbc()*t);
-                //			ts = Op::sp(ts, Gen::mot_dll(td));
-                //			ts = Op::sp(ts, Gen::trs(scene().mdc()*t));
-                //			ts = Op::sp(ts, Gen::dil_pnt( Ro::cen(pos), scene().md().norm()*t*neg));
-				break;
-			}
-			case 'q':
-			{
-				//cout << "deselect all" << endl;
-                toggleSelect(frame); 
-                break;
-			}
-		}
-		frame ->acc();
-        //		}
-    }
     
-    void Interface :: viewCalc(){
-        //Points in Z Space
-        vd().z  = Op::sp(Vec::z, !scene().cat());  
-        
-        Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
-        Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
-        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );     
-        
-        //Get Line of Mouse Position into Z Space (store as a Dual Line)
-		vd().ray	 = Op::dl( Ro::null(v2) ^ v1.unit() ^ Inf(1) ) ;
-		mouse.projectFar	= v1 ;
-		mouse.projectNear	= v2 ;
-//		
-//
-        mouse.cat     = Op::sp( mouse.move * -1, !scene().cat() );
-        mouse.biv     = mouse.pos ^ mouse.projectFar; //not used?
-//        
-//        //Point on Line Closest to Origin
-        mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), true ) );
-        mouse.bivCat = vd().z ^ mouse.cat;
-
-    }
-    
-    void Interface :: windowTransform(){
-       // printf("WT!\n");
-        switch(keyboard.code){
-                
-            case 96: //tilde
-                //printf("TILDE!\n");
-                vimpl -> fullScreenToggle(); 
-                break;
-            case 'q':
-     //           exit(0);
-                break;
-        }
-    }
-
-
-    
-    void Interface :: modelTransform(){
+    void Interface :: modelTransform(float acc){
+        //cout << "Model" << endl; 
+        model().ab() = acc;
         // Get Rotor Ratio between camera and model view
         Rot ryz = Gen::ratio( model().yz(), camera().yz() );
         Rot rxz = Gen::ratio( model().xz(), camera().xz() );
         // Rotate By said Rotor
         Biv tyz = Op::sp( model().yz(), ryz );
         Biv txz = Op::sp( model().xz(), rxz );
-        
+        //cout << tyz << txz << endl; 
         switch( keyboard.code ){
             case Key::Up:
             {    
@@ -401,70 +249,179 @@ namespace vsr {
         }
     }
     
-    void Interface :: camTranslate(){
+    void Interface :: camTranslate(float acc){
+        camera().ax() = acc;
         switch(keyboard.code){
             case Key::Up:
-                if (keyboard.ctrl) camera().dx() += camera().up() * .1;
-                else camera().dx() += camera().forward() * .1;	
+                if (keyboard.ctrl) camera().dx() += camera().up() * .05;
+                else camera().dx() += camera().forward() * .05;	
                 break;
             case Key::Down:
-                if (keyboard.ctrl) camera().dx() -= camera().up() * .1;  
-                else camera().dx() -= camera().forward() * .1; 
+                if (keyboard.ctrl) camera().dx() -= camera().up() * .05;  
+                else camera().dx() -= camera().forward() * .05; 
                 break;
-            case Key::Left:  camera().dx() -= camera().right() * .1; break;
-            case Key::Right: camera().dx() += camera().right() * .1; break;							
+            case Key::Left:  camera().dx() -= camera().right() * .05; break;
+            case Key::Right: camera().dx() += camera().right() * .05; break;							
         }
     }
     
-    void Interface :: camSpin(){
+    void Interface :: camSpin(float acc){
         if (!keyboard.shift){
-        switch(keyboard.code){
-            case Key::Up:    camera().db() -= camera().yz() * .01;	break;
-            case Key::Down:  camera().db() += camera().yz() * .01; break;
-            case Key::Left:  camera().db() += camera().xz() * .01; break;
-            case Key::Right: camera().db() -= camera().xz() * .01; break;							
+            camera().ab() = acc; 
+            switch(keyboard.code){
+                case Key::Up:    camera().db() -= camera().yz() * .01;	break;
+                case Key::Down:  camera().db() += camera().yz() * .01; break;
+                case Key::Left:  camera().db() += camera().xz() * .01; break;
+                case Key::Right: camera().db() -= camera().xz() * .01; break;							
+            }
         }
-        }
+    } 
+
+    void Interface :: xfFrame( Frame * frame, Frame * eframe, double t){
+		Pnt& tp = frame->pos();
+		Vec tv ( tp );
+		Vec sc = GL::project(tv[0], tv[1], tv[2], scene().xf);
+		switch(keyboard.code){
+			case 's': //scale
+			{
+                //printf("scale\n");s
+                Vec tm1 = mouse.pos + mouse.drag - sc;
+                Vec tm2 = mouse.pos - sc; 
+				int neg = (tm1.norm() > tm2.norm()) ? -1 : 1; //Drag towards or away from element
+				
+				eframe->dd( mouse.drag.norm()*t*neg );
+				eframe->dilate();
+				break;
+			}
+			case 'g': //translate
+			{
+				eframe->dx() = mouse.dragCat * t;
+				eframe->move();
+				break;
+			}
+			case 'r': //rotate about local line
+			{
+				eframe->db() =  mouse.dragBivCat * t; //scene().mp().unit() ^ scene().md();
+				eframe->spin();
+				break;
+			}
+			case 'b': //boost by drag
+			{
+				break;
+			}
+			case 'a': //all transformations
+			{
+				double neg = mouse.drag[0];
+				break;
+			}
+			case 'q':
+			{
+			}
+		}
+		eframe ->acc();
+        //		}
+    }    
+    
+    void Interface :: xfFrame( Frame * frame, double t){
+		Pnt& tp = frame->pos();
+		Rot& tr = frame->rot();
+		Vec tv ( tp );
+		Vec sc = GL::project(tv[0], tv[1], tv[2], scene().xf);
+		switch(keyboard.code){
+			case 's': //scale
+			{
+                //printf("scale\n");s
+                Vec tm1 = mouse.pos + mouse.drag - sc;
+                Vec tm2 = mouse.pos - sc; 
+				int neg = (tm1.norm() > tm2.norm()) ? -1 : 1; //Drag towards or away from element
+				
+				frame->dd( mouse.drag.norm()*t*neg );
+				frame->dilate();
+				break;
+			}
+			case 'g': //translate
+			{
+                //			tp = Op::sp(tp, Gen::trs(scene().mdc()*t));
+				frame->dx() = mouse.dragCat * t;
+				frame->move();
+				break;
+			}
+			case 'r': //rotate about local line
+			{
+				frame->db() =  mouse.dragBivCat * t; //scene().mp().unit() ^ scene().md();
+				frame->spin();
+				break;
+			}
+			case 'b': //boost by drag
+			{
+				break;
+			}
+			case 'a': //all transformations
+			{
+				double neg = mouse.drag[0];
+				break;
+			}
+			case 'q':
+			{
+                toggleSelect(frame); 
+                break;
+			}
+		}
+		frame ->acc();
     }
     
+    void Interface :: inputCalc(){
+
+    }
+
+    void Interface :: viewCalc(){
+        
+        //Assumes data has been copied to (or created from) scene transfomration matrices (xf)
+        //Points into Scene's Z Space
+        vd().z  = Op::sp(Vec::z, !scene().cat()); 
+         
+        //bottom Left (0,0) to top right (1,1)
+        mouse.pos     = Vec( mouse.x / vd().w, 1 - mouse.y / vd().h, 0 ) ;
+        mouse.move	= Vec( mouse.dx/ vd().w, - mouse.dy/vd().h, 0 ) ;
+        mouse.cat     = Op::sp( mouse.move * -1, !scene().cat() );
+        mouse.bivCat = vd().z ^ mouse.cat;
+
+        Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
+        Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
+        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );     
+        
+        //Get Line of Mouse Position into Z Space (store as a Dual Line)
+		vd().ray	 = Op::dl( Ro::null(v2) ^ v1.unit() ^ Inf(1) ) ;
+        
+		mouse.projectFar	= v1 ;
+		mouse.projectNear	= v2 ;
+
+        mouse.biv     = mouse.pos ^ mouse.projectFar; //not used?
+
+        //Point on Line Closest to Origin
+        mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), true ) );
+        
+        //            interface -> mouse.ddx		= win.mouse().ddx();
+//            interface -> mouse.ddy		= win.mouse().ddy();
+//            interface -> mouse.accel   = Vec( win.mouse().ddx(), -win.mouse().ddy(),0);
+             
+//            interface -> mouse.xrel     =  win.mouse().xRel() / win.width();
+ //           interface -> mouse.yrel     = 1 - win.mouse().yRel() / win.height();
+
+    }
     
-    //    void Interface :: stateTransform(){
-//        switch(keyboard.code){
-//            case 's': //scale
-//                {
-//                    if (mMode & Mode::Transform) { 
-//                        state() = model -> active();//tmp().back();
-//                    } else {
-//                        model -> push( state() );//tmp().push_back( state() );
-//                    }
-//                    enable( Mode::Scale | Mode::Transform );
-//                    disable( Mode::Rotate | Mode::Grab );
-//                    break;
-//                }
-//            case 'r': //rotate
-//                {
-//                    if (mMode & Mode::Transform) { 
-//                        state() = model -> get();
-//                    } else {								
-//                        model -> push( state() );
-//                        
-//                    }
-//                    enable( Mode::Rotate | Mode::Transform );
-//                    disable( Mode::Scale | Mode::Grab );
-//                    break;
-//                }
-//            case 'g': //grab
-//                {
-//                    
-//                    if (mMode & Mode::Transform) { 
-//                        state() = model -> get();
-//                    } else {								
-//                        model -> push( state() );
-//                    }
-//                    enable( Mode::Grab | Mode::Transform  );
-//                    disable( Mode::Rotate | Mode::Scale );
-//                    break;
-//                }
-//        }
-//    }
+    void Interface :: windowTransform(){
+       // printf("WT!\n");
+        switch(keyboard.code){
+                
+            case 96: //tilde
+                //printf("TILDE!\n");
+                vimpl -> fullScreenToggle(); 
+                break;
+            case 'q':
+     //           exit(0);
+                break;
+        }
+    }
+
 } // Vsr::

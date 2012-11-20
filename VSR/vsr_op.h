@@ -371,7 +371,37 @@ struct Gen {
         return Bst(cn, tp[0] * sn, tp[1] * sn, tp[2] * sn, tp[3] * sn, tp[4] * sn, tp[5] * sn, tp[6] * sn, tp[7] * sn, tp[8] * sn, tp[9] * sn );
     }
     
-    /*! Generate a Dilation from Origin [[[ uses Dil ( log(t) * .5 ) ]]]
+    /*!
+        Get Point Pair Generator of Basic Boost
+        Implemented from "Square Root and Logarithm of Rotors. . ." by Dorst and Valkenburg, 2011
+        @param Boost Spinor 
+    */
+    static Par log(const Bst& b){
+
+        double n;
+    
+        Par p(b); //extract 2-blade part
+        double td = p.dot()[0]; //get scalar
+        
+        if (td > 0 ) { double s2 = sqrt(td);  n = asinh( s2 ) / s2; }
+        else if ( td == 0 ) { n = 1; }
+        else if (td < 0 ) { double s2 = sqrt(-td); n = atan2(s2, b[0] ) / s2; }
+        
+        return p * n;
+    }
+    
+    /*
+        IN PROGRESS Get Two Point Pairs though polar decomposition (see "Square Root . . ." by Dorst and Valkenbrug, 2011)
+        @param General Conformal Spinor (e.g. a Ratio of Two Circles)
+    */
+    static Par log(const Mtt& m){
+//        Sph quad(m); //Quadvector of M is a Sphere
+//        Par curl =   quad * 4.0;//Eq 5.23 
+            
+
+    }
+    
+    /*! Generate a Dilation from Origin [[[ pass in ( log(t) * .5 ) ]]]
         @param Amt t
     */
     template<class T>
@@ -519,21 +549,21 @@ struct Ro {
         return sqrt ( fabs ( Ro::size(s, false) ) );
     }
     
-    //deprecated (too slow)
-//    template <class T>
-//    static Pnt loc( const T& s) { 
-//        typename Product<Inf,T>::IP t = Inf(1) <= s; 
-//        return  ( ( s * Inf(1) * s ) / ( t * t ) ) * -.5;
-//    }
-
-//    template<class A>
-//    static typename Product< typename Product< Inf,A, typename A::value_type>::IP, Inf,  typename A::value_type >::OP 
-
+    /*! Center of a Round Element 
+        @param input real or imaginary round (sphere, dual sphere, circle, point pair)
+    */
     template<class T>
     static Dls cen( const T& s) {
         return  s  / ( Inf(-1) <= s );
     }
-    
+
+    /*! More Exact Equation for Center of a Round (but more expensive) */
+    template<class T>
+    static Dls cen2( const T& s) {
+        Sca a = Inf(1) <= s;
+        return  Pnt( s * Inf(1) * s )  / ( ( a * a ) * -2.0 ) ;
+    }
+        
     template<class A>
     static Dls sur( const A& s) {
         return Dls( s / ( s ^ Inf(1) ));
@@ -543,6 +573,12 @@ struct Ro {
     template<class T>
     static Pnt loc( const T& s){
         return null ( cen ( s ) );
+    }
+
+    /// make null point from round
+    template<class T>
+    static Pnt loc2( const T& s){
+        return null ( cen2 ( s ) );
     }
     
     /*! Direction of Round Element 
@@ -750,24 +786,24 @@ inline Pnt Ro::pnt_cir( const Cir& cir, double theta){
 typedef Ro Round;
 typedef Fl Flat;
 typedef Ta Tangent;
-#define PT(x,y,z) Ro::null(Vec(x,y,z))
-#define PV(v) Ro::null(v)
-#define PX(f) Ro::null(Vec(f,0,0))
-#define PY(f) Ro::null(Vec(0,f,0))
-#define PZ(f) Ro::null(Vec(0,0,f))
+#define PT(x,y,z) vsr::Ro::null(vsr::Vec(x,y,z))
+#define PV(v) vsr::Ro::null(v)
+#define PX(f) vsr::Ro::null(vsr::Vec(f,0,0))
+#define PY(f) vsr::Ro::null(vsr::Vec(0,f,0))
+#define PZ(f) vsr::Ro::null(vsr::Vec(0,0,f))
 #define CXY(f) (PX(f)^PX(-f)^PY(f))
 #define CXZ(f) (PX(f)^PX(-f)^PZ(f))
 #define CYZ(f) (PY(f)^PY(-f)^PZ(f))
 #define F2S(f) f*1000.0
 #define S2F(f) f/1000.0
-#define LN(x,y,z) ( Pnt(0,0,0,1,.5)^PT(x,y,z)^Inf(1) )
-#define DLN(x,y,z) ( Op::dl(LN(x,y,z)) )
-#define EP Dls(0,0,0,1,-.5)
-#define EM Dls(0,0,0,1,.5)
-#define PAO Pnt(0,0,0,1,0)
-#define INFTY Inf(1)
-#define HLN(x,y,z) (Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
-#define HDLN(x,y,z) (Op::dl(HLN(x,y,z)))
+#define LN(x,y,z) ( vsr::Pnt(0,0,0,1,.5)^PT(x,y,z)^vsr::Inf(1) )
+#define DLN(x,y,z) ( vsr::Op::dl(LN(x,y,z)) )
+#define EP vsr::Dls(0,0,0,1,-.5)
+#define EM vsr::Dls(0,0,0,1,.5)
+#define PAO vsr::Pnt(0,0,0,1,0)
+#define INFTY vsr::Inf(1)
+#define HLN(x,y,z) (vsr::Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
+#define HDLN(x,y,z) (vsr::Op::dl(HLN(x,y,z)))
 } //vsr::
 
 #endif

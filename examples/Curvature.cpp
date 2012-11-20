@@ -92,7 +92,7 @@ void linear(GLVApp& app){
             
             if (bShowBend){
                 ITJi(k,num)
-                    Pnt tnsrc = Ro::loc( nsrc.sp( Gen::trv( 1, tp * amt * t ) ) );
+                    Pnt tnsrc = Ro::loc( nsrc.sp( Gen::bst(tp*amt*t) ) );//Gen::trv( 1, tp * amt * t ) ) );
                     DRAW3( tnsrc, t,0,1-t);
                 END 
             }
@@ -100,9 +100,7 @@ void linear(GLVApp& app){
        END 
         
     END 
-    
-    //DRAW
-    
+        
     uvmesh.draw(1,0,0);
     uvmesh.drawTri(1,1,0);
     

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Allo.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>Curvature.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -68,6 +73,11 @@
 			<true/>
 		</dict>
 		<key>9B5890251641A69B0096B491</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B5C460116445FBE003BF1B2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -102,7 +102,7 @@ namespace vsr {
 			double len() const { return sqrt (x * x + y * y + z * z); }
 			Vec3 unit() const { double n = len();  if (n ==0) n = 1; return Vec3(x/n, y/n, z/n); }
 			
-			double dot(Vec3 v) const { return x * v.x + y * v.y + z * v.z; }
+			T dot(Vec3 v) const { return x * v.x + y * v.y + z * v.z; }
 			static double Dot(const Vec3<>& v ) { return v.dot(v); }
 			Vec3 cross(Vec3 v) const { return Vec3( (y * v.z) - (z * v.y), (z * v.x) - (x * v.z), (x * v.y) - (y * v.x) ); }			
 			
@@ -132,6 +132,8 @@ namespace vsr {
 			
 			Vec4(T _w, Vec3<T> v) : x(v.x), y(v.y), z(v.z), w(_w) {}
             Vec4(Vec3<T> v, T _w) : x(v.x), y(v.y), z(v.z), w(_w) {}
+            
+			T dot(Vec4 v) const { return x * v.x + y * v.y + z * v.z + w * v.w; }
 
 			void set(T _x, T _y, T _z, T _w) { x=_x; y = _y; z = _z; w = _w; }
 				
@@ -213,6 +215,7 @@ namespace vsr {
 	class Mat4 {
 		public:
 			Vec4<T> col[4];
+            
 			
 			Mat4() {
 				col[0].set(1.,0.,0.,0.);
@@ -256,6 +259,16 @@ namespace vsr {
         }
         
          T * val() { return &col[0][0]; }
+         Vec4<T> row(int j) const { return Vec4<T>( col[0][j], col[1][j], col[2][j], col[3][j]); } 
+         
+         //matrix multiplication, 
+         Mat4 operator * (const Mat4& B) const {
+            Mat4 m;
+            for (int i = 0; i < 4; ++i){
+                m[i].set( row(0).dot( B[i] ), row(1).dot(B[i]), row(2).dot(B[i]) , row(3).dot(B[i]) );
+            }
+            return m;
+         }
         
 			friend ostream& operator << (ostream&, const Mat4<>&);
 			
