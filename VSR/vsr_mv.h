@@ -21,7 +21,7 @@
 #include <string.h>
 #include <iostream>
 #include <sstream>
-#include <math.h>
+//#include <math.h>
 #include "vsr_templates.h"
 
 
@@ -236,6 +236,20 @@ public:
 
     //Feed in a value_type
 	MV(const T& v = T()) BASECONST { std::fill(mW, mW + N, v);  }
+//    MV() BASECONST { std::fill(mW, mW + N, 0); }
+//	MV(T v) BASECONST { std::fill(mW, mW + N, v);  }
+//	MV(float v = 0) BASECONST { std::fill(mW, mW + N, v);  }
+//	MV(double v = 0) BASECONST { std::fill(mW, mW + N, v);  }
+    //NEW From other Vector Libraries
+//    template<class A>
+//    MV(const A& a) BASECONST { TPRINT("CONST OUTSIDER type\n"); IT(N) { (*this)[i] = a[i]; } }
+    //    //NEW from other libraries
+//    template <class A>
+//    MV& set(const A& a) {
+//        IT(N) { (*this)[i] = a[i]; }
+//        return *this;
+//    }
+
     
     //Copy Constructor -- same MV
     MV(const MV<N, IDX, T>& mv)  BASECONST {TPRINT(" Constructor Same Type \n"); set(mv);  }
@@ -254,6 +268,7 @@ public:
         return *this;
     }
     
+
     const MV& operator = (const MV& mv) { TPRINT(" Assignment Operator Same Type\n"); return set(mv); }
     
 //    template< class A >
@@ -385,18 +400,18 @@ public:
     Pnt null() const;
 
     /*! Dot Product */
-    typename ProductN<idx, idx, T>::IP dot() const { return (*this) <= (*this); }
+    typename ProductN<IDX, IDX, T>::IP dot() const;// { return (*this) <= (*this); }
     /*! Reverse Dot Product */
-    typename ProductN<idx, idx, T>::IP rdot() const { return *this <= ~(*this); }
+    typename ProductN<IDX, IDX, T>::IP rdot() const;// { return *this <= ~(*this); }
     /*! Weight */
-    T wt() const { return dot()[0]; }
+    T wt() const;// { return dot()[0]; }
     /*! Reverse Weight */
-    T rwt() const { return rdot()[0]; }
-    T norm() const { double a = rwt(); if(a<0) return 0; return sqrt( a ); }
-	T rnorm() const { double a = rwt(); if(a<0) return -sqrt( -a ); return sqrt( a ); }
-	self_type unit() const { double t = sqrt( fabs( dot()[0] ) ); if (t == 0) return self_type(); return *this / t; }
-    self_type runit() const { double t = rnorm(); if (t == 0) return self_type(); return *this / t; }
-    self_type tunit() const { double t = norm(); if (t == 0) return self_type(); return *this / t; }
+    T rwt() const;// { return rdot()[0]; }
+    T norm() const;// { double a = rwt(); if(a<0) return 0; return sqrt( a ); }
+	T rnorm() const;// { double a = rwt(); if(a<0) return -sqrt( -a ); return sqrt( a ); }
+	self_type unit() const;// { double t = sqrt( fabs( dot()[0] ) ); if (t == 0) return self_type(); return *this / t; }
+    self_type runit() const;// { double t = rnorm(); if (t == 0) return self_type(); return *this / t; }
+    self_type tunit() const;// { double t = norm(); if (t == 0) return self_type(); return *this / t; }
     
     
     typename Product<self_type, Pss, T>::GP dual() const;

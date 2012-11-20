@@ -30,10 +30,10 @@ namespace vsr {
 		
         
         
-		Frame * mJoint;			///< In Socket Transformation (RDHC, etc) SET THIS directly (all others follow)
-		Frame * mLink;			///< Relative Link (to next joint)
+		Frame * mJoint;			///< In Socket Transformation (RDHC, etc) SET THIS directly (all others follow after calling fk() method)
+		Frame * mLink;			///< Relative Link to next joint
 		
-		Frame * mFrame;			///< Absolute frames of Joints = joint * prev link * prev frame
+		Frame * mFrame;			///< Absolute frames of Joints = joint * prevLink * prevFrame
 
 		int mNum;
 		
@@ -113,7 +113,7 @@ namespace vsr {
 			}
         
             /* Possible Points */
-        
+            
             /// Pnt at position t along Link idx
             Pnt at(int idx, double t = 0.0){
                 return Ro::null( Interp::linear<Vec>( mFrame[idx].vec(), mFrame[idx+1].vec(), t) );
@@ -131,16 +131,15 @@ namespace vsr {
 			Dlp xz(const Pnt& p)  {
 				return Dlp(0,1,0,p[1]);
 			}
-			/// Plane 
 			
-			/// Line Forward: Line from kth joint to kth+1 joint
+			/// Dual Line Forward: Line from kth frame to kth+1 joint
 			Dll linf(int k) { return Op::dl( mFrame[k].pos() ^ mFrame[k+1].pos() ^ Inf(1) ).runit() ; }
-			/// Line Backward: Line from kth joint to kth-1 joint
+			/// Dual Line Backward: Line from kth frame to kth-1 joint
 			Dll linb(int k ) { return Op::dl( mFrame[k].pos() ^ mFrame[k-1].pos() ^ Inf(1) ).runit() ; }
-			/// Line From Kth Joint to Input Target (Default is From Last joint)
+			/// Dual Line From Kth Joint to Input Target (Default is From Last joint)
 			Dll lin(const Pnt& p ) { return Op::dl( mFrame[mNum-1].pos() ^ p ^ Inf(1) ).runit() ; }
 			
-			/// Forward Kinematics: Concatenations of previous frame, previous link, and current joint
+			/// Forward Kinematics: Absolute Concatenations of previous frame, previous link, and current joint
             void fk() {	
                 Mot mot = mJoint[0].mot();
                 mFrame[0].mot( mot );
@@ -148,23 +147,7 @@ namespace vsr {
                     Mot rel = mLink[i-1].mot() * mJoint[i].mot();
                     mFrame[i].mot(  mFrame[i-1].mot() * rel ) ;
                 }
-            }	
-//			void fk2() {	
-//                Mot mot = mJoint[0].mot();
-//                mFrame[0].mot( mot );
-//				for (int i = 1; i < mNum; ++i){		
-//					Mot m = mJoint[i].mot() * mLink[i-1].mot() * mFrame[i-1].mot();
-//					mFrame[i].mot( m );
-//				}
-//			}
-//            void fk3() {	
-//                Mot mot = mJoint[0].mot();
-//                mFrame[0].mot( mot );
-//                for (int i = 1; i < mNum; ++i){		
-//                    Mot rel = mLink[i-1].mot().sp( mFrame[i-1].mot() ) * mJoint[i].mot();
-//                    mFrame[i].mot(  rel * mFrame[i-1].mot() ) ;
-//                }
-//            }	      
+            }	      
         
             /// Forward Kinematics: Selective From begin joint to end joint
 			void fk(int begin, int end){
@@ -287,19 +270,18 @@ namespace vsr {
 
                 for (int i = 0; i < mNum-1; ++i){
                     //DRV of LINK
-                    Vec b = Biv( linf(i) ).unit().duale();                    
-                    Rot nr = Gen::ratio(t, b); //What it takes to turn it there
-                    //mJoint[i].rot( nr );
+                    Vec b = Biv( linf(i) ).duale();                    
+                    Rot nr = Gen::ratio(t, b*-1); //What it takes to turn the current integation there
                     R = nr * R;
                     mFrame[i].rot( R );
-                    t = Op::sp(t, nr );
+                    t = Op::sp(t, nr ); //angle is integrated
                 }
                 
                 //Set Base Joint
                 mJoint[0].rot( mFrame[0].rot() );
                 
                 for (int i = 1; i < mNum; ++i){                    
-                    //disassemble
+                    //reverse engineer
                     Rot Rt = (!mFrame[i-1].rot()) * mFrame[i].rot();
                     mJoint[i].rot( Rt ); 
                 }
@@ -328,7 +310,7 @@ namespace vsr {
             }
     
 			
-			/// Derive Link Frames from current Positions
+			/// Derive New Relative Link Frames from current Positions
 			void links(){
 				for (int i = 0; i < mNum-1; ++i){
 					mLink[i].pos() = Ro::null( mFrame[i+1].vec() - mFrame[i].vec() ); 

@@ -23,6 +23,7 @@ include Makefile.common
 #LINK TO GRAPHICS LIBRARIES FLAG (GLV, OpenGL, GLUT) 
 # run make GFX=0 vsr to make versor without built-in graphics capabilities (just data and operations)
 GFX = 1
+INSTALL_PCH = 0
 
 #Location of Git Repository Directory
 BASE_DIR	= ../../
@@ -160,6 +161,10 @@ install: vsr
 	@$(INSTALL) -m 644 $(INC_DIR)*.h $(DESTDIR)/include/$(LIB_NAME)
 	@$(INSTALL) -m 644 $(EXT_DIR)gl2ps/*.h $(DESTDIR)/include/$(LIB_NAME)
 	@$(INSTALL) -m 644 $(INC_DIR)Elements/*.h $(DESTDIR)/include/$(LIB_NAME)/Elements/
+	@$(INSTALL) -d $(DESTDIR)/include/$(LIB_NAME)/pch/
+	ifeq(INSTALL_PCH, 1)
+			@$(INSTALL) -m 644 $(PCH_DIR)*.gch $(DESTDIR)/include/$(LIB_NAME)/pch/
+	endif
 	#ifneq ($(EXT_LIB_COPY_DIR), )
 	#	@$(INSTALL) -m 644 $(EXT_LIB_COPY_DIR)/* $(DESTDIR)/lib
 	#endif

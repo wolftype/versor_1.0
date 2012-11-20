@@ -44,9 +44,9 @@ namespace vsr{
         
         Par par(double t) { return par() * t; }
         
-        Bst bst() { return Gen::trv( 1, par() ); }
-        Bst bst(double t) { return Gen::trv( 1, par(t) ); }
-        Bst bst(double a, double t) { return Gen::trv( a, par(t) ); }
+        Bst bst() { return Gen::bst(par()); }//trv( 1, par() ); }
+        Bst bst(double t) { return Gen::bst( par(t) ); }//Gen::trv( 1, par(t) ); }
+        //Bst bst(double a, double t) { return Gen::trv( a, par(t) ); }
         
         Cir cir() { return par().dual(); }
         

@@ -11,6 +11,8 @@
 
 #include "vsr_mv.h"
 
+#include <math.h>
+
 
 namespace vsr{
 
@@ -76,7 +78,31 @@ namespace vsr{
     MV<N, IDX, T> MV<N, IDX, T>::dil(T v) const {
         return  Op::sp(*this, Gen::dil(v) ); 
     }
-
+    
+    //Math funcs
+    /*! Dot Product */
+    template<int N, int IDX, class T>
+    typename ProductN<IDX, IDX, T>::IP MV<N,IDX,T>::dot() const { return (*this) <= (*this); }
+    /*! Reverse Dot Product */
+    template<int N, int IDX, class T>
+    typename ProductN<IDX, IDX, T>::IP MV<N,IDX,T>::rdot() const { return *this <= ~(*this); }
+    /*! Weight */
+    template<int N, int IDX, class T>
+    T MV<N,IDX,T>::wt() const { return dot()[0]; }
+    /*! Reverse Weight */
+    template<int N, int IDX, class T>
+    T MV<N,IDX,T>::rwt() const { return rdot()[0]; }
+    template<int N, int IDX, class T>
+    T MV<N,IDX,T>::norm() const { double a = rwt(); if(a<0) return 0; return sqrt( a ); }
+	template<int N, int IDX, class T>
+    T MV<N,IDX,T>::rnorm() const { double a = rwt(); if(a<0) return -sqrt( -a ); return sqrt( a ); }
+	template<int N, int IDX, class T>
+    MV<N,IDX,T> MV<N,IDX,T>::unit() const { double t = sqrt( fabs( dot()[0] ) ); if (t == 0) return self_type(); return *this / t; }
+    template<int N, int IDX, class T>
+    MV<N,IDX,T> MV<N,IDX,T>::runit() const { double t = rnorm(); if (t == 0) return self_type(); return *this / t; }
+    template<int N, int IDX, class T>
+    MV<N,IDX,T> MV<N,IDX,T>::tunit() const { double t = norm(); if (t == 0) return self_type(); return *this / t; }
+    
 
 //    #include "vsr_instantiation.cpp"
 	template class MV<4,ROT,VSR_PRECISION>;

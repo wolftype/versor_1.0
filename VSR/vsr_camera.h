@@ -74,10 +74,13 @@ struct Lens {
     /* Implicit Getters and Setters */
     void width( float w )	{ mWidth = w;}						///< set width
     void height( float h )	{ mHeight = h;}						///< set height
+    float ratio() const { return width()/ height(); }
 
     float width()	const {return mWidth;}							///< get width
     float height()	const {return mHeight;}							///< get height
     float depth()   const { return mFar - mNear; }
+    float& width()	 {return mWidth;}							///< get width
+    float& height()	 {return mHeight;}							///< get height
     
     float near() const { return mNear; }
     float far() const { return mFar; }
@@ -212,14 +215,33 @@ class Camera : public Frame {
 
         //Print View Matrix (Camera)
         friend ostream& operator << ( ostream& os, const XformMat& xf){
-            for (int i = 0; i < 4; ++i){
-                for (int j = 0; j < 4; ++j){
-                    int idx = i + j * 4;
-                    os << xf.modelViewd[idx];
-                    os << " ";
+        
+            os << "VIEWPORT" << "\n";            
+            for (int i = 0; i < 2; ++i){
+                for (int j = 0; j < 2; ++j){
+                    os << xf.viewport[i + j * 2] << " "; 
                 }
                 os << "\n";
             }
+        
+            os << "MODELVIEW" << "\n";
+            for (int i = 0; i < 4; ++i){
+                for (int j = 0; j < 4; ++j){
+                    int idx = i + j * 4;
+                    os << xf.modelViewd[idx] << " ";
+                }
+                os << "\n";
+            }
+
+            os << "PROJECTION" << "\n";
+            for (int i = 0; i < 4; ++i){
+                for (int j = 0; j < 4; ++j){
+                    int idx = i + j * 4;
+                    os << xf.projd[idx] << " ";
+                }
+                os << "\n";
+            }
+            
             return os;
         }
     };
@@ -237,11 +259,10 @@ class Camera : public Frame {
             Rot cat() { return camera.rot() * model.rot(); }//camera.rot() * model.rot(); }
             
             Mat4f mod() { return model.image(); }
-//            Mat4f& cam() { return camera.image(); }
-            Mat4f mvm() { return XMat::rot( cat() ); }
+            Mat4f mvm() { return  XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos()) * XMat::rot( model.rot() ) ; }
             Mat4f proj() { 
                 Lens& tl = camera.lens();
-                return XMat::fovy( tl.mFocal, tl.mWidth/tl.mHeight, tl.mNear, tl.mFar ); 
+                return XMat::fovy( tl.mFocal * PI/180.0, tl.mWidth/tl.mHeight, tl.mNear, tl.mFar ); 
             }
             
             //ADVANCED MODE -> Update Shader Uniforms
@@ -256,14 +277,14 @@ class Camera : public Frame {
                 copy(tview.val(), tview.val() + 16, xf.view);
                 copy(tmvm.val(), tmvm.val() + 16, xf.modelView);
                 copy(tproj.val(), tproj.val() + 16, xf.proj);
-                
-                
+             
+                xf.toDoubles();
             }
             
             void pop3D();
             void push3D();
             
-            //IMMEDIATE MODE
+            //IMMEDIATE MODE ONLY (NO IPHONE, etc)
             void getMatrices(){
                 glGetDoublev(GL_PROJECTION_MATRIX, xf.projd);	
                 glGetDoublev(GL_MODELVIEW_MATRIX, xf.modelViewd);

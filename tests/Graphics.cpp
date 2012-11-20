@@ -87,8 +87,8 @@ void shaderTest(GLVApp& app){
 void immediateTest(GLVApp& app){
     
     
-    
-    
+
+
     static Cir c = CXY(1);
     
 //    cout << app.camera().pos();
