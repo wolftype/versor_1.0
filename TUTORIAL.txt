@@ -1,0 +1,44 @@
+[This Tutorial is IN PROGRESS]
+
+0 - How it works
+
+The current version of Versor is built for speed, with the expense of longer compile times and a dash of code bloat.  Future versions
+will likely use jit compilation to take care of this (i.e. combine speed with lightweight implementation), by hooking into 
+luajit for instance.  Graham and I are working on that.
+ 
+Typical matrix operation libraries have templated inlined functions for Vector and Matrix multiplication.  Versor
+is similar, but on steroids, where "vectors" and "matrices" are redefined as "multivectors" which represent geometric
+elements (circles, lines, spheres) and operators (Rotors (aka Quaternions) Motors (aka Twists) Dilators, Reflections, Boosts (Knots, Orbits, etc) ).  
+These multivectors multiply together in many many many different ways.  Versor's library is a precomputation table of the most likely multiplications 
+you could possibly hope to use.  A Circle, for instance, can be outer-multiplied by a Plane to get the Point Pair where they intersect.
+
+
+1 - Download Versor to the same directory where you have AlloSystem 
+
+git clone github://wolftype/vsr
+
+Do not make Versor from here.  If you have, in order to test it on your system, you must clean it before
+installing via AlloSystem's makefile
+
+cd vsr
+make clean
+cd ..
+
+2 - Compile versor library and install to AlloSystem/build folder
+
+cd AlloSystem
+make vsr
+make allovsr
+
+Be Patient.  This will take a while to compile the first time round.  You may want to close memory hogging applications first (like xcode).
+Thereafter, the precompiled header (.gch file) that is created should speed things up drastically.
+
+
+3 - Try one of the examples
+cd allovsr
+make examples/circles.cpp
+
+Email me with problems / questions / concerns / discussion items
+
+
+ 

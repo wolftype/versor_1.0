@@ -163,10 +163,10 @@ namespace vsr {
         };
         
         
-        static int     AttributeSize[4] = {3,3,4,2};
-        static int     AttributeOffset[4];// = { offsetof(Vertex, Pos), offsetof(Vertex, Norm), offsetof(Vertex, Col), offsetof(Vertex, Tex)};
-        static bool    AttributeNormalizeBoolean[4] = {GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE};
-        static GLenum  AttributeType[4] = {GL::FLOAT, GL::FLOAT, GL::UBYTE, GL::FLOAT};
+//        static int     AttributeSize[4] = {3,3,4,2};
+//        static int     AttributeOffset[4];// = { offsetof(Vertex, Pos), offsetof(Vertex, Norm), offsetof(Vertex, Col), offsetof(Vertex, Tex)};
+//        static bool    AttributeNormalizeBoolean[4] = {GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE};
+//        static GLenum  AttributeType[4] = {GL::FLOAT, GL::FLOAT, GL::UBYTE, GL::FLOAT};
         
 //        static void enable(Ability);
 //        static void disable(Ability);
@@ -218,13 +218,13 @@ namespace vsr {
         
         
         static bool bLights; 
-        static bool bOrtho;
+//        static bool bOrtho;
         		
         static bool& isLightOn() { return bLights; }  
       //  static bool isLightOn() { return bLights; } 
         
 		
-        static GLenum Lights[8] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7 };
+//        static GLenum Lights[8] = { GL_LIGHT0, GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7 };
 		
         
         /// Project TO Screen Coordinates
