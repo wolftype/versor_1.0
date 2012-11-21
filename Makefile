@@ -5,7 +5,6 @@ title:
 	@echo versor: made by pablo colapinto at the university of california santa barbara 
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo
-	
 
 help: title
 	@echo make vsr ................ builds the main vsr library with built-in graphics
@@ -56,11 +55,7 @@ DEPFLAGS = -MMD -MF $(basename $@).dep
 LDFLAGS	+= -L$(LIB_DIR) 
 
 #Graphics only added to LDFLAGS if GFX=1 - (default)
-
-
-
 ifeq ($(GFX),1)
-
 	ifeq ($(PLATFORM), linux)
 		LINK_LDFLAGS += -lGLEW -lGLU -lGL -lglut -lGLV
 	else ifeq ($(PLATFORM), macosx)
@@ -154,7 +149,8 @@ $(EXEC_TARGETS): $(LIB_PATH) FORCE
 #test: test.cpp vsr
 #	$(CXX) $(CXXFLAGS) $(HPATH) $< -o $(BUILD_DIR)test $(LDFLAGS) -l$(LIB_NAME)
 
-install: vsr
+install: FORCE vsr
+	@echo installing to $(DESTDIR)
 	@$(INSTALL) -d $(DESTDIR)/lib
 	@$(INSTALL) -d $(DESTDIR)/include/$(LIB_NAME)/Elements/
 	@$(INSTALL) -m 644 $(LIB_PATH) $(DESTDIR)/lib
@@ -162,12 +158,14 @@ install: vsr
 	@$(INSTALL) -m 644 $(EXT_DIR)gl2ps/*.h $(DESTDIR)/include/$(LIB_NAME)
 	@$(INSTALL) -m 644 $(INC_DIR)Elements/*.h $(DESTDIR)/include/$(LIB_NAME)/Elements/
 	@$(INSTALL) -d $(DESTDIR)/include/$(LIB_NAME)/pch/
-	ifeq(INSTALL_PCH, 1)
-			@$(INSTALL) -m 644 $(PCH_DIR)*.gch $(DESTDIR)/include/$(LIB_NAME)/pch/
-	endif
-	#ifneq ($(EXT_LIB_COPY_DIR), )
-	#	@$(INSTALL) -m 644 $(EXT_LIB_COPY_DIR)/* $(DESTDIR)/lib
-	#endif
+ifeq ($(INSTALL_PCH),1)
+	@echo installing precompiled header to $(DESTDIR)/include/$(LIB_NAME)/
+	@$(INSTALL) -m 644 $(PCH_DIR)*.gch $(DESTDIR)/include/$(LIB_NAME)/
+endif
+
+#ifneq ($(EXT_LIB_COPY_DIR), )
+#	@$(INSTALL) -m 644 $(EXT_LIB_COPY_DIR)/* $(DESTDIR)/lib
+#endif
 
 #lib dir etc . . .
 #Stuff set in Makefile.common (here for debugging)
