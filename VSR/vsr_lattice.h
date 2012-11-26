@@ -474,17 +474,18 @@ namespace vsr {
 //				break;
 //		}
 
-		switch(bounded){
+		if(bounded){
         
-			case 0:
+			//case 0:
 			for (int i = 0; i < num(); ++i){
 				//create backwards transformation that location from v (type dependent)
 				s = Op::sp( grid(i), Gen::trs( v[i] * -dt ) );
 				mData[i] = euler(v, prev(), s); //eulerPrev(s);
 			}
-			break;
+			//break;
 			
-			case 1:
+        }
+        else {//case 1:
 			
 			for (int m = 1; m < mWidth-1; ++m){
 				for (int j = 1; j < mHeight-1; ++j){
@@ -498,9 +499,8 @@ namespace vsr {
 					}
 				}
 			}
-			bound(mData, neg);
-			break;
-		}
+			bound(mData, neg);	
+        }
 	}
     
     //////////////////////////// //////////////////////////// 

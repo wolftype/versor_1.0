@@ -139,7 +139,7 @@ namespace vsr {
             Vec rel ( .5-cx, .5-cy, 0.0 );
             Vec nn  ( nx, ny, 0.0 );					
             
-            double acc = mouse.accel.norm();	
+            //double acc = mouse.accel.norm();	
         
             mouse.newClick = 0;
 
@@ -311,7 +311,7 @@ namespace vsr {
 			}
 			case 'a': //all transformations
 			{
-				double neg = mouse.drag[0];
+				//double neg = mouse.drag[0];
 				break;
 			}
 			case 'q':
@@ -324,7 +324,7 @@ namespace vsr {
     
     void Interface :: xfFrame( Frame * frame, double t){
 		Pnt& tp = frame->pos();
-		Rot& tr = frame->rot();
+		//Rot& tr = frame->rot();
 		Vec tv ( tp );
 		Vec sc = GL::project(tv[0], tv[1], tv[2], scene().xf);
 		switch(keyboard.code){
@@ -358,7 +358,7 @@ namespace vsr {
 			}
 			case 'a': //all transformations
 			{
-				double neg = mouse.drag[0];
+				//double neg = mouse.drag[0];
 				break;
 			}
 			case 'q':

@@ -705,10 +705,10 @@ namespace vsr {
 	}	
 	template < class T >
 	void Lattice < T > :: diffusefwd(double rate, bool bounded){
-			switch (bounded) {
+			if (bounded) {
 			
 				//unbounded
-				case 0:
+				//case 0:
 				//for each data member
 				for (int i = 0; i < num(); ++i){
 					T tdx;
@@ -723,29 +723,29 @@ namespace vsr {
 					//add to current value
 					mData[i] += tdx;
 				}
-				break;
+				//break;
 				//bounded 
-				case 1:
-				for (int i = 1; i < mWidth -1; ++ i) {
-					for (int j = 1; j < mHeight -1; ++ j) {
-						for (int k = 1; k < mDepth -1; ++ k) {
-							int idx = _indexOf(i,j,k,*this);
-							T tdx;
-							//sum up neighboring values
-							for (int m = 1; m < 7; ++m){
-								if ( nbr(idx)[m] != -1 ) tdx += mData[ nbr(idx)[m] ];
-							}
-							//subtract 6 times current value
-							tdx -= mData[ idx ] * 6;
-							//multiply by rate
-							tdx *= rate;
-							//add to current value
-							mData[idx] += tdx;
-						}
-					}
-				}
-				break;
-			}	
+				//case 1:
+            }
+			else{	for (int i = 1; i < mWidth -1; ++ i) {
+                        for (int j = 1; j < mHeight -1; ++ j) {
+                            for (int k = 1; k < mDepth -1; ++ k) {
+                                int idx = _indexOf(i,j,k,*this);
+                                T tdx;
+                                //sum up neighboring values
+                                for (int m = 1; m < 7; ++m){
+                                    if ( nbr(idx)[m] != -1 ) tdx += mData[ nbr(idx)[m] ];
+                                }
+                                //subtract 6 times current value
+                                tdx -= mData[ idx ] * 6;
+                                //multiply by rate
+                                tdx *= rate;
+                                //add to current value
+                                mData[idx] += tdx;
+                            }
+                        }
+                    }
+            }
 	}
 
 

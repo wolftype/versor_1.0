@@ -394,12 +394,12 @@ struct Gen {
         IN PROGRESS Get Two Point Pairs though polar decomposition (see "Square Root . . ." by Dorst and Valkenbrug, 2011)
         @param General Conformal Spinor (e.g. a Ratio of Two Circles)
     */
-    static Par log(const Mtt& m){
-//        Sph quad(m); //Quadvector of M is a Sphere
-//        Par curl =   quad * 4.0;//Eq 5.23 
-            
-
-    }
+//    static Par log(const Mtt& m){
+////        Sph quad(m); //Quadvector of M is a Sphere
+////        Par curl =   quad * 4.0;//Eq 5.23 
+//            
+//
+//    }
     
     /*! Generate a Dilation from Origin [[[ pass in ( log(t) * .5 ) ]]]
         @param Amt t

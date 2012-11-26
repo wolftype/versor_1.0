@@ -1,7 +1,7 @@
 //
 //  vsr_types.h
 //  vsr
-//
+//  TYPE detection (used in automatic GUI generation)
 //  Created by Pablo Colapinto on 5/3/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
@@ -27,26 +27,26 @@ namespace vsr {
         DOUBLE        
     };
 
-typedef map< const char *, int> NameMap;
+    typedef map< const char *, int> NameMap;
 
-NameMap create_types(){
-    NameMap m;
-    bool b;
-    unsigned char uc;
-    char c;
-    float f;
-    double d;
-    int i;
-    
-    m[ typeid(b).name() ] = BOOLEAN;
-    m[ typeid(uc ).name() ] = UCHAR;
-    m[ typeid(f ).name() ] = FLOAT;
-    m[ typeid(d ).name() ] = DOUBLE;
-    m[ typeid(i ).name() ] = DOUBLE;
-    return m;
-}
+    NameMap create_types(){
+        NameMap m;
+        bool b;
+        unsigned char uc;
+    //    char c;
+        float f;
+        double d;
+        int i;
+        
+        m[ typeid(b).name() ] = BOOLEAN;
+        m[ typeid(uc ).name() ] = UCHAR;
+        m[ typeid(f ).name() ] = FLOAT;
+        m[ typeid(d ).name() ] = DOUBLE;
+        m[ typeid(i ).name() ] = DOUBLE;
+        return m;
+    }
 
-static NameMap Types = create_types();
+    static NameMap Types = create_types();
 
 } //vsr::
 

@@ -506,7 +506,7 @@ inline void Glyph :: Helix(float radius, float height, bool clockwise) {
 
 	glNormal3f(0, 0, 1);
 	
-	int dir = ( clockwise ? -1 : 1 );
+//	int dir = ( clockwise ? -1 : 1 );
 
 	glBegin(GL_LINES);
 
@@ -843,7 +843,7 @@ void Glyph :: SegTo(const Cir& K, double st, double t, int res){
     double siz = Ro::size(K,false);                            //Squared Radius
     double rad = sqrt ( fabs (siz) );                   //Radius
     
-    bool sign = Op::sn(b, Biv::xy);
+   // bool sign = Op::sn(b, Biv::xy);
     
     glPushMatrix();
     glTranslated(v[0],v[1],v[2]);
@@ -862,7 +862,7 @@ void Glyph :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
 	Rot v4 = Gen::aa(r);
 	double siz = Ro::size(K,false);
 	double rad = Ro::rad(K);
-	bool sn = Op::sn(bi, Biv::xy);
+	//bool sn = Op::sn(bi, Biv::xy);
 
 	Dlp da = ( a^Inf(1) ) <= K;
 	da = da.unit();
