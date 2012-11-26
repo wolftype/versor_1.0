@@ -107,10 +107,10 @@ To make the process of writing code faster and consistent, all elements of the a
 You also be able to use the longname.
 
 [**EUCLIDEAN ELEMENTS**][Euclidean Elements Table]				
-  		|   				|  				|
----   	|:-----------:		|---			|
-`Sca` 	| Scalar			| (A real number)|
-`Vec` 	| Vector 			| (A Directed Magnitude, or 3D Vector, typical cartesian stuff) |
+  		|   				|  				|  
+---   	|:-----------:		|---			|  
+`Sca` 	| Scalar			| (A real number)|  
+`Vec` 	| Vector 			| (A Directed Magnitude, or 3D Vector, typical cartesian stuff) |  
 
 `Biv` -- Bivector     (A Directed Area. Use them to make Rotors (aka Quaternions): Gen::Rot( Biv b ) )  
 `Tri` -- Trivector    (A Directed Volume Element)  
