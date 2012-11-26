@@ -106,21 +106,20 @@ And finally, since I ran out of overloadable operators, some basic methods
 To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long. 
 You also be able to use the longname.
 
-[**EUCLIDEAN ELEMENTS**][Euclidean Elements Table]				
+[**EUCLIDEAN ELEMENTS**]				
   		|   				|  				|  
----   	|:-----------:		|---			|  
-`Sca` 	| Scalar			| (A real number)|  
-`Vec` 	| Vector 			| (A Directed Magnitude, or 3D Vector, typical cartesian stuff) |  
+---   	|:-----------:		|---:			|  
+`Sca`   | Scalar			| (A real number)|  
+`Vec`   | Vector 			| (A Directed Magnitude, or 3D Vector, typical cartesian stuff) |  
+`Biv`   | Bivector     		| (A Directed Area. Use them to make Rotors (aka Quaternions): Gen::Rot( Biv b ) )  
+`Tri`   | Trivector    		| (A Directed Volume Element)  
 
-`Biv` -- Bivector     (A Directed Area. Use them to make Rotors (aka Quaternions): Gen::Rot( Biv b ) )  
-`Tri` -- Trivector    (A Directed Volume Element)  
-
-[**ROUND ELEMENTS**][Round Elements Table] 
-`Pnt` -- Point            (Pnt a) (Pnt a = Vec(1,0,0).null() )   
-`Par` -- Point Pair       (Pnt a ^ Pnt b)  
-`Cir` -- Circle           (Pnt a ^ Pnt b ^ Pnt c)  
-`Sph` -- Sphere           (Pnt a ^ Pnt b ^ Pnt c ^ Pnt d)  
-`Dls` -- Dual Sphere      (same as a point, so: typedef Pnt Dls)  
+[**ROUND ELEMENTS**]
+`Pnt`   | Point            	| (Pnt a) (Pnt a = Vec(1,0,0).null() )   
+`Par`   | Point Pair       	| (Pnt a ^ Pnt b)  
+`Cir`   | Circle           	| (Pnt a ^ Pnt b ^ Pnt c)  
+`Sph`   | Sphere           	| (Pnt a ^ Pnt b ^ Pnt c ^ Pnt d)  
+`Dls`   | Dual Sphere      	| (same as a point, so: typedef Pnt Dls)  
 
 **FLAT ELEMENTS**  
 `Lin` -- Line             
