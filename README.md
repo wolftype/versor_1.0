@@ -1,4 +1,8 @@
 CSS: style0.css
+	 
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 Versor (libvsr) 
 ===
@@ -15,8 +19,8 @@ wolftype@gmail.com
 
 ##CONTENTS: 
 1. [INTRODUCTION](#introduction) 
-2. [Built-in GUI](#builtingui)
-2. [ELEMENTS AND OPERATORS](#elementsandoperators) 
+2. [GUI](#gui)
+2. [ELEMENTS](#elements) 
 
 To INSTALL please read the INSTALL file
 
@@ -44,50 +48,65 @@ A tutorial is in the works . . . but a basic intro follows
 
 One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
 
-Built-in GUI
+GUI
 ---
 The TestExamples include bindings to the GLV framework, along with a GLVApp class, which has a GLVInterface class.
     
 The interface has a built in gui, mouse info, and keyboard info stored.  
     
-	static Cir cir;
-	interface.touch(cir);
-	DRAW(cir);
+	static Circle circle;
+	interface.touch(circle);
+	DRAW(circle);
 	
 Putting the above code inside your application's `onDraw()` loop will enable you to click and modify geometric elements by hitting the "G", "R" and "S" keys.  Hit "Q" to deselect all elements.  
 
-Hit "~" to toggle full screen.
+[**BUILT-IN INTERFACE**]
+|		|		|
+Key| Response
+--- 	|---
+`~` | Toggle full screen.
+`SHIFT` + `Arrow Keys` | navigates the camera  in x and z directions.
+`SHIFT`+`CONTROL`+`Arrow Keys` | navigates the camera in Y direction
+`OPTION` `+`Arrow Keys` | spins the model view around.
 
-Holding down the `SHIFT` key while navigating with the arrow buttons moves the camera around.
-Holding down the `CONTROL` key navigates in the cameras Y direction
-Holding down the `OPTION` key while navigating with the arrow buttons spins the model view around.
-
-ELEMENTS AND OPERATORS
+ELEMENTS
 ---
 
-Operators act on the elements of the algebra.  The elements are geometric entities.  There are three overloaded binary operators: 
+The elements of the algebra are geometric entities (circles, planes, spheres, etc) and operators (rotations, translations, twists, etc) which 
+act on the elements of the algebra.  All are known as _multivectors_ since they are more than just your typical vectors.
 
-The Geometric Product:  
+Multivector elements are most often combined using three overloaded binary operators: 
 
-	*
+The **Geometric** Product of elements `A` and `B`:  
 
-The Outer Product:  
+	A * B
 
-	^
+multiplies two multivector elements together.  This is most useful when multiplying one by the inverse of another (see `!` operator, below).
+
+The **Outer** Product of elements `A` and `B`:  
+
+	A ^ B
 	
-The Inner Product:
+"wedges" two multivectors together.  Its from Grassman's algebra of extensions, and can be thought of as a way of creating higher dimensions from smaller ones.
+For instance, wedging two `Vectors` (directed magnitudes) together returns a `Bivector` (a directed Area).  Wedging two `Points` together returns a `PointPair`.
+Wedging three `Points` together returns a `Circle`.
 
-	<=
+The **Inner** Product of elements `A` and `B`:
 
-There is also a commutator product (differential)
+	A<=B
 
-	%
+
+There is also a **Commutator** product (differential)
+
+	A%B
 
 And a few overloaded operations, including,
 
 The Inverse:  
 
-	!
+	!A
+
+returns \\(A^{-1}\\)
 
 The Reverse:  
 
@@ -98,53 +117,60 @@ And finally, since I ran out of overloadable operators, some basic methods
 	conjugation()  
 	involution()  
 
+In summary:  
 
 `A * B` multiplies two elements together (and, in the case of A * !B finds ratios between elements)  
 `A ^ B`   wedges two elements together ( builds up higher dimensional elements )  
 `A <= B`  contracts A out of B ( returns the part of B least like A ).  Often times, A is infinity, written as Inf(1)   
 
-To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long. 
-You also be able to use the longname.
+To make the process of writing code faster, all elements of the algebra are represented by types 3 letters long. 
+Alternatively, you can also use the long-form name.
 
-[**EUCLIDEAN ELEMENTS**]				
-  		|   				|  				|  
----   	|:-----------:		|---:			|  
-`Sca`   | Scalar			| (A real number)|  
-`Vec`   | Vector 			| (A Directed Magnitude, or 3D Vector, typical cartesian stuff) |  
-`Biv`   | Bivector     		| (A Directed Area. Use them to make Rotors (aka Quaternions): Gen::Rot( Biv b ) )  
-`Tri`   | Trivector    		| (A Directed Volume Element)  
+[**BASIC ELEMENTS**]				  
+Type  | 			     |                                                             |  
+----- | ---------------- | :---------------------------------------------------------: |  
+_Euclidean_             ||  
+`Sca` | `Scalar`         |                         A real number  
+`Vec` | `Vector`         |  A Directed Magnitude, or 3D Vector, typical cartesian stuff  
+`Biv` | `Bivector`       | A Directed Area. Use them to make Rotors: `Gen::Rot( Biv b )`  
+`Tri` | `Trivector`      |                   A Directed Volume Element  
 
-[**ROUND ELEMENTS**]
-`Pnt`   | Point            	| (Pnt a) (Pnt a = Vec(1,0,0).null() )   
-`Par`   | Point Pair       	| (Pnt a ^ Pnt b)  
-`Cir`   | Circle           	| (Pnt a ^ Pnt b ^ Pnt c)  
-`Sph`   | Sphere           	| (Pnt a ^ Pnt b ^ Pnt c ^ Pnt d)  
-`Dls`   | Dual Sphere      	| (same as a point, so: typedef Pnt Dls)  
+_Round_                 ||  
+`Pnt` | `Point`          |           A Null Vector: `Pnt a = Vec(1,0,0).null()`  
+`Par` | `PointPair`      |    A 0-Sphere (Sphere on a Line): `Par par = Pnt a ^ Pnt b`  
+`Cir` | `Circle`         |         A 1-Sphere: `Cir cir = Pnt a ^ Pnt b ^ Pnt c`  
+`Sph` | `Sphere`         |     A 2-Sphere: `Sph sph = Pnt a ^ Pnt b ^ Pnt c ^ Pnt d`  
+`Dls` | `DualSphere`     |            Typedef'ed as a point: `typedef Pnt Dls`  
 
-**FLAT ELEMENTS**  
-`Lin` -- Line             
-`Dll` -- Dual Line  
-`Pln` -- Plane  
-`Dlp` -- Dual Plane  
-`Flp` -- Flat Point
+_Flat_                  ||  
+`Lin` | `Line`           |        A Direct Line: e.g. `Lin lin = Par par ^ Inf(1)`  
+`Dll` | `DualLine`       |            A Dual Line: e.g. `Dll dll = lin.dual()`  
+`Pln` | `Plane`          |       A Direct Plane: e.g. `Pln pln = Cir cir ^ Inf(1)`  
+`Dlp` | `DualPlane`      |                A Dual Plane: e.g. `Dlp dlp = `  
+`Flp` | `FlatPoint`      |  
 
-**ABSTRACT ELEMENTS**  
-`Mnk` -- Minkowski Plane  
-`Pss` -- Pseudoscalar (5D Tangent Space)  
-`Inf` -- Infinity  
+_Versors_               ||  
+`Rot` | `Rotor`          |            Spins an Element (as a Quaternion would)  
+`Trs` | `Translator`     |                     Translates an Element  
+`Dil` | `Dilator`        |                       Dilates an Element  
+`Mot` | `Motor`          |                Twists an Element along an axis  
+`Trv` | `Transversor`    |                        Bends an element  
+`Bst` | `Booster`        |                        Bends an Element  
 
-**VERSORS**  
-`Rot` -- Rotor  
-`Trs` -- Translator  
-`Dil` -- Dilator  
-`Mot` -- Motor  
-`Trv` -- Transversor  
+_Abstract_              ||  
+`Mnk` | `MinkowskiPlane` |  
+`Pss` | `Pseudoscalar`   |  
+`Inf` | `Infinity`       |  
+ 
 
+There are others as well (for instance, affine planes, lines, and points) but the above are more than sufficient to start with. 
 There are also built in macros, for instance  
-`EP`  -- Imaginary Sphere At the Origin.   
-`EM`  -- Sphere at the Origin.    
 
-EP and EM can be invoked instead of Inf to work in non-Euclidean metrics ( Hyperbolic and Spherical, respectively)
+`EP`  			| Imaginary Sphere At the Origin.   
+`EM`  			| Sphere at the Origin.    
+`PT(x,y,z)`  	| A null Point at x,y,z
+
+`EP` and `EM` can be invoked instead of `Inf` to work in non-Euclidean metrics ( Hyperbolic and Spherical, respectively)
 
 Many Euclidean elements can be drawn by invoking Draw::Render(<element>).  Some can't (yet) either because it wasn't obvious
 how to draw them (e.g the scalar) or because I just didn't figure out how to do it or because I forgot or was lazy.  If you

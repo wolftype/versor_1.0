@@ -18,6 +18,18 @@ HTML BODY {
 	text-align: justify;
 	font-size: 12px;
 }
+td{
+	padding-right:.5em;
+}
+table{
+	padding: 1em;
+	background: #FFF5F5;
+	display: block;
+	border: solid 1px #e1e1e1;
+	text-align: center;
+	margin: auto;
+/*	color: #FFCC99;*/
+}
 
 pre {
     font-family: "Courier 10 Pitch", Courier, monospace;
