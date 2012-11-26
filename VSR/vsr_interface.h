@@ -116,6 +116,8 @@ namespace vsr  {
 			void fit() { 
 				scene.camera.width( data.w ); scene.camera.height( data.h ); 
 			}
+            
+            virtual ~ViewImpl(){}
 
             // All Subclasses must define fullScreenToggle method and getData method
             virtual void fullScreenToggle() {};            
@@ -127,6 +129,7 @@ namespace vsr  {
         struct InputImpl {
             Interface * interface;
             InputImpl(Interface * i) : interface(i){} 
+            virtual ~InputImpl() {}
             // All Subclasses must define getData() method
             virtual void getData( void * udata){};
             virtual void getKeyboardData( void * udata){};
@@ -239,7 +242,7 @@ namespace vsr  {
         if ( mouse.isDown ){
             dt = t; // Reset acc
             if ( pntClicked( x ) ) {
-                cout << "clicked" << s << endl; 
+                //cout << "clicked" << s << endl; 
                 select( &s );
             }
         }

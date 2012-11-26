@@ -1,0 +1,157 @@
+<h1 id="versorlibvsr">Versor (libvsr) </h1>
+
+<h2 id="alibraryforconformalgeometricalgebra.">A library for Conformal Geometric Algebra.  </h2>
+
+<h3 id="currentlytestedonlinuxandmacosx">Currently tested on Linux and Mac OS X</h3>
+
+<p>Lead Developer: Pablo Colapinto
+wolftype@gmail.com</p>
+
+<pre><code>As long as algebra and geometry have been separated, their progress have been slow and their uses limited; but when these two sciences have been united, they have lent each mutual forces, and have marched together towards perfection.  
+Joseph Louis Lagrange (1736–1813)
+</code></pre>
+
+<h2 id="contents:">CONTENTS:</h2>
+
+<ol>
+<li><a href="#introduction">INTRODUCTION</a> </li>
+<li><a href="#builtingui">Built-in GUI</a></li>
+<li><a href="#elementsandoperators">ELEMENTS AND OPERATORS</a> </li>
+</ol>
+
+<p>To INSTALL please read the INSTALL file</p>
+
+<h2 id="introduction">INTRODUCTION</h2>
+
+<p>Welcome to Versor!  This package provides operations and draw routines for conformal geometric algebra, 
+a revolutionizing spatial computing model that just might change your life. <em>VERSOR</em> is designed to make graphical 
+experimentation of conformal geometric algebra within a C++ environment easier. 
+You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc. 
+I am using it for my PhD on bio-inspired engineering. I first developed &#8220;Versor&#8221; while reading &#8220;Geometric Algebra for Computer Science&#8221; by Leo Dorst, Daniel Fontijne, and Stephen Mann.  It&#8217;s a great book and if you&#8217;re reading this you should read that.  </p>
+
+<p>Built to aid in my modelling of biological forms, this work was funded in large part by the Olivia Long Converse Fellowship, from the Graduate Division at the University of California in Santa Barbara.  So this is under a UC Regents General Public License.</p>
+
+<p>See also wolftype.com/versor for a link to my master&#8217;s thesis on CGA and version 1.0 of this implementation of it, and maybe take a look at wolftype channel on vimeo for a few quick demos on what kinds of animations this thing can quickly whip up.  The Doc folder has a doxygen which I periodically tidy up.  Lots of test files too.  Still need to streamline the make process, etc.</p>
+
+<p>NOTE TO SPEED FREAKS: The makefile builds the STATIC version of this library, which gives up abstraction (no inherted generic Multivector class) in exchange for a 5x speed boost (and 10x decrease in file size).  It is a highly templatized and inlined extravaganza of function calls.  Additionally, there is a trade off I am working on (in a branch to this master called &#8220;building and MVBase class&#8221;) where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  The C++11 standards should help (for instance, &#8220;auto&#8221; return types), but are not implemented here.   </p>
+
+<p>A tutorial is in the works &#8230; but a basic intro follows  </p>
+
+<p>One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it&#8217;s a twisty, boosty ride, full of weird discoveries.  You&#8217;re bound to make some, so have fun!</p>
+
+<h2 id="built-ingui">Built-in GUI</h2>
+
+<p>The TestExamples include bindings to the GLV framework, along with a GLVApp class, which has a GLVInterface class.</p>
+
+<p>The interface has a built in gui, mouse info, and keyboard info stored.  </p>
+
+<pre><code>static Cir cir;
+interface.touch(cir);
+DRAW(cir);
+</code></pre>
+
+<p>Putting the above code inside your application&#8217;s <code>onDraw()</code> loop will enable you to click and modify geometric elements by hitting the &#8220;G&#8221;, &#8220;R&#8221; and &#8220;S&#8221; keys.  Hit &#8220;Q&#8221; to deselect all elements.  </p>
+
+<p>Hit &#8220;~&#8221; to toggle full screen.</p>
+
+<p>Holding down the <code>SHIFT</code> key while navigating with the arrow buttons moves the camera around.
+Holding down the <code>CONTROL</code> key navigates in the cameras Y direction
+Holding down the <code>OPTION</code> key while navigating with the arrow buttons spins the model view around.</p>
+
+<h2 id="elementsandoperators">ELEMENTS AND OPERATORS</h2>
+
+<p>Operators act on the elements of the algebra.  The elements are geometric entities.  There are three overloaded binary operators: </p>
+
+<p>The Geometric Product:  </p>
+
+<pre><code>*
+</code></pre>
+
+<p>The Outer Product:  </p>
+
+<pre><code>^
+</code></pre>
+
+<p>The Inner Product:</p>
+
+<pre><code>&lt;=
+</code></pre>
+
+<p>There is also a commutator product (differential)</p>
+
+<pre><code>%
+</code></pre>
+
+<p>And a few overloaded operations:</p>
+
+<p>The Inverse  </p>
+
+<pre><code>!
+</code></pre>
+
+<p>The Reverse  </p>
+
+<pre><code>~
+</code></pre>
+
+<p>And finally, since I ran out of overloadable operators, some basic methods</p>
+
+<p><code>conjugation()</code> <br />
+<code>involution()</code>  </p>
+
+<p><code>A * B</code> multiplies two elements together (and, in the case of A * !B finds ratios between elements) <br />
+<code>A ^ B</code>   wedges two elements together ( builds up higher dimensional elements ) <br />
+<code>A &lt;= B</code>  contracts A out of B ( returns the part of B least like A ).  Often times, A is infinity, written as Inf(1)   </p>
+
+<p>To make the process of writing code faster and consistent, all elements of the algebra are 3 letters long. 
+You also be able to use the longname.</p>
+
+<p><strong>EUCLIDEAN ELEMENTS</strong> <br />
+<code>Sca</code> &#8212; Scalar (A real number) <br />
+<code>Vec</code> &#8212; Vector       (A Directed Magnitude, or 3D Vector, typical cartesian stuff) <br />
+<code>Biv</code> &#8212; Bivector     (A Directed Area. Use them to make Rotors (aka Quaternions): Gen::Rot( Biv b ) ) <br />
+<code>Tri</code> &#8212; Trivector    (A Directed Volume Element)  </p>
+
+<p><strong>ROUND ELEMENTS</strong> <br />
+<code>Pnt</code> &#8212; Point            (Pnt a) (Pnt a = Vec(1,0,0).null() ) <br />
+<code>Par</code> &#8212; Point Pair       (Pnt a ^ Pnt b) <br />
+<code>Cir</code> &#8212; Circle           (Pnt a ^ Pnt b ^ Pnt c) <br />
+<code>Sph</code> &#8212; Sphere           (Pnt a ^ Pnt b ^ Pnt c ^ Pnt d) <br />
+<code>Dls</code> &#8212; Dual Sphere      (same as a point, so: typedef Pnt Dls)  </p>
+
+<p><strong>FLAT ELEMENTS</strong> <br />
+<code>Lin</code> &#8212; Line <br />
+<code>Dll</code> &#8212; Dual Line <br />
+<code>Pln</code> &#8212; Plane <br />
+<code>Dlp</code> &#8212; Dual Plane <br />
+<code>Flp</code> &#8212; Flat Point</p>
+
+<p><strong>ABSTRACT ELEMENTS</strong> <br />
+<code>Mnk</code> &#8212; Minkowski Plane <br />
+<code>Pss</code> &#8212; Pseudoscalar (5D Tangent Space) <br />
+<code>Inf</code> &#8212; Infinity  </p>
+
+<p><strong>VERSORS</strong> <br />
+<code>Rot</code> &#8212; Rotor <br />
+<code>Trs</code> &#8212; Translator <br />
+<code>Dil</code> &#8212; Dilator <br />
+<code>Mot</code> &#8212; Motor <br />
+<code>Trv</code> &#8212; Transversor  </p>
+
+<p>There are also built in macros, for instance <br />
+<code>EP</code>  &#8212; Imaginary Sphere At the Origin. <br />
+<code>EM</code>  &#8212; Sphere at the Origin.    </p>
+
+<p>EP and EM can be invoked instead of Inf to work in non-Euclidean metrics ( Hyperbolic and Spherical, respectively)</p>
+
+<p>Many Euclidean elements can be drawn by invoking Draw::Render(<element>).  Some can&#8217;t (yet) either because it wasn&#8217;t obvious
+how to draw them (e.g the scalar) or because I just didn&#8217;t figure out how to do it or because I forgot or was lazy.  If you
+want something to be drawable, let me know and I&#8217;ll add it in.  Or try adding it in yourself and send a pull request via github.</p>
+
+<p>All elements can be dualized by invoking their <code>dual()</code> method  </p>
+
+<p>All elements can be reflected over spinors with the <code>sp(&lt;spinor&gt;)</code> method  </p>
+
+<p>All elements can be reflected over versors with the <code>re(&lt;versor&gt;)</code> method  </p>
+
+<p>The versors are constructed by the geometric entities, typically by using the <code>Gen::</code> routines.  Operators can also be acted on by operators &#8212; you can rotate a translation, or twist a boost.</p>

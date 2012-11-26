@@ -157,8 +157,8 @@ class Camera : public Frame {
 //		Biv xzcat(){ return xz() + mModelView.xz(); }//Op::sp0(xz(),-mvm()); }
 //		Biv yzcat(){ return yz() + mModelView.yz(); }//Op::sp0(yz(),-mvm()); }
 					
-		virtual void push3D();
-		virtual void pop3D();
+		void push3D();
+		void pop3D();
 		
 		//ortho
 		void push2D(int, int);
@@ -202,7 +202,7 @@ class Camera : public Frame {
         double modelViewd[16];
         double projd[16];
         
-        double toDoubles() {
+        void toDoubles() {
             for (int i = 0; i < 16; ++i){
                 modeld[i] = model[i];
                 projd[i] = proj[i];

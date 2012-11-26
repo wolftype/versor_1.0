@@ -104,6 +104,7 @@ namespace vsr {
             case GL_FLOAT_VEC3: 
             case GL_FLOAT_VEC4: return GL_FLOAT;         
         }
+        return GL_FLOAT;
     }
     int GL:: cmp( GLenum type) {
         switch (type){

@@ -462,6 +462,18 @@ namespace vsr {
 					{
 						break;
 					}
+                    case LINEAR:
+                    {
+                        break;
+                    }
+                    case BSPLINE:
+                    {
+                        break;
+                    }
+                    case NURB:
+                    {
+                        break;
+                    }
 				}
 			}
 

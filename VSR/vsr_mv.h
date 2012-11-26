@@ -510,8 +510,9 @@ public:
 
 template<int NUM, int IDX, typename T>
 inline std::ostream& operator << ( std::ostream& os, const MV< NUM, IDX, T >& a ){
+    int nsize = a.size;
     os << a.name() << "\t";
-    for (int i = 0 ; i < a.size; ++i){
+    for (int i = 0 ; i < nsize; ++i){
         os << a[i] << " ";
     }
     os << "\n";

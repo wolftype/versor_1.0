@@ -15,7 +15,7 @@
 //GLV SPECIFIC HEADERS
 #include "GLV/glv.h"
 #include "GLV/glv_binding.h"
-#include "vsr_gui.hpp"
+#include "vsr_gui.h"
 
 //GL2PS
 #include "gl2ps/gl2ps.h"
