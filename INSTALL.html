@@ -1,0 +1,105 @@
+<h1 id="versorcompilationandinstallationinstructions">VERSOR COMPILATION and INSTALLATION Instructions</h1>
+
+<p>This Documents the use of Versor as a standalone software.</p>
+
+<h2 id="download">DOWNLOAD</h2>
+
+<p>For best results, cd into a common directory for all your code repositories &#8211;
+For instance, assuming you have a directory called <strong><code>code</code></strong> with all your git repos:</p>
+
+<pre><code>cd code
+git clone git://github.com/wolftype/vsr.git
+git clone git://github.com/AlloSphere-Research-Group/GLV.git
+</code></pre>
+
+<p>This grabs both Versor and GLV (a windowing and user-interface system)</p>
+
+<h2 id="installdependencies">INSTALL DEPENDENCIES</h2>
+
+<p>libvsr.a can built in isolation with no dependencies except the standard library. </p>
+
+<pre><code>make vsr GFX=0
+</code></pre>
+
+<p>Most likely, however, you will want to be able to draw the elements to screen.</p>
+
+<p>To use the draw routines, requires OpenGL, Glu, Glut, and GLEW. You likely already have these installed.
+If not, see Getting GLU / GLUT / GLEW section below</p>
+
+<p>To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
+Bindings exist to two cross-platform windowing systems, <a href="mat.ucsb.edu/glv/">GLV</a> and <a href="">AlloCore</a>, both made by my colleagues in the MAT program. </p>
+
+<p>The easiest way to get started to is to use GLV. GLV is great for quick and easy OpenGL-based interfaces. If you have not done so already, grab it here: </p>
+
+<pre><code>cd code
+git clone git@github.com:AlloSphere-Research-Group/GLV.git
+</code></pre>
+
+<p>Once you have it, <code>cd</code> into <code>GLV</code> and make, then sudo make install</p>
+
+<pre><code>cd GLV
+make
+sudo make install
+</code></pre>
+
+<h2 id="build">BUILD</h2>
+
+<p>To build on mac osx or linux:</p>
+
+<pre><code>make vsr
+</code></pre>
+
+<p>This builds the static library with full graphics support (using GLV).</p>
+
+<pre><code>make examples/Knots.cpp
+</code></pre>
+
+<p>will build and run the Knots program</p>
+
+<p>for a list of make options:</p>
+
+<pre><code>make help
+</code></pre>
+
+<p>Feel free email me at wolftype@gmail.com with questions</p>
+
+<h2 id="gettinggluglutglewunixosx:">Getting GLU / GLUT / GLEW UNIX / OSX:</h2>
+
+<h3 id="linuxubuntu">Linux (Ubuntu)</h3>
+
+<p>If you do not have glut and glew installed:</p>
+
+<p>A) install glut:*
+ sudo apt-get install freeglut3 freeglut3-dev</p>
+
+<p>*note on newer versions of ubuntu (11.10 and greater) you may also have to do:
+ sudo apt-get install binutils-gold</p>
+
+<p>B) install glew:</p>
+
+<p>On ubuntu, first do:</p>
+
+<pre><code>sudo apt-get install libxmu-dev libxi-dev
+</code></pre>
+
+<p>Download tar or zip from http://glew.sourceforge.net/.<br/>
+cd into glew folder:</p>
+
+<pre><code>cd glew
+sudo make install
+</code></pre>
+
+<p>or clone from current repos:</p>
+
+<pre><code>git clone git://glew.git.sourceforge.net/gitroot/glew/glew
+cd glew
+make extensions
+sudo make install
+</code></pre>
+
+<h2 id="otheroptions">Other Options</h2>
+
+<p>You might also build the older version in the Dynamic folder (which temporarily has a few more features, but only runs on mac os and is no longer supported. It runs slower and you&#8217;ll need to use the built in xcode project, and run &#8220;TestVsrGlv.app&#8221;)
+The Xcode project in OSX/vsr/ takes care of the multistage compilation process.
+It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors into libvsr.a, a library that calls the functions in the cga framework and does other nifty things
+(like helps with draw routines and helps with common operations). Take a look at Op.h.</p>
