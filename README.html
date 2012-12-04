@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link type="text/css" rel="stylesheet" href="style0.css"/>
+</head>
+<body>
+
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p><img src = "resources/images/cshape.png" width = 80>
+<img src = "resources/images/twine_0.png" width = 100>
+<img src = "resources/images/twist_04_bw.png" width = 400>
+<img src = "resources/images/lox_0.png" width = 100></p>
+
+<h1 id="versorlibvsr">Versor (libvsr)</h1>
+
+<h2 id="afastclibraryforconformalgeometricalgebra.">A (Fast) C++ library for Conformal Geometric Algebra.</h2>
+
+<h3 id="currentlytestedonlinuxandmacosx">Currently tested on Linux and Mac OS X</h3>
+
+<p>Developer: Pablo Colapinto
+wolftype (at) gmail dot com</p>
+
+<pre><code>As long as algebra and geometry have been separated, their progress have been slow and their uses limited; but when these two sciences have been united, they have lent each mutual forces, and have marched together towards perfection.  
+-Joseph Louis Lagrange
+
+No attention should be paid to the fact that algebra and geometry are different in appearance.
+-Omar Khayyám
+
+L’algèbre n’est qu’une géométrie écrite; la géométrie n’est qu’une algèbre figurée.
+-Sophie Germain
+
+If you want to see, learn how to act
+-Heinz von Foerster
+</code></pre>
+
+<h2 id="contents:">CONTENTS:</h2>
+
+<ul>
+<li><a href="#introduction">INTRODUCTION</a></li>
+<li><a href="#speed">SPEED</a></li>
+<li><a href="#basics">BASICS</a></li>
+<li><a href="#methods">METHODS</a></li>
+<li><a href="#generators">GENERATORS</a></li>
+<li><a href="#gui">GUI</a></li>
+<li><a href="#operators">OPERATORS</a></li>
+<li><a href="#elements">ELEMENTS</a></li>
+<li><a href="#links">LINKS</a></li>
+</ul>
+
+<h2 id="othernicesoftware:">OTHER NICE SOFTWARE:</h2>
+
+<ul>
+<li><a href="http://www.cinderella.de/tiki-index.php">Cinderella</a> Standalone GA interface</li>
+<li><a href="http://www.science.uva.nl/ga/viewer/content_viewer.html">GAViewer</a> Standalone GA interface</li>
+<li><a href="http://staff.science.uva.nl/~fontijne/g25.html">Gaigen</a> An Implementation Generator</li>
+<li><a href="http://www.clucalc.info/">CluCalc/CluViz</a> Standalone and Library</li>
+</ul>
+
+<hr />
+
+<ol>
+<li><strong>To INSTALL please read the INSTALL file</strong></li>
+<li><strong>The current document is a work-in-progress! For specific questions please do not hesitate to contact me: wolftype (at) gmail dot com</strong></li>
+</ol>
+
+<hr />
+
+<h2 id="introduction">INTRODUCTION</h2>
+
+<p>This package provides operations and draw routines for conformal geometric algebra,
+a relatively new spatial computing model used by physicists, engineers, and artists. <em>Versor</em> is designed to make graphical
+experimentation of conformal geometric algebra within a C++ environment easier.
+You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc.
+I am using it for my PhD on bio-inspired engineering. </p>
+
+<p>I first developed <em>Versor</em> while reading &#8220;Geometric Algebra for Computer Science&#8221; by Leo Dorst, Daniel Fontijne, and Stephen Mann.
+It&#8217;s a fantastic book and if you&#8217;re reading this you should also consider reading that. </p>
+
+<p>Built to aid in my modelling of organic forms, the initial development was funded in large part by the Olivia Long Converse Fellowship for Botanic research, courtesy of the Graduate Division at the University of California in Santa Barbara.<br/>
+So this software is under a UC Regents General Public License.</p>
+
+<p>See also the <a href="#links">links</a> below for more information, including some videos.
+The Doc folder has a doxygen which I periodically tidy up. Lots of test files too.</p>
+
+<p>A full-fledged tutorial is in the works &#8230; but a basic intro follows </p>
+
+<p>One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting. But it&#8217;s a twisty, boosty ride, full of weird discoveries. You&#8217;re bound to make some, so have fun!</p>
+
+<h2 id="speed">SPEED</h2>
+
+<p>Typical matrix operation libraries have templated inlined functions for Vector and Matrix multiplication. Versor
+is similar, but on steroids, where <em>vectors</em> and sparse <em>matrices</em> of various sizes are all just called <em>multivectors</em> and represent geometric
+elements beyond just xyz directions and transformation matrices. Circles, lines, spheres, planes, points are all algebraic elements, as are
+operators that spin, twist, dilate, and bend those variables. Both these elements and operators are <em>multivectors</em> which multiply together in many many many different ways. </p>
+
+<p>The backbone of Versor&#8217;s library is a precomputation table of the most likely (though <em>not all</em>) multiplications you could possibly hope to use.<br/>
+It is a highly templatized and inlined extravaganza of function calls. Of course, there are also many useful algorithms included for manipulating geometric elements.
+Most of these useful algorithms are located in the<code>vsr_op.h</code> file. </p>
+
+<p>A Circle, for instance, can be <em>outer</em>-multiplied by a Plane to get the Point Pair where they intersect. </p>
+
+<p>The current version of Versor is built for operational speed, with the expense of slightly longer compile times.<br/>
+The makefile builds the STATIC version of this library, which currently gives up a bit of abstraction
+(no inherited generic Multivector class) in exchange for a 5x speed boost (and 10x decrease in file size).</p>
+
+<p>Future versions will likely use jit compilation to take care of this (i.e. combine speed with lightweight implementation), by hooking into
+luajit for instance. I am working on that with Graham Wakefield and his thoughtful guidance and tutelage. Additionally, there is a trade off I am working on where you have an MVBase class with which you can make arbitrary functions. This requires a bunch of pointer being copied and has led to code bloat. GA is a tricky world of unknown return types.<br/>
+The C++11 standards should help (for instance, &#8220;auto&#8221; return types), but are not implemented here. </p>
+
+<h2 id="basics">BASICS</h2>
+
+<p><em>Versor</em> is named after the one of the basic category of elements of geometric algebra.<br/>
+A <strong>versor</strong> is a type of <strong>multivector</strong> which can be used to compose geometric transformations,
+namely reflections, translations, rotations, twists, dilations, and transversions (special conformal transformations).</p>
+
+<p>More on all of those transformations later. </p>
+
+<p>In Versor, a <code>Vector</code> (or <code>Vec</code>) is a typical Euclidean 3D element. It can be built in the normal way:</p>
+
+<pre><code>Vec v(1,2,3);
+</code></pre>
+
+<p>Some built-in Vectors exist:</p>
+
+<pre><code>Vec::x x; //&lt;-- X Direction Unit Vector Vec(1,0,0)
+Vec::y y; //&lt;-- Y Direction Unit Vector Vec(0,1,0)
+Vec::z z; //&lt;-- Z Direction Unit Vector Vec(0,0,1)
+</code></pre>
+
+<p>A <code>Vector</code> can be spun around using a <code>Rotor</code>, which is exactly like a quaternion. However, whereas quaternions are often built by specifying an axis
+and an angle, rotors are built by specifying the <strong>plane</strong> of rotation. Eventually this will make much more sense to you: in general <strong>planes</strong> are what we
+will be using to transform things. For instance, a reflection is a reflection in a plane. As we will see, planes can become <strong>hyperplanes</strong> which will allow for more extraordinary transformations.</p>
+
+<p>The first completely new element to introduce is the <code>Bivector</code>, which is the plane we will use to generate our <code>Rotor</code>. Bivectors represent <strong>directed areas</strong> and are <strong>dual</strong>
+to the cross product: the cross product of two vectors in typical vector algebra returns a vector normal to the plane they define. So it is not completely new,
+but just sort of new.</p>
+
+<p>Bivectors are also just three elements long, and are built the same way Vectors are.</p>
+
+<pre><code>Biv b(1,2,3);
+</code></pre>
+
+<p>Some built-in Bivectors exist:</p>
+
+<pre><code>Biv::xy xy; //&lt;-- XY Counterclockwise Unit Area Biv(1,0,0)
+Biv::xz xy; //&lt;-- XZ Counterclockwise Unit Area Biv(0,1,0)
+Biv::yz xy; //&lt;-- YZ Counterclockwise Unit Area Biv(0,0,1)
+</code></pre>
+
+<p>While it is perfectly valid to write <code>Vector</code>, <code>Bivector</code> and <code>Rotor</code>, you&#8217;ll notice I&#8217;ve truncated them to their three letter nicknames, <code>Vec</code> and <code>Rot</code>.<br/>
+That&#8217;s up to you: Both long-name and nick-name versions are valid in libvsr (they are typedef&#8217;ed to each other).</p>
+
+<pre><code>Biv b = Biv::xy;
+double theta = PIOVERTWO;
+Vec v1 = Vec::x.rot( b * theta )
+</code></pre>
+
+<p>You can also generate rotors using <code>Gen::rot( &lt;some bivector&gt; )</code> In fact, all transformations can be generated this way, and then later applied to arbitrary elements.
+For instance, <code>Motors</code> can be generated which translate and rotate an element at the same time. This is also called a <em>twist</em>.</p>
+
+<pre><code>Motor m = Gen::mot(&lt;some dual line&gt;);   //&lt;-- Makes A Twisting Motor around Some Dual Line
+Point p = Vec(0,0,0).null().sp(m);      //&lt;-- Applies above motor to a Point
+</code></pre>
+
+<p>You&#8217;ll notice there are <em>dual</em> versions of elements: as in a <code>DualLine</code> (or <code>Dll</code> for short). That&#8217;s because in the real world of abstract geometry, there are usually
+two ways of defining an element. For instance, we can build a <em>direct</em> <code>Line</code> on the Y-axis by wedging two points together, along with infinity:</p>
+
+<pre><code>Line lin = Vec(0,0,0).null() ^ Vec(0,1,0).null() ^ Inf(1);
+</code></pre>
+
+<p>Or we can define a line by the bivector plane that it is normal to, and a support vector that determines how far away the line is from the origin. To convert the above
+line into its dual representation, we just call the dual() method:</p>
+
+<pre><code>Dll dll = lin.dual();
+</code></pre>
+
+<p>For those who are interested, this dual representation is isomorphic to the Plücker coordinates, which are used in screw theory to twist things around. Here, too, we can use
+dual lines to generate transformations which twist things around them. </p>
+
+<h2 id="methods">METHODS</h2>
+
+<p><code>vsr_op.h</code> contains the bulk of the functions for generating elements from other elements. Some guidelines:</p>
+
+<ul>
+<li><code>Generate::</code> or <code>Gen::</code> methods generate or otherwise operate on versors</li>
+<li><code>Round::</code> or <code>Ro::</code> methods create or otherwise operate on Round elements (Points, Point Pairs, Circles, Spheres)</li>
+<li><code>Flat::</code> or <code>Fl::</code> methods create or otherwise operate on Flat elements (Lines, Dual Lines, Planes, Dual Planes, or Flat Points)</li>
+</ul>
+
+<h2 id="generators">GENERATORS</h2>
+
+<pre><code>Rotor Gen::rot( const Biv&amp; b );                 //&lt;-- Generate a Rotor from a Bivector
+Translator Gen::trs( const Drv&amp; v);             //&lt;-- Generate a Translator from a Direction Vector
+Motor Gen::mot( const Dll&amp; d);                  //&lt;-- Generate a Motor from a Dual Line
+Dilator Gen::dil( const Pnt&amp; p, double amt );   //&lt;-- Generate a Dilator from a Point and an amount
+Transversor Gen::trv( cont Tnv&amp; v);             //&lt;-- Generate a Transveror from a Tangent Vector
+Booster Gen::bst( const Par&amp; p);                //&lt;-- Generate a Booster from a Point Pair
+</code></pre>
+
+<h2 id="gui">GUI</h2>
+
+<p>The TestExamples include bindings to the GLV framework for windowing and user interface controls. A GLVApp class and GLVInterface class provide the necessary glue.</p>
+
+<p>The interface has a built in gui, mouse info, and keyboard info stored. </p>
+
+<pre><code>static Circle circle;
+interface.touch(circle);
+DRAW(circle);
+</code></pre>
+
+<p>Putting the above code inside your application&#8217;s <code>onDraw()</code> loop will enable you to click and modify geometric elements by hitting the &#8220;G&#8221;, &#8220;R&#8221; and &#8220;S&#8221; keys. Hit &#8220;Q&#8221; to deselect all elements. </p>
+
+<table>
+<caption id="built-ininterface"><strong>BUILT-IN INTERFACE</strong></caption>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;"></th>
+	<th style="text-align:left;"></th>
+</tr>
+<tr>
+	<th style="text-align:left;">Key</th>
+	<th style="text-align:left;">Response</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><code>~</code></td>
+	<td style="text-align:left;">Toggle full screen.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>SHIFT</code> + <code>Arrow Keys</code></td>
+	<td style="text-align:left;">navigates the camera in x and z directions.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>SHIFT</code>+<code>CONTROL</code>+<code>Arrow Keys</code></td>
+	<td style="text-align:left;">navigates the camera in Y direction</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>OPTION</code> <code>+</code>Arrow Keys`</td>
+	<td style="text-align:left;">spins the model view around.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="operators">OPERATORS</h2>
+
+<p>The elements of the algebra are geometric entities (circles, planes, spheres, etc) and operators (rotations, translations, twists, etc) which
+act on the elements of the algebra. All are known as <em>multivectors</em> since they are more than just your typical vectors.</p>
+
+<p>Multivector elements are most often combined using three overloaded binary operators: </p>
+
+<p>The <strong>Geometric</strong> Product of elements <code>A</code> and <code>B</code>: </p>
+
+<pre><code>A * B
+</code></pre>
+
+<p>multiplies two multivector elements together. This is most useful when multiplying one by the inverse of another (see <code>!</code> operator, below).</p>
+
+<p>The <strong>Outer</strong> Product of elements <code>A</code> and <code>B</code>: </p>
+
+<pre><code>A ^ B
+</code></pre>
+
+<p>&#8220;wedges&#8221; two multivectors together. Its from Grassman&#8217;s algebra of extensions, and can be thought of as a way of creating higher dimensions from smaller ones.
+For instance, wedging two <code>Vectors</code> (directed magnitudes) together returns a <code>Bivector</code> (a directed Area). Wedging two <code>Points</code> together returns a <code>PointPair</code>.
+Wedging three <code>Points</code> together returns a <code>Circle</code>.</p>
+
+<p>The <strong>Inner</strong> Product of elements <code>A</code> and <code>B</code>:</p>
+
+<pre><code>A&lt;=B
+</code></pre>
+
+<p>There is also a <strong>Commutator</strong> product (differential)</p>
+
+<pre><code>A%B
+</code></pre>
+
+<p>And a few overloaded operations, including,</p>
+
+<p>The Inverse: </p>
+
+<pre><code>!A
+</code></pre>
+
+<p>returns <span class="math">\(A^{-1}\)</span></p>
+
+<p>The Reverse: </p>
+
+<pre><code>~A
+</code></pre>
+
+<p>returns <span class="math">\(\tilde{A}\)</span></p>
+
+<p>And finally, since I ran out of overloadable operators, some basic methods</p>
+
+<pre><code>A.conjugation() 
+</code></pre>
+
+<p>which returns <span class="math">\(\bar{A}\)</span></p>
+
+<pre><code>A.involution()  
+</code></pre>
+
+<p>which returns <span class="math">\(\hat{A}\)</span></p>
+
+<p>In summary: </p>
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:center;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Versor</th>
+	<th style="text-align:left;">Math</th>
+	<th style="text-align:center;">Description</th>
+	<th style="text-align:left;"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><code>A * B</code></td>
+	<td style="text-align:left;"><span class="math">\(AB\)</span></td>
+	<td style="text-align:center;">Multiplies two elements together (and, in the case of A * !B finds ratios between elements).</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>A ^ B</code></td>
+	<td style="text-align:left;"><span class="math">\(A \wedge B\)</span></td>
+	<td style="text-align:center;">Wedges two elements together (builds up higher dimensional elements).</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>A &lt;= B</code></td>
+	<td style="text-align:left;"><span class="math">\(A \rfloor B\)</span> or <span class="math">\(\boldsymbol{a} \cdot B\)</span></td>
+	<td style="text-align:center;">Contracts A out of B (returns the part of B &#8220;least like A&#8221;, sort of).</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>A % B</code></td>
+	<td style="text-align:left;"><span class="math">\(A \times B\)</span></td>
+	<td style="text-align:center;">Commutator, equal to <span class="math">\(\frac{1}{2}(AB-BA)\)</span></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>!A</code></td>
+	<td style="text-align:left;"><span class="math">\(A^{-1}\)</span></td>
+	<td style="text-align:center;">The Inverse of A.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>~A</code></td>
+	<td style="text-align:left;"><span class="math">\(\tilde{A}\)</span></td>
+	<td style="text-align:center;">The Reverse of A.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>A.conjugation()</code></td>
+	<td style="text-align:left;"><span class="math">\(\bar{A}\)</span></td>
+	<td style="text-align:center;">Conjugation.</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>A.involution()</code></td>
+	<td style="text-align:left;"><span class="math">\(\hat{A}\)</span></td>
+	<td style="text-align:center;">Involution. </td>
+</tr>
+</tbody>
+</table>
+<h2 id="elements">ELEMENTS</h2>
+
+<p>To make the process of writing code faster, all elements of the algebra are represented by types 3 letters long.
+Alternatively, you can also use the long-form name.</p>
+
+<table>
+<caption id="basicelements"><strong>BASIC ELEMENTS</strong></caption>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:center;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th style="text-align:left;">Type</th>
+	<th style="text-align:left;"></th>
+	<th style="text-align:center;"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2"><em>Euclidean</em></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Sca</code></td>
+	<td style="text-align:left;"><code>Scalar</code></td>
+	<td style="text-align:center;">A real number</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Vec</code></td>
+	<td style="text-align:left;"><code>Vector</code></td>
+	<td style="text-align:center;">A Directed Magnitude, or 3D Vector, typical cartesian stuff</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Biv</code></td>
+	<td style="text-align:left;"><code>Bivector</code></td>
+	<td style="text-align:center;">A Directed Area. Use them to make Rotors: <code>Gen::Rot( Biv b )</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Tri</code></td>
+	<td style="text-align:left;"><code>Trivector</code></td>
+	<td style="text-align:center;">A Directed Volume Element </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2"><em>Round</em></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Pnt</code></td>
+	<td style="text-align:left;"><code>Point</code></td>
+	<td style="text-align:center;">A Null Vector: <code>Pnt a = Vec(1,0,0).null()</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Par</code></td>
+	<td style="text-align:left;"><code>PointPair</code></td>
+	<td style="text-align:center;">A 0-Sphere (Sphere on a Line): <code>Par par = Pnt a ^ Pnt b</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Cir</code></td>
+	<td style="text-align:left;"><code>Circle</code></td>
+	<td style="text-align:center;">A 1-Sphere: <code>Cir cir = Pnt a ^ Pnt b ^ Pnt c</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Sph</code></td>
+	<td style="text-align:left;"><code>Sphere</code></td>
+	<td style="text-align:center;">A 2-Sphere: <code>Sph sph = Pnt a ^ Pnt b ^ Pnt c ^ Pnt d</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Dls</code></td>
+	<td style="text-align:left;"><code>DualSphere</code></td>
+	<td style="text-align:center;">Typedef&#8217;ed as a point: <code>typedef Pnt Dls</code> </td>
+</tr>
+</tbody>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2"><em>Flat</em></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Lin</code></td>
+	<td style="text-align:left;"><code>Line</code></td>
+	<td style="text-align:center;">A Direct Line: e.g. <code>Lin lin = Par par ^ Inf(1)</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Dll</code></td>
+	<td style="text-align:left;"><code>DualLine</code></td>
+	<td style="text-align:center;">A Dual Line: e.g. <code>Dll dll = lin.dual()</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Pln</code></td>
+	<td style="text-align:left;"><code>Plane</code></td>
+	<td style="text-align:center;">A Direct Plane: e.g. <code>Pln pln = Cir cir ^ Inf(1)</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Dlp</code></td>
+	<td style="text-align:left;"><code>DualPlane</code></td>
+	<td style="text-align:center;">A Dual Plane: e.g. <code>Dlp dlp =</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Flp</code></td>
+	<td style="text-align:left;"><code>FlatPoint</code></td>
+</tr>
+</tbody>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2"><em>Versors</em></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Rot</code></td>
+	<td style="text-align:left;"><code>Rotor</code></td>
+	<td style="text-align:center;">Spins an Element (as a Quaternion would)</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Trs</code></td>
+	<td style="text-align:left;"><code>Translator</code></td>
+	<td style="text-align:center;">Translates an Element</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Dil</code></td>
+	<td style="text-align:left;"><code>Dilator</code></td>
+	<td style="text-align:center;">Dilates an Element</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Mot</code></td>
+	<td style="text-align:left;"><code>Motor</code></td>
+	<td style="text-align:center;">Twists an Element along an axis</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Trv</code></td>
+	<td style="text-align:left;"><code>Transversor</code></td>
+	<td style="text-align:center;">Bends an Element about the Origin</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Bst</code></td>
+	<td style="text-align:left;"><code>Booster</code></td>
+	<td style="text-align:center;">Bends an Element around an &#8220;Orbit&#8221;</td>
+</tr>
+</tbody>
+
+<tbody>
+<tr>
+	<td style="text-align:left;" colspan="2"><em>Abstract</em></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Mnk</code></td>
+	<td style="text-align:left;"><code>MinkowskiPlane</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Pss</code></td>
+	<td style="text-align:left;"><code>Pseudoscalar</code></td>
+</tr>
+<tr>
+	<td style="text-align:left;"><code>Inf</code></td>
+	<td style="text-align:left;"><code>Infinity</code></td>
+</tr>
+</tbody>
+</table>
+<p>There are others as well (for instance, affine planes, lines, and points) but the above are more than sufficient to start with.
+There are also built in macros, for instance </p>
+
+<p><code>EP</code> | Sphere At the Origin.<br/>
+<code>EM</code> | Imaginary Sphere at the Origin.<br/>
+<code>PT(x,y,z)</code> | A null Point at x,y,z</p>
+
+<p><code>EP</code> and <code>EM</code> can be invoked instead of <code>Inf</code> to work in non-Euclidean metrics ( Spherical and Hyperbolic, respectively)</p>
+
+<p>Many Euclidean elements can be drawn by invoking Draw::Render(<element>). Some can&#8217;t (yet) either because it wasn&#8217;t obvious
+how to draw them (e.g the scalar) or because I just didn&#8217;t figure out how to do it or because I forgot or was lazy. If you
+want something to be drawable, let me know and I&#8217;ll add it in. Or try adding it in yourself and send a pull request via github.</p>
+
+<p>All elements can be dualized by invoking their <code>dual()</code> method </p>
+
+<p>All elements can be reflected over spinors with the <code>sp(&lt;spinor&gt;)</code> method </p>
+
+<p>All elements can be reflected over versors with the <code>re(&lt;versor&gt;)</code> method </p>
+
+<p>The versors are constructed by the geometric entities, typically by using the <code>Gen::</code> routines. Operators can also be acted on by operators &#8211; you can rotate a translation, or twist a boost.</p>
+
+<h2 id="thistutorialisinprogress...">TUTORIAL: BUILD A ROBOT ARM MODEL</h2>
+
+<p>The following tutorial outlines (or will, when it is finished) how to model a simple three joint robotic arm. There is actually already a class <code>Chain</code> which encapsulates much of the functionality below, but
+it will serve as a method to introduce the various elements and operators of geometric algebra. Look in examples/robot.cpp for the implementation file.</p>
+
+<h3 id="partone:theframeclassandmotoralgebra">Part One: The <code>Frame</code> class and Motor Algebra</h3>
+
+<p>Versor includes a class for spatial orientation and navigation (much like a &#8220;Navigation&#8221; or &#8220;Pose&#8221; class might in other libraries).<br/>
+A <code>Frame</code> is constructed by a Point position and Rotor orientation (much like the other libraries&#8217; classes might be instantiated with a Vector position and Quaternion orientation).</p>
+
+<pre><code>Frame myframe( Point(0,0,0,1,0), Rotor(1,0,0,0) );
+</code></pre>
+
+<p>The above code makes a frame at the origin with default orientation.<br/>
+<strong>Note:</strong> instead of <code>Pnt(0,0,0,1,0)</code> you can also use the <code>PAO</code> macro (for &#8220;Point-At-Origin&#8221;) or make a <code>Point</code> by invoking the <code>null()</code> method of a Vector: <code>Vec(0,0,0).null()</code></p>
+
+<p>Frames can easily be drawn and manipulated with the mouse. In your GLVApp&#8217;s <code>onDraw()</code> method:</p>
+
+<pre><code>static Frame myframe( PAO, Rotor(1,0,0,0) );
+DRAW(myframe);
+interface.touch(myframe);
+</code></pre>
+
+<p>The <code>Frame</code> class has many methods for referencing various elements, like the <code>Line</code> (<code>Lin</code>) through the y-axis: </p>
+
+<pre><code>Line yaxis = myframe.ly();      //&lt;-- Returns the line through the yaxis
+DRAW3(yaxis,0,1,0);             //&lt;-- Draws GREEN Line through y axis 
+</code></pre>
+
+<p>or the xy <code>Plane</code> (&#8216;Pln&#8217;):</p>
+
+<pre><code>Plane xyplane = myframe.xy();
+</code></pre>
+
+<p>A <code>Frame</code> can also be instantiated by a <code>Motor</code> representing it&#8217;s absolute position and orientation (combined!).</p>
+
+<h2 id="links:">LINKS:</h2>
+
+<ul>
+<li><a href="http://www.geometricalgebra.net/">The Good Book: <em>Geometric Algebra for Computer Science</em></a></li>
+<li><a href="http://wolftype.com/versor/colapinto_masters_final_02.pdf">My Master&#8217;s Thesis on the Subject</a></li>
+<li><a href="http://vimeo.com/wolftype">Some Video Demos of Versor</a></li>
+<li><a href="http://www.delicious.com/tag/geometricalgebra">GA Bookmarks on Delicious</a></li>
+<li><a href="https://groups.google.com/forum/?fromgroups#!forum/geometric_algebra">GA Google Group</a></li>
+<li><a href="http://geocalc.clas.asu.edu/">David Hestenes&#8217; Geometric Calculus Page</a></li>
+<li><a href="http://www.science.uva.nl/research/isla/">University of Amsterdam Intelligent Systems Lab</a></li>
+<li><a href="http://www.gdl.cinvestav.mx/~edb/">Eduardo Bayro-Corrochano&#8217;s Robotics Lab</a></li>
+<li><a href="http://www.mrao.cam.ac.uk/~clifford/">Cambridge University Geometric Algebra Research Group</a></li>
+<li><a href="http://www.mrao.cam.ac.uk/~clifford/">Cognitive Systems at Christian-Albrechts-Universität zu Kiel</a></li>
+</ul>
+
+</body>
+</html>
