@@ -17,6 +17,7 @@ HTML BODY {
 	width: 750px;
 	text-align: justify;
 	font-size: 12px;
+	font-family: Arial;
 }
 td{
 	padding-right:.5em;

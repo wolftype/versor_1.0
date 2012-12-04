@@ -1,6 +1,3 @@
-
-<!-- THIS README IS WRITTEN USING MULTIMARKDOWN -->
-
 CSS: style0.css
 	 
 <script type="text/javascript"
@@ -57,7 +54,7 @@ wolftype (at) gmail dot com
 ---
  
 1. **To INSTALL please read the INSTALL file**  
-2. **The current document is a work-in-progress!  For specific questions please do not hesitate to contact me: wolftype (at) gmail dot com **
+2. **The current document is a work-in-progress!  For specific questions please do not hesitate to contact me: wolftype (at) gmail dot com**
 
 ---
 
@@ -102,9 +99,7 @@ The makefile builds the STATIC version of this library, which currently gives up
 (no inherited generic Multivector class) in exchange for a 5x speed boost (and 10x decrease in file size).
  
 Future versions will likely use jit compilation to take care of this (i.e. combine speed with lightweight implementation), by hooking into 
-luajit for instance.  I am working on that with Graham Wakefield and his thoughtful guidance and tutelage.
-Additionally, there is a trade off I am working on where you have an MVBase class with which you can make arbitrary functions.  
-This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  
+luajit for instance.  I am working on that with Graham Wakefield and his thoughtful guidance and tutelage.  Additionally, there is a trade off I am working on where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  
 The C++11 standards should help (for instance, "auto" return types), but are not implemented here.   
 
 BASICS
@@ -345,10 +340,10 @@ The versors are constructed by the geometric entities, typically by using the `G
 
 TUTORIAL: BUILD A ROBOT ARM MODEL [This tutorial is in progress . . .]
 ---
-The following tutorial outlines how to model a simple three joint robotic arm.  There is actually already a class `Chain` which encapsulates much of the functionality below, but
-it will serve as a method to introduce the various elements and operators of geometric algebra.
+The following tutorial outlines (or will, when it is finished) how to model a simple three joint robotic arm.  There is actually already a class `Chain` which encapsulates much of the functionality below, but
+it will serve as a method to introduce the various elements and operators of geometric algebra.  Look in examples/robot.cpp for the implementation file.
 
-###The `Frame` class
+###Part One: The `Frame` class and Motor Algebra
 
 Versor includes a class for spatial orientation and navigation (much like a "Navigation" or "Pose" class might in other libraries).  
 A `Frame` is constructed by a Point position and Rotor orientation (much like the other libraries' classes might be instantiated with a Vector position and Quaternion orientation).
@@ -373,7 +368,7 @@ or the xy `Plane` ('Pln'):
 
 	Plane xyplane = myframe.xy();
 	
- `Motor` representing it's absolute position and orientation (combined).
+ A `Frame` can also be instantiated by a `Motor` representing it's absolute position and orientation (combined!).
 
 
 
