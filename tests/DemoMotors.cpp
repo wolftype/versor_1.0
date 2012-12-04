@@ -202,8 +202,8 @@ void GLVApp :: onDraw(){
 
 //     ratio(*this);
 //    frame(*this);
-//    articulated(*this);
-    robot(*this);
+    articulated(*this);
+ //   robot(*this);
 
 //    text("Use the G, R, S keys to Grab, Rotate, and Scale Control Points.  Q to let go.",50,50);
 }

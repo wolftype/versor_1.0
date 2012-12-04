@@ -25,7 +25,7 @@ GFX = 1
 INSTALL_PCH = 0
 
 #Location of Git Repository Directory
-BASE_DIR	= ../../
+BASE_DIR	= ../
 
 #Locations of Source and Header Files
 INC_DIR		= VSR/
@@ -41,7 +41,7 @@ BIN_DIR		=$(BUILD_DIR)bin/
 #Warnings
 CFLAGS += -Wno-deprecated
 
-OBJS := vsr_mv.o vsr_frame.o 
+OBJS := vsr_mv.o vsr_frame.o vsr_file.o
 OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o vsr_gl_shader.o gl2ps.o 
 
 HEAD = vsr.h
@@ -64,6 +64,7 @@ ifeq ($(GFX),1)
 		LINK_LDFLAGS += -lglew32 -lglu32 -lopengl32 -lglut32
 	endif
 
+	LDFLAGS	+= -L$(BASE_DIR)GLV/build/lib/
 	OBJS += $(OBJS_GL)
 endif
 
@@ -79,6 +80,7 @@ VPATH = $(PCH_DIR):\
 IPATH = $(PCH_DIR) \
 		$(INC_DIR)Elements/\
 		$(INC_DIR) \
+		$(BASE_DIR)GLV/\
 		$(EXT_DIR) \
 		/usr/local/include/
 
