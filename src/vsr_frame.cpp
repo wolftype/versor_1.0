@@ -34,19 +34,16 @@ mRot( m ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9),  aPar(.9
 { orient(); }
 
 
-Frame Frame :: twist(const Frame& f1, const Frame& f2, double t){
+Frame Frame :: Twist(const Frame& f1, const Frame& f2, double t){
 
-	Frame fr;
-		
-	//or direct motors
-	Dll tdz = Gen::log( f2.mot() / f1.mot() ) * t;
-	fr.twist( Gen::mot(tdz) );
-	return fr;	
+    Dll tdz = f1.dll() * (1-t) + f2.dll() * t;    
+            	
+	return Frame( Gen::mot(tdz) );	
 }
 
 Frame Frame :: twist(const Frame& f1, double t){
 	Frame fr;			
-	return Frame::twist(fr, f1, t);	
+	return Frame::Twist(fr, f1, t);	
 }
 
 Frame Frame :: spin(const Frame& f1, const Frame& f2, double t){

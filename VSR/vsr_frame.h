@@ -464,7 +464,7 @@ namespace vsr {
 				@param[in] f2 End Frame
 				@param[in] t position along interpolation [0,1]
 			*/
-			static Frame twist(const Frame& f1, const Frame& f2, double t);
+			static Frame Twist(const Frame& f1, const Frame& f2, double t);
 			static Frame spin(const Frame& f1, const Frame& f2, double t);
 			static Frame twist(const Frame& f1, double t);
 
