@@ -198,11 +198,29 @@ void robot(GLVApp& app){
 
 }
 
+
+void interpolation(GLVApp& app){
+        static Frame fa( PT(-1,0,0) );
+        static Frame fb( PT(1,0,0) );
+        DRAW(fa); DRAW(fb);
+        
+        app.interface.touch(fa);
+        app.interface.touch(fb);
+        
+        for (int i = 0; i < 1000; ++i){
+            double t= 1.0 * i/1000;
+                        
+            Frame frame = Frame::Twist( fa, fb, t );
+            
+            DRAW(frame);
+        }
+}
 void GLVApp :: onDraw(){
+    interpolation(*this);
 
 //     ratio(*this);
 //    frame(*this);
-    articulated(*this);
+ //   articulated(*this);
  //   robot(*this);
 
 //    text("Use the G, R, S keys to Grab, Rotate, and Scale Control Points.  Q to let go.",50,50);
