@@ -1,0 +1,83 @@
+\hypertarget{structvsr_1_1_optical_surface}{\section{vsr\-:\-:Optical\-Surface Struct Reference}
+\label{structvsr_1_1_optical_surface}\index{vsr\-::\-Optical\-Surface@{vsr\-::\-Optical\-Surface}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structvsr_1_1_optical_surface_ac2beedfd3583901669aafa8f1bbaa515}{{\bfseries Optical\-Surface} (double r=1.\-5, \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} c=C\-X\-Y(1))}\label{structvsr_1_1_optical_surface_ac2beedfd3583901669aafa8f1bbaa515}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a2edc3a3ff95edddd71087ac47b958e0a}{void {\bfseries set} (double r, \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} c, bool con)}\label{structvsr_1_1_optical_surface_a2edc3a3ff95edddd71087ac47b958e0a}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a1cb71c5d7472ad6c3979a2d27357cab0}{void {\bfseries reset} (double size=1)}\label{structvsr_1_1_optical_surface_a1cb71c5d7472ad6c3979a2d27357cab0}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_aef029d98858fa93787d1aa23aaf7b31e}{\hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \hyperlink{structvsr_1_1_optical_surface_aef029d98858fa93787d1aa23aaf7b31e}{meet} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray)}\label{structvsr_1_1_optical_surface_aef029d98858fa93787d1aa23aaf7b31e}
+
+\begin{DoxyCompactList}\small\item\em Meet of ray and circle (entrance point) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a2f8a8c06a87de9b262032c70aad1d912}{\hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \hyperlink{structvsr_1_1_optical_surface_a2f8a8c06a87de9b262032c70aad1d912}{meet} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c)}\label{structvsr_1_1_optical_surface_a2f8a8c06a87de9b262032c70aad1d912}
+
+\begin{DoxyCompactList}\small\item\em Meet of Curved ray. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a40b826692df214501ff215a143d9a2b5}{vector$<$ \hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} $>$ \hyperlink{structvsr_1_1_optical_surface_a40b826692df214501ff215a143d9a2b5}{meet2} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c)}\label{structvsr_1_1_optical_surface_a40b826692df214501ff215a143d9a2b5}
+
+\begin{DoxyCompactList}\small\item\em Split Meet of Curved Ray (decide which point to use later) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a36b40fde512e4c8c4e5d1b0ec00a74b5}{bool {\bfseries hit} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray)}\label{structvsr_1_1_optical_surface_a36b40fde512e4c8c4e5d1b0ec00a74b5}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a5458b6d02072f93f6309aeffc0108bf1}{bool {\bfseries hit} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c)}\label{structvsr_1_1_optical_surface_a5458b6d02072f93f6309aeffc0108bf1}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a035b4ed74794d2de3f9c3016d77f35c8}{\hyperlink{namespacevsr_ae046793ece205351429a6346a66fd6eb}{Par} \hyperlink{structvsr_1_1_optical_surface_a035b4ed74794d2de3f9c3016d77f35c8}{tangent} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray)}\label{structvsr_1_1_optical_surface_a035b4ed74794d2de3f9c3016d77f35c8}
+
+\begin{DoxyCompactList}\small\item\em Tangent of incoming light ray's reflection at meet. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a124b44ef9bffe5a72a638dc196f7e1da}{\hyperlink{namespacevsr_ae046793ece205351429a6346a66fd6eb}{Par} \hyperlink{structvsr_1_1_optical_surface_a124b44ef9bffe5a72a638dc196f7e1da}{tangent} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c)}\label{structvsr_1_1_optical_surface_a124b44ef9bffe5a72a638dc196f7e1da}
+
+\begin{DoxyCompactList}\small\item\em Tangent of incoming curved light ray. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a28fcdce0f5ebcb2932c4e165ad6c222c}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_optical_surface_a28fcdce0f5ebcb2932c4e165ad6c222c}{reflect} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray)}\label{structvsr_1_1_optical_surface_a28fcdce0f5ebcb2932c4e165ad6c222c}
+
+\begin{DoxyCompactList}\small\item\em Reflection of a Straight Ray. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_aac74b2130c14082bc2255399aaa17e37}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_optical_surface_aac74b2130c14082bc2255399aaa17e37}{reflect} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c)}\label{structvsr_1_1_optical_surface_aac74b2130c14082bc2255399aaa17e37}
+
+\begin{DoxyCompactList}\small\item\em Reflection of a Circle (straight ray output) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_ab29237e000e636b810a1d81237dfd23d}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_optical_surface_ab29237e000e636b810a1d81237dfd23d}{tanline} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray)}\label{structvsr_1_1_optical_surface_ab29237e000e636b810a1d81237dfd23d}
+
+\begin{DoxyCompactList}\small\item\em Tangent Line on Surface at Meet of Ray. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a343c8015f0580786828092456e07d94f}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_optical_surface_a343c8015f0580786828092456e07d94f}{tanline} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c)}\label{structvsr_1_1_optical_surface_a343c8015f0580786828092456e07d94f}
+
+\begin{DoxyCompactList}\small\item\em Tangent Line on Surface at Meet of Circle. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a2e2e16f3b05c1cd81596c18d1685ca00}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} {\bfseries refract} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray, bool exit=false)}\label{structvsr_1_1_optical_surface_a2e2e16f3b05c1cd81596c18d1685ca00}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a1e405a801f3e87dd62c5a7c87e7cc4e7}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_optical_surface_a1e405a801f3e87dd62c5a7c87e7cc4e7}{refract} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c, bool exit=false)}\label{structvsr_1_1_optical_surface_a1e405a801f3e87dd62c5a7c87e7cc4e7}
+
+\begin{DoxyCompactList}\small\item\em Refract a circle back to a straight line by refracting the tangent line at the meet. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a7bd89eaa7b175bfcc5a4b91e9e88b2fe}{\hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \hyperlink{structvsr_1_1_optical_surface_a7bd89eaa7b175bfcc5a4b91e9e88b2fe}{bend} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray, double amt)}\label{structvsr_1_1_optical_surface_a7bd89eaa7b175bfcc5a4b91e9e88b2fe}
+
+\begin{DoxyCompactList}\small\item\em Bend incoming straight line ray by amt (refracts the ray first by ridx, then bends it by amt) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_ac522aa034b1fc4b69774fd1d495503fe}{\hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \hyperlink{structvsr_1_1_optical_surface_ac522aa034b1fc4b69774fd1d495503fe}{bend} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c, double amt)}\label{structvsr_1_1_optical_surface_ac522aa034b1fc4b69774fd1d495503fe}
+
+\begin{DoxyCompactList}\small\item\em Bend incoming curved line ray by amt (refracts the ray first by ridx, then bends it by amt) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a30e09f7b4992b73ce037273b1942c2bd}{void \hyperlink{structvsr_1_1_optical_surface_a30e09f7b4992b73ce037273b1942c2bd}{draw\-To} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray, const \hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \&p)}\label{structvsr_1_1_optical_surface_a30e09f7b4992b73ce037273b1942c2bd}
+
+\begin{DoxyCompactList}\small\item\em Draw Coming Ray Meet To Pnt p. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a4c8f67908eb4a0fb694c3977ad4d99d9}{bool {\bfseries convex}}\label{structvsr_1_1_optical_surface_a4c8f67908eb4a0fb694c3977ad4d99d9}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a0a7ef0672344671b2291e44df5570438}{\hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} {\bfseries cir}}\label{structvsr_1_1_optical_surface_a0a7ef0672344671b2291e44df5570438}
+
+\item 
+\hypertarget{structvsr_1_1_optical_surface_a94dd0e3fd6e597cbdaef050f795d0cb8}{double \hyperlink{structvsr_1_1_optical_surface_a94dd0e3fd6e597cbdaef050f795d0cb8}{theta}}\label{structvsr_1_1_optical_surface_a94dd0e3fd6e597cbdaef050f795d0cb8}
+
+\begin{DoxyCompactList}\small\item\em part of circle that is 'active' \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_optical_surface_a6d342a3f76e961a1c2a1964200445b9c}{double \hyperlink{structvsr_1_1_optical_surface_a6d342a3f76e961a1c2a1964200445b9c}{ridx}}\label{structvsr_1_1_optical_surface_a6d342a3f76e961a1c2a1964200445b9c}
+
+\begin{DoxyCompactList}\small\item\em Refraction Index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/wolftype/code/vsr/\-V\-S\-R/vsr\-\_\-optics.\-h\end{DoxyCompactItemize}

@@ -1,0 +1,228 @@
+\hypertarget{classvsr_1_1_interface}{\section{vsr\-:\-:Interface Class Reference}
+\label{classvsr_1_1_interface}\index{vsr\-::\-Interface@{vsr\-::\-Interface}}
+}
+Inheritance diagram for vsr\-:\-:Interface\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classvsr_1_1_interface}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structvsr_1_1_interface_1_1_input_impl}{Input\-Impl}
+\item 
+struct \hyperlink{structvsr_1_1_interface_1_1_view_impl}{View\-Impl}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_interface_ab12bcc17ee54d982c67f30163bbca291}{typedef std\-::map$<$ string, bool $>$ {\bfseries S\-B\-Map}}\label{classvsr_1_1_interface_ab12bcc17ee54d982c67f30163bbca291}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_interface_a6d064e76ee55d594abfcf7401118fcf3}{virtual void {\bfseries init} ()=0}\label{classvsr_1_1_interface_a6d064e76ee55d594abfcf7401118fcf3}
+
+\item 
+\hypertarget{classvsr_1_1_interface_af00f9a19bd845332f58cd90052935ed8}{void \hyperlink{classvsr_1_1_interface_af00f9a19bd845332f58cd90052935ed8}{input\-Calc} ()}\label{classvsr_1_1_interface_af00f9a19bd845332f58cd90052935ed8}
+
+\begin{DoxyCompactList}\small\item\em Calculate Mouse Movements based on x and dx. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a514fe24f1a702c408abf8bc961c2063d}{void \hyperlink{classvsr_1_1_interface_a514fe24f1a702c408abf8bc961c2063d}{view\-Calc} ()}\label{classvsr_1_1_interface_a514fe24f1a702c408abf8bc961c2063d}
+
+\begin{DoxyCompactList}\small\item\em Calculate Window Matrices, Screen Coordinates of Mouse. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a3141e35c4aeb5ff37f80d7f39054df7d}{\hyperlink{structvsr_1_1_view_data}{View\-Data} \& {\bfseries vd} ()}\label{classvsr_1_1_interface_a3141e35c4aeb5ff37f80d7f39054df7d}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a7547feb47638cdfb8cde4c12e79965c0}{\hyperlink{structvsr_1_1_view_data}{View\-Data} {\bfseries vd} () const }\label{classvsr_1_1_interface_a7547feb47638cdfb8cde4c12e79965c0}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a97776db570337b8cae7117a1598d6ffd}{\hyperlink{structvsr_1_1_keyboard_data}{Keyboard\-Data} \& {\bfseries kd} ()}\label{classvsr_1_1_interface_a97776db570337b8cae7117a1598d6ffd}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a798dd4e4aadd4dda17b2fe6f27a7d93b}{\hyperlink{structvsr_1_1_mouse_data}{Mouse\-Data} \& {\bfseries md} ()}\label{classvsr_1_1_interface_a798dd4e4aadd4dda17b2fe6f27a7d93b}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a2ab1bef892e3e2084ed27c0e975dea3b}{\hyperlink{classvsr_1_1_scene}{Scene} \& {\bfseries scene} ()}\label{classvsr_1_1_interface_a2ab1bef892e3e2084ed27c0e975dea3b}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a04650413d56d3a6a5b4dabf6391dec2e}{\hyperlink{classvsr_1_1_camera}{Camera} \& {\bfseries camera} ()}\label{classvsr_1_1_interface_a04650413d56d3a6a5b4dabf6391dec2e}
+
+\item 
+\hypertarget{classvsr_1_1_interface_ac951d397ab79a17ec8723cb13a1e315f}{\hyperlink{classvsr_1_1_frame}{Frame} \& {\bfseries model} ()}\label{classvsr_1_1_interface_ac951d397ab79a17ec8723cb13a1e315f}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a5f7b6eca12ae94633a83f5e8df0af9f3}{{\footnotesize template$<$class A $>$ }\\bool {\bfseries pnt\-Clicked} (const A \&, double rad=.\-05)}\label{classvsr_1_1_interface_a5f7b6eca12ae94633a83f5e8df0af9f3}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a38628d7fa3935fd6f34b975d5e087e6a}{{\footnotesize template$<$class A $>$ }\\void \hyperlink{classvsr_1_1_interface_a38628d7fa3935fd6f34b975d5e087e6a}{touch} (A \&s, const \hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \&x, double t)}\label{classvsr_1_1_interface_a38628d7fa3935fd6f34b975d5e087e6a}
+
+\begin{DoxyCompactList}\small\item\em Executes on\-Touch. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a9f1ae1b48b70c0b16ac40064a10c1026}{{\footnotesize template$<$class A $>$ }\\void {\bfseries touch} (A \&, double t=1.\-0)}\label{classvsr_1_1_interface_a9f1ae1b48b70c0b16ac40064a10c1026}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a6b50417345897f5f0dc59877060b4f5d}{void {\bfseries touch} (\hyperlink{namespacevsr_a0d061c30ac198a710a1b92dd8b343273}{Vec} \&s, double t)}\label{classvsr_1_1_interface_a6b50417345897f5f0dc59877060b4f5d}
+
+\item 
+\hypertarget{classvsr_1_1_interface_abf451396468f5f45367bcfcf0946548c}{void {\bfseries touch} (\hyperlink{namespacevsr_a042664cb2545c7ef14aeb5e5e5d092de}{Tnv} \&s, double t)}\label{classvsr_1_1_interface_abf451396468f5f45367bcfcf0946548c}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a65ae80ab8c8f91cbc8f6ba940f964e82}{void {\bfseries touch} (\hyperlink{namespacevsr_a106201b887e3d76e1fa4e2b719f1c9cc}{Drv} \&s, double t)}\label{classvsr_1_1_interface_a65ae80ab8c8f91cbc8f6ba940f964e82}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a0c33c8aad0c4f69ebde328baa19a016b}{void {\bfseries touch} (\hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \&s, double t)}\label{classvsr_1_1_interface_a0c33c8aad0c4f69ebde328baa19a016b}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a4627fe8607d03361617aedc787812f11}{void {\bfseries touch} (\hyperlink{namespacevsr_a3cf58c26bcb862198f1a2ee838c5f337}{Sph} \&s, double t)}\label{classvsr_1_1_interface_a4627fe8607d03361617aedc787812f11}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a50b883bc2c7a280b95975597425f1795}{void {\bfseries touch} (\hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&s, double t)}\label{classvsr_1_1_interface_a50b883bc2c7a280b95975597425f1795}
+
+\item 
+\hypertarget{classvsr_1_1_interface_acb6175a19a8f461937cd057493ce3701}{void {\bfseries touch} (\hyperlink{namespacevsr_ae046793ece205351429a6346a66fd6eb}{Par} \&s, double t)}\label{classvsr_1_1_interface_acb6175a19a8f461937cd057493ce3701}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a56b22a11ad678833c8fcab83c5388f1d}{void {\bfseries touch} (\hyperlink{namespacevsr_a9542e8697c5f44a52328b062305ab911}{Lin} \&s, double t)}\label{classvsr_1_1_interface_a56b22a11ad678833c8fcab83c5388f1d}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a08c6c8d226fe4edcb3adf11f4f9a231f}{void {\bfseries touch} (\hyperlink{namespacevsr_a545350582a051c1eddecf80e3f337501}{Pln} \&s, double t)}\label{classvsr_1_1_interface_a08c6c8d226fe4edcb3adf11f4f9a231f}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a1098e6506a3014c9d15ea026ddc46a8c}{void {\bfseries touch} (\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&s, double t)}\label{classvsr_1_1_interface_a1098e6506a3014c9d15ea026ddc46a8c}
+
+\item 
+\hypertarget{classvsr_1_1_interface_acb916ece3de0734ed606a5b3a1214ed9}{void {\bfseries touch} (\hyperlink{namespacevsr_ae6aa665e2777c681cdc7cab893be07d2}{Dlp} \&s, double t)}\label{classvsr_1_1_interface_acb916ece3de0734ed606a5b3a1214ed9}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a8098ead4cfd2821fe7247e1a7520eb1b}{{\footnotesize template$<$class A $>$ }\\void \hyperlink{classvsr_1_1_interface_a8098ead4cfd2821fe7247e1a7520eb1b}{xf} (A $\ast$s, const \hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \&pos, double t)}\label{classvsr_1_1_interface_a8098ead4cfd2821fe7247e1a7520eb1b}
+
+\begin{DoxyCompactList}\small\item\em Transform a \hyperlink{structvsr_1_1_state}{State} 's' Centered at position 'pos' by velocity 't'. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a4549f7ecabbebbe4ce3785a125832b1d}{{\footnotesize template$<$class A $>$ }\\bool {\bfseries is\-Selected} (A $\ast$)}\label{classvsr_1_1_interface_a4549f7ecabbebbe4ce3785a125832b1d}
+
+\item 
+\hypertarget{classvsr_1_1_interface_abaab956b07b9850bba95714b3754fa1d}{{\footnotesize template$<$class A $>$ }\\void {\bfseries select} (A $\ast$)}\label{classvsr_1_1_interface_abaab956b07b9850bba95714b3754fa1d}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a8bd5eafa0cea54a24bb690f7ed43b27a}{{\footnotesize template$<$class A $>$ }\\void {\bfseries deselect} (A $\ast$)}\label{classvsr_1_1_interface_a8bd5eafa0cea54a24bb690f7ed43b27a}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a35d2d1a1770d414748a6c92c222b7518}{{\footnotesize template$<$class A $>$ }\\void {\bfseries toggle\-Select} (A $\ast$)}\label{classvsr_1_1_interface_a35d2d1a1770d414748a6c92c222b7518}
+
+\item 
+\hypertarget{classvsr_1_1_interface_ab635dea6dda3ce83e9fba29bc5d7e482}{void {\bfseries touch} (\hyperlink{classvsr_1_1_frame}{Frame} \&f, double t=1.\-0)}\label{classvsr_1_1_interface_ab635dea6dda3ce83e9fba29bc5d7e482}
+
+\item 
+\hypertarget{classvsr_1_1_interface_ab2367f510538dbca24b51fa67d91fc78}{void \hyperlink{classvsr_1_1_interface_ab2367f510538dbca24b51fa67d91fc78}{touch} (\hyperlink{classvsr_1_1_frame}{Frame} \&f, \hyperlink{classvsr_1_1_frame}{Frame} \&e, double t=1.\-0)}\label{classvsr_1_1_interface_ab2367f510538dbca24b51fa67d91fc78}
+
+\begin{DoxyCompactList}\small\item\em Maniupulate \hyperlink{classvsr_1_1_frame}{Frame} e by clicking on \hyperlink{classvsr_1_1_frame}{Frame} f. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_ae904ec6808d74ac401a3212a65e4a5e6}{void {\bfseries window\-Transform} ()}\label{classvsr_1_1_interface_ae904ec6808d74ac401a3212a65e4a5e6}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a129dc1e9a086484fb64c58f5c70fd8cf}{void {\bfseries state\-Transform} ()}\label{classvsr_1_1_interface_a129dc1e9a086484fb64c58f5c70fd8cf}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a43efbc868693c604c1a2d269947b993a}{void {\bfseries cam\-Spin} (float acc=.\-9)}\label{classvsr_1_1_interface_a43efbc868693c604c1a2d269947b993a}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a602401dc9b399a2276de6d82f973633f}{void {\bfseries cam\-Translate} (float acc=.\-9)}\label{classvsr_1_1_interface_a602401dc9b399a2276de6d82f973633f}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a6de59e9c8d4c8f55196913ccb6300c4a}{void {\bfseries model\-Transform} (float acc=.\-9)}\label{classvsr_1_1_interface_a6de59e9c8d4c8f55196913ccb6300c4a}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a872666e1d4c4718dbb399c939a9ef0b9}{void {\bfseries on\-Mouse\-Move} ()}\label{classvsr_1_1_interface_a872666e1d4c4718dbb399c939a9ef0b9}
+
+\item 
+\hypertarget{classvsr_1_1_interface_aef7c538e043ed751583bd912b4ac9e98}{void {\bfseries on\-Mouse\-Down} ()}\label{classvsr_1_1_interface_aef7c538e043ed751583bd912b4ac9e98}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a514c5a97163ce16f713f09179e6c0596}{void {\bfseries on\-Mouse\-Drag} ()}\label{classvsr_1_1_interface_a514c5a97163ce16f713f09179e6c0596}
+
+\item 
+\hypertarget{classvsr_1_1_interface_ae57ecf949813a9ba672bdd5cdca244c3}{void {\bfseries on\-Mouse\-Up} ()}\label{classvsr_1_1_interface_ae57ecf949813a9ba672bdd5cdca244c3}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a85a16751281ee50f5b520fb1d2774f2e}{void {\bfseries on\-Key\-Down} ()}\label{classvsr_1_1_interface_a85a16751281ee50f5b520fb1d2774f2e}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a3a7990f9db4053c1219c28aacfa06f01}{void {\bfseries on\-Key\-Up} ()}\label{classvsr_1_1_interface_a3a7990f9db4053c1219c28aacfa06f01}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a03320c1bff78b0213a97233d2fc28760}{\hyperlink{namespacevsr_a0d061c30ac198a710a1b92dd8b343273}{Vec} {\bfseries click} ()}\label{classvsr_1_1_interface_a03320c1bff78b0213a97233d2fc28760}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a1764d13654ad1c0d02df60c55334b672}{\hyperlink{namespacevsr_a0d061c30ac198a710a1b92dd8b343273}{Vec} {\bfseries pos} ()}\label{classvsr_1_1_interface_a1764d13654ad1c0d02df60c55334b672}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a29366c4c2a9437d64de77a4d59cab5d3}{void \hyperlink{classvsr_1_1_interface_a29366c4c2a9437d64de77a4d59cab5d3}{xf\-Frame} (\hyperlink{classvsr_1_1_frame}{Frame} $\ast$f, double t)}\label{classvsr_1_1_interface_a29366c4c2a9437d64de77a4d59cab5d3}
+
+\begin{DoxyCompactList}\small\item\em Transform a \hyperlink{classvsr_1_1_frame}{Frame} 'f' by velocity 't'. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a8027dce5e4e2d45fc78c75accc2278b8}{void \hyperlink{classvsr_1_1_interface_a8027dce5e4e2d45fc78c75accc2278b8}{xf\-Frame} (\hyperlink{classvsr_1_1_frame}{Frame} $\ast$f, \hyperlink{classvsr_1_1_frame}{Frame} $\ast$e, double t)}\label{classvsr_1_1_interface_a8027dce5e4e2d45fc78c75accc2278b8}
+
+\begin{DoxyCompactList}\small\item\em Transform a \hyperlink{classvsr_1_1_frame}{Frame} 'e' Centered at Position 'f' by velocity 't'. \end{DoxyCompactList}\item 
+int \& \hyperlink{classvsr_1_1_interface_a17652642fba1b28ef8b3759af5dedde0}{mode} ()
+\item 
+int \hyperlink{classvsr_1_1_interface_ac3ea2d8e5afd1e8387afa62b4a38924f}{mode} () const 
+\item 
+\hypertarget{classvsr_1_1_interface_a30c8975d2c534d53fb15ce02e77896a3}{bool \hyperlink{classvsr_1_1_interface_a30c8975d2c534d53fb15ce02e77896a3}{mode} (int q)}\label{classvsr_1_1_interface_a30c8975d2c534d53fb15ce02e77896a3}
+
+\begin{DoxyCompactList}\small\item\em Check \hyperlink{classvsr_1_1_interface}{Interface} Mode. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a73d0fa0608b54b649203fd647e4398cd}{void \hyperlink{classvsr_1_1_interface_a73d0fa0608b54b649203fd647e4398cd}{enable} (int bitflag)}\label{classvsr_1_1_interface_a73d0fa0608b54b649203fd647e4398cd}
+
+\begin{DoxyCompactList}\small\item\em Enable Mode. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a38ccaf32e5e57c426e7e76018c4b08f6}{void {\bfseries disable} (int bitflag)}\label{classvsr_1_1_interface_a38ccaf32e5e57c426e7e76018c4b08f6}
+
+\item 
+\hypertarget{classvsr_1_1_interface_ae85f530e7401cedbb90b2880f107bbc8}{void {\bfseries toggle} (int bitflag)}\label{classvsr_1_1_interface_ae85f530e7401cedbb90b2880f107bbc8}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a9cda0861c810551a99c1e1080d834deb}{void {\bfseries print} ()}\label{classvsr_1_1_interface_a9cda0861c810551a99c1e1080d834deb}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_interface_a85474f7837ab3a5483f824af1bf18bb1}{{\footnotesize template$<$class A $>$ }\\static \hyperlink{namespacevsr_a0d061c30ac198a710a1b92dd8b343273}{Vec} \hyperlink{classvsr_1_1_interface_a85474f7837ab3a5483f824af1bf18bb1}{screen\-Coord} (const A \&p, const \hyperlink{structvsr_1_1_xform_mat}{Xform\-Mat} \&)}\label{classvsr_1_1_interface_a85474f7837ab3a5483f824af1bf18bb1}
+
+\begin{DoxyCompactList}\small\item\em Screen Coordinates of Target point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_interface_a6fea0d001ec2136729849239faf962aa}{S\-B\-Map \hyperlink{classvsr_1_1_interface_a6fea0d001ec2136729849239faf962aa}{select\-Map}}\label{classvsr_1_1_interface_a6fea0d001ec2136729849239faf962aa}
+
+\begin{DoxyCompactList}\small\item\em Map of object addresses and whether they are selected. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_ac1bdc62a5b087a0a859127333cb17b8b}{\hyperlink{structvsr_1_1_interface_1_1_view_impl}{View\-Impl} $\ast$ \hyperlink{classvsr_1_1_interface_ac1bdc62a5b087a0a859127333cb17b8b}{vimpl}}\label{classvsr_1_1_interface_ac1bdc62a5b087a0a859127333cb17b8b}
+
+\begin{DoxyCompactList}\small\item\em Window Information (Width, Height) \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_addc2fbc819b39bf508fbd0b3c8130c08}{\hyperlink{structvsr_1_1_interface_1_1_input_impl}{Input\-Impl} $\ast$ \hyperlink{classvsr_1_1_interface_addc2fbc819b39bf508fbd0b3c8130c08}{iimpl}}\label{classvsr_1_1_interface_addc2fbc819b39bf508fbd0b3c8130c08}
+
+\begin{DoxyCompactList}\small\item\em Inputs (Keyboard, Mouse, O\-S\-C, etc) ? more than one? \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_interface_a067674162a9e09b8dd2bb0675a06a191}{\hyperlink{structvsr_1_1_mouse_data}{Mouse\-Data} {\bfseries mouse}}\label{classvsr_1_1_interface_a067674162a9e09b8dd2bb0675a06a191}
+
+\item 
+\hypertarget{classvsr_1_1_interface_a2c720a632844c5f843954566af173eef}{\hyperlink{structvsr_1_1_keyboard_data}{Keyboard\-Data} {\bfseries keyboard}}\label{classvsr_1_1_interface_a2c720a632844c5f843954566af173eef}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classvsr_1_1_interface_a17652642fba1b28ef8b3759af5dedde0}{\index{vsr\-::\-Interface@{vsr\-::\-Interface}!mode@{mode}}
+\index{mode@{mode}!vsr::Interface@{vsr\-::\-Interface}}
+\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}int\& {\bf vsr\-::\-Interface\-::mode} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classvsr_1_1_interface_a17652642fba1b28ef8b3759af5dedde0}
+\hyperlink{classvsr_1_1_set}{Set} Mode \hypertarget{classvsr_1_1_interface_ac3ea2d8e5afd1e8387afa62b4a38924f}{\index{vsr\-::\-Interface@{vsr\-::\-Interface}!mode@{mode}}
+\index{mode@{mode}!vsr::Interface@{vsr\-::\-Interface}}
+\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf vsr\-::\-Interface\-::mode} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classvsr_1_1_interface_ac3ea2d8e5afd1e8387afa62b4a38924f}
+Get Mode 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/wolftype/code/vsr/\-V\-S\-R/vsr\-\_\-interface.\-h\end{DoxyCompactItemize}

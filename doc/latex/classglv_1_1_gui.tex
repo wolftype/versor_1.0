@@ -1,0 +1,80 @@
+\hypertarget{classglv_1_1_gui}{\section{glv\-:\-:Gui Class Reference}
+\label{classglv_1_1_gui}\index{glv\-::\-Gui@{glv\-::\-Gui}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classglv_1_1_gui_ae98ba8c8c1f3ec625e2f2e2e59be7160}{{\bfseries Gui} (int \-\_\-w, int \-\_\-h)}\label{classglv_1_1_gui_ae98ba8c8c1f3ec625e2f2e2e59be7160}
+
+\item 
+\hypertarget{classglv_1_1_gui_a4c4c46ae4dfb1a285a4ba01739622f62}{{\bfseries Gui} (string \-\_\-name)}\label{classglv_1_1_gui_a4c4c46ae4dfb1a285a4ba01739622f62}
+
+\item 
+\hypertarget{classglv_1_1_gui_ac67c05b759aa183d2231803672324baf}{void {\bfseries add} (Widget $\ast$v)}\label{classglv_1_1_gui_ac67c05b759aa183d2231803672324baf}
+
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classglv_1_1_gui}{Gui} \& \hyperlink{classglv_1_1_gui_ad05b519428fcfa37ec02d10f212ba806}{operator()} (T \&val, string nm=\char`\"{}\char`\"{}, float min=0, float max=1)
+\item 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classglv_1_1_gui}{Gui} \& \hyperlink{classglv_1_1_gui_a5cef6144c49f3f2aa5f8d95cb318f724}{operator()} (T \&val, float max)
+\item 
+{\footnotesize template$<$class V $>$ }\\void \hyperlink{classglv_1_1_gui_aa7283b98dee158aaece9985726f84790}{add} (int, string, V \&val, float min=0., float max=1.)
+\item 
+void \hyperlink{classglv_1_1_gui_aaa1a71c78d35f50b09871cf435803cfe}{add} (Widget $\ast$v, const std\-::string \&\-\_\-name)
+\item 
+\hypertarget{classglv_1_1_gui_a064cb3678a8fd59863f63a702189590f}{Widget \& \hyperlink{classglv_1_1_gui_a064cb3678a8fd59863f63a702189590f}{widget} (string name)}\label{classglv_1_1_gui_a064cb3678a8fd59863f63a702189590f}
+
+\begin{DoxyCompactList}\small\item\em Get Widget. \end{DoxyCompactList}\item 
+\hypertarget{classglv_1_1_gui_a72ddf1408109c74679c3a24a9329283f}{Widget\-Map \& \hyperlink{classglv_1_1_gui_a72ddf1408109c74679c3a24a9329283f}{widget} ()}\label{classglv_1_1_gui_a72ddf1408109c74679c3a24a9329283f}
+
+\begin{DoxyCompactList}\small\item\em Get Widget Map. \end{DoxyCompactList}\item 
+\hypertarget{classglv_1_1_gui_aaa5f4bc9726c2f39759c30b2a8dde8ca}{void {\bfseries update\-Values} ()}\label{classglv_1_1_gui_aaa5f4bc9726c2f39759c30b2a8dde8ca}
+
+\item 
+\hypertarget{classglv_1_1_gui_a4e748e40346663f8dc8467a803a99dc2}{virtual void {\bfseries on\-Draw} ()}\label{classglv_1_1_gui_a4e748e40346663f8dc8467a803a99dc2}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classglv_1_1_gui_aa7283b98dee158aaece9985726f84790}{\index{glv\-::\-Gui@{glv\-::\-Gui}!add@{add}}
+\index{add@{add}!glv::Gui@{glv\-::\-Gui}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class V $>$ void glv\-::\-Gui\-::add (
+\begin{DoxyParamCaption}
+\item[{int}]{\-\_\-type, }
+\item[{string}]{\-\_\-name, }
+\item[{V \&}]{val, }
+\item[{float}]{min = {\ttfamily 0.}, }
+\item[{float}]{max = {\ttfamily 1.}}
+\end{DoxyParamCaption}
+)}}\label{classglv_1_1_gui_aa7283b98dee158aaece9985726f84790}
+add widget\-: enum type, name, min, max, attach, num \hypertarget{classglv_1_1_gui_aaa1a71c78d35f50b09871cf435803cfe}{\index{glv\-::\-Gui@{glv\-::\-Gui}!add@{add}}
+\index{add@{add}!glv::Gui@{glv\-::\-Gui}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void glv\-::\-Gui\-::add (
+\begin{DoxyParamCaption}
+\item[{Widget $\ast$}]{v, }
+\item[{const std\-::string \&}]{\-\_\-name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classglv_1_1_gui_aaa1a71c78d35f50b09871cf435803cfe}
+add widget\-: enum type, name, callback function, \hypertarget{classglv_1_1_gui_ad05b519428fcfa37ec02d10f212ba806}{\index{glv\-::\-Gui@{glv\-::\-Gui}!operator()@{operator()}}
+\index{operator()@{operator()}!glv::Gui@{glv\-::\-Gui}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Gui}\& glv\-::\-Gui\-::operator() (
+\begin{DoxyParamCaption}
+\item[{T \&}]{val, }
+\item[{string}]{nm = {\ttfamily \char`\"{}\char`\"{}}, }
+\item[{float}]{min = {\ttfamily 0}, }
+\item[{float}]{max = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classglv_1_1_gui_ad05b519428fcfa37ec02d10f212ba806}
+add widget and automatically determine type of widget \hypertarget{classglv_1_1_gui_a5cef6144c49f3f2aa5f8d95cb318f724}{\index{glv\-::\-Gui@{glv\-::\-Gui}!operator()@{operator()}}
+\index{operator()@{operator()}!glv::Gui@{glv\-::\-Gui}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Gui}\& glv\-::\-Gui\-::operator() (
+\begin{DoxyParamCaption}
+\item[{T \&}]{val, }
+\item[{float}]{max}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classglv_1_1_gui_a5cef6144c49f3f2aa5f8d95cb318f724}
+add widget and automatically determine type of widget 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/wolftype/code/vsr/\-V\-S\-R/vsr\-\_\-gui.\-h\end{DoxyCompactItemize}

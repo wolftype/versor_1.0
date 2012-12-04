@@ -381,11 +381,11 @@ template<> inline void Draw :: Immediate (const Tnv& s){
 }
 
 template<> inline void Draw :: Immediate (const Tnb& s){
-//    Biv b(s); b.draw(0,0,1,.5);
+    Draw :: Immediate ( Biv(s) );
 }
 
 template<> inline void Draw :: Immediate (const Flp& s){
-//    s.null().draw(r,g,b,a);
+    Draw::Immediate( s.null() );
 }        
 
 template<> inline void Draw :: Immediate (const Frame& s){

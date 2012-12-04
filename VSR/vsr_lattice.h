@@ -9,6 +9,9 @@
  
 /*!
 	
+    
+    THIS FILE IS DEPRECATED AND BEING REPLACED BY VSR_FIELD.H
+    
 	A templated 1, 2 or 3D array of multivectors.
 	
 	Lattice includes diffusion, advection, projection functions for conservation
@@ -73,13 +76,15 @@
 #ifndef VSR_LATTICE_H_INCLUDED
 #define VSR_LATTICE_H_INCLUDED
 
-#include "vsr_gl.h"
+//#include "vsr_gl.h"
 #include "vsr_gfxdata.h"
 
+#include "vsr.h"
+#include "vsr_op.h"
 #include "vsr_frame.h"
 #include "vsr_matrix.h"
 
-#include "vsr_draw.h"
+//#include "vsr_draw.h"
 
 using std::ostream;
 
@@ -418,7 +423,7 @@ namespace vsr {
 			void verlet();
 			
 			/*! Get Data Type */
-			int type() const { return mData[0].idx; }
+			int type() const;
 
 			virtual void drawLoop();
 			void drawPush();	///< Push to Grid Position, then Draw Data
@@ -448,6 +453,44 @@ namespace vsr {
 		<< "\t height: " << f.h() << "\t depth: " << f.d() << endl;
 		return os;	
 	}
+
+    //tmp defs to prevent compilation errors
+    template<class T> int Lattice<T> :: type() const {return mData[0].idx; } 
+    template<> int Lattice< Frame > ::type() const { return 0; }
+    template< > void Lattice <Frame> ::diffusefwd(double d, bool bounded){} 
+    template< > void Lattice <Frame> ::diffuse(double d, double dt, bool bounded, bool neg){}
+    template< > void Lattice <Frame> ::project(int it){}
+    template< > void Lattice <Frame> ::bound(Frame * pdata, bool neg){}
+    template< > template < class S > void Lattice <Frame> :: advect( Lattice < S > & v, double dt, bool bounded, bool neg ) {}
+    
+    template<> Frame Lattice< Frame > :: surf(double u, double v){
+            
+        double pw = 1.0 / ( mWidth-1);
+        double ph = 1.0/ ( mHeight-1);
+        //double pd = 1.0 / mDepth;
+        
+        double fw = u / pw;
+        double fh = v / ph;
+        //double fd = w / pd;
+        
+        int iw = floor ( fw );
+        int ih = floor ( fh );
+        //int id = floor ( fd );
+       // cout << iw << " " << ih << endl; 
+        
+        double rw = fw - iw;
+        double rh = fh - ih;
+        //double rd = fd - id;
+       // cout << rw << " " << rh << endl; 
+        
+        Dll a = at ( iw, ih, 0 ).dll();
+        Dll d = at ( iw, ih + 1, 0 ).dll();
+        Dll b = at ( iw + 1, ih, 0 ).dll();
+        Dll c = at ( iw + 1, ih + 1, 0 ).dll();
+                
+        return Gen::mot( Interp::surface<Dll> (a,b,c,d, rw, rh) );
+            
+    }
 
 	//move according to another Lattice field v
 	template < class T > template < class S >
@@ -617,5 +660,5 @@ namespace vsr {
 		
 		return (w * f.h() * f.d() ) + (h * f.d()) + d; 
 	}
-} //con::
+} //vsr::
 #endif

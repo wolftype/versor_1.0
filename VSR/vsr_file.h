@@ -32,7 +32,7 @@ namespace vsr {
 			static string images;
 			static string videos;
 			static string audio;
-			//static string output;
+			static string output;
 			static void setdir(string s);
 	};
 }

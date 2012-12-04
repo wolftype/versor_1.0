@@ -8,8 +8,6 @@
  */
 
 #include "vsr.h"
-#include "vsr_op.h"
-
 #include "vsr_frame.h"
 
 namespace vsr {
@@ -32,7 +30,7 @@ mRot( r ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9), aPar(.9)
 
 Frame :: Frame(const Mot& m) : 
 mPos( Op::sp(PAO,m) ), //mX(Drv::x), mY(Drv::y), mZ(Drv::z*-1),
-mRot( Op::sp(Rot::e12(0),m) ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9),  aPar(.9)
+mRot( m ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9),  aPar(.9)
 { orient(); }
 
 

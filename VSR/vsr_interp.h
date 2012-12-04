@@ -34,25 +34,36 @@ namespace vsr {
 			static T cubic(T _a, T _b, T _c, T _d, double t);
 			/// t from -1 to 1
             template<typename T>
-			static T quad(T _a, T _b, T _c, double t);
+			static T quadric(T _a, T _b, T _c, double t);
 			/// t from 0 to 1
             template<typename T>
 			static T linear(T _a, T _b, double t);
+            /// arbitrary number of points to pass through
+            template<typename T>
+            static T linear( T * s, int num, double t);
 			
 			/// arbitrary number of points to pass through
             template<typename T>
-			static T quad(T * s, int num, double t, bool closed =0);
+			static T quadric(T * s, int num, double t, bool closed =0);
             /// arbitrary number of points to pass through
             template<typename T>
 			static T cubic(T * s, int num, double t);
         
-			//eulerian surface interpolation assumes four points 
+            /*! bilinear eulerian surface interpolation assumes four points 
+                @param array in the order: bl, br, tr, tl
+            */
             template<typename T>
 			static T surface(T *s, double u, double v);
-            //eulerian surface interpolation assumes four points 
+            
+            /*! bilinear eulerian surface interpolation assumes four points 
+                @param bottom-left
+                @param bottom-right
+                @param top-right
+                @param top-left
+            */
             template<typename T>
             static T surface(T a, T b, T c, T d, double u, double v);
-			//eulerian volume interpolation assumes eight points
+			/// trilinear eulerian volume interpolation assumes eight points
 			template<typename T>
             static T volume(T *s, double x, double y, double z);
 
@@ -93,7 +104,7 @@ namespace vsr {
     
     //return state
     template<typename T>
-    inline  T Interp :: quad(T _a, T _b, T _c, double t) {
+    inline  T Interp :: quadric(T _a, T _b, T _c, double t) {
         
         
         //remap from 0 - 1 to -1 to 1
@@ -115,8 +126,19 @@ namespace vsr {
         return _a * (1-t) + _b * (t);
     }
     
+    template<typename T>    
+    inline T Interp  :: linear(T * s, int num, double t) {
+        double fw = t * (num-1);
+        int iw = floor(fw);
+        
+        double rw = fw - iw;
+        if (iw == num-1) { iw = num-2; rw = 1.0; }
+        
+        return s[iw] * (1.0 - rw) + s[iw+1] * rw;
+    }    
+    
     template<typename T>
-    inline T Interp :: quad( T * cp, int num, double t, bool closed ) {
+    inline T Interp :: quadric( T * cp, int num, double t, bool closed ) {
         
         if (t < 0 ) t = 0;
         
@@ -133,13 +155,11 @@ namespace vsr {
         
         int gt = it * 2;	
         
-        //	cout << "num: " << fn << " rem: " << rem << " group: " << it << " idx: " << gt << " ct: " << ct << "\n"; 
-        
         if ( (rem != 0) && (it==fn) ) {
             return closed? linear( cp[gt], cp[0], ct *2 ) : linear( cp[gt], cp[gt+1], ct *2 );
         }
         else{ 
-            return closed ? quad(cp[gt], cp[gt+1], (it==fn-1)? cp[0] : cp[gt+2], ct) : quad(cp[gt], cp[gt+1], cp[gt+2], ct); 	
+            return closed ? quadric(cp[gt], cp[gt+1], (it==fn-1)? cp[0] : cp[gt+2], ct) : quadric(cp[gt], cp[gt+1], cp[gt+2], ct); 	
         }
         
     }
@@ -160,6 +180,12 @@ namespace vsr {
         return bot * (1-v) + top * v;
     }
     
+//    template<>
+//    inline Frame Interp :: surface<Frame>(Frame a, Frame b, Frame c, Frame d, double u, double v){
+//        Dll bot = a.dll() * (1-u) + b.dll() * u;
+//        Dll top = d.dll() * (1-u) + c.dll() * u;
+//        return Frame( Gen::mot ( bot * (1-v) + top * v );
+//    }
     
     //d3 c2					h7 g6
     //a0 b1  <- front		e4 f5  <- back

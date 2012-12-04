@@ -389,24 +389,28 @@ namespace vsr {
         Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
         Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
         Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );     
-        
+
         //Get Line of Mouse Position into Z Space (store as a Dual Line)
-		vd().ray	 = Op::dl( Ro::null(v2) ^ v1.unit() ^ Inf(1) ) ;
+		vd().ray	 = Op::dl( Ro::null(v3) ^ v1.null() ^ Inf(1) ).runit();
         
 		mouse.projectFar	= v1 ;
 		mouse.projectNear	= v2 ;
+		mouse.projectMid	= v3 ;
 
         mouse.biv     = mouse.pos ^ mouse.projectFar; //not used?
 
         //Point on Line Closest to Origin
-        mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), true ) );
+        mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), true ) );//v3.null();
+        //Ro::null( Fl::loc( vd().ray, Ori(1), true ) );
         
-        //            interface -> mouse.ddx		= win.mouse().ddx();
+
+
+//            interface -> mouse.ddx		= win.mouse().ddx();
 //            interface -> mouse.ddy		= win.mouse().ddy();
 //            interface -> mouse.accel   = Vec( win.mouse().ddx(), -win.mouse().ddy(),0);
              
 //            interface -> mouse.xrel     =  win.mouse().xRel() / win.width();
- //           interface -> mouse.yrel     = 1 - win.mouse().yRel() / win.height();
+//           interface -> mouse.yrel     = 1 - win.mouse().yRel() / win.height();
 
     }
     

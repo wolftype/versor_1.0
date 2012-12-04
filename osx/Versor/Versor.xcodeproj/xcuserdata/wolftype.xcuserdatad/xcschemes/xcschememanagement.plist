@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>Dynamics.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 		<key>Graphics.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -49,6 +54,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Twists.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>Versor.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -63,6 +73,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>9B0C756A162C9B9C0037F835</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B1EF0DF166D988900617EB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -113,6 +128,11 @@
 			<true/>
 		</dict>
 		<key>9BB10829163883B5009F3070</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BD3515B1665532300809328</key>
 		<dict>
 			<key>primary</key>
 			<true/>

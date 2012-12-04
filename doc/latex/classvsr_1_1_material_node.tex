@@ -1,0 +1,72 @@
+\hypertarget{classvsr_1_1_material_node}{\section{vsr\-:\-:Material\-Node Class Reference}
+\label{classvsr_1_1_material_node}\index{vsr\-::\-Material\-Node@{vsr\-::\-Material\-Node}}
+}
+Inheritance diagram for vsr\-:\-:Material\-Node\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classvsr_1_1_material_node}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_material_node_a7efcdd77272a557e2561193733fee1cd}{typedef std\-::map$<$ int, \hyperlink{classvsr_1_1_texture}{Texture} $\ast$ $>$ {\bfseries Textures}}\label{classvsr_1_1_material_node_a7efcdd77272a557e2561193733fee1cd}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_a1642781f74f55910e07368b9c9e861c6}{typedef std\-::map$<$ int, \hyperlink{classvsr_1_1_texture}{Texture} $\ast$ $>$\\*
+\-::iterator {\bfseries Tex\-Ptr}}\label{classvsr_1_1_material_node_a1642781f74f55910e07368b9c9e861c6}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_material_node_abc2b45c131998ad47171797de2f145b9}{{\bfseries Material\-Node} (Asset\-Manager $\ast$\-\_\-am=N\-U\-L\-L)}\label{classvsr_1_1_material_node_abc2b45c131998ad47171797de2f145b9}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_a050bc1ace03795093473c433d04164c7}{{\bfseries Material\-Node} (\hyperlink{classvsr_1_1_texture}{Texture} $\ast$)}\label{classvsr_1_1_material_node_a050bc1ace03795093473c433d04164c7}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_ae6f7f075deaeb78f9599ac8c7e6e8a59}{void {\bfseries load} (const \hyperlink{classvsr_1_1_material}{Material} \&mat)}\label{classvsr_1_1_material_node_ae6f7f075deaeb78f9599ac8c7e6e8a59}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_a36e1530d2acd3109fcd04f287e290eab}{virtual void {\bfseries on\-Un\-Initialize} (\hyperlink{classvsr_1_1_graphics}{Graphics} \&gl)}\label{classvsr_1_1_material_node_a36e1530d2acd3109fcd04f287e290eab}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_a0072aae5ec30d56a68afc71fa9240696}{virtual void {\bfseries on\-Initialize} (\hyperlink{classvsr_1_1_graphics}{Graphics} \&gl)}\label{classvsr_1_1_material_node_a0072aae5ec30d56a68afc71fa9240696}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_ac062986c7f4cf288f3c8291ee722a4aa}{virtual void {\bfseries on\-Enter} (\hyperlink{classvsr_1_1_graphics}{Graphics} \&gl, \hyperlink{classvsr_1_1vsr__sec}{vsr\-\_\-sec} now)}\label{classvsr_1_1_material_node_ac062986c7f4cf288f3c8291ee722a4aa}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_ab94d6aa96300b77af957467ef0ad4d5a}{virtual void {\bfseries on\-Draw} (\hyperlink{classvsr_1_1_graphics}{Graphics} \&gl)}\label{classvsr_1_1_material_node_ab94d6aa96300b77af957467ef0ad4d5a}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_afeb0a87759316b46ef9f99cd794a60f9}{virtual void {\bfseries on\-Leave} (\hyperlink{classvsr_1_1_graphics}{Graphics} \&gl, \hyperlink{classvsr_1_1vsr__sec}{vsr\-\_\-sec} now)}\label{classvsr_1_1_material_node_afeb0a87759316b46ef9f99cd794a60f9}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_material_node_a6a687c14481b63b4f4852504b5aafe22}{int {\bfseries node\-I\-D}}\label{classvsr_1_1_material_node_a6a687c14481b63b4f4852504b5aafe22}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_a4a0a2fde699c68e2ab19c408e0a31db8}{Asset\-Manager $\ast$ {\bfseries am}}\label{classvsr_1_1_material_node_a4a0a2fde699c68e2ab19c408e0a31db8}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_a49e2f9d563092b8ce32cb1692203cfcf}{bool {\bfseries loaded}}\label{classvsr_1_1_material_node_a49e2f9d563092b8ce32cb1692203cfcf}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_af2887b82c93a375d640887f8e3918596}{\hyperlink{classvsr_1_1_vec3}{Vec3}$<$ float $>$ \hyperlink{classvsr_1_1_material_node_af2887b82c93a375d640887f8e3918596}{scale}}\label{classvsr_1_1_material_node_af2887b82c93a375d640887f8e3918596}
+
+\begin{DoxyCompactList}\small\item\em scaling factor \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_material_node_aacb7c6b0fd31086d344ac1bef39dbb50}{Textures {\bfseries textures}}\label{classvsr_1_1_material_node_aacb7c6b0fd31086d344ac1bef39dbb50}
+
+\item 
+\hypertarget{classvsr_1_1_material_node_a75f8e3c066aa123cb65ff675798db826}{std\-::vector$<$ \hyperlink{classvsr_1_1_texture}{Texture} $\ast$ $>$ {\bfseries tex}}\label{classvsr_1_1_material_node_a75f8e3c066aa123cb65ff675798db826}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/wolftype/code/vsr/\-V\-S\-R/vsr\-\_\-drawnode.\-h\end{DoxyCompactItemize}

@@ -295,7 +295,7 @@ void GLVApp :: onDraw(){
 //    twoknots(*this);
 //      knot(*this);
 //      ortho(*this);
-        orbits(*this);
+//        orbits(*this);
         
 //    text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }

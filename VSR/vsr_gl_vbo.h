@@ -16,8 +16,7 @@
 
 namespace vsr {
 
-    //vertex data can be interleaved with color info, etc, watch for packing bit alignments!
-
+    ///Vertex Buffer Object. Vertex data can be interleaved with color info, etc, watch for packing bit alignments!
 	class VBO {
 	
 		private:

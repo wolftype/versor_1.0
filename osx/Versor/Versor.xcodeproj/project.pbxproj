@@ -11,6 +11,11 @@
 		9B0C7578162C9BB40037F835 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B0C7579162C9BB70037F835 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B0C757C162C9BDF0037F835 /* DemoAgacse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B0C757B162C9BDF0037F835 /* DemoAgacse.cpp */; };
+		9B1EF0E5166D988900617EB8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9B1EF0E6166D988900617EB8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9B1EF0E7166D988900617EB8 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
+		9B1EF0E8166D988900617EB8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B1EF0F1166D98D000617EB8 /* Twists.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EF0F0166D98D000617EB8 /* Twists.cpp */; };
 		9B2529A9162DF41F00DD9FC2 /* DemoMotors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */; };
 		9B2529AA162DF42800DD9FC2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B2529AB162DF43400DD9FC2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
@@ -64,6 +69,7 @@
 		9B76CCF11628AAF10064FF35 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B76CCF31628AAF70064FF35 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B76CD031628ABD30064FF35 /* gl2ps.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B76CCFB1628ABD30064FF35 /* gl2ps.h */; };
+		9B8F25DF1667F6BA00FC4FC0 /* gl2ps.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B76CCFA1628ABD30064FF35 /* gl2ps.c */; };
 		9B9F32C41631E8B50075D685 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B9F32C51631E8BE0075D685 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B9F32C61631E8CF0075D685 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
@@ -89,11 +95,20 @@
 		9BBF0AE3163B12D400146CA6 /* pos.vert in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
 		9BBF0B0A163B173F00146CA6 /* pos.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
 		9BBF0B0B163B174200146CA6 /* col.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
+		9BD351611665532300809328 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9BD351621665532300809328 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9BD351631665532300809328 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
+		9BD351641665532300809328 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9BD351661665532300809328 /* pos.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
+		9BD351671665532300809328 /* col.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
+		9BD351691665532300809328 /* col.frag in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
+		9BD3516A1665532300809328 /* pos.vert in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
+		9BD351721665536900809328 /* Dynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD351711665536900809328 /* Dynamics.cpp */; };
+		9BD351731665538700809328 /* Dynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BD351711665536900809328 /* Dynamics.cpp */; };
 		9BDA7C7D1636037800A864DC /* vsr_camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C6E1636037800A864DC /* vsr_camera.cpp */; };
 		9BDA7C7F1636037800A864DC /* vsr_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C701636037800A864DC /* vsr_draw.cpp */; };
 		9BDA7C801636037800A864DC /* vsr_frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C711636037800A864DC /* vsr_frame.cpp */; };
 		9BDA7C891636037800A864DC /* vsr_interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C7A1636037800A864DC /* vsr_interface.cpp */; };
-		9BDA7C8A1636037800A864DC /* vsr_lattice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C7B1636037800A864DC /* vsr_lattice.cpp */; };
 		9BDA7C8B1636037800A864DC /* vsr_mv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C7C1636037800A864DC /* vsr_mv.cpp */; };
 		9BDA7C8D1636068200A864DC /* vsr_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C8C1636068200A864DC /* vsr_file.cpp */; };
 		9BDA7C9516360E3800A864DC /* vsr_mglyph.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BDA7C9416360E3700A864DC /* vsr_mglyph.h */; };
@@ -101,6 +116,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		9B0C7575162C9BA60037F835 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B76CC231628A9440064FF35;
+			remoteInfo = vsr;
+		};
+		9B1EF0E1166D988900617EB8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
 			proxyType = 1;
@@ -156,10 +178,26 @@
 			remoteGlobalIDString = 9B76CC231628A9440064FF35;
 			remoteInfo = vsr;
 		};
+		9BD3515D1665532300809328 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B76CC231628A9440064FF35;
+			remoteInfo = vsr;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9B0C7569162C9B9C0037F835 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		9B1EF0E9166D988900617EB8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -258,6 +296,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9BD351651665532300809328 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				9BD351661665532300809328 /* pos.vert in CopyFiles */,
+				9BD351671665532300809328 /* col.frag in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -265,6 +314,8 @@
 		9B0C757B162C9BDF0037F835 /* DemoAgacse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoAgacse.cpp; path = ../../tests/DemoAgacse.cpp; sourceTree = "<group>"; };
 		9B0C757D162C9C5E0037F835 /* vsr_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vsr_tests.h; path = ../../VSR/vsr_tests.h; sourceTree = "<group>"; };
 		9B0C757E162C9F580037F835 /* vsr_gfxdata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gfxdata.h; sourceTree = "<group>"; };
+		9B1EF0ED166D988900617EB8 /* Twists */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Twists; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B1EF0F0166D98D000617EB8 /* Twists.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Twists.cpp; path = ../../examples/Twists.cpp; sourceTree = "<group>"; };
 		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoMotors; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoMotors.cpp; path = ../../tests/DemoMotors.cpp; sourceTree = "<group>"; };
 		9B2529AC162DF44300DD9FC2 /* libGLV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLV.a; path = ../../../GLV/build/lib/libGLV.a; sourceTree = "<group>"; };
@@ -280,6 +331,7 @@
 		9B5C4620164463E1003BF1B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B680148163F349E004A850F /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = Graphics; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B68014A163F34D1004A850F /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Graphics.cpp; path = ../../tests/Graphics.cpp; sourceTree = "<group>"; };
+		9B72563216642D5E00A853A4 /* vsr_coord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_coord.h; sourceTree = "<group>"; };
 		9B76CC131628A9390064FF35 /* Versor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Versor; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B76CC171628A9390064FF35 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9B76CC191628A9390064FF35 /* Versor.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Versor.1; sourceTree = "<group>"; };
@@ -316,8 +368,9 @@
 		9B76CCFF1628ABD30064FF35 /* gl2psTestSimple.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gl2psTestSimple.c; sourceTree = "<group>"; };
 		9B76CD001628ABD30064FF35 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		9B76CD011628ABD30064FF35 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		9B8F25E1166806A900FC4FC0 /* vsr_time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_time.h; sourceTree = "<group>"; };
+		9B8F25E31669245100FC4FC0 /* INSTALL.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = INSTALL.md; path = ../../INSTALL.md; sourceTree = "<group>"; };
 		9B9F32B31631E4830075D685 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
-		9B9F32B51631E48B0075D685 /* INSTALL */ = {isa = PBXFileReference; lastKnownFileType = text; name = INSTALL; path = ../../INSTALL; sourceTree = "<group>"; };
 		9B9F32BA1631E8A10075D685 /* DemoBoosts */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = DemoBoosts; path = Hopf; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAFEB66164C80E900CAB97F /* vsr_dynamics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_dynamics.h; sourceTree = "<group>"; };
 		9BAFEB67164C879600CAB97F /* vsr_nestedFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_nestedFrame.h; sourceTree = "<group>"; };
@@ -336,6 +389,9 @@
 		9BBF0AD6163B083B00146CA6 /* pos.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = pos.vert; path = ../resources/shaders/pos.vert; sourceTree = "<group>"; };
 		9BBF0B0C163B51E900146CA6 /* vsr_gl_pipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_pipeline.h; sourceTree = "<group>"; };
 		9BC5A61F165C58370082D7EA /* vsr_gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gui.h; sourceTree = "<group>"; };
+		9BD3516E1665532300809328 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = Dynamic; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BD351711665536900809328 /* Dynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dynamics.cpp; path = ../../examples/Dynamics.cpp; sourceTree = "<group>"; };
+		9BD3517416659B7F00809328 /* vsr_field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_field.h; sourceTree = "<group>"; };
 		9BDA5510164B305C00B74D6F /* vsr_knot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_knot.h; sourceTree = "<group>"; };
 		9BDA7C1D1636035300A864DC /* Aff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Aff.h; sourceTree = "<group>"; };
 		9BDA7C1E1636035300A864DC /* Afl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Afl.h; sourceTree = "<group>"; };
@@ -445,6 +501,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B1EF0E4166D988900617EB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B1EF0E5166D988900617EB8 /* OpenGL.framework in Frameworks */,
+				9B1EF0E6166D988900617EB8 /* GLUT.framework in Frameworks */,
+				9B1EF0E7166D988900617EB8 /* libGLV.a in Frameworks */,
+				9B1EF0E8166D988900617EB8 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B25299A162DF3E500DD9FC2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,6 +617,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BD351601665532300809328 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BD351611665532300809328 /* OpenGL.framework in Frameworks */,
+				9BD351621665532300809328 /* GLUT.framework in Frameworks */,
+				9BD351631665532300809328 /* libGLV.a in Frameworks */,
+				9BD351641665532300809328 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -570,6 +648,7 @@
 		9B76CC081628A9380064FF35 = {
 			isa = PBXGroup;
 			children = (
+				9B1EF0F0166D98D000617EB8 /* Twists.cpp */,
 				9B5C461F164463A1003BF1B2 /* lib */,
 				9B5C46171644607F003BF1B2 /* Allo.cpp */,
 				9BBC39EC164346D500BA5208 /* Makefile */,
@@ -582,13 +661,14 @@
 				9B76CCEB1628AAD00064FF35 /* testGraph.cpp */,
 				9B0C757B162C9BDF0037F835 /* DemoAgacse.cpp */,
 				9BBC39EF164346D500BA5208 /* Makefile.link */,
+				9BD351711665536900809328 /* Dynamics.cpp */,
 				9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */,
 				9BB10838163883F7009F3070 /* Knots.cpp */,
 				9BB1083A16388400009F3070 /* Hopf.cpp */,
 				9BB1083C1638840A009F3070 /* Curvature.cpp */,
 				9B0C757D162C9C5E0037F835 /* vsr_tests.h */,
 				9B9F32B31631E4830075D685 /* README.md */,
-				9B9F32B51631E48B0075D685 /* INSTALL */,
+				9B8F25E31669245100FC4FC0 /* INSTALL.md */,
 				9B456BB51640B261008E5EA2 /* To Do */,
 				9B76CC161628A9390064FF35 /* Versor */,
 				9B76CCF61628ABD30064FF35 /* gl2ps */,
@@ -612,6 +692,8 @@
 				9B680148163F349E004A850F /* Knots copy */,
 				9B5890381641A69B0096B491 /* Graphics copy */,
 				9B5C461416445FBE003BF1B2 /* Allo */,
+				9BD3516E1665532300809328 /* Knots copy */,
+				9B1EF0ED166D988900617EB8 /* Twists */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -665,6 +747,8 @@
 				9BDA7C511636035300A864DC /* vsr_boost.h */,
 				9B456BB71640C2BB008E5EA2 /* vsr_stat.h */,
 				9BDA5510164B305C00B74D6F /* vsr_knot.h */,
+				9B8F25E1166806A900FC4FC0 /* vsr_time.h */,
+				9B72563216642D5E00A853A4 /* vsr_coord.h */,
 				9BBDCA34163A0E570082FBAE /* GFX */,
 				9BDA7C651636035300A864DC /* vsr_interface.h */,
 				9BDA7C531636035300A864DC /* vsr_chain.h */,
@@ -675,6 +759,7 @@
 				9BAFEB67164C879600CAB97F /* vsr_nestedFrame.h */,
 				9BDA7C661636035300A864DC /* vsr_interp.h */,
 				9BDA7C671636035300A864DC /* vsr_lattice.h */,
+				9BD3517416659B7F00809328 /* vsr_field.h */,
 				9BDA7C681636035300A864DC /* vsr_mesh.h */,
 				9BDA7C691636035300A864DC /* vsr_motor.h */,
 				9BDA7C6A1636035300A864DC /* vsr_mv.h */,
@@ -864,6 +949,24 @@
 			productReference = 9B0C756B162C9B9C0037F835 /* DemoAgacse */;
 			productType = "com.apple.product-type.tool";
 		};
+		9B1EF0DF166D988900617EB8 /* Twists */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B1EF0EA166D988900617EB8 /* Build configuration list for PBXNativeTarget "Twists" */;
+			buildPhases = (
+				9B1EF0E2166D988900617EB8 /* Sources */,
+				9B1EF0E4166D988900617EB8 /* Frameworks */,
+				9B1EF0E9166D988900617EB8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B1EF0E0166D988900617EB8 /* PBXTargetDependency */,
+			);
+			name = Twists;
+			productName = DemoBoosts;
+			productReference = 9B1EF0ED166D988900617EB8 /* Twists */;
+			productType = "com.apple.product-type.tool";
+		};
 		9B25299C162DF3E500DD9FC2 /* DemoMotors */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B2529A6162DF3E500DD9FC2 /* Build configuration list for PBXNativeTarget "DemoMotors" */;
@@ -1047,6 +1150,25 @@
 			productReference = 9BB10836163883B5009F3070 /* Knots copy */;
 			productType = "com.apple.product-type.tool";
 		};
+		9BD3515B1665532300809328 /* Dynamics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BD3516B1665532300809328 /* Build configuration list for PBXNativeTarget "Dynamics" */;
+			buildPhases = (
+				9BD3515E1665532300809328 /* Sources */,
+				9BD351601665532300809328 /* Frameworks */,
+				9BD351651665532300809328 /* CopyFiles */,
+				9BD351681665532300809328 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9BD3515C1665532300809328 /* PBXTargetDependency */,
+			);
+			name = Dynamics;
+			productName = DemoBoosts;
+			productReference = 9BD3516E1665532300809328 /* Knots copy */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1075,9 +1197,11 @@
 				9B9F32B91631E8A10075D685 /* Hopf */,
 				9BB1081A1638836A009F3070 /* Knots */,
 				9BB10829163883B5009F3070 /* Curvature */,
+				9BD3515B1665532300809328 /* Dynamics */,
 				9B680135163F349E004A850F /* Graphics */,
 				9B5890251641A69B0096B491 /* Meet */,
 				9B5C460116445FBE003BF1B2 /* Allo */,
+				9B1EF0DF166D988900617EB8 /* Twists */,
 			);
 		};
 /* End PBXProject section */
@@ -1137,6 +1261,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BD351681665532300809328 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BD351691665532300809328 /* col.frag in Resources */,
+				9BD3516A1665532300809328 /* pos.vert in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1145,6 +1278,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B0C757C162C9BDF0037F835 /* DemoAgacse.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B1EF0E2166D988900617EB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B1EF0F1166D98D000617EB8 /* Twists.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1185,6 +1326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B76CC181628A9390064FF35 /* main.cpp in Sources */,
+				9BD351721665536900809328 /* Dynamics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,9 +1340,9 @@
 				9BDA7C7F1636037800A864DC /* vsr_draw.cpp in Sources */,
 				9BDA7C801636037800A864DC /* vsr_frame.cpp in Sources */,
 				9BDA7C891636037800A864DC /* vsr_interface.cpp in Sources */,
-				9BDA7C8A1636037800A864DC /* vsr_lattice.cpp in Sources */,
 				9BDA7C8B1636037800A864DC /* vsr_mv.cpp in Sources */,
 				9BDA7C8D1636068200A864DC /* vsr_file.cpp in Sources */,
+				9B8F25DF1667F6BA00FC4FC0 /* gl2ps.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,6 +1378,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BD3515E1665532300809328 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BD351731665538700809328 /* Dynamics.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1243,6 +1393,11 @@
 			isa = PBXTargetDependency;
 			target = 9B76CC231628A9440064FF35 /* vsr */;
 			targetProxy = 9B0C7575162C9BA60037F835 /* PBXContainerItemProxy */;
+		};
+		9B1EF0E0166D988900617EB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B76CC231628A9440064FF35 /* vsr */;
+			targetProxy = 9B1EF0E1166D988900617EB8 /* PBXContainerItemProxy */;
 		};
 		9B5890261641A69B0096B491 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1279,6 +1434,11 @@
 			target = 9B76CC231628A9440064FF35 /* vsr */;
 			targetProxy = 9BB1082B163883B5009F3070 /* PBXContainerItemProxy */;
 		};
+		9BD3515C1665532300809328 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B76CC231628A9440064FF35 /* vsr */;
+			targetProxy = 9BD3515D1665532300809328 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1293,6 +1453,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9B1EF0EB166D988900617EB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Twists;
+			};
+			name = Debug;
+		};
+		9B1EF0EC166D988900617EB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Twists;
 			};
 			name = Release;
 		};
@@ -1433,6 +1615,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ../../VSR/vsr.h;
@@ -1463,6 +1646,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ../../VSR/vsr.h;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1592,6 +1776,30 @@
 			};
 			name = Release;
 		};
+		9BD3516C1665532300809328 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Dynamic;
+			};
+			name = Debug;
+		};
+		9BD3516D1665532300809328 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Dynamic;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1600,6 +1808,15 @@
 			buildConfigurations = (
 				9B0C7573162C9B9C0037F835 /* Debug */,
 				9B0C7574162C9B9C0037F835 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B1EF0EA166D988900617EB8 /* Build configuration list for PBXNativeTarget "Twists" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B1EF0EB166D988900617EB8 /* Debug */,
+				9B1EF0EC166D988900617EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1699,6 +1916,15 @@
 			buildConfigurations = (
 				9BB10834163883B5009F3070 /* Debug */,
 				9BB10835163883B5009F3070 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BD3516B1665532300809328 /* Build configuration list for PBXNativeTarget "Dynamics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BD3516C1665532300809328 /* Debug */,
+				9BD3516D1665532300809328 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

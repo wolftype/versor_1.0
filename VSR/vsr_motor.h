@@ -89,7 +89,7 @@ namespace vsr {
 			double moment() const { return iphi().rnorm(); }
 		
             /// given a (unit?) line, generate a dll with period and pitch along it
-            void along(const Dll& d, double period, double pitch){
+            Twist& along(const Dll& d, double period, double pitch){
 
                 Dll td = d.runit() * period;
                 
@@ -100,6 +100,20 @@ namespace vsr {
                 
                 dll(tb, Drv( Vec(tv) - (dir * pitch) ) );
                 
+                return *this;
+                
+            }
+            
+            inline static Dll Along( const Dll& d, double period, double pitch){
+                Dll td = d.runit() * period;
+                
+                Biv tb(td); //tb *= period;             //Drv tv(td);
+                Drv tv(td);
+            
+                Vec dir = tb.duale();
+                Drv drv( Vec(tv) - (dir * pitch) );
+                
+                return Dll(tb[0], tb[1], tb[2], drv[0], drv[1], drv[2] );
             }
         
 			Rot ratio() const { return Gen::ratio( Vec( biv() ), Vec( drv() ) ); }
@@ -274,7 +288,7 @@ namespace vsr {
         
             /// Interpolated Generators (t from 0 to 1)
             Dll at(double t) {
-                return Interp::quad<Dll>(mDll, mNum, t);
+                return Interp::quadric<Dll>(mDll, mNum, t);
             }
         
 			void draw(){

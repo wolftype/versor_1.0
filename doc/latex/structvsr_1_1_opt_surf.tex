@@ -1,0 +1,89 @@
+\hypertarget{structvsr_1_1_opt_surf}{\section{vsr\-:\-:Opt\-Surf Struct Reference}
+\label{structvsr_1_1_opt_surf}\index{vsr\-::\-Opt\-Surf@{vsr\-::\-Opt\-Surf}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a91a27c921b255edf83631b4b87f94ce1}{{\bfseries Opt\-Surf} (double r=1.\-5, \hyperlink{classvsr_1_1_m_v}{Dls} s=Ro\-::dls3(0, 0, 0))}\label{structvsr_1_1_opt_surf_a91a27c921b255edf83631b4b87f94ce1}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_ad498efc07e0932e1fb74952697f00d53}{void {\bfseries set} (double r, \hyperlink{classvsr_1_1_m_v}{Dls} s, bool con)}\label{structvsr_1_1_opt_surf_ad498efc07e0932e1fb74952697f00d53}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a81a14e20e63f5696b3de963071d284bc}{void {\bfseries reset} ()}\label{structvsr_1_1_opt_surf_a81a14e20e63f5696b3de963071d284bc}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a8a03d7c11ec6a1e121db932f7da421a4}{\hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \hyperlink{structvsr_1_1_opt_surf_a8a03d7c11ec6a1e121db932f7da421a4}{meet} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray) const }\label{structvsr_1_1_opt_surf_a8a03d7c11ec6a1e121db932f7da421a4}
+
+\begin{DoxyCompactList}\small\item\em Meet of ray and circle (entrance point) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a962792a53ac763ac6b247accc8790fdb}{\hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \hyperlink{structvsr_1_1_opt_surf_a962792a53ac763ac6b247accc8790fdb}{meet} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c) const }\label{structvsr_1_1_opt_surf_a962792a53ac763ac6b247accc8790fdb}
+
+\begin{DoxyCompactList}\small\item\em Meet of Curved ray (pre-\/split) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a08ac1651df4cbc23f2292d36c08943de}{\hyperlink{namespacevsr_ae046793ece205351429a6346a66fd6eb}{Par} \hyperlink{structvsr_1_1_opt_surf_a08ac1651df4cbc23f2292d36c08943de}{meet2} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c) const }\label{structvsr_1_1_opt_surf_a08ac1651df4cbc23f2292d36c08943de}
+
+\begin{DoxyCompactList}\small\item\em Meet of Curved Ray (split and decide which point to use later, or use for tangent) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_aa6265683f19cb376ce0ada53fd234b88}{bool {\bfseries hit} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray) const }\label{structvsr_1_1_opt_surf_aa6265683f19cb376ce0ada53fd234b88}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a5e06442ee763a8e684f180e6449dddff}{bool {\bfseries hit} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c) const }\label{structvsr_1_1_opt_surf_a5e06442ee763a8e684f180e6449dddff}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a7b27b03b9ca9d11508e7ff9b1f405cff}{\hyperlink{namespacevsr_ae046793ece205351429a6346a66fd6eb}{Par} \hyperlink{structvsr_1_1_opt_surf_a7b27b03b9ca9d11508e7ff9b1f405cff}{tangent} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray) const }\label{structvsr_1_1_opt_surf_a7b27b03b9ca9d11508e7ff9b1f405cff}
+
+\begin{DoxyCompactList}\small\item\em Tangent of incoming light ray's reflection at meet. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a4e8d4d9622c5f6227a6f0e1dab8179b7}{\hyperlink{namespacevsr_ae046793ece205351429a6346a66fd6eb}{Par} \hyperlink{structvsr_1_1_opt_surf_a4e8d4d9622c5f6227a6f0e1dab8179b7}{tangent} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c) const }\label{structvsr_1_1_opt_surf_a4e8d4d9622c5f6227a6f0e1dab8179b7}
+
+\begin{DoxyCompactList}\small\item\em Tangent of incoming curved light ray. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a54b0e6f5e7d01e34b674519633d444db}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_opt_surf_a54b0e6f5e7d01e34b674519633d444db}{reflect} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray) const }\label{structvsr_1_1_opt_surf_a54b0e6f5e7d01e34b674519633d444db}
+
+\begin{DoxyCompactList}\small\item\em Reflection of a Straight Ray. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a0c81c3c64d3ebc380d9b0db161151507}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_opt_surf_a0c81c3c64d3ebc380d9b0db161151507}{reflect} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c) const }\label{structvsr_1_1_opt_surf_a0c81c3c64d3ebc380d9b0db161151507}
+
+\begin{DoxyCompactList}\small\item\em Reflection of a Circle (straight ray output) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a77903906dcd3ebfaa04d0a53431f78f9}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_opt_surf_a77903906dcd3ebfaa04d0a53431f78f9}{tanline} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray) const }\label{structvsr_1_1_opt_surf_a77903906dcd3ebfaa04d0a53431f78f9}
+
+\begin{DoxyCompactList}\small\item\em Tangent Line on Surface at Meet of Ray. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a575ff0059237e967f579e697a8bb7bd6}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_opt_surf_a575ff0059237e967f579e697a8bb7bd6}{tanline} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c) const }\label{structvsr_1_1_opt_surf_a575ff0059237e967f579e697a8bb7bd6}
+
+\begin{DoxyCompactList}\small\item\em Tangent Line on Surface at Meet of Circle. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a88ab65121eefbb00aa2576a44c1e3cd2}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} {\bfseries refract} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray, bool exit=false) const }\label{structvsr_1_1_opt_surf_a88ab65121eefbb00aa2576a44c1e3cd2}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a582a25cecf3fa176f2ad201bca329729}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \hyperlink{structvsr_1_1_opt_surf_a582a25cecf3fa176f2ad201bca329729}{refract} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c, bool exit=false) const }\label{structvsr_1_1_opt_surf_a582a25cecf3fa176f2ad201bca329729}
+
+\begin{DoxyCompactList}\small\item\em Refract a circle back to a straight line by refracting the tangent line at the meet. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a0f4baeaab2623a16ef369c92a2d9f1ea}{\hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \hyperlink{structvsr_1_1_opt_surf_a0f4baeaab2623a16ef369c92a2d9f1ea}{bend} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray, double amt) const }\label{structvsr_1_1_opt_surf_a0f4baeaab2623a16ef369c92a2d9f1ea}
+
+\begin{DoxyCompactList}\small\item\em Bend incoming straight line ray by amt (refracts the ray first by ridx, then bends it by amt) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a4f4aa3d16a959c84f58f4c4999746971}{\hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \hyperlink{structvsr_1_1_opt_surf_a4f4aa3d16a959c84f58f4c4999746971}{bend} (const \hyperlink{namespacevsr_a2744605aa828e495fc85463b7ae0d045}{Cir} \&c, double amt) const }\label{structvsr_1_1_opt_surf_a4f4aa3d16a959c84f58f4c4999746971}
+
+\begin{DoxyCompactList}\small\item\em Bend incoming curved line ray by amt (refracts the ray first by ridx, then bends it by amt) \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a2b458c9635e219c4391dee2000dbb990}{void \hyperlink{structvsr_1_1_opt_surf_a2b458c9635e219c4391dee2000dbb990}{draw\-To} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&ray, const \hyperlink{namespacevsr_a2d05beb9721c5d9211b479af6d47222d}{Pnt} \&p)}\label{structvsr_1_1_opt_surf_a2b458c9635e219c4391dee2000dbb990}
+
+\begin{DoxyCompactList}\small\item\em Draw Coming Ray Meet To Pnt p. \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a4c553832f71222dbf0aed59ae2903b6c}{void {\bfseries draw} ()}\label{structvsr_1_1_opt_surf_a4c553832f71222dbf0aed59ae2903b6c}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structvsr_1_1_opt_surf_afc048ca17f11e5627e68c1cd6b4b97f5}{bool {\bfseries convex}}\label{structvsr_1_1_opt_surf_afc048ca17f11e5627e68c1cd6b4b97f5}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a60d0ff1320995cd5cea5ad16d55b314c}{\hyperlink{classvsr_1_1_m_v}{Dls} {\bfseries dls}}\label{structvsr_1_1_opt_surf_a60d0ff1320995cd5cea5ad16d55b314c}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_a0ff00c310bc12a3c62bcb103a3a1489d}{double {\bfseries rad}}\label{structvsr_1_1_opt_surf_a0ff00c310bc12a3c62bcb103a3a1489d}
+
+\item 
+\hypertarget{structvsr_1_1_opt_surf_ac3dab50bf0d4a7f6c7f4537074e5b28c}{double \hyperlink{structvsr_1_1_opt_surf_ac3dab50bf0d4a7f6c7f4537074e5b28c}{theta}}\label{structvsr_1_1_opt_surf_ac3dab50bf0d4a7f6c7f4537074e5b28c}
+
+\begin{DoxyCompactList}\small\item\em part of circle that is 'active' \end{DoxyCompactList}\item 
+\hypertarget{structvsr_1_1_opt_surf_a0815467da24d81419a50f5eb449f71e9}{double \hyperlink{structvsr_1_1_opt_surf_a0815467da24d81419a50f5eb449f71e9}{ridx}}\label{structvsr_1_1_opt_surf_a0815467da24d81419a50f5eb449f71e9}
+
+\begin{DoxyCompactList}\small\item\em Refraction Index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/wolftype/code/vsr/\-V\-S\-R/vsr\-\_\-optics.\-h\end{DoxyCompactItemize}
