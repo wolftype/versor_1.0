@@ -1,6 +1,8 @@
 VERSOR COMPILATION and INSTALLATION Instructions
 ===
 
+This Documents the use of Versor as a standalone software.
+
 DOWNLOAD
 ---
 
@@ -11,26 +13,32 @@ For instance, assuming you have a directory called **`code`** with all your git 
 	git clone git://github.com/wolftype/vsr.git
 	git clone git://github.com/AlloSphere-Research-Group/GLV.git
 
+This grabs both Versor and GLV (a windowing and user-interface system)
 
-DEPENDENCIES
+INSTALL DEPENDENCIES
 ---
 libvsr.a can built in isolation with no dependencies except the standard library.  
 
 	make vsr GFX=0
 
-Most likely, however, you will want to be able to draw the elements to screen immediately.  
+Most likely, however, you will want to be able to draw the elements to screen.
+  
 To use the draw routines, requires OpenGL, Glu, Glut, and GLEW.  You likely already have these installed.
 If not, see Getting GLU / GLUT / GLEW section below
   
-To use the built-in interface, gui, mouse and keyboard, etc, requires a windowing system and input control listener set-up.
-Bindings exist to two cross-platform windowing systems, [GLV](mat.ucsb.edu/glv/) and [AlloCore](), both made by my colleagues in the MAT program.
-The easiest way to get started to is to use GLV.  GLV is great for quick and easy OpenGL based interfaces.  If you have not done so already, grab it here: 
+To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
+Bindings exist to two cross-platform windowing systems, [GLV](mat.ucsb.edu/glv/) and [AlloCore](), both made by my colleagues in the MAT program.  
 
+The easiest way to get started to is to use GLV.  GLV is great for quick and easy OpenGL-based interfaces.  If you have not done so already, grab it here: 
 
 	cd code
 	git clone git@github.com:AlloSphere-Research-Group/GLV.git
 	
-
+Once you have it, `cd` into `GLV` and make, then sudo make install
+    
+    cd GLV
+    make
+    sudo make install
 
 BUILD
 ---
@@ -38,17 +46,17 @@ To build on mac osx or linux:
 
 	make vsr
 
-This builds the static library.
+This builds the static library with full graphics support (using GLV).
 
 	make examples/Knots.cpp
 
 will build and run the Knots program
 
 for a list of make options:
-make help
+
+    make help
 
 Feel free email me at wolftype@gmail.com with questions
-
 
 
 Getting GLU / GLUT / GLEW UNIX / OSX:
@@ -70,9 +78,9 @@ On ubuntu, first do:
 	sudo apt-get install libxmu-dev libxi-dev
 
 Download tar or zip from http://glew.sourceforge.net/.  
-cd into glew folder and type:
+cd into glew folder:
 
-	
+    cd glew
 	sudo make install
 
 or clone from current repos:

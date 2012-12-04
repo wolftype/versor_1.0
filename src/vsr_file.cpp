@@ -21,6 +21,7 @@ namespace vsr {
 	string File :: textures;
     string File :: resources;
 	string File :: audio;
+    string File :: output;
 	
 	void File :: setdir (string directory) {
 
@@ -42,6 +43,7 @@ namespace vsr {
 		images = data  + "images/";
 		videos = data + "videos/";
 		audio = data + "audio/";
+        output = directory+"output/";
 		
 		cout << "CWD: " << File::cwd 
 		<< "\nData Folder: " << File::data 
@@ -50,7 +52,8 @@ namespace vsr {
 		<< "\nVideos Folder: " << File::videos
 		<< "\nShaders Folder: " << File::shaders
 		<< "\nTextures Folder: " << File::textures
-		<< "\nAudio Folder: " << File::audio << endl;
+		<< "\nAudio Folder: " << File::audio
+        << "\nOutput Folder: " << File::output << endl;
 
 	}
 	

@@ -8,9 +8,9 @@
  */
 
 #include "vsr.h"
-
 #include "vsr_lattice.h"
-//#include "Opera.h"
+//#include "vsr_draw.h"
+
 
 namespace vsr {
 
@@ -246,7 +246,12 @@ namespace vsr {
 		}
 	}
     
-    
+  	template <> 
+	void Lattice< Frame > :: init(){
+		for (int i = 0; i < mNum; ++i){
+			mData[i].pos() = mGrid[i];			
+		}
+	}  
     // RANDOMIZATION
 
 	//Jitter Samples
@@ -477,27 +482,27 @@ namespace vsr {
 	}
 
 	//deprecated
-	template < class T >
-	T Lattice < T > :: euler ( const Pnt& p) const {
-		
-		Vxl vxl = vxlPnt(p);
-		T tdx;
-		for (int i = 0; i < 8; ++i){
-			tdx += mData[ vxl[i] ] * ( 1.0 / Ro::dst ( p , grid ( vxl[i] ) ) );
-		}
-		return tdx;
-	}
-
-	template < class T >
-	T Lattice < T > :: eulerPrev ( const Pnt& p) const {
-		
-		Vxl vxl = vxlPnt(p);
-		T tdx;
-		for (int i = 0; i < 8; ++i){
-			tdx += mPrev[ vxl[i] ] * ( 1.0 / ( p <= grid ( vxl[i] ) )[0] );
-		}
-		return tdx;
-	}
+//	template < class T >
+//	T Lattice < T > :: euler ( const Pnt& p) const {
+//		
+//		Vxl vxl = vxlPnt(p);
+//		T tdx;
+//		for (int i = 0; i < 8; ++i){
+//			tdx += mData[ vxl[i] ] * ( 1.0 / Ro::dst ( p , grid ( vxl[i] ) ) );
+//		}
+//		return tdx;
+//	}
+//
+//	template < class T >
+//	T Lattice < T > :: eulerPrev ( const Pnt& p) const {
+//		
+//		Vxl vxl = vxlPnt(p);
+//		T tdx;
+//		for (int i = 0; i < 8; ++i){
+//			tdx += mPrev[ vxl[i] ] * ( 1.0 / ( p <= grid ( vxl[i] ) )[0] );
+//		}
+//		return tdx;
+//	}
 	
 
 	template < class T >
@@ -517,6 +522,7 @@ namespace vsr {
 		tdx += data[ nb[idx].zb ] - data [ nb[idx].zf ]; //zb - zf
 		return tdx; 
 	}
+
 	
 	template < class T >
 	T Lattice < T > :: diffXNbrs ( T * data, Nbr * nb, int idx) {
@@ -545,6 +551,15 @@ namespace vsr {
 		tdx += data[ nb[idx].xr ][0] - data [ nb[idx].xl ][0]; //xr - xl
 		tdx += data[ nb[idx].yt ][1] - data [ nb[idx].yb ][1]; //yt - yb
 		tdx += data[ nb[idx].zb ][2] - data [ nb[idx].zf ][2]; //zb - zf
+		return tdx; 
+	}
+
+	template <>
+	double Lattice < Frame > :: tensNbrs ( Frame * data, Nbr * nb, int idx) {
+		double tdx; 
+		tdx += data[ nb[idx].xr ].pos()[0] - data [ nb[idx].xl ].pos()[0]; //xr - xl
+		tdx += data[ nb[idx].yt ].pos()[1] - data [ nb[idx].yb ].pos()[1]; //yt - yb
+		tdx += data[ nb[idx].zb ].pos()[2] - data [ nb[idx].zf ].pos()[2]; //zb - zf
 		return tdx; 
 	}
 
@@ -584,125 +599,144 @@ namespace vsr {
 //		return ( ( Ro::siz( dll ^ Ro::dls_pnt( grid(i) + data(i) ) ) ) < 0 ) ? 1 : 0;
 //	}
 	
-	template < class T >
-	void Lattice < T > :: drawLoop(){
-		
-		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);		
-		
-		glPushMatrix();
-			
-			//glTranslated(tmp.x - tw()/2.0, tmp.y - th()/2.0, tmp.z + td()/2.0);			
-			glTranslated(tmp.x, tmp.y, tmp.z);
-        
-			for (int i = 0; i < mNum; ++i){
-				DRAW( mData[i] );	
-			}
-		
-		glPopMatrix();
-		
-	}
-	
-	template < class T >
-	void Lattice < T > :: drawPush(){
-		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);		
-		
-		glPushMatrix();
-			glTranslated(tmp.x, tmp.y, tmp.z);
-			for (int i = 0; i < mNum; ++i){
-				glPushMatrix();
-					GL::translate( mGrid[i].w() );
-					DRAW( mData[i] );
-				glPopMatrix();	
-			}		
-		glPopMatrix();		
-	}
-	
-	template < class T >
-	void Lattice < T > :: drawBounded(){
-		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);					
-		glPushMatrix();			
-			//glTranslated(tmp.x - tw()/2.0, tmp.y - th()/2.0, tmp.z + td()/2.0);			
-			glTranslated(tmp.x, tmp.y, tmp.z);
-			BEGIN_BOUNDED_LOOP	
-				DRAW( mData[i] );	
-			END_BOUNDED_LOOP
-		glPopMatrix();	
-	}
-	
-	template < class T >
-	void Lattice < T > :: drawBoundedPush(){
-		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);		
-		glPushMatrix();
-			glTranslated(tmp.x, tmp.y, tmp.z);
-			BEGIN_BOUNDED_LOOP
-				glPushMatrix();
-					GL::translate( mGrid[ix].w() );
-					DRAW( mData[ix] );
-				glPopMatrix();
-			END_BOUNDED_LOOP
-		glPopMatrix();		
-	
-	}
-	
-	template < class T >	
-	void Lattice < T > :: drawMesh(int n, bool grid){	
-		for (int i = 0; i < mNumVxl; ++i){
-			drawVoxel ( mVxl[i], n, grid );
-		}
-	}
+//	template < class T >
+//	void Lattice < T > :: drawLoop(){
+//		
+//		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);		
+//		
+//		glPushMatrix();
+//			
+//			//glTranslated(tmp.x - tw()/2.0, tmp.y - th()/2.0, tmp.z + td()/2.0);			
+//			glTranslated(tmp.x, tmp.y, tmp.z);
+//        
+//			for (int i = 0; i < mNum; ++i){
+//				DRAW( mData[i] );	
+//			}
+//		
+//		glPopMatrix();
+//		
+//	}
+//	
+//	template < class T >
+//	void Lattice < T > :: drawPush(){
+//		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);		
+//		
+//		glPushMatrix();
+//			glTranslated(tmp.x, tmp.y, tmp.z);
+//			for (int i = 0; i < mNum; ++i){
+//				glPushMatrix();
+//					GL::translate( mGrid[i].w() );
+//					DRAW( mData[i] );
+//				glPopMatrix();	
+//			}		
+//		glPopMatrix();		
+//	}
+//	
+//	template < class T >
+//	void Lattice < T > :: drawBounded(){
+//		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);					
+//		glPushMatrix();			
+//			//glTranslated(tmp.x - tw()/2.0, tmp.y - th()/2.0, tmp.z + td()/2.0);			
+//			glTranslated(tmp.x, tmp.y, tmp.z);
+//			BEGIN_BOUNDED_LOOP	
+//				DRAW( mData[i] );	
+//			END_BOUNDED_LOOP
+//		glPopMatrix();	
+//	}
+//	
+//	template < class T >
+//	void Lattice < T > :: drawBoundedPush(){
+//		Vec3<> tmp (mPos[0], mPos[1], mPos[2]);		
+//		glPushMatrix();
+//			glTranslated(tmp.x, tmp.y, tmp.z);
+//			BEGIN_BOUNDED_LOOP
+//				glPushMatrix();
+//					GL::translate( mGrid[ix].w() );
+//					DRAW( mData[ix] );
+//				glPopMatrix();
+//			END_BOUNDED_LOOP
+//		glPopMatrix();		
+//	
+//	}
+//	
+//	template < class T >	
+//	void Lattice < T > :: drawMesh(int n, bool grid){	
+//		for (int i = 0; i < mNumVxl; ++i){
+//			drawVoxel ( mVxl[i], n, grid );
+//		}
+//	}
+//
+//	template < class T >	
+//	void Lattice < T > :: drawMeshLoc(int n, bool grid){	
+//		for (int i = 0; i < mNumVxl; ++i){
+//			drawVoxelLoc ( mVxl[i], 0, n, grid );
+//		}
+//	}	
+//	template < class T >	
+//	void Lattice < T > :: drawMeshAllLoc(int n, bool grid){	
+//		for (int i = 0; i < mNumVxl; ++i){
+//			drawVoxelLoc ( mVxl[i], 1, n, grid );
+//		}
+//	}	
+//
+//
+//	template < class T >
+//	void Lattice < T > :: drawGrid(){
+//		for (int i = 0; i < mNum; ++i){
+//			DRAW( mGrid[i] );
+//		}
+//	}
+//	
+//	template < class T >
+//	void Lattice < T > :: drawFaces(bool grid){
+//		for (int i = 0; i < mNumFace; ++i){
+//			(grid) ? DRAW( mGrid[mFace[i]] ) : DRAW( mData[ mFace[i] ] );
+//		}
+//	}
+//
+//	template < class T >
+//	void Lattice < T > :: drawEdges(bool grid){
+//		for (int i = 0; i < mNumEdge; ++i){
+//			(grid) ? DRAW( mGrid[mEdge[i]] ) : DRAW( mData[ mEdge[i] ] );
+//		}	
+//	}
+//
+//	template < class T >
+//	void Lattice < T > :: drawFaceLines(bool grid){
+//		glBegin(GL_LINES);
+//		for (int i = 0; i < mNumFace; ++i){
+//			(grid) ?  GL::vertex( mGrid[mFace[i]].w() ) : GL::vertex( mData[ mFace[i] ].w() );
+//		}
+//		glEnd();
+//	}
+//
+//	template <>
+//	void Lattice < Frame > :: drawFaceLines(bool grid){
+//		glBegin(GL_LINES);
+//		for (int i = 0; i < mNumFace; ++i){
+//			(grid) ?  GL::vertex( mGrid[mFace[i]].w() ) : GL::vertex( mData[ mFace[i] ].pos().w() );
+//		}
+//		glEnd();
+//	}
+//
+//	template < class T >
+//	void Lattice < T > :: drawEdgeLines(bool grid){
+//		glBegin(GL_LINES);
+//		for (int i = 0; i < mNumEdge; ++i){
+//			grid ? GL::vertex( mGrid[mEdge[i]].w() ) : GL::vertex( mData[ mEdge[i] ].w() );
+//		}
+//		glEnd();	
+//	}	
+//
+//	template <>
+//	void Lattice < Frame > ::  drawEdgeLines(bool grid){
+//		glBegin(GL_LINES);
+//		for (int i = 0; i < mNumEdge; ++i){
+//			grid ? GL::vertex( mGrid[mEdge[i]].w() ) : GL::vertex( mData[ mEdge[i] ].pos().w() );
+//		}
+//		glEnd();	
+//	}
 
-	template < class T >	
-	void Lattice < T > :: drawMeshLoc(int n, bool grid){	
-		for (int i = 0; i < mNumVxl; ++i){
-			drawVoxelLoc ( mVxl[i], 0, n, grid );
-		}
-	}	
-	template < class T >	
-	void Lattice < T > :: drawMeshAllLoc(int n, bool grid){	
-		for (int i = 0; i < mNumVxl; ++i){
-			drawVoxelLoc ( mVxl[i], 1, n, grid );
-		}
-	}	
-
-
-	template < class T >
-	void Lattice < T > :: drawGrid(){
-		for (int i = 0; i < mNum; ++i){
-			DRAW( mGrid[i] );
-		}
-	}
-	
-	template < class T >
-	void Lattice < T > :: drawFaces(bool grid){
-		for (int i = 0; i < mNumFace; ++i){
-			(grid) ? DRAW( mGrid[mFace[i]] ) : DRAW( mData[ mFace[i] ] );
-		}
-	}
-
-	template < class T >
-	void Lattice < T > :: drawEdges(bool grid){
-		for (int i = 0; i < mNumEdge; ++i){
-			(grid) ? DRAW( mGrid[mEdge[i]] ) : DRAW( mData[ mEdge[i] ] );
-		}	
-	}
-
-	template < class T >
-	void Lattice < T > :: drawFaceLines(bool grid){
-		glBegin(GL_LINES);
-		for (int i = 0; i < mNumFace; ++i){
-			(grid) ?  GL::vertex( mGrid[mFace[i]].w() ) : GL::vertex( mData[ mFace[i] ].w() );
-		}
-		glEnd();
-	}
-
-	template < class T >
-	void Lattice < T > :: drawEdgeLines(bool grid){
-		glBegin(GL_LINES);
-		for (int i = 0; i < mNumEdge; ++i){
-			grid ? GL::vertex( mGrid[mEdge[i]].w() ) : GL::vertex( mData[ mEdge[i] ].w() );
-		}
-		glEnd();	
-	}	
 	template < class T >
 	void Lattice < T > :: diffusefwd(double rate, bool bounded){
 			if (bounded) {
@@ -803,6 +837,9 @@ namespace vsr {
 	}
 	
 
+     
+
+     
 	//incompressibility of fluids
 	template < class T >
 	void Lattice < T > :: project( int it){
@@ -950,195 +987,196 @@ namespace vsr {
 	}
 
 
-	//DRAW ROUTINES
-	template< class T >
-	void Lattice < T > :: drawVoxel(Vxl vxl, int s, bool grid){
-			
-		Lattice < T >& f = *this;
-        Dls * g = f.grid();//(grid) ? f.grid() : f.data();
-		int typ = vxl.type;
-		//cout << vxl << endl;
+//	//DRAW ROUTINES
+//	template< class T >
+//	void Lattice < T > :: drawVoxel(Vxl vxl, int s, bool grid){
+//			
+//		Lattice < T >& f = *this;
+//        Dls * g = f.grid();//(grid) ? f.grid() : f.data();
+//		int typ = vxl.type;
+//		//cout << vxl << endl;
+//
+//			//FACES
+//			Poly4 fr = vxl.fr();
+//			Poly4 ba = vxl.ba();
+//			Poly4 ri = vxl.ri();
+//			Poly4 le = vxl.le();
+//			Poly4 to = vxl.to();
+//			Poly4 bo = vxl.bo();
+//
+//			//NORMALS
+//			Dls frv = ( g[fr.a] + g[fr.b] + g[fr.c] + g[fr.d]  ) / 4.0;
+//			Dls bav = ( g[ba.a] + g[ba.b] + g[ba.c] + g[ba.d]  ) / 4.0;
+//			Dls riv = ( g[ri.a] + g[ri.b] + g[ri.c] + g[ri.d]  ) / 4.0;
+//			Dls lev = ( g[le.a] + g[le.b] + g[le.c] + g[le.d]  ) / 4.0;
+//			Dls tov = ( g[to.a] + g[to.b] + g[to.c] + g[to.d]  ) / 4.0;
+//			Dls bov = ( g[bo.a] + g[bo.b] + g[bo.c] + g[bo.d]  ) / 4.0;
+//
+//		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//			
+//			if (typ & _FRONT){
+//
+//			GL::normal( frv.w() );
+//			GL::vertex( g[fr.a].w() );	
+//			GL::vertex( g[fr.b].w() );	
+//			GL::vertex( g[fr.c].w() );	
+//			GL::vertex( g[fr.d].w() );	
+//			}
+//		glEnd();
+//
+//		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//			
+//			if (typ & _LEFT){
+//			GL::normal( lev.w() );
+//			GL::vertex( g[le.a].w() );	
+//			GL::vertex( g[le.b].w() );	
+//			GL::vertex( g[le.c].w() );	
+//			GL::vertex( g[le.d].w() );
+//			}
+//		glEnd();
+//
+//		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//
+//			if (typ & _TOP){
+//			GL::normal( tov.w() );			
+//			GL::vertex( g[to.a].w() );	
+//			GL::vertex( g[to.b].w() );	
+//			GL::vertex( g[to.c].w() );	
+//			GL::vertex( g[to.d].w() );
+//			}
+//		glEnd();
+//
+//
+//		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//
+//			if (typ & _BACK){
+//			GL::normal( bav.w() );
+//			GL::vertex( g[ba.a].w() );	
+//			GL::vertex( g[ba.b].w() );	
+//			GL::vertex( g[ba.c].w() );	
+//			GL::vertex( g[ba.d].w() );	
+//			}
+//		glEnd();
+//
+//
+//		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//
+//			if (typ & _RIGHT){
+//			GL::normal( riv.w() );
+//			GL::vertex( g[ri.a].w() );	
+//			GL::vertex( g[ri.b].w() );	
+//			GL::vertex( g[ri.c].w() );	
+//			GL::vertex( g[ri.d].w() );
+//			}
+//		glEnd();
+//
+//		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//
+//			if (typ & _BOTTOM){
+//			GL::normal( bov.w() );			
+//			GL::vertex( g[bo.a].w() );	
+//			GL::vertex( g[bo.b].w() );	
+//			GL::vertex( g[bo.c].w() );	
+//			GL::vertex( g[bo.d].w() );
+//			}
+//		glEnd();
+//					
+//	}
+//
+//
+//	template< class T >
+//	void Lattice < T > :: drawVoxelLoc(Vxl vxl, bool bAll, int s, bool grid){
+//		/*	
+//		Lattice < T >& f = *this;
+//		Dls * g = (grid)? f.grid() : f.data();
+//		int typ = (bAll) ? _ALLSIDES : vxl.type;
+//
+//
+//			Poly4 fr = vxl.fr();
+//			Poly4 ba = vxl.ba();
+//			Poly4 ri = vxl.ri();
+//			Poly4 le = vxl.le();
+//			Poly4 to = vxl.to();
+//			Poly4 bo = vxl.bo();
+//
+//			//normals
+//			
+//			MonoFunc func = Ro::cen;
+//			
+//			if (typ & _FRONT){
+//				State frv = ( g[fr.a] + g[fr.b] + g[fr.c] + g[fr.d]  ) / 4.0;
+//				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//					GL::normal( frv.w() );
+//					GL::vertex( func( g[fr.a] ).w() );	
+//					GL::vertex( func( g[fr.b] ).w() );	
+//					GL::vertex( func( g[fr.c] ).w() );	
+//					GL::vertex( func( g[fr.d] ).w() );	
+//				glEnd();
+//			}
+//
+//			
+//			if (typ & _LEFT){
+//				State lev = ( g[le.a] + g[le.b] + g[le.c] + g[le.d]  ) / 4.0;
+//				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//					GL::normal( lev.w() );
+//					GL::vertex( func( g[le.a] ).w() );	
+//					GL::vertex( func( g[le.b] ).w() );	
+//					GL::vertex( func( g[le.c] ).w() );	
+//					GL::vertex( func( g[le.d] ).w() );
+//				glEnd();
+//			}
+//
+//			if (typ & _TOP){
+//				State tov = ( g[to.a] + g[to.b] + g[to.c] + g[to.d]  ) / 4.0;
+//				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//					GL::normal( tov.w() );			
+//					GL::vertex( func( g[to.a] ).w() );	
+//					GL::vertex( func( g[to.b] ).w() );	
+//					GL::vertex( func( g[to.c] ).w() );	
+//					GL::vertex( func( g[to.d] ).w() );
+//				glEnd();
+//			}
+//
+//
+//			if (typ & _BACK){
+//				State bav = ( g[ba.a] + g[ba.b] + g[ba.c] + g[ba.d]  ) / 4.0;
+//				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//					GL::normal( bav.w() );
+//					GL::vertex( func( g[ba.a] ).w() );	
+//					GL::vertex( func( g[ba.b] ).w() );	
+//					GL::vertex( func( g[ba.c] ).w() );	
+//					GL::vertex( func( g[ba.d] ).w() );	
+//				glEnd();
+//
+//			}
+//
+//
+//			if (typ & _RIGHT){
+//				State riv = ( g[ri.a] + g[ri.b] + g[ri.c] + g[ri.d]  ) / 4.0;
+//				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//					GL::normal( riv.w() );
+//					GL::vertex( func( g[ri.a] ).w() );	
+//					GL::vertex( func( g[ri.b] ).w() );	
+//					GL::vertex( func( g[ri.c] ).w() );	
+//					GL::vertex( func( g[ri.d] ).w() );
+//				glEnd();
+//			}
+//
+//			if (typ & _BOTTOM){
+//				State bov = ( g[bo.a] + g[bo.b] + g[bo.c] + g[bo.d]  ) / 4.0;			
+//				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
+//					GL::normal( bov.w() );			
+//					GL::vertex( func( g[bo.a] ).w() );	
+//					GL::vertex( func( g[bo.b] ).w() );	
+//					GL::vertex( func( g[bo.c] ).w() );	
+//					GL::vertex( func( g[bo.d] ).w() );
+//				glEnd();
+//			}
+//            */	
+//	}
 
-			//FACES
-			Poly4 fr = vxl.fr();
-			Poly4 ba = vxl.ba();
-			Poly4 ri = vxl.ri();
-			Poly4 le = vxl.le();
-			Poly4 to = vxl.to();
-			Poly4 bo = vxl.bo();
-
-			//NORMALS
-			Dls frv = ( g[fr.a] + g[fr.b] + g[fr.c] + g[fr.d]  ) / 4.0;
-			Dls bav = ( g[ba.a] + g[ba.b] + g[ba.c] + g[ba.d]  ) / 4.0;
-			Dls riv = ( g[ri.a] + g[ri.b] + g[ri.c] + g[ri.d]  ) / 4.0;
-			Dls lev = ( g[le.a] + g[le.b] + g[le.c] + g[le.d]  ) / 4.0;
-			Dls tov = ( g[to.a] + g[to.b] + g[to.c] + g[to.d]  ) / 4.0;
-			Dls bov = ( g[bo.a] + g[bo.b] + g[bo.c] + g[bo.d]  ) / 4.0;
-
-		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-			
-			if (typ & _FRONT){
-
-			GL::normal( frv.w() );
-			GL::vertex( g[fr.a].w() );	
-			GL::vertex( g[fr.b].w() );	
-			GL::vertex( g[fr.c].w() );	
-			GL::vertex( g[fr.d].w() );	
-			}
-		glEnd();
-
-		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-			
-			if (typ & _LEFT){
-			GL::normal( lev.w() );
-			GL::vertex( g[le.a].w() );	
-			GL::vertex( g[le.b].w() );	
-			GL::vertex( g[le.c].w() );	
-			GL::vertex( g[le.d].w() );
-			}
-		glEnd();
-
-		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-
-			if (typ & _TOP){
-			GL::normal( tov.w() );			
-			GL::vertex( g[to.a].w() );	
-			GL::vertex( g[to.b].w() );	
-			GL::vertex( g[to.c].w() );	
-			GL::vertex( g[to.d].w() );
-			}
-		glEnd();
-
-
-		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-
-			if (typ & _BACK){
-			GL::normal( bav.w() );
-			GL::vertex( g[ba.a].w() );	
-			GL::vertex( g[ba.b].w() );	
-			GL::vertex( g[ba.c].w() );	
-			GL::vertex( g[ba.d].w() );	
-			}
-		glEnd();
-
-
-		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-
-			if (typ & _RIGHT){
-			GL::normal( riv.w() );
-			GL::vertex( g[ri.a].w() );	
-			GL::vertex( g[ri.b].w() );	
-			GL::vertex( g[ri.c].w() );	
-			GL::vertex( g[ri.d].w() );
-			}
-		glEnd();
-
-		(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-
-			if (typ & _BOTTOM){
-			GL::normal( bov.w() );			
-			GL::vertex( g[bo.a].w() );	
-			GL::vertex( g[bo.b].w() );	
-			GL::vertex( g[bo.c].w() );	
-			GL::vertex( g[bo.d].w() );
-			}
-		glEnd();
-					
-	}
-
-	//DRAW ROUTINES
-	template< class T >
-	void Lattice < T > :: drawVoxelLoc(Vxl vxl, bool bAll, int s, bool grid){
-		/*	
-		Lattice < T >& f = *this;
-		Dls * g = (grid)? f.grid() : f.data();
-		int typ = (bAll) ? _ALLSIDES : vxl.type;
-
-
-			Poly4 fr = vxl.fr();
-			Poly4 ba = vxl.ba();
-			Poly4 ri = vxl.ri();
-			Poly4 le = vxl.le();
-			Poly4 to = vxl.to();
-			Poly4 bo = vxl.bo();
-
-			//normals
-			
-			MonoFunc func = Ro::cen;
-			
-			if (typ & _FRONT){
-				State frv = ( g[fr.a] + g[fr.b] + g[fr.c] + g[fr.d]  ) / 4.0;
-				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-					GL::normal( frv.w() );
-					GL::vertex( func( g[fr.a] ).w() );	
-					GL::vertex( func( g[fr.b] ).w() );	
-					GL::vertex( func( g[fr.c] ).w() );	
-					GL::vertex( func( g[fr.d] ).w() );	
-				glEnd();
-			}
-
-			
-			if (typ & _LEFT){
-				State lev = ( g[le.a] + g[le.b] + g[le.c] + g[le.d]  ) / 4.0;
-				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-					GL::normal( lev.w() );
-					GL::vertex( func( g[le.a] ).w() );	
-					GL::vertex( func( g[le.b] ).w() );	
-					GL::vertex( func( g[le.c] ).w() );	
-					GL::vertex( func( g[le.d] ).w() );
-				glEnd();
-			}
-
-			if (typ & _TOP){
-				State tov = ( g[to.a] + g[to.b] + g[to.c] + g[to.d]  ) / 4.0;
-				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-					GL::normal( tov.w() );			
-					GL::vertex( func( g[to.a] ).w() );	
-					GL::vertex( func( g[to.b] ).w() );	
-					GL::vertex( func( g[to.c] ).w() );	
-					GL::vertex( func( g[to.d] ).w() );
-				glEnd();
-			}
-
-
-			if (typ & _BACK){
-				State bav = ( g[ba.a] + g[ba.b] + g[ba.c] + g[ba.d]  ) / 4.0;
-				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-					GL::normal( bav.w() );
-					GL::vertex( func( g[ba.a] ).w() );	
-					GL::vertex( func( g[ba.b] ).w() );	
-					GL::vertex( func( g[ba.c] ).w() );	
-					GL::vertex( func( g[ba.d] ).w() );	
-				glEnd();
-
-			}
-
-
-			if (typ & _RIGHT){
-				State riv = ( g[ri.a] + g[ri.b] + g[ri.c] + g[ri.d]  ) / 4.0;
-				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-					GL::normal( riv.w() );
-					GL::vertex( func( g[ri.a] ).w() );	
-					GL::vertex( func( g[ri.b] ).w() );	
-					GL::vertex( func( g[ri.c] ).w() );	
-					GL::vertex( func( g[ri.d] ).w() );
-				glEnd();
-			}
-
-			if (typ & _BOTTOM){
-				State bov = ( g[bo.a] + g[bo.b] + g[bo.c] + g[bo.d]  ) / 4.0;			
-				(s) ? glBegin(GL_QUADS) : glBegin(GL_LINE_LOOP);
-					GL::normal( bov.w() );			
-					GL::vertex( func( g[bo.a] ).w() );	
-					GL::vertex( func( g[bo.b] ).w() );	
-					GL::vertex( func( g[bo.c] ).w() );	
-					GL::vertex( func( g[bo.d] ).w() );
-				glEnd();
-			}
-            */	
-	}
 	
-//	template class Lattice < Frame >;
+	template class Lattice < Frame >;
 	template class Lattice < Pnt >;
 	template class Lattice < Drv >;
 	template class Lattice < Drb >;

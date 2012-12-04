@@ -66,8 +66,8 @@ namespace vsr  {
         
 		float x, y, dx, dy, ddx, ddy, xrel, yrel; //< 2D Mouse Position, first and second derivatives of motion, position relative to TL corner
 		
-        Vec click, pos, move, accel, cat, drag, dragAccum, dragCat, projectFar, projectNear;
-		Pnt origin;
+        Vec click, pos, move, accel, cat, drag, dragAccum, dragCat, projectFar, projectNear, projectMid;
+        Pnt origin;
 		Biv biv, bivCat, dragBiv, dragBivCat;
         
 		bool isDown, isMoving, newClick;		

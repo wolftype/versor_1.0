@@ -256,6 +256,9 @@ class Camera : public Frame {
             Frame model;
             Camera camera;
             
+            float height() const { return camera.height(); }
+            float width() const { return camera.width(); }
+            
             Rot cat() { return camera.rot() * model.rot(); }//camera.rot() * model.rot(); }
             
             Mat4f mod() { return model.image(); }

@@ -6,7 +6,10 @@
 //  FOR A DEMO at AGACSE LA ROCHELLE 2012
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
+/*
 
+    TO DO: Send IFF AZIMUTH, ELEVATION, RADIUS over OSC TO /SES 
+*/
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
@@ -14,6 +17,7 @@
 
 #include "vsr_mesh.h"
 #include "vsr_boost.h"
+#include "vsr_coord.h"
 
 #include <iostream>
 
@@ -21,159 +25,93 @@
 using namespace vsr;
 using namespace glv;
 
-void linear(GLVApp& app){
 
-//    static Cir c = CYZ(1);
+struct HopfFiber{
+    /// Feed in Spherical Coordinates of a 2-Sphere, get 3-Sphere Fiber out
     
-    static Frame f1; static Frame f2;
-    
-    app.interface.touch(f1);
-    app.interface.touch(f2);
-    
-    
-    static int num, iter;
-    static float val,amt, yamt;
-    static bool bLine, bDrawLines, bShowBend;
-    
-    SET
-        f1.pos() = PT(-1,0,0);
-        f2.pos() = PT(1,0,0);
-        f1.orientX( f1.vec() + Vec(0,1,0) );
-        f2.orientX(f2.vec() + Vec(0,1,0) );
-        f1.scale(.3); f2.scale(.3);
-
-        static Gui gui;
-        app.subgui["linear"] = &gui;
-
-        gui(iter,"iter",1,1000);        
-        gui(num,"num_per",0,1000);
-        gui(val,"scalar_val",-100.0, 100.0);
-        gui(amt,"amt",-100.0, 100.0);
-        gui(yamt,"yamt",0,10);
-        gui(bLine,"line_source")(bDrawLines,"draw_lines")(bShowBend,"show_bend");
-
-        app.gui << (*app.subgui["linear"]);
-        app.gui.arrange();
-        
-        iter = 10;
-        num = 1;
-        val = 1;
-        amt = 1;
-        yamt = 1;
-        
-    END 
-    
-    GL::Draw::X( f1 );
-    GL::Draw::X( f2 );
-    
-    Par pa = f1.tx(f1.scale());
-    Par pb = f2.tx(f2.scale());
-    
-    static Par tp; static Cir tc;
-    
-    UVMesh uvmesh(iter+1,iter+1);
-    
-    ITJi(i,iter)
-        tp = Interp::linear<Par>(pa, pb, t);
-        Bst pp = Gen::trv(1, tp * amt);
-        pp[0] = val;
-        
-        Dll dll = f1.dlz().mot(  Gen::log( Gen::ratio( f1.dlz(), f2.dlz(), t ) ) );
-        if (bDrawLines) DRAW( dll );
-
-        Pnt src = Interp::linear<Pnt>(f1.pos(), f2.pos(), t).null();
-        Pnt src2 = Fl::loc( dll, src, true);
-
-       ITJi(j, iter)
-            double xt = -1.0 + 2.0 * t;
-            Pnt nsrc = ( bLine ? src2 : src ).trs( Fl::dir( dll.undual() ) * xt * yamt).null();
-            Pnt nnsrc = Ro::loc( nsrc.sp( pp ) );
-            uvmesh.add(nnsrc);
-            
-            if (bShowBend){
-                ITJi(k,num)
-                    Pnt tnsrc = Ro::loc( nsrc.sp( Gen::trv( 1, tp * amt * t ) ) );
-                    DRAW3( tnsrc, t,0,1-t);
-                END 
-            }
-
-       END 
-        
-    END 
-    
-    //DRAW
-    
-    uvmesh.draw(1,0,0);
-    uvmesh.drawTri(1,1,0);
-    
-    app.text("Linear Interpolation of Point Pair Generators acting on a Set of Lines");
-
-}
-
-
-void hopf(GLVApp& app){
-
-
-    /*
-        The spinor, a Motor Transversor, takes a circle to its axis
-        
-        Mtt = { id = "Mtt", desc = "Motor Transversor", 
-        bases = {_s, _e12, _e13, _e23, _e1no, _e2no, _e3no, _e1ni, _e2ni, _e3ni, _noni, _e12noni, _e13noni, _e23noni, _e123no, _e123ni, }, key = 1771476585 }
-
-    */
-
-        
-    static float max = 1000;
-
-    //GUI Controlled Parameters
-    static int num = 50;
-    static int res = 20;
-    static bool handed;
-    SET app.gui(num,"num",0,100)(res,"res",0,100)(handed); END
-
-
-    //BASE CIRCLE AT SOUTH POLE
-    Cir ca = CXZ(1);
-    DRAW3(ca,1,0,0); 
+    bool bHanded;
 
     //BASE LINE AT NORTH POLE
-    Lin inf = PAO ^ Ro::null(0,1,0) ^ Inf(1);
-    if (handed) inf = PAO ^ Ro::null(0,-1,0) ^ Inf(1);
-
-
-    //j is theta of globe (longitude)
-    //i is phi of a globe (latitude)
+    Lin mInf;
+    //base
+    Cir mCir;
     
-    static int time = 0; time++;  double phase = PI * time/180.0;
+    HopfFiber(bool hand=true) : bHanded(hand) {
+        mInf =  PAO ^ Ro::null(0, bHanded? 1 :-1,0) ^ Inf(1);
+        mCir = CXZ(1);
+    }
     
-    ITJi(j,res)
+    Cir cir(double theta, double phi){
 
-        float tt = t;
+        double ptheta = PIOVERTWO * theta;
 
-        Vec v = Vec::x.rot( Biv::xz * PI * t );
-        Lin lim = ca.sp( Gen::trv(v) );                                                             //<-- Circle to a Line (Limit)
+        Vec v = Vec::x.rot( Biv::xz * ptheta );
+       // cout << v << endl ;
+        Lin lim = mCir.sp( Gen::trv(v) );                                                         //<-- Circle to a Line (Limit)
+        Mot mot = Gen::ratio( lim.dual(), mInf.dual(), phi);
+        
+       // cout << theta << " " << phi << "\n" << mot << endl;
+        
+        return mCir.sp( mot * Gen::trv(v * phi )  ) ; 
+        
+//      Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(1, p * st )  ) ;        // <-- More complicated and unnecessary, takes circle to local tangent, then twists
+    }
+};
 
-//      Par p  = Par(Tnv( v ) ).trs( v ) ;
-//      Lin lim = ca.sp( Gen::trv(1,p*-.5) );
-        ITJi(i,num)
-            Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(v * t )  ) ;            // <-- simpler, takes circle to line, then twists
-//          Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(1, p * st )  ) ;        // <-- More complicated and unnecessary, takes circle to local tangent, then twists
 
-            DRAW3(nc,1-t,t,tt);
-            Pnt pnt = Ro::pnt_cir(nc, phase * Ro::cur(nc) );
-            DRAW3(pnt,t,tt,1-t);
-            if (Ro::size(nc,false) > max) DRAW( Lin(nc) );                                          //<-- Draw as a Line if Circle is above a certain radius
-        END
-    END
+void hopf2(GLVApp& app){
+    
+
+    HopfFiber hf;
+    
+    static int time = 0; time++;  double tphase = PI * time/180.0;
+
+    //GUI Controlled Parameters
+    static int num = 2;
+    static int res = 3;
+    static bool handed, bDrawCir, bDrawPnt,bReset;
+    static double phase,amt,minDistance;
+    SET app.gui(num,"num",0,1000)(res,"res",0,1000)(phase,"phase",1,100)(amt,"amt",0,10)(minDistance,"minDistance",0,1000);
+    app.gui(handed)(bDrawCir, "drawcir")(bDrawPnt,"drawpnt")(bReset,"reset"); 
+    END     
+    
+    //static 
+    static Pnt pnt = Ro::null(1,1,1);
+    if (bReset) { pnt = Ro::null(1,1,1); bReset = false; }
+    app.interface.touch(pnt); DRAW(pnt);
+    Par par;
+    IT2(num,res)
+        Cir tc = hf.cir(-1.0 + 2*u, v);
+        Pnt tp = Ro::pnt_cir( tc, tphase * Ro::cur(tc) * phase);
+        if(bDrawPnt)DRAW3(tp,u,v,1-u);
+        if(bDrawCir)DRAW3(tc,v,u,1-u);
+    
+//        Pnt ttp= pnt <= tc.dual();
+        Cir ttc= pnt ^ tc.dual();
+//        if(bDrawCir)DRAW3(ttc,1,0,0);
+//        if(bDrawPnt)DRAW3(ttp,1,0,0);
+        double dist = Ro::size(ttc, false);
+        //cout << dist << endl; 
+        if (dist < minDistance) {
+            par += tc.dual() * 1.0/dist;
+        }
+    END END
+    
+    pnt = Ro::loc( pnt.sp( Gen::bst(par * amt) ) );
+    DRAW3(Ro::dls_pnt(pnt,.2),1,0,0);
+    
 }
+
+
 
 void GLVApp :: onDraw(){
 
    // linear(*this);
-    hopf(*this);
-
+//    hopf(*this);
+    hopf2(*this);
     text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }
+
 
 int main() {
         
@@ -190,3 +128,50 @@ int main() {
 
     return 0;
 }
+
+
+//void hopf(GLVApp& app){
+//        
+//    static float max = 1000;
+//
+//    //GUI Controlled Parameters
+//    static int num = 50;
+//    static int res = 20;
+//    static bool handed;
+//    SET app.gui(num,"num",0,100)(res,"res",0,100)(handed); END
+//
+//
+//    //BASE CIRCLE AT SOUTH POLE
+//    Cir ca = CXZ(1);
+//    DRAW3(ca,1,0,0); 
+//
+//    //BASE LINE AT NORTH POLE
+//    Lin inf = PAO ^ Ro::null(0,1,0) ^ Inf(1);
+//    if (handed) inf = PAO ^ Ro::null(0,-1,0) ^ Inf(1);
+//
+//
+//    //j is theta of globe (longitude)
+//    //i is phi of a globe (latitude)
+//    
+//    static int time = 0; time++;  double phase = PI * time/180.0;
+//    
+//    ITJi(j,res)
+//
+//        float tt = t;
+//
+//        Vec v = Vec::x.rot( Biv::xz * PI * t );
+//        Lin lim = ca.sp( Gen::trv(v) );                                                             //<-- Circle to a Line (Limit)
+//
+////      Par p  = Par(Tnv( v ) ).trs( v ) ;
+////      Lin lim = ca.sp( Gen::trv(1,p*-.5) );
+//        ITJi(i,num)
+//            Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(v * t )  ) ;            // <-- simpler, takes circle to line, then twists
+////          Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(1, p * st )  ) ;        // <-- More complicated and unnecessary, takes circle to local tangent, then twists
+//            DRAW3(nc,1-t,t,tt);
+//            Pnt pnt = Ro::pnt_cir(nc, phase * Ro::cur(nc) );
+//            DRAW3(pnt,t,tt,1-t);
+//            if (Ro::size(nc,false) > max) DRAW( Lin(nc) );                                          //<-- Draw as a Line if Circle is above a certain radius
+//        END
+//    END
+//}
+

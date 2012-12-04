@@ -32,6 +32,10 @@
  *
  * Please report all bugs and problems to <gl2ps@geuz.org>.
  */
+ 
+// #ifdef __cplusplus__
+//extern "C" {
+//#endif
 
 #include "gl2ps.h"
 
@@ -6029,3 +6033,7 @@ GL2PSDLL_API const char *gl2psGetFormatDescription(GLint format)
   else
     return "Unknown format";
 }
+
+//#ifdef __cplusplus__
+//}
+//#endif

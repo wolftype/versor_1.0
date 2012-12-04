@@ -131,7 +131,24 @@ namespace vsr {
 				return *this;
 			}
 			
-			
+            /*! Experimental: returns a Frame representing the concatenation ("addition") of *this followed by f */
+			Frame operator + (const Frame& f) const {
+                return Frame( f.mot() * mot() );
+            }
+            /*! Experimental: returns a Frame representing the transformation ("difference") from f to *this */
+			Frame operator -(const Frame& f) const {
+                return Frame( Gen::ratio( f.dll(), dll() ) );
+            }
+            /*! Experimental: returns a Frame representing the concatenation ("addition") of *this followed by f */
+			Frame& operator +=(const Frame& f) {
+                mot( f.mot() * mot() ); return *this;
+            }
+
+            /*! Experimental: returns a Frame representing the concatenation ("multiplication") of f followed by *this */
+			Frame operator *(const Frame& f) const {
+                return Frame( mot() * f.mot() );
+            }
+
 
 			Mat4f& image() { return mImage; }										///< get matrix image 		
 			Mat4f image() const { return mImage; }										///< get matrix image 		
@@ -206,14 +223,23 @@ namespace vsr {
 			Cir cxz() const { return Op::udl( pxz() ); }			///< xz circle		
             /* Local YZ Circle */
 			Cir cyz() const { return Op::udl( pyz() ); }			///< yz circle	
-			/* Local Tangents */
+			/* Tangents */
+//			Tnv tx() const { return  Tnv( right() ); }		///< x tangent generator in global space
+//			Tnv ty() const { return  Tnv( up() ) ; }		///< y tangent generator in global space
+//			Tnv tz() const { return  Tnv( forward() ); }	///< z tangent generator in global space
+			/* Tangents */
 			Par tx() const { return Par( Tnv( right() ) ).sp( trs() ); }		///< x tangent generator in global space
 			Par ty() const { return Par( Tnv( up() ) ).sp( trs() ); }		///< y tangent generator in global space
 			Par tz() const { return Par( Tnv( forward() ) ).sp( trs() ); }	///< z tangent generator in global space
-            /* Local Tangents */
+            /* Tangents */
             Par tx(double t) const { return Par( Tnv( right() * t) ).sp( trs() ); }		///< x tangent generator in global space * t
             Par ty(double t) const { return Par( Tnv( up() * t ) ).sp( trs() ); }		///< y tangent generator in global space * t
             Par tz(double t) const { return Par( Tnv( forward() * t ) ).sp( trs() ); }	///< z tangent generator in global space * t
+            /* Local Tangents Scaled */
+            Par txScaled() const { return tx(scale()); }		///< x tangent generator in global space * t
+            Par tyScaled() const { return ty(scale()); }		///< y tangent generator in global space * t
+            Par tzScaled() const { return tz(scale()); }	///< z tangent generator in global space * t
+
 			/* Local Boost Tranformations */
 			Bst ppx() { return Gen::trv(1,tx()); }			///< x tangent space boost versor
 			Bst ppy() { return Gen::trv(1,ty()); }			///< y tangent space boost versor
@@ -454,7 +480,7 @@ namespace vsr {
 				switch(ctype){
 					case QUADRIC : 
 					{
-						Dll dll = Interp::quad<Dll>(dlf,num,t);
+						Dll dll = Interp::quadric<Dll>(dlf,num,t);
 						fr.twist( Gen::mot(dll) );
 						break;
 					}

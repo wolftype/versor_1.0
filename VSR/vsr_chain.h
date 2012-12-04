@@ -263,15 +263,22 @@ namespace vsr {
 
         
             /// Derive Joint Rotations from Current Positions
-            void joints(){
+            void joints(int start = 0){
+
 
                 Vec t = Vec::y;
                 Rot R(1,0,0,0);
+                
+                //Where we are in current rotation scheme
+                for (int i = 0; i < start; ++i){
+                    t = t.sp( mFrame[i].rot() );
+                }
 
-                for (int i = 0; i < mNum-1; ++i){
+                //From Here forward, what we need to get where we want to go
+                for (int i = start; i < mNum-1; ++i){
                     //DRV of LINK
                     Vec b = Biv( linf(i) ).duale();                    
-                    Rot nr = Gen::ratio(t, b*-1); //What it takes to turn the current integation there
+                    Rot nr = Gen::ratio(t, b*-1); //What it takes to turn the current integration there
                     R = nr * R;
                     mFrame[i].rot( R );
                     t = Op::sp(t, nr ); //angle is integrated
@@ -292,7 +299,7 @@ namespace vsr {
             void angle(int k, double theta){
                 
                 Rot R =  mJoint[k].rot();
-                double t = Gen::iphi ( R );
+                //double t = Gen::iphi ( R );
                                 
                 Biv b = Biv( R ) * -1;// * ( (t > 1) ? ); // note: check Op:lg and Gen::log_rot (maybe mult by -1 there as well)
 

@@ -667,6 +667,7 @@
 	typedef Pss_Mnk_Pnt_Sph PseudoscalarMinkowskiPlanePointSphere;
 	
 	typedef Pnt Dls;
+    typedef Pnt DualSphere;
     
 			
 	} //vsr::

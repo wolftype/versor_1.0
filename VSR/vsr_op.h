@@ -127,6 +127,20 @@ struct Gen {
         return Rot( cos(c), b[0]*sc, b[1]*sc, b[2]*sc );
     }
     
+    /*! Generate a Rotor (i.e quaternion) from spherical coordinates
+        @param[in] theta
+        @param[in] phi
+    */
+    static Rot rot(double theta, double phi){
+        double ptheta = (PIOVERTWO * theta);
+        double pphi = (PIOVERFOUR * phi);
+        
+        Rot rt = Gen::rot( Biv::xz * ptheta );
+        Rot rp = Gen::rot( Biv::xy.sp( rt ) * pphi  );
+        
+        return rp * rt;
+    }
+    
     /*! Get Bivector Generator from a Rotor 
         @param Rotor r
     */
@@ -303,14 +317,20 @@ struct Gen {
         return rq;
     }
     
+    /*! Dual Line Generator of Motor That Twists Dual Line a to Dual Line b;
+    
+    */
     static Dll log(const Dll& a, const Dll& b, double t = 1.0){
-        Mot m = a/b; double n = m.rnorm(); if (n!=0) m /= n;
+        Mot m = b/a; double n = m.rnorm(); if (n!=0) m /= n;
         return Gen::log( m ) * (t/2.0) ;
     }
     
+    /*! Generate Motor That Twists Dual Line a to Dual Line b;
+    
+    */
     static Mot ratio( const Dll& a, const Dll& b, double t = 1.0){
-        Mot m = a/b; double n = m.rnorm(); if (n!=0) m /= n;
-        return Gen::mot( Gen::log( m ) * (t/2.0) );   
+        //Mot m = b/a; double n = m.rnorm(); if (n!=0) m /= n; else cout << "zero mot" << endl; 
+        return Gen::mot( log(a,b,t) );//Gen::log( m ) * (t/2.0) );   
     }
     
     /*! Transversor Generator from arbitrary Vector
@@ -610,16 +630,22 @@ struct Ro {
 //    }
 
     /*!
-     Direct (imaginary?) Round From Dual Sphere and Euclidean Carrier Flat
+     Direct (imaginary?) Cirlce From Dual Sphere and Euclidean Bivector
      */    
      static Cir cir(const Dls& dls, const Biv& flat){
         return dls ^ ( ( dls <= ( flat.involution() * Inf(1) ) )  * -1.0 );  
      }
     /*!
-     Direct (imaginary?) Round From Dual Sphere and Euclidean Carrier Flat
+     Direct (imaginary?) Point Pair From Dual Sphere and Euclidean Vector
      */    
      static Par par(const Dls& dls, const Vec& flat){
         return dls ^ ( ( dls <= ( flat.involution() * Inf(1) ) )  * -1.0 ); // cout << "y" << endl; 
+     }
+    /*!
+     Direct Point From Dual Sphere and Euclidean Carrier Flat
+     */    
+     static Pnt pnt(const Dls& dls, const Vec& flat){
+        return Ro::split( par(dls, flat), true ); // cout << "y" << endl; 
      }
     
     /*! Direct Circle from Point and Euclidean Carrier Flat 
@@ -663,7 +689,9 @@ struct Ro {
         return (r==0) ? 10000 : 1.0 / Ro::rad(s);
     }
     
+    /*! Point Pair on Circle at angle t*/
     static Par par_cir(const Cir& c, double t);
+    /*! Point on Circle at angle t*/
     static Pnt pnt_cir(const Cir& c, double t);
     
     static Pnt noon( const Cir& c ){

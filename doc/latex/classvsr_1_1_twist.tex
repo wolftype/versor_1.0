@@ -1,0 +1,93 @@
+\hypertarget{classvsr_1_1_twist}{\section{vsr\-:\-:Twist Class Reference}
+\label{classvsr_1_1_twist}\index{vsr\-::\-Twist@{vsr\-::\-Twist}}
+}
+
+
+{\ttfamily \#include $<$vsr\-\_\-motor.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_twist_a15bf0a130d1560354e3a64802dafc266}{{\footnotesize template$<$class T $>$ }\\{\bfseries Twist} (const T \&axis)}\label{classvsr_1_1_twist_a15bf0a130d1560354e3a64802dafc266}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a93215edad7912135a7736b2b1987ce45}{{\bfseries Twist} (double x, double y, double z)}\label{classvsr_1_1_twist_a93215edad7912135a7736b2b1987ce45}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a78dae233418dca78373fff58a515de74}{{\footnotesize template$<$class T $>$ }\\void \hyperlink{classvsr_1_1_twist_a78dae233418dca78373fff58a515de74}{move\-By} (const T \&vec)}\label{classvsr_1_1_twist_a78dae233418dca78373fff58a515de74}
+
+\begin{DoxyCompactList}\small\item\em Direction. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_a8aaac7f8c5cb09a82ce4e75a664fc32a}{void \hyperlink{classvsr_1_1_twist_a8aaac7f8c5cb09a82ce4e75a664fc32a}{set} (double distance, double \hyperlink{classvsr_1_1_twist_a5b1e72c1d494d5b77894aa63a779e3b4}{period})}\label{classvsr_1_1_twist_a8aaac7f8c5cb09a82ce4e75a664fc32a}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classvsr_1_1_set}{Set} Distance and Period. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_a5b1e72c1d494d5b77894aa63a779e3b4}{double \hyperlink{classvsr_1_1_twist_a5b1e72c1d494d5b77894aa63a779e3b4}{period} () const }\label{classvsr_1_1_twist_a5b1e72c1d494d5b77894aa63a779e3b4}
+
+\begin{DoxyCompactList}\small\item\em Period, i.\-e frequency, of twist (in P\-I units) \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_ad77f024ccd01884dcb9eb3a045a85426}{double \hyperlink{classvsr_1_1_twist_ad77f024ccd01884dcb9eb3a045a85426}{pitch} () const }\label{classvsr_1_1_twist_ad77f024ccd01884dcb9eb3a045a85426}
+
+\begin{DoxyCompactList}\small\item\em Pitch from 0 (othogonal, pure rotation) to 1 ( identical, pure translation ) \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_a9134cc4c7f736d737c46d2a7ee87a6fd}{double \hyperlink{classvsr_1_1_twist_a9134cc4c7f736d737c46d2a7ee87a6fd}{moment} () const }\label{classvsr_1_1_twist_a9134cc4c7f736d737c46d2a7ee87a6fd}
+
+\begin{DoxyCompactList}\small\item\em Distance from origin. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_aba59be836ad65578bd2000ea79a9fe20}{void \hyperlink{classvsr_1_1_twist_aba59be836ad65578bd2000ea79a9fe20}{along} (const \hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \&d, double \hyperlink{classvsr_1_1_twist_a5b1e72c1d494d5b77894aa63a779e3b4}{period}, double \hyperlink{classvsr_1_1_twist_ad77f024ccd01884dcb9eb3a045a85426}{pitch})}\label{classvsr_1_1_twist_aba59be836ad65578bd2000ea79a9fe20}
+
+\begin{DoxyCompactList}\small\item\em given a (unit?) line, generate a dll with period and pitch along it \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_a2a66b764ae775c3bbdfb983d9673bd73}{\hyperlink{namespacevsr_aa1af5d33b552dd31499209a8f68548e8}{Rot} {\bfseries ratio} () const }\label{classvsr_1_1_twist_a2a66b764ae775c3bbdfb983d9673bd73}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a6680a5fbda746dea8c0363396379d979}{\hyperlink{namespacevsr_ab2f5aee828c6c805b8a86a5b077d192c}{Biv} {\bfseries iphi} () const }\label{classvsr_1_1_twist_a6680a5fbda746dea8c0363396379d979}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a85b4601f1f15a6968779c694c88743a2}{\hyperlink{namespacevsr_ab2f5aee828c6c805b8a86a5b077d192c}{Biv} {\bfseries pitch\-Plane} () const }\label{classvsr_1_1_twist_a85b4601f1f15a6968779c694c88743a2}
+
+\item 
+\hypertarget{classvsr_1_1_twist_ac9d5f48e7dc26e5a9c2c59172bb73148}{void {\bfseries dll} (const \hyperlink{namespacevsr_ab2f5aee828c6c805b8a86a5b077d192c}{Biv} \&b, const \hyperlink{namespacevsr_a106201b887e3d76e1fa4e2b719f1c9cc}{Drv} \&d)}\label{classvsr_1_1_twist_ac9d5f48e7dc26e5a9c2c59172bb73148}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a52dc727dc30e337f453bca3d33e055c5}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} {\bfseries dll} (double t) const }\label{classvsr_1_1_twist_a52dc727dc30e337f453bca3d33e055c5}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a5a4a5cc371bcb86d503d937807c3533b}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} {\bfseries dll} () const }\label{classvsr_1_1_twist_a5a4a5cc371bcb86d503d937807c3533b}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a2638a037041c6a79a30c9ce0f59f6e57}{\hyperlink{namespacevsr_a6c6892b7aec25cfb16492501e2e35b11}{Dll} \& {\bfseries dll} ()}\label{classvsr_1_1_twist_a2638a037041c6a79a30c9ce0f59f6e57}
+
+\item 
+\hypertarget{classvsr_1_1_twist_ab0cade857559a59e54063a5e50c7f34b}{\hyperlink{namespacevsr_ad4b77d620ed90deefbeab9d4a122667e}{Mot} {\bfseries mot} () const }\label{classvsr_1_1_twist_ab0cade857559a59e54063a5e50c7f34b}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a59be4b85314dff22f95e00d523cb1f21}{\hyperlink{namespacevsr_ab2f5aee828c6c805b8a86a5b077d192c}{Biv} {\bfseries biv} () const }\label{classvsr_1_1_twist_a59be4b85314dff22f95e00d523cb1f21}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a8742ab35ee5c53cd152c237ca1f3cdbf}{\hyperlink{namespacevsr_a106201b887e3d76e1fa4e2b719f1c9cc}{Drv} {\bfseries drv} () const }\label{classvsr_1_1_twist_a8742ab35ee5c53cd152c237ca1f3cdbf}
+
+\item 
+\hypertarget{classvsr_1_1_twist_abb0e0eacc2aa3626af347720a79ef362}{void {\bfseries period} (double theta)}\label{classvsr_1_1_twist_abb0e0eacc2aa3626af347720a79ef362}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a476d31b557010424546971888c1e5468}{void \hyperlink{classvsr_1_1_twist_a476d31b557010424546971888c1e5468}{pitch} (double dt)}\label{classvsr_1_1_twist_a476d31b557010424546971888c1e5468}
+
+\begin{DoxyCompactList}\small\item\em Pass in 0 to 1 -\/$>$ if 1 pitch is 1. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_a6b382ea2557eb3e688b2a2382232f632}{void {\bfseries ext} (double e)}\label{classvsr_1_1_twist_a6b382ea2557eb3e688b2a2382232f632}
+
+\item 
+\hypertarget{classvsr_1_1_twist_a83c45e97a62ef0833c0272bc5a4a36a4}{\hyperlink{namespacevsr_ad4b77d620ed90deefbeab9d4a122667e}{Mot} \hyperlink{classvsr_1_1_twist_a83c45e97a62ef0833c0272bc5a4a36a4}{mot} (double t) const }\label{classvsr_1_1_twist_a83c45e97a62ef0833c0272bc5a4a36a4}
+
+\begin{DoxyCompactList}\small\item\em Get Motor at t. \end{DoxyCompactList}\item 
+\hypertarget{classvsr_1_1_twist_a184bb2211aaa8a15f81bce966f946edb}{void \hyperlink{classvsr_1_1_twist_a184bb2211aaa8a15f81bce966f946edb}{set} (const \hyperlink{namespacevsr_ad4b77d620ed90deefbeab9d4a122667e}{Mot} \&m)}\label{classvsr_1_1_twist_a184bb2211aaa8a15f81bce966f946edb}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classvsr_1_1_set}{Set} \hyperlink{classvsr_1_1_twist}{Twist} Axis From Destination Motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classvsr_1_1_twist_ac8d0a1ca0784e1d896d3cfcb2aa9350c}{ostream \& {\bfseries operator$<$$<$} (ostream \&, const \hyperlink{classvsr_1_1_twist}{Twist} \&)}\label{classvsr_1_1_twist_ac8d0a1ca0784e1d896d3cfcb2aa9350c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Decomposed Dual Line (As a Bivector and Direction Vector to it ) 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/wolftype/code/vsr/\-V\-S\-R/vsr\-\_\-motor.\-h\end{DoxyCompactItemize}

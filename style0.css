@@ -41,7 +41,7 @@ pre {
     white-space: -o-pre-wrap;
 	display: block;
 	border: solid 1px #e1e1e1;
-	color: #555555;
+	color: darkgrey;
 	background: #faf8f0;
 	padding: 1em;
 }       
@@ -54,5 +54,5 @@ code {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
     white-space: -o-pre-wrap;
-    color: grey;
+    color: #808066;
 }

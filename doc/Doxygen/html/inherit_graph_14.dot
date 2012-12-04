@@ -1,9 +1,0 @@
-digraph G
-{
-  edge [fontname="Helvetica",fontsize="11",labelfontname="Helvetica",labelfontsize="11"];
-  node [fontname="Helvetica",fontsize="11",shape=record];
-  rankdir="LR";
-  Node1 [label="vsr::Interface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_interface.html"];
-  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="11",style="solid",fontname="Helvetica"];
-  Node2 [label="vsr::GLVInterface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvsr_1_1_g_l_v_interface.html"];
-}
