@@ -32,7 +32,7 @@ void twists(GLVApp& app){
     DRAW3(dll,1,0,0);
     
     //A Twist around and along that axis
-    Dll twist = Twist::Along( dll, period * PI, pitch * PI);
+    DualLine twist = Twist::Along( dll, period * PI, pitch * PI);
     
     //Another Space Frame at 1,0,0
     static Frame sframe( PT(1,0,0) );

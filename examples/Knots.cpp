@@ -293,7 +293,7 @@ void GLVApp :: onDraw(){
 
 //    weighted(*this);
 //    twoknots(*this);
-//      knot(*this);
+      knot(*this);
 //      ortho(*this);
 //        orbits(*this);
         
