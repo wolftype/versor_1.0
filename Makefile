@@ -146,7 +146,7 @@ $(EXEC_TARGETS): $(LIB_PATH) FORCE
 	@echo Building $@ using $<
 	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) $@ -o $(BIN_DIR)$(*F)
 #	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
-	$(CXX) $@ $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) -o $(BIN_DIR)$(*F) 
+	$(CXX) $@ $(CXXFLAGS) $(HPATH) -H -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
 	@cd $(BIN_DIR) && ./$(*F)
 
 #test: test.cpp vsr
