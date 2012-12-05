@@ -57,7 +57,7 @@ LDFLAGS	+= -L$(LIB_DIR)
 #Graphics only added to LDFLAGS if GFX=1 - (default)
 ifeq ($(GFX),1)
 	ifeq ($(PLATFORM), linux)
-		LINK_LDFLAGS += -lGLEW -lGLU -lGL -lglut -lGLV
+		LINK_LDFLAGS += -lglut -lGLEW -lGLU -lGL -lGLV
 	else ifeq ($(PLATFORM), macosx)
 		LINK_LDFLAGS += -framework OpenGL -framework GLUT -lglv 
 	else ifeq ($(PLATFORM), windows)
@@ -142,12 +142,11 @@ clean:
 vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
 
-
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
 	@echo Building $@ using $<
 	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) $@ -o $(BIN_DIR)$(*F)
 #	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
-	$(CXX) $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) $@ -o $(BIN_DIR)$(*F) 
+	$(CXX) $@ $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) -o $(BIN_DIR)$(*F) 
 	@cd $(BIN_DIR) && ./$(*F)
 
 #test: test.cpp vsr
