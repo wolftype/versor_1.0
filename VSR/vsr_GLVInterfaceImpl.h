@@ -11,7 +11,7 @@
 
 //ABSTRACT BASE CLASS
 #include "vsr_interface.h"
-#include "vsr_File.h"
+#include "vsr_file.h"
 
 //GLV SPECIFIC HEADERS
 #include "GLV/glv.h"
