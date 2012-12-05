@@ -108,7 +108,7 @@ $(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
 	@echo CXX compiling $< to $@
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo
-	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@ 
+	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@ $(LDFLAGS)
 
 #COMPILATION of C to Object File
 $(OBJ_DIR)%.o: %.c
@@ -144,9 +144,9 @@ vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
 	@echo Building $@ using $<
-	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) $@ -o $(BIN_DIR)$(*F)
+	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
 #	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
-	$(CXX) $@ $(CXXFLAGS) $(HPATH) -H -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
+	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
 	@cd $(BIN_DIR) && ./$(*F)
 
 #test: test.cpp vsr
