@@ -145,7 +145,9 @@ vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
 	@echo Building $@ using $<
-	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
+	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) $@ -o $(BIN_DIR)$(*F)
+#	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
+	$(CXX) $(CXXFLAGS) $(HPATH) -H $(LDFLAGS) -l$(LIB_NAME) $@ -o $(BIN_DIR)$(*F) 
 	@cd $(BIN_DIR) && ./$(*F)
 
 #test: test.cpp vsr
