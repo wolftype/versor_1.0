@@ -75,7 +75,8 @@ You can use this library to draw geometrical things, explore spherical and hyper
 I am using it for my PhD on bio-inspired engineering.
 
 I first developed _Versor_ while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann. 
-It's a fantastic book and if you're reading this you should also consider reading that.  
+It's a fantastic book and if you're reading this you should also consider reading that.  Also take a look at the links to the sites
+of other luminaries.  For practical applications in robotics and "Geometric Cybernetics", see Eduardo Bayro-Corrochano's work.
 
 Built to aid in my modelling of organic forms, the initial development was funded in large part by the Olivia Long Converse Fellowship for Botanic research, 
 courtesy of the Graduate Division at the University of California in Santa Barbara.  So this software is under a UC Regents General Public License.
@@ -95,9 +96,9 @@ _continuous transformations_ were married with a system of _dimensional synthesi
 
 ####LICENSE
 This software is licensed under a general UC Regents General Public License.  If you're planning on using CGA inside a sellable product you should be aware that 
-there is some sort of vague patent on the use of 5D CGA which _may_ limit its _commercial_ use when encoding robotic control mechanisms, 
-but I don't understand what exactly it claims to own: the heart of CGA is just a quadratic equation and the arguments for the use of 5D CGA are that it is _foundational_ 
-and _universal_, the very two characteristics of a system which would make it un-patentable.  The Clifford Algebras on which it is based are from the 19th century.
+there is a vague patent on the use of 5D CGA which _may_ limit its _commercial_ use when encoding robotic control mechanisms, or may just limit your ability to patent
+the model itself.  I hope and imagine it is the later.  Though powerful, elegant, and brilliant, the heart of CGA is just a quadratic equation and the arguments for 
+the use of 5D CGA are that it is _foundational_ and _universal_, the very two characteristics of a system which would make it un-patentable.  The Clifford Algebras on which it is based are from the 19th century.
 
 ####SPEED
 Typical matrix operation libraries have templated inlined functions for Vector and Matrix multiplication.  Versor
@@ -156,10 +157,12 @@ We can also make Spheres with a radius this way:
 
 	DualSphere dls = Round::dls( Vec( 1,0,0 ).null(), 1 );
 
-or
+or  
+
 	DualSphere dls = Round::dls( Vec( 1,0,0 ), 1 );
 	
-or
+or  
+
 	DualSphere dls = Round::dls( 1,0,0,1 )
 	
 all of which give a dual sphere of radius 1 at coordinate 1,0,0; 
@@ -267,11 +270,11 @@ Key                            | Response
 `~`                            | Toggle full screen.  
 `SHIFT` + `Arrow Keys`         | navigates the camera  in x and z directions.  
 `SHIFT`+`CONTROL`+`Arrow Keys` | navigates the camera in Y direction  
-`OPTION` `+`Arrow Keys`        | spins the model view around.  
-`g`                            | Grab an Element  
-`r`                            | Rotate an Element  
-`s`                            | Scale an Element  
-`v`                            | Print out still (to postscript)  
+`OPTION` +`Arrow Keys`		   | spins the model view around.
+`G`                            | Grab an Element  
+`R`                            | Rotate an Element  
+`S`                            | Scale an Element  
+`V`                            | Print out still (to postscript)  
 
 
 OPERATORS
