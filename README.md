@@ -75,8 +75,7 @@ You can use this library to draw geometrical things, explore spherical and hyper
 I am using it for my PhD on bio-inspired engineering.
 
 I first developed _Versor_ while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann. 
-It's a fantastic book and if you're reading this you should also consider reading that.  Also take a look at the links to the sites
-of other luminaries.  For practical applications in robotics and "Geometric Cybernetics", see Eduardo Bayro-Corrochano's work.
+It's a fantastic book and if you're reading this you should also consider reading that.  
 
 Built to aid in my modelling of organic forms, the initial development was funded in large part by the Olivia Long Converse Fellowship for Botanic research, 
 courtesy of the Graduate Division at the University of California in Santa Barbara.  So this software is under a UC Regents General Public License.
@@ -86,18 +85,24 @@ The Doc folder has a doxygen which I periodically tidy up.  Lots of test files t
 
 A full-fledged tutorial is in the works . . . but a basic intro follows  
 
+---
+
 One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
+
+---
 
 ####BACKGROUND
 The homogenous 5D CGA model used here was initially proposed by David Hestenes, Hongbo Li, and Alan Rockwood in 2001, and given full form and weight through the excellent 
-and careful work of Leo Dorst, Joan and Anthony Lasenby, and Eduardo Bayro-Corrochano.  CGA is particular breed of _Clifford Algebras_ (also known as Geometric Algebras), 
+and careful work of Leo Dorst, Joan and Anthony Lasenby, and Eduardo Bayro-Corrochano, and others.  These researchers' writings have helped me quite a bit.  CGA is particular breed of _Clifford Algebras_ (also known as Geometric Algebras), 
 which operate upon combinatoric hypercomplex vector spaces that emerged from William Clifford's attempt to fuse Hamilton's quaternions with Grassmans' extension algebras.  Thus 
-_continuous transformations_ were married with a system of _dimensional synthesis_.  
+_transformations_ were married with a system of _abstraction_.  For more information, take a look at the [links](#links) to the sites at the bottom of 
+this page.  For instance, for practical applications in robotics and "Geometric Cybernetics", see Eduardo Bayro-Corrochano's work.  For some
+very helpful algorithms in rigid body dynamics and gravitational physics see the variety of publications by Joan and Anthony Lasenby.  To get at the beginning of it all, read David Hestenes' _New Foundations for Classical Mechanics_. 
 
 ####LICENSE
 This software is licensed under a general UC Regents General Public License.  If you're planning on using CGA inside a sellable product you should be aware that 
 there is a vague patent on the use of 5D CGA which _may_ limit its _commercial_ use when encoding robotic control mechanisms, or may just limit your ability to patent
-the model itself.  I hope and imagine it is the later.  Though powerful, elegant, and brilliant, the heart of CGA is just a quadratic equation and the arguments for 
+the model itself.  I hope and imagine it is the latter.  Though powerful, elegant, and brilliant, the heart of CGA is just a quadratic equation and the arguments for 
 the use of 5D CGA are that it is _foundational_ and _universal_, the very two characteristics of a system which would make it un-patentable.  The Clifford Algebras on which it is based are from the 19th century.
 
 ####SPEED
