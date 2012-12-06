@@ -59,6 +59,11 @@
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
+		<key>Transformations.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 		<key>Twists.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -78,6 +83,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>9B0C756A162C9B9C0037F835</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B1E15531670FF470015D25C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
