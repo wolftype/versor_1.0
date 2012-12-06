@@ -25,11 +25,16 @@
 		9B1EF0E7166D988900617EB8 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
 		9B1EF0E8166D988900617EB8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B1EF0F1166D98D000617EB8 /* Twists.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EF0F0166D98D000617EB8 /* Twists.cpp */; };
-		9B2529A9162DF41F00DD9FC2 /* DemoMotors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */; };
 		9B2529AA162DF42800DD9FC2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B2529AB162DF43400DD9FC2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B2529AD162DF44300DD9FC2 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
 		9B2529AE162DF44900DD9FC2 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B26F0BD1671069400455E54 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B26F0BE1671069400455E54 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
+		9B26F0BF1671069400455E54 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9B26F0C01671069400455E54 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9B26F0C8167106DF00455E54 /* Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B26F0C7167106DF00455E54 /* Robot.cpp */; };
+		9B26F0CA1671072300455E54 /* Frames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B26F0C91671072300455E54 /* Frames.cpp */; };
 		9B28075916700947001806F8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B28075A16700947001806F8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B28075B16700947001806F8 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
@@ -250,6 +255,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9B26F0C11671069400455E54 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9B28075D16700947001806F8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -363,8 +377,10 @@
 		9B1EF0ED166D988900617EB8 /* Twists */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Twists; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1EF0F0166D98D000617EB8 /* Twists.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Twists.cpp; path = ../../examples/Twists.cpp; sourceTree = "<group>"; };
 		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoMotors; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoMotors.cpp; path = ../../tests/DemoMotors.cpp; sourceTree = "<group>"; };
 		9B2529AC162DF44300DD9FC2 /* libGLV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLV.a; path = ../../../GLV/build/lib/libGLV.a; sourceTree = "<group>"; };
+		9B26F0C51671069400455E54 /* Frames */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Frames; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B26F0C7167106DF00455E54 /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Robot.cpp; path = ../../examples/Robot.cpp; sourceTree = "<group>"; };
+		9B26F0C91671072300455E54 /* Frames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Frames.cpp; path = ../../examples/Frames.cpp; sourceTree = "<group>"; };
 		9B28076116700947001806F8 /* Twists copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Twists copy"; path = Topo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2807641670097D001806F8 /* Topo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Topo.cpp; path = ../../examples/Topo.cpp; sourceTree = "<group>"; };
 		9B456BB51640B261008E5EA2 /* To Do */ = {isa = PBXFileReference; lastKnownFileType = text; name = "To Do"; path = "../../To Do"; sourceTree = "<group>"; };
@@ -576,6 +592,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B26F0BC1671069400455E54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B26F0BD1671069400455E54 /* libvsr.a in Frameworks */,
+				9B26F0BE1671069400455E54 /* libGLV.a in Frameworks */,
+				9B26F0BF1671069400455E54 /* GLUT.framework in Frameworks */,
+				9B26F0C01671069400455E54 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B28075816700947001806F8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -722,8 +749,9 @@
 				9B76CCE91628AACF0064FF35 /* test.cpp */,
 				9B76CCEA1628AACF0064FF35 /* testGL.cpp */,
 				9B76CCEB1628AAD00064FF35 /* testGraph.cpp */,
+				9B26F0C7167106DF00455E54 /* Robot.cpp */,
+				9B26F0C91671072300455E54 /* Frames.cpp */,
 				9B0C757B162C9BDF0037F835 /* DemoAgacse.cpp */,
-				9B2529A8162DF41F00DD9FC2 /* DemoMotors.cpp */,
 				9BB1083A16388400009F3070 /* Hopf.cpp */,
 				9BB1083C1638840A009F3070 /* Curvature.cpp */,
 				9B0C757D162C9C5E0037F835 /* vsr_tests.h */,
@@ -756,6 +784,7 @@
 				9B1EF0ED166D988900617EB8 /* Twists */,
 				9B28076116700947001806F8 /* Twists copy */,
 				9B1E15661670FF470015D25C /* Transformations */,
+				9B26F0C51671069400455E54 /* Frames */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1048,9 +1077,9 @@
 			productReference = 9B1EF0ED166D988900617EB8 /* Twists */;
 			productType = "com.apple.product-type.tool";
 		};
-		9B25299C162DF3E500DD9FC2 /* DemoMotors */ = {
+		9B25299C162DF3E500DD9FC2 /* Robot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9B2529A6162DF3E500DD9FC2 /* Build configuration list for PBXNativeTarget "DemoMotors" */;
+			buildConfigurationList = 9B2529A6162DF3E500DD9FC2 /* Build configuration list for PBXNativeTarget "Robot" */;
 			buildPhases = (
 				9B252999162DF3E500DD9FC2 /* Sources */,
 				9B25299A162DF3E500DD9FC2 /* Frameworks */,
@@ -1060,9 +1089,26 @@
 			);
 			dependencies = (
 			);
-			name = DemoMotors;
+			name = Robot;
 			productName = DemoMotors;
 			productReference = 9B25299D162DF3E500DD9FC2 /* DemoMotors */;
+			productType = "com.apple.product-type.tool";
+		};
+		9B26F0B91671069400455E54 /* Frames */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B26F0C21671069400455E54 /* Build configuration list for PBXNativeTarget "Frames" */;
+			buildPhases = (
+				9B26F0BA1671069400455E54 /* Sources */,
+				9B26F0BC1671069400455E54 /* Frameworks */,
+				9B26F0C11671069400455E54 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Frames;
+			productName = DemoMotors;
+			productReference = 9B26F0C51671069400455E54 /* Frames */;
 			productType = "com.apple.product-type.tool";
 		};
 		9B28075316700947001806F8 /* Topo */ = {
@@ -1292,7 +1338,7 @@
 				9B76CC231628A9440064FF35 /* vsr */,
 				9B76CCDE1628AA810064FF35 /* OpGraph */,
 				9B0C756A162C9B9C0037F835 /* DemoAgacse */,
-				9B25299C162DF3E500DD9FC2 /* DemoMotors */,
+				9B25299C162DF3E500DD9FC2 /* Robot */,
 				9B9F32B91631E8A10075D685 /* Hopf */,
 				9BB1081A1638836A009F3070 /* Knots */,
 				9BB10829163883B5009F3070 /* Curvature */,
@@ -1303,6 +1349,7 @@
 				9B1EF0DF166D988900617EB8 /* Twists */,
 				9B28075316700947001806F8 /* Topo */,
 				9B1E15531670FF470015D25C /* Transformations */,
+				9B26F0B91671069400455E54 /* Frames */,
 			);
 		};
 /* End PBXProject section */
@@ -1411,7 +1458,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B2529A9162DF41F00DD9FC2 /* DemoMotors.cpp in Sources */,
+				9B26F0C8167106DF00455E54 /* Robot.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B26F0BA1671069400455E54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B26F0CA1671072300455E54 /* Frames.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1651,6 +1706,28 @@
 					"\"$(SRCROOT)/../../../GLV/build/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9B26F0C31671069400455E54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Frames;
+			};
+			name = Debug;
+		};
+		9B26F0C41671069400455E54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Frames;
 			};
 			name = Release;
 		};
@@ -2006,11 +2083,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9B2529A6162DF3E500DD9FC2 /* Build configuration list for PBXNativeTarget "DemoMotors" */ = {
+		9B2529A6162DF3E500DD9FC2 /* Build configuration list for PBXNativeTarget "Robot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B2529A4162DF3E500DD9FC2 /* Debug */,
 				9B2529A5162DF3E500DD9FC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B26F0C21671069400455E54 /* Build configuration list for PBXNativeTarget "Frames" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B26F0C31671069400455E54 /* Debug */,
+				9B26F0C41671069400455E54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

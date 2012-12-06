@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9B25299C162DF3E500DD9FC2"
-               BuildableName = "DemoMotors"
-               BlueprintName = "DemoMotors"
+               BuildableName = "Robot"
+               BlueprintName = "Robot"
                ReferencedContainer = "container:Versor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,8 +32,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B25299C162DF3E500DD9FC2"
-            BuildableName = "DemoMotors"
-            BlueprintName = "DemoMotors"
+            BuildableName = "Robot"
+            BlueprintName = "Robot"
             ReferencedContainer = "container:Versor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B25299C162DF3E500DD9FC2"
-            BuildableName = "DemoMotors"
-            BlueprintName = "DemoMotors"
+            BuildableName = "Robot"
+            BlueprintName = "Robot"
             ReferencedContainer = "container:Versor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9B25299C162DF3E500DD9FC2"
-            BuildableName = "DemoMotors"
-            BlueprintName = "DemoMotors"
+            BuildableName = "Robot"
+            BlueprintName = "Robot"
             ReferencedContainer = "container:Versor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
