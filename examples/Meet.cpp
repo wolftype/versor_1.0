@@ -64,6 +64,7 @@ void linePoint(GLVApp& app){
 
 void GLVApp :: onDraw(){
     linePoint(*this);
+    //circle(*this);
 }
 
 int main(int argc, const char * argv[]) {

@@ -9,8 +9,6 @@ CSS: style0.css
 <img src = "resources/images/twist_04_bw.gif" width = 400>
 <img src = "resources/images/lox_0.jpg" width = 100>
 
-
-
 Versor (libvsr)
 ===
 A (Fast) C++ library for Conformal Geometric Algebra.  
@@ -22,9 +20,11 @@ Developer: Pablo Colapinto
 
 [Download and Installation Instructions](INSTALL.html) 
  
-[Join the Mailing List (for update notifications, to ask questions, etc)](http://lists.create.ucsb.edu/mailman/listinfo/versor)  
+[Join the Mailing List (for update notifications, to ask questions, discuss bugs, etc)](http://lists.create.ucsb.edu/mailman/listinfo/versor)  
 
-[AlloSphere Research Group](http://www.allosphere.ucsb.edu/)  
+[Read my Master's Thesis on the Subject](http://wolftype.com/versor/colapinto_masters_final_02.pdf)
+
+[Look at the AlloSphere Research Group](http://www.allosphere.ucsb.edu/)  
 
 
     As long as algebra and geometry have been separated, their progress have been slow and their uses limited; but when these two sciences have been united, they have lent each mutual forces, and have marched together towards perfection.  
@@ -72,13 +72,13 @@ This package provides operations and draw routines for conformal geometric algeb
 a relatively new spatial computing model used by physicists, engineers, and artists. _Versor_ is designed to make graphical 
 experimentation of conformal geometric algebra within a C++ environment easier. 
 You can use this library to draw geometrical things, explore spherical and hyperbolic spaces, transformations, design robots, etc. 
-I am using it for my PhD on bio-inspired engineering.  
+I am using it for my PhD on bio-inspired engineering.
 
 I first developed _Versor_ while reading "Geometric Algebra for Computer Science" by Leo Dorst, Daniel Fontijne, and Stephen Mann. 
 It's a fantastic book and if you're reading this you should also consider reading that.  
 
-Built to aid in my modelling of organic forms, the initial development was funded in large part by the Olivia Long Converse Fellowship for Botanic research, courtesy of the Graduate Division at the University of California in Santa Barbara.  
-So this software is under a UC Regents General Public License.
+Built to aid in my modelling of organic forms, the initial development was funded in large part by the Olivia Long Converse Fellowship for Botanic research, 
+courtesy of the Graduate Division at the University of California in Santa Barbara.  So this software is under a UC Regents General Public License.
 
 See also the [links](#links) below for more information, including some videos.
 The Doc folder has a doxygen which I periodically tidy up.  Lots of test files too.
@@ -87,9 +87,19 @@ A full-fledged tutorial is in the works . . . but a basic intro follows
 
 One quick word: clifford algebras and the spatial relationships they embody can often feel abstract and daunting.  But it's a twisty, boosty ride, full of weird discoveries.  You're bound to make some, so have fun!
 
+####BACKGROUND
+The homogenous 5D CGA model used here was initially proposed by David Hestenes, Hongbo Li, and Alan Rockwood in 2001, and given full form and weight through the excellent 
+and careful work of Leo Dorst, Joan and Anthony Lasenby, and Eduardo Bayro-Corrochano.  CGA is particular breed of _Clifford Algebras_ (also known as Geometric Algebras), 
+which operate upon combinatoric hypercomplex vector spaces that emerged from William Clifford's attempt to fuse Hamilton's quaternions with Grassmans' extension algebras.  Thus 
+_continuous transformations_ were married with a system of _dimensional synthesis_.  
 
-SPEED
----
+####LICENSE
+This software is licensed under a general UC Regents General Public License.  If you're planning on using CGA inside a sellable product you should be aware that 
+there is some sort of vague patent on the use of 5D CGA which _may_ limit its _commercial_ use when encoding robotic control mechanisms, 
+but I don't understand what exactly it claims to own: the heart of CGA is just a quadratic equation and the arguments for the use of 5D CGA are that it is _foundational_ 
+and _universal_, the very two characteristics of a system which would make it un-patentable.  The Clifford Algebras on which it is based are from the 19th century.
+
+####SPEED
 Typical matrix operation libraries have templated inlined functions for Vector and Matrix multiplication.  Versor
 is similar, but on steroids, where _vectors_ and sparse _matrices_ of various sizes are all just called _multivectors_ and represent geometric
 elements beyond just xyz directions and transformation matrices. Circles, lines, spheres, planes, points are all algebraic elements, as are 
@@ -97,7 +107,7 @@ operators that spin, twist, dilate, and bend those variables.  Both these elemen
 
 The backbone of Versor's library is a precomputation table of the most likely (though _not all_) multiplications you could possibly hope to use.  
 It is a highly templatized and inlined extravaganza of function calls. Of course, there are also many useful algorithms included for manipulating geometric elements.
-Most of these useful algorithms are located in the`vsr_op.h` file.  
+Most of these useful algorithms are located in the`vsr_op.h` file.
 
 A Circle, for instance, can be _outer_-multiplied by a Plane to get the Point Pair where they intersect.  
 
@@ -108,6 +118,52 @@ The makefile builds the STATIC version of this library, which currently gives up
 Future versions will likely use jit compilation to take care of this (i.e. combine speed with lightweight implementation), by hooking into 
 luajit for instance.  I am working on that with Graham Wakefield and his thoughtful guidance and tutelage.  Additionally, there is a trade off I am working on where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  
 The C++11 standards should help (for instance, "auto" return types), but are not implemented here.   
+
+#### WHAT'S THE POINT? ####
+GA combines many other maths (matrix, tensor, vector, and lie algebras). It is **holistic**. CGA uses a particular mapping (a conformal one) of 3D Euclidean space to a 
+4D sphere. Operations on that hypersphere are then projected back down to 3D. That how it works in a nutshell. 
+
+A fuller treatment of this question can be found in my [Master's thesis on the subject](http://wolftype.com/versor/colapinto_masters_final_02.pdf).  But basically,
+Geometic Algebra offers a particular richness of spatial expression.  Imagine needing glasses and not knowing you needed glasses.  Then, when you do get glasses, the world changes
+unexpectedly.  GA is like glasses for the inside of your brain.  _Conformal_ Geometric Algebra, especially the 5D variety enlisted here, are like x-ray glasses.  One 
+point of clarification that occurs are **disambiguations** of previously collapsed concepts.  
+
+For instance, the main disambiguation, is that between a _Point_ in space and a _Vector_ in space.  
+A Point has no magnitude, but a Vector does.  A Point has no direction, but a Vector does. Points are _null_ Vectors.  We can make them
+by writing
+
+	Vec( 1,0,0 ).null();
+
+* Points are null Vectors
+* Points square to 0
+* The dot (inner) product of two Points returns their squared distance
+* The wedge (outer) product of two Points returns a Point Pair
+
+More on that last point later . . . there are various binary operators defined (mainly three).  We can introduce one right now, which is the **dot** or **inner** product.
+In mathematics, the inner product of two points `pa` and `pb` is written \\(p_{a} \rfloor p_{b}\\).  In _Versor_ we use the `<=` operator:
+
+	Pnt pa = Vec(1,0,0).null();
+	Pnt pb = Vec(-1,0,0).null();
+	double squaredDist = pa <= pb;
+	
+which in this case would return `4`
+
+Points can also be thought of as Spheres (really, Dual Spheres, more on _Duality_ later): they are Spheres of zero radius.  As such they are a type of _Round_ element.  We can also build points this way:
+
+	Round::null( 1,0,0 );
+
+We can also make Spheres with a radius this way:
+
+	DualSphere dls = Round::dls( Vec( 1,0,0 ).null(), 1 );
+
+or
+	DualSphere dls = Round::dls( Vec( 1,0,0 ), 1 );
+	
+or
+	DualSphere dls = Round::dls( 1,0,0,1 )
+	
+all of which give a dual sphere of radius 1 at coordinate 1,0,0; 
+
 
 BASICS
 ---
@@ -178,6 +234,8 @@ METHODS
 * `Generate::` or `Gen::` methods generate or otherwise operate on versors
 * `Round::` or `Ro::` methods create or otherwise operate on Round elements (Points, Point Pairs, Circles, Spheres)
 * `Flat::` or `Fl::` methods create or otherwise operate on Flat elements (Lines, Dual Lines, Planes, Dual Planes, or Flat Points)
+
+You notice I've been throwing around the `null()` method a lot, 
 
 GENERATORS 
 ---
