@@ -1,3 +1,5 @@
+CSS: style0.css
+
 VERSOR COMPILATION and INSTALLATION Instructions
 ===
 
@@ -14,6 +16,13 @@ For instance, assuming you have a directory called **`code`** with all your git 
 	git clone git://github.com/AlloSphere-Research-Group/GLV.git
 
 This grabs both Versor and GLV (a windowing and user-interface system)
+
+---
+
+**NOTE:** _VERSOR_ is in active development!  I have not been versioning it -- `git pull` frequently for updates!
+
+---
+
 
 INSTALL DEPENDENCIES
 ---
@@ -48,7 +57,7 @@ To build on mac osx or linux:
 
 This builds the static library with full graphics support (using GLV).
 
-	make examples/Knots.cpp
+	make examples/Hopf.cpp
 
 will build and run the Knots program
 

@@ -2,7 +2,7 @@
 //  vsr_knot.h
 //  Versor
 /*
-    KNOTS
+    KNOTS -- building up from Dorst and Valkenburg's paper on Square Roots of Rotors and Logarithms through Polar Decomposition
 */
 //  Created by Pablo Colapinto on 11/7/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
@@ -25,9 +25,14 @@ class Orbit : public Frame {
     bool bReal, bNull;
     public:
     
+    
+    
         Orbit() : Frame(), sF(PT(0,0,0)), mM(1), mAmt(.01), bReal(false), bNull(false)
         { calc(); }
-        
+    
+        Orbit( const Frame& f): Frame(f), sF(PT(0,0,0)), mM(1), mAmt(.01), bReal(false), bNull(false)
+        { calc(); }
+                
         bool& real() { return bReal; }
         bool& null() { return bNull; }        
         double& m() { return mM; }
@@ -48,15 +53,21 @@ class Orbit : public Frame {
         Par par() const {  return ( ( bNull ) ? mF.tx() : mF.px(bReal) ) * PI/mM ; }
         Cir cir() const { return mF.px(bReal).undual(); }
         
-        void calc() { 
+        void calc() {
+            mF = sF;
             mF.mot( sF.mot() * mot() ); 
         }
         
         Bst bst() { return Gen::bst( par() * mAmt ); }
 
         Par par(const Orbit& o, double t){
-            return par() * (1-t) + o.par() * t;
+            Orbit no = Frame::Twist( f(), o.f(), t );
+            
+            return no.par();
+            //return par() * (1-t) + o.par() * t;
         }
+
+
 };
 
 class Knot : public Frame {

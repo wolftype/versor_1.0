@@ -16,6 +16,8 @@
 #include "vsr_mesh.h"
 #include "vsr_boost.h"
 #include "vsr_field.h"
+#include "vsr_stat.h"
+#include "vsr_mesh.h"
 
 #include <iostream>
 
@@ -24,27 +26,6 @@ using namespace vsr;
 using namespace glv;
 using namespace vsr::GL;
 
-//void frames(GLVApp& app){
-//
-//    //Control Frames
-//    static Frame f1; static Frame f2;
-//    
-//    //Interface with Frames ('G', 'R', 'S', to grab, rotate, or scale)
-//    app.interface.touch(f1);
-//    app.interface.touch(f2);
-//    
-//    //DRAW X axis of Frames
-//    GL::Draw::X( f1 );
-//    GL::Draw::X( f2 );
-//    
-//    SET
-//        f1.pos() = PT(-1,0,0);
-//        f2.pos() = PT(1,0,0);
-//        f1.orientX( f1.vec() + Vec(0,1,0) );
-//        f2.orientX(f2.vec() + Vec(0,1,0) );
-//        f1.scale(.3); f2.scale(.3);
-//    END
-//}
 
 void linear(GLVApp& app){
 
@@ -96,7 +77,6 @@ void linear(GLVApp& app){
         
     END 
     
-    
     //Local Tangents of Frames
     Par pa = f1.tx(f1.scale());
     Par pb = f2.tx(f2.scale());
@@ -107,8 +87,6 @@ void linear(GLVApp& app){
     //Get Ready . . .
     static Par tp; static Cir tc;    
     UVMesh uvmesh(iter+1,iter+1);
-    
-    
     
     //GO (build mesh)
     ITJi(i,iter)
@@ -160,9 +138,6 @@ void linear(GLVApp& app){
     uvmesh.draw(1,0,0);
     uvmesh.drawTri(1,1,0);
     
-
-    
-
     //Description
     app.text("Linear Interpolation of Point Pair Generators acting on a Set of Lines");
 
@@ -245,17 +220,67 @@ void bilinear2(GLVApp& app){
     
 }
 
-void gaussian(GLVApp& app){
+void membrane2(GLVApp& app){
+    
+    static Field<Frame> f(2,2,1,2);
+    int tot = f.num()-1;
+    static double falloff,amt;
+    SET
+        ITJ(i,f.num())
+            f[i].scale() = .5;
+        END
+        
+        app.gui(amt)(falloff,"falloff",1,10);
+        falloff = 1; amt = 0;
+    END
+
+    ITJ(i,f.num())
+        app.interface.touch( f[i] );
+    END
+    
+    //static Par * par = new Par[ f.num() ]; 
+    
+    int iter = 20;
+    UVMesh mesh(iter+1,iter+1);
+
+    IT2i(iter,iter)
+    
+        Pnt p = Vec::x.sp( Gen::rot(-1.0 + 2*u, -1.0 + 2*v) ).null();
+        Mtt mtt(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        
+        Par tpar;
+        ITJ(i,f.num())
+            double dist = ( p <= f[tot-i].pos() )[0];
+            Par par = f[tot-i].tyScaled( amt / (dist*falloff) );
+            tpar += f[tot-i].tyScaled( amt / (dist*falloff) );
+            mtt *= Gen::bst(par);
+        END
+
+//        mesh.add( Ro::loc( p.sp(mtt) ) );
+        mesh.add( Ro::loc( p.sp( Gen::bst(tpar) ) ) );
+    END END
+
+    mesh.draw(.5,.5,.5);
+    mesh.drawTri(0,0,0);
+    f.draw();
+}
+
+void membrane(GLVApp& app){
 
     static Frame f;
     app.interface.touch(f);
-    DRAW(f);
-    
-    
-    static double amt, bendRatio, iter, spread;
+    Draw::Y(f,0,0,0);
+
+    static Frame f2(PT(-1,0,0));
+    app.interface.touch(f2);
+    Draw::Y(f2,0,0,0);
+
+    static double amt, bendRatio, bendRatio2, iter, spread;
     
     SET
-        app.gui(amt, "amt", -10,10)(bendRatio, "bendRatio",-10,10);
+        app.gui(amt, "amt", -10,10);
+        app.gui(bendRatio, "bendRatio",-10,10);
+        app.gui(bendRatio2, "bendRatio2",-10,10);
         app.gui(iter,"iter",1,100);
         app.gui(spread,"spread",1,100);
         
@@ -264,29 +289,56 @@ void gaussian(GLVApp& app){
         bendRatio = 1;
     END
     
-    Par parU = f.ty() * amt;
-    Par parV = f.ty() * amt * bendRatio;
     
+    Tnv tnU = Tnv(f.y() * f.scale() * amt);
+    Tnv tnU2 = Tnv(f2.y() * f2.scale() * amt);
+    
+    
+//    Tnv tnV = Tnv(f.x() * amt);
+//    Tnv tnW = Tnv(f.z() * amt);
+//    Tnv tnV = Tnv(f.y() * amt * bendRatio);
+    
+    Rand::Seed(10);
+
+    UVMesh mesh(iter+1,iter+1);
 
     IT2i(iter,iter)
-    
-        double xu = -1.0 + 2 * u;
-        double xv = -1.0 + 2 * v;
-    
-        Drv du = Fl::dir( f.lx() ) * xu;
-        Drv dv = Fl::dir( f.lz() ) * xv;
-        Drv cd = du + dv;
-        
-        Pnt src = f.pos().trs(  ( cd )  * spread );
-        
-        Bst bst = Gen::bst( parU * (1-fabs(xv)) +  parV * (1-fabs(xu)) );
 
-        Pnt np = src.sp( bst );
+
+        //GLOBAL (FALLOFF)
+        Pnt src = Vec::x.sp( Gen::rot(-1.0 + 2*u, -1.0 + 2* v) ).null();//(Vec::x.rot( Biv::xz * Rand::Num(PI)).rot( Biv::yz * Rand::Num(PI/2.0) )).null();
         
-        DRAW(np);
+        double dist = (src <= f.pos())[0];
+        double dist2 = (src <= f2.pos())[0];
+        
+        //squared distance of point to frames x and z axis
+        //can be found by contracting the point out of the dual line
+
+//        double distU = (rsrc <= f.dlx()).dot()[0] * dist;
+//        double distV = (rsrc <= f.dlz()).dot()[0] * dist;
+//        double distW = (rsrc <= f.dly()).dot()[0] * dist;
+        
+//        Par py = Par( tnU * ( 1/distU + 1/distV ) ).trs(f.pos()); // y curve
+//        Par px = Par( tnV * ( 1/distW + 1/distV ) ).trs(f.pos());
+//        Par pz = Par( tnW * ( 1/distU + 1/distW ) ).trs(f.pos());
+
+        Par tpar = Par( tnU * ( 1.0 / dist ) ).trs(f.pos());
+        Par tpar2 = Par( tnU2 * ( 1.0 / dist2 ) ).trs(f2.pos());
+        Mtt mtt = Gen::bst( tpar ) * Gen::bst(tpar2);
+        Pnt np = src.sp( mtt );
+        Pnt nnp = Ro::loc(np);
+        
+//        Pnt dp = src % tpar;
+//        double diff = dp.dot()[0];
+        double diff =  (src<=nnp)[0];//Ro::size(dp,true); 
+//        cout << diff << endl; 
+        mesh.add(nnp);
+//        DRAW3(nnp,fabs(diff),.5,.5);
         
     END END
 
+   mesh.draw(.5,.5,.5);
+    mesh.drawTri(0,0,0);
 }
 
 
@@ -316,63 +368,101 @@ void gaussian2(GLVApp& app){
     
 
     static const int n = f.num();
-    static Vec * tv = new Vec[n];
-    static Tnv * tt = new Tnv[n];
+    
+    static Vec * tv  = new Vec[n];
+    static Tnv * ttU = new Tnv[n];
     static Tnv * ttV = new Tnv[n];
-    static Par * tp = new Par[n];
+    static Par * tp  = new Par[n];
+    
     ITJ(i, f.num() )
-        tv[i] = f[i].vec();
-        tt[i] = f[i].y() * f[i].scale();
-        ttV[i] = f[i].y() * f[i].scale();
-        tp[i] = f[i].tyScaled();
+        tv[i]   = f[i].vec();
+        ttU[i]  = f[i].y() * f[i].scale();
+        ttV[i]  = f[i].y() * f[i].scale();
+        tp[i]   = f[i].tyScaled();
     END
 
-    ttV[0] *= bendRatioA;     ttV[1] *= bendRatioB;     ttV[2] *= bendRatioC;
+    ttV[0] *= bendRatioA; tp[0] *= bendRatioA; 
+    ttV[1] *= bendRatioB; tp[1] *= bendRatioB;   
+    ttV[2] *= bendRatioC; tp[2] *= bendRatioC;
 
 
     ITJi(i,iter)
-        
-//        Patch p = f.idxU(t);0        
-        //Par parU = Interp::quadric<Par>(tp, f.num(), t );//f[p.a].tyScaled(), f[p.b].tyScaled(), p.rw );
-        //Par parU = Interp::quadric<Par>( tp, f.num(), t);//f[p.a].tyScaled(), f[p.b].tyScaled(),  p.rw );
-        
+                
         //NULL TANGENTS
         Pnt src = Interp::quadric<Vec>(tv, f.num(), t).null();
-        Par parU = Par ( Interp::quadric<Tnv>( tt, f.num(), t) ).trs(src);
+        
+        Par parU = Par ( Interp::quadric<Tnv>( ttU, f.num(), t) ).trs(src);
+        
         Par parV = Par ( Interp::quadric<Tnv>( ttV, f.num(), t) ).trs(src);
+       // Par parV2 = Interp::quadric<Par>( tp, f.num(), t );
+
+        Bst bstU = Gen::bst( parU * amt );
         
         ITJi(j,iter)
+        
+            
             double xt = -1.0 + 2* t;
-            Bst bstU = Gen::bst( parU * amt );
             Pnt np = src.trs(0,0,xt * spread).sp( bstU );
             
-//            DRAW(Ro::loc(np));
             DRAW3(src,1,0,0);
-        
-            Bst bstV = Gen::bst( parV * amt );
-            
-            Pnt nnp = np.sp( bstV );
+            DRAW3(Ro::loc(np),0,0,1);
+
+            Bst bstV = Gen::bst( parV * amt * (1-fabs(xt)) );  
+                  
+            Pnt nnp =  Ro::loc(np).sp( bstV ) ;
+            DRAW3(Ro::loc(nnp),0,1,0);
         END
 
     END     
- 
+     
+}
+
+void gaussian3(GLVApp& app){
+
+    static Frame f;
+    app.interface.touch(f);
+    DRAW(f);
+
+    static double amt, bendRatio, iter, spread;
     
-//    Pnt p1 = app.interface.mouse.projectNear.null();
-//    Pnt p2 = app.interface.mouse.projectMid.null();
-//    Pnt p3 = app.interface.mouse.projectFar.null();
-//    Vec v2 = app.interface.mouse.projectFar;
-//    Vec v0 = GL::unproject( app.mouse().x, app.interface.vd().h - app.mouse().y ,amt,  app.scene().xf ); 
-//
-//    Lin lin = p2 ^ v0.null() ^ Inf(1);
+    SET
+        app.gui(amt, "amt", -10,10);
+        app.gui(bendRatio, "bendRatio",-10,10);
+        app.gui(iter,"iter",1,100);
+        app.gui(spread,"spread",1,100);
+        
+        iter = 20;
+        amt = 1;
+        bendRatio = 1;
+    END
     
+    Par parU = f.ty() * amt;
+    Par parV = f.ty() * amt * bendRatio;
     
+    Tnv tnU = Tnv(f.y() * f.scale() * amt);
+    Tnv tnV = Tnv(f.y() * f.scale() * amt * bendRatio);
+
+    IT2i(iter,iter)
+        double xu = -1.0 + 2 * u;
+        double xv = -1.0 + 2 * v;
     
-    Point np = app.interface.mouse.origin;//Fl::loc( lin.runit(), PAO, false).null();
-    DRAW( np );
+        Drv du = Fl::dir( f.lx() ) * xu;
+        Drv dv = Fl::dir( f.lz() ) * xv;
+        Drv cd = du + dv;
+        
+
+        //LOCAL
+        Pnt src = f.pos().trs(  ( cd )  * spread );
+        Bst bst = Gen::bst( Par( tnU * (1-fabs(xv)) +  tnV * (1-fabs(xu)) ).trs(f.pos()) );
+        Pnt np = src.sp( bst );
+
+    END END
+
 }
 
 void GLVApp :: onDraw(){
-    gaussian2(*this);
+    
+    membrane2(*this);
  //   bilinear2(*this);
 //   linear(*this);
 //    frames(*this);

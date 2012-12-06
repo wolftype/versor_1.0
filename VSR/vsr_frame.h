@@ -236,9 +236,9 @@ namespace vsr {
             Par ty(double t) const { return Par( Tnv( up() * t ) ).sp( trs() ); }		///< y tangent generator in global space * t
             Par tz(double t) const { return Par( Tnv( forward() * t ) ).sp( trs() ); }	///< z tangent generator in global space * t
             /* Local Tangents Scaled */
-            Par txScaled() const { return tx(scale()); }		///< x tangent generator in global space * t
-            Par tyScaled() const { return ty(scale()); }		///< y tangent generator in global space * t
-            Par tzScaled() const { return tz(scale()); }	///< z tangent generator in global space * t
+            Par txScaled(double t=1.0) const { return tx(scale()*t); }		///< x tangent generator in global space * t
+            Par tyScaled(double t=1.0) const { return ty(scale()*t); }		///< y tangent generator in global space * t
+            Par tzScaled(double t=1.0) const { return tz(scale()*t); }	///< z tangent generator in global space * t
 
 			/* Local Boost Tranformations */
 			Bst ppx() { return Gen::trv(1,tx()); }			///< x tangent space boost versor
