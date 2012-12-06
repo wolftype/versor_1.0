@@ -656,7 +656,7 @@ inline void Glyph :: Point(const Vec3<>& v) {
 
 inline void Glyph :: Cone() {
     glTranslated(0,0,-.1);
-	glutWireCone(.05,.1,2,1);
+	glutWireCone(.05,.1,10,3);
 }
 
 inline void Glyph :: Tri(bool down) {

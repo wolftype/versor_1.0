@@ -3,7 +3,8 @@
 //  vsr
 //
 //  Created by Pablo Colapinto on 6/28/12.
-//  Playing around with Point Pair Generators
+//  Playing around with Point Pair Generators and KNOTS
+//  SEE ALSO: DORST AND VALKENBURG, paper on SQUARE ROOT AND LOGARITHMS THROUGH POLAR DECOMPOSITION
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,7 +16,6 @@
 #include "vsr_mesh.h"
 #include "vsr_boost.h"
 
-
 #include "vsr_draw.h"
 #include "vsr_mdraw.h"
 #include "vsr_mglyph.h"
@@ -26,6 +26,7 @@
 
 #include "vsr_stat.h"
 #include "vsr_knot.h"
+#include "vsr_motor.h"
 
 #include <iostream>
 
@@ -280,7 +281,11 @@ void orbits(GLVApp& app){
     static Pnt p = PT(1,1,1);
     app.interface.touch(p);
     Pnt pnt = p;
+    
     ITJi(i,iter)
+        
+        Frame f = Frame::Twist(a.f(), b.f(), t);
+        DRAW(f);
         
         Bst bst = Gen::bst( a.par(b,t) * amt );
         pnt = Ro::loc( pnt.sp (bst) );
@@ -289,13 +294,38 @@ void orbits(GLVApp& app){
 
 }
 
+void twistAroundACircle(GLVApp& app){
+
+    static Frame f;
+    app.interface.touch(f);
+    DRAW( f.cyz() );
+    
+    static double amt, iter, period, pitch;
+    SET app.gui(amt)(iter,"iter",100,10000)(period)(pitch); END
+    
+    static Pnt p = PT(1,1,0);
+    app.interface.touch(p);
+    DRAW(p);
+    
+    Par par = f.px(false);
+        
+    Pnt np = p;
+    for (int i = 0; i < iter; ++i){
+
+        np = Ro::loc( np.sp ( Gen::bst( par * amt) ) );
+        DRAW(np);
+    
+    }
+}
+
 void GLVApp :: onDraw(){
 
+ //   twistAroundACircle(*this);
 //    weighted(*this);
 //    twoknots(*this);
-      knot(*this);
+ //     knot(*this);
 //      ortho(*this);
-//        orbits(*this);
+        orbits(*this);
         
 //    text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }

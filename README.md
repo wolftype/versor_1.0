@@ -4,10 +4,10 @@ CSS: style0.css
   src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<img src = "resources/images/cshape.png" width = 80>
-<img src = "resources/images/twine_0.png" width = 100>
-<img src = "resources/images/twist_04_bw.png" width = 400>
-<img src = "resources/images/lox_0.png" width = 100>
+<img src = "resources/images/cshape.gif" width = 80>
+<img src = "resources/images/twine_0.gif" width = 100>
+<img src = "resources/images/twist_04_bw.gif" width = 400>
+<img src = "resources/images/lox_0.jpg" width = 100>
 
 
 
@@ -15,10 +15,17 @@ Versor (libvsr)
 ===
 A (Fast) C++ library for Conformal Geometric Algebra.  
 ---
-###Currently tested on Linux and Mac OS X
+### Currently tested on Linux and Mac OS X ###
 
-Developer: Pablo Colapinto
-wolftype (at) gmail dot com
+Developer: Pablo Colapinto  
+`gmail: wolftype`  
+
+[Download and Installation Instructions](INSTALL.html) 
+ 
+[Join the Mailing List (for update notifications, to ask questions, etc)](http://lists.create.ucsb.edu/mailman/listinfo/versor)  
+
+[AlloSphere Research Group](http://www.allosphere.ucsb.edu/)  
+
 
     As long as algebra and geometry have been separated, their progress have been slow and their uses limited; but when these two sciences have been united, they have lent each mutual forces, and have marched together towards perfection.  
 	-Joseph Louis Lagrange
@@ -53,7 +60,7 @@ wolftype (at) gmail dot com
 
 ---
  
-1. **To INSTALL please read the INSTALL file**  
+1. **To INSTALL please read the [INSTALL file](INSTALL.html)**  
 2. **The current document is a work-in-progress!  For specific questions please do not hesitate to contact me: wolftype (at) gmail dot com**
 
 ---
@@ -196,13 +203,18 @@ The interface has a built in gui, mouse info, and keyboard info stored.
 Putting the above code inside your application's `onDraw()` loop will enable you to click and modify geometric elements by hitting the "G", "R" and "S" keys.  Hit "Q" to deselect all elements.  
 
 [**BUILT-IN INTERFACE**]
-|		|		|
-Key| Response
---- 	|---
-`~` | Toggle full screen.
-`SHIFT` + `Arrow Keys` | navigates the camera  in x and z directions.
-`SHIFT`+`CONTROL`+`Arrow Keys` | navigates the camera in Y direction
-`OPTION` `+`Arrow Keys` | spins the model view around.
+| 	                            | 	                                          |  
+Key                            | Response  
+------------------------------ | ------------------------------------------  
+`~`                            | Toggle full screen.  
+`SHIFT` + `Arrow Keys`         | navigates the camera  in x and z directions.  
+`SHIFT`+`CONTROL`+`Arrow Keys` | navigates the camera in Y direction  
+`OPTION` `+`Arrow Keys`        | spins the model view around.  
+`g`                            | Grab an Element  
+`r`                            | Rotate an Element  
+`s`                            | Scale an Element  
+`v`                            | Print out still (to postscript)  
+
 
 OPERATORS
 ---

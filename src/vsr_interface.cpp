@@ -19,37 +19,7 @@ namespace vsr {
     Interface :: Interface()  : mMode( Mode::Navigate | Mode::Select ){
     }
     
-    void Interface :: touch( Frame& f, double t){
-        
-        static double dt = 5;
-        static double acc = .9;
-        dt *= acc;
-        if ( mouse.isDown ){
-            dt = t;// scene().ma() / scene().width();
-            if (pntClicked ( f.pos() ) ){
-                select(&f);//f.select();
-            }
-        }
-        if (isSelected( &f )){
-            xfFrame(&f, dt);
-        }
-    }
-    
-    void Interface :: touch( Frame& f, Frame& e, double t){
-        
-        static double dt = 5;
-        static double acc = .9;
-        dt *= acc;
-        if ( mouse.isDown ){
-            dt = t;// scene().ma() / scene().width();
-            if (pntClicked ( f.pos() ) ){
-               select(&f);
-            }
-        }
-        if (isSelected( &f )){
-            xfFrame(&f, &e, dt);
-        }
-    }
+
     
     void Interface :: onMouseMove(){
         
@@ -277,6 +247,40 @@ namespace vsr {
         }
     } 
 
+    void Interface :: touch( Frame& f, double t){
+        
+        static double dt = 5;
+        static double acc = .9;
+        dt *= acc;
+        if ( mouse.isDown ){
+            dt = t;// scene().ma() / scene().width();
+            if (pntClicked ( f.pos() ) ){
+                select(&f);//f.select();
+            }
+        }
+        if (isSelected( &f )){
+            xfFrame(&f, dt);
+        }
+        //cout << dt << endl; 
+
+    }
+    
+    void Interface :: touch( Frame& f, Frame& e, double t){
+        
+        static double dt = 5;
+        static double acc = .9;
+        dt *= acc;
+        if ( mouse.isDown ){
+            dt = t;// scene().ma() / scene().width();
+            if (pntClicked ( f.pos() ) ){
+               select(&f);
+            }
+        }
+        if (isSelected( &f )){
+            xfFrame(&f, &e, dt);
+        }
+    }
+
     void Interface :: xfFrame( Frame * frame, Frame * eframe, double t){
 		Pnt& tp = frame->pos();
 		Vec tv ( tp );
@@ -327,6 +331,7 @@ namespace vsr {
 		//Rot& tr = frame->rot();
 		Vec tv ( tp );
 		Vec sc = GL::project(tv[0], tv[1], tv[2], scene().xf);
+        
 		switch(keyboard.code){
 			case 's': //scale
 			{
@@ -349,7 +354,10 @@ namespace vsr {
 			case 'r': //rotate about local line
 			{
 				frame->db() =  mouse.dragBivCat * t; //scene().mp().unit() ^ scene().md();
-				frame->spin();
+                //cout << t << endl; 
+                //Biv b = mouse.dragBivCat * t; 
+				//frame->rot( Gen::rot(b) * frame->rot() ); //spin();
+                frame->spin();
 				break;
 			}
 			case 'b': //boost by drag

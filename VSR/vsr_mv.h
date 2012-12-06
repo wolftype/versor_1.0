@@ -346,9 +346,13 @@ public:
     template< class B >
     MV& operator /= ( const B& v) { IT(N){ mW[i] /= v; } return *this; }
     
-//    template< class B >
     MV& operator *= ( const MV& v) { *this = *this * v; return *this; }
 
+    template < int N2, int IDX2, class T2 >
+    MV& operator *= (  const MV<N2,IDX2,T2>& rh ) { 
+        *this = *this * rh; return *this;
+    }
+    
     template < int N2, int IDX2, class T2 >
     typename ProductN<idx, IDX2, T>::GP operator * ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, rh ); }
     

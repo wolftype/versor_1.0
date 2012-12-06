@@ -58,6 +58,7 @@ LDFLAGS	+= -L$(LIB_DIR)
 ifeq ($(GFX),1)
 	ifeq ($(PLATFORM), linux)
 		LINK_LDFLAGS += -lglut -lGLEW -lGLU -lGL -lGLV
+		LDFLAGS += -L/usr/lib/x86_64-linux-gnu/
 	else ifeq ($(PLATFORM), macosx)
 		LINK_LDFLAGS += -framework OpenGL -framework GLUT -lglv 
 	else ifeq ($(PLATFORM), windows)

@@ -87,9 +87,9 @@ namespace vsr{
             return i * mHeight * mDepth + j * mDepth + k; 
         }
         /*! Set Data by Index*/
-        T&	operator [] (int i)	{ return ( ( (T*) mData ) [i] ); }
+        T&	operator [] (int i)	{ return ( mData[i] ); }
         /*! Get Data by Index*/						
-        T	operator [] (int i) const { return ( (T*) ( mData ) ) [i]; }        
+        T	operator [] (int i) const { return mData[i]; }        
         /*! Set Data by Coordinate */
         T&  at(int w = 0, int h = 0, int d = 0) { return mData[ idx(w, h, d)  ]; }   
         /*! Get Data by Coordinate */

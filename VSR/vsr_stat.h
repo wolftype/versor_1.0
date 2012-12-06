@@ -43,6 +43,7 @@ namespace vsr{
         
         /// Number Between 0 and 1;
         inline static double Num() { return 1.0 * rand() / (RAND_MAX); }
+         inline static double Num(double max) { return max * rand() / (RAND_MAX); }
         inline static double Num(double low, double high){
             return low + ( (high-low) * rand() / RAND_MAX );
         }
