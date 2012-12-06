@@ -231,8 +231,7 @@ void circularDini(GLVApp& app){
 void lineToCircle(GLVApp& app){
 
     static Frame frame(PT(1,0,0), Rot(1,0,0,0));
-    
-    app.interface.touch(frame);
+        app.interface.touch(frame);
     
     Lin lin = frame.ly();
     
