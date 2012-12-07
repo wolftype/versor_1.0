@@ -26,10 +26,8 @@ using namespace vsr;
 using namespace glv;
 using namespace vsr::GL;
 
-
 void linear(GLVApp& app){
 
-    
     //Control Frames
     static Frame f1; static Frame f2;
     
@@ -143,6 +141,47 @@ void linear(GLVApp& app){
 
 }
 
+void linear2(GLVApp& app){
+
+    static Field<Frame> f(2,1,1);
+    
+    Draw::Y(f[0]); Draw::Y(f[1]);
+    TOUCH(f[0]); TOUCH(f[1]);
+
+    ITJi(i,100)
+        
+        Frame fr = Frame::Twist(f[0], f[1], t);
+        //DRAW(fr);
+        
+        Tnv tnv = Interp::linear( f[0].y(), f[1].y(), t);
+        //Par par = Par(tnv).trs(fr.pos());
+        
+        Par par0 =  f[0].tyScaled();
+        Par par1 =  f[1].tyScaled();
+        
+        Par par = Interp::linear( f[0].tyScaled(), f[1].tyScaled(), t);
+        double dist1 = ( fr.pos() <= f[0].pos() )[0];
+        double dist2 = ( fr.pos() <= f[1].pos() )[0];
+        
+        Booster bst = Gen::bst( par0 * (1/dist1) + par1 * (1/dist2) );
+        
+        Booster bst0 = Gen::bst( par0 );
+        Booster bst1 = Gen::bst( par1 );
+
+        Point np = Ro::loc( fr.pos().sp (bst) );
+        DRAW(np);
+        
+//        Point np = Ro::loc( fr.pos().sp (bst0) );
+//        DRAW(np);
+//        Point np2 = Ro::loc( fr.pos().sp (bst1) );
+//        DRAW(np2);
+    
+    END
+    
+    
+
+}
+
 void bilinear(GLVApp& app){
 
     static Field<Frame> f(2,2,1,4);//Frame f1, f2, f3, f4;
@@ -165,7 +204,8 @@ void bilinear(GLVApp& app){
         tf.scale(.5);
         DRAW( tf );
         
-        Par par = Interp::surface( f[0].ty(), f[2].ty(), f[3].ty(), f[1].ty(), u, v);
+        Par par = Par ( Tnv( Interp::surface( f[0].y(), f[2].y(), f[3].y(), f[1].y(), u, v) ) ).trs(tf.pos() ) ;
+        
         DRAW3( tf.lz(),0,0,1 );
         DRAW3( tf.lx(),1,0,0 );
         
@@ -192,9 +232,8 @@ void bilinear2(GLVApp& app){
         app.interface.touch(f[i]); 
     END
 
-
-        Dll udll = Gen::log(f[0].dlz(), f[3].dlz() );
-        Dll vdll = Gen::log(f[1].dlz(), f[2].dlz() );
+    Dll udll = Gen::log(f[0].dlz(), f[3].dlz() );
+    Dll vdll = Gen::log(f[1].dlz(), f[2].dlz() );
 
     IT2i(10,10)  
         double xu = -1.0 + 2 * u;  double xv = -1.0 + 2 * v;
@@ -220,22 +259,76 @@ void bilinear2(GLVApp& app){
     
 }
 
+void coupledBoost(GLVApp& app){
+
+    static Field<Frame> f(2,1,1);
+    
+    static double amtA, amtB, amtT, iter;
+    static bool bReset;
+    SET
+        app.gui(amtA,"amtA",-100,100)(amtB,"amtB",-100,100)(amtT,"amtT",-10,10)(iter,"iter",1,10000);
+        app.gui(bReset);
+        amtA = amtB = 1.0; iter =20;
+    END
+    
+    ITJ(i,f.num()) 
+        Draw::Y(f[0]);
+        Draw::Z(f[0]);
+        app.interface.touch(f[i]);
+    END
+
+    IT2i(iter,iter)
+    
+    
+        double tu = -1.0 + 2*u;
+        double tv = -1.0 + 2*v;
+
+        Pnt src = f[0].pos().trs( f[0].x() * tu + f[0].z() * tv );
+
+        Par paru = f[0].tyScaled(amtA*amtT);
+        Par parv = f[0].tyScaled(amtB*amtT); 
+        
+        Par tpar = paru + parv;
+        
+        Bst ba = Gen::bst( paru);
+        Bst bb = Gen::bst( parv);
+        
+        Bst nb = Gen::bst( tpar );
+        
+//        Mtt mtt = bb * ba; // do ba, then bb
+        
+//        for (int k = 0; k < iter; ++k){
+//            double tw = -1.0 + 2.0 * k/iter;
+//            Pnt src = f[0].pos().trs( f[0].x() * tw );
+
+        Pnt np = Ro::loc( src.sp(ba) );
+        DRAW3(np,0,0,1);
+    
+    END END       
+}
+
 void membrane2(GLVApp& app){
     
     static Field<Frame> f(2,2,1,2);
     int tot = f.num()-1;
-    static double falloff,amt;
+    
+    static double * falloff = new double[f.num()];
+    static double * amt = new double[f.num()];
+    
     SET
         ITJ(i,f.num())
             f[i].scale() = .5;
-        END
         
-        app.gui(amt)(falloff,"falloff",1,10);
-        falloff = 1; amt = 0;
+            app.gui(amt[i],"amt")(falloff[i],"falloff",1,10);
+            falloff[i] = 1; amt[i] = .5;
+
+        END
+
     END
 
     ITJ(i,f.num())
         app.interface.touch( f[i] );
+        Draw::Y(f[i]);
     END
     
     //static Par * par = new Par[ f.num() ]; 
@@ -246,23 +339,22 @@ void membrane2(GLVApp& app){
     IT2i(iter,iter)
     
         Pnt p = Vec::x.sp( Gen::rot(-1.0 + 2*u, -1.0 + 2*v) ).null();
-        Mtt mtt(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        //Mtt mtt(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
         
         Par tpar;
         ITJ(i,f.num())
-            double dist = ( p <= f[tot-i].pos() )[0];
-            Par par = f[tot-i].tyScaled( amt / (dist*falloff) );
-            tpar += f[tot-i].tyScaled( amt / (dist*falloff) );
-            mtt *= Gen::bst(par);
+            double dist = ( p <= f[i].pos() )[0];
+           // Par par = f[tot-i].tyScaled( amt / (dist*falloff) );
+            tpar += f[i].tyScaled( amt[i] / (dist*falloff[i])  );
+           // mtt *= Gen::bst(par);
         END
 
-//        mesh.add( Ro::loc( p.sp(mtt) ) );
         mesh.add( Ro::loc( p.sp( Gen::bst(tpar) ) ) );
     END END
 
     mesh.draw(.5,.5,.5);
     mesh.drawTri(0,0,0);
-    f.draw();
+    
 }
 
 void membrane(GLVApp& app){
@@ -341,7 +433,15 @@ void membrane(GLVApp& app){
     mesh.drawTri(0,0,0);
 }
 
+void gaussian(GLVApp& app){
 
+
+    
+    
+}
+
+
+//
 void gaussian2(GLVApp& app){
 
     static Field<Frame> f(3,1,1);
@@ -417,6 +517,8 @@ void gaussian2(GLVApp& app){
      
 }
 
+
+//LOCALLY DETERMINED UV PATCH
 void gaussian3(GLVApp& app){
 
     static Frame f;
@@ -453,16 +555,121 @@ void gaussian3(GLVApp& app){
 
         //LOCAL
         Pnt src = f.pos().trs(  ( cd )  * spread );
-        Bst bst = Gen::bst( Par( tnU * (1-fabs(xv)) +  tnV * (1-fabs(xu)) ).trs(f.pos()) );
-        Pnt np = src.sp( bst );
+        Bst bst = Gen::bst( Par( tnU * (fabs(xv)) +  tnV * (fabs(xu)) ).trs(f.pos()) );
+        Pnt np = Ro::loc( src.sp( bst ) );
 
+        DRAW(np);
     END END
 
 }
 
-void GLVApp :: onDraw(){
+void gaussian4(GLVApp& app){
+
+    static Field<Frame> f(2,2,1);
+    ITJ(i,f.num())
+    TOUCH(f[i])
+    Draw::Y(f[i]);
+    END
     
-    membrane2(*this);
+    static double iter, amtA, amtB;
+    
+    SET
+        app.gui(iter,"iter",100,1000)(amtA,"amt",-100,100)(amtB,"amtB",-100,100);
+        iter = 100; amtA = 1; amtB = -1;
+    END
+    
+    IT2i(iter,iter)
+       
+        
+        
+        double tu = -1.0 + 2*u;
+        double tv = -1.0 + 2*v;
+
+        Vec pt = Interp::linear<Vec>(f[1].vec(), f[3].vec(), u);
+        Vec pb = Interp::linear<Vec>(f[0].vec(), f[2].vec(), u);
+        Vec pl = Interp::linear<Vec>(f[0].vec(), f[1].vec(), v);
+        Vec pr = Interp::linear<Vec>(f[2].vec(), f[3].vec(), v);
+        
+        Par part = Interp::linear<Par>(f[1].tyScaled(), f[3].tyScaled(), u);
+        Par parb = Interp::linear<Par>(f[0].tyScaled(), f[2].tyScaled(), u);
+        Par parl = Interp::linear<Par>(f[0].tyScaled(), f[1].tyScaled(), v);
+        Par parr = Interp::linear<Par>(f[2].tyScaled(), f[3].tyScaled(), v);
+
+
+        Par pU = ( f[0].tyScaled( 1-u ).trs( pl) + f[2].tyScaled( u ).trs( pr ) );                
+        Par pV = ( f[0].tyScaled( 1-u ).trs( pl) + f[2].tyScaled( u ).trs( pr ) );
+
+
+//        Bst bstU = Gen::bst (  .trs( v ) );
+//        Bst bstV
+//
+//        Frame f = f.surf(u,v);
+//        DRAW(f);
+//
+////        Pnt src  = Interp::surface<Vec>( f[0].vec(), f[2].vec(), f[3].vec(), f[1].vec(), u,v ).null();
+//        
+////        Booster bstU = Gen::bst( Par(Tnv( Interp::linear( f[0].y() * f[0].scale(), f[1].y()* f[1].scale(), t ) ) ).trs( Interp::linear(f[0].vec(), f[1].vec(), t) ) );
+//
+//        Booster bstU = Gen::bst( f.tyScaled(amtA).trs(f.x() * tu ) );
+//        Booster bstV = Gen::bst( f.tyScaled(amtB).trs(f.z() * tv ) );
+//        
+//        DRAW3(src,1,0,0);
+
+
+//            Point np =  Ro::loc( src.trs( Vec::z * tv ).sp(bstU) );
+
+//            DRAW(np);
+    END END 
+
+
+}
+
+void gaussian5(GLVApp& app){
+
+    static Frame f;
+    TOUCH(f)
+    Draw::Y(f);
+    
+    static double iter, amtA, amtB;
+    
+    SET
+        app.gui(iter,"iter",100,1000)(amtA,"amt",-100,100)(amtB,"amtB",-100,100);
+        iter = 100; amtA = 1; amtB = -1;
+    END
+    
+    IT2i(iter,iter)
+       
+        
+        double tu = -1.0 + 2*u;
+        double tv = -1.0 + 2*v;
+        Point src = f.pos().trs(f.x() * tu + f.z() * tv);
+        
+        Booster bstU = Gen::bst( f.tyScaled(amtA).trs(f.x() * tu ) );
+        Booster bstV = Gen::bst( f.tyScaled(amtB).trs(f.z() * tv ) );
+        
+        Point np = Ro::loc( src.sp(bstU+bstV) );
+
+        DRAW(np);
+        
+    END END
+    
+    ITJi(i,100)
+    
+    
+    END
+
+
+}
+
+void GLVApp :: onDraw(){
+   
+   linear2(*this);
+ //  gaussian2(*this);
+ //       gaussian3(*this);
+  //  gaussian4(*this);
+   //  coupledBoost(*this);
+  //  membrane2(*this);
+  //  bilinear(*this);
  //   bilinear2(*this);
 //   linear(*this);
 //    frames(*this);

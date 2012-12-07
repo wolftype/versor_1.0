@@ -42,6 +42,7 @@ Developer: Pablo Colapinto
 ## CONTENTS: ##
 
 * [INTRODUCTION](#introduction) 
+* [WHAT THE POINT IS](#whathepointis)
 * [SPEED](#speed)
 * [BASICS](#basics)
 * [METHODS](#methods)
@@ -125,11 +126,13 @@ Future versions will likely use jit compilation to take care of this (i.e. combi
 luajit for instance.  I am working on that with Graham Wakefield and his thoughtful guidance and tutelage.  Additionally, there is a trade off I am working on where you have an MVBase class with which you can make arbitrary functions.  This requires a bunch of pointer being copied and has led to code bloat.  GA is a tricky world of unknown return types.  
 The C++11 standards should help (for instance, "auto" return types), but are not implemented here.   
 
-#### WHAT'S THE POINT? ####
+WHAT THE POINT IS 
+---
+
 GA combines many other maths (matrix, tensor, vector, and lie algebras). It is **holistic**. CGA uses a particular mapping (a conformal one) of 3D Euclidean space to a 
 4D sphere. Operations on that hypersphere are then projected back down to 3D. That how it works in a nutshell. 
 
-A fuller treatment of this question can be found in my [Master's thesis on the subject](http://wolftype.com/versor/colapinto_masters_final_02.pdf).  But basically,
+A fuller treatment of this question (er, the question of why we do this) can be found in my [Master's thesis on the subject](http://wolftype.com/versor/colapinto_masters_final_02.pdf).  But basically,
 Geometic Algebra offers a particular richness of spatial expression.  Imagine needing glasses and not knowing you needed glasses.  Then, when you do get glasses, the world changes
 unexpectedly.  GA is like glasses for the inside of your brain.  _Conformal_ Geometric Algebra, especially the 5D variety enlisted here, are like x-ray glasses.  One 
 point of clarification that occurs are **disambiguations** of previously collapsed concepts.  
@@ -148,17 +151,29 @@ by writing
 More on that last point later . . . there are various binary operators defined (mainly three).  We can introduce one right now, which is the **dot** or **inner** product.
 In mathematics, the inner product of two points `pa` and `pb` is written \\(p_{a} \rfloor p_{b}\\).  In _Versor_ we use the `<=` operator:
 
-	Pnt pa = Vec(1,0,0).null();
-	Pnt pb = Vec(-1,0,0).null();
-	double squaredDist = pa <= pb;
+	Point pa = Vec(1,0,0).null();
+	Point pb = Vec(-1,0,0).null();
+	Scalar squaredDist = pa <= pb;
 	
-which in this case would return `4`
+which in this case would return `4`.  We can extract the Scalar into a double like so:
 
-Points can also be thought of as Spheres (really, Dual Spheres, more on _Duality_ later): they are Spheres of zero radius.  As such they are a type of _Round_ element.  We can also build points this way:
+	double squaredDist = ( pa <= pb )[0];
+
+thought of as Spheres (really, Dual Spheres, more on _Duality_ later): they are Spheres of zero radius.  As such they are a type of _Round_ element.  We can also build points this way:
 
 	Round::null( 1,0,0 );
 
-We can also make Spheres with a radius this way:
+or you can pass in another element
+
+	Round::null( Vec(1,0,0) )
+
+Points can also be made with the macro `PT`
+
+	Point pa = PT(1,0,0);
+
+which is just "syntactic sugar"
+
+Speaking of Spheres, we can also make spheres with a radius this way:
 
 	DualSphere dls = Round::dls( Vec( 1,0,0 ).null(), 1 );
 
