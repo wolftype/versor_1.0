@@ -159,7 +159,7 @@ which in this case would return `4`.  We can extract the Scalar into a double li
 
 	double squaredDist = ( pa <= pb )[0];
 
-thought of as Spheres (really, Dual Spheres, more on _Duality_ later): they are Spheres of zero radius.  As such they are a type of _Round_ element.  We can also build points this way:
+Points thought of as Spheres (really, Dual Spheres, more on _Duality_ later): they are Spheres of zero radius.  As such they are a type of _Round_ element.  We can also build points this way:
 
 	Round::null( 1,0,0 );
 
