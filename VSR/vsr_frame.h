@@ -266,6 +266,14 @@ namespace vsr {
             void orientX(double x, double y, double z){
                 orientX( Vec(x,y,z) );
             }
+            template <class A>
+            void orientXrel(const A& p){
+                mRot = Gen::ratio( Vec::x, Vec(p).unit() );
+                orient(); 
+            }
+            void orientXrel(double x, double y, double z){
+                orientXrel( Vec( x, y, z) );
+            }
             /*! Orient Towards Point p  
                 @param a target pnt or vector
             */
@@ -277,6 +285,14 @@ namespace vsr {
             void orientY(double x, double y, double z){
                 orientY( Vec(x,y,z) );
             }
+            template <class A>
+            void orientYrel(const A& p){
+                mRot = Gen::ratio( Vec::y, Vec(p).unit() );
+                orient(); 
+            }
+            void orientYrel(double x, double y, double z){
+                orientYrel( Vec( x, y, z) );
+            }
             /*! Orient Towards Point p  
                 @param a target pnt or vector
             */
@@ -287,6 +303,14 @@ namespace vsr {
             }
             void orientZ(double x, double y, double z){
                 orientZ( Vec(x,y,z) );
+            }
+            template <class A>
+            void orientZrel(const A& p){
+                mRot = Gen::ratio( Vec::z, Vec(p).unit() );
+                orient(); 
+            }
+            void orientZrel(double x, double y, double z){
+                orientXrel( Vec( x, y, z) );
             }
 			/*! Absolute Twist Transformation (based on global frame) */
 			Frame& twista(const Mot& m)		{ mPos = PAO.sp(m); mRot = m; return orient(); }

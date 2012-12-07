@@ -18,6 +18,8 @@ if (!bSet){ \
 #define END }
 #define END2 }}
 
+#define TOUCH(x) app.interface.touch(x);
+
 #define IT1(n) \
 for (int i = 0; i < n; ++i) {\
 VAL(i,n)

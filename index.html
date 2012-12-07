@@ -49,6 +49,7 @@ If you want to see, learn how to act
 
 <ul>
 <li><a href="#introduction">INTRODUCTION</a></li>
+<li><a href="#whathepointis">WHAT THE POINT IS</a></li>
 <li><a href="#speed">SPEED</a></li>
 <li><a href="#basics">BASICS</a></li>
 <li><a href="#methods">METHODS</a></li>
@@ -139,12 +140,12 @@ The makefile builds the STATIC version of this library, which currently gives up
 luajit for instance. I am working on that with Graham Wakefield and his thoughtful guidance and tutelage. Additionally, there is a trade off I am working on where you have an MVBase class with which you can make arbitrary functions. This requires a bunch of pointer being copied and has led to code bloat. GA is a tricky world of unknown return types.<br/>
 The C++11 standards should help (for instance, &#8220;auto&#8221; return types), but are not implemented here. </p>
 
-<h4 id="whatsthepoint">WHAT&#8217;S THE POINT?</h4>
+<h2 id="whatthepointis">WHAT THE POINT IS</h2>
 
 <p>GA combines many other maths (matrix, tensor, vector, and lie algebras). It is <strong>holistic</strong>. CGA uses a particular mapping (a conformal one) of 3D Euclidean space to a
 4D sphere. Operations on that hypersphere are then projected back down to 3D. That how it works in a nutshell. </p>
 
-<p>A fuller treatment of this question can be found in my <a href="http://wolftype.com/versor/colapinto_masters_final_02.pdf">Master&#8217;s thesis on the subject</a>. But basically,
+<p>A fuller treatment of this question (er, the question of why we do this) can be found in my <a href="http://wolftype.com/versor/colapinto_masters_final_02.pdf">Master&#8217;s thesis on the subject</a>. But basically,
 Geometic Algebra offers a particular richness of spatial expression. Imagine needing glasses and not knowing you needed glasses. Then, when you do get glasses, the world changes
 unexpectedly. GA is like glasses for the inside of your brain. <em>Conformal</em> Geometric Algebra, especially the 5D variety enlisted here, are like x-ray glasses. One
 point of clarification that occurs are <strong>disambiguations</strong> of previously collapsed concepts. </p>
@@ -166,19 +167,34 @@ by writing</p>
 <p>More on that last point later &#8230; there are various binary operators defined (mainly three). We can introduce one right now, which is the <strong>dot</strong> or <strong>inner</strong> product.
 In mathematics, the inner product of two points <code>pa</code> and <code>pb</code> is written <span class="math">\(p_{a} \rfloor p_{b}\)</span>. In <em>Versor</em> we use the <code>&lt;=</code> operator:</p>
 
-<pre><code>Pnt pa = Vec(1,0,0).null();
-Pnt pb = Vec(-1,0,0).null();
-double squaredDist = pa &lt;= pb;
+<pre><code>Point pa = Vec(1,0,0).null();
+Point pb = Vec(-1,0,0).null();
+Scalar squaredDist = pa &lt;= pb;
 </code></pre>
 
-<p>which in this case would return <code>4</code></p>
+<p>which in this case would return <code>4</code>. We can extract the Scalar into a double like so:</p>
 
-<p>Points can also be thought of as Spheres (really, Dual Spheres, more on <em>Duality</em> later): they are Spheres of zero radius. As such they are a type of <em>Round</em> element. We can also build points this way:</p>
+<pre><code>double squaredDist = ( pa &lt;= pb )[0];
+</code></pre>
+
+<p>thought of as Spheres (really, Dual Spheres, more on <em>Duality</em> later): they are Spheres of zero radius. As such they are a type of <em>Round</em> element. We can also build points this way:</p>
 
 <pre><code>Round::null( 1,0,0 );
 </code></pre>
 
-<p>We can also make Spheres with a radius this way:</p>
+<p>or you can pass in another element</p>
+
+<pre><code>Round::null( Vec(1,0,0) )
+</code></pre>
+
+<p>Points can also be made with the macro <code>PT</code></p>
+
+<pre><code>Point pa = PT(1,0,0);
+</code></pre>
+
+<p>which is just &#8220;syntactic sugar&#8221;</p>
+
+<p>Speaking of Spheres, we can also make spheres with a radius this way:</p>
 
 <pre><code>DualSphere dls = Round::dls( Vec( 1,0,0 ).null(), 1 );
 </code></pre>
