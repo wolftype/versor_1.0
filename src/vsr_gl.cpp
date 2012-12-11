@@ -280,7 +280,7 @@ namespace vsr {
         glDisable(GL::Lights[i]);
     }
     
-    void GL :: lightPos(float x, float y, float z, float w ){
+    void GL :: lightPos(float x, float y, float z, float w  ){
         GLfloat lp[] = {x,y,z,w};	
         glLightfv(GL_LIGHT0, GL_POSITION, lp);
     }
@@ -382,7 +382,7 @@ namespace vsr {
         //	GL :: specularMat(.2,.2,.2,0.5);			
         GL :: emissionMat(.2,.2,.2,0.5);
         
-        lightPos(0,0,5);
+        lightPos(1,5,1);
         
     }
     

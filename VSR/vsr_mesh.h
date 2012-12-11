@@ -321,6 +321,7 @@ struct UVMesh{
     int u, v;
     UVMesh(int _u, int _v) : u(_u), v(_v) {}
     void add(const Pnt& p) { vp.push_back(p); }
+    
     void draw(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
     
         glColor4f(rr,gg,bb,aa);
@@ -332,7 +333,7 @@ struct UVMesh{
                 int c = b + v;
                 int d = c - 1;
                 
-                Vec dir  = Ro::dir(vp[a] ^ vp[c] ^ vp[b] ).dual();
+                Vec dir  = Ro::dir( vp[a] ^ vp[b] ^ vp[c] ).dual();
                 GL::normal(dir.unit().w());
                 GL::Quad(vp[a], vp[b], vp[c], vp[d]);
             
@@ -362,6 +363,30 @@ struct UVMesh{
                 glEnd();
             }
         }
+    }
+    
+    void drawNormals(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
+    
+        glColor4f(rr,gg,bb,aa);
+        glBegin(GL_QUADS);
+        for (int i = 0; i < u-1; ++i){
+            for (int j = 0; j < v-1; ++j){
+                int a = i * v + j;
+                int b = a + 1;
+                int c = b + v;
+                int d = c - 1;
+                
+                Vec dir  = Ro::dir( vp[a] ^ vp[b] ^ vp[c] ).dual();
+                //GL::normal(dir.unit().w());
+                Vec mid = Interp::surface<Vec>( vp[a], vp[b], vp[c], vp[d], .5, .5);
+                GL::Glyph::Line( mid, mid + dir.unit() );
+                //GL::Quad(vp[a], vp[b], vp[c], vp[d]);
+            
+            }
+        }
+        glEnd();
+    
+    
     }
 };
 

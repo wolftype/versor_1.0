@@ -35,6 +35,7 @@
 		9B26F0C01671069400455E54 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B26F0C8167106DF00455E54 /* Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B26F0C7167106DF00455E54 /* Robot.cpp */; };
 		9B26F0CA1671072300455E54 /* Frames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B26F0C91671072300455E54 /* Frames.cpp */; };
+		9B26F0CC1676D76000455E54 /* Curvature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B26F0CB1676D76000455E54 /* Curvature.cpp */; };
 		9B28075916700947001806F8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B28075A16700947001806F8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B28075B16700947001806F8 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
@@ -102,7 +103,6 @@
 		9BB10830163883B5009F3070 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
 		9BB10831163883B5009F3070 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9BB1083B16388400009F3070 /* Hopf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB1083A16388400009F3070 /* Hopf.cpp */; };
-		9BB1083D1638840A009F3070 /* Curvature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BB1083C1638840A009F3070 /* Curvature.cpp */; };
 		9BBF0ADA163B087800146CA6 /* col.frag in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
 		9BBF0ADB163B087B00146CA6 /* pos.vert in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
 		9BBF0ADD163B118000146CA6 /* vsr_gl_shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA7C751636037800A864DC /* vsr_gl_shader.cpp */; };
@@ -381,6 +381,7 @@
 		9B26F0C51671069400455E54 /* Frames */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Frames; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B26F0C7167106DF00455E54 /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Robot.cpp; path = ../../examples/Robot.cpp; sourceTree = "<group>"; };
 		9B26F0C91671072300455E54 /* Frames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Frames.cpp; path = ../../examples/Frames.cpp; sourceTree = "<group>"; };
+		9B26F0CB1676D76000455E54 /* Curvature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Curvature.cpp; path = ../../examples/private/Curvature.cpp; sourceTree = "<group>"; };
 		9B28076116700947001806F8 /* Twists copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Twists copy"; path = Topo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2807641670097D001806F8 /* Topo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Topo.cpp; path = ../../examples/Topo.cpp; sourceTree = "<group>"; };
 		9B456BB51640B261008E5EA2 /* To Do */ = {isa = PBXFileReference; lastKnownFileType = text; name = "To Do"; path = "../../To Do"; sourceTree = "<group>"; };
@@ -440,7 +441,6 @@
 		9BB108271638836A009F3070 /* Knots */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Knots; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB10836163883B5009F3070 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knots copy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB1083A16388400009F3070 /* Hopf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hopf.cpp; path = ../../examples/Hopf.cpp; sourceTree = "<group>"; };
-		9BB1083C1638840A009F3070 /* Curvature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Curvature.cpp; path = ../../examples/Curvature.cpp; sourceTree = "<group>"; };
 		9BBC39EC164346D500BA5208 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../../Makefile; sourceTree = "<group>"; };
 		9BBDCA201639FE8B0082FBAE /* vsr_mdraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_mdraw.h; sourceTree = "<group>"; };
 		9BBDCA35163A1C590082FBAE /* vsr_gl_vattrib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_vattrib.h; sourceTree = "<group>"; };
@@ -746,6 +746,7 @@
 				9BBC39EC164346D500BA5208 /* Makefile */,
 				9B58903B1641A6D90096B491 /* Meet.cpp */,
 				9B68014A163F34D1004A850F /* Graphics.cpp */,
+				9B26F0CB1676D76000455E54 /* Curvature.cpp */,
 				9B76CCE91628AACF0064FF35 /* test.cpp */,
 				9B76CCEA1628AACF0064FF35 /* testGL.cpp */,
 				9B76CCEB1628AAD00064FF35 /* testGraph.cpp */,
@@ -753,7 +754,6 @@
 				9B26F0C91671072300455E54 /* Frames.cpp */,
 				9B0C757B162C9BDF0037F835 /* DemoAgacse.cpp */,
 				9BB1083A16388400009F3070 /* Hopf.cpp */,
-				9BB1083C1638840A009F3070 /* Curvature.cpp */,
 				9B0C757D162C9C5E0037F835 /* vsr_tests.h */,
 				9B9F32B31631E4830075D685 /* README.md */,
 				9B8F25E31669245100FC4FC0 /* INSTALL.md */,
@@ -1552,7 +1552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BB1083D1638840A009F3070 /* Curvature.cpp in Sources */,
+				9B26F0CC1676D76000455E54 /* Curvature.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
