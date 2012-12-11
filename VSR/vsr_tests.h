@@ -3,6 +3,9 @@
 
 #include "vsr_draw.h"
 
+#define VAL(j,n) \
+double t = 1.0 * j/n;
+
 #define SET \
 static bool bSet = 0; \
 if (!bSet){ \
@@ -44,7 +47,6 @@ for (int i = 0; i < n; ++i){
 for (int i = 0; i <= n; ++i){ \
 VAL(i,n)
 
-#define VAL(j,n) \
-double t = 1.0 * j/n;
+
 
 #endif

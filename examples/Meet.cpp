@@ -14,12 +14,13 @@
 
 using namespace vsr;
 
-void circ(GLVApp& app){
+void circle(GLVApp& app){
 
     static Point pa = PT(1,0,0);
     static Point pb = PT(0,1,0);
     static Point pc = PT(-1,0,0);
     
+    //Grab points (hit 'g' and drag mouse) to define a circle
     app.interface.touch(pa);
     app.interface.touch(pb);
     app.interface.touch(pc);
@@ -28,16 +29,23 @@ void circ(GLVApp& app){
     
     Circle c = pa ^ pb ^ pc;
     
-    Dls dls = Round::sur( c );    
-    static Dls dls2 = Ro::dls(2, 0, 0);
+    //The Sphere Surrounding the Circle
+    DualSphere dls = Round::sur( c );    
     
+    
+    //Another Sphere
+    static DualSphere dls2 = Ro::dls(2, 0, 0);
     app.interface.touch(dls2);
     DRAW4(dls,1,0,0,.3); DRAW4(dls2,1,0,0,.3);
     
-    Cir inter = (dls ^ dls2).dual();
+    //The Circle Meet of the two Spheres
+    Circle inter = (dls ^ dls2).dual();
     DRAW(inter);
+    
+    //The Point Pair
     DRAW3( ( (dls ^ dls2) ^ Dlp(0,1,0,0) ).undual(), 0,1,0 );
     
+    //The Plane
     DRAW(Dlp(0,1,0,0));
 }
 
@@ -49,22 +57,19 @@ void linePoint(GLVApp& app){
     
     app.interface.touch(dll);
     app.interface.touch(pnt);
-    DRAW(dll); DRAW(pnt);
+    DRAW(dll); DRAW3(pnt,1,0,0);
     
     Cir dualMeet = pnt ^ dll;
     DRAW( dualMeet );
     
     Dlp dualPlane = pnt <= dll;
     DRAW(dualPlane);
-    
-    cout << Ro::size(dualMeet, false) << endl; 
-    cout << dualPlane.dot() << endl; 
-    
+        
 }
 
 void GLVApp :: onDraw(){
-    linePoint(*this);
-    //circle(*this);
+    //linePoint(*this);
+    circle(*this);
 }
 
 int main(int argc, const char * argv[]) {

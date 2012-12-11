@@ -41,17 +41,35 @@ struct HopfFiber{
         mCir = CXZ(1);
     }
     
+    //boost only no twist
+    Cir bst(double theta, double phi){
+        double ptheta = PIOVERTWO * theta;
+        Vec v = Vec::x.rot( Biv::xz * ptheta );
+        return mCir.sp( Gen::trv(v * phi )  ) ; 
+        //return mCir.sp( Gen::bst( Par( Tnv(v) * phi ).trs(v) ) ) ; 
+    }
+    
+    //twist only
+    Lin mot(double theta, double phi){
+            double ptheta = PIOVERTWO * theta;
+
+        Vec v = Vec::x.rot( Biv::xz * ptheta );
+        Lin lim = mCir.sp( Gen::trv(v.unit()) ); 
+        Mot mot = Gen::ratio( lim.dual().runit(), mInf.dual(), phi);
+        return lim.sp( mot );
+    }
+    
     Cir cir(double theta, double phi){
 
         double ptheta = PIOVERTWO * theta;
 
         Vec v = Vec::x.rot( Biv::xz * ptheta );
-       // cout << v << endl ;
-        Lin lim = mCir.sp( Gen::trv(v) );                                                         //<-- Circle to a Line (Limit)
-        Mot mot = Gen::ratio( lim.dual(), mInf.dual(), phi);
-        
-       // cout << theta << " " << phi << "\n" << mot << endl;
-        
+ //       cout << v << endl; 
+        Lin lim = mCir.sp( Gen::trv(v.unit()) );                                                         //<-- Circle to a Line (Limit)
+  //      cout << lim << endl; 
+        Mot mot = Gen::ratio( lim.dual().runit(), mInf.dual(), phi);
+   //
+    //     cout << mot << endl;        
         return mCir.sp( mot * Gen::trv(v * phi )  ) ; 
         
 //      Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(1, p * st )  ) ;        // <-- More complicated and unnecessary, takes circle to local tangent, then twists
@@ -59,7 +77,7 @@ struct HopfFiber{
 };
 
 
-void hopf2(GLVApp& app){
+void hopf(GLVApp& app){
     
 
     HopfFiber hf;
@@ -98,23 +116,82 @@ void hopf2(GLVApp& app){
     END END
     
     pnt = Ro::loc( pnt.sp( Gen::bst(par * amt) ) );
-    DRAW3(Ro::dls_pnt(pnt,.2),1,0,0);
+   // DRAW3(Ro::dls_pnt(pnt,.2),1,0,0);
     
 }
 
+//drawing it
+void hopf2(GLVApp& app){
 
+    HopfFiber hf;
+    
+
+    //GUI Controlled Parameters
+    static int num = 1;
+    static int res = 1;
+    static int cres = 20;
+    static bool handed, bDrawCir, bDrawPnt,bReset, bBoost, bTwist, bAxis;
+    static double phase,amt,minDistance;
+
+    SET app.gui(num,"num",0,1000)(res,"res",0,1000)(cres,"cres",0,100)(phase,"phase",1,100)(amt,"amt",0,10)(minDistance,"minDistance",0,1000);
+    app.gui(handed)(bDrawCir, "drawcir")(bDrawPnt,"drawpnt")(bBoost,"bBoostOnly")(bTwist, "bTwistOnly")(bAxis,"bAxis")(bReset,"reset"); 
+    END     
+    if (bAxis) { DRAW3( hf.mInf, 0,0,0); DRAW3( hf.mCir, 0,0,0); }
+    ITJi(i,num)
+        
+        double v = t * amt;
+//        UVMesh mesh(num+1, cres+1);
+          UVMesh mesh(res, cres+1);
+  
+        ITJ(j,res)
+        
+            double u = 1.0 * j/res;   //-1.0 + 2*         
+            Cir tc = (bBoost) ? hf.bst(-v,u) : hf.cir(-v, u);
+            if (bDrawCir) DRAW3(tc,.5,.5,.5);
+            if (Ro::size(tc, false) > 100) DRAW3( Lin(tc), .5,.5,.5);
+            
+            if (bTwist) DRAW3(hf.mot(-v, u) , 0, 0, 0);
+            
+            
+            ITJi(k,cres)
+                
+                double w = 1.0 * k/cres;
+                Pnt tp = Ro::pnt_cir( tc, w * TWOPI);
+                mesh.add(tp);
+                
+            END
+         
+        END 
+        
+        mesh.draw(.4,.4,.4);
+        mesh.drawTri(.6,.6,.6);
+
+    END
+
+}
+
+void cirtest(GLVApp& app){
+
+    static Cir c = CXY(1);
+    
+    ITJi(i,100)
+        Pnt p = Ro::pnt_cir( c, t * TWOPI );
+        DRAW3(p,t,0,1-t);
+    END
+    
+}
 
 void GLVApp :: onDraw(){
 
-   // linear(*this);
-//    hopf(*this);
+   // hopf(*this);
     hopf2(*this);
-    text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
+    //cirtest(*this);
+   // text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }
 
 
-int main() {
-        
+int main(int argc, const char * argv[]) {        
+    File::setdir(argv[0]);    
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
 	glv.colors().back.set(.3,.3,.3);

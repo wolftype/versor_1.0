@@ -188,6 +188,7 @@ namespace vsr {
                 case 'v': bPrintPS = true;
                     break;
                 case 'c':
+                    model().reset();
                     camera().reset();
                     break;
                 default:

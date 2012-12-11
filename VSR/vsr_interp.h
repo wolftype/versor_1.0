@@ -38,6 +38,9 @@ namespace vsr {
 			/// t from 0 to 1
             template<typename T>
 			static T linear(T _a, T _b, double t);
+			/// t from 0 to 1
+            template<typename T>
+			static T sqlinear(T _a, T _b, double t);
             /// arbitrary number of points to pass through
             template<typename T>
             static T linear( T * s, int num, double t);
@@ -63,6 +66,10 @@ namespace vsr {
             */
             template<typename T>
             static T surface(T a, T b, T c, T d, double u, double v);
+
+            template<typename T>
+            static T sqsurface(T a, T b, T c, T d, double u, double v);
+
 			/// trilinear eulerian volume interpolation assumes eight points
 			template<typename T>
             static T volume(T *s, double x, double y, double z);
@@ -125,6 +132,10 @@ namespace vsr {
     inline T Interp  :: linear(T _a, T _b, double t) {
         return _a * (1-t) + _b * (t);
     }
+    template<typename T>    
+    inline T Interp  :: sqlinear(T _a, T _b, double t) {
+        return _a * ((1-t)*(1-t)) + _b * (t*t);
+    }
     
     template<typename T>    
     inline T Interp  :: linear(T * s, int num, double t) {
@@ -179,6 +190,20 @@ namespace vsr {
         T top = d * (1-u) + c * u;
         return bot * (1-v) + top * v;
     }
+    
+    template<typename T>
+    inline T Interp :: sqsurface(T a, T b, T c, T d, double u, double v){
+        T bot = a * ( (1-u) * (1-u) ) + b * (u*u);
+        T top = d * ( (1-u)* (1-u) ) + c * (u*u);
+        return bot * ( (1-v) * (1-v) ) + top * (v*v);
+    }    
+
+//    template<typename T>
+//    inline T Interp :: quadricSurface(T a, T b, T c, T d, double u, double v){
+//        T bot = a * ( (1-u) * (1-u) ) + b * (u*u);
+//        T top = d * ( (1-u)* (1-u) ) + c * (u*u);
+//        return bot * ( (1-v) * (1-v) ) + top * (v*v);
+//    }    
     
 //    template<>
 //    inline Frame Interp :: surface<Frame>(Frame a, Frame b, Frame c, Frame d, double u, double v){

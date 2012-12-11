@@ -31,12 +31,22 @@ namespace vsr{
     /// Info Container for Euler integration of a Field
     struct Patch{
         Patch(int _a, int _b, int _c, int _d, double _rw, double _rh) 
-        : a(_a), b(_b), c(_d), d(_d), rw(_rw), rh(_rh)
+        : a(_a), b(_b), c(_c), d(_d), rw(_rw), rh(_rh)
         {}
         
         int a, b, c, d;
         double rw, rh;
     };
+    
+    /// Info Container for Quadric Interpolation
+//    struct QPatch{
+//        Patch(int _a, int _b, int _c, int _d, int _e, int _f, int _g, int _h, int _i , int _j, double _rw, double _rh) 
+//        : a(_a), b(_b), c(_c), d(_d), rw(_rw), rh(_rh)
+//        {}
+//        
+//        int a, b, c, d;
+//        double rw, rh; 
+//    };
 
     ///  A Basic 3D Field (slowly porting this over from the now defunct vsr_lattice class)
     template < class T>
@@ -97,7 +107,11 @@ namespace vsr{
         /*! Set grid data by Coordinate */
         T&  gridAt(int w = 0, int h = 0, int d = 0) { return mGrid[ idx(w, h, d)  ]; }   
         /*! Get grid data by Coordinate */
-        T	gridAt(int w = 0, int h = 0, int d = 0) const { return mGrid[ idx(w, h, d)  ]; }              
+        T	gridAt(int w = 0, int h = 0, int d = 0) const { return mGrid[ idx(w, h, d)  ]; }     
+        /*! Set Grid (position) Data*/ 
+        Pnt& grid(int i) { return mGrid[i]; }  
+        /*! Get Grid (position)  Data */      
+        Pnt grid(int i) const { return mGrid[i]; }        
 
         //INITIALIZE
         void basicInit(){
@@ -197,7 +211,13 @@ namespace vsr{
             Pnt c = mGrid[ p.c ];//gridAt ( iw + 1, ih + 1, 0 );
             Pnt d = mGrid[ p.d ];//gridAt ( iw, ih + 1, 0 );
             
-            return Interp::surface<Pnt> (a,b,c,d, p.rw, p.rh);       
+            return Interp::surface<Pnt> (a,b,c,d, p.rw, p.rh).null();       
+        }
+        
+        /*! Get QUADRIC Interpolated Data at eval u,v [0-1] */
+        T quadSurf(double u, double v){
+            Patch p =  surfIdx(u,v);
+            
         }
 
     };
