@@ -6,11 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#include <iostream>
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
 #include "vsr_draw.h"
+
+#include <iostream>
 
 using namespace vsr;
 
@@ -74,9 +75,7 @@ void GLVApp :: onDraw(){
 
 int main(int argc, const char * argv[]) {
 
-    /* Get Current Working Directory */
-    File::setdir( argv[0] );
-        
+        cout << argv[0] << endl; 
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
 	glv.colors().back.set(.3,.3,.3);

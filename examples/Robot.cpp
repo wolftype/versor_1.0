@@ -7,13 +7,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#include <iostream>
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
 #include "vsr_tests.h"
 
 #include "vsr_chain.h"
+
+#include <iostream>
 
 using namespace vsr;
 using namespace glv;

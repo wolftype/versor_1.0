@@ -7,7 +7,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#include <iostream>
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
@@ -15,6 +14,8 @@
 
 #include "vsr_chain.h"
 
+#include <iostream>
+#include <stdio.h>
 using namespace vsr;
 using namespace glv;
 
@@ -52,7 +53,7 @@ void GLVApp :: onDraw(){
     text("Use the G, R, keys to Grab and Rotate the Right Frame.  Q to let go.",50,50);
 }
 
-int main() {
+int main(int argc, const char * argv[]) {
         
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
