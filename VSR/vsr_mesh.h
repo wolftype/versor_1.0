@@ -319,8 +319,14 @@ namespace vsr {
 struct UVMesh{
     vector<Pnt> vp;
     int u, v;
-    UVMesh(int _u, int _v) : u(_u), v(_v) {}
+    bool bFlipNormals;
+    UVMesh(int _u, int _v) : u(_u), v(_v), bFlipNormals(0) {}
     void add(const Pnt& p) { vp.push_back(p); }
+    
+    Vec normal(int a, int b, int c){
+            Vec dir  = bFlipNormals ?  Ro::dir( vp[a] ^ vp[c] ^ vp[b] ).dual() : Ro::dir( vp[a] ^ vp[b] ^ vp[c] ).dual();
+            return dir.unit();
+    }
     
     void draw(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
     
@@ -333,8 +339,8 @@ struct UVMesh{
                 int c = b + v;
                 int d = c - 1;
                 
-                Vec dir  = Ro::dir( vp[a] ^ vp[b] ^ vp[c] ).dual();
-                GL::normal(dir.unit().w());
+                
+                GL::normal(normal(a,b,c).w());
                 GL::Quad(vp[a], vp[b], vp[c], vp[d]);
             
             }
@@ -354,10 +360,9 @@ struct UVMesh{
                 int c = b + v;
                 int d = c - 1;
                 
-                Vec dir  = Ro::dir(vp[a] ^ vp[c] ^ vp[b]).dual();
-//                glNormal3f(.5,.5,.5);
+                
                 glBegin(GL_LINE_STRIP);
-                GL::normal(dir.unit().w());
+                GL::normal(normal(a,b,c).w());
                 GL::Tri( vp[a], vp[b], vp[c]);
                 GL::Tri(vp[a], vp[d], vp[c]);
                 glEnd();
@@ -376,10 +381,8 @@ struct UVMesh{
                 int c = b + v;
                 int d = c - 1;
                 
-                Vec dir  = Ro::dir( vp[a] ^ vp[b] ^ vp[c] ).dual();
-                //GL::normal(dir.unit().w());
                 Vec mid = Interp::surface<Vec>( vp[a], vp[b], vp[c], vp[d], .5, .5);
-                GL::Glyph::Line( mid, mid + dir.unit() );
+                GL::Glyph::Line( mid, mid + normal(a,b,c) );
                 //GL::Quad(vp[a], vp[b], vp[c], vp[d]);
             
             }
