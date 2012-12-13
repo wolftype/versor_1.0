@@ -109,7 +109,7 @@ $(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
 	@echo CXX compiling $< to $@
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo
-	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@ 
 
 #COMPILATION of C to Object File
 $(OBJ_DIR)%.o: %.c
