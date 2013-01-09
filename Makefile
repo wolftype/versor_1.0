@@ -54,15 +54,16 @@ DEPFLAGS = -MMD -MF $(basename $@).dep
 #Link
 LDFLAGS	+= -L$(LIB_DIR) 
 
+LINK_LDFLAGS += -l$(LIB_NAME)
 #Graphics only added to LDFLAGS if GFX=1 - (default)
 ifeq ($(GFX),1)
 	ifeq ($(PLATFORM), linux)
-		LINK_LDFLAGS += -lglut -lGLEW -lGLU -lGL -lGLV
+		LINK_LDFLAGS += -lGLV -lglut -lGLEW -lGLU -lGL
 		LDFLAGS += -L/usr/lib/x86_64-linux-gnu/
 	else ifeq ($(PLATFORM), macosx)
-		LINK_LDFLAGS += -framework OpenGL -framework GLUT -lglv 
+		LINK_LDFLAGS += -lglv -framework OpenGL -framework GLUT  
 	else ifeq ($(PLATFORM), windows)
-		LINK_LDFLAGS += -lglew32 -lglu32 -lopengl32 -lglut32
+		LINK_LDFLAGS += -lglv -lglew32 -lglu32 -lopengl32 -lglut32
 	endif
 
 	LDFLAGS	+= -L$(BASE_DIR)GLV/build/lib/
@@ -126,7 +127,7 @@ $(PCH_DIR)%.h.gch: %.h
 	$(CXX) $(CXXFLAGS) $(HPATH) -x c++-header -c $< -o $@
 
 linkfile:
-	@printf "%b\n" "CPPFLAGS +=$(LINK_CPPFLAGS)\r\nLDFLAGS +=$(LINK_LDFLAGS) -l$(LIB_NAME)" > Makefile.link
+	@printf "%b\n" "CPPFLAGS +=$(LINK_CPPFLAGS)\r\nLDFLAGS +=$(LINK_LDFLAGS)" > Makefile.link
 
 dir:
 	@mkdir -p $(OBJ_DIR)
@@ -145,9 +146,9 @@ vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
 	@echo Building $@ using $<
-	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
+	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS)
 #	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
-	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS) -l$(LIB_NAME)
+	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS)
 	@cd $(BIN_DIR) && ./$(*F)
 
 #test: test.cpp vsr
