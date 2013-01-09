@@ -215,8 +215,8 @@ namespace vsr {
             }
             return "";
         }
-        
-        
+
+
         static bool bLights; 
 //        static bool bOrtho;
         		
@@ -335,6 +335,9 @@ namespace vsr {
 //    inline void GL::depthMask(bool b) { glDepthMask(b?GL_TRUE : GL_FALSE); }
 //    inline void GL::pointSize(GLfloat f) { glPointSize(f); }
 //    inline void GL::shadeModel(ShadeModel sm) { glShadeModel(sm); } 
+        inline void push() { glPushMatrix(); }
+        inline void pop() { glPopMatrix(); }
+        
      inline void enable(Ability a) { glEnable(a); }
      inline void disable(Ability a) { glDisable(a); }
      inline void ability(Ability a, bool v) { v ? enable(a) : disable(a); }

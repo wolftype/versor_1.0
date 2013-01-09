@@ -70,6 +70,10 @@ namespace vsr {
             template<typename T>
             static T sqsurface(T a, T b, T c, T d, double u, double v);
 
+
+            /// trilinear eulerian volume integration
+            template<typename T>
+            static T volume( T a, T b, T c, T d, T e, T f, T g, T h, double u, double v, double w);
 			/// trilinear eulerian volume interpolation assumes eight points
 			template<typename T>
             static T volume(T *s, double x, double y, double z);
@@ -228,6 +232,14 @@ namespace vsr {
         T bmid = bbottom * (1-v) + btop * (v);	
         
         return fmid * (1-w) + bmid * w;
+    }
+    
+    template<typename T>
+    inline T Interp :: volume( T a, T b, T c, T d, T e, T f, T g, T h, double u, double v, double w){
+        T front = surface(a, b, c, d, u, v);
+        T back = surface(e, f, g, h, u, v);
+ 
+        return linear(front, back, w);
     }
     
 //    template<typename T>

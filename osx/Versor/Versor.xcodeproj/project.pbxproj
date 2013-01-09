@@ -376,7 +376,7 @@
 		9B1E15691670FFBE0015D25C /* Transformations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Transformations.cpp; path = ../../examples/Transformations.cpp; sourceTree = "<group>"; };
 		9B1EF0ED166D988900617EB8 /* Twists */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Twists; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1EF0F0166D98D000617EB8 /* Twists.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Twists.cpp; path = ../../examples/Twists.cpp; sourceTree = "<group>"; };
-		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoMotors; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = DemoMotors; path = Robot; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2529AC162DF44300DD9FC2 /* libGLV.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLV.a; path = ../../../GLV/build/lib/libGLV.a; sourceTree = "<group>"; };
 		9B26F0C51671069400455E54 /* Frames */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Frames; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B26F0C7167106DF00455E54 /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Robot.cpp; path = ../../examples/Robot.cpp; sourceTree = "<group>"; };
@@ -545,6 +545,7 @@
 		9BDA7C8E1636068E00A864DC /* vsr_file.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_file.h; sourceTree = "<group>"; };
 		9BDA7C9316360BD200A864DC /* vsr_vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_vertex.h; sourceTree = "<group>"; };
 		9BDA7C9416360E3700A864DC /* vsr_mglyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_mglyph.h; sourceTree = "<group>"; };
+		9BF010B2169CBDF90079F394 /* vsr_fiber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_fiber.h; sourceTree = "<group>"; };
 		9BF7814C1652D66D00AB3AAF /* vsr_constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsr_constraint.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -842,6 +843,7 @@
 				9B72563216642D5E00A853A4 /* vsr_coord.h */,
 				9BBDCA34163A0E570082FBAE /* GFX */,
 				9BDA7C651636035300A864DC /* vsr_interface.h */,
+				9BF010B2169CBDF90079F394 /* vsr_fiber.h */,
 				9BDA7C531636035300A864DC /* vsr_chain.h */,
 				9BF7814C1652D66D00AB3AAF /* vsr_constraint.h */,
 				9BDA7C561636035300A864DC /* vsr_exptemp.h */,
@@ -860,7 +862,6 @@
 				9B76CC7A1628A9540064FF35 /* vsr.h */,
 				9B76CC7B1628A9540064FF35 /* vsr_casts.h */,
 				9B76CC7C1628A9540064FF35 /* vsr_constants.h */,
-				9B76CC7E1628A9540064FF35 /* vsr_gxlib.h */,
 				9B76CC7F1628A9540064FF35 /* vsr_math.h */,
 				9B76CC801628A9540064FF35 /* vsr_matrix.h */,
 				9B76CC811628A9540064FF35 /* vsr_templates.h */,
@@ -905,6 +906,7 @@
 		9BBDCA34163A0E570082FBAE /* GFX */ = {
 			isa = PBXGroup;
 			children = (
+				9B76CC7E1628A9540064FF35 /* vsr_gxlib.h */,
 				9BBF0AD3163B082400146CA6 /* Shaders */,
 				9B76CC7D1628A9540064FF35 /* vsr_gl.h */,
 				9BDA7C521636035300A864DC /* vsr_camera.h */,

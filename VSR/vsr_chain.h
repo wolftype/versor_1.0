@@ -91,8 +91,8 @@ namespace vsr {
 			Frame frame(int k) const { return mFrame[k]; }				///< Get Absolute Displacement Motor
 
 			
-			Frame& operator [] (int k) { return frame(k); }				///< Set kth Absolute Frame
-			Frame operator [] (int k) const { return frame(k); }		///< Get kth Absolute Frame
+			Frame& operator [] (int k) { return mFrame[k]; }				///< Set kth Absolute Frame
+			Frame operator [] (int k) const { return mFrame[k]; }		///< Get kth Absolute Frame
 			
 			/* SURROUNDS */
 			/// Sphere Centered at Joint K Going Through Joint K+1 
@@ -271,6 +271,7 @@ namespace vsr {
                 
                 //Where we are in current rotation scheme
                 for (int i = 0; i < start; ++i){
+                    //cout << "update" << endl; 
                     t = t.sp( mFrame[i].rot() );
                 }
 

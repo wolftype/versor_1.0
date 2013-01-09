@@ -275,12 +275,12 @@ template<> inline void Draw :: Immediate (const Par& s){
         double size = Ro::size( s, true );
         std::vector<Pnt> pp = Ro::split( s );
         
-        double ta = 0;//Ro::size( pp[0], true );
+        double ta = Ro::size( pp[0], true );
         
         if ( fabs(ta) >  FPERROR ) {				
             Pnt p1 = Ro::cen( pp[0] );
             Pnt p2 = Ro::cen( pp[1] );
-            double t = sqrt ( fabs ( size ) );
+            double t = sqrt ( fabs ( ta ) );
             bool real = size > 0 ? 1 : 0;	
             
             glPushMatrix();

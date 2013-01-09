@@ -19,6 +19,8 @@
 #include "vsr_boost.h"
 #include "vsr_coord.h"
 
+#include "vsr_fiber.h"
+
 #include <iostream>
 
 
@@ -26,55 +28,55 @@ using namespace vsr;
 using namespace glv;
 
 
-struct HopfFiber{
-    /// Feed in Spherical Coordinates of a 2-Sphere, get 3-Sphere Fiber out
-    
-    bool bHanded;
-
-    //BASE LINE AT NORTH POLE
-    Lin mInf;
-    //base
-    Cir mCir;
-    
-    HopfFiber(bool hand=true) : bHanded(hand) {
-        mInf =  PAO ^ Ro::null(0, bHanded? 1 :-1,0) ^ Inf(1);
-        mCir = CXZ(1);
-    }
-    
-    //boost only no twist
-    Cir bst(double theta, double phi){
-        double ptheta = PIOVERTWO * theta;
-        Vec v = Vec::x.rot( Biv::xz * ptheta );
-        return mCir.sp( Gen::trv(v * phi )  ) ; 
-        //return mCir.sp( Gen::bst( Par( Tnv(v) * phi ).trs(v) ) ) ; 
-    }
-    
-    //twist only
-    Lin mot(double theta, double phi){
-            double ptheta = PIOVERTWO * theta;
-
-        Vec v = Vec::x.rot( Biv::xz * ptheta );
-        Lin lim = mCir.sp( Gen::trv(v.unit()) ); 
-        Mot mot = Gen::ratio( lim.dual().runit(), mInf.dual(), phi);
-        return lim.sp( mot );
-    }
-    
-    Cir cir(double theta, double phi){
-
-        double ptheta = PIOVERTWO * theta;
-
-        Vec v = Vec::x.rot( Biv::xz * ptheta );
- //       cout << v << endl; 
-        Lin lim = mCir.sp( Gen::trv(v.unit()) );                                                         //<-- Circle to a Line (Limit)
-  //      cout << lim << endl; 
-        Mot mot = Gen::ratio( lim.dual().runit(), mInf.dual(), phi);
-   //
-    //     cout << mot << endl;        
-        return mCir.sp( mot * Gen::trv(v * phi )  ) ; 
-        
-//      Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(1, p * st )  ) ;        // <-- More complicated and unnecessary, takes circle to local tangent, then twists
-    }
-};
+//struct HopfFiber{
+//    /// Feed in Spherical Coordinates of a 2-Sphere, get 3-Sphere Fiber out
+//    
+//    bool bHanded;
+//
+//    //BASE LINE AT NORTH POLE
+//    Lin mInf;
+//    //base
+//    Cir mCir;
+//    
+//    HopfFiber(bool hand=true) : bHanded(hand) {
+//        mInf =  PAO ^ Ro::null(0, bHanded? 1 :-1,0) ^ Inf(1);
+//        mCir = CXZ(1);
+//    }
+//    
+//    //boost only no twist
+//    Cir bst(double theta, double phi){
+//        double ptheta = PIOVERTWO * theta;
+//        Vec v = Vec::x.rot( Biv::xz * ptheta );
+//        return mCir.sp( Gen::trv(v * phi )  ) ; 
+//        //return mCir.sp( Gen::bst( Par( Tnv(v) * phi ).trs(v) ) ) ; 
+//    }
+//    
+//    //twist only
+//    Lin mot(double theta, double phi){
+//            double ptheta = PIOVERTWO * theta;
+//
+//        Vec v = Vec::x.rot( Biv::xz * ptheta );
+//        Lin lim = mCir.sp( Gen::trv(v.unit()) ); 
+//        Mot mot = Gen::ratio( lim.dual().runit(), mInf.dual(), phi);
+//        return lim.sp( mot );
+//    }
+//    
+//    Cir cir(double theta, double phi){
+//
+//        double ptheta = PIOVERTWO * theta;
+//
+//        Vec v = Vec::x.rot( Biv::xz * ptheta );
+// //       cout << v << endl; 
+//        Lin lim = mCir.sp( Gen::trv(v.unit()) );                                                         //<-- Circle to a Line (Limit)
+//  //      cout << lim << endl; 
+//        Mot mot = Gen::ratio( lim.dual().runit(), mInf.dual(), phi);
+//   //
+//    //     cout << mot << endl;        
+//        return mCir.sp( mot * Gen::trv(v * phi )  ) ; 
+//        
+////      Cir nc = ca.sp( Gen::ratio(inf.dual(),lim.dual(), t) * Gen::trv(1, p * st )  ) ;        // <-- More complicated and unnecessary, takes circle to local tangent, then twists
+//    }
+//};
 
 
 void hopf(GLVApp& app){
@@ -98,8 +100,9 @@ void hopf(GLVApp& app){
     if (bReset) { pnt = Ro::null(1,1,1); bReset = false; }
     app.interface.touch(pnt); DRAW(pnt);
     Par par;
+    
     IT2(num,res)
-        Cir tc = hf.cir(-1.0 + 2*u, v);
+        Cir tc = hf.fiber(-1.0 + 2*u, v);
         Pnt tp = Ro::pnt_cir( tc, tphase * Ro::cur(tc) * phase);
         if(bDrawPnt)DRAW3(tp,u,v,1-u);
         if(bDrawCir)DRAW3(tc,v,u,1-u);
@@ -136,7 +139,7 @@ void hopf2(GLVApp& app){
     SET app.gui(num,"num",0,1000)(res,"res",0,1000)(cres,"cres",0,100)(phase,"phase",1,100)(amt,"amt",0,10)(minDistance,"minDistance",0,1000);
     app.gui(handed)(bDrawCir, "drawcir")(bDrawPnt,"drawpnt")(bBoost,"bBoostOnly")(bTwist, "bTwistOnly")(bAxis,"bAxis")(bReset,"reset"); 
     END     
-    if (bAxis) { DRAW3( hf.mInf, 0,0,0); DRAW3( hf.mCir, 0,0,0); }
+    if (bAxis) { DRAW3( hf.inf, 0,0,0); DRAW3( hf.cir, 0,0,0); }
     ITJi(i,num)
         
         double v = t * amt;
@@ -146,11 +149,11 @@ void hopf2(GLVApp& app){
         ITJ(j,res)
         
             double u = 1.0 * j/res;   //-1.0 + 2*         
-            Cir tc = (bBoost) ? hf.bst(-v,u) : hf.cir(-v, u);
+            Cir tc = (bBoost) ? hf.cir.sp( hf.bst(-v,u) ) : hf.fiber(-v, u);
             if (bDrawCir) DRAW3(tc,.5,.5,.5);
             if (Ro::size(tc, false) > 100) DRAW3( Lin(tc), .5,.5,.5);
             
-            if (bTwist) DRAW3(hf.mot(-v, u) , 0, 0, 0);
+            if (bTwist) DRAW3( hf.lim(-v).sp( hf.mot(-v, u) ), 0, 0, 0);
             
             
             ITJi(k,cres)
