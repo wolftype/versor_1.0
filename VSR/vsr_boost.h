@@ -13,8 +13,33 @@
 #define vsr_Boost_h
 
 #include "vsr.h"
+#include "vsr_op.h"
+#include "vsr_frame.h"
+#include "vsr_motor.h"
 
 namespace vsr{
+
+    //
+    class CriticalPoint : public Frame {
+    
+         public:
+         
+         CriticalPoint () : Frame() {}
+         
+        double mDipoleAmt, mDilateAmt, mTwistAmt, mDirAmt;
+        double mPeriod, mPitch;
+    
+       
+    
+            Par par() {
+                return ( ( tyScaled( mDipoleAmt ) + ( mPos ^ Inf(1) )  * mDilateAmt ) + Twist::Along( dlz(), mPeriod, mPitch ) * mTwistAmt ) + (y() ^ Inf(1)) * mDirAmt;
+            }
+            
+            Bst bst( double amt = 1.0 ) {
+                return Gen::bst( par() * amt );
+            }
+    
+    };
     
     class Boost {
 

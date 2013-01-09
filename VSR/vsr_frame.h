@@ -183,6 +183,9 @@ namespace vsr {
             
             //HELPERS
             
+            /*! Flat Point position (dilator generator) */
+            Flp flat() const { return mPos ^ Inf(1); }
+            
 			Vec x() const { return right(); } Vec y() const { return up(); } Vec z() const { return forward(); }
 			
 			/* Local Euclidean Bivectors */

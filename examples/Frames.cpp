@@ -13,6 +13,7 @@
 #include "vsr_tests.h"
 
 #include "vsr_chain.h"
+#include "vsr_field.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -46,9 +47,38 @@ void interpolation(GLVApp& app){
 
 }
 
+void field(GLVApp& app){
+
+    static Field<Vec> f(2,2,2);
+    
+    f.drawPush();
+    
+    static double idx;
+    SET
+        ITJ(i,f.num())  f[i] = f.grid(i); END
+        
+        app.gui(idx,"idx",0,7);
+    END
+    
+    DRAW3( f[idx],1,0,0);
+    
+    Point p = app.mouse().origin;
+    
+    Vec v = f.euler3d( p );
+    Vec vr = f.range(p);
+    VPatch vxl = f.vidx( vr[0], vr[1], vr[2]  );
+    
+    //cout << p << f.range(p) << v << endl; 
+    
+    //cout << vxl.a << " " << vxl.b << " " << vxl.c << " " << vxl.d << " " << vxl.e << " " << vxl.f << " " << vxl.g << " " << vxl.h << endl; 
+    
+    GL::push(); GL::translate( p.w()); DRAW(v); GL::pop();
+}
+
 void GLVApp :: onDraw(){
 
     interpolation(*this);
+//    field(*this);
 
     text("Use the G, R, keys to Grab and Rotate the Right Frame.  Q to let go.",50,50);
 }

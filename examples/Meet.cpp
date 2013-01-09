@@ -10,6 +10,7 @@
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
 #include "vsr_draw.h"
+#include "vsr_tests.h"
 
 #include <iostream>
 
@@ -68,9 +69,29 @@ void linePoint(GLVApp& app){
         
 }
 
+void pointOnCircle(GLVApp& app){
+
+    static Cir c = CXY(1); 
+    DRAWANDTOUCH(c);
+    
+    static double rad,w;
+    SET app.gui(rad)(w); END
+        
+    Pnt p1 = Ro::pnt_cir( c, rad * TWOPI);
+    DRAW3(p1,1,0,0);
+    
+    Vec v = Ro::vec( c, rad * TWOPI );
+    DRAW(v);
+    Pnt p2 = (p1 + v*w).null();
+    DRAW(p2);
+    Cir c1 = p2 ^ c.dual();
+    DRAW(c1);
+}
+
 void GLVApp :: onDraw(){
     //linePoint(*this);
-    circle(*this);
+    //circle(*this);
+    pointOnCircle(*this);
 }
 
 int main(int argc, const char * argv[]) {

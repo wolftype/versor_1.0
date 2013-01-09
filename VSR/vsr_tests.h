@@ -22,6 +22,7 @@ if (!bSet){ \
 #define END2 }}
 
 #define TOUCH(x) app.interface.touch(x);
+#define DRAWANDTOUCH(x) TOUCH(x) DRAW(x)
 
 #define IT1(n) \
 for (int i = 0; i < n; ++i) {\

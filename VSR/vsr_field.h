@@ -14,6 +14,7 @@
 #include "vsr_op.h"
 #include "vsr_frame.h"
 #include "vsr_draw.h"
+#include "vsr_stat.h"
 
 namespace vsr{
 
@@ -28,7 +29,7 @@ namespace vsr{
     
     #define ITEND }}}
 
-    /// Info Container for Euler integration of a Field
+    /// Info Container for Euler integration of a 2d Field
     struct Patch{
         Patch(int _a, int _b, int _c, int _d, double _rw, double _rh) 
         : a(_a), b(_b), c(_c), d(_d), rw(_rw), rh(_rh)
@@ -36,6 +37,14 @@ namespace vsr{
         
         int a, b, c, d;
         double rw, rh;
+    };
+    /// Info Container for Euler integration of a 3d Field
+    struct VPatch{
+         VPatch(int _a, int _b, int _c, int _d, int _e, int _f, int _g, int _h, double _rw, double _rh, double _rd) 
+        : a(_a), b(_b), c(_c), d(_d), e(_e), f(_f), g(_g), h(_h), rw(_rw), rh(_rh), rd(_rd)
+        {}  
+        int a, b, c, d, e, f, g, h;
+        double rw, rh, rd; 
     };
     
     /// Info Container for Quadric Interpolation
@@ -127,27 +136,41 @@ namespace vsr{
     
         /* Totals and Offsets From Center */
         /*! Total Width */
-        float tw() const { return (mWidth-1) * mSpacing; }
+        double tw() const { return (mWidth-1) * mSpacing; }
         /*! Offset Width */
-        float ow() const { return tw() / 2.0 ; }
+        double ow() const { return tw() / 2.0 ; }
         /*! Total Height */
-        float th() const { return (mHeight-1) * mSpacing; }
+        double th() const { return (mHeight-1) * mSpacing; }
         /*! Offset Height */
-        float oh() const { return th() / 2.0 ; }
+        double oh() const { return th() / 2.0 ; }
         /*! Total Depth */
-        float td() const { return (mDepth-1) * mSpacing; }
+        double td() const { return (mDepth-1) * mSpacing; }
         /*! Offset Depth */
-        float od() const { return td() / 2.0 ; }//0;}//
+        double od() const { return td() / 2.0 ; }//0;}//
         /*! Spatial Positions of ith element in x direction  */
-        float px(int i) const { return -ow() + (mSpacing * i); }
+        double px(int i) const { return -ow() + (mSpacing * i); }
         /*! Spatial Positions of jth element in y direction  */
-        float py(int j) const { return -oh() + (mSpacing * j); }
+        double py(int j) const { return -oh() + (mSpacing * j); }
         /*! Spatial Positions of kth element in z direction  */
-        float pz(int k) const { return  od() - (mSpacing * k); }
+        double pz(int k) const { return  od() - (mSpacing * k); }
+        
+        /*! Random Vector in Field*/
+        Vec rand(){ 
+            return Vec( px(Rand::Int(mWidth)) , py(Rand::Int(mHeight)), pz(Rand::Int(mDepth))  );         
+        }
 
-        void draw(){
+        void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
             for (int i = 0; i < mNum; ++i){
-                GL::Draw::Render( mData[i] );
+                GL::Draw::Render( mData[i], r, g, b, a );
+            }
+        }
+
+        void drawPush(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
+            for (int i = 0; i < mNum; ++i){
+                GL::push();
+                GL::translate( mGrid[i].w() );
+                GL::Draw::Render( mData[i],r,g,b,a );
+                GL::pop();
             }
         }
         
@@ -164,6 +187,43 @@ namespace vsr{
             int c = idx(iw+2, 0, 0);
             
             return Patch(a, b, 0, 0, rw, 0);
+        }
+        
+        Vec range( const Vec& v){
+            Vec t = v;
+
+            double minx = px(0);
+            double maxx = px(mWidth-1);
+            double miny = py(0);
+            double maxy = py(mHeight-1);
+            double maxz = pz(0);
+            double minz = pz(mDepth-1);
+            
+            if (t[0] < minx) t[0] = minx;
+            if (t[0] > maxx) t[0] = maxx;
+            if (t[1] < miny) t[1] = miny;
+            if (t[1] > maxy) t[1] = maxy;
+            if (t[2] < minz) t[2] = minz;
+            if (t[2] > maxz) t[2] = maxz;
+            
+            double dx = (t[0] - minx)/tw();
+            double dy = (t[1] - miny)/th();
+            double dz = -(t[2] - maxz)/td();
+            
+            return Vec(dx,dy,dz);
+            
+            
+        }
+        
+        //2d for now
+        T euler2d( const Vec& v){
+            Vec t = range(v);            
+            return surf(t[0], t[1]);
+        }
+        
+        T euler3d( const Vec& v){
+            Vec t= range(v);
+            return vol(t[0], t[1], t[2]);
         }
 
         /*! Indicex of surface at u, v [0, 1]*/
@@ -188,6 +248,35 @@ namespace vsr{
             
             return Patch( a, b, c, d, rw, rh);
         }
+        
+        VPatch vidx(double u, double v, double w){
+            double fw = u * (mWidth - 1);
+            double fh = v * (mHeight - 1);
+            double fd = w * (mDepth-1);
+            
+            int iw = floor ( fw );
+            int ih = floor ( fh );
+            int id = floor ( fd );
+            
+            double rw = fw - iw;
+            double rh = fh - ih;
+            double rd = fd - id;
+            
+            if (iw == mWidth -1) { iw = mWidth -2; rw = 1.0; }
+            if (ih == mHeight -1) { ih = mHeight -2; rh = 1.0; }
+            if (id == mDepth -1) { id = mDepth -2; rd = 1.0; }
+            
+            int a= ( idx ( iw, ih, id ) );
+            int b= ( idx ( iw + 1, ih, id ) );
+            int c= ( idx ( iw + 1, ih + 1, id ) );
+            int d= ( idx ( iw, ih + 1, id ) );
+            int e= ( idx ( iw, ih, id +1) );
+            int f= ( idx ( iw + 1, ih, id +1) );
+            int g= ( idx ( iw + 1, ih + 1, id +1) );
+            int h= ( idx ( iw, ih + 1, id +1) );
+            
+            return VPatch( a, b, c, d, e, f, g, h, rw, rh, rd);
+        }
 
         /*! Get BILINEAR Interpolated Data at eval u,v [0-1.0] */
         T surf(double u, double v){
@@ -200,6 +289,17 @@ namespace vsr{
             T d = mData[ p.d ];//at ( iw, ih + 1, 0 );
             
             return Interp::surface<T> (a,b,c,d, p.rw, p.rh);
+        }
+        
+        T vol(double u, double v, double w){
+            VPatch p = vidx(u,v,w);
+//            T& d = *mData;
+            
+            T a = mData[ p.a ]; T b = mData[ p.b ]; T c = mData[ p.c ]; T d = mData[ p.d ];
+            T e = mData[ p.e ]; T f = mData[ p.f ]; T g = mData[ p.g ]; T h = mData[ p.h ];
+            return Interp::volume<T> (a,b,c,d,e,f,g,h, p.rw, p.rh, p.rd );
+            
+            //return Interp::volume<T> (d[p.a],d[p.b],d[p.c],d[p.d],d[p.e],d[p.f],d[p.g],d[p.h], p.rw, p.rh, p.rd );
         }
         
         Pnt surfGrid(double u, double v){
@@ -218,6 +318,17 @@ namespace vsr{
         T quadSurf(double u, double v){
             Patch p =  surfIdx(u,v);
             
+        }
+
+
+        vector<Vec> contour(const Vec& v, int num, double force){
+            vector<Vec> vp;
+            Vec tv = v;
+            for (int i = 0; i < num; ++i){
+                vp.push_back(tv);
+                tv += euler3d(tv) * force;
+            }
+            return vp;
         }
 
     };

@@ -48,6 +48,14 @@ namespace vsr{
             return low + ( (high-low) * rand() / RAND_MAX );
         }
         
+        inline static int Int( int high, int low = 0 ) {
+            int diff = high - low;
+
+            int result = floor( Num(diff+1) );
+
+            return low + result;
+        }
+        
         inline static double Poisson(double mean) {            
             poisson_distribution<double> poisson(mean);
             return poisson( gen );

@@ -153,11 +153,12 @@ In mathematics, the inner product of two points `pa` and `pb` is written \\(p_{a
 
 	Point pa = Vec(1,0,0).null();
 	Point pb = Vec(-1,0,0).null();
-	Scalar squaredDist = pa <= pb;
+	Scalar squaredDist = ( pa <= pb ) * -2;
 	
-which in this case would return `4`.  We can extract the Scalar into a double like so:
+which in this case would return a Scalar value of `4`.  The `-2` is there since the inner product really returns **half the negative** squared distance.
+We can extract the Scalar into a c++ double like so:
 
-	double squaredDist = ( pa <= pb )[0];
+	double squaredDist = ( pa <= pb )[0] * -2;
 
 Points thought of as Spheres (really, Dual Spheres, more on _Duality_ later): they are Spheres of zero radius.  As such they are a type of _Round_ element.  We can also build points this way:
 

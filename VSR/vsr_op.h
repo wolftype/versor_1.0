@@ -376,6 +376,7 @@ struct Gen {
     
     /*!
         Generate Boost as exponential of a Point Pair
+        Implemented from "Square Root and Logarithm of Rotors. . ." by Dorst and Valkenburg, 2011
         @param Point Pair generator
     */
     static Bst bst(const Par& tp){
@@ -630,7 +631,7 @@ struct Ro {
 //    }
 
     /*!
-     Direct (imaginary?) Cirlce From Dual Sphere and Euclidean Bivector
+     Direct (imaginary?) Circle From Dual Sphere and Euclidean Bivector
      */    
      static Cir cir(const Dls& dls, const Biv& flat){
         return dls ^ ( ( dls <= ( flat.involution() * Inf(1) ) )  * -1.0 );  
@@ -689,6 +690,12 @@ struct Ro {
         return (r==0) ? 10000 : 1.0 / Ro::rad(s);
     }
     
+    /*! Euclidean Vector of Circle at theta */
+    static Vec vec(const Cir& c, double theta = 0){
+        Dll axis = (Inf(1) <= c).runit();        
+        return Vec::x.sp( Gen::ratio( Biv::xz, Biv(axis) ) * Gen::rot(Biv::xz * theta) );    
+    }
+    
     /*! Point Pair on Circle at angle t*/
     static Par par_cir(const Cir& c, double t);
     /*! Point on Circle at angle t*/
@@ -738,7 +745,7 @@ struct Fl {
 		return dual ? ( Ori(1) <= Fl::dir( f.undual() ) ).wt() : ( Ori(1) <= Fl::dir(f) ).wt();
     }
     
-    /*! Plane Orthogonal to Circle at angle theta */
+    /*! Plane Orthogonal to Circle at angle theta DEPRECATED */
     static Dlp ortho_cir( const Cir& cir, double theta){
         Drv drvHome(0,0,1);
         Dll dllHome = Op::dl( Ori(1) ^ Vec(0,1,0) ^ Inf(1) );
@@ -776,7 +783,7 @@ struct Ta {
     
     /*! Location of Tangent Element (similar formulation to Rounds) */
     template< class A >
-    Pnt loc( const A& s){
+    static Pnt loc( const A& s){
         return ( s / Inf(-1) <= s );
     }
 
@@ -791,8 +798,18 @@ struct Ta {
     }
     /*! Weight of Tangent Element */
     template<class A>
-    double wt(const A& s){
+    static double wt(const A& s){
         return ( Ori(1) <= dir(s) ).sqwt();
+    }
+};
+
+struct Eu {
+    /*!
+        Euclidean Vector 
+    */
+    static Vec vec(const Cir& c){        
+        Dll axis = (Inf(1) <= c).runit();        
+        return Vec::x.sp( Gen::ratio( Biv::xz, Biv(axis) ) );
     }
 };
 
@@ -801,14 +818,24 @@ template<> inline VSR_PRECISION Ro::size( const Par& r, bool dual){
     return ( ( r * r.involution() ) / ( Mot(s * s) ) * ( (dual) ? -1.0 : 1.0 )  )[0];
 }   
 
-inline Par Ro::par_cir(const Cir& c, double t){
-    return ( Fl::ortho_cir(c,t) ^ c.dual() ).dual();
+
+inline Par Ro::par_cir(const Cir& c, double theta){
+
+        Dll axis = (Inf(1) <= c).runit();			
+        
+        Rot rot = Gen::ratio( Biv::xz, Biv(axis) );
+        Vec vec = Vec::x.sp( rot * Gen::rot(Biv::xz * theta));
+        
+        return Ro::par( Ro::sur(c), vec );
 }
 
 //Point on Circle at theta
 inline Pnt Ro::pnt_cir( const Cir& cir, double theta){
-	return Ro::loc( Ro::split( Ro::par_cir( cir, theta), true ) );
+
+    return Ro::split( Ro::par_cir(cir,theta), true).null();
+//	return Ro::loc( Ro::split( Ro::par_cir( cir, theta), true ) );
 }
+
 
 
 typedef Ro Round;
@@ -826,8 +853,8 @@ typedef Ta Tangent;
 #define S2F(f) f/1000.0
 #define LN(x,y,z) ( vsr::Pnt(0,0,0,1,.5)^PT(x,y,z)^vsr::Inf(1) )
 #define DLN(x,y,z) ( vsr::Op::dl(LN(x,y,z)) )
-#define EP vsr::Dls(0,0,0,1,-.5)
-#define EM vsr::Dls(0,0,0,1,.5)
+#define EP vsr::Dls(0,0,0,1,-.5) // dual unit sphere at origin: hyperbolic space
+#define EM vsr::Dls(0,0,0,1,.5)  // dual imaginary unit sphere at origin: spherical space
 #define PAO vsr::Pnt(0,0,0,1,0)
 #define INFTY vsr::Inf(1)
 #define HLN(x,y,z) (vsr::Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
