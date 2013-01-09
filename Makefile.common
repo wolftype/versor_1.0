@@ -221,7 +221,7 @@ else ifeq ($(PLATFORM), macosx)
 		CPPFLAGS += -I/usr/local/include/
 	endif
 
-	LDFLAGS	+= -lm -lstdc++
+	LINK_LDFLAGS += -lm -lstdc++
 	DLIB_EXT = dylib
 	DLIB_OPT = dynamiclib
 
