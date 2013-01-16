@@ -19,7 +19,6 @@
 		9B1E155F1670FF470015D25C /* col.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
 		9B1E15611670FF470015D25C /* col.frag in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD5163B083B00146CA6 /* col.frag */; };
 		9B1E15621670FF470015D25C /* pos.vert in Resources */ = {isa = PBXBuildFile; fileRef = 9BBF0AD6163B083B00146CA6 /* pos.vert */; };
-		9B1E156A1670FFBE0015D25C /* Transformations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E15691670FFBE0015D25C /* Transformations.cpp */; };
 		9B1EF0E5166D988900617EB8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B1EF0E6166D988900617EB8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B1EF0E7166D988900617EB8 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
@@ -40,7 +39,6 @@
 		9B28075A16700947001806F8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B28075B16700947001806F8 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
 		9B28075C16700947001806F8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
-		9B2807651670097D001806F8 /* Topo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B2807641670097D001806F8 /* Topo.cpp */; };
 		9B58902B1641A69B0096B491 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B58902C1641A69B0096B491 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B58902D1641A69B0096B491 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AC162DF44300DD9FC2 /* libGLV.a */; };
@@ -373,7 +371,6 @@
 		9B0C757D162C9C5E0037F835 /* vsr_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vsr_tests.h; path = ../../VSR/vsr_tests.h; sourceTree = "<group>"; };
 		9B0C757E162C9F580037F835 /* vsr_gfxdata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gfxdata.h; sourceTree = "<group>"; };
 		9B1E15661670FF470015D25C /* Transformations */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Transformations; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B1E15691670FFBE0015D25C /* Transformations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Transformations.cpp; path = ../../examples/Transformations.cpp; sourceTree = "<group>"; };
 		9B1EF0ED166D988900617EB8 /* Twists */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Twists; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1EF0F0166D98D000617EB8 /* Twists.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Twists.cpp; path = ../../examples/Twists.cpp; sourceTree = "<group>"; };
 		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = DemoMotors; path = Robot; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -383,7 +380,6 @@
 		9B26F0C91671072300455E54 /* Frames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Frames.cpp; path = ../../examples/Frames.cpp; sourceTree = "<group>"; };
 		9B26F0CB1676D76000455E54 /* Curvature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Curvature.cpp; path = ../../examples/private/Curvature.cpp; sourceTree = "<group>"; };
 		9B28076116700947001806F8 /* Twists copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Twists copy"; path = Topo; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B2807641670097D001806F8 /* Topo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Topo.cpp; path = ../../examples/Topo.cpp; sourceTree = "<group>"; };
 		9B456BB51640B261008E5EA2 /* To Do */ = {isa = PBXFileReference; lastKnownFileType = text; name = "To Do"; path = "../../To Do"; sourceTree = "<group>"; };
 		9B456BB71640C2BB008E5EA2 /* vsr_stat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_stat.h; sourceTree = "<group>"; };
 		9B5890381641A69B0096B491 /* Graphics copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Graphics copy"; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -441,6 +437,7 @@
 		9BB108271638836A009F3070 /* Knots */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Knots; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB10836163883B5009F3070 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knots copy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB1083A16388400009F3070 /* Hopf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hopf.cpp; path = ../../examples/Hopf.cpp; sourceTree = "<group>"; };
+		9BB10E8416A4F48500EADA1C /* vsr_gamma.h */ = {isa = PBXFileReference; path = vsr_gamma.h; sourceTree = "<group>"; };
 		9BBC39EC164346D500BA5208 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../../Makefile; sourceTree = "<group>"; };
 		9BBDCA201639FE8B0082FBAE /* vsr_mdraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_mdraw.h; sourceTree = "<group>"; };
 		9BBDCA35163A1C590082FBAE /* vsr_gl_vattrib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_gl_vattrib.h; sourceTree = "<group>"; };
@@ -740,12 +737,10 @@
 		9B76CC081628A9380064FF35 = {
 			isa = PBXGroup;
 			children = (
-				9B1E15691670FFBE0015D25C /* Transformations.cpp */,
-				9B2807641670097D001806F8 /* Topo.cpp */,
-				9B1EF0F0166D98D000617EB8 /* Twists.cpp */,
 				9B5C461F164463A1003BF1B2 /* lib */,
 				9BBC39EC164346D500BA5208 /* Makefile */,
 				9B58903B1641A6D90096B491 /* Meet.cpp */,
+				9B1EF0F0166D98D000617EB8 /* Twists.cpp */,
 				9B68014A163F34D1004A850F /* Graphics.cpp */,
 				9B26F0CB1676D76000455E54 /* Curvature.cpp */,
 				9B76CCE91628AACF0064FF35 /* test.cpp */,
@@ -907,6 +902,7 @@
 			isa = PBXGroup;
 			children = (
 				9B76CC7E1628A9540064FF35 /* vsr_gxlib.h */,
+				9BB10E8416A4F48500EADA1C /* vsr_gamma.h */,
 				9BBF0AD3163B082400146CA6 /* Shaders */,
 				9B76CC7D1628A9540064FF35 /* vsr_gl.h */,
 				9BDA7C521636035300A864DC /* vsr_camera.h */,
@@ -1444,7 +1440,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B1E156A1670FFBE0015D25C /* Transformations.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1476,7 +1471,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B2807651670097D001806F8 /* Topo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

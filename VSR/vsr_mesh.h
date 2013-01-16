@@ -317,8 +317,10 @@ namespace vsr {
 };
 
 struct UVMesh{
-    vector<Pnt> vp;
     int u, v;
+
+    vector<Pnt> vp; ///<-- VECTORS
+    vector<Vec> np; ///<-- NORMALS
     bool bFlipNormals;
     UVMesh(int _u, int _v) : u(_u), v(_v), bFlipNormals(0) {}
     void add(const Pnt& p) { vp.push_back(p); }
@@ -339,15 +341,12 @@ struct UVMesh{
                 int c = b + v;
                 int d = c - 1;
                 
-                
                 GL::normal(normal(a,b,c).w());
                 GL::Quad(vp[a], vp[b], vp[c], vp[d]);
             
             }
         }
         glEnd();
-    
-    
     }
     
     void drawTri(float rr=1, float gg=1, float bb=1, float aa =1){
@@ -389,9 +388,10 @@ struct UVMesh{
         }
         glEnd();
     
-    
     }
 };
+
+
 
 struct CubeMesh{
      vector<Pnt> vp;
