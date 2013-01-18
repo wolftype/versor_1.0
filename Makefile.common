@@ -165,7 +165,9 @@ ifeq ($(PLATFORM), linux)
 	endif
 
 	ifeq ($(ARCH), 32)
-		CFLAGS += -m32
+		ifneq( $(shell uname -m), armv6l)
+			CFLAGS += -m32
+		endif
 	else ifeq ($(ARCH), 64)
 		CFLAGS += -m64
 	else ifeq ($(ARCH), 32_64)
