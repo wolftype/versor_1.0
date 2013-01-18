@@ -15,6 +15,8 @@
 #--------------------------------------------------------------------------
 # Operating system: 'macosx', 'linux', or 'windows'
 UNAME := $(shell uname)
+UNAMEM := $(shell uname -m)
+
 ifeq ($(UNAME), Linux)
 	PLATFORM = linux
 else ifeq ($(UNAME), Darwin)
@@ -41,7 +43,7 @@ endif
 
 # Architecture: '32' or '64'
 ifeq ($(shell which getconf 2>/dev/null),)
-	UNAMEM := $(shell uname -m)
+	#UNAMEM := $(shell uname -m)
 	ifeq ($(UNAMEM), $(findstring $(UNAMEM), x86_64 ia86 amd64))
 		ARCH = 64
 	else
@@ -158,7 +160,7 @@ endif
 # Linux:
 ifeq ($(PLATFORM), linux)
 
-	UNAMEM := $(shell uname -m)
+#	TUNAMEM := $(shell uname -m)
 
 	PLATFORM_DIR = linux/
 
@@ -167,7 +169,7 @@ ifeq ($(PLATFORM), linux)
 	endif
 
 	ifeq ($(ARCH), 32)
-		ifneq( $(UNAMEM), armv6l)
+		ifneq($(UNAMEM), armv6l)
 			CFLAGS += -m32
 		endif
 	else ifeq ($(ARCH), 64)
