@@ -158,6 +158,8 @@ endif
 # Linux:
 ifeq ($(PLATFORM), linux)
 
+	UNAMEM := $(shell uname -m)
+
 	PLATFORM_DIR = linux/
 
 	ifneq ($(USING_PUREDYNE), 0)
@@ -165,7 +167,7 @@ ifeq ($(PLATFORM), linux)
 	endif
 
 	ifeq ($(ARCH), 32)
-		ifneq( $(shell uname -m), armv6l)
+		ifneq( $(UNAMEM), armv6l)
 			CFLAGS += -m32
 		endif
 	else ifeq ($(ARCH), 64)
