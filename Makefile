@@ -7,14 +7,16 @@ title:
 	@echo
 
 help: title
-	@echo make vsr ................ builds the main vsr library with built-in graphics
-	@echo make GFX=0 vsr .......... builds vsrs operations without graphics functionality
-	@echo make test
+	@echo make vsr ....................... builds the main vsr library with built-in graphics
+	@echo make GFX=0 vsr ................. builds vsrs operations without graphics functionality
+	@echo make test ...................... builds and runs tests/test.cpp to test vsr engine
+	@echo make testGL .................... builds and runs tests/testGL.cpp to test graphics functionality  
+	@echo make examples/filename.cpp ..... builds and runs filename.cpp
 	@echo
-	@echo email questions to wolftype@gmail.com
-	@echo
+	@echo email questions to wolftype@gmail.com or submit issues via github 
+	@echo more info: versor.mat.ucsb.edu
 
-#Target Name
+#Target Nameâ‰
 LIB_NAME = vsr
 STRICT_WARNINGS = 0
 include Makefile.common
@@ -124,6 +126,7 @@ $(OBJ_DIR)%.o: %.c
 
 $(PCH_DIR)%.h.gch: %.h
 	@echo CXX precompiling $< to $@
+	@echo This will take a little while and generate a large file ~600mb but only needs to happen once
 	$(CXX) $(CXXFLAGS) $(HPATH) -x c++-header -c $< -o $@
 
 linkfile:
@@ -151,8 +154,8 @@ $(EXEC_TARGETS): $(LIB_PATH) FORCE
 	$(CXX) $(CXXFLAGS) $(HPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS)
 	@cd $(BIN_DIR) && ./$(*F)
 
-#test: test.cpp vsr
-#	$(CXX) $(CXXFLAGS) $(HPATH) $< -o $(BUILD_DIR)test $(LDFLAGS) -l$(LIB_NAME)
+test: vsr tests/test.cpp
+testGL: vsr tests/testGL.cpp
 
 install: FORCE vsr
 	@echo installing to $(DESTDIR)
