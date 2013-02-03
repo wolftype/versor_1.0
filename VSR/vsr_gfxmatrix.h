@@ -20,6 +20,90 @@ namespace vsr{
     typedef Mat4<float> Mat4f;
     typedef Mat4<double> Mat4d;
     
+    /*! Transformation Matrices Container */
+    struct XformMat {
+        float model[16];
+        float view[16];
+        float modelView[16];
+        float proj[16];
+        float normal[16];
+
+        double modeld[16];
+        double viewd[16];
+        double modelViewd[16];
+        double projd[16];
+        double normald[16];
+        
+        Mat4f modelMatrixf() const { return model; }
+        Mat4f viewMatrixf()const { return view; }
+        Mat4f modelViewMatrixf()const { return modelView; }
+        Mat4f projMatrixf()const { return proj; }
+        Mat4f normalMatrixf() const { return normal; }
+
+        void toDoubles() {
+            for (int i = 0; i < 16; ++i){
+                modeld[i] = model[i];
+                projd[i] = proj[i];
+                viewd[i] = view[i];
+                modelViewd[i] = modelView[i];
+                normald[i] = normal[i];
+            }
+        }
+
+        void toFloats() {
+            for (int i = 0; i < 16; ++i){
+                model[i] = modeld[i];
+                proj[i] = projd[i];
+                view[i] = viewd[i];
+                modelView[i] = modelViewd[i];
+                normal[i] = normald[i];
+            }
+        }
+
+        int	viewport[4];
+
+        //Print View Matrix (Camera)
+        friend ostream& operator << ( ostream& os, const XformMat& xf){
+        
+            os << "VIEWPORT" << "\n";            
+            for (int i = 0; i < 2; ++i){
+                for (int j = 0; j < 2; ++j){
+                    os << xf.viewport[i + j * 2] << " "; 
+                }
+                os << "\n";
+            }
+        
+            os << "MODELVIEW" << "\n";
+            for (int i = 0; i < 4; ++i){
+                for (int j = 0; j < 4; ++j){
+                    int idx = i + j * 4;
+                    os << xf.modelViewd[idx] << " ";
+                }
+                os << "\n";
+            }
+
+            os << "PROJECTION" << "\n";
+            for (int i = 0; i < 4; ++i){
+                for (int j = 0; j < 4; ++j){
+                    int idx = i + j * 4;
+                    os << xf.projd[idx] << " ";
+                }
+                os << "\n";
+            }
+
+            os << "NORMAL" << "\n";
+            for (int i = 0; i < 4; ++i){
+                for (int j = 0; j < 4; ++j){
+                    int idx = i + j * 4;
+                    os << xf.normald[idx] << " ";
+                }
+                os << "\n";
+            }
+            
+            return os;
+        }
+    };
+    
     struct XMat {
       
         static Mat4f ortho (float X, float Y0); 
@@ -112,8 +196,30 @@ namespace vsr{
         static const Mat4f identity();
         
         
-//        static const Vec3f Project();
-//        static const Vec3f UnProject();
+        /* Projection of World onto Screen Coordinates */
+        static const Vec3f Project(const Vec3f& v, const XformMat& xf){
+            Mat4f tmp = xf.projMatrixf() * xf.modelViewMatrixf();
+            Vec4f vp = tmp * Vec4f(v[0],v[1],v[2],1.0);
+            
+            return Vec3f(
+                xf.viewport[0] + xf.viewport[2] * (vp[0] + 1)/2.0,
+                xf.viewport[1] + xf.viewport[3] * (vp[1] + 1)/2.0,
+                (vp[2] + 1) / 2.0
+            );
+        }
+        
+        /* UNProjection of Screen Coordinates into World */
+        static const Vec3f UnProject(const Vec3f& v, const XformMat& xf){
+            Mat4f pm = xf.modelViewMatrixf() * xf.projMatrixf();
+            Vec4f vp( 
+                (2.0 * (v[0] - xf.viewport[0]) / xf.viewport[2] ) - 1, 
+                (2.0 * (v[1] - xf.viewport[1]) / xf.viewport[3] ) - 1, 
+                (2.0 * (v[2]) ) - 1,
+                1
+                );
+            Vec4f r = !pm * vp;
+            return Vec3f(r[0],r[1],r[2]);
+        }
         
     };
 
@@ -181,84 +287,7 @@ namespace vsr{
         );    
     }
 
-//
-//template<typename T>
-//Project( T in, const float model[16], const float proj[16], const int viewport[4],
-//	      T * win)
-//{
-//    model
-//    __gluMultMatrixVecd(modelMatrix, in, out);
-//    __gluMultMatrixVecd(projMatrix, out, in);
-//    if (in[3] == 0.0) return(GL_FALSE);
-//    in[0] /= in[3];
-//    in[1] /= in[3];
-//    in[2] /= in[3];
-//    /* Map x, y and z to range 0-1 */
-//    in[0] = in[0] * 0.5 + 0.5;
-//    in[1] = in[1] * 0.5 + 0.5;
-//    in[2] = in[2] * 0.5 + 0.5;
-//
-//    /* Map x,y to viewport */
-//    in[0] = in[0] * viewport[2] + viewport[0];
-//    in[1] = in[1] * viewport[3] + viewport[1];
-//
-//    *winx=in[0];
-//    *winy=in[1];
-//    *winz=in[2];
-//    return(GL_TRUE);
-//}
-//
-//UnProject(GLdouble winx, GLdouble winy, GLdouble winz,
-//		const GLdouble modelMatrix[16], 
-//		const GLdouble projMatrix[16],
-//                const GLint viewport[4],
-//	        GLdouble *objx, GLdouble *objy, GLdouble *objz)
-//{
-//    double finalMatrix[16];
-//    double in[4];
-//    double out[4];
-//
-//    __gluMultMatricesd(modelMatrix, projMatrix, finalMatrix);
-//    if (!__gluInvertMatrixd(finalMatrix, finalMatrix)) return(GL_FALSE);
-//
-//    in[0]=winx;
-//    in[1]=winy;
-//    in[2]=winz;
-//    in[3]=1.0;
-//
-//    /* Map x and y from window coordinates */
-//    in[0] = (in[0] - viewport[0]) / viewport[2];
-//    in[1] = (in[1] - viewport[1]) / viewport[3];
-//
-//    /* Map to range -1 to 1 */
-//    in[0] = in[0] * 2 - 1;
-//    in[1] = in[1] * 2 - 1;
-//    in[2] = in[2] * 2 - 1;
-//
-//    __gluMultMatrixVecd(finalMatrix, in, out);
-//    if (out[3] == 0.0) return(GL_FALSE);
-//    out[0] /= out[3];
-//    out[1] /= out[3];
-//    out[2] /= out[3];
-//    *objx = out[0];
-//    *objy = out[1];
-//    *objz = out[2];
-//    return(GL_TRUE);
-//}
 
-
-
-//    inline Mat4f lookAt(const Vec3f eye, const Vec3f target, const Vec3f up ){
-//        Vec3f z = (eye-target).unit();
-//        Vec3f x = up.cross(z).unit();
-//        Vec3f y = z.cross(x);
-//        
-//        Mat4f m( Vec4f(x,0), Vec4f(y,0), Vec4f(z,0), Vec4f(0,0,0,1) );
-//        
-//        Vec4f eyep = m * (-eye);
-//        
-//    }
-//    	
 
 
     

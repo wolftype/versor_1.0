@@ -96,6 +96,12 @@ namespace vsr {
                 GL::error( "vbo buffer data");
             }    
 
+            void buffer(GLvoid * data){
+                mData = data;
+                glBufferData(mTarget, mDataSize, mData, mUsage);
+                GL::error( "vbo buffer data");
+            }    
+
             void set(GLvoid* udata, int num, GLsizeiptr s, GL::BUFFER t){
                 mData = udata;
                 mNum = num;
@@ -112,6 +118,15 @@ namespace vsr {
                 GL::error("vbo ubind");
             }
 
+            void update(GLvoid * data ) {
+                mData = data;
+                bind();
+                glBufferSubData( mTarget, 0, mDataSize, mData );
+                unbind();
+                GL::error( "vbo update data");
+
+            }
+            
             void update() {
 
                 bind();

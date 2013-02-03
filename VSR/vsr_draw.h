@@ -343,7 +343,7 @@ template<> inline void Draw :: Immediate (const Pln& s){
     Dls v = Fl::loc( s , PAO, false ); //Sph?
     Rot r = Gen::ratio( Vec::z, Op::dle( Biv( s ) ).unit() );
     glTranslatef(v[0],v[1],v[2]);
-    glMultMatrixf(&(Gen::mat(r)[0][0]));
+    glMultMatrixf(&(Gen::mat(r).col[0][0]));
     Glyph::SolidGrid();		
 }
 

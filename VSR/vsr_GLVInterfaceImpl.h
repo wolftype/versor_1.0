@@ -159,17 +159,22 @@ namespace vsr {
             }
         }
         
+        //OPENGLES2.0
         void advanced(){
-            cout << "advanced GLVApp onDraw" << endl; 
+           // cout << "advanced GLVApp onDraw" << endl; 
+            scene().updateMatrices();
+            interface.viewCalc();  
             onDraw();
         }
         
+        //OPENGLES1.1, etc
         void immediate(){
             //Push into Active Camera Settings (viewport bit, etc)
                 scene().push3D();
             
+                //cout << "get matrices" << endl; 
                 scene().getMatrices();
-                            
+                //scene().updateMatrices();           
                 interface.viewCalc();  
                 
                 //Default Color

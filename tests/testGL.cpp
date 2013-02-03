@@ -24,16 +24,16 @@ GLVApp * app;
 
 void GLVApp :: onDraw(){
     
-	Dls a = Ro::dls(-1,0,0);
-	Dls b = Ro::dls(1,0,0);
-	
-	static int c = 0; c++;
-	double rad = sin(PI * c / 90.0);
-	a = a.trs(rad,0,0);
-	b = b.trs(-rad,0,0);
-	Cir cir = (a ^ b).dual();
+//	Dls a = Ro::dls(-1,0,0);
+//	Dls b = Ro::dls(1,0,0);
+//	
+//	static int c = 0; c++;
+//	double rad = sin(PI * c / 90.0);
+//	a = a.trs(rad,0,0);
+//	b = b.trs(-rad,0,0);
+//	Cir cir = (a ^ b).dual();
     
-    static Cir sc= CXY(1);
+    static Cir sc = CXY(1);
     
     DRAW(sc);
     interface.touch(sc);
@@ -41,11 +41,6 @@ void GLVApp :: onDraw(){
 //	DRAW3(a,0,1,0); DRAW3(b,0,1,0); DRAW3(cir,1,0,0);	
 }
 
-struct Tap : public View3D {
-	virtual void onDraw(){
-		cout << "hello" << endl; 
-	}
-};
 
 int main (int argc, const char * argv[])
 {
@@ -53,15 +48,12 @@ int main (int argc, const char * argv[])
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
 	glv.colors().back.set(.3,.3,.3);		
-	
-	
-    win = new Window(500,500,"VERSOR",&glv);    
-	View3D * tap = new View3D();
-
-//    app = new GLVApp(win);    
     
- //   glv << app;        
-	glv << tap;
+    win = new Window(500,500,"VERSOR",&glv);    
+    
+    app = new GLVApp(win);
+	glv << app;
+    
     Application::run();
     
     return 0;

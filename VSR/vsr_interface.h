@@ -12,6 +12,7 @@
 #define vsr_Interface_h
 
 #include "vsr_gl.h"
+#include "vsr_gfxmatrix.h"
 #include "vsr_set.h"
 #include "vsr_drawable.h"
 #include "vsr_camera.h"
@@ -19,7 +20,6 @@
 
 namespace vsr  {
     
-//    class Model;
     
     /* Mapped Key values from GLV */
     namespace Key{
@@ -87,10 +87,11 @@ namespace vsr  {
 	};    
     
     
-    
+    /*! Abstract Interface Class */
     class Interface {
         
         int mMode;  ///< Edit Mode State
+       // bool bFixed; ///< Fixed Functionality or 
         
     public:
     
