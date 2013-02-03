@@ -29,6 +29,8 @@ void interpolation(GLVApp& app){
         fa.set( PT(-1,0,0), Rot(1,0,0,0) );
         
         Pnt p = app.interface.mouse.origin;
+        cout << p << endl; 
+        
         fa.orientY(Vec(p));
     
         //Frame fb is interfaced by 'G' and 'R' keys
@@ -44,6 +46,9 @@ void interpolation(GLVApp& app){
             
             DRAW(frame);
         }
+        
+        Pnt tp = PT(1,0,0);
+        cout << -tp << endl; 
 
 }
 

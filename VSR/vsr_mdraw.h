@@ -23,6 +23,8 @@ namespace vsr{
                 /// BASIC GL PIPELINE: SHADER -> VBO -> ATTRIB -> DRAW
                 struct Pipe {
                 
+                    static int mIdx;
+                
                     static ShaderProgram * shaderprogram;
                     static std::map<int, DBO> vbo;//[200][2];
 //                    static GLuint VBOHandle[200][2];
@@ -30,8 +32,7 @@ namespace vsr{
                     
                     static Uniform LightPosition;
                     
-                    static void InitBufferObjects(){
-                     
+                    static void InitBufferObjects(){                      
                         
                         //basic shader (build into shader node structre)
                         shaderprogram = new ShaderProgram("pos.vert","col.frag");
@@ -50,16 +51,30 @@ namespace vsr{
 
                         shaderprogram -> unbind();
                         
-                        //Bind Circle Mesh Buffer Data
-                        Buffer( CIR, Mesh::Circle(1) );
-                        
+                        //Bind All Mesh Buffer Data
+                        Buffer( Mesh::Circle(1), CIR );
+                        //...Buffer( Mesh::Arrow(1), Vec ); 
                     }
                     
-                    static void Buffer(int id, Mesh mesh){
-                      //  VBO v( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
-                      //  VBO e( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLubyte), GL::ELEMENTBUFFER );
-                        vbo[id].vertex = VBO( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
-                        vbo[id].index = VBO( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLuint), GL::ELEMENTBUFFER );
+//                    //Create and Bind Mesh, return ID of VBO
+//                    static int Buffer(int id, Mesh mesh){
+//                      //  VBO v( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
+//                      //  VBO e( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLubyte), GL::ELEMENTBUFFER );
+//                        vbo[id].vertex = VBO( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
+//                        vbo[id].index = VBO( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLuint), GL::ELEMENTBUFFER );
+//                        return id;
+//                    }
+                    
+                    static int Buffer(Mesh mesh, int id = -1){
+                        mIdx += 1;
+                        int tmp = (id == -1) ? mIdx : id;
+                        vbo[tmp].vertex = VBO( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
+                        vbo[tmp].index = VBO( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLuint), GL::ELEMENTBUFFER );
+                        return tmp;
+                    }
+                    
+                    static int Update(int id, Vertex * val){
+                        vbo[id].vertex.update(val);
                     }
                     
                     static void Pointer(){
@@ -95,6 +110,8 @@ namespace vsr{
                     
                 };
                 
+                //DECLARE                 
+                int Pipe::mIdx;
                 std::map<int, DBO> Pipe::vbo;
                 VAttrib4 Pipe::vatt;
                 ShaderProgram * Pipe::shaderprogram;

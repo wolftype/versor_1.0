@@ -128,15 +128,15 @@ struct Gen {
     }
     
     /*! Generate a Rotor (i.e quaternion) from spherical coordinates
-        @param[in] theta
-        @param[in] phi
+        @param[in] theta in xz plane from (1,0,0)
+        @param[in] phi in rotated xy plane
     */
     static Rot rot(double theta, double phi){
-        double ptheta = (PIOVERTWO * theta);
-        double pphi = (PIOVERFOUR * phi);
+       // double ptheta = (PIOVERTWO * theta);
+       // double pphi = (PIOVERFOUR * phi);
         
-        Rot rt = Gen::rot( Biv::xz * ptheta );
-        Rot rp = Gen::rot( Biv::xy.sp( rt ) * pphi  );
+        Rot rt = Gen::rot( Biv::xz * theta );
+        Rot rp = Gen::rot( Biv::xy.sp( rt ) * phi  );
         
         return rp * rt;
     }

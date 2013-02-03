@@ -157,17 +157,17 @@ namespace vsr {
             void reset()	{ mRot.set(1,0,0,0); mPos.set(0,0,0,1,0); orient(); }		///< reset position and orientation
 			
 			/*! Local Z Axis Euclidean Vector */
-			Vec forward()	const { return Vec(mImage[2][0],mImage[2][1],mImage[2][2]) * - 1; }
+			Vec forward()	const { return Vec(mImage.col[2][0],mImage.col[2][1],mImage.col[2][2]) * - 1; }
 			/*! Local Y Axis Euclidean Vector */
-			Vec up()		const { return Vec(mImage[1][0],mImage[1][1],mImage[1][2]); }
+			Vec up()		const { return Vec(mImage.col[1][0],mImage.col[1][1],mImage.col[1][2]); }
 			/*! Local X Axis Euclidean Vector */
-			Vec right()		const { return Vec(mImage[0][0],mImage[0][1],mImage[0][2]); }						
+			Vec right()		const { return Vec(mImage.col[0][0],mImage.col[0][1],mImage.col[0][2]); }						
 			/*! Reverse Local Z Axis Euclidean Vector */
-			Vec backward()	const { return Vec(mImage[2][0],mImage[2][1],mImage[2][2]); }
+			Vec backward()	const { return Vec(mImage.col[2][0],mImage.col[2][1],mImage.col[2][2]); }
 			/*! Reverse Local Y Axis Euclidean Vector */
-			Vec down()		const { return Vec(mImage[1][0],mImage[1][1],mImage[1][2]) * -1; }
+			Vec down()		const { return Vec(mImage.col[1][0],mImage.col[1][1],mImage.col[1][2]) * -1; }
 			/*! Reverse Local X Axis Euclidean Vector */
-			Vec left()		const { return Vec(mImage[0][0],mImage[0][1],mImage[0][2]) * -1; }						
+			Vec left()		const { return Vec(mImage.col[0][0],mImage.col[0][1],mImage.col[0][2]) * -1; }						
 			Pnt pos() const { return mPos; }					///< get position point
 			void pos(const Pnt& p) { mPos = p; }				///< set position point 
 			Pnt& pos() { return mPos; }							///< set position point

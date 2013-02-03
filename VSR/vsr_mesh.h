@@ -37,6 +37,8 @@ namespace vsr {
         
         {}
         
+        Vertex(float x, float y, float z) : Pos(x,y,z), Norm(0,0,1), Col(1,1,1,1), Tex(0.0,0.0) {}
+        
         float * pos() { return &Pos[0]; }
         float * col() { return &Col[0]; }
         float * norm() { return &Norm[0]; }
@@ -70,8 +72,15 @@ namespace vsr {
         Mesh() : mMode(GL::LL) {}
         
         Mesh(const Mesh& m){
+            
+            mMode = m.mMode;
+            
             for (int i = 0; i < m.num(); ++i){
                 mVertex.push_back( m[i] );
+            }
+            
+            for (int i = 0; i < m.mIndex.size(); ++i){
+                mIndex.push_back(m.mIndex[i]);
             }
         }
         
@@ -104,16 +113,6 @@ namespace vsr {
             for (int i = 0; i < n; ++i) { mIndex.push_back( idx[i] ); } 
             return *this;
         }
-        
-//        virtual void draw(){
-//            glBegin(GL_POINTS);
-//            glNormal3f(0,0,1);
-//            for (int i = 0; i < mVertex.size(); ++i){
-//                Vec3<float> v = mVertex[i].Pos; 
-//                glVertex3f(v[0], v[1], v[2]);
-//            }
-//            glEnd();
-//        }
         
         GL::MODE mode() { return mMode; }
         

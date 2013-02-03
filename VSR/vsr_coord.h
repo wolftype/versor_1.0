@@ -15,12 +15,22 @@
 namespace vsr {
   
   namespace Coord{
+  
+    struct Sph{
+        Sph( double t, double p, double r) : theta(t), phi(p), rad(r) {}
+        double theta, phi, rad;
+    };
     
-    inline Vec Sph(double theta, double phi){
+    inline Vec sph2vec(double theta, double phi){
      
-        Rot r = Gen::rot(theta, phi);
+        Rot r = Gen::rot(theta/2.0, phi/2.0);
         return Vec::x.sp(r);   
     }
+    
+    inline Sph vec2sph(const Vec& tv){
+        double r = tv.norm();
+        return Sph( atan2(tv[2],tv[0]) , acos(-tv[1]/r) - PIOVERTWO, r);
+     } 
   }
 } //vsr::
 

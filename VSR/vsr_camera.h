@@ -190,61 +190,7 @@ class Camera : public Frame {
 
 };
 
-    /*! Transformation Matrices Container */
-    struct XformMat {
-        float model[16];
-        float view[16];
-        float modelView[16];
-        float proj[16];
-
-        double modeld[16];
-        double viewd[16];
-        double modelViewd[16];
-        double projd[16];
-        
-        void toDoubles() {
-            for (int i = 0; i < 16; ++i){
-                modeld[i] = model[i];
-                projd[i] = proj[i];
-                viewd[i] = view[i];
-                modelViewd[i] = modelView[i];
-            }
-        }
-
-        int	viewport[4];
-
-        //Print View Matrix (Camera)
-        friend ostream& operator << ( ostream& os, const XformMat& xf){
-        
-            os << "VIEWPORT" << "\n";            
-            for (int i = 0; i < 2; ++i){
-                for (int j = 0; j < 2; ++j){
-                    os << xf.viewport[i + j * 2] << " "; 
-                }
-                os << "\n";
-            }
-        
-            os << "MODELVIEW" << "\n";
-            for (int i = 0; i < 4; ++i){
-                for (int j = 0; j < 4; ++j){
-                    int idx = i + j * 4;
-                    os << xf.modelViewd[idx] << " ";
-                }
-                os << "\n";
-            }
-
-            os << "PROJECTION" << "\n";
-            for (int i = 0; i < 4; ++i){
-                for (int j = 0; j < 4; ++j){
-                    int idx = i + j * 4;
-                    os << xf.projd[idx] << " ";
-                }
-                os << "\n";
-            }
-            
-            return os;
-        }
-    };
+ 
 
     class Scene {
     
@@ -267,6 +213,9 @@ class Camera : public Frame {
                 Lens& tl = camera.lens();
                 return XMat::fovy( tl.mFocal * PI/180.0, tl.mWidth/tl.mHeight, tl.mNear, tl.mFar ); 
             }
+            Mat4f norm(){
+                return (!mvm().transpose());
+            }
             
             //ADVANCED MODE -> Update Shader Uniforms
             void updateMatrices(){
@@ -275,11 +224,13 @@ class Camera : public Frame {
                 Mat4f tview = XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos());
                 Mat4f tmvm = mvm();
                 Mat4f tproj = proj();
+                Mat4f tnorm = norm();
                 
                 copy(tmod.val(), tmod.val() + 16, xf.model);
                 copy(tview.val(), tview.val() + 16, xf.view);
                 copy(tmvm.val(), tmvm.val() + 16, xf.modelView);
                 copy(tproj.val(), tproj.val() + 16, xf.proj);
+                copy(tnorm.val(), tnorm.val() + 16, xf.normal);
              
                 xf.toDoubles();
             }
@@ -292,6 +243,8 @@ class Camera : public Frame {
                 glGetDoublev(GL_PROJECTION_MATRIX, xf.projd);	
                 glGetDoublev(GL_MODELVIEW_MATRIX, xf.modelViewd);
                 glGetIntegerv(GL_VIEWPORT, xf.viewport);	
+                
+                xf.toFloats();
             }
     
     };

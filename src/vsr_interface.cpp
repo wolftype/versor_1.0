@@ -347,6 +347,7 @@ namespace vsr {
 			case 'g': //translate
 			{
                 //			tp = Op::sp(tp, Gen::trs(scene().mdc()*t));
+                //cout << "g" << endl; 
 				frame->dx() = mouse.dragCat * t;
 				frame->move();
 				break;
@@ -381,7 +382,9 @@ namespace vsr {
     void Interface :: inputCalc(){
 
     }
-
+    
+    
+    // Calculate Position of Mouse, Ray of Eye, etc, in Scene
     void Interface :: viewCalc(){
         
         //Assumes data has been copied to (or created from) scene transfomration matrices (xf)
@@ -394,10 +397,24 @@ namespace vsr {
         mouse.cat     = Op::sp( mouse.move * -1, !scene().cat() );
         mouse.bivCat = vd().z ^ mouse.cat;
 
+
+ //       cout << "viewcalc:\n" << mouse.x << " " << mouse.y << endl; 
+        //GLU FUNCS
         Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
         Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
-        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );     
+        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );   
 
+        //OWN FUNCS (in progress, seem to give results scaled differently)
+//        Vec3f tv1 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 1.0), scene().xf );
+//        Vec3f tv2 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 0.0),scene().xf );
+//        Vec3f tv3 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 0.5),scene().xf );
+//        
+//        Vec v1(tv1.x, tv1.y, tv1.z);
+//        Vec v2(tv2.x, tv2.y, tv2.z);
+//        Vec v3(tv3.x, tv3.y, tv3.z);
+
+ //       cout << v2 << tv2 << endl; 
+        
         //Get Line of Mouse Position into Z Space (store as a Dual Line)
 		vd().ray	 = Op::dl( Ro::null(v3) ^ v1.null() ^ Inf(1) ).runit();
         

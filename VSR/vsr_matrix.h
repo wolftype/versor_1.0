@@ -136,12 +136,22 @@ namespace vsr {
 			T dot(Vec4 v) const { return x * v.x + y * v.y + z * v.z + w * v.w; }
 
 			void set(T _x, T _y, T _z, T _w) { x=_x; y = _y; z = _z; w = _w; }
+            
 				
 			T& operator [] (int i) { return ((T*)&x)[i]; }
 			T  operator [] (int i) const { return ((T*)&x)[i]; }
 			
+            T * val() { return (T*)&x; }
+            const T * val() const { return (T*)&x; }
+
 			Vec4 operator *  (T s) const { return Vec4(x*s, y*s, z*s, w*s); }
 			Vec4& operator *=  (T s) { x *= s; y *= s; z *= s; w *= s; return *this; }
+            
+//            Vec4 operator * (const Mat4<T>& m){
+//                return Vec4(
+//                    
+//                );
+//            }
 			
 			Vec3<T> vec3() { return Vec3<T>(x,y,z); }
 			
@@ -214,9 +224,11 @@ namespace vsr {
 	template <typename T = double>	
 	class Mat4 {
 		public:
-			Vec4<T> col[4];
+        
             
-			
+			Vec4<T> col[4];
+//            typedef const T array_type[4];
+            
 			Mat4() {
 				col[0].set(1.,0.,0.,0.);
 				col[1].set(0.,1.,0.,0.);
@@ -231,6 +243,13 @@ namespace vsr {
 				col[2].set(zx,zy,zz,zw);
 				col[3].set(wx,wy,wz,ww);			
 			}
+            
+            Mat4( const T v[16] ){
+                col[0].set(v[0],v[1],v[2],v[3]);
+                col[1].set(v[4],v[5],v[6],v[7]);
+                col[2].set(v[8],v[9],v[10],v[11]);
+                col[3].set(v[12],v[13],v[14],v[15]);
+            }
 			
 			Mat4(Vec4<T>& cX, Vec4<T>& cY, Vec4<T>& cZ, Vec4<T>& cW){
 				col[0] = cX;
@@ -245,10 +264,7 @@ namespace vsr {
 				col[2].set(m[2][0],m[2][1],m[2][2],0.);
 				col[3].set(0.,0.,0.,1.);
 			}
-			
-			Vec4<T> & operator [] (int i) { return col[i]; }
-			Vec4<T>   operator [] (int i) const { return col[i]; }
-		
+					
         Mat4 transpose(){
             return Mat4<T>( 
                            col[0][0], col[1][0], col[2][0], col[3][0],
@@ -258,17 +274,66 @@ namespace vsr {
                            );
         }
         
+         const T * val() const { return col[0].val(); }
          T * val() { return &col[0][0]; }
+         const T operator [] ( int i ) const { return val()[i]; }
+         T& operator [] ( int i ) { return val()[i]; }
+
          Vec4<T> row(int j) const { return Vec4<T>( col[0][j], col[1][j], col[2][j], col[3][j]); } 
          
+         
+         Mat4 operator * (const double d) const{
+            Mat4 m;
+            for (int i = 0; i < 16; ++i){
+                m[i] = val()[i] * d;
+            }
+            return m;
+         }
          //matrix multiplication, 
          Mat4 operator * (const Mat4& B) const {
             Mat4 m;
             for (int i = 0; i < 4; ++i){
-                m[i].set( row(0).dot( B[i] ), row(1).dot(B[i]), row(2).dot(B[i]) , row(3).dot(B[i]) );
+                m.col[i].set( row(0).dot( B.col[i] ), row(1).dot(B.col[i]), row(2).dot(B.col[i]) , row(3).dot(B.col[i]) );
             }
             return m;
          }
+         
+         Vec4<T> operator * (const Vec4<T>& v) const {
+            return Vec4<T>(
+                row(0).dot(v), row(1).dot(v), row(2).dot(v), row(3).dot(v)
+            );
+         }
+        
+        //inverse
+        Mat4 operator !(){
+                Mat4& m = *this;
+        		double determinant =
+                    m[12]*m[9]*m[6]*m[3] - m[8]*m[13]*m[6]*m[3] - m[12]*m[5]*m[10]*m[3] + m[4]*m[13]*m[10]*m[3]+
+                    m[8]*m[5]*m[14]*m[3] - m[4]*m[9]*m[14]*m[3] - m[12]*m[9]*m[2]*m[7] + m[8]*m[13]*m[2]*m[7]+
+                    m[12]*m[1]*m[10]*m[7] - m[0]*m[13]*m[10]*m[7] - m[8]*m[1]*m[14]*m[7] + m[0]*m[9]*m[14]*m[7]+
+                    m[12]*m[5]*m[2]*m[11] - m[4]*m[13]*m[2]*m[11] - m[12]*m[1]*m[6]*m[11] + m[0]*m[13]*m[6]*m[11]+
+                    m[4]*m[1]*m[14]*m[11] - m[0]*m[5]*m[14]*m[11] - m[8]*m[5]*m[2]*m[15] + m[4]*m[9]*m[2]*m[15]+
+                    m[8]*m[1]*m[6]*m[15] - m[0]*m[9]*m[6]*m[15] - m[4]*m[1]*m[10]*m[15] + m[0]*m[5]*m[10]*m[15];
+            
+                return Mat4(
+                    m[9]*m[14]*m[7] - m[13]*m[10]*m[7] + m[13]*m[6]*m[11] - m[5]*m[14]*m[11] - m[9]*m[6]*m[15] + m[5]*m[10]*m[15],
+                    m[12]*m[10]*m[7] - m[8]*m[14]*m[7] - m[12]*m[6]*m[11] + m[4]*m[14]*m[11] + m[8]*m[6]*m[15] - m[4]*m[10]*m[15],
+                    m[8]*m[13]*m[7] - m[12]*m[9]*m[7] + m[12]*m[5]*m[11] - m[4]*m[13]*m[11] - m[8]*m[5]*m[15] + m[4]*m[9]*m[15],
+                    m[12]*m[9]*m[6] - m[8]*m[13]*m[6] - m[12]*m[5]*m[10] + m[4]*m[13]*m[10] + m[8]*m[5]*m[14] - m[4]*m[9]*m[14],
+                    m[13]*m[10]*m[3] - m[9]*m[14]*m[3] - m[13]*m[2]*m[11] + m[1]*m[14]*m[11] + m[9]*m[2]*m[15] - m[1]*m[10]*m[15],
+                    m[8]*m[14]*m[3] - m[12]*m[10]*m[3] + m[12]*m[2]*m[11] - m[0]*m[14]*m[11] - m[8]*m[2]*m[15] + m[0]*m[10]*m[15],
+                    m[12]*m[9]*m[3] - m[8]*m[13]*m[3] - m[12]*m[1]*m[11] + m[0]*m[13]*m[11] + m[8]*m[1]*m[15] - m[0]*m[9]*m[15],
+                    m[8]*m[13]*m[2] - m[12]*m[9]*m[2] + m[12]*m[1]*m[10] - m[0]*m[13]*m[10] - m[8]*m[1]*m[14] + m[0]*m[9]*m[14],
+                    m[5]*m[14]*m[3] - m[13]*m[6]*m[3] + m[13]*m[2]*m[7] - m[1]*m[14]*m[7] - m[5]*m[2]*m[15] + m[1]*m[6]*m[15],
+                    m[12]*m[6]*m[3] - m[4]*m[14]*m[3] - m[12]*m[2]*m[7] + m[0]*m[14]*m[7] + m[4]*m[2]*m[15] - m[0]*m[6]*m[15],
+                    m[4]*m[13]*m[3] - m[12]*m[5]*m[3] + m[12]*m[1]*m[7] - m[0]*m[13]*m[7] - m[4]*m[1]*m[15] + m[0]*m[5]*m[15],
+                    m[12]*m[5]*m[2] - m[4]*m[13]*m[2] - m[12]*m[1]*m[6] + m[0]*m[13]*m[6] + m[4]*m[1]*m[14] - m[0]*m[5]*m[14],
+                    m[9]*m[6]*m[3] - m[5]*m[10]*m[3] - m[9]*m[2]*m[7] + m[1]*m[10]*m[7] + m[5]*m[2]*m[11] - m[1]*m[6]*m[11],
+                    m[4]*m[10]*m[3] - m[8]*m[6]*m[3] + m[8]*m[2]*m[7] - m[0]*m[10]*m[7] - m[4]*m[2]*m[11] + m[0]*m[6]*m[11],
+                    m[8]*m[5]*m[3] - m[4]*m[9]*m[3] - m[8]*m[1]*m[7] + m[0]*m[9]*m[7] + m[4]*m[1]*m[11] - m[0]*m[5]*m[11],
+                    m[4]*m[9]*m[2] - m[8]*m[5]*m[2] + m[8]*m[1]*m[6] - m[0]*m[9]*m[6] - m[4]*m[1]*m[10] + m[0]*m[5]*m[10]
+                ) * (1./determinant);
+        }
         
 			friend ostream& operator << (ostream&, const Mat4<>&);
 			
@@ -277,7 +342,7 @@ namespace vsr {
 	
 	inline ostream& operator << (ostream& os, const Mat4<>& m){
 	
-		os << "MAT 4: \n" << m[0] << m[1] << m[2] << m[3] <<"\n";
+		os << "MAT 4: \n" << m.col[0] << m.col[1] << m.col[2] << m.col[3] <<"\n";
 		
 		return os;
 	

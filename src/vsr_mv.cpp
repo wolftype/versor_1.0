@@ -25,18 +25,23 @@ namespace vsr{
     void MV<N, IDX, T>::test() { cout << "test" << endl; }
 
 
+    /*! Null point from first three values (e.g. Pnt p = Vec(1,0,0).null() */
     template<int N, int IDX, class T>
     Pnt MV<N, IDX, T>::null() const { return Ro::null( mW[0], mW[1], mW[2]); }
     
+    /*! Dual CGA */
     template<int N, int IDX, class T>
     typename Product< MV<N, IDX, T>, Pss, T>::GP MV<N, IDX, T>::dual() const { return Op::dl(*this); }
 
+    /*! Undual CGA */
     template<int N, int IDX, class T>
    typename Product< MV<N, IDX, T>, Pss, T>::GP  MV<N, IDX, T>::undual() const { return Op::udl(*this); }
-
+    
+    /*! Dual Euclidean */
     template<int N, int IDX, class T>
     typename Product< MV<N, IDX, T>, Tri, T>::GP MV<N, IDX, T>::duale() const { return Op::dle(*this); }
 
+    /*! Undual Euclidean */
     template<int N, int IDX, class T>
    typename Product< MV<N, IDX, T>, Tri, T>::GP  MV<N, IDX, T>::unduale() const { return Op::udle(*this); }
 
@@ -70,7 +75,7 @@ namespace vsr{
         return  Op::sp(*this, Gen::trv(x,y,z)); 
     }
      
-    template<int N, int IDX, class T> //template<class B>
+    template<int N, int IDX, class T> 
     MV<N, IDX, T> MV<N, IDX, T>::dil(const Pnt& b, T v) const {
         return Op::sp( *this, Gen::dil(b,v) ); 
     }
@@ -157,9 +162,10 @@ namespace vsr{
 	template class MV<3,MNV,VSR_PRECISION>;
 
 
-    Pnt Generic::pnt() const { return *(Pnt*)(this); }
-    Par Generic::par() const { return *(Par*)(this); }
-    Cir Generic::cir() const { return *(Cir*)(this); }
-    Sph Generic::sph() const { return *(Sph*)(this); }
+    //pending (strange conversions)
+//    Pnt Generic::pnt() const { return *(Pnt*)(this); }
+//    Par Generic::par() const { return *(Par*)(this); }
+//    Cir Generic::cir() const { return *(Cir*)(this); }
+//    Sph Generic::sph() const { return *(Sph*)(this); }
 
 }

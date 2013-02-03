@@ -16,6 +16,23 @@
 namespace vsr {
     namespace GL{
         namespace MGlyph {
+        
+            static Mesh Point(float x, float y, float z){
+                Mesh m;
+                m.add(x,y,z);
+                m.mode( GL::P );
+                return m;
+            }
+        
+            static Mesh Rect( float w, float h){
+                Mesh m;
+                m.add( -w/2.0,-h/2.0, 0 );
+                m.add( w/2.0,-h/2.0, 0 );
+                m.add( -w/2.0,h/2.0, 0 );
+                m.add( -w/2.0,-h/2.0, 0 );
+                m.add(0).add(1).add(2).add(3).add(0);
+                return m;
+            }
 
             static Mesh Circle (float scale){
         

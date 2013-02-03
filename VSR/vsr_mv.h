@@ -236,31 +236,17 @@ public:
 
     //Feed in a value_type
 	MV(const T& v = T()) BASECONST { std::fill(mW, mW + N, v);  }
-//    MV() BASECONST { std::fill(mW, mW + N, 0); }
-//	MV(T v) BASECONST { std::fill(mW, mW + N, v);  }
-//	MV(float v = 0) BASECONST { std::fill(mW, mW + N, v);  }
-//	MV(double v = 0) BASECONST { std::fill(mW, mW + N, v);  }
-    //NEW From other Vector Libraries
-//    template<class A>
-//    MV(const A& a) BASECONST { TPRINT("CONST OUTSIDER type\n"); IT(N) { (*this)[i] = a[i]; } }
-    //    //NEW from other libraries
-//    template <class A>
-//    MV& set(const A& a) {
-//        IT(N) { (*this)[i] = a[i]; }
-//        return *this;
-//    }
-
     
-    //Copy Constructor -- same MV
-    MV(const MV<N, IDX, T>& mv)  BASECONST {TPRINT(" Constructor Same Type \n"); set(mv);  }
+    /*! Copy Constructor Same Type  */ //TPRINT("Copy Constructor Same Type \n");
+    MV(const MV<N, IDX, T>& mv)  BASECONST { set(mv);  }
 
-    //Copy Constructor -- same MV, different value_type
+    //Copy Constructor -- same MV, different value_type //TPRINT(" Constructor Same Type \n"); 
     template <class T2>
-    MV(const MV<N, IDX, T2>& mv)  BASECONST {TPRINT(" Constructor Same Type \n"); set(mv);  }
+    MV(const MV<N, IDX, T2>& mv)  BASECONST {set(mv);  }
 
-    //Copy Constructor -- Different MV
+    //Copy Constructor -- Different MV // TPRINT( " Copy Constructor Different Type \n") ;
     template <int N2, int IDX2, class T2>
-    MV(const MV<N2, IDX2, T2>& mv) BASECONST { TPRINT( " Copy Constructor Different Type \n") ;set( cast< self_type, MV<N2, IDX2, T2> >( mv ) );}
+    MV(const MV<N2, IDX2, T2>& mv) BASECONST {set( cast< self_type, MV<N2, IDX2, T2> >( mv ) );}
     
     template <class T2>
     MV& set(const MV<N, IDX, T2>& mv) {
@@ -268,13 +254,12 @@ public:
         return *this;
     }
     
-
-    const MV& operator = (const MV& mv) { TPRINT(" Assignment Operator Same Type\n"); return set(mv); }
+    /*! Assignment Operator Same Type */ //TPRINT(" Assignment Operator Same Type\n"); 
+    const MV& operator = (const MV& mv) { return set(mv); }
     
-//    template< class A >
-//    const MV& operator = ( A a) { TPRINT(" Assignment Operator Different Type\n"); return cast< self_type, A > ( a ); } 
+    /*! Assignment Operator Different Type; */
     template <int N2, int IDX2, class T2>
-    const MV& operator = (const MV<N2, IDX2, T2>& mv) { TPRINT(" Assignment Operator Different Type\n"); return set( cast< self_type,  MV<N2, IDX2, T2> > ( mv ) ); } 
+    const MV& operator = (const MV<N2, IDX2, T2>& mv) { return set( cast< self_type,  MV<N2, IDX2, T2> > ( mv ) ); } 
 	
 	MV( const T& a0, const T& a1 )  BASECONST { set( a0,a1 ); }
 	void set( const T& a0, const T& a1 ) { mW[0]=a0; mW[1]=a1;  }
@@ -353,21 +338,29 @@ public:
         *this = *this * rh; return *this;
     }
     
+    
+    
+    /*! Geometric Product */
     template < int N2, int IDX2, class T2 >
     typename ProductN<idx, IDX2, T>::GP operator * ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, rh ); }
     
+    /*! Geometric Division */
     template< int N2, int IDX2, class T2 >
     typename ProductN<idx, IDX2, T>::GP operator / ( const MV<N2,IDX2,T2>& rh ) const { return gp ( *this, !rh ); }
 
+    /*! Outer Product */
      template< int N2, int IDX2, class T2 >
     typename ProductN<idx, IDX2, T>::OP operator ^ ( const MV<N2,IDX2,T2>& rh ) const { return op ( *this, rh ); }
 
+    /*! Inner Product */
     template< int N2, int IDX2, class T2 >
     typename ProductN<idx, IDX2, T>::IP operator <= ( const MV<N2,IDX2,T2>& rh ) const { return ip ( *this, rh ); }
     
+    /*! Commutator (differential) */
     template<class B>
     MV operator %(const B& b) { return ( (*this) * b - b * (*this) ) * .5; }
     
+    /*! Inversion */
     MV operator !() const {
             self_type sr = (~(*this));
 			typename ProductN<idx, idx>::GP s = (*this) * sr;
@@ -375,17 +368,21 @@ public:
 			return ( sr / s[0] ); 
     }
     
+    /*! Involution */
     MV involution() const { return involute(*this); }
+    /*! Conjugation */
     MV conjugation() const { return conjugate(*this); }
+    /*! Reversion */
     MV operator ~() const { return reverse(*this); }
+    /*! Negation*/
+    MV operator -() const { return *this * -1; }
     
-    //ADD/SUB
+    // ADD and SUBTRACT
     MV& operator += (const MV& rh) { IT(N){ (*this)[i] += rh[i]; } return *this; }
     MV operator + ( const MV& rh) const { return MV(*this) += rh; }
     
     MV& operator -= (const MV& rh) { IT(N){ (*this)[i] -= rh[i]; } return *this; }
     MV operator - ( const MV& rh) const { return MV(*this) -= rh; }
-
 
     template< class B >
     MV& operator +=(const B& rh) { return *this += MV<N,IDX,T>(rh); }
@@ -402,7 +399,6 @@ public:
     
     /*! Null Point */
     Pnt null() const;
-
     /*! Dot Product */
     typename ProductN<IDX, IDX, T>::IP dot() const;// { return (*this) <= (*this); }
     /*! Reverse Dot Product */
@@ -417,9 +413,10 @@ public:
     self_type runit() const;// { double t = rnorm(); if (t == 0) return self_type(); return *this / t; }
     self_type tunit() const;// { double t = norm(); if (t == 0) return self_type(); return *this / t; }
     
-    
+    /*! Duality */
     typename Product<self_type, Pss, T>::GP dual() const;
     typename Product<self_type, Pss, T>::GP undual() const;
+    /*! Euclidean Duality */
     typename Product<self_type, Tri, T>::GP duale() const;
     typename Product<self_type, Tri, T>::GP unduale() const;
 
@@ -482,7 +479,7 @@ public:
 	friend std::ostream& operator << <> (  std::ostream& os, const self_type& a );
     
 
-
+    /*! Equality Checking */
     template<class B>
     bool operator == (const B& mv) const{
         int t = N <= B::size ? N : B::size;
@@ -491,7 +488,7 @@ public:
         else return true;
     }
 	
-        
+    /* USE THE SLOPPY STATICS BELOW CAREFULLY: ASSUMES SPECIFIC GRADE POSITIONS (mostly for Vec and Biv) */    
     static MV x, y, z, xy, xz, yz;  
     
     static MV e1(T t) { return MV<N,IDX,T>(t,0,0); }   	
