@@ -20,6 +20,8 @@ Developer: Pablo Colapinto
 
 [Download and Installation Instructions](INSTALL.html) 
  
+[Reference Guide to the Elements](masters_appendix.pdf)
+
 [Join the Mailing List (for update notifications, to ask questions, discuss bugs, etc)](http://lists.create.ucsb.edu/mailman/listinfo/versor)  
 
 [Read my Master's Thesis on the Subject](http://wolftype.com/versor/colapinto_masters_final_02.pdf)

@@ -19,27 +19,33 @@
 namespace vsr{
 
     /// Feed in Spherical Coordinates of a 2-Sphere with One Pole Specified, get 3-Sphere Fiber out
-    struct HopfFiber{
+    class HopfFiber{
         
+        //Chirality
         bool bHanded;
         
-        //CIRCLE AT SOUTH POLE
-        Circle cir;
+        //Circle base (at Phi = -.5)
+        Circle mCir;
+        
+        public:
                 
         HopfFiber(bool hand=true) : bHanded(hand) {
-            cir = CXZ(1);
+            mCir = CXZ(1);
             //inf =  Inf(1) <= cir;//PAO ^ Ro::null(0, bHanded? 1 :-1,0) ^ Inf(1);
         }
         
+        Circle& cir() { return mCir; }
+        Circle cir() const { return mCir; }
+        
         //Dual line axis of Circle South Pole (i.e. the North Pole)
-        DualLine dll(){ return (Inf(1) <= cir).runit(); }
+        DualLine dll(){ return (Inf(1) <= mCir).runit(); }
         
         Mtt mtt(double theta, double phi){
             double ptheta = PIOVERTWO * theta;
             double pphi = phi+.5;
 
-            Vector v = Vec::x.rot( Biv::xz * ptheta ) / Ro::rad(cir);
-            Lin lim = cir.sp( Gen::trv( v ) );                                      //<-- Circle to a Line (Limit)
+            Vector v = Vec::x.rot( Biv::xz * ptheta ) / Ro::rad(mCir);
+            Lin lim = mCir.sp( Gen::trv( v ) );                                      //<-- Circle to a Line (Limit)
             Mot mot = Gen::ratio( lim.dual().runit(), dll(), pphi);
             
             return mot * Gen::trv(v * pphi ) ; 
@@ -60,7 +66,7 @@ namespace vsr{
             double ptheta = PIOVERTWO * theta;
 
             Vec v = Vec::x.rot( Biv::xz * ptheta );
-            Lin lim = cir.sp( Gen::trv(v.unit()) ); 
+            Lin lim = mCir.sp( Gen::trv(v.unit()) ); 
             return Gen::ratio( lim.dual().runit(), dll(), phi );
         }
         
@@ -70,18 +76,26 @@ namespace vsr{
             double ptheta = PIOVERTWO * theta;
             double pphi = phi+.5;
 
-            Vector v = Vec::x.rot( Biv::xz * ptheta ) / Ro::rad(cir);
-            Lin lim = cir.sp( Gen::trv( v ) );                                      //<-- Circle to a Line (Limit)
+            //Divide by Radius
+            Vector v = Vec::x.rot( Biv::xz * ptheta ) / Ro::rad(mCir);
+            
+            Lin lim = mCir.sp( Gen::trv( v ) );                                      //<-- Circle to a Line (Limit)
             Mot mot = Gen::ratio( lim.dual().runit(), dll(), pphi);
             
-            return cir.sp( mot * Gen::trv(v * pphi )  ) ; 
+            return mCir.sp( mot * Gen::trv(v * pphi )  ) ; 
             
+        }
+        
+
+        Cir fiber(const Vec& v){
+            Coord::Sph cs = Coord::vec2sph(v); // spherical coordinates [-1,1] and [-.5,.5]
+            return fiber(cs.theta/PI, cs.phi/PI);
         }
         
         Lin lim(double theta){
             double ptheta = PIOVERTWO * theta;
             Vector v = Vec::x.rot( Biv::xz * ptheta );
-            return cir.sp( Gen::trv(v) );  
+            return mCir.sp( Gen::trv(v) );  
         }
         
         vector<Cir> poles(double theta, double phi){
@@ -96,6 +110,7 @@ namespace vsr{
         Pnt phase(double theta, double phi, double phs){
             return Ro::pnt_cir( fiber(theta,phi), phs * PI);
         }
+        
     };
 
 }//vsr::
