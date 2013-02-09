@@ -98,7 +98,7 @@ void hopf2(GLVApp& app){
         ITJ(j,res)
         
             double u = 1.0 * j/res;   //-1.0 + 2*         
-            Cir tc = (bBoost) ? hf.cir.sp( hf.bst(-v,u) ) : hf.fiber(-v, u);
+            Cir tc = (bBoost) ? hf.cir.sp( hf.trv(-v,u) ) : hf.fiber(-v, u);
             if (bDrawCir) DRAW3(tc,.5,.5,.5);
             if (Ro::size(tc, false) > 100) DRAW3( Lin(tc), .5,.5,.5);
             
@@ -129,7 +129,9 @@ void cirtest(GLVApp& app){
         app.gui(amt);
     END
 
+    
     static Cir c = CXY(1);
+    DRAWANDTOUCH(c);
     
     ITJi(i,100)
         Pnt p = Ro::pnt_cir( c, t * TWOPI );
@@ -158,11 +160,67 @@ void cirtest(GLVApp& app){
 
 }
 
+void hopf3(GLVApp& app){
+
+    static double theta, phi, m, n, amt;
+    
+    static bool bDrawCir;
+    SET
+        app.gui(theta,"theta",-1,1)(phi,"phi",-.5,.5);
+        app.gui(m,"m",0,10)(n,"n",0,10)(amt,"amt",-10,10);
+        app.gui(bDrawCir,"drawCir");
+    END
+    
+    //A Hopf Link
+    HopfFiber hf;
+
+//    static Cir cxz = CXZ(1);
+//    DRAWANDTOUCH(cxz);
+
+    static double dt = 0; dt += theta;
+    static double dp = 0; dp += phi;
+    
+    Vec v = Vec::x.sp( Gen::rot( dt, dp ) );
+
+    Vec v2 = -v;  DRAW3(v2,0,1,0);
+    
+    Par tp = Ro::par( Ro::sur( hf.cir ), v );
+    DRAW( Ro::split( tp,true ).null() );
+    
+    Coord::Sph sc = Coord::vec2sph( v );
+     
+    DRAW(v);
+
+    
+    Cir ca = hf.fiber( Ro::split(tp,true ).null() ); DRAW3(ca,1,0,0);
+    Cir cb = hf.fiber( Ro::split(tp,false ).null() ); DRAW3(cb,0,0,1);  
+    
+    ///KNOT
+    Par pp = ca.dual() * PI/m + cb.dual() * PI/n;
+    Bst bst = Gen::bst(pp * amt);
+    
+    static Point p = PT(2,0,0); DRAWANDTOUCH(p);
+    Point np = p; vector<Pnt> vp;
+    
+    ITJ(i,1000)
+        np = Ro::loc( np.sp(bst) );
+        vp.push_back(np);
+    END
+    
+    glBegin(GL_LINE_STRIP);
+    ITJ(i,1000)
+        GL::vertex(vp[i].w());
+    END
+    glEnd();
+    
+}
+
 void GLVApp :: onDraw(){
 
-   // hopf(*this);
-   // hopf2(*this);
-   // cirtest(*this);
+    //hopf(*this);
+    //hopf2(*this);
+    hopf3(*this);
+//   cirtest(*this);
    // text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }
 
