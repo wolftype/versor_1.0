@@ -18,9 +18,11 @@ A (Fast) C++ library for Conformal Geometric Algebra.
 Developer: Pablo Colapinto  
 `gmail: wolftype`  
 
-[Download and Installation Instructions](INSTALL.html) 
+[Homepage (versor.mat.ucsb.edu)](http://versor.mat.ucsb.edu)
+
+[Download and Installation Instructions](http://versor.mat.ucsb.edu/INSTALL.html) 
  
-[Reference Guide to the Elements](masters_appendix.pdf)
+[Reference Guide to the Elements](http://versor.mat.ucsb.edu/masters_appendix.pdf)
 
 [Join the Mailing List (for update notifications, to ask questions, discuss bugs, etc)](http://lists.create.ucsb.edu/mailman/listinfo/versor)  
 
@@ -168,13 +170,17 @@ Points thought of as Spheres (really, Dual Spheres, more on _Duality_ later): th
 
 or you can pass in another element
 
-	Round::null( Vec(1,0,0) )
+	Round::null( Vec(1,0,0) );
+
+or use the built-in method
+
+	Point pa = Vec(1,0,0).null();
 
 Points can also be made with the macro `PT`
 
 	Point pa = PT(1,0,0);
 
-which is just "syntactic sugar"
+which is just "syntactic sugar" for `Vec(1,0,0).null()`
 
 Speaking of Spheres, we can also make spheres with a radius this way:
 
@@ -433,6 +439,20 @@ All elements can be reflected over spinors with the `sp(<spinor>)` method
 All elements can be reflected over versors with the `re(<versor>)` method  
 
 The versors are constructed by the geometric entities, typically by using the `Gen::` routines.  Operators can also be acted on by operators -- you can rotate a translation, or twist a boost.
+
+NOTES:
+===
+
+REFLECTIONS
+---
+Most reflections (in a sphere, circle, or point pair, or over a line or plane ) can be calculated by writing
+
+	Pnt p = PT(1,0,0);
+	Pnt r = p.re( CXY(1) ); //Reflection of a point in a circle
+	r = r / r[3]; 			//Renormalization of a point
+	
+The re() method calculates `v.re(C)` as `C*v.involution()*~C`.  With a versor `C` and an element `v` you might also try `C * v * !C`.  Inversion in a circle or a sphere may change the 
+weight of the element (for at Point at x, by x^2)
 
 TUTORIAL: BUILD A ROBOT ARM MODEL [This tutorial is in progress . . .]
 ---
