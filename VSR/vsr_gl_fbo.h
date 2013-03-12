@@ -51,6 +51,46 @@ of the default EAGL_fbo to the screen
 namespace vsr {
 
 
+
+    //depth buffer, color buffer, or stencil buffer
+    class RBO{
+    
+        private:
+            
+            GLuint mId;
+            int mWidth, mHeight;
+            GL::IFORMAT mFormat;
+            
+        public:
+        
+            int width() { return mWidth; }
+            int height() { return mHeight; }
+        
+            RBO(int w, int h, GL::IFORMAT format) : 
+            mWidth(w), mHeight(h), mFormat(format) {
+                generate(); bind(); alloc(); unbind();
+            }
+        
+        
+            ~RBO() { glDeleteRenderbuffers(1, &mId); }
+
+            GLuint id() const { return mId; }
+        
+            void generate(){
+                glGenRenderbuffers(1, &mId);
+            }
+            void bind(){
+                glBindRenderbuffer(GL_RENDERBUFFER, mId);
+            }
+            void unbind(){
+                glBindRenderbuffer(GL_RENDERBUFFER, 0);
+            }            
+            void alloc(){
+                glRenderbufferStorage(GL_RENDERBUFFER, mFormat, mWidth, mHeight);
+            }
+    };
+
+
 	class FBO {
 	
 		private:
@@ -77,13 +117,18 @@ namespace vsr {
 		public:
 		
 			FBO();
+            
+            //Create From Texture Parameters
+            FBO( Texture& t, GL::ATTACH att = GL::COLOR);
 			
             void generate();
         
 			GLuint id() const { return mId; }
 			
 			void bind();
-			void unbind();			
+			void unbind() {
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            }			
             
             //attach to texture
             void init();
@@ -113,6 +158,29 @@ namespace vsr {
 				mClearColor[0] = r; mClearColor[1] = g;
 				mClearColor[2] = b; mClearColor[3] = a;
 			}
+
+            //typically att = GL::DEPTH
+            void attach(const RBO& rbo, GL::ATTACH att){
+                bind();    
+                glFramebufferRenderbuffer(GL_FRAMEBUFFER, att, GL_RENDERBUFFER, rbo.id());                
+                mNumAttachments += 1;
+                unbind();
+            }
+
+            //typically att = GL::COLOR, note exception for cubemap
+            void attach(const Texture& t, GL::ATTACH att){
+               	bind();
+                glFramebufferTexture2D(GL_FRAMEBUFFER, att, t.target(), t.idx(), 0);
+                unbind();
+            }
+            
+            void attachCubeMap(const Texture& t, GL::ATTACH att = GL::COLOR){
+               	bind();
+                for (int i = 0; i < 6; ++i){
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, att+i, GL::CUBEMAPX+i, t.idx(), 0);
+                }
+                unbind();            
+            }
 
             /// should be an operation GLOB :: Attach ( )...
 			static void Attach(FBO*, Texture*,  GL::ATTACH);

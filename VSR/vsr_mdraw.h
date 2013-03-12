@@ -1,7 +1,10 @@
 //
 //  vsr_mdraw.h
 //  Versor
-//
+//  
+/*
+    QUICK AND DIRTY HELPER CLASS
+*/
 //  Created by Pablo Colapinto on 10/25/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
@@ -13,6 +16,7 @@
 #include "vsr_gl_vattrib.h"
 #include "vsr_gl_vbo.h"
 #include "vsr_mesh.h"
+#include "vsr_gl_data.h"
 //#include "vsr_mglyph.h"
 
 namespace vsr{
@@ -20,61 +24,53 @@ namespace vsr{
     namespace GL{
         namespace Draw {
         
-                /// BASIC GL PIPELINE: SHADER -> VBO -> ATTRIB -> DRAW
+                /// BASIC AND LOOSE GL PIPELINE: SHADER -> VBO -> ATTRIB -> DRAW
                 struct Pipe {
                 
-                    static int mIdx;
-                
+                    static int mIdx; ///< MBO counter
+                    
+//                    static std::map<int, VEBO> vbo;
+                    static std::map<int, MBO> mbo;
+
                     static ShaderProgram * shaderprogram;
-                    static std::map<int, DBO> vbo;//[200][2];
-//                    static GLuint VBOHandle[200][2];
-                    static VAttrib4 vatt;// pos, col, norm, tex;
-                    
                     static Uniform LightPosition;
-                    
-                    static void InitBufferObjects(){                      
-                        
-                        //basic shader (build into shader node structre)
-                        shaderprogram = new ShaderProgram("pos.vert","col.frag");
-                        shaderprogram -> bind();
-                     
-                        //Get Address of Shader Attributes
-                        //Only Call After Shader is Bound
+
+                    //Position, Color, Normal, TexCoord
+                    static VAttrib4 vatt;
+                                        
+                    //Get Address of Shader Attributes
+                    //Only Call After Shader is Bound
+                    //Change to BindDefaultAttributes and Keep Pipe Metaphor!
+                    static void BindAttributes(){
                         vatt.pos.set( Shader :: Current(), "position", sizeof(Vertex), 3, 0);
                         vatt.col.set( Shader :: Current(), "sourceColor", sizeof(Vertex), 4, Vertex::oc() );
                         vatt.norm.set( Shader :: Current(), "normal", sizeof(Vertex), 3, Vertex::on() );
                         vatt.tex.set( Shader :: Current(), "texCoord", sizeof(Vertex), 2, Vertex::ot() );
-                     
-
-//                        LightPosition.set( Shader :: Current(), "lightPosition");
-//                        shaderprogram -> setUniformVariable(<#char *name#>, <#float value#>)
-
-                        shaderprogram -> unbind();
-                        
-                        //Bind All Mesh Buffer Data
-                        Buffer( Mesh::Circle(1), CIR );
-                        //...Buffer( Mesh::Arrow(1), Vec ); 
                     }
                     
-//                    //Create and Bind Mesh, return ID of VBO
-//                    static int Buffer(int id, Mesh mesh){
-//                      //  VBO v( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
-//                      //  VBO e( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLubyte), GL::ELEMENTBUFFER );
-//                        vbo[id].vertex = VBO( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
-//                        vbo[id].index = VBO( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLuint), GL::ELEMENTBUFFER );
-//                        return id;
-//                    }
-                    
+                    static void InitBufferObjects(){                      
+                        
+                        shaderprogram -> bind();
+                        BindAttributes();
+
+//                        LightPosition.set( Shader :: Current(), "lightPosition");
+  //                      shaderprogram -> unbind();
+                        
+                        //Bind All Mesh Buffer Data GLYPHS
+                       // Buffer( Mesh::Circle(1), CIR );
+                        //...Buffer( Mesh::Arrow(1), Vec ); 
+                    }
+                                        
                     static int Buffer(Mesh mesh, int id = -1){
                         mIdx += 1;
-                        int tmp = (id == -1) ? mIdx : id;
-                        vbo[tmp].vertex = VBO( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
-                        vbo[tmp].index = VBO( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLuint), GL::ELEMENTBUFFER );
+                        int tmp = (id == -1) ? mIdx : id; //auto or use ENUM code
+                        mbo[tmp].vertex = VBO( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
+                        mbo[tmp].index = VBO( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLuint), GL::ELEMENTBUFFER );
                         return tmp;
                     }
                     
                     static int Update(int id, Vertex * val){
-                        vbo[id].vertex.update(val);
+                        mbo[id].vertex.update(val);
                     }
                     
                     static void Pointer(){
@@ -90,29 +86,36 @@ namespace vsr{
                     }
                     
                     static void DrawElements(int id, GLenum mode, int num = -1, int off = 0){
-                        vbo[id].index.drawElements(mode, num, off);
+                        mbo[id].index.drawElements(mode, num, off);
                     }
                     
                     static void DrawArray(int id, GLenum mode){
-                        vbo[id].vertex.drawArray(mode);
+                        mbo[id].vertex.drawArray(mode);
                     }
                                         
                     static void Begin(int id) { 
-                        vbo[id].vertex.bind(); 
-                        vbo[id].index.bind(); 
+                        mbo[id].vertex.bind(); 
+                        mbo[id].index.bind(); 
                         Enable(); Pointer(); 
                     }
                     static void End(int id) { 
                         Disable(); 
-                        vbo[id].index.unbind(); 
-                        vbo[id].vertex.unbind();   
+                        mbo[id].index.unbind(); 
+                        mbo[id].vertex.unbind();   
                     }
                     
+                    static void Line( GL::MBO& m ) {
+                        m.bind();
+                        Enable(); Pointer();
+                        m.drawElements( GL::TS );
+                        Disable();
+                        m.unbind();
+                    }                                        
                 };
                 
                 //DECLARE                 
                 int Pipe::mIdx;
-                std::map<int, DBO> Pipe::vbo;
+                std::map<int, MBO> Pipe::mbo;
                 VAttrib4 Pipe::vatt;
                 ShaderProgram * Pipe::shaderprogram;
                 Uniform Pipe::LightPosition;
@@ -187,6 +190,7 @@ namespace vsr{
                     
                 }
 
+                //BUFFER RENDER
                 template< class A > void BRender( const A& a){
                     glPushMatrix();	
                     Pipe::shaderprogram -> bind();

@@ -24,8 +24,8 @@ namespace vsr {
 
 	using namespace std;
 	
-	class FBO;
-	class PBO;
+//	class FBO;
+//	class PBO;
 
 	class Texture {
 
@@ -44,17 +44,14 @@ namespace vsr {
 			GLuint mIdx;
 			GLuint mPrevIdx;
 			
-			FBO * mFbo;        ///< (render to texture)
-			PBO * mPbo;        ///< 
+//			FBO * mFbo;        ///< (render to texture)
+//			PBO * mPbo;        ///< 
 			
-//			Video * mVideo;
-//			Image * mImage;
-
 		public:
 
-        Texture( GLvoid * d, int w, int h, GL::TYPE = GL::UBYTE, GL::FORMAT = GL::RGBA);
+        Texture( GLvoid * d, int w, int h, GL::TYPE = GL::UBYTE, GL::FORMAT = GL::RGBA,  GL::TEXTURE textarget = GL::TEX2D);
         
-        Texture(int _w = 128, int _h = 128, int _d = 1);
+        Texture(int _w = 128, int _h = 128, int _d = 1,  GL::TEXTURE textarget = GL::TEX2D);
         
         Texture(string);
 		
@@ -64,12 +61,16 @@ namespace vsr {
 			void alloc();
 			void generate();
 			
-			void enable();
-			void disable();
-			void activate();
-			void bind();	
-			void unbind();
-			void setParam();	///< set parameters
+			void enable() const;
+			void disable() const;
+			void activate() const;
+			void bind() const;	
+			void unbind() const;
+            
+            
+            void set(GL::PARAM a, GL::PARAM b); ///< Set param named a to param b of this texture target
+            
+			void setDefaultParam();	///< set parameters
 			
 			void copy();	///< copy back buffer to texture
 			void update();	///< refill with new data (substitute image)
@@ -104,29 +105,30 @@ namespace vsr {
 				return ((int*)mData )[idxOfTexel(w,h,d)];
 			}
 			
-			GLuint idx()	{ return mIdx; }
-			GLenum target()	{ return mTarget; }
-			GLenum format()	{ return mFormat; }
-			GLenum type()	{ return mType; }	
+			GLuint idx()	const { return mIdx; }
+			GLenum target()	const { return mTarget; }
+			GLenum format()	const { return mFormat; }
+			GLenum type()	const { return mType; }	
 
-			FBO& fbo();
-			PBO& pbo();
+//			FBO& fbo();
+//			PBO& pbo();
 			
-			void startCapture();
-			void endCapture();
+//			void startCapture();
+//			void endCapture();
 			
-			void grabPBO();
+//			void grabPBO();
 
 			int loadData (void*);
         
-            static const void Reset(){
-                glBindTexture(GL_TEXTURE_2D, 0);
-                glDisable(GL_TEXTURE_2D);
+            static const void Reset(GL::TEXTURE t= GL::TEX2D){
+                glBindTexture(t, 0);
+                glDisable(t);
             }
         
         void print(){
             
-            std::cout << GL::Get(mTarget) << GL::Get(mFormat) << GL::Get(mType) << "Chan: " << mNumChannels << std::endl;
+            std::cout << GL::Get(mTarget) << GL::Get(mFormat) << GL::Get(mType) << "Chan: " << mNumChannels << 
+            " datasize: " << dataSize() << " numtexels " << numTexels() << std::endl;
         }
         
         
@@ -135,7 +137,8 @@ namespace vsr {
             glGetIntegerv(GL_ACTIVE_TEXTURE, &tmp_id);
             return tmp_id;
         }
-			
+		
+        //Generate and Bind a New Texture2D
         static const GLuint Gen(int width, int height, GL::IFORMAT iformat){
             GLuint tmp;
  
@@ -146,36 +149,25 @@ namespace vsr {
             GL::error("texture bind");
             
             glTexImage2D(GL_TEXTURE_2D, 0, iformat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+            GL::error("texture2d");
+            
+            Unbind();
             
             return tmp;
             
         }
         
-        static const void Bind(GLint id, GL::TEXTURE tex = GL::TEX2D){
+        static const void Bind(GLuint id, GL::TEXTURE tex = GL::TEX2D){
             glBindTexture(tex, id);
             GL::error("Tex BIND" );
         }
-			//clear();
-/*
-			int loadImage(string filename);
-			int loadFImage(string filename);
-			int loadImage( Image m );
-			int loadVideo(string filename);
-			int loadRawImage(string filename);
-            
-			
-			Video& video() { return *mVideo; }
-			Image& image() { return *mImage; }
-			
-			void updateVideo() { 
-				mVideo -> nextFrame(); 
-				mData = mVideo -> data(); 
-				update(); 
-			}
-
-*/			
-			int pbotest();
-//			static void bindNull();
+        
+        static void Unbind( GL::TEXTURE target = GL::TEX2D ){
+            glBindTexture( target, 0 );
+        }
+        static void Disable( GL::TEXTURE target = GL::TEX2D){
+            glDisable(GL_TEXTURE_2D);
+        }
 
 	};
 

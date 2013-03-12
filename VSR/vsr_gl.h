@@ -88,12 +88,35 @@ namespace vsr {
         };
         
         enum TEXTURE{
+            TEX1D = GL_TEXTURE_1D,
             TEX2D = GL_TEXTURE_2D,
-            CUBEMAP = GL_TEXTURE_CUBE_MAP
+            CUBEMAP = GL_TEXTURE_CUBE_MAP,
+            CUBEMAPX = GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+            CUBEMAPNX = GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+            CUBEMAPY = GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+            CUBEMAPNY = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+            CUBEMAPZ = GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+            CUBEMAPNZ = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
+        };
+        
+        enum PARAM{
+            WS = GL_TEXTURE_WRAP_S,
+            WT = GL_TEXTURE_WRAP_T,
+            WR = GL_TEXTURE_WRAP_R,
+            EDGE = GL_CLAMP_TO_EDGE,
+            MIRROR = GL_MIRRORED_REPEAT,
+            REPEAT = GL_REPEAT,
+            BORDER = GL_CLAMP_TO_BORDER,
+            MAGFILTER = GL_TEXTURE_MAG_FILTER,
+            MINFILTER = GL_TEXTURE_MIN_FILTER,
+            NEAREST = GL_NEAREST,
+            LINEAR = GL_LINEAR,
+            MIPMAPLINEAR = GL_LINEAR_MIPMAP_LINEAR,
+            MIPMAPNEAREST = GL_LINEAR_MIPMAP_NEAREST
         };
         
         enum IFORMAT {
-            DEPTHCOMP   = GL_DEPTH_COMPONENT16,
+            DEPTHCOMP   = GL_DEPTH_COMPONENT16, //GL_DEPTH_COMPONENT24 ?
             RGBA4       = GL_RGBA4,
             RGBA8       = GL_RGBA8,
             RGB5        = GL_RGB5_A1,
@@ -162,6 +185,31 @@ namespace vsr {
             SMOOTH					= GL_SMOOTH
         };
         
+        inline void Begin(GL::MODE mode){
+            switch (mode){
+                case GL::P:
+                    glBegin(GL_POINTS);
+                    break;
+                case GL::L:
+                    glBegin(GL_LINES);
+                    break;
+                case GL::LL:
+                    glBegin(GL_LINE_LOOP);
+                    break;
+                case GL::LS:
+                    glBegin(GL_LINE_STRIP);
+                    break;
+                case GL::T:
+                    glBegin(GL_TRIANGLES);
+                    break;
+                case GL::TS:
+                    glBegin(GL_TRIANGLE_STRIP);
+                    break;
+                case GL::TF:
+                    glBegin(GL_TRIANGLE_FAN);
+                    break;
+            }
+        }
         
 //        static int     AttributeSize[4] = {3,3,4,2};
 //        static int     AttributeOffset[4];// = { offsetof(Vertex, Pos), offsetof(Vertex, Norm), offsetof(Vertex, Col), offsetof(Vertex, Tex)};
@@ -246,6 +294,14 @@ namespace vsr {
         
         template<class T>
         void vertex(T*);
+        
+        inline void vertex(float a, float b, float c){
+            glVertex3f(a,b,c);
+        }
+        
+        inline void vertex( Vec3f v){
+            glVertex3f(v[0],v[1],v[2]);
+        }
 
         template<class T>
         void normal(T*);
@@ -259,7 +315,8 @@ namespace vsr {
         template<class T>
         void scale(T);
 
- 
+        inline void clearColor(float r = 0.0, float g = 0.0, float b = 0.0, float a = 1.0) { glClearColor(r,g,b,a); }
+        inline void clear(GLbitfield a) { glClear(a); }
             
          void frontBackDiff();
          void frontBackFill();

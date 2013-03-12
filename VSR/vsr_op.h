@@ -128,8 +128,8 @@ struct Gen {
     }
     
     /*! Generate a Rotor (i.e quaternion) from spherical coordinates
-        @param[in] theta in xz plane from (1,0,0)
-        @param[in] phi in rotated xy plane
+        @param[in] theta in xz plane from (1,0,0) in range [0,PI]
+        @param[in] phi in rotated xy plane in range []
     */
     static Rot rot(double theta, double phi){
        // double ptheta = (PIOVERTWO * theta);
@@ -352,26 +352,23 @@ struct Gen {
         @param Point Pair (typically of Zero-Size, created by Translating a Tangent Vector)
         @param Scalar amt 
     */
-    template <class T>
-    static Bst trv(T t, const Par& s){
-        return Bst(t, 
-                       s[0], s[1], s[2], 
-                       s[3], s[4], s[5], 
-                       s[6], s[7], s[8], s[9]);
-    } 
+//    template <class T>
+//    static Bst trv(T t, const Par& s){
+//        return Bst(t, 
+//                       s[0], s[1], s[2], 
+//                       s[3], s[4], s[5], 
+//                       s[6], s[7], s[8], s[9]);
+//    } 
     
     /*! Generate a Translated Transversion 
         @param Tangent Direction
         @param Position in space
         @param scalar amt (typically 0 or 1)
     */
-    template <class A, class B, class T>
-    static Bst trv(const A& tnv, const B& drv, T t){
+    template <class T>
+    static Bst bst(const Tnv& tnv, const Vec& drv, T t){
         Par s = Par(tnv).trs(drv);
-        return Bst(t, 
-                       s[0], s[1], s[2], 
-                       s[3], s[4], s[5], 
-                       s[6], s[7], s[8], s[9]);
+        return Gen::bst(s * t);
     } 
     
     /*!
@@ -500,12 +497,18 @@ struct Ro {
     }
     
     static VSR_PRECISION sqd(const Pnt& a, const Pnt& b){
-        return -( (a <= b)[0] );
-    }
-    static VSR_PRECISION dst(const Pnt& a, const Pnt& b){
-        return sqrt( fabs(sqd(a,b) ) );
+        return ( (a <= b)[0] ) * -2.0;
     }
     
+    /*! squared Distance between points a and b */
+    static VSR_PRECISION dist(const Pnt& a, const Pnt& b){
+        return sqrt( fabs(sqd(a,b) ) );
+    }
+
+    /*! squared Distance between points a and b (deprecated) */
+    static VSR_PRECISION dst(const Pnt& a, const Pnt& b){
+        return sqrt( fabs(sqd(a,b) ) );
+    }    
     /*! Split Points from Point Pair 
         @param PointPair input
     */
@@ -649,7 +652,7 @@ struct Ro {
         return Ro::split( par(dls, flat), true ); // cout << "y" << endl; 
      }
     
-    /*! Direct Circle from Point and Euclidean Carrier Flat 
+    /*! Direct (imaginary?) Circle from Point and Euclidean Carrier Flat 
         @param Center pnt 
         @param Carrier Bivector 
         @param Radius r
@@ -695,6 +698,8 @@ struct Ro {
         Dll axis = (Inf(1) <= c).runit();        
         return Vec::x.sp( Gen::ratio( Biv::xz, Biv(axis) ) * Gen::rot(Biv::xz * theta) );    
     }
+    
+    
     
     /*! Point Pair on Circle at angle t*/
     static Par par_cir(const Cir& c, double t);
@@ -846,6 +851,7 @@ typedef Ta Tangent;
 #define PX(f) vsr::Ro::null(vsr::Vec(f,0,0))
 #define PY(f) vsr::Ro::null(vsr::Vec(0,f,0))
 #define PZ(f) vsr::Ro::null(vsr::Vec(0,0,f))
+#define PAIR(x,y,z) (PT(x,y,z)^PT(-x,-y,-z))
 #define CXY(f) (PX(f)^PX(-f)^PY(f))
 #define CXZ(f) (PX(f)^PX(-f)^PZ(f))
 #define CYZ(f) (PY(f)^PY(-f)^PZ(f))
@@ -853,10 +859,13 @@ typedef Ta Tangent;
 #define S2F(f) f/1000.0
 #define LN(x,y,z) ( vsr::Pnt(0,0,0,1,.5)^PT(x,y,z)^vsr::Inf(1) )
 #define DLN(x,y,z) ( vsr::Op::dl(LN(x,y,z)) )
+#define PAO vsr::Pnt(0,0,0,1,0)   // Point At Origin
 #define EP vsr::Dls(0,0,0,1,-.5) // dual unit sphere at origin: hyperbolic space
 #define EM vsr::Dls(0,0,0,1,.5)  // dual imaginary unit sphere at origin: spherical space
-#define PAO vsr::Pnt(0,0,0,1,0)
 #define INFTY vsr::Inf(1)
+#define HYPERBOLIC EP
+#define SPHERICAL EM
+#define EUCLIDEAN INFTY
 #define HLN(x,y,z) (vsr::Ori(1)^PT(x,y,z)^EP) //hyperbolic line (circle)
 #define HDLN(x,y,z) (vsr::Op::dl(HLN(x,y,z)))
 } //vsr::

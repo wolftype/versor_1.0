@@ -51,6 +51,7 @@ void twists(GLVApp& app){
     }
 }
 
+
 void GLVApp :: onDraw() {
     twists(*this);
 }

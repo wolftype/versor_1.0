@@ -173,7 +173,6 @@ void robot(GLVApp& app){
         DRAW4(ffsphere,1,0,0,.2);
         DRAW4(firstSphere,1,0,0,.2);
 
-
 }
 
 
@@ -182,8 +181,8 @@ void GLVApp :: onDraw(){
 
     /* There are Two Demos here */
 
- //  articulated(*this);
-     robot(*this);
+   //articulated(*this);
+    robot(*this);
 
 }
 

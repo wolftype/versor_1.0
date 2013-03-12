@@ -21,6 +21,20 @@ mAttachment(GL::COLOR),
 mClearDepth(1)
 {
 	clearColor(0,0,0,1);
+    generate();
+}
+
+FBO :: FBO(Texture& texture, GL::ATTACH att) : 
+mAutoClear(true),
+mId(0),
+mWidth(0),
+mHeight(0),
+mNumAttachments(0),
+mAttachment(att),
+mClearDepth(1)
+{
+	clearColor(0,0,0,1);
+    init(&texture, att);
 }
 
 void FBO :: init(){
@@ -28,7 +42,7 @@ void FBO :: init(){
     bind();
 }
     
-//Init from Texture
+//Init from Texture or elsewhere
 void FBO :: init(Texture *t, GL::ATTACH att) {
 
     mAttachment = att;
@@ -115,12 +129,12 @@ void FBO :: endCapture() {
 void FBO :: bind() {
 
 	//reset texture
-    Texture::Reset();	
-	
-	//generate if not yet generated
-	if(mId <= 0) {
-		glGenFramebuffers(1, &mId);
-	}
+//    Texture::Reset();	
+//	
+//	//generate if not yet generated
+//	if(mId <= 0) {
+//		glGenFramebuffers(1, &mId);
+//	}
 	
 	//bind
 	glBindFramebuffer(GL_FRAMEBUFFER, mId);
@@ -207,19 +221,19 @@ GLint FBO :: attachTextureBuffer(int width, int height, GL::ATTACH type) {
 
 GLenum FBO :: status() {
 	GLenum stat = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    return stat;
     if (stat != GL_FRAMEBUFFER_COMPLETE){
         printf("fbo fail/n");
     }
+    return stat;
 }
 
-//Attaches texture t to framebuffer f
+//Attaches texture t to framebuffer f at buffer _buf (color, depth, etc)
 void FBO :: Attach(FBO *f, Texture *t, GL::ATTACH _buf) {
     
-    GLint tmp = Current();
+//    GLint tmp = FBO::Current();
     
 	//set texture's fbo attachment point buffer (color, depth, or stencil)
-	t->fbo().attachment(_buf);
+//	t->fbo().attachment(_buf);
 
 	//call forth buffer
 	glBindFramebuffer(GL_FRAMEBUFFER, f->id());

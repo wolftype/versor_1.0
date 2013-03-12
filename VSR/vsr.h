@@ -121,5 +121,8 @@
 	
 	#include "Mnv.h"
 	
+    #include "vsr_supplement.h"
+    
 	#include "versorFuncs.h"
+    
 	#endif

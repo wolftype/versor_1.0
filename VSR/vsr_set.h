@@ -1,5 +1,5 @@
 //
-//  Model.h
+//  vsr_set.h
 //  vsr
 //
 //  Created by Pablo Colapinto on 3/27/12.
@@ -44,7 +44,7 @@ namespace vsr  {
         
         unsigned long size() const { return mData.size(); }
         
-        
+        typename vector<T>::iterator begin() { return mData.begin(); }
 
 //        vector<T>& tmp() { return mTmp; }
 //        vector<T> tmp() const { return mTmp; }

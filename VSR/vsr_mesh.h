@@ -25,7 +25,7 @@ namespace vsr {
     struct Vertex {
         Vec3<float> Pos;        ///< 3d Position
         Vec3<float> Norm;       ///< 3d normal
-        Vec4<float> Col;        ///< RGBA Color
+        Vec4<float> Col;        ///< RGBA Color (could be uchar)
         Vec2<float> Tex;        ///< UV Coordinates
                 
         Vertex(const Vec3f& pos = Vec3f(0,0,0), 
@@ -45,8 +45,10 @@ namespace vsr {
         float * tex() { return &Tex[0]; }
         
         static GLvoid * on() { return (GLvoid*)sizeof(Vec3f); }
-        static GLvoid * oc() { return (GLvoid*)( 2 * sizeof(Vec3f) ); }
-        static GLvoid * ot() { return (GLvoid*)( 3 * sizeof(Vec3f) ); }
+        static GLvoid * oc() { return (GLvoid*)( sizeof(Vec3f) + sizeof(Vec4f) ); }
+        static GLvoid * ot() { return (GLvoid*)( 2 * sizeof(Vec3f) + sizeof(Vec4f) ); }
+//        static GLvoid * oc() { return (GLvoid*)( 2 * sizeof(Vec3f) ); }
+//        static GLvoid * ot() { return (GLvoid*)( 3 * sizeof(Vec3f) ); }
         
     };
     
@@ -69,7 +71,7 @@ namespace vsr {
         void mode( GL::MODE m) { mMode = m; }
         
         /// Default Line Loop Mode
-        Mesh() : mMode(GL::LL) {}
+        Mesh(GL::MODE m = GL::LL) : mMode(m) {}
         
         Mesh(const Mesh& m){
             
@@ -97,8 +99,16 @@ namespace vsr {
         Mesh& add(const Vertex& v) { mVertex.push_back(v); return *this;}        
         Mesh& add(const Vec3f& v) { mVertex.push_back( Vertex(v) ); return *this; }
         Mesh& add(float x, float y, float z) { mVertex.push_back( Vertex( Vec3f(x,y,z) ) ); return *this; }
+        //Mesh& add(const Vec& v) { mVertex.push_back( Vertex( Vec3f(v[0], v[1], v[2]) ) ); return *this; }
+        
+        
         
         /// ADD N VERTICES
+        template<typename T>
+        Mesh& add(typename vector<T>::iterator v, int n){
+            for (int i = 0; i < n; ++i) { mVertex.push_back( Vertex( Vec3f( v[i][0], v[i][1], v[i][2] ) ) ); }
+        }
+        
         Mesh& add(Vec3f * v, int n) { 
             for (int i = 0; i < n; ++i) { mVertex.push_back( Vertex(v[i]) ); } 
             return *this;
@@ -120,6 +130,23 @@ namespace vsr {
         vector<Vertex>::iterator vertices() { return mVertex.begin(); }
         
         Vertex& last() { return mVertex[ mVertex.size() - 1 ]; }
+        
+        //immediate mode!
+        void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+            glColor4f(r,g,b,a);
+            GL::Begin( mMode);
+            for (int i = 0; i < mVertex.size(); ++i){
+                GL::vertex( mVertex[i].Pos );
+            }
+            glEnd();
+        }
+        void drawElements() {
+            GL::Begin( mMode);
+            for (int i = 0; i < mIndex.size(); ++i){
+                GL::vertex( mVertex[ mIndex[i] ].Pos );
+            }
+            glEnd();
+        }
         
 //        GLubyte * indices() { return &mIndex[0]; }
 //        float * vertices() { return &mVertex[0].Pos[0]; }
@@ -244,14 +271,20 @@ namespace vsr {
         return m;
     }
     
+    
+    //Q: How is this different from MGlyph::Rect
     inline Mesh Mesh::Rect (float w, float h) {
         
         Mesh m;
         
-        Vec3f lt (-w/2.0,-h/2.0, 0 );
-        Vec3f rt = lt + Vec3f(w,0,0);
-        Vec3f rb = rt + Vec3f(0,h,0);
-        Vec3f lb = lt + Vec3f(0,h,0);
+//        Vec3f lt (-w/2.0, -h/2.0, 0 );
+//        Vec3f rt = lt + Vec3f(w,0,0);
+//        Vec3f rb = rt + Vec3f(0,h,0);
+//        Vec3f lb = lt + Vec3f(0,h,0);
+        Vec3f lb (-w/2.0, -h/2.0, 0 );
+        Vec3f rb = lb + Vec3f(w,0,0);
+        Vec3f rt = rb + Vec3f(0,h,0);
+        Vec3f lt = rt - Vec3f(w,0,0);
         
         Vec3f normal(0,0,1);
         Vertex va( lt, Vec4f(lt,1), normal, Vec2f(0,0));
@@ -268,8 +301,13 @@ namespace vsr {
         return m;
     }
     
+    ///////////////
+    ///////////////
+    ///////////////
+    ///////////////
+    ///////////////
     
-    struct CirMesh{
+struct CirMesh{
 
     vector<Cir> vc;
     vector<Pnt> vp;
@@ -321,8 +359,9 @@ struct UVMesh{
     vector<Pnt> vp; ///<-- VECTORS
     vector<Vec> np; ///<-- NORMALS
     bool bFlipNormals;
-    UVMesh(int _u, int _v) : u(_u), v(_v), bFlipNormals(0) {}
+    UVMesh(int _u=0, int _v=0) : u(_u), v(_v), bFlipNormals(0) {}
     void add(const Pnt& p) { vp.push_back(p); }
+    void add(const Vec& v) { vp.push_back(v.null()); }
     
     Vec normal(int a, int b, int c){
             Vec dir  = bFlipNormals ?  Ro::dir( vp[a] ^ vp[c] ^ vp[b] ).dual() : Ro::dir( vp[a] ^ vp[b] ^ vp[c] ).dual();

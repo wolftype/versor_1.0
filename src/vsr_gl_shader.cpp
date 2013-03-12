@@ -69,6 +69,9 @@ void Shader::compile(){
     
 //  int length = strlen(mSrc);
     
+    string t = mType == VERTEX ? "vertex" : "fragment";
+    cout << "compiling " << t << " shader" << endl; 
+    
     mId = glCreateShader( mType );
     cSrc = mSrc.c_str();
     
@@ -123,7 +126,24 @@ void ShaderProgram :: load ( string vs, string fs){
 
 }
 		
+void ShaderProgram::source( string vs, string fs){
+	bLoaded = false;	
+    
+    mId = glCreateProgram();  
+    vert.source(vs.c_str(), Shader::VERTEX);
+    frag.source(fs.c_str(), Shader::FRAGMENT);
+    attach(vert);
+    attach(frag);
+    
+    link();
+    
+    printf("Shader Program: %d: %s %s\n", mId, vs.c_str(), fs.c_str() );
 
+    bLoaded = true;
+    bActive = true;
+    
+    get();
+}
 
 void ShaderProgram::unload(){
 	

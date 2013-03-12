@@ -24,13 +24,72 @@ void reflections(GLVApp& app){
     static Cir cir = CXY(1).trs(2,0,0);
     DRAWANDTOUCH(cir);
     
-    //Reflection of Line in Circle
-    Cir r = Cir(lin).re(cir);
-    DRAW3(r,0,1,0);
+
+    Cir r = (cir * Cir(lin)) / cir;
+    cout << lin << cir << "new:\n" << r << endl;
+    //Tr
+    double s = Ro::size(r,false);
+    cout << "size: " << s << endl; 
+    if (fabs(s) > 10000) {
+        DRAW3(Lin(r),1,0,0);
+       // cout << "treat as a line" << endl; 
+    }
+    else DRAW3(r,0,1,0);
+    
+ //   cout << "inversion and reversion: " << !cir << ~cir << endl; 
+    
+}
+
+void planeInSphere(GLVApp& app){
+    static Dlp dlp(0,1,0,0);
+    DRAW(dlp);
+    
+    static Dls dls = Ro::dls(0,0,0,1);
+    DRAWANDTOUCH(dls); 
+    
+    Dls nd = Dls(dlp).re(dls);
+    DRAW(nd);
+    
+    cout << dlp << nd << endl;  
+}
+
+
+void glide(GLVApp& app){
+
+    static Dlp dlp(0,1,0,1);
+    DRAWANDTOUCH(dlp);
+    static Vec vec(2,0,0);
+    DRAWANDTOUCH(vec);
+    Trs trs = Gen::trs(vec);
+    
+//    static Par f = PAIR(1,1,0);
+    static Cir cir = CXZ(1);
+    
+//    DRAW3(Ro::split(f,true),1,0,0);  
+//    DRAW3(Ro::split(f,false),0,0,1);  
+//    TOUCH(f);
+
+    DRAWANDTOUCH(cir);
+    DRAW3( Ro::pnt_cir(cir, PIOVERTWO),1,0,0 );
+
+//    Par nf =  f.re( trs * dlp ); //f.re(dlp).trs(vec);
+    Cir nc = cir.re( trs * dlp );
+    
+    DRAW(nc);
+    DRAW3( Ro::pnt_cir(nc, PIOVERTWO),0,1,0 );
+    
+    
+    
+//    DRAW3(Ro::split(nf,true),1,0,0);  
+//    DRAW3(Ro::split(nf,false),0,0,1);  
+    
+
 }
 
 void GLVApp :: onDraw() {
-    reflections(*this);
+    //reflections(*this);
+    glide(*this);
+    //planeInSphere(*this);
     text("Hit 'G' 'R' or 'S' keys and click on element to Grab Rotate or Scale.  Hit 'Q' to release");
 }
 

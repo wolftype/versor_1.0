@@ -2,7 +2,7 @@
  *  vsr_gl_shader.h
  *  VERSOR
  *
- *  modified from openFrameworks
+ *  
  *
  */
 
@@ -20,7 +20,7 @@
 //#include "vsr_file.h"
 
 //		---------------------------------------
-// 		very useful info here:
+// 		useful info here:
 // 		http://www.evl.uic.edu/aej/594/
 
 
@@ -44,8 +44,9 @@ using namespace std;
     
 struct ShaderParam {
     
+    //Types of Passable Values
     enum Type {
-       ATTRIBUTE = 0,
+        ATTRIBUTE = 0,
         UNIFORM        
     };
     
@@ -66,30 +67,7 @@ struct ShaderParam {
     GLenum datatype; //floating point , int, ubyte, etc
     
     GLchar name[256];
-    
-//    GLuint attrib(GLuint sprog, char * name){
-//        
-//        id = glGetAttribLocation(sprog, name); 
-//    
-//        getAttrib(sprog);
-//        
-//        print();
-//        
-//        return id;
-//    }
-//
-//    GLuint uniform(GLuint sprog, char * name){
-//        
-//        id = glGetUniformLocation(sprog, name); 
-//        
-//        getUniform(sprog);
-//        
-//        print();
-//        
-//        return id;
-//    }
 
-    
     void getAttrib(GLuint program) {
         glGetActiveAttrib(program, id, buf, &len, &size, &vectype, name);
         datatype = GL::type(vectype); //Get GL Type from Vectype
@@ -138,7 +116,10 @@ struct Uniform : public ShaderParam {
     Uniform (GLuint p, string n) : ShaderParam(UNIFORM, p, glGetUniformLocation(p, n.c_str() ) ) {}
 };
     
-  
+/////////////////////////  
+/////////////////////////  
+/////////////////////////  
+/////////////////////////  
     
 class Shader {
 
@@ -220,13 +201,13 @@ class ShaderProgram {
 		
         GLint id() const { return mId; }
 	
-        void attach( const Shader& s );
-        void link();
+        void attach( const Shader& s );                         ///< Attach Vert or Frag Shader to Program
+        void link();                                            ///< Link Programs Together
 		
-		void load(const char * shaderName);                                             ///< Load Shader (.frag and .vert)
-		void load(string, string);      ///< Load Fragment and Vertex Shaders
-		
-		void setUniformVariable (char * name, float value);                             ///< Change a Variable in the Shader
+		void load(const char * shaderName);                     ///< Load Shader From File(.frag and .vert)
+		void load(string, string);                              ///< Load Fragment and Vertex Shaders from File
+		void source( string vs, string fs);                     ///< Load from Source
+		void setUniformVariable (char * name, float value);     ///< Change a Variable in the Shader
     
         int uniform(const char * name) const { 
             GLint loc = glGetUniformLocation(mId, name);
@@ -253,11 +234,13 @@ class ShaderProgram {
             GL::error("Set Shader Program Uniformf");
             return *this;
         }
+        
         const ShaderProgram& uniform(const char * name, float v0, float v1) const{
             glUniform2f(uniform(name), v0, v1);	
             GL::error("Set Shader Program Uniformf");
             return *this;
-        }    
+        }
+            
         const ShaderProgram& uniform(const char * name, float x, float y, float z ){
             glUniform3f(uniform(name), x, y, z);
             GL::error("Set Shader Program Uniform3f");
@@ -291,6 +274,9 @@ class ShaderProgram {
         return *this;
     }
     
+    //////////////////
+    ////THE FOLLOWING STATIC FUNCTIONS OPERATE ON WHATEVER SHADER IS CURRENTLY BOUND
+    //////////////////
     static const int UniformID( const char * name){
         GLint loc = glGetUniformLocation( Shader::Current(), name);
         if (loc == -1) printf("No such uniform named \"%s\" in shader\n", name);
