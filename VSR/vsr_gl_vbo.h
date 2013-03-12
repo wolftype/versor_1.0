@@ -145,6 +145,7 @@ namespace vsr {
                 glDrawArrays  (mode, 0, mNum);	
                 GL::error("vbo draw arrays");
             }
+            
             void drawElements(GLenum mode = GL_TRIANGLES, int num = -1, int off = 0){
                 glDrawElements ( mode, (num==-1) ? mNum - off : num, GL::UINT, (GLvoid *) ( sizeof( GLuint ) * off ) );	
                 GL::error("vbo draw elements");
@@ -162,7 +163,7 @@ namespace vsr {
 	
     
     /// Two Buffer (vertex and elements)
-    struct DBO{
+    struct VEBO{
         VBO vertex, index;
         VBO& operator [] (int idx) { return (&vertex)[idx]; }
         VBO operator [] (int idx) const { return (&vertex)[idx]; }

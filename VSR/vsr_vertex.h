@@ -25,6 +25,8 @@
 //#include "vsr_gl_varray.h"
 //#include "vsr_gl_shader.h"
 
+//!!!! DEPRECATED (USE VSR_MESH INSTEAD) !!!!
+
 using namespace std;
 
 namespace vsr {

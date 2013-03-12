@@ -13,6 +13,7 @@
 
 #include "vsr.h"
 #include "vsr_op.h"
+#include "vsr_coord.h"
 
 
 //Q: Given a Circle, can we find it's associated HopfBundle, and thereby a commuting Circle?
@@ -27,15 +28,21 @@ namespace vsr{
         //Circle base (at Phi = -.5)
         Circle mCir;
         
+        //Vector on S2
+        Vec mVec;
+        
         public:
                 
         HopfFiber(bool hand=true) : bHanded(hand) {
             mCir = CXZ(1);
-            //inf =  Inf(1) <= cir;//PAO ^ Ro::null(0, bHanded? 1 :-1,0) ^ Inf(1);
+            mVec = Vec::y;
         }
         
         Circle& cir() { return mCir; }
-        Circle cir() const { return mCir; }
+        const Circle cir() const { return mCir; }
+
+        Vec& vec() { return mVec;}
+        Vec vec() const { return mVec; }
         
         //Dual line axis of Circle South Pole (i.e. the North Pole)
         DualLine dll(){ return (Inf(1) <= mCir).runit(); }
@@ -77,12 +84,19 @@ namespace vsr{
             double pphi = phi+.5;
 
             //Divide by Radius
-            Vector v = Vec::x.rot( Biv::xz * ptheta ) / Ro::rad(mCir);
+            //Vector of Circle
+            Vec v = Ro::vec( mCir, ptheta ) / Ro::rad(mCir);
             
-            Lin lim = mCir.sp( Gen::trv( v ) );                                      //<-- Circle to a Line (Limit)
+//            Vector v = Vec::x.rot( Biv::xz * ptheta ) / Ro::rad(mCir);
+            
+            Vec c = Ro::loc(mCir);
+            
+            Bst bst = Gen::bst( v, c , 1 );
+            
+            Lin lim = mCir.sp( bst );                                      //<-- Circle to a Line (Limit)
             Mot mot = Gen::ratio( lim.dual().runit(), dll(), pphi);
             
-            return mCir.sp( mot * Gen::trv(v * pphi )  ) ; 
+            return mCir.sp( mot * Gen::bst(v ,c , pphi )  ) ; 
             
         }
         
@@ -91,6 +105,10 @@ namespace vsr{
             Coord::Sph cs = Coord::vec2sph(v); // spherical coordinates [-1,1] and [-.5,.5]
             return fiber(cs.theta/PI, cs.phi/PI);
         }
+        
+        //Hopf Links a and b are orthogonal (a * b = b * a)
+        Cir fiberA() { return fiber (mVec); }
+        Cir fiberB() { return fiber (-mVec); }
         
         Lin lim(double theta){
             double ptheta = PIOVERTWO * theta;

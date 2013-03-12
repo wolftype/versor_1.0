@@ -15,6 +15,8 @@
 
 namespace vsr {
     namespace GL{
+    
+        //MESH GLYPHS -- consolidate with mesh::rect, etc.
         namespace MGlyph {
         
             static Mesh Point(float x, float y, float z){
@@ -24,13 +26,27 @@ namespace vsr {
                 return m;
             }
         
+            //SLAB
             static Mesh Rect( float w, float h){
                 Mesh m;
-                m.add( -w/2.0,-h/2.0, 0 );
-                m.add( w/2.0,-h/2.0, 0 );
-                m.add( -w/2.0,h/2.0, 0 );
-                m.add( -w/2.0,-h/2.0, 0 );
-                m.add(0).add(1).add(2).add(3).add(0);
+                
+                Vec3f lb (-w/2.0, -h/2.0, 0 );
+                Vec3f rb = lb + Vec3f(w,0,0);
+                Vec3f rt = rb + Vec3f(0,h,0);
+                Vec3f lt = rt - Vec3f(w,0,0);
+                
+                Vec3f normal(0,0,1);
+                Vertex va( lt, Vec4f(lt,1), normal, Vec2f(0.0,0.0));
+                Vertex vb( rt, Vec4f(lt,1), normal, Vec2f(1.0,0.0));
+                Vertex vc( rb, Vec4f(lt,1), normal, Vec2f(1.0,1.0));
+                Vertex vd( lb, Vec4f(lt,1), normal, Vec2f(0.0,1.0));
+                
+                m.add(va).add(vb).add(vc).add(vd);
+                
+                int idx[4] = {0,1,3,2};
+                m.add(idx,4);
+                        
+                m.mode(GL::TS);
                 return m;
             }
 

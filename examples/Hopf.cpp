@@ -88,7 +88,7 @@ void hopf2(GLVApp& app){
     SET app.gui(num,"num",0,1000)(res,"res",0,1000)(cres,"cres",0,100)(phase,"phase",1,100)(amt,"amt",0,10)(minDistance,"minDistance",0,1000);
     app.gui(handed)(bDrawCir, "drawcir")(bDrawPnt,"drawpnt")(bBoost,"bBoostOnly")(bTwist, "bTwistOnly")(bAxis,"bAxis")(bReset,"reset"); 
     END     
-    if (bAxis) { DRAW3( hf.dll(), 0,0,0); DRAW3( hf.cir, 0,0,0); }
+    if (bAxis) { DRAW3( hf.dll(), 0,0,0); DRAW3( hf.cir(), 0,0,0); }
     ITJi(i,num)
         
         double v = t * amt;
@@ -98,7 +98,7 @@ void hopf2(GLVApp& app){
         ITJ(j,res)
         
             double u = 1.0 * j/res;   //-1.0 + 2*         
-            Cir tc = (bBoost) ? hf.cir.sp( hf.trv(-v,u) ) : hf.fiber(-v, u);
+            Cir tc = (bBoost) ? hf.cir().sp( hf.trv(-v,u) ) : hf.fiber(-v, u);
             if (bDrawCir) DRAW3(tc,.5,.5,.5);
             if (Ro::size(tc, false) > 100) DRAW3( Lin(tc), .5,.5,.5);
             
@@ -160,6 +160,57 @@ void cirtest(GLVApp& app){
 
 }
 
+//Q:
+//GIVEN A POINT IN SPACE, and AN ORIGIN,
+//WHAT IS ITS CORRESPONDING HOPF FIBER AND PHASE?
+
+void hopfMap(GLVApp& app){
+
+    static Dls dls = Ro::dls(0,0,0,1);
+    
+    static Vec vec = Vec::x;
+    
+    DRAW3(vec,0,1,0); TOUCH(vec);
+    //DRAW4(dls,1,0,0,.5);
+    
+    HopfFiber hf;
+    DRAW3(hf.cir(), 1, 1, 1 );
+    Cir ca = hf.fiber(vec);
+    Cir cb = hf.fiber(-vec);
+    
+    //DRAW3(ca,0,0,1);
+    //DRAW3(cb,0,1,1);
+    
+    static Pnt pnt = PT(2,0,0); DRAWANDTOUCH(pnt);
+
+    Cir base = CXZ(1);//hf.cir();
+    //Distance
+    Cir tc = pnt ^ base.dual(); DRAW3(tc,1,1,0);
+    //Par tp = pnt <= base; DRAW3(tp,1,1,0);
+    
+    double d = Ro::size(tc, false);
+
+    //reflection in base
+    Pnt np = pnt.re(base);
+    np = np / np[3];
+    DRAW( np );
+
+
+//    DRAW( -Pnt( Mtt(base * pnt) / base) );
+    
+//    ITJ(i,100)
+//        double t = -.5 + (1.0 * i/100);
+//        Cir nc = hf.fiber(0, t);
+//        DRAW(nc);
+//        ITJ(j,10);
+//            double t = j/10.0;
+//            Pnt p = Ro::pnt_cir( nc, PI * t);
+//            DRAW(p);
+//        END
+//    END
+
+}
+
 void hopf3(GLVApp& app){
 
     static double theta, phi, m, n, amt;
@@ -184,7 +235,7 @@ void hopf3(GLVApp& app){
 
     Vec v2 = -v;  DRAW3(v2,0,1,0);
     
-    Par tp = Ro::par( Ro::sur( hf.cir ), v );
+    Par tp = Ro::par( Ro::sur( hf.cir() ), v );
     DRAW( Ro::split( tp,true ).null() );
     
     Coord::Sph sc = Coord::vec2sph( v );
@@ -219,7 +270,8 @@ void GLVApp :: onDraw(){
 
     //hopf(*this);
     //hopf2(*this);
-    hopf3(*this);
+//    hopf3(*this);
+    hopfMap(*this);
 //   cirtest(*this);
    // text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }

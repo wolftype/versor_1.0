@@ -341,13 +341,13 @@ inline void Glyph :: Segment2(float angle, float angle2, float radius, int res){
 
     // * fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
 
-	double t = angle2 - angle;
-	int num = res * fabs(t);
+	double ta = fabs(angle2 - angle);
+	int num = res * ta;
     glBegin(GL_LINE_STRIP);
 		
 		for (int i = 0; i < num; ++ i){
 
-			float rad = ( angle ) + t * i / res;
+			float rad = ( angle ) + ta * i / num;
 			Vec2<> t ( cos(rad), sin(rad) );
 			t *= radius;
 			glVertex2f(t.x, t.y);			

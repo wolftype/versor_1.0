@@ -204,8 +204,10 @@ struct ProductN{
 
 //template< int N, class T >
 
+//in progress, unused
 struct Generic {
-    Generic(unsigned int t) : id(t) {}
+//    Generic({}
+    Generic(unsigned int t = -1) : id(t) {}
     unsigned int id;
     
     Pnt pnt() const; //{ return *(Pnt*)(this); }

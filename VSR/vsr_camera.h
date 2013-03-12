@@ -121,9 +121,13 @@ class Camera : public Frame {
         Camera(float x, float y, float z); 
         Camera( Vec v, Drv x); 
 
-		template <class A> void lookAt( const A& v ) { mLook = v; }
+		//template <class A> void lookAt( const A& v ) { mLook = v; }
 						
 		Vec  look() { mLook = Vec(mPos) + forward();  return mLook; }	
+        
+        //A Direction
+        void lookAt(double x, double y, double z){ orientZrel(-x,-y,-z); }
+        void lookAt(const Vec& v) { orientZrel(-v); }
         
         void focal( float f ) { mLens.focal( f ); }
         void width( float w )	{ mLens.width( w ) ;}						///< set width

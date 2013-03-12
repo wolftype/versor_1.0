@@ -2,6 +2,11 @@
 //  vsr_gl_vattrib.h
 //  Versor
 //
+/*
+
+    Vertex Attribute Data
+*/
+
 //  Created by Pablo Colapinto on 10/25/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //

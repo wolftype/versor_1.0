@@ -156,7 +156,7 @@ namespace vsr {
 			void set(const Pnt&p, const Rot& r = Rot(1,0,0,0) ) { mPos = p; mRot = r; orient(); }
             void reset()	{ mRot.set(1,0,0,0); mPos.set(0,0,0,1,0); orient(); }		///< reset position and orientation
 			
-			/*! Local Z Axis Euclidean Vector */
+			/*! Local Z Axis Euclidean Vector NEGATES opengl Z*/
 			Vec forward()	const { return Vec(mImage.col[2][0],mImage.col[2][1],mImage.col[2][2]) * - 1; }
 			/*! Local Y Axis Euclidean Vector */
 			Vec up()		const { return Vec(mImage.col[1][0],mImage.col[1][1],mImage.col[1][2]); }
@@ -244,13 +244,13 @@ namespace vsr {
             Par tzScaled(double t=1.0) const { return tz(scale()*t); }	///< z tangent generator in global space * t
 
 			/* Local Boost Tranformations */
-			Bst ppx() { return Gen::trv(1,tx()); }			///< x tangent space boost versor
-			Bst ppy() { return Gen::trv(1,ty()); }			///< y tangent space boost versor
-			Bst ppz() { return Gen::trv(1,tz()); }			///< z tangent space boost versor
+			Bst ppx() { return Gen::bst(tx()); }			///< x tangent space boost versor
+			Bst ppy() { return Gen::bst(ty()); }			///< y tangent space boost versor
+			Bst ppz() { return Gen::bst(tz()); }			///< z tangent space boost versor
             /* Local Boost Tranformations */
-            Bst ppx(double t) { return Gen::trv(1,tx(t)); }			///< x tangent space boost versor
-            Bst ppy(double t) { return Gen::trv(1,ty(t)); }			///< y tangent space boost versor
-            Bst ppz(double t) { return Gen::trv(1,tz(t)); }			///< z tangent space boost versor			
+            Bst ppx(double t) { return Gen::bst(tx(t)); }			///< x tangent space boost versor
+            Bst ppy(double t) { return Gen::bst(ty(t)); }			///< y tangent space boost versor
+            Bst ppz(double t) { return Gen::bst(tz(t)); }			///< z tangent space boost versor			
 
 			void mot(const Mot& m) { 
                 mPos = PAO.sp(m); 
@@ -313,7 +313,7 @@ namespace vsr {
                 orient(); 
             }
             void orientZrel(double x, double y, double z){
-                orientXrel( Vec( x, y, z) );
+                orientZrel( Vec( x, y, z) );
             }
 			/*! Absolute Twist Transformation (based on global frame) */
 			Frame& twista(const Mot& m)		{ mPos = PAO.sp(m); mRot = m; return orient(); }

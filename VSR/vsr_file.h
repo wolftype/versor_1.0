@@ -16,6 +16,8 @@
 namespace vsr {
 
 	using namespace std;
+    
+    #define STRINGIFY(A) #A 
 
 	class File {
 	

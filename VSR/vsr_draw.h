@@ -59,6 +59,8 @@ namespace vsr {
                 template<> void Immediate( const Flp& );
                 template<> void Immediate( const Frame& );
                 
+                void Immediate( const Cir&, double angleA, double angleB, bool dir);
+                
                 template< class A > Vec Pos(const A& s);
                 template<> Vec Pos( const Vec& s);
                 template<> Vec Pos( const Drv& s);
@@ -298,29 +300,34 @@ template<> inline void Draw :: Immediate (const Par& s){
 }
 
 template<> inline void Draw :: Immediate (const Cir& s){
-        Biv b = Ro::dir( s );
-
-        Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() ); 
-                
-        Pnt v = Ro::loc( s );	
-
                         
         double size = Ro::size( s, false );
-        double rad = Ro::rad( s );
-        Rot t = Gen::aa(r);
+        if ( fabs(size) > 5000 || fabs(size) < .00001) {
+            Draw::Immediate( Lin(s) );
+        } else {
         
-        // Get Sign 
-        bool sn = Op::sn(b, Biv::xy);
+            Biv b = Ro::dir( s );
+
+            Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() ); 
+                
+            Pnt v = Ro::loc( s );	
+            double rad = Ro::rad( s );
+            Rot t = Gen::aa(r);
         
-        GL::translate(v.w());
-        GL:rotate(t.w());
+            // Get Sign 
+            bool sn = Op::sn(b, Biv::xy);
+            
+            GL::translate(v.w());
+            GL:rotate(t.w());
 
-        // Is it imaginary 
-        bool im = size > 0 ? 1 : 0;
+            // Is it imaginary 
+            bool im = size > 0 ? 1 : 0;
 
-        bool bDir = 0;
-        if (bDir) {im ? Glyph::DirCircle(rad,sn) : Glyph::DirDashedCircle(rad,sn);}
-        else { im ? Glyph::Circle(rad) : Glyph::DashedCircle(rad);}
+            bool bDir = 0;
+            if (bDir) {im ? Glyph::DirCircle(rad,sn) : Glyph::DirDashedCircle(rad,sn);}
+            else { im ? Glyph::Circle(rad) : Glyph::DashedCircle(rad);}
+        
+        }
 
 }
 
@@ -399,6 +406,32 @@ template<> inline void Draw :: Immediate (const Frame& s){
     
     
 }  
+
+inline void Draw :: Immediate (const Cir& s, double angleA, double angleB, bool dir){
+    
+    double size = Ro::size(s, false);
+    
+    Biv b = Ro::dir( s );
+
+    Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() ); 
+        
+    Pnt v = Ro::loc( s );	
+    double rad = Ro::rad( s );
+    Rot t = Gen::aa(r);
+
+    // Get Sign 
+    bool sn = Op::sn(b, Biv::xy);
+    
+    GL::translate(v.w());
+    GL:rotate(t.w());
+
+    // Is it imaginary 
+    bool im = size > 0 ? 1 : 0;
+
+ //           else { im ? Glyph::Segment(rad) : Glyph::DashedCircle(rad);}
+        
+    Glyph::Segment2(angleA, angleB, size); 
+}
 
 //    struct Print {
 //    

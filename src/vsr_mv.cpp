@@ -163,9 +163,9 @@ namespace vsr{
 
 
     //pending (strange conversions)
-//    Pnt Generic::pnt() const { return *(Pnt*)(this); }
-//    Par Generic::par() const { return *(Par*)(this); }
-//    Cir Generic::cir() const { return *(Cir*)(this); }
-//    Sph Generic::sph() const { return *(Sph*)(this); }
+    Pnt Generic::pnt() const { return *(Pnt*)(this); }
+    Par Generic::par() const { return *(Par*)(this); }
+    Cir Generic::cir() const { return *(Cir*)(this); }
+    Sph Generic::sph() const { return *(Sph*)(this); }
 
 }

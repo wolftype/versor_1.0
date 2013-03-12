@@ -8,101 +8,77 @@
  */
 
 #include "vsr_gl_texture.h"
-#include "vsr_gl_fbo.h"
-#include "vsr_gl_pbo.h"
 #include <math.h>
 #include <iostream>
 #include "vsr_matrix.h"
+//#include "vsr_gl_fbo.h"
+//#include "vsr_gl_pbo.h"
 
 namespace vsr {
 
 using namespace std;
 
-Texture::Texture( GLvoid * d, int w, int h, GL::TYPE t, GL::FORMAT inf ) :
+Texture::Texture( GLvoid * d, int w, int h, GL::TYPE t, GL::FORMAT inf, GL::TEXTURE textarget  ) :
 mData(d), mNumChannels(  GL::planes( inf )   ),
 mWidth(w), mHeight(h), 
 mType(t), mIdx(0),
 mFormat( inf ), mIFormat(inf),
-mTarget(GL_TEXTURE_2D)
+mTarget(textarget)
 {
     print();
     generate();
 }    
     
-Texture::Texture( int _w, int _h, int _d) :
+Texture::Texture( int _w, int _h, int _d,  GL::TEXTURE targ) :
 mWidth(_w), mHeight(_h), mDepth(_d), 
-mData(NULL), mNumChannels(4),
-mType(GL_UNSIGNED_BYTE), mIdx(0),
-mFormat(GL_RGBA), mIFormat(GL_RGBA),
-//mVideo(NULL), mImage(NULL), 
-mFbo(NULL), mPbo(NULL)
+mData(NULL), mNumChannels(4),           //DEFAULTS
+mType(GL_UNSIGNED_BYTE), mIdx(0),       //DEFAULTS
+mFormat(GL_RGBA), mIFormat(GL_RGBA),    //DEFAULTS
+mTarget(targ)
+//mFbo(NULL), mPbo(NULL)
 {
 	int i = init();	
 }
     
-
-
 Texture::Texture(string filename) :
-mWidth(0), mHeight(0), mDepth(0), mData(NULL),
-mType(GL_UNSIGNED_BYTE), mNumChannels(4),
-mFormat(GL_RGBA), mIFormat(GL_RGBA), mTarget(GL_TEXTURE_2D),
+mWidth(0), mHeight(0), mDepth(0), mData(NULL),                      
+mType(GL_UNSIGNED_BYTE), mNumChannels(4),                           //DEFAULTS
+mFormat(GL_RGBA), mIFormat(GL_RGBA), mTarget(GL_TEXTURE_2D),        //DEFAULTS
 //mVideo(NULL), mImage(NULL),
-
-mFbo(NULL), mPbo(NULL),  mIdx(0)
+ mIdx(0)
+//mFbo(NULL), mPbo(NULL), 
 {
-	mFbo = new FBO();
-	mPbo = new PBO();
+//	mFbo = new FBO();
+//	mPbo = new PBO();
 //	loadImage(filename);
 }
 
 Texture::~Texture(){
 	
-//	if(mVideo) {
-//		cout << "deleting video" << endl;
-//		delete mVideo;
-//	}
-	
-//	if(mImage){
-//		delete mImage;
-//	}
-	
-	if(mFbo) delete mFbo;
-	if(mPbo) delete mPbo;
+//	if(mFbo) delete mFbo;
+//	if(mPbo) delete mPbo;
 	if(mData) delete[] mData;
 }
 
-FBO& Texture::fbo()  { return *mFbo; }
-PBO& Texture::pbo() { return *mPbo; }
+//FBO& Texture::fbo()  { return *mFbo; }
+//PBO& Texture::pbo() { return *mPbo; }
 
 int Texture::init(){
 
-	alloc();
+	//alloc();
 	generate();
 	
 	mData = NULL;
    
-   	cout << "TEXTURE INSTANCE: " << mIdx << endl;
+   	cout << "NEW TEXTURE INSTANCE: " << mIdx << endl;
          	
 	return mIdx;
 }
 
-void Texture::grabPBO(){
 
-	if(!mIdx){
-		cout << "init texture from pbo grab" << endl;
-		init();
-	}
 
-	if(!mPbo) {
-		cout << "texture calls for new pbo: " 
-		<< mWidth << " x " << mHeight << endl;
-		mPbo = new PBO(mWidth, mHeight, mDepth, mNumChannels);
-		mPbo -> generate();
-	}
-	
-	mPbo -> toTexture(this);
-}
 
+//allocates memory on CPU (use generate() to allocate memory on GPU)
 void Texture::alloc(){
 
 	int size = dataSize();
@@ -126,23 +102,21 @@ void Texture::alloc(){
 GLint Texture :: loadData(void * data){
 
 	if(mData) delete[] mData;
-
 	generate();
-	delete mData;
 	return mIdx;
 }	
 
-void Texture::activate(){ 
+void Texture::activate() const{ 
 //	glGetIntegerv( GL_ACTIVE_TEXTURE_ARB, &mPrev);
 	glActiveTexture( GL_TEXTURE0 + mIdx ); 
 	GL::error("texture activate");
 }
 
-void Texture::enable()	{ glEnable( mTarget );  GL::error( "Texture Enable" ); }
+void Texture::enable()	const { glEnable( mTarget );  GL::error( "Texture Enable" ); }
                                                         
-void Texture::disable() { glDisable( mTarget ); GL::error("Texture Disable" ); }
+void Texture::disable() const { glDisable( mTarget ); GL::error("Texture Disable" ); }
 
-void Texture::bind()	{ 
+void Texture::bind()	const { 
 
 //	activate();
 //	enable();
@@ -157,7 +131,7 @@ void Texture::bind()	{
 	
 }
 
-void Texture::unbind() {
+void Texture::unbind() const {
 
     glBindTexture( mTarget, 0 );
     GL::error("texture unbind");	
@@ -172,21 +146,17 @@ void Texture::update()	{
 //	activate();
 	bind(); 
 
+    //assumes no cubemap
     glTexSubImage2D(mTarget, 0, 0, 0, mWidth, mHeight, mFormat, mType, (GLvoid *)mData);
 	
+
 	GL::error("texture update");	
 	unbind();
 }
 
-void Texture::startCapture(){
-	mFbo -> startCapture(this);
-}
 
-void Texture::endCapture(){
-	mFbo -> endCapture();
-}
 
-void Texture::setParam() {	
+void Texture::setDefaultParam() {	
 
 //    glTexParameteri( mTarget, GL_TEXTURE_WRAP_S, GL_REPEAT);
 //    glTexParameteri( mTarget, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -196,7 +166,7 @@ void Texture::setParam() {
     //2D Sampling Small Texels //GL_LINEAR_MIPMAP_NEAREST
     glTexParameteri( mTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-    GL::error("Texture Set Param");
+    GL::error("Texture Set Default Param");
 	//autogenerate mipmaps
 	//glTexParameteri( mTarget, GL_GENERATE_MIPMAP, true );
 	
@@ -213,10 +183,16 @@ void Texture::generate() {
 	glBindTexture(mTarget, mIdx); 
 	GL::error("texture generate first bind");
 	
-	setParam(); 
+	setDefaultParam(); 
 	
-    glTexImage2D (mTarget, 0, mIFormat, mWidth, mHeight, 0, mFormat, mType,  mData);
-	GL::error("texture generate assignment");
+    if (mTarget != GL::CUBEMAP){
+        glTexImage2D (mTarget, 0, mIFormat, mWidth, mHeight, 0, mFormat, mType,  mData);
+        GL::error("texture generate assignment");
+    } else {
+        for (int i = 0;i<6;++i){
+            glTexImage2D (GL_TEXTURE_CUBE_MAP_POSITIVE_X+i, 0, mIFormat, mWidth, mHeight, 0, mFormat, mType,  mData);
+        }
+    }
 
 //	glGenerateMipmap(mTarget);	
 //	GL::error("texture generate mip map");
@@ -226,7 +202,19 @@ void Texture::generate() {
 	unbind();
 }
 
+
+
+
+//deprecated
 /*
+//void Texture::startCapture(){
+//	mFbo -> startCapture(this);
+//}
+//
+//void Texture::endCapture(){
+//	mFbo -> endCapture();
+//}
+
 int Texture::loadRawImage(string filename){
 
 	mTarget = GL_TEXTURE_2D;
@@ -320,6 +308,24 @@ GLint Texture :: loadVideo(string filename){
 	mData = NULL;
 	return mIdx;
 }
+
+//deprecate this stuff it's confusing!
+//void Texture::grabPBO(){
+//
+//	if(!mIdx){
+//		cout << "init texture from pbo grab" << endl;
+//		init();
+//	}
+//
+//	if(!mPbo) {
+//		cout << "texture calls for new pbo: " 
+//		<< mWidth << " x " << mHeight << endl;
+//		mPbo = new PBO(mWidth, mHeight, mDepth, mNumChannels);
+//		mPbo -> generate();
+//	}
+//	
+//	mPbo -> toTexture(this);
+//}
 
 */
 	

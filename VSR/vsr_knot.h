@@ -3,6 +3,10 @@
 //  Versor
 /*
     KNOTS -- building up from Dorst and Valkenburg's paper on Square Roots of Rotors and Logarithms through Polar Decomposition
+    
+    
+    IN PROGRESS!!!! Still owkring out the best way to do this (and what "this" is)
+    
 */
 //  Created by Pablo Colapinto on 11/7/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
@@ -12,10 +16,43 @@
 #define Versor_vsr_knot_h
 
 #include "vsr_frame.h"
+#include "vsr_fiber.h"
+//#include "vsr_set.h"
 
 namespace vsr {
 
 //A sort of Coupled Boost
+
+struct TorusKnot  {
+    
+    //typically integers
+    double P, Q;
+    
+    //double cable;
+
+    //A Circle base with methods for finding the links around which to knot . . .
+    HopfFiber HF;
+    
+    //A vector of circle in the knot orbit
+    vector<Cir> cir;
+    //A vector of points in the knot orbit
+    vector<Pnt> pnt;
+    
+    double amt;
+    
+    Par par() { 
+        return HF.fiberA().dual() * PI/P + HF.fiberB().dual() * PI/Q;
+    }
+        
+    Bst bst() {
+        return Gen::bst( par() * amt );
+    }
+    
+    Bst bst(double t) { return Gen::bst( par() * t ); }
+    
+    TorusKnot(double p = 3, double q = 2, double a = .001) : P(p), Q(q), amt(a) {}
+        
+};
 
 
 /*! Generates an Orbit around a Real, Imaginary, or Null Point Pair */

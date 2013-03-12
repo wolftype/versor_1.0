@@ -7,7 +7,7 @@
 //
 /*
  
- For building Guis from Shaders . . .
+ For building shaders from pieces
  
  */
 
@@ -17,15 +17,23 @@
 #include "vsr_gui.hpp"
 #include "vsr_gl_shader.h"
 
+namespace vsr {
 
-class ShaderGui : public Gui {
+    namespace GLSL {
+        
+        
+    
+    }
 
-    public:
-    
-    ShaderProgram * shader;
-    
-    
-    
-};
+//class ShaderGui : public Gui {
+//
+//    public:
+//    
+//    ShaderProgram * shader;
+//    
+//    
+//    
+//};
+}
 
 #endif
