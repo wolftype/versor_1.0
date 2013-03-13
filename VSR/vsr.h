@@ -21,108 +21,58 @@
 
     #include "vsr_casts.h"
 		
-	#include "Rot.h"
-	
-	#include "Mot.h"
-	
-	#include "Dil.h"
-	
-	#include "Trv.h"
-	
-	#include "Mtd.h"
-	
-	#include "Trs.h"
-	
-	#include "Rtc.h"
-	
-	#include "Mtt.h"
-	
-	#include "Rtt.h"
-	
-	#include "Rtd.h"
-	
-	#include "Tvd.h"
-	
-	#include "Tsd.h"
-	
-	#include "Trt.h"
-	
-	#include "Rvd.h"
-	
-	#include "Tst.h"
-	
-	#include "Tvt.h"
-	
-	#include "Bst.h"
-	
-	#include "Sca.h"
-	
-	#include "Ori.h"
-	
-	#include "Inf.h"
-	
-	#include "Mnk.h"
-	
-	#include "Hyp.h"
-	
-	#include "Pss.h"
-	
-	#include "Pnt.h"
-	
-	#include "Par.h"
-	
-	#include "Cir.h"
-	
-	#include "Sph.h"
-	
-	#include "Sta.h"
-	
-	#include "Drv.h"
-	
-	#include "Drb.h"
-	
-	#include "Drt.h"
-	
-	#include "Tnv.h"
-	
-	#include "Tnb.h"
-	
-	#include "Tnt.h"
-	
-	#include "Lin.h"
-	
-	#include "Pln.h"
-	
-	#include "Flp.h"
-	
-	#include "Dfp.h"
-	
-	#include "Dll.h"
-	
-	#include "Dlp.h"
-	
-	#include "Vec.h"
-	
-	#include "Biv.h"
-	
-	#include "Tri.h"
-	
-	#include "Aff.h"
-	
-	#include "Afl.h"
-	
-	#include "Afp.h"
-	
-	#include "Dap.h"
-	
-	#include "Daf.h"
-	
-	#include "Dal.h"
-	
-	#include "Mnv.h"
-	
-    #include "vsr_supplement.h"
-    
-	#include "versorFuncs.h"
-    
-	#endif
+   #include "Elements/Rot.h"
+   #include "Elements/Mot.h"
+   #include "Elements/Dil.h"
+   #include "Elements/Trv.h"
+   #include "Elements/Mtd.h"
+   #include "Elements/Trs.h"
+   #include "Elements/Rtc.h"
+   #include "Elements/Mtt.h"
+   #include "Elements/Rtt.h"
+   #include "Elements/Rtd.h"
+   #include "Elements/Tvd.h"
+   #include "Elements/Tsd.h"
+   #include "Elements/Trt.h"
+   #include "Elements/Rvd.h"
+   #include "Elements/Tst.h"
+   #include "Elements/Tvt.h"
+   #include "Elements/Bst.h"
+   #include "Elements/Sca.h"
+   #include "Elements/Ori.h"
+   #include "Elements/Inf.h"
+   #include "Elements/Mnk.h"
+   #include "Elements/Hyp.h"	
+   #include "Elements/Pss.h"
+   #include "Elements/Pnt.h"
+   #include "Elements/Par.h"
+   #include "Elements/Cir.h"
+   #include "Elements/Sph.h"
+   #include "Elements/Sta.h"
+   #include "Elements/Drv.h"
+   #include "Elements/Drb.h"
+   #include "Elements/Drt.h"
+   #include "Elements/Tnv.h"
+   #include "Elements/Tnb.h"
+   #include "Elements/Tnt.h"
+   #include "Elements/Lin.h"
+   #include "Elements/Pln.h"
+   #include "Elements/Flp.h"
+   #include "Elements/Dfp.h"
+   #include "Elements/Dll.h"
+   #include "Elements/Dlp.h"
+   #include "Elements/Vec.h"
+   #include "Elements/Biv.h"
+   #include "Elements/Tri.h"
+   #include "Elements/Aff.h"
+   #include "Elements/Afl.h"
+   #include "Elements/Afp.h"
+   #include "Elements/Dap.h"
+   #include "Elements/Daf.h"
+   #include "Elements/Dal.h"
+   #include "Elements/Mnv.h"
+   #include "vsr_supplement.h"
+   
+   #include "versorFuncs.h"
+   
+   #endif
