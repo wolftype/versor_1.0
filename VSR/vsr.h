@@ -19,7 +19,7 @@
 	
 */
 
-    #include "vsr_casts.h"
+    #include "Elements/vsr_casts.h"
 		
    #include "Elements/Rot.h"
    #include "Elements/Mot.h"
@@ -71,8 +71,8 @@
    #include "Elements/Daf.h"
    #include "Elements/Dal.h"
    #include "Elements/Mnv.h"
-   #include "vsr_supplement.h"
+   #include "Elements/vsr_supplement.h"
    
-   #include "versorFuncs.h"
+   #include "Elements/versorFuncs.h"
    
    #endif
