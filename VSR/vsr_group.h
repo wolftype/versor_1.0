@@ -107,7 +107,6 @@ namespace vsr {
 		//The "Frame" is composed of 2 or 3 versors (could be dual planes ... or also circles or spheres for hyperbolic extension)
 		Versor mVersor[3];  
 
-        
         //Symmetric Ratios
         int mP, int mQ;
 

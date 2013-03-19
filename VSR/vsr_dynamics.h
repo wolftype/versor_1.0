@@ -12,8 +12,17 @@
 #include "vsr.h"
 #include "vsr_op.h"
 #include "vsr_frame.h"
+#include "vsr_field.h"
 
 namespace vsr {
+
+    //Double Field (present and past state)
+    template<class T>
+    struct DoubleField {
+        
+        Field<T> a, b;
+    };
+    
 
     //Current and Past State
     template<class T, int N>
@@ -61,6 +70,16 @@ namespace vsr {
     
     struct VelocityVerlet {
     
+    };
+    
+    template<class T>
+    struct Advect {
+        
+        //Pass in a Double Field 
+        static DoubleField& Forward(const DoubleField& f, double amt){
+        
+        }
+        
     };
 } //vsr::
 

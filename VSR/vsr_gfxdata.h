@@ -19,6 +19,16 @@ using std::ostream;
 
 namespace vsr  {
 
+enum Cube{
+    LEFT	= 1,
+    RIGHT	= 1 << 1,
+    BOTTOM	= 1 << 2,
+    TOP	= 1 << 3,
+    FRONT	= 1 << 4,
+    BACK	= 1 << 5,
+    ALLSIDES = LEFT | RIGHT | BOTTOM | TOP | FRONT | BACK
+};
+
     //make unions . . .
 struct UV {
     float u, v;
@@ -74,32 +84,56 @@ struct AxisAngle{
 
 };
 
-//struct Vertex {
-//    Vec3<float> Pos;
-//    Vec3<float> Norm;
-//    Vec4<float> Col;
-//    Vec2<float> Tex;
-//    
-//    //            Vertex() : Pos(0,0,0), Norm(0,0,0), Col(1,1,1,1), Tex(0,0){}
-//    
-//    Vertex(const Vec3f& pos = Vec3f(0,0,0), 
-//           const Vec4f& col = Vec4f(1,1,1,1), 
-//           const Vec3f& norm = Vec3f(0,0,0), 
-//           const Vec2f& tex = Vec2f(0,0) )  
-//    
-//    : Pos(pos), Col(col), Norm(norm), Tex(tex) 
-//    
-//    {}
-//    
-//};
+/// Info Container for Euler integration of a 2d Field
+struct Patch{
+    Patch(int _a, int _b, int _c, int _d, double _rw, double _rh) 
+    : a(_a), b(_b), c(_c), d(_d), rw(_rw), rh(_rh)
+    {}
+    
+    int a, b, c, d;
+    double rw, rh;
+};
+
+/// Volume Patch Info Container for Euler integration of a 3d Field
+struct VPatch{
+     VPatch(int _a, int _b, int _c, int _d, int _e, int _f, int _g, int _h, double _rw, double _rh, double _rd) 
+    : a(_a), b(_b), c(_c), d(_d), e(_e), f(_f), g(_g), h(_h), rw(_rw), rh(_rh), rd(_rd)
+    {}  
+    int a, b, c, d, e, f, g, h;
+    double rw, rh, rd; 
+};
+    
+
     
 /*! Data Structure of Neighbors in a cartesian volume (left, right, bottom, top, front, back) */
 class Nbr {
 	public:
 		Nbr(){}
 		Nbr(int _idx, int _xl, int _xr, int _yb, int _yt, int _zf, int _zb) :
-		idx(_idx), xl(_xl), xr(_xr), yt(_yt), yb(_yb), zf(_zf), zb(_zb) {}
-		int idx, xl, xr, yb, yt, zf, zb;	
+		idx(_idx), xl(_xl), xr(_xr), yt(_yt), yb(_yb), zf(_zf), zb(_zb), type(0) {
+            
+            if (xl == -1 ) type |= LEFT;
+            if (xr == -1 ) type |= RIGHT;
+            if (yb == -1 ) type |= BOTTOM;
+            if (yt == -1 ) type |= TOP;
+            if (zf == -1 ) type |= FRONT;
+            if (zb == -1 ) type |= BACK;
+        
+        }
+        
+        Nbr(int _idx, int w, int h, int d, int type) 
+        : idx(_idx), 
+        xl( (type & LEFT) ? -1 : _idx - ( h ) * ( d ) ),
+        xr( (type & RIGHT) ? -1 : _idx + ( h ) * ( d ) ),
+        yt( (type & TOP) ? - 1 : _idx + d  ),
+        yb( (type & BOTTOM) ? - 1 : _idx - d ),
+        zf( (type & FRONT) ? - 1 : _idx - 1 ),
+        zb( (type & BACK) ? - 1 : _idx + 1 ),
+        type(type)
+        {}
+            
+        
+		int idx, xl, xr, yb, yt, zf, zb, type;	
 		int& operator[] (int i) { return (&idx)[i]; }
 		int operator[] (int i) const { return (&idx)[i]; }	
 		
@@ -142,15 +176,7 @@ inline ostream& operator << (ostream& os, const Vxl& m){
 }
 
     
-enum Cube{
-    LEFT	= 1,
-    RIGHT	= 1 << 1,
-    BOTTOM	= 1 << 2,
-    TOP	= 1 << 3,
-    FRONT	= 1 << 4,
-    BACK	= 1 << 5,
-    ALLSIDES = LEFT | RIGHT | BOTTOM | TOP | FRONT | BACK
-};
+
     
     
 } //con::
