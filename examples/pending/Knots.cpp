@@ -28,6 +28,8 @@
 #include "vsr_knot.h"
 #include "vsr_motor.h"
 
+#include "vsr_field.h"
+
 #include <iostream>
 
 
@@ -318,6 +320,14 @@ void twistAroundACircle(GLVApp& app){
     }
 }
 
+void vortexSheet(GLVApp& app){
+
+    static Field<Vec> f(10,10,10);
+    
+    f.draw();
+
+}
+
 void GLVApp :: onDraw(){
 
  //   twistAroundACircle(*this);
@@ -325,8 +335,10 @@ void GLVApp :: onDraw(){
 //    twoknots(*this);
  //     knot(*this);
 //      ortho(*this);
-        orbits(*this);
-        
+//        orbits(*this);
+  
+    vortexSheet(*this);    
+                    
 //    text("Use the Shift + arrow Keys to move camera, or Optoin + arrows to rotate Fibration",50,50);
 }
 

@@ -16,6 +16,7 @@
 #include "vsr_frame.h"
 #include "vsr_matrix.h"
 #include "vsr_gl.h"
+#include "vsr_glyph.h"
 
 using namespace std;
 

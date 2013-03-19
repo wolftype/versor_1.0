@@ -19,7 +19,7 @@
 
 namespace vsr{
 
-//////////////////SUPPLEMENTS
+//////////////////SUPPLEMENTS / EXTENDORS (group theory)
 typedef Lin_Flp Gld;
 
 inline Gld reverse(const Gld& a){

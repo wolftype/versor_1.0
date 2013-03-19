@@ -99,6 +99,10 @@ namespace vsr {
 				//static void Reflection(
                 void SolidGrid(int w = 5, int h = 5, double s = 1);
                 
+                //Box
+                void Box(double w = 1, double h = 1, double d= 1);
+                
+                
                 //Segment
 				 void Seg(const Cir&, double t, bool dir = 1, int res = 20);
                  void SegOff(const Cir& K, double t, double off, bool dir = 1, int res = 20);
@@ -763,6 +767,27 @@ inline void Glyph :: SolidGrid(int w, int h, double s){
 		glTranslatef(-(w*s),s,0);
 	}
     glPopMatrix();
+}
+
+inline void Glyph :: Box ( double w, double h, double d ){
+    double le = -w/2.0;     double ri = w/2.0;
+    double bo = -h/2.0;     double to = h/2.0;
+    double fr = d/2.0;     double ba = -d/2.0;
+
+//    glBegin(GL_TRIANGLE_STRIP);
+//
+//    glVertex3f(le, bo, fr);
+//    glVertex3f(le, to, fr);
+//    glVertex3f(ri, bo, fro);
+//
+//    glVertex3f(ri, to, fr);
+//    glVertex3f(le, to, ba);
+//    glVertex3f(ri, to, ba);
+//
+//    glVertex3f(le, bo, ba);
+//    glVertex3f(ri, bo, ba);
+//
+//    glEnd;
 }
 
 inline void Glyph :: Axes(const Vec& v1, const Vec& v2, const Vec& v3){

@@ -416,17 +416,17 @@ inline void Draw :: Immediate (const Cir& s, double angleA, double angleB, bool 
     Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() ); 
         
     Pnt v = Ro::loc( s );	
-    double rad = Ro::rad( s );
+//    double rad = Ro::rad( s );
     Rot t = Gen::aa(r);
 
     // Get Sign 
-    bool sn = Op::sn(b, Biv::xy);
+//    bool sn = Op::sn(b, Biv::xy);
     
     GL::translate(v.w());
     GL:rotate(t.w());
 
     // Is it imaginary 
-    bool im = size > 0 ? 1 : 0;
+//    bool im = size > 0 ? 1 : 0;
 
  //           else { im ? Glyph::Segment(rad) : Glyph::DashedCircle(rad);}
         

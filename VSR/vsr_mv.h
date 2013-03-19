@@ -61,8 +61,8 @@ template<class T> T reverse( const T& );
 template<class A, class B> A sp(const A&, const B&);
 template<class A, class B> A re(const A&, const B&);
     
-////Type Container Struct    
-template<class A, class B, class T=float>
+////Type Container Struct e.g. Product<Vec,Rot>
+template<class A, class B, class T=VSR_PRECISION>
 struct Product{
     
     static const int AN = A::idx;
@@ -81,8 +81,8 @@ struct Product{
 
 };
 
-//Type Container Struct    
-template<int A, int B, class T=float>
+//Type Container Struct Using IDX input instead of Class 
+template<int A, int B, class T=VSR_PRECISION>
 struct ProductN{
     
     static const int GP_IDX = ProductIdx<A,B>::GP; 
@@ -210,6 +210,7 @@ struct Generic {
     Generic(unsigned int t = -1) : id(t) {}
     unsigned int id;
     
+    //in process . . .
     Pnt pnt() const; //{ return *(Pnt*)(this); }
     Par par() const; //{ return *(Par*)(this); }
     Cir cir() const; // { return *(Cir*)(this); }
@@ -236,7 +237,7 @@ public:
     static const unsigned int idx = IDX;
  	static const unsigned int size =  N;    
 
-    //Feed in a value_type
+    //Feed in a value_type e.g. Vec(0.0), mind the decimals
 	MV(const T& v = T()) BASECONST { std::fill(mW, mW + N, v);  }
     
     /*! Copy Constructor Same Type  */ //TPRINT("Copy Constructor Same Type \n");

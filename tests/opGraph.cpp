@@ -11,12 +11,15 @@
 #include "vsr_draw.h"
 #include "vsr_GLVInterfaceImpl.h"
 
+#include "vsr_tests.h"
+
 #include <iostream>
 
 #include "vsr_exptemp.h"
 
 
 using namespace vsr;
+using namespace std;
 
 using glv::GLV;
 using glv::Window;
@@ -27,9 +30,7 @@ Window * win;
 struct Command {
     
     vector< Generic * > args;
-    
-//    template< class L, class R >
-    
+        
     
     void operator()() {
         
@@ -46,7 +47,26 @@ struct OpApp : public GLVApp {
     void add( Generic& g ){ data.push_back(&g); }
     vector< Generic * > data;
     
-    typedef void (*Opera)(const Generic&, const Generic&);
+
+    typedef Generic (*BinaryFunc)(const Generic&, const Generic&);
+
+    struct Opera {
+            
+            BinaryFunc op;
+            
+             Generic * l; 
+             Generic * r;
+            
+            Opera( BinaryFunc bf,  Generic& a,  Generic& b ) :
+            op(bf), l(&a), r(&b) {}
+            
+            Generic operator()(){
+                return op(*l,*r);
+            }
+    };
+
+
+
     vector< Opera > ops;
     void addOp(const Opera& o) { ops.push_back(o); }    
 
@@ -60,23 +80,36 @@ struct OpApp : public GLVApp {
 
     }
 
-    template<class A>
-    void gop(const A& a, const Generic& b){
-        switch(b.id){
-            case PNT: DRAW( op(a, b.pnt() ) ); break; 
-            case PAR: DRAW( op(a, b.par() ) ); break;
-            case CIR: DRAW( op(a, b.cir() ) ); break;
-            case SPH: DRAW( op(a, b.sph() ) ); break;
-        }    
+    void drawAndTouch(){
+        for (int i = 0; i < data.size(); ++i){
+            DRAW( *data[i] );                   // You can pass in generic commands to Draw, it will create the right type to draw
+        }
+    
+        for (int i = 0; i < data.size(); ++i){
+            interface.touch( *data[i] );        // Same here
+        }
     }
     
-    void gop(const Generic& a, const Generic& b){
+
+    template<class A>
+    static Generic op(const A& a, const Generic& b){
+        switch(b.id){
+            case PNT: return vsr::op( a, b.pnt() ); break;
+            case PAR: return vsr::op( a, b.par() ); break;
+            case CIR: return vsr::op( a, b.cir() ); break;
+            case SPH: return vsr::op( a, b.sph() ); break;
+            default: cout << "no outer product found" << endl; break;
+        }
+    }
+
+    //Function Table?
+    static Generic op(const Generic& a, const Generic& b){
         switch(a.id){
-            case PNT: gop(a.pnt(), b ); break; 
-            case PAR: gop(a.par(), b ); break;
-            case CIR: gop(a.cir(), b ); break;
-            case SPH: gop(a.sph(), b ); break;
-        }    
+            case PNT: return op( a.pnt(), b ); break;
+            case PAR: return op( a.par(), b ); break;
+            case CIR: return op( a.cir(), b ); break;
+            case SPH: return op( a.sph(), b ); break;
+        }
     }
         
 
@@ -104,34 +137,34 @@ void * commandLine (void * arg){
 
 void OpApp :: onDraw(){
 
-    for (int i = 0; i < data.size(); ++i){
-        DRAW( *data[i] );
-    }
+    drawAndTouch();
     
-    for (int i = 0; i < data.size(); ++i){
-        interface.touch( *data[i] );
-    }
-    
+    //do ops
     for (int i = 0; i < ops.size(); ++i){
-    
+        Generic g = ops[i]();
+        DRAW(g);
     }
     
+    SET
+        static Dls a = Ro::dls(1,0,0,1);
+        static Dls b = Ro::dls(-1,0,0,1);
+        
+        add(a);
+        add(b);
+        
+        addOp( Opera(op, a, b)  );
+        
+    END
     
-    Var< Vec > vx;
-    Var< Vec > vy;
     
-    Exp< Var<Vec> > ex ( vx );
-    Exp< Var<Vec> > ey ( vy );
-    
-    cout << ex( Vec(3,2,1) ) * ey ( Vec(3,4,4) ) << endl; 
-    
-//    static Cir cir2 = CXY(1).trs(2,0,0);
+//    Var< Vec > vx;
+//    Var< Vec > vy;
 //    
-//    DRAW(cir2);
-//    interface.touch(cir2);
+//    Exp< Var<Vec> > ex ( vx );
+//    Exp< Var<Vec> > ey ( vy );
 //    
-//    DRAW( Ro::sur(cir2) );
-    
+//    cout << ex( Vec(3,2,1) ) * ey ( Vec(3,4,4) ) << endl; 
+        
     
     
 }
@@ -151,12 +184,6 @@ int main (int argc, const char * argv[])
 	
     win = new Window(500,500,"VERSOR",&glv);    
     app = new OpApp(win);    
-    
-    Cir c = CXY(1);
-    Pnt p = PT(3,0,0);
-
-    app -> add(c);
-    app -> add(p);
     
     glv << app;          
     

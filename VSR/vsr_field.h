@@ -15,10 +15,26 @@
 #include "vsr_frame.h"
 #include "vsr_draw.h"
 #include "vsr_stat.h"
+#include "vsr_gfxdata.h"
+#include "vsr_lattice.h"
 
 namespace vsr{
 
     #define ITER \
+        for (int i = 0; i < mWidth; ++i){\
+            for (int j = 0; j < mHeight; ++j){\
+                for (int k = 0; k < mDepth; ++k){\
+                    int tidx = idx(i,j,k);
+    
+    #define ITEND }}}
+
+    #define ITERED(x) \
+            for (int i = 0; i < x.w(); ++i){\
+            for (int j = 0; j < x.h(); ++j){\
+                for (int k = 0; k < x.d(); ++k){\
+                    int tidx = idx(i,j,k);
+
+    #define ITERV \
         for (int i = 0; i < mWidth; ++i){\
             double u = 1.0 * i/mWidth;\
             for (int j = 0; j < mHeight; ++j){\
@@ -26,85 +42,72 @@ namespace vsr{
                 for (int k = 0; k < mDepth; ++k){\
                     double w = 1.0 * k/mDepth; \
                     int tidx = idx(i,j,k);
-    
-    #define ITEND }}}
-
-    /// Info Container for Euler integration of a 2d Field
-    struct Patch{
-        Patch(int _a, int _b, int _c, int _d, double _rw, double _rh) 
-        : a(_a), b(_b), c(_c), d(_d), rw(_rw), rh(_rh)
-        {}
         
-        int a, b, c, d;
-        double rw, rh;
-    };
-    /// Info Container for Euler integration of a 3d Field
-    struct VPatch{
-         VPatch(int _a, int _b, int _c, int _d, int _e, int _f, int _g, int _h, double _rw, double _rh, double _rd) 
-        : a(_a), b(_b), c(_c), d(_d), e(_e), f(_f), g(_g), h(_h), rw(_rw), rh(_rh), rd(_rd)
-        {}  
-        int a, b, c, d, e, f, g, h;
-        double rw, rh, rd; 
-    };
     
-    /// Info Container for Quadric Interpolation
-//    struct QPatch{
-//        Patch(int _a, int _b, int _c, int _d, int _e, int _f, int _g, int _h, int _i , int _j, double _rw, double _rh) 
-//        : a(_a), b(_b), c(_c), d(_d), rw(_rw), rh(_rh)
-//        {}
-//        
-//        int a, b, c, d;
-//        double rw, rh; 
-//    };
+	#define BOUNDITER\
+				for (int i = 1; i < mWidth-1; ++i){ \
+				for (int j = 1; j < mHeight-1; ++j){ \
+				for (int k = 1; k < mDepth-1; ++k){ \
+
+	#define BOUNDED(x)\
+				for (int i = 1; i < x.w()-1; ++i){ \
+				for (int j = 1; j < x.h()-1; ++j){ \
+				for (int k = 1; k < x.d()-1; ++k){ \
+
+	#define BOUNDEND \
+				}}}
 
     ///  A Basic 3D Field (slowly porting this over from the now defunct vsr_lattice class)
+    /// Use to Evaluate Neighbors, Tensors, etc.
+    
     template < class T>
-    class Field  {
-    
-
-    
-        int mWidth, mHeight, mDepth, mNum;
-        double mSpacing;
-    
+    class Field : public CubicLattice {
+        
+        
+        protected:
+        
         T * mData;
-        Pnt * mGrid;
         
         public:
+
+        //Vector Derivative in Euclidean Metric
+        typedef typename Product<Vec,T>::GP VecDeriv;
+        
+        T * dataPtr() { return mData; }
+        void dataPtr( T* d ) { mData = d; }
+        
+        /// Zero Out All Data
+        void zero() { ITER mData[tidx] = T(0); ITEND }
         
         Field( int w, int h, int d, double spacing = 1.0) :
-        mWidth(w), mHeight(h), mDepth(d), mSpacing(spacing)
+        CubicLattice(w,h,d,spacing)
         {
             alloc();
             init();
         }
+        
+        Field& resize( int w, int h, int d, double spacing = 1.0){
+            CubicLattice::resize(w,h,d,spacing);
+            
+            alloc(); init();
+        }
+        
+        void onDestroy(){
+            if (mData) delete[] mData;
+        }
 
-        int w() const { return mWidth; }
-        int h() const { return mHeight; }
-        int d() const { return mDepth; }
-        // DATA
-        int num() const { return mNum; }
+
+        
         /*! Allocate Memory */
         void alloc(){
-            mNum = mWidth * mHeight * mDepth;
             
             if (mData) delete[] mData;
-            if (mGrid) delete[] mGrid;
+
+            mNum = mWidth * mHeight * mDepth;
             
             mData = new T[mNum]; 
-            mGrid = new Pnt[mNum]; 
         }
-        /*! Get Index In Array */
-        int idx(int i, int j, int k) const { 
-            if (i > w() - 1) i = w()  -1;
-            if (j > h() - 1) j = h()  -1;
-            if (k > d() - 1) k = d()  -1;
-
-            if (i < 0 ) i = 0;
-            if (j < 0 ) j = 0;
-            if (k < 0 ) k = 0;
-            
-            return i * mHeight * mDepth + j * mDepth + k; 
-        }
+        
         /*! Set Data by Index*/
         T&	operator [] (int i)	{ return ( mData[i] ); }
         /*! Get Data by Index*/						
@@ -113,46 +116,19 @@ namespace vsr{
         T&  at(int w = 0, int h = 0, int d = 0) { return mData[ idx(w, h, d)  ]; }   
         /*! Get Data by Coordinate */
         T	at(int w = 0, int h = 0, int d = 0) const { return mData[ idx(w, h, d)  ]; }  
-        /*! Set grid data by Coordinate */
-        T&  gridAt(int w = 0, int h = 0, int d = 0) { return mGrid[ idx(w, h, d)  ]; }   
-        /*! Get grid data by Coordinate */
-        T	gridAt(int w = 0, int h = 0, int d = 0) const { return mGrid[ idx(w, h, d)  ]; }     
-        /*! Set Grid (position) Data*/ 
-        Pnt& grid(int i) { return mGrid[i]; }  
-        /*! Get Grid (position)  Data */      
-        Pnt grid(int i) const { return mGrid[i]; }        
 
         //INITIALIZE
         void basicInit(){
             ITER
-                mGrid[ tidx ]  = Ro::null( px(i),  py(j),  pz(k) ); 
-                mData[ tidx ] = T( mGrid[ tidx ] );
+                mData[ tidx ] = T( mPoint[ tidx ] );
             ITEND
         }
         //SPECIALIZE HERE
         void init(){
             basicInit();
         }
-    
-        /* Totals and Offsets From Center */
-        /*! Total Width */
-        double tw() const { return (mWidth-1) * mSpacing; }
-        /*! Offset Width */
-        double ow() const { return tw() / 2.0 ; }
-        /*! Total Height */
-        double th() const { return (mHeight-1) * mSpacing; }
-        /*! Offset Height */
-        double oh() const { return th() / 2.0 ; }
-        /*! Total Depth */
-        double td() const { return (mDepth-1) * mSpacing; }
-        /*! Offset Depth */
-        double od() const { return td() / 2.0 ; }//0;}//
-        /*! Spatial Positions of ith element in x direction  */
-        double px(int i) const { return -ow() + (mSpacing * i); }
-        /*! Spatial Positions of jth element in y direction  */
-        double py(int j) const { return -oh() + (mSpacing * j); }
-        /*! Spatial Positions of kth element in z direction  */
-        double pz(int k) const { return  od() - (mSpacing * k); }
+        
+        void reset() { init(); }
         
         /*! Random Vector in Field*/
         Vec rand(){ 
@@ -168,115 +144,31 @@ namespace vsr{
         void drawPush(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
             for (int i = 0; i < mNum; ++i){
                 GL::push();
-                GL::translate( mGrid[i].w() );
+                GL::translate( mPoint[i].w() );
                 GL::Draw::Render( mData[i],r,g,b,a );
                 GL::pop();
             }
         }
         
-        /*! Indices of Line at T */
-        Patch idxU(double t){
-            double fw = t * (mWidth - 1);
-            
-            int iw = floor ( fw );
-            double rw = fw - iw;
-            if (iw == mWidth -1) { iw = mWidth -2; rw = 1.0; }
-            
-            int a = idx(iw, 0, 0);
-            int b = idx(iw+1, 0, 0);
-            int c = idx(iw+2, 0, 0);
-            
-            return Patch(a, b, 0, 0, rw, 0);
+        //data at bottom front corner of vxl at p
+        template<class B>
+        T& dataAt( const B& p ){
+            int idx = vxlAt(p).a;
+            return mData[idx];
         }
         
-        Vec range( const Vec& v){
-            Vec t = v;
-
-            double minx = px(0);
-            double maxx = px(mWidth-1);
-            double miny = py(0);
-            double maxy = py(mHeight-1);
-            double maxz = pz(0);
-            double minz = pz(mDepth-1);
-            
-            if (t[0] < minx) t[0] = minx;
-            if (t[0] > maxx) t[0] = maxx;
-            if (t[1] < miny) t[1] = miny;
-            if (t[1] > maxy) t[1] = maxy;
-            if (t[2] < minz) t[2] = minz;
-            if (t[2] > maxz) t[2] = maxz;
-            
-            double dx = (t[0] - minx)/tw();
-            double dy = (t[1] - miny)/th();
-            double dz = -(t[2] - maxz)/td();
-            
-            return Vec(dx,dy,dz);
-            
-            
-        }
-        
-        //2d for now
+        //2d Euler (bounded)
         T euler2d( const Vec& v){
             Vec t = range(v);            
             return surf(t[0], t[1]);
         }
         
-        T euler3d( const Vec& v){
+        //3d Euler (bounded) v an arbitrary point in space
+        T euler3d( const Vec& v) const{
             Vec t= range(v);
             return vol(t[0], t[1], t[2]);
         }
 
-        /*! Indicex of surface at u, v [0, 1]*/
-        Patch surfIdx(double u, double v){
-        
-            double fw = u * (mWidth - 1);
-            double fh = v * (mHeight - 1);
-            
-            int iw = floor ( fw );
-            int ih = floor ( fh );
-            
-            double rw = fw - iw;
-            double rh = fh - ih;
-            
-            if (iw == mWidth -1) { iw = mWidth -2; rw = 1.0; }
-            if (ih == mHeight -1) { ih = mHeight -2; rh = 1.0; }
-            
-            int a= ( idx ( iw, ih, 0 ) );
-            int b= ( idx ( iw + 1, ih, 0 ) );
-            int c= ( idx ( iw + 1, ih + 1, 0 ) );
-            int d= ( idx ( iw, ih + 1, 0 ) );
-            
-            return Patch( a, b, c, d, rw, rh);
-        }
-        
-        VPatch vidx(double u, double v, double w){
-            double fw = u * (mWidth - 1);
-            double fh = v * (mHeight - 1);
-            double fd = w * (mDepth-1);
-            
-            int iw = floor ( fw );
-            int ih = floor ( fh );
-            int id = floor ( fd );
-            
-            double rw = fw - iw;
-            double rh = fh - ih;
-            double rd = fd - id;
-            
-            if (iw == mWidth -1) { iw = mWidth -2; rw = 1.0; }
-            if (ih == mHeight -1) { ih = mHeight -2; rh = 1.0; }
-            if (id == mDepth -1) { id = mDepth -2; rd = 1.0; }
-            
-            int a= ( idx ( iw, ih, id ) );
-            int b= ( idx ( iw + 1, ih, id ) );
-            int c= ( idx ( iw + 1, ih + 1, id ) );
-            int d= ( idx ( iw, ih + 1, id ) );
-            int e= ( idx ( iw, ih, id +1) );
-            int f= ( idx ( iw + 1, ih, id +1) );
-            int g= ( idx ( iw + 1, ih + 1, id +1) );
-            int h= ( idx ( iw, ih + 1, id +1) );
-            
-            return VPatch( a, b, c, d, e, f, g, h, rw, rh, rd);
-        }
 
         /*! Get BILINEAR Interpolated Data at eval u,v [0-1.0] */
         T surf(double u, double v){
@@ -291,36 +183,15 @@ namespace vsr{
             return Interp::surface<T> (a,b,c,d, p.rw, p.rh);
         }
         
-        T vol(double u, double v, double w){
+        T vol(double u, double v, double w) const {
             VPatch p = vidx(u,v,w);
-//            T& d = *mData;
             
             T a = mData[ p.a ]; T b = mData[ p.b ]; T c = mData[ p.c ]; T d = mData[ p.d ];
             T e = mData[ p.e ]; T f = mData[ p.f ]; T g = mData[ p.g ]; T h = mData[ p.h ];
             return Interp::volume<T> (a,b,c,d,e,f,g,h, p.rw, p.rh, p.rd );
-            
-            //return Interp::volume<T> (d[p.a],d[p.b],d[p.c],d[p.d],d[p.e],d[p.f],d[p.g],d[p.h], p.rw, p.rh, p.rd );
         }
         
-        Pnt surfGrid(double u, double v){
-            
-            Patch p =  surfIdx(u,v);
-            
-            Pnt a = mGrid[ p.a ];//gridAt ( iw, ih, 0 );
-            Pnt b = mGrid[ p.b ];//gridAt ( iw + 1, ih, 0 );
-            Pnt c = mGrid[ p.c ];//gridAt ( iw + 1, ih + 1, 0 );
-            Pnt d = mGrid[ p.d ];//gridAt ( iw, ih + 1, 0 );
-            
-            return Interp::surface<Pnt> (a,b,c,d, p.rw, p.rh).null();       
-        }
-        
-        /*! Get QUADRIC Interpolated Data at eval u,v [0-1] */
-        T quadSurf(double u, double v){
-            Patch p =  surfIdx(u,v);
-            
-        }
-
-
+        //Contour Integral
         vector<Vec> contour(const Vec& v, int num, double force){
             vector<Vec> vp;
             Vec tv = v;
@@ -331,20 +202,276 @@ namespace vsr{
             return vp;
         }
 
+ 
+        /*! Get QUADRIC Interpolated Data at eval u,v [0-1] */
+//        T quadSurf(double u, double v){
+//            Patch p =  surfIdx(u,v);
+//            
+//        }
+
+
+    //a 6-faced Kernel (3D 'plus" sign)
+    
+	T sumNbrs (int idx) const{
+	 T tdx; 
+	 for (int i = 1; i < 7; ++i){ 
+		if (nbr(idx)[i] != -1 ) tdx += mData[ nbr(idx)[i] ]; 
+	 }  
+	 return tdx; 	
+	}
+    
+    T diffNbrs (int idx) const {
+		T tdx; 
+		tdx += mData[ nbr(idx).xr ] - mData [ nbr(idx).xl ]; //xr - xl
+		tdx += mData[ nbr(idx).yt ] - mData [ nbr(idx).yb ]; //yt - yb
+		tdx += mData[ nbr(idx).zb ] - mData [ nbr(idx).zf ]; //zb - zf
+		return tdx; 
+	}
+
+	
+	T diffXNbrs (int ix) const{
+		return mData[ nbr(ix).xr ] - mData [ nbr(ix).xl ];; 
+	}	
+
+    T diffYNbrs ( int ix) const{
+		return mData[ nbr(ix).yt ] - mData [ nbr(ix).yb ]; 
+	}	
+	
+	T diffZNbrs (int ix) const{
+		return mData[ nbr(ix).zb ] - mData [ nbr(ix).zf ]; //xr - xl
+	}		
+	
+    T dx(int ix) const{ return diffXNbrs(ix); } //or . . .
+    T dy(int ix) const{ return diffYNbrs(ix); }
+    T dz(int ix) const{ return diffZNbrs(ix); }
+    
+    //Create Vector Derivative field of another Field f. . . e1 * dx + e2 * dy + e3 * dz . . . in other dimensions use reciprocal frame
+    template<class B>
+    Field& der(const Field<B>& f){
+        BOUNDITER
+            int ix = idx(i,j,k);
+            typename Product< Vec, T >::GP tdx;
+            tdx += Vec::x * f.diffXNbrs(ix);
+            tdx += Vec::y * f.diffYNbrs(ix);
+            tdx += Vec::z * f.diffZNbrs(ix);
+            mData[ix] = tdx;
+        BOUNDEND
+        return *this;
+    }
+    
+    
+    //Scalar Tensor 
+	double tensNbrs (int idx) const {
+		double tdx; 
+		tdx += mData[ nbr(idx).xr ][0] - mData [ nbr(idx).xl ][0]; //xr - xl
+		tdx += mData[ nbr(idx).yt ][1] - mData [ nbr(idx).yb ][1]; //yt - yb
+		tdx += mData[ nbr(idx).zb ][2] - mData [ nbr(idx).zf ][2]; //zb - zf
+		return tdx; 
+	}
+    
+    //Scalar Tensor Weighted By 1.0/dim (? spacing *  ?)
+	double tensNbrsWt(int idx) const {
+		double tdx; double ww = 1.0 / w(); double wh = 1.0/h(); double wd = 1.0/d();
+		tdx += ( mData[ nbr(idx).xr ][0] - mData [ nbr(idx).xl ][0] ) * ww; //xr - xl
+		tdx += ( mData[ nbr(idx).yt ][1] - mData [ nbr(idx).yb ][1] ) * wh; //yt - yb
+		tdx += ( mData[ nbr(idx).zb ][2] - mData [ nbr(idx).zf ][2] ) * wd; //zb - zf
+		return tdx; 
+	}    
+    
+
+    //Scalar Tensor "reverse weighted" By dim (? spacing *  ?)
+	double tensNbrsRwt(int idx) const {
+		double tdx;
+		tdx += ( mData[ nbr(idx).xr ][0] - mData [ nbr(idx).xl ][0] ) * w(); //xr - xl
+		tdx += ( mData[ nbr(idx).yt ][1] - mData [ nbr(idx).yb ][1] ) * h(); //yt - yb
+		tdx += ( mData[ nbr(idx).zb ][2] - mData [ nbr(idx).zf ][2] ) * d(); //zb - zf
+		return tdx; 
+	}  
+    
+    /*!Guass Siedel Relaxation Solver Using a Previous Field State */
+    void gsSolver(const Field& prev){
+            //Iterative Pressure Solver substracts pressure tensor out
+            int it = 20;
+            for (int m = 0; m < it; ++m){
+                BOUNDITER
+                    int ix = idx(i,j,k);
+                    T td = sumNbrs(ix);
+                    mData[ix] = (prev[ix] + td ) / 6.0;                            
+                BOUNDEND
+                
+                boundaryConditions(0);
+            }
+    }
+    
+    /*! Backwards Diffusion Using a Previous Field State */
+    void diffuse(const Field& prev, double diffRate, bool bounded, bool ref){
+
+        		static int it = 20;
+
+                double rate = diffRate * .001 * mNum;
+                if  (bounded) {
+                    //field is padded ? bounded
+                    //iterate
+                    for (int k = 0; k < it; ++k){
+                        //for each data member
+                        for (int i = 0; i < this->num(); ++i){
+                        
+                            //sum up neighboring values
+                            T td = sumNbrs(i);
+                            //multiply by (rate / 1 + 6*rate ) (or multiply afterwards?
+                            td *= rate ;
+                            //add to old value
+                            mData[i] = ( prev[i] + td ) / (1 + 6*rate);
+                        }
+                    }
+                    //break;
+                } else {       
+                    //unbounded so set bounds in loop
+                    //iterate
+                    for (int n = 0; n < it; ++n){
+                        //cout << "BOUNDED:";
+                        BOUNDITER
+                            int tdx = idx(i,j,k);
+                            T td = sumNbrs(tdx);
+                            //multiply by (rate )
+                            td *= rate;					
+                            //add to old value and divide new result by (1 + 6 * rate)
+                            mData[tdx] = ( prev[tdx] + td ) / (1 + 6*rate);                            
+                        BOUNDEND
+                        
+                        boundaryConditions(ref);
+                    }
+                    //break;
+                }
+        }
+        
+        /*! Backwards Advection Using a Previous Field State prev and Based on Another Frame f */
+        template<class B>
+        void advect(const Field& prev, const Field<B>& f, double dt, bool ref){
+                    
+            double dt0 = dt;// * mWidth;
+            BOUNDITER
+                int tidx = idx(i,j,k);
+                Pnt p = mPoint[ tidx ].trs( f[tidx] * -dt0 ); //Lattice Point 
+                mData[tidx] = prev.euler3d( p );
+            BOUNDEND
+            
+            boundaryConditions(ref);
+        }
+        
+        //backwards Twist Advection?
+     
+     // Sets values of a scalar field to divergence of another Field b
+     template <class B>
+     Field& div(const Field<B>& f){
+        //Sum Differences of each Face (= DIVERGENCE TENSOR)
+		BOUNDITER
+            int ix = idx(i,j,k);
+			mData[ix] = Sca( f.tensNbrs(ix) * ( -.5 ) );			
+		BOUNDEND   
+        boundaryConditions(0);
+        return *this;
+    }
+    
+    //swap ptrs to data with another field f of same type
+    Field& swap( Field& f ){
+        T * tmp = dataPtr(); dataPtr( f.dataPtr() ); f.dataPtr( tmp );
+        return *this;
+    }
+    
+    
+    //Operators
+    template<class N> 
+    Field& operator * ( N val ) { ITER mData[tidx] *= val; ITEND  return *this; }
+
+    //Operators
+    template<int N2,int IDX2, class T2 > 
+    Field& operator -= ( const Field< MV<N2,IDX2,T2> >& f ) { ITER mData[tidx] -= f[tidx]; ITEND  return *this; }
+    
+    
+    //here written fro a scalar fiedl: specialize below for vectors etcs
+    void boundaryConditions(bool ref){
+
+        for (int i = 0; i < mFace.size(); ++i){
+            int ix = mFace[i];
+            static Nbr n;
+            n = mNbr[ ix ];
+            int type = n.type;
+            
+            //negation for now treat as vectors
+            if (type & LEFT) mData[ix] = ref ? -mData[n.xr] : mData[n.xr]; 
+            if (type & RIGHT) mData[ix] = ref ? -mData[n.xl] : mData[n.xl]; 
+            if (type & TOP) mData[ix] = ref ? -mData[n.yb] : mData[n.yb]; 
+            if (type & BOTTOM) mData[ix] = ref ? -mData[n.yt] : mData[n.yt]; 
+            if (type & BACK) mData[ix] = ref ? -mData[n.zf] : mData[n.zf]; 
+            if (type & FRONT) mData[ix] = ref ? -mData[n.zb] : mData[n.zb]; 
+            
+        }
+    
+    }
+
+
+
     };
     
-    //SPECIALIZATIONS
-    template<> Frame Field< Frame > :: surf(double u, double v){
-        
-        Patch p =  surfIdx(u,v);
-
-        Dll a = mData[p.a].dll();
-        Dll b = mData[p.b].dll();
-        Dll c = mData[p.c].dll();
-        Dll d = mData[p.d].dll();
-         
-        return Gen::mot( Interp::surface<Dll> (a,b,c,d, p.rw, p.rh) );
+    template<> void Field<Vec>::boundaryConditions(bool ref){
+        for (int i = 0; i < mFace.size(); ++i){
+            int ix = mFace[i];
+            static Nbr n;
+            n = mNbr[ ix ];
+            int type = n.type;
+            
+            //negation for now treat as vectors
+            if (type & LEFT) mData[ix][0] = ref ? -mData[n.xr][0] : mData[n.xr][0]; 
+            if (type & RIGHT) mData[ix][0] = ref ? -mData[n.xl][0] : mData[n.xl][0]; 
+            if (type & TOP) mData[ix][1] = ref ? -mData[n.yb][1] : mData[n.yb][1]; 
+            if (type & BOTTOM) mData[ix][1] = ref ? -mData[n.yt][1] : mData[n.yt][1]; 
+            if (type & BACK) mData[ix][2] = ref ? -mData[n.zf][2] : mData[n.zf][2]; 
+            if (type & FRONT) mData[ix][2] = ref ? -mData[n.zb][2] : mData[n.zb][2]; 
+            
+        }    
     }
+    
+
+//    //SPECIALIZATIONS
+
+    template<> void Field< Vec > :: draw(float r, float g, float b, float a) {
+        drawPush(r,g,b,a);
+    }
+
+    template<> void Field< Vec > :: init() {
+        ITER  mData[tidx] = Vec(mPoint[tidx]).unit(); ITEND
+    }
+    
+    template<> void Field< Sca > :: draw(float r, float g, float b, float a) {
+       ITER Draw::Box
+    }
+//    template<> Frame Field< Frame > :: surf(double u, double v){
+//        
+//        Patch p =  surfIdx(u,v);
+//
+//        Dll a = mData[p.a].dll();
+//        Dll b = mData[p.b].dll();
+//        Dll c = mData[p.c].dll();
+//        Dll d = mData[p.d].dll();
+//         
+//        return Gen::mot( Interp::surface<Dll> (a,b,c,d, p.rw, p.rh) );
+//    }
+    
+    
+//    template <>
+//	double Field < Frame > :: tensNbrs (int idx) {
+//		double tdx; 
+//		tdx += mData[ nbr(idx).xr ].pos()[0] - mData [ nbr(idx).xl ].pos()[0]; //xr - xl
+//		tdx += mData[ nbr(idx).yt ].pos()[1] - mData [ nbr(idx).yb ].pos()[1]; //yt - yb
+//		tdx += mData[ nbr(idx).zb ].pos()[2] - mData [ nbr(idx).zf ].pos()[2]; //zb - zf
+//		return tdx; 
+//	}
+    
+    
+    
+    
+    
 //    template<>
 //    void Field<Dll> :: init(){
 //        ITER
@@ -357,10 +484,252 @@ namespace vsr{
 //    void Field< T > :: 
 
     
+    struct FrameField : public CubicLattice {
+    
+        Frame * mFrame;
+    
+        FrameField(int _w, int _h, int _d) : CubicLattice(_w,_h,_d), dll(_w,_h,_d) { 
+            
+            update(); 
+        }
+        
+        Field<Dll> dll;
+        
+        void update(){
+            
+        }
+        
+        void draw(){
+        
+        }
+    };
+    
+    
+    
+    template <class T> 
+    class Fluid {
+
+        Field<T> mField;            // Current Vector Veloctiy field
+        Field<T> mPrev;             // Previously evaluated Vector field
+        
+        Field<Sca> mDensity;        // Current Density Field
+        Field<Sca> mDensityPrev;    // Previously Evaluated Density Field
+        
+        Field<Sca> mPressure;       
+        Field<Sca> mDivergence;
+        
+        //Vector Derivative of Scalar Pressure Field is a Vector Field
+        Field< typename Field<Sca>::VecDeriv > mDerivative;
+        
+        public:
+        
+        Fluid(int _w, int _h, int _d)
+        : mField(_w,_h,_d), mPrev(_w,_h,_d), 
+        mPressure(_w,_h,_d), mDivergence(_w,_h,_d), 
+        mDensity(_w,_h,_d), mDensityPrev(_w,_h,_d),
+        mDerivative(_w,_h,_d)
+        {
+            
+        }
+        
+        void reset() {
+            
+            mField.reset(); mPrev.reset();
+            mDensity.reset(); mDensityPrev.reset();
+            mPressure.reset();       
+            mDivergence.reset();
+        }
+        
+
+        Field<T>& velocity() { return mField; }
+        Field<Sca>& density() { return mDensity; }
+        Field<Sca>& pressure() { return mPressure; }
+        
+        //incompressibility of fluids
+        void project(){
+            
+            //Reset Pressure field
+            mPressure.zero();
+            
+            //Calculate Divergence tensor
+            mDivergence.div( mField );
+            
+            //Iterative Gauss-Seidel Solver using Divergence Field
+            mPressure.gsSolver( mDivergence );
+
+            //Substract out Vector Derivative Gradient of Scalar Pressure
+            mField -= mDerivative.der( mPressure ) * .5;
+            
+            //Satisfy Boundary Conditions
+            mField.boundaryConditions(1);
+            
+        }
+        
+        void step(double visc, double diff, double advectRate){
+            
+            //VECTOR VELOCITY FIELD
+            mField.swap(mPrev);
+            
+            mField.diffuse( mPrev, visc, 0, 1);             
+
+            project();
+            
+            mField.swap(mPrev);
+            
+           //self-advection 
+            mField.advect( mPrev, mPrev, advectRate, 1);
+            
+            project();
+            
+            //DENSITY FIELD
+            mDensity.swap(mDensityPrev);
+            mDensity.diffuse(mDensityPrev, diff, 0, 0);
+            mDensity.swap(mDensityPrev);
+            mDensity.advect(mDensityPrev, mField, advectRate, 0);                
+        }
+
+    };
+
+
     #undef ITER
     #undef ITEND
+    #undef BOUNDITER
+    #undef BOUNDEND
 
 } //vsr::
 
-
 #endif
+
+//deprecated
+
+//   //Work on this and clean it up . . .
+//	void boundaryConditions(bool ref){
+//		int i,j, ix, ix2, ixo, ixo2;
+//
+//		//WALLS repeat inner settings OR reflect them back
+//		//z component
+//		for ( i = 1; i < mWidth-1; ++i){
+//			for ( j = 1; j < mHeight-1; ++j ){
+//				ix = idx(i,j,0);  ix2 = idx(i,j,mDepth-1);
+//				
+//				mData[ix] =  (ref) ?  Op::re( mData[ix+1], Dlp(0,0,1,0) ) : mData[ix+1];
+//				mData[ix2] = (ref) ?  Op::re( mData[ix2-1], Dlp(0,0,1,0) ) : mData[ix2-1];
+//
+//			}
+//		}
+//		//x component
+//		for ( i = 1; i < mWidth-1; ++i){
+//			for ( j = 1; j < mDepth-1; ++j ){
+//				 ix = idx(i,0,j);  ixo = idx(i,1,j); 
+//				 ix2 = idx(i,mHeight-1,j);  ixo2 = idx(i,mHeight-2,j);
+//				mData[ix] = ref ? Op::re( mData[ixo], Dlp(0,1,0,0) ): mData[ixo];//pdata[ixo] * -1 : pdata[ixo]; //
+//				mData[ix2] = ref ?  Op::re( mData[ixo2], Dlp(0,1,0,0) ): mData[ixo2];//pdata[ixo2] * -1 : pdata[ixo2];//			//RIGHT
+//			}
+//		}
+//		//y component
+//		for ( i = 1; i < mHeight-1; ++i){
+//			for ( j = 1; j < mDepth-1; ++j ){
+//				 ix = idx(0,i,j);  ixo = idx(1,i,j); 
+//				 ix2 = idx(mWidth-1,i,j);  ixo2 = idx(mWidth-2,i,j);		
+//				mData[ix] = ref ?  Op::re( mData[ixo], Dlp(1,0,0,0) ) : mData[ixo];	//pdata[ixo] * -1 : pdata[ixo];//			//TOP
+//				mData[ix2] = ref ? Op::re( mData[ixo2], Dlp(1,0,0,0) ) : mData[ixo2];//pdata[ixo2] * -1 : pdata[ixo2];//			//BOTTOM
+//			}
+//		}
+//
+//		
+//		// EDGES Average Neighbors
+//		for ( i = 1; i < mWidth-1; ++i){
+//			 ix = idx(i,0,0);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].yt ] +  mData[ mNbr[ ix ].zb ] ) / 2.0;	//BOTTOM		
+//
+//			 ix = idx(i,mHeight-1,0);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].yb ] +  mData[ mNbr[ ix ].zb ]  ) / 2.0;   //TOP
+//
+//			 ix = idx(i, mHeight-1, mDepth -1);
+//			mData[ ix ] =  ( mData[ mNbr[ ix ].yb ] +  mData[ mNbr[ ix ].zf ] ) / 2.0;   //
+//
+//			 ix = idx(i,0,mDepth-1);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].yt ] +  mData[ mNbr[ ix ].zf ] ) / 2.0;
+//		}
+//		
+//		for ( i = 1; i < mHeight-1; ++i){
+//			 ix = idx(0,i,0);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].xr ] +  mData[ mNbr[ ix ].zb ] ) / 2.0;
+//
+//			 ix = idx(mWidth-1,i,0);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].xl ] +  mData[ mNbr[ ix ].zb ] ) / 2.0;
+//
+//			 ix = idx(mWidth-1,i,mDepth-1);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].xl] +  mData[ mNbr[ ix ].zf ] ) / 2.0;
+//
+//			 ix = idx(0,i,mDepth-1);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].xr ] +  mData[ mNbr[ ix ].zf ] ) / 2.0;
+//		}
+//
+//		for ( i = 1; i < mDepth-1; ++i){
+//			 ix = idx(0,0,i);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].yt ] +  mData[ mNbr[ ix ].xr ] ) / 2.0;
+//
+//			 ix = idx(mWidth-1,0,i);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].yt ] +  mData[ mNbr[ ix ].xl ] ) / 2.0;
+//
+//			 ix = idx(mWidth-1,mHeight-1,i);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].yb ] +  mData[ mNbr[ ix ].xl ] ) / 2.0;
+//
+//			 ix = idx(0,mHeight-1,i);
+//			mData[ ix ] = ( mData[ mNbr[ ix ].yb ] +  mData[ mNbr[ ix ].xr ] ) / 2.0;
+//		}
+//
+//		//corners average neighbors		
+//		for ( i = 0; i < 8; ++i){
+//			mData [ mCorner[i] ] =  (ref) ? sumNbrs( mCorner[i] ) / -1.0 : sumNbrs( mCorner[i] ) / 3.0;
+//		}
+//
+//		
+//	}
+
+//alt bound
+//        Vec range( const Vec& v){
+//            Vec t = v;
+//
+//            double minx = px(0);
+//            double maxx = px(mWidth-1);
+//            double miny = py(0);
+//            double maxy = py(mHeight-1);
+//            double maxz = pz(0);
+//            double minz = pz(mDepth-1);
+//            
+//            if (t[0] < minx) t[0] = minx;
+//            if (t[0] > maxx) t[0] = maxx;
+//            if (t[1] < miny) t[1] = miny;
+//            if (t[1] > maxy) t[1] = maxy;
+//            if (t[2] < minz) t[2] = minz;
+//            if (t[2] > maxz) t[2] = maxz;
+//            
+//            double dx = (t[0] - minx)/tw();
+//            double dy = (t[1] - miny)/th();
+//            double dz = -(t[2] - maxz)/td();
+//            
+//            return Vec(dx,dy,dz);
+            
+            
+//        /* Totals and Offsets From Center */
+//        /*! Total Width */
+//        double tw() const { return (mWidth-1) * mSpacing; }
+//        /*! Offset Width */
+//        double ow() const { return tw() / 2.0 ; }
+//        /*! Total Height */
+//        double th() const { return (mHeight-1) * mSpacing; }
+//        /*! Offset Height */
+//        double oh() const { return th() / 2.0 ; }
+//        /*! Total Depth */
+//        double td() const { return (mDepth-1) * mSpacing; }
+//        /*! Offset Depth */
+//        double od() const { return td() / 2.0 ; }//0;}//
+//        /*! Spatial Positions of ith element in x direction  */
+//        double px(int i) const { return -ow() + (mSpacing * i); }
+//        /*! Spatial Positions of jth element in y direction  */
+//        double py(int j) const { return -oh() + (mSpacing * j); }
+//        /*! Spatial Positions of kth element in z direction  */
+//        double pz(int k) const { return  od() - (mSpacing * k); }
+
