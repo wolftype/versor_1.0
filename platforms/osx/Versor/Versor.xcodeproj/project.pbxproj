@@ -15,6 +15,7 @@
 		9B158C0616C618FC00A6DFE0 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B18A3C916FB8C1E00D2D265 /* Inversions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B18A3C816FB8C1D00D2D265 /* Inversions.cpp */; };
 		9B1A26591700DBAE003165C8 /* Knot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A26581700DBAE003165C8 /* Knot.cpp */; };
+		9B1A265B170266EA003165C8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B1E15591670FF470015D25C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B1E155A1670FF470015D25C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B1E155C1670FF470015D25C /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -32,7 +33,6 @@
 		9B28075C16700947001806F8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B58902B1641A69B0096B491 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B58902C1641A69B0096B491 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
-		9B58902E1641A69B0096B491 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B5C460716445FBE003BF1B2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B5C460816445FBE003BF1B2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B5C460A16445FBE003BF1B2 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -454,7 +454,7 @@
 		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = DemoMotors; path = Robot; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B26F0C51671069400455E54 /* Frames */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Frames; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B28076116700947001806F8 /* Twists copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Twists copy"; path = Topo; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B5890381641A69B0096B491 /* Graphics copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Graphics copy"; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B5890381641A69B0096B491 /* Meet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461416445FBE003BF1B2 /* Allo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Allo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461B16446392003BF1B2 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
 		9B5C461C16446392003BF1B2 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
@@ -708,7 +708,7 @@
 			files = (
 				9B58902B1641A69B0096B491 /* OpenGL.framework in Frameworks */,
 				9B58902C1641A69B0096B491 /* GLUT.framework in Frameworks */,
-				9B58902E1641A69B0096B491 /* libvsr.a in Frameworks */,
+				9B1A265B170266EA003165C8 /* libvsr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,7 +909,7 @@
 				9BB108271638836A009F3070 /* Knots */,
 				9BB10836163883B5009F3070 /* Knots copy */,
 				9B680148163F349E004A850F /* Knots copy */,
-				9B5890381641A69B0096B491 /* Graphics copy */,
+				9B5890381641A69B0096B491 /* Meet */,
 				9B5C461416445FBE003BF1B2 /* Allo */,
 				9BD3516E1665532300809328 /* Knots copy */,
 				9B1EF0ED166D988900617EB8 /* Twists */,
@@ -1265,7 +1265,7 @@
 			);
 			name = Meet;
 			productName = DemoBoosts;
-			productReference = 9B5890381641A69B0096B491 /* Graphics copy */;
+			productReference = 9B5890381641A69B0096B491 /* Meet */;
 			productType = "com.apple.product-type.tool";
 		};
 		9B5C460116445FBE003BF1B2 /* Allo */ = {
@@ -2085,10 +2085,7 @@
 		9B5890361641A69B0096B491 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../GLV/build/lib\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = Meet;
 			};
 			name = Debug;
@@ -2096,10 +2093,8 @@
 		9B5890371641A69B0096B491 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../GLV/build/lib\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Meet;
 			};
 			name = Release;
@@ -2211,7 +2206,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../../GLV/build/lib/";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../GLV/build/lib/",
+					"$(SRCROOT)/../../../build/lib/",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lGLV";
@@ -2239,7 +2237,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../../GLV/build/lib/";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../../GLV/build/lib/",
+					"$(SRCROOT)/../../../build/lib/",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-lGLV";
 				SDKROOT = macosx;
@@ -2270,6 +2271,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = $SRCROOT/../build/;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2282,6 +2284,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = $SRCROOT/../build/;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
@@ -2334,10 +2337,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../GLV/build/lib\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = Knots;
 			};
 			name = Debug;
@@ -2346,10 +2346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../GLV/build/lib\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = Knots;
 			};
 			name = Release;
