@@ -1,0 +1,17 @@
+Some "Lacunae" (my friend Phil Popp uses this term to identify code to flesh out / features to add / etc)
+
+1 - roll own gluProject and gluUnproject manual
+
+2 - LUA handle for reading and writing scripts, saving settings, etc
+
+3 - Pln_Pln is a simpler Motor (rotation around a line without a quadvector)  -- use it
+
+4 - Lin_Flp is a "Reflection Glide"
+
+5 - Pnt_Flp is a "Reflection in a Sphere Glide" 
+
+5 - Par_Flp is a "Reflection in a Circle Glide" 
+
+
+[in general consider combining reflection operators with rotor operations ]
+

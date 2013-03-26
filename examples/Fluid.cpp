@@ -10,8 +10,8 @@
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
 #include "vsr_draw.h"
-#include "vsr_tests.h"
 #include "vsr_field.h"
+#include "vsr_tests.h"
 
 #include <iostream>
 
@@ -20,29 +20,27 @@ using namespace vsr;
 
 void basic(GLVApp& app){
     
-        static Fluid<Vec> fluid(10,10,10);
+        static Fluid<Vec> fluid(20,20,3);
         
-        static double visc, diff, adv,src, numparticles;
+        static double visc, diff, adv,src,src2, numparticles;
         static bool bReset;
         SET
-            app.gui(visc,"visc")(diff,"diff")(adv,"advect",-100,100)(src,"src")(numparticles,"numpart",0,1000)(bReset);
+            app.gui(visc,"visc")(diff,"diff")(adv,"advect",-100,100)(src,"src",0,10)(src2,"src2",0,1000)(numparticles,"numparticles",0,100)(bReset);
             visc = .01; diff = .01; adv = .01;
             bReset = 0;
             
-            app.camera().pos( 0,0,10);
-            
-            
-            
+            app.camera().pos( 0,0,20);
         END
 
         if (bReset) fluid.reset();
         
         fluid.step( visc, diff, adv);
 
-        fluid.density().draw();
 
         fluid.velocity().draw();
-        fluid.velocity().at(5,5,0) += Vec(0,1,0) * src * 100;
+        fluid.density().draw(1,0,0,.5);
+        fluid.velocity().at(5,1,1) += Vec(0,1,0) * src * 10;
+        fluid.density().at(5,1,1) += Sca(src2) * 10;
         
 //        ITJ(i,numparticles);
 //            

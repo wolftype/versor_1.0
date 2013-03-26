@@ -38,17 +38,23 @@ struct TorusKnot  {
     //A vector of points in the knot orbit
     vector<Pnt> pnt;
     
-    double amt;
+    double amt; //RES
+    
+//    int num() { return pnt.size(); }
+    int iter() { 
+        return ( P == 0 || Q == 0 ) ?  1.0/amt : P * Q / amt;
+    }
     
     Par par() { 
-        return HF.fiberA().dual() * PI/P + HF.fiberB().dual() * PI/Q;
+        double a = P == 0 ? 0 : PI/P; double b = Q == 0 ? 0 : PI/Q;
+        return HF.fiberA().dual() * a + HF.fiberB().dual() * b;
     }
         
     Bst bst() {
-        return Gen::bst( par() * amt );
+        return Gen::bst( par() * amt / 2.0 );
     }
     
-    Bst bst(double t) { return Gen::bst( par() * t ); }
+    Bst bst(double t) { amt = t; return bst(); }
     
     TorusKnot(double p = 3, double q = 2, double a = .001) : P(p), Q(q), amt(a) {}
         

@@ -101,6 +101,8 @@ namespace vsr {
                 
                 //Box
                 void Box(double w = 1, double h = 1, double d= 1);
+                //Cube
+                void Cube(double size=1);
                 
                 
                 //Segment
@@ -646,7 +648,7 @@ template<class A>
 inline void Glyph :: Point(const A& v) {
 //	glPointSize(5.0);
 	glBegin(GL_POINTS);	
-		glNormal3f(v[0], v[1], v[2]);
+		//glNormal3f(v[0], v[1], v[2]);
 		glVertex3f(v[0], v[1], v[2]);
 	glEnd();
 }
@@ -774,6 +776,14 @@ inline void Glyph :: Box ( double w, double h, double d ){
     double bo = -h/2.0;     double to = h/2.0;
     double fr = d/2.0;     double ba = -d/2.0;
 
+    glBegin(GL_QUADS);
+        GL::Quad( Vec(le,bo,fr), Vec(le,to,fr), Vec(ri,to,fr), Vec(ri,bo,fr) ) ;
+        GL::Quad( Vec(le,to,fr), Vec(le,to,ba), Vec(ri,to,ba), Vec(ri,to,fr) ) ;
+        GL::Quad( Vec(le,to,ba), Vec(le,bo,ba), Vec(ri,bo,ba), Vec(ri,to,ba) ) ;
+        GL::Quad( Vec(le,bo,ba), Vec(le,bo,fr), Vec(ri,bo,fr), Vec(ri,bo,ba) ) ;
+        GL::Quad( Vec(le,bo,ba), Vec(le,to,ba), Vec(le,to,fr), Vec(le,bo,fr) ) ;
+        GL::Quad( Vec(ri,bo,fr), Vec(ri,to,fr), Vec(ri,to,ba), Vec(ri,bo,ba) ) ;
+    glEnd();
 //    glBegin(GL_TRIANGLE_STRIP);
 //
 //    glVertex3f(le, bo, fr);
@@ -789,6 +799,12 @@ inline void Glyph :: Box ( double w, double h, double d ){
 //
 //    glEnd;
 }
+
+
+inline void Glyph :: Cube(double size){
+    Glyph::Box(size,size,size);
+}
+
 
 inline void Glyph :: Axes(const Vec& v1, const Vec& v2, const Vec& v3){
 

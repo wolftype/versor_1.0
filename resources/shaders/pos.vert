@@ -16,6 +16,7 @@ uniform mat4 projection;        // Projection Matrix (ortho or frustrum)
 uniform mat4 normalMatrix;        // Normal Matrix (inverse transpose of mvm)
 
 
+
 /* LIGHTING */
 uniform vec3 lightPosition;
 

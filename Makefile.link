@@ -1,2 +1,2 @@
 CPPFLAGS +=
-LDFLAGS += -lGLEW -lGLU -lGL -lglut -lGLV -lvsr
+LDFLAGS += -lm -lstdc++ -lvsr -lglv -framework OpenGL -framework GLUT  

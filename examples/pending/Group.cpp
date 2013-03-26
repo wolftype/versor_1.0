@@ -8,6 +8,8 @@
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
+#include "vsr_group.h"
+
 #include "vsr_tests.h"
 
 #include <iostream>
@@ -149,9 +151,13 @@ void dodeca(GLVApp& app){
 //    END
 }
 
+void point(GLVApp& app){
+
+}
+
 void GLVApp :: onDraw() {
 //    hyper(*this);
-    dodeca(*this);
+//    dodeca(*this);
 }
 
 int main(int argc, const char * argv[]) {

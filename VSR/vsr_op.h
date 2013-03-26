@@ -112,8 +112,8 @@ struct Gen {
     /*! Generate a Translator (to be applied with sp() function)
         @param X Y and Z direction coordinates
     */
-    template<class T>
-    static Trs trs(T x, T y, T z){
+    template<class T, class U, class V>
+    static Trs trs(T x, U y, V z){
         return Trs(1, x*-.5, y*-.5, z*-.5);
     }
 
@@ -457,6 +457,23 @@ struct Ro {
         return Pnt(x, y, z, 1 , (x*x + y*y + z*z) / 2.0 );
     }
     
+    /*! Negatively Weighted Null Point from x, y, z (useful for constructing imaginary point pairs, or circles) */
+    template< class A, class B, class C >
+    static Pnt inull( A x, B y, C z){	
+        return Pnt(x, y, z, -1 , (x*x + y*y + z*z) / 2.0 );
+    }
+
+    /*! Negatively Weighted Null Point from x, y, z (useful for constructing imaginary point pairs, or circles) */
+    template< class B >
+    static Pnt inull( const B& b){	
+        return inull(b[0], b[1], b[2]);
+    }
+
+    /*! Abitrarily Weighted Null Point from x, y, z (potentially useful for alternative metrics) */
+    template< class A, class B, class C >
+    static Pnt null( A x, B y, C z, double t){	
+        return Pnt(x, y, z, t , (x*x + y*y + z*z) / 2.0 );
+    }
     /*! Dual Sphere from Element and Radius
         @param Any input MV v (function will take first 3 weights)
         @param Radius (enter a negative radius for an imaginary sphere)
@@ -847,11 +864,13 @@ typedef Ro Round;
 typedef Fl Flat;
 typedef Ta Tangent;
 #define PT(x,y,z) vsr::Ro::null(vsr::Vec(x,y,z))
+#define IPT(x,y,z) vsr::Ro::inull(x,y,z)
 #define PV(v) vsr::Ro::null(v)
 #define PX(f) vsr::Ro::null(vsr::Vec(f,0,0))
 #define PY(f) vsr::Ro::null(vsr::Vec(0,f,0))
 #define PZ(f) vsr::Ro::null(vsr::Vec(0,0,f))
 #define PAIR(x,y,z) (PT(x,y,z)^PT(-x,-y,-z))
+#define IPAIR(x,y,z) (IPT(x,y,z)^IPT(-x,-y,-z))
 #define CXY(f) (PX(f)^PX(-f)^PY(f))
 #define CXZ(f) (PX(f)^PX(-f)^PZ(f))
 #define CYZ(f) (PY(f)^PY(-f)^PZ(f))
