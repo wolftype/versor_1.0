@@ -97,7 +97,7 @@ namespace vsr {
 	using std::vector;
 	                
     //don't be alarmed, "versor" here is typedefed
-    typedef Versor Dlp;    
+    typedef Dlp Versor;    
 
     //A Point Group (base class for 2D or 3D groups)
 	class PointGroup  {
@@ -108,7 +108,7 @@ namespace vsr {
 		Versor mVersor[3];  
 
         //Symmetric Ratios
-        int mP, int mQ;
+        int mP, mQ;
 
 		//bools of bars
 		bool mBar[3];	
@@ -133,8 +133,8 @@ namespace vsr {
 			int numFrame() const		{ return mNumFrame; }
 			int numGen()   const		{ return mNumGen;   }
 
-			Versor&	versor(int i) const { return mVersor[i]; }
-			Versor  versor(int i)		{ return mVersor[i]; }
+			Versor	versor(int i) const { return mVersor[i]; }
+			Versor&  versor(int i)		{ return mVersor[i]; }
 
 			int		exp(int i) const	{ return mExp[i];   }
 			bool	bar(int i) const	{ return mBar[i];   }
@@ -157,19 +157,19 @@ namespace vsr {
             //Primitive Translation Generators
             Trs trs(int i) { return Gen::trs( mVersor[i]); }
 
-			friend ostream& operator << (ostream&, const Group&);
+			friend ostream& operator << (ostream&, const PointGroup&);
 	};
     
     
     
 	
-	inline ostream& operator << (ostream& os, const Group& g){
+	inline ostream& operator << (ostream& os, const PointGroup& g){
 		os << g.name() << " Group:  #Frames: " << g.numFrame() << " #Gens: " << g.numGen() << "\n";
 		for (int i = 0; i < g.numFrame(); ++i){
-			os << "Frame " << i << ": " << g.frame(i) << "\n";
+			os << "Frame " << i << ": " << g.versor(i) << "\n";
 		}
 		for (int i = 0; i < g.numGen(); ++ i){
-			os << "Exp: " << g.exp(i) << " Bar: " << g.bar(i) << "\n" << "Gen: " << g.gen(i);
+			os << "Exp: " << g.exp(i) << " Bar: " << g.bar(i) << "\n";
 		 } 		
 		os << endl;
 		return os;
@@ -183,7 +183,7 @@ namespace vsr {
 	
 		public:
 
-			//2d point groups -> pass in number of exponents and boolean spin or pin type (bar = spin)		
+			/// 2d point groups -> pass in number of exponents (foldness) and boolean spin or pin type (bar = true = spin, false = mirror)
 			PointGroup2D (int p, bool bar, string name = "unnamed");
 			
             Versor pin(int i) { return versor(i); }

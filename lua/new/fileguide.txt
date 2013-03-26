@@ -1,0 +1,28 @@
+basis - list of basis and order
+func - products (returns "instructions" and id)
+
+build - build types (with basis and funcs) generates types.lua
+
+types - list of all types (see also org)
+
+gen - build library
+genlite -- static templates
+gentest0
+
+statics - static functions of template types
+vsrheaders - build mk types, and statics
+
+unroll - tests
+
+
+GENERATE
+---
+
+1 - Build All Types with Build.lua
+	This makes vsrmodule/types.lua
+	
+2 - Generate Unrolled Expressions With gen.lua
+
+3 - Generate Language Specific Implementation with static/c_gen.lua
+
+	* Generates 

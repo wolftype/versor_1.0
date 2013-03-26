@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B05231416D5F24B00DD5287 /* libGLV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2529AF162E34B400DD9FC2 /* libGLV.a */; };
 		9B092D9B153CB028003E03F2 /* Linkage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B092D9A153CB027003E03F2 /* Linkage.h */; };
 		9B0D3D8A152BD00000AD875C /* vsr_gl_fbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D3D82152BD00000AD875C /* vsr_gl_fbo.h */; };
 		9B0D3D8B152BD00000AD875C /* vsr_gl_material.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B0D3D83152BD00000AD875C /* vsr_gl_material.h */; };
@@ -5076,6 +5077,7 @@
 			files = (
 				9BCECD1C1527BDEA00589E30 /* GLUT.framework in Frameworks */,
 				9BCECD1B1527BDE500589E30 /* OpenGL.framework in Frameworks */,
+				9B05231416D5F24B00DD5287 /* libGLV.a in Frameworks */,
 				9BCECD1A1527BDDC00589E30 /* libvsr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11535,6 +11537,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../GLV/build/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -11552,6 +11558,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../GLV/build/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

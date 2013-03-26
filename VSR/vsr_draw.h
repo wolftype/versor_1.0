@@ -40,6 +40,7 @@ namespace vsr {
          	
             namespace Draw {
 		
+                /* Immediate Mode */
 				
 				/* Draw Elements In Immediate Mode */
                 template< class A > void Immediate( const A& );
@@ -203,6 +204,7 @@ inline void Draw :: Render (const A& s, float r, float g, float b, float a){
 
 template<class A> inline void Draw :: Immediate (const A& s){
    // cout << "generic draw: " << s.id << endl; 
+   	glNormal3f(0, 0, 1);
     switch ( s.id ){
         case VEC:
             Immediate( *((Vec*)&s) );

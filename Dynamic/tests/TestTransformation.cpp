@@ -447,9 +447,9 @@ void cirdir(GLVApp& app){
 
 void reflections(GLVApp& app){
     
-    cout << ( Ori(1) ^ PT(1,0,0) ^ Inf(1) ) << endl; 
-     cout << ( Aff(1,1,1).dual() ) << endl; 
-     cout << "afl" << ( Afl(1,1,1,1,1,1).dual() ) << endl; 
+//    cout << ( Ori(1) ^ PT(1,0,0) ^ Inf(1) ) << endl; 
+//     cout << ( Aff(1,1,1).dual() ) << endl; 
+//     cout << "afl" << ( Afl(1,1,1,1,1,1).dual() ) << endl; 
     
     static double v,t;
     
@@ -471,6 +471,26 @@ void reflections(GLVApp& app){
     Cir c2 = c.re(dll);
     c2.draw();
     
+    
+    
+}
+
+
+void reflections2(GLVApp& app){
+    static Cir c = CXY(1);
+    c.draw(0,1,0);
+    static Pnt pnt  = PT(2,0,0);
+    app.interface.touch(pnt);
+    pnt.draw(0,0,1);
+    
+    Pnt rpnt = pnt.re(c);
+   // rpnt.draw(1,0,0);
+    
+    Dls d = Ro::sur(c);
+    Pnt rp2 = (d * pnt * -d) * -1;
+    rp2  = rp2 / rp2[3];
+    cout << pnt << rp2 << endl; 
+    rp2.draw(1,1,1);
 }
 
 void spin(GLVApp& app){
@@ -512,9 +532,10 @@ void GLVApp :: onDraw(){
 
     //cirdir(*this);
     
-  //  reflections(*this);
+//   reflections(*this);
+   reflections2(*this);
   
-        spin(*this);
+   //     spin(*this);
   
    // cout << DLN(0,1,0) << endl; 
 }

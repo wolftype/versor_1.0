@@ -20,6 +20,11 @@
 
 namespace vsr{
 
+    #define ITN \
+        for (int i = 0; i < mNum; ++i) {
+        
+    #define END }
+
     #define ITER \
         for (int i = 0; i < mWidth; ++i){\
             for (int j = 0; j < mHeight; ++j){\
@@ -251,9 +256,9 @@ namespace vsr{
         BOUNDITER
             int ix = idx(i,j,k);
             typename Product< Vec, T >::GP tdx;
-            tdx += Vec::x * f.diffXNbrs(ix);
-            tdx += Vec::y * f.diffYNbrs(ix);
-            tdx += Vec::z * f.diffZNbrs(ix);
+            tdx += Vec::x * f.diffXNbrs(ix) * (mWidth-2);
+            tdx += Vec::y * f.diffYNbrs(ix) * (mHeight-2);
+            tdx += Vec::z * f.diffZNbrs(ix) * (mDepth-2);
             mData[ix] = tdx;
         BOUNDEND
         return *this;
@@ -269,7 +274,7 @@ namespace vsr{
 		return tdx; 
 	}
     
-    //Scalar Tensor Weighted By 1.0/dim (? spacing *  ?)
+    //Scalar Tensor Weighted By 1.0/dim (? spacing *  ?) vec for now . . .
 	double tensNbrsWt(int idx) const {
 		double tdx; double ww = 1.0 / w(); double wh = 1.0/h(); double wd = 1.0/d();
 		tdx += ( mData[ nbr(idx).xr ][0] - mData [ nbr(idx).xl ][0] ) * ww; //xr - xl
@@ -345,14 +350,14 @@ namespace vsr{
                 }
         }
         
-        /*! Backwards Advection Using a Previous Field State prev and Based on Another Frame f */
+        /*! Backwards Advection Using a Previous Field State prev and Based on a Velocity Frame f */
         template<class B>
         void advect(const Field& prev, const Field<B>& f, double dt, bool ref){
                     
             double dt0 = dt;// * mWidth;
             BOUNDITER
                 int tidx = idx(i,j,k);
-                Pnt p = mPoint[ tidx ].trs( f[tidx] * -dt0 ); //Lattice Point 
+                Pnt p = mPoint[ tidx ].trs( f.euler3d( mPoint[tidx] ) * -dt0 );//f[tidx] * -dt0 ); //Lattice Point 
                 mData[tidx] = prev.euler3d( p );
             BOUNDEND
             
@@ -364,10 +369,10 @@ namespace vsr{
      // Sets values of a scalar field to divergence of another Field b
      template <class B>
      Field& div(const Field<B>& f){
-        //Sum Differences of each Face (= DIVERGENCE TENSOR)
+        //Sum Differences of each Vxl Face (= DIVERGENCE TENSOR)
 		BOUNDITER
             int ix = idx(i,j,k);
-			mData[ix] = Sca( f.tensNbrs(ix) * ( -.5 ) );			
+			mData[ix] = Sca( f.tensNbrsWt(ix) * ( -.5 ) );			
 		BOUNDEND   
         boundaryConditions(0);
         return *this;
@@ -379,14 +384,13 @@ namespace vsr{
         return *this;
     }
     
-    
     //Operators
     template<class N> 
-    Field& operator * ( N val ) { ITER mData[tidx] *= val; ITEND  return *this; }
+    Field& operator * ( N val ) { ITN mData[i] *= val; END  return *this; }
 
-    //Operators
+    //Operators Pairwise substraction
     template<int N2,int IDX2, class T2 > 
-    Field& operator -= ( const Field< MV<N2,IDX2,T2> >& f ) { ITER mData[tidx] -= f[tidx]; ITEND  return *this; }
+    Field& operator -= ( const Field< MV<N2,IDX2,T2> >& f ) { ITN mData[i] -= f[i]; END  return *this; }
     
     
     //here written fro a scalar fiedl: specialize below for vectors etcs
@@ -398,15 +402,19 @@ namespace vsr{
             n = mNbr[ ix ];
             int type = n.type;
             
-            //negation for now treat as vectors
-            if (type & LEFT) mData[ix] = ref ? -mData[n.xr] : mData[n.xr]; 
-            if (type & RIGHT) mData[ix] = ref ? -mData[n.xl] : mData[n.xl]; 
-            if (type & TOP) mData[ix] = ref ? -mData[n.yb] : mData[n.yb]; 
-            if (type & BOTTOM) mData[ix] = ref ? -mData[n.yt] : mData[n.yt]; 
-            if (type & BACK) mData[ix] = ref ? -mData[n.zf] : mData[n.zf]; 
-            if (type & FRONT) mData[ix] = ref ? -mData[n.zb] : mData[n.zb]; 
+            mData[ix] = T(0);
             
+            //negation for now treat as vectors
+            if (type & LEFT) mData[ix] += ref ? -mData[n.xr] : mData[n.xr]; 
+            if (type & RIGHT) mData[ix] += ref ? -mData[n.xl] : mData[n.xl]; 
+            if (type & TOP) mData[ix] += ref ? -mData[n.yb] : mData[n.yb]; 
+            if (type & BOTTOM) mData[ix] += ref ? -mData[n.yt] : mData[n.yt]; 
+            if (type & BACK) mData[ix] += ref ? -mData[n.zf] : mData[n.zf]; 
+            if (type & FRONT) mData[ix] += ref ? -mData[n.zb] : mData[n.zb]; 
+            
+            mData[ix] /= Math::bitcount(type);
         }
+
     
     }
 
@@ -436,6 +444,7 @@ namespace vsr{
 //    //SPECIALIZATIONS
 
     template<> void Field< Vec > :: draw(float r, float g, float b, float a) {
+        cout <<"vecdraw"<<endl;
         drawPush(r,g,b,a);
     }
 
@@ -443,8 +452,12 @@ namespace vsr{
         ITER  mData[tidx] = Vec(mPoint[tidx]).unit(); ITEND
     }
     
+    template<> void Field< Sca > :: init() {
+        ITN  mData[i] = Sca(0); END
+    }
+    
     template<> void Field< Sca > :: draw(float r, float g, float b, float a) {
-       ITER Draw::Box
+       ITN  GL::push(); glColor4f(r,g,b,mData[i][0] * a);  GL::translate(mPoint[i].w()); GL::Glyph::Cube( mSpacing ); GL::pop(); END
     }
 //    template<> Frame Field< Frame > :: surf(double u, double v){
 //        
@@ -526,7 +539,7 @@ namespace vsr{
         Fluid(int _w, int _h, int _d)
         : mField(_w,_h,_d), mPrev(_w,_h,_d), 
         mPressure(_w,_h,_d), mDivergence(_w,_h,_d), 
-        mDensity(_w,_h,_d), mDensityPrev(_w,_h,_d),
+        mDensity(_w*2,_h*2,_d*2,.5), mDensityPrev(_w*2,_h*2,_d*2,.5),
         mDerivative(_w,_h,_d)
         {
             
@@ -550,6 +563,8 @@ namespace vsr{
             
             //Reset Pressure field
             mPressure.zero();
+            mDerivative.zero();
+            mDivergence.zero();
             
             //Calculate Divergence tensor
             mDivergence.div( mField );
@@ -585,6 +600,7 @@ namespace vsr{
             mDensity.swap(mDensityPrev);
             mDensity.diffuse(mDensityPrev, diff, 0, 0);
             mDensity.swap(mDensityPrev);
+            
             mDensity.advect(mDensityPrev, mField, advectRate, 0);                
         }
 
@@ -595,6 +611,8 @@ namespace vsr{
     #undef ITEND
     #undef BOUNDITER
     #undef BOUNDEND
+    #undef ITN
+    #undef END
 
 } //vsr::
 
