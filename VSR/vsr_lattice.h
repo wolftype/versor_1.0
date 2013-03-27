@@ -467,6 +467,34 @@ namespace vsr {
             return Interp::surface<Pnt> (a,b,c,d, p.rw, p.rh).null();       
         }   
 
+        Pnt surfpnt(double u, double v){
+             
+            double pw = 1.0 / ( mWidth-1);
+            double ph = 1.0/ ( mHeight-1);
+            //double pd = 1.0 / mDepth;
+            
+            double fw = u / pw;
+            double fh = v / ph;
+            //double fd = w / pd;
+            
+            int iw = floor ( fw );
+            int ih = floor ( fh );
+            //int id = floor ( fd );
+           // cout << iw << " " << ih << endl; 
+            
+            double rw = fw - iw;
+            double rh = fh - ih;
+            //double rd = fd - id;
+           // cout << rw << " " << rh << endl; 
+            
+            Pnt a = grid( idx ( iw, ih, 0 ) );
+            Pnt d =grid( idx ( iw, ih + 1, 0 ));
+            Pnt b = grid( idx (  iw + 1, ih, 0 ));
+            Pnt c = grid( idx (  iw + 1, ih + 1, 0 ));
+            
+            return Ro::null( Interp::surface<Pnt> (a,b,c,d, rw, rh) );       
+        }
+
         vector<int>& face() { return mFace; }
         int face(int ix) const { return mFace[ix]; }
      protected:
