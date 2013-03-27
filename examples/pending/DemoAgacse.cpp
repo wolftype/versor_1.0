@@ -20,6 +20,8 @@
 #include "vsr_mesh.h"
 #include "vsr_draw.h"
 
+#include "vsr_field.h"
+
 #include "vsr_tests.h"
 
 //#include "Gamma/Gamma.h"
@@ -151,7 +153,6 @@ void origin(GLVApp& app){
 //Dini's Surface
 void dini(GLVApp& app, bool reset = false){
 
-
     static Dll dll = DLN(0,1,0);
     static Frame frame(PT(0,2,0), Rot(1,0,0,0));
     
@@ -165,7 +166,7 @@ void dini(GLVApp& app, bool reset = false){
         gui(period,"period",-10,10)(pitch,"pitch",-10,10)(amt,"amt",-10,10)(nm,"num",10,100)(bDraw); 
         gui(lz, "light_src",-100,100);
         
-        amt = 2;
+        amt = -2;
         period = 1;
         pitch = 0;
         lz = .5;
@@ -175,7 +176,7 @@ void dini(GLVApp& app, bool reset = false){
     if (reset) bSet = false;
 
     GL::lightPos(0, lz, lz);
-    if(bDraw) frame.draw();
+    if(bDraw) DRAW(frame);//.draw();
     
     Twist tw; tw.along(dll, PI*period, pitch);
     
@@ -188,7 +189,7 @@ void dini(GLVApp& app, bool reset = false){
         Pnt tp = p.sp( tw.mot(-t) );
         ITJi(j, num)
             Par npar = par.trs(0,tp[1],0);
-            Bst pp = Gen::trv(1,npar * t);
+            Bst pp = Gen::bst(npar*t);//Gen::trv(1,npar * t);
             Pnt np = Ro::loc( tp.sp( pp ) );
             
             uvmesh.add(np);
@@ -258,7 +259,10 @@ void lineToCircle(GLVApp& app){
     Pnt pt = frame.pos();//Fl::loc(lin, PT(0,0,0), false);//PT(0,ypos,0);
 
     Par p = frame.tx();
-    frame.push(); DRAW3( frame.x() * amt,0,0,0); frame.pop();
+    GL::push();
+    GL::translate( frame.pos().w()); 
+        DRAW3( frame.x() * amt,0,0,0); 
+    GL::pop();
 
     Boost b;
     b.par( p );
@@ -274,7 +278,7 @@ void lineToCircle(GLVApp& app){
         double cur = Ro::cur(tc);
         
         glColor3f(t,.5*t,.5*t);
-        GL::Draw::Seg( tc , TWOPI * cur  );
+        GL::Glyph::Seg( tc , TWOPI * cur  );
         
         
         if ( ERROR(cur,err) ) GL::Glyph::Line(frame.vec() + frame.y() * PI, frame.vec() - frame.y() * PI); 
@@ -308,8 +312,9 @@ void boosted(GLVApp& app){
     END 
     
     DRAW3( c,1,1,0);
-    f1.drawX();
-    f2.drawX();
+    
+    GL::Draw::X(f1);//.drawX();
+    GL::Draw::X(f2);//.drawX();
     
     Par pa = f1.tx(f1.scale());
     Par pb = f2.tx(f2.scale());
@@ -320,7 +325,7 @@ void boosted(GLVApp& app){
         
        // ITI(j, num)
             double xt = -1.0 + 2.0 * t;
-            Bst pp = Gen::trv( 1, tp * xt );
+            Bst pp = Gen::bst(tp*xt);//Gen::trv( 1, tp * xt );
             pp[0] = Ro::size(f1.pos() ^ f2.pos(), true ) * val;
             tc = c.sp ( pp );
             DRAW( tc );
@@ -333,9 +338,13 @@ void boosted(GLVApp& app){
 
 void surface(GLVApp& app){
 
-    static Lattice<Par> f(2,2,1,2);
-    static Lattice<Dll> fd(2,2,1,2);
-    static Lattice<Tnv> ft(2,2,1,2);
+//    static Lattice<Par> f(2,2,1,2);
+//    static Lattice<Dll> fd(2,2,1,2);
+//    static Lattice<Tnv> ft(2,2,1,2);
+
+    static Field<Par> f(2,2,1,2);
+    static Field<Dll> fd(2,2,1,2);
+    static Field<Tnv> ft(2,2,1,2);
     
     static Frame * frame = new Frame[ f.w() * f.h() ];
     
@@ -382,7 +391,9 @@ void surface(GLVApp& app){
         fd[i] = frame[i].dll() ;
         ft[i] = frame[i].x() * ( frame[i].scale() );
         
-        frame[i].push(); DRAW3(Vec::x * frame[i].scale() * amt , 0,0,0); frame[i].pop();
+        GL::Draw::PushFrame(frame[i]);
+        DRAW3(Vec::x * frame[i].scale() * amt , 0,0,0); 
+        GL::pop();
         app.interface.touch(frame[i]);
         
         //frame[i].scale() *= scale;
@@ -391,7 +402,7 @@ void surface(GLVApp& app){
     
     //STARTING POINT
     app.interface.touch(source);
-    if (bDraw) source.draw();    
+    if (bDraw) DRAW(source);//.draw();    
     Pnt src = source.pos();
     
     int num = nm;
@@ -409,12 +420,12 @@ void surface(GLVApp& app){
         Mot mm = Gen::mot(tvd);
         
         //INTERPOLATED PAIRS
-        Bst pp = Gen::trv(1, tv );
+        Bst pp = Gen::bst(tv);////Gen::trv(1, tv );
         pp[0] = val; 
         if (bSizeVal) pp[0] *= Ro::size( tv, true ); 
         
         //INTERPOLATED TANGENTS
-        Bst pp2 = Gen::trv( tv2, fsrc, 1);
+        Bst pp2 = Gen::bst(tv2, fsrc, 1);//Gen::trv( tv2, fsrc, 1);
         pp2[0] = val;
         if (bSizeVal) pp2[0] *= 2 * Ro::size( Par(pp2), true );
         
@@ -601,8 +612,8 @@ void linear(GLVApp& app){
         
     END 
     
-    f1.drawX();
-    f2.drawX();
+    GL::Draw::X(f1);//f1.drawX();
+    GL::Draw::X(f2);//f2.drawX();
     
     Par pa = f1.tx(f1.scale());
     Par pb = f2.tx(f2.scale());
@@ -613,7 +624,7 @@ void linear(GLVApp& app){
     
     ITJi(i,iter)
         tp = Interp::linear<Par>(pa, pb, t);
-        Bst pp = Gen::trv(1, tp * amt);
+        Bst pp = Gen::bst(tp * amt);//Gen::trv(1, tp * amt);
         pp[0] = val;
         
         Dll dll = f1.dlz().mot(  Gen::log( Gen::ratio( f1.dlz(), f2.dlz(), t ) ) );
@@ -630,7 +641,7 @@ void linear(GLVApp& app){
             
             if (bShowBend){
                 ITJi(k,num)
-                    Pnt tnsrc = Ro::loc( nsrc.sp( Gen::trv( 1, tp * amt * t ) ) );
+                    Pnt tnsrc = Ro::loc( nsrc.sp( Gen::bst(tp * amt * t ) ) );
                     DRAW3( tnsrc, t,0,1-t);
                 END 
             }

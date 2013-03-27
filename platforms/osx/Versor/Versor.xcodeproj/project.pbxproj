@@ -2214,7 +2214,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lGLV";
 				SDKROOT = macosx;
-				SYMROOT = $SRCROOT/../build;
+				SYMROOT = build;
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../../GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/";
 			};
 			name = Debug;
@@ -2244,7 +2244,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-lGLV";
 				SDKROOT = macosx;
-				SYMROOT = $SRCROOT/../build;
+				SYMROOT = build;
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../../GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/";
 			};
 			name = Release;
@@ -2270,6 +2270,8 @@
 				GCC_PREFIX_HEADER = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = $SRCROOT/../build/;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2283,6 +2285,8 @@
 				GCC_PREFIX_HEADER = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = $SRCROOT/../build/;
 				USER_HEADER_SEARCH_PATHS = "";
