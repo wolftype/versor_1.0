@@ -9,6 +9,16 @@
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
+		<key>Articulated.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>Commute.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>23</integer>
+		</dict>
 		<key>Curvature.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +28,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
+		</dict>
+		<key>Dipole.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>24</integer>
 		</dict>
 		<key>Dynamics.xcscheme</key>
 		<dict>
@@ -168,6 +183,21 @@
 			<true/>
 		</dict>
 		<key>9B680135163F349E004A850F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B76AAC817062CC60054ECBC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B76AADA1706337F0054ECBC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B76AAF1170659990054ECBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

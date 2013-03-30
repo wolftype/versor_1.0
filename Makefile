@@ -97,7 +97,7 @@ CFLAGS		:= $(CPPFLAGS) $(CFLAGS)
 CXXFLAGS	:= $(CFLAGS) $(CXXFLAGS)
 
 
-EXEC_TARGETS = tests/%.cpp examples/%.cpp
+EXEC_TARGETS = tests/%.cpp examples/%.cpp examples/%/%.cpp
 
 
 # Dummy target to force rebuilds

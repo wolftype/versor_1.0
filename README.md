@@ -28,6 +28,8 @@ Developer: Pablo Colapinto
 
 [Read my Master's Thesis on the Subject](http://wolftype.com/versor/colapinto_masters_final_02.pdf)
 
+[Other links, Resources, Papers](#papers)
+
 [Look at the AlloSphere Research Group](http://www.allosphere.ucsb.edu/)  
 
 
@@ -199,6 +201,7 @@ all of which give a dual sphere of radius 1 at coordinate 1,0,0;
 
 BASICS
 ---
+
 _Versor_ is named after the one of the basic category of elements of geometric algebra.  
 A **versor** is a type of **multivector** which can be used to compose geometric transformations, 
 namely reflections, translations, rotations, twists, dilations, and transversions (special conformal transformations).
@@ -261,6 +264,7 @@ dual lines to generate transformations which twist things around them.
 
 METHODS
 ---
+
 `vsr_op.h` contains the bulk of the functions for generating elements from other elements.  Some guidelines:
 
 * `Generate::` or `Gen::` methods generate or otherwise operate on versors
@@ -282,6 +286,7 @@ GENERATORS
 
 GUI
 ---
+
 The TestExamples include bindings to the GLV framework for windowing and user interface controls.  A GLVApp class and GLVInterface class provide the necessary glue.
     
 The interface has a built in gui, mouse info, and keyboard info stored.  
@@ -440,11 +445,10 @@ All elements can be reflected over versors with the `re(<versor>)` method
 
 The versors are constructed by the geometric entities, typically by using the `Gen::` routines.  Operators can also be acted on by operators -- you can rotate a translation, or twist a boost.
 
-NOTES:
-===
 
 REFLECTIONS
 ---
+
 Most reflections (in a sphere, circle, or point pair, or over a line or plane ) can be calculated by writing
 
 	Pnt p = PT(1,0,0);
@@ -487,12 +491,11 @@ or the xy `Plane` ('Pln'):
  A `Frame` can also be instantiated by a `Motor` representing it's absolute position and orientation (combined!).
 
 
+LINKS
+---
 
-## LINKS: ##
-
-* [The Good Book: _Geometric Algebra for Computer Science_](http://www.geometricalgebra.net/)
-* [My Master's Thesis on the Subject](http://wolftype.com/versor/colapinto_masters_final_02.pdf)
 * [Some Video Demos of Versor](http://vimeo.com/wolftype)
+* [The Good Book: _Geometric Algebra for Computer Science_](http://www.geometricalgebra.net/)
 * [GA Bookmarks on Delicious](http://www.delicious.com/tag/geometricalgebra)
 * [GA Google Group](https://groups.google.com/forum/?fromgroups#!forum/geometric_algebra)
 * [David Hestenes' Geometric Calculus Page](http://geocalc.clas.asu.edu/)
@@ -500,4 +503,10 @@ or the xy `Plane` ('Pln'):
 * [Eduardo Bayro-Corrochano's Robotics Lab](http://www.gdl.cinvestav.mx/~edb/)
 * [Cambridge University Geometric Algebra Research Group](http://www.mrao.cam.ac.uk/~clifford/)
 * [Cognitive Systems at Christian-Albrechts-Universität zu Kiel](http://www.mrao.cam.ac.uk/~clifford/)
+
+PAPERS
+---
+
+* 2011 [Versor: Spatial Computing With Conformal Geometric Algebra](http://wolftype.com/versor/colapinto_masters_final_02.pdf)
+* 2012 [Boosted Surfaces: Synthesis of Meshes using Point Pair Generators in the Conformal Model](http://versor.mat.ucsb.edu/Boosted_Surfaces_submission_0113.pdf)
 

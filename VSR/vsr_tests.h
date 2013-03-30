@@ -20,6 +20,7 @@ if (!bSet){ \
  
 #define END }
 #define END2 }}
+#define END3 }}}
 
 #define TOUCH(x) app.interface.touch(x);
 #define DRAWANDTOUCH(x) TOUCH(x) DRAW(x)
@@ -51,6 +52,20 @@ for (int i = 0; i < n; ++i){
 for (int i = 0; i <= n; ++i){ \
 VAL(i,n)
 
+#define IT3(m,n,l) \
+    for (int i = 0; i < m; ++i) { \
+        double u = 1.0 * i/m; \
+        for (int j = 0; j < n; ++j) { \
+        double v = 1.0 * j/n; \
+            for (int k = 0; k < l; ++k) { \
+            double w = 1.0 * k/l;
 
 
+#define IT3i(m,n,l) \
+    for (int i = 0; i <= m; ++i) { \
+        double u = 1.0  * i/m; \
+        for (int j = 0; j <= n; ++j) { \
+        double v = 1.0 * j/n; \
+            for (int k = 0; k <= l; ++k) { \
+            double w = 1.0 * k/l;
 #endif

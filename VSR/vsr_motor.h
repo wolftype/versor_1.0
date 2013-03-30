@@ -111,7 +111,7 @@ namespace vsr {
                 Drv tv(td);
             
                 Vec dir = tb.duale();
-                Drv drv( Vec(tv) - (dir * pitch) );
+                Drv drv( Vec(tv) + (dir * pitch) );
                 
                 return Dll(tb[0], tb[1], tb[2], drv[0], drv[1], drv[2] );
             }

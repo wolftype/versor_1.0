@@ -16,10 +16,8 @@
 #include "vsr_lattice.h"
 #include "vsr_motor.h"
 #include "vsr_boost.h"
-
 #include "vsr_mesh.h"
 #include "vsr_draw.h"
-
 #include "vsr_field.h"
 
 #include "vsr_tests.h"
@@ -48,8 +46,6 @@ void basic(GLVApp& app){
     app.interface.touch(c);
 
     SETGUI("basic")
-//        static Gui gui;
-//        app.subgui["basic"] = &gui;
         app.gui(num,"num",1,100)(amt,"amt")(bSkin, "skin");
         
         amt = 1;

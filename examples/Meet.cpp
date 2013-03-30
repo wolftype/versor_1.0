@@ -16,7 +16,87 @@
 
 using namespace vsr;
 
-void circle(GLVApp& app){
+void twoSpheres(GLVApp& app){
+
+    //Two Dual Spheres
+    static Dls sA = Ro::dls(-1,0,0,1);
+    static Dls sB = Ro::dls(1,0,0,.5);
+    
+    //use 'G', 'R', 'S' to grab, rotate, or scale these elements
+    TOUCH(sA); TOUCH(sB);
+
+    //Plunge (is Real when Meet is Imaginary)
+    Par p = sA ^ sB ;
+
+    //Meet is dual to the plunge
+    Cir c = p.dual();
+
+    //CYAN POINT PAIR PLUNGE
+    DRAW3(p,0,1,1);
+    
+    //GREEN CIRCLE MEET (is dotted when Meet is Imaginary)
+    DRAW3(c,0,1,0);
+
+    //RED SPHERES
+    DRAW4(sA,1,0,0,.5);
+    DRAW4(sB,1,0,0,.5);
+
+}
+
+void threeSpheres(GLVApp& app){
+
+    //Three Dual Spheres
+    static Dls sA = Ro::dls(-1,0,0,1);
+    static Dls sB = Ro::dls(1,0,0,.5);
+    static Dls sC = Ro::dls(0,1,0,.2);
+    
+    //use 'G', 'R', 'S' to grab, rotate, or scale these elements
+    TOUCH(sA); TOUCH(sB); TOUCH(sC);
+
+    //Plunge (is Real when Meet is Imaginary)
+    Cir c = sA ^ sB ^ sC ;
+
+    //Meet is dual to the plunge
+    Par p = c.dual();
+
+    //CYAN Circle Plunge
+    DRAW3(c,0,1,1);
+    
+    //GREEN Point Pair MEET
+    DRAW4(p,0,1,0,.5);
+
+    //RED SPHERES
+    DRAW4(sA,1,0,0,.5);
+    DRAW4(sB,1,0,0,.5);
+    DRAW4(sC,1,0,0,.5);
+
+}
+
+void lines(GLVApp& app){
+
+    static Frame a, b;
+    
+    SET
+        a.set(PT(-1,0,0)); b.set(PT(1,0,0));
+    END
+    
+    DRAWANDTOUCH(a); DRAWANDTOUCH(b);
+
+    Dll dllA = a.dly();
+    Dll dllB = b.dly();
+    
+    DRAW3(dllA,1,0,0); DRAW3(dllB,0,1,0);
+    
+    
+    Dll c = dllA % dllB;rr
+    Drt drt = dllA ^ dllB;
+    Sca sca = dllA <= dllB;
+    
+    cout << c.rnorm() << " " << sca << drt << endl; 
+
+}
+
+void circleAndSphere(GLVApp& app){
 
     static Point pa = PT(1,0,0);
     static Point pb = PT(0,1,0);
@@ -89,9 +169,21 @@ void pointOnCircle(GLVApp& app){
 }
 
 void GLVApp :: onDraw(){
+
+    static bool bTwoSpheres, bThreeSpheres, bTwoLines, bCircleAndSphere, bLinePoint, bCircle, bPointCircle;
+
     //linePoint(*this);
     //circle(*this);
-    pointOnCircle(*this);
+//    pointOnCircle(*this);
+
+    SET
+        gui(bTwoSpheres,"Two Spheres")(bThreeSpheres,"Three Spheres")(bTwoLines,"Two Lines")(bCircleAndSphere,"Circle and Sphere");
+    END
+    
+    if (bTwoSpheres) twoSpheres(*this);
+    if (bThreeSpheres) threeSpheres(*this);
+    if (bTwoLines) twoLines(*this);
+    if (bCircleAndSphere) circleAndSphere(*this);
 }
 
 int main(int argc, const char * argv[]) {

@@ -233,9 +233,12 @@ public:
     typedef MV<N,IDX,T> self_type;
     typedef T value_type;
     typedef const T array_type[N];
+    typedef typename ProductN<VEC,IDX>::GP VecDeriv;
     
     static const unsigned int idx = IDX;
- 	static const unsigned int size =  N;    
+ 	static const unsigned int size =  N;
+    
+    
 
     //Feed in a value_type e.g. Vec(0.0), mind the decimals
 	MV(const T& v = T()) BASECONST { std::fill(mW, mW + N, v);  }

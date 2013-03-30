@@ -8,10 +8,10 @@
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
-#include "vsr_tests.h"
-
 #include "vsr_motor.h"
+#include "vsr_field.h"
 
+#include "vsr_tests.h"
 #include <iostream>
 
 using namespace vsr;
@@ -30,16 +30,18 @@ void twists(GLVApp& app){
     //The Dual Line y axis of the space frame
     Dll dll = frame.dly();
     DRAW3(dll,1,0,0);
+    //Draw Y Vector
+    GL::Draw::Y(frame);
     
     //A Twist around and along that axis
     DualLine twist = Twist::Along( dll, period * PI, pitch * PI);
     
     //Another Space Frame at 1,0,0
-    static Frame sframe( PT(1,0,0) );
+    static Frame sframe( PT(1,-2,0) );
     app.interface.touch(sframe);
     
-    for (int i = 0; i < 1000; ++i){
-        double t= 1.0 * i / 1000;
+    for (int i = 0; i < 100; ++i){
+        double t= 1.0 * i / 100;
         
         Motor m = Gen::mot( twist * t );
         
@@ -47,13 +49,51 @@ void twists(GLVApp& app){
         //a start frame
         Frame nf( m * sframe.mot());
         DRAW(nf);
-    
     }
+    
+    app.text("Grab ('G') or Rotate ('R') Frame or Vector. 'Q' To Let Go. ",50,70);
 }
 
 
+void twistfield(GLVApp& app){
+
+    static Field<Dll> f(2,2,2,3);
+    static Frame frame[8];
+    
+    SET
+        ITJ(i,8)
+            frame[i].set(f.grid(i), Rot(1,0,0,0) );
+            frame[i].scale(.2);
+        END
+    END
+    
+    ITJ(i,8)
+        DRAWANDTOUCH(frame[i]);
+        f[i] = frame[i].dll();
+    END
+    
+    IT3i(10,10,10)
+        Dll td = f.vol(u,v,w);
+        Frame tf( td );
+        tf.scale(.2);
+        DRAW(tf);
+    END3
+    
+    app.text("Grab ('G') or Rotate ('R') Corner Frames. 'Q' To Let Go. ",50,70);
+}
+
 void GLVApp :: onDraw() {
-    twists(*this);
+
+    static bool bBasic;
+    SET
+        gui(bBasic,"Basic Twist");
+        bBasic = 0;
+    END 
+    
+    if (bBasic) twists(*this);
+    else twistfield(*this);
+    
+    text("A Field of Twists and A 'Basic' Twist (hit 'basic' button)",50,50);
 }
 
 int main(int argc, const char * argv[]) {
@@ -61,9 +101,9 @@ int main(int argc, const char * argv[]) {
 //    File::setdir( argv[0] );       
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
-	glv.colors().back.set(.3,.3,.3);
+	glv.colors().back.set(.2,.2,.2);
     		
-	Window * win = new Window(500,500,"KNOTS",&glv);
+	Window * win = new Window(600,700,"Twists",&glv);
     GLVApp * app = new GLVApp(win);    
     
     glv << app;

@@ -11,7 +11,7 @@ local bor = bit.bor
 local lshift = bit.lshift
 local rshift = bit.rshift
 
-metric = {-1,1,1,1,1}
+metric = {1,1,1,1,-1}
 basis = {}
 cayley = {}
 subspace = {}
@@ -136,7 +136,6 @@ metricProduct = function(a,b)
 	return tmp
 end
 
-
 inner = function(a,b)
 	local tmp = product(a,b)
 	local g = grade(b) - grade(a)
@@ -225,14 +224,14 @@ compress = function(x)
 			end
 		end
 		--if doesn't exist, add it
-		if (exists = 0) then
+		if (exists == 0) then
 			table.insert(tally,iv)
 		end		
 	end
 	
 	--remove zeros
 	for i,iv in ipairs(tally) do
-		if (iv.w ~= 0) table.insert(res, iv )
+		if (iv.w ~= 0) then table.insert(res, iv ) end
 	end
 	
 	return res
@@ -318,7 +317,7 @@ buildConformal = function()
 			for k, kv in ipairs(gpCompress) do
 				local tmp
 				if checkMink(kv.id)==true then tmp = popMink(kv.id)
-				else tmp = kv
+				else tmp = kv end
 			end
 			
 			-- S[idA].gp[S[idB]] = 
