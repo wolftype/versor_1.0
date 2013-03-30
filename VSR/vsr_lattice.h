@@ -467,6 +467,7 @@ namespace vsr {
             return Interp::surface<Pnt> (a,b,c,d, p.rw, p.rh).null();       
         }   
 
+        Pnt surfGrid(double u, double v) { return surfpnt(u,v); }
         Pnt surfpnt(double u, double v){
              
             double pw = 1.0 / ( mWidth-1);

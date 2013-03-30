@@ -34,6 +34,16 @@ mRot( m ), mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9),  aPar(.9
 { orient(); }
 
 
+Frame :: Frame(const Dll& dll) : 
+mScale(1), aBiv(.9), aVec(.9), aMnk(.9), aTnv(.9), aDll(.9),  aPar(.9)
+{ 
+    Mot m = Gen::mot(dll);
+    mPos = Op::sp(PAO,m);
+    mRot = m;
+    orient(); 
+}
+
+
 Frame Frame :: Twist(const Frame& f1, const Frame& f2, double t){
 
     Dll tdz = f1.dll() * (1-t) + f2.dll() * t;    

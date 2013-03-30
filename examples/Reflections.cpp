@@ -8,37 +8,57 @@
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
+
+#include "vsr_mesh.h"
+#include "vsr_field.h"
+
 #include "vsr_tests.h"
 
 #include <iostream>
 
 using namespace vsr;
 
+
 void reflections(GLVApp& app){
 
-    //Line along Y Axis
-    static Lin lin = LN(0,1,0);
-    DRAWANDTOUCH(lin);
-    
-    //A Circle at 2,0,0
-    static Cir cir = CXY(1).trs(2,0,0);
-    DRAWANDTOUCH(cir);
-    
 
-    Cir r = (cir * Cir(lin)) / cir;
-    cout << lin << cir << "new:\n" << r << endl;
-    //Tr
-    double s = Ro::size(r,false);
-    cout << "size: " << s << endl; 
-    if (fabs(s) > 10000) {
-        DRAW3(Lin(r),1,0,0);
-       // cout << "treat as a line" << endl; 
-    }
-    else DRAW3(r,0,1,0);
+    static double amt;
+    static bool bLine, bShow;
+    SET app.gui(amt,"amt",-100,100)(bLine, "line")(bShow,"show ref"); END
     
- //   cout << "inversion and reversion: " << !cir << ~cir << endl; 
+    static Frame frame;
+    TOUCH(frame);
+    DRAW(frame.lz());
     
+    static Field<Pnt> f(1,19,10,.5);
+    
+    int iter = 10;
+    
+    UVMesh mesh(f.h(), f.d());
+    
+    IT2( f.h(), f.d() )
+        
+        double t = sin(3*PI*u);//-1.0 + 2*u;
+        
+        int idx = f.idx(1,i,j);
+        Pnt& p = f.at(1,i,j);      
+         p = Ro::dls_pnt( f.grid(idx), amt * t);
+        
+        Dls td = frame.bound().re( p );
+        Cir tp = Cir(frame.lz()).re( p );
+        if (bShow) bLine? DRAW(tp) : DRAW(td);
+        
+        Pnt np =  bLine ? Ro::loc(tp) : (td/td[3]).null();
+        mesh.add(np);
+        DRAW3( np,0,1,1);
+    END2
+    
+    mesh.draw(.3,.3,.3);
+    
+    //Sphere
+    DRAW4(frame.bound(), 1,0,0,.5);
 }
+
 
 void planeInSphere(GLVApp& app){
     static Dlp dlp(0,1,0,0);
@@ -87,8 +107,8 @@ void glide(GLVApp& app){
 }
 
 void GLVApp :: onDraw() {
-    //reflections(*this);
-    glide(*this);
+    reflections(*this);
+    //glide(*this);
     //planeInSphere(*this);
     text("Hit 'G' 'R' or 'S' keys and click on element to Grab Rotate or Scale.  Hit 'Q' to release");
 }

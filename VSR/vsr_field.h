@@ -76,7 +76,7 @@ namespace vsr{
         public:
 
         //Vector Derivative in Euclidean Metric
-        typedef typename Product<Vec,T>::GP VecDeriv;
+        //typedef typename ProductN<VEC,T::idx>::GP VecDeriv;
         
         T * dataPtr() { return mData; }
         void dataPtr( T* d ) { mData = d; }
@@ -443,11 +443,6 @@ namespace vsr{
 
 //    //SPECIALIZATIONS
 
-    template<> void Field< Vec > :: draw(float r, float g, float b, float a) {
-        cout <<"vecdraw"<<endl;
-        drawPush(r,g,b,a);
-    }
-
     template<> void Field< Vec > :: init() {
         ITER  mData[tidx] = Vec(mPoint[tidx]).unit(); ITEND
     }
@@ -455,6 +450,17 @@ namespace vsr{
     template<> void Field< Sca > :: init() {
         ITN  mData[i] = Sca(0); END
     }
+    
+    template<> void Field< Frame > :: init(){
+        ITN mData[i].pos() = mPoint[i]; END
+    }
+
+    template<> void Field< Vec > :: draw(float r, float g, float b, float a) {
+        //cout <<"vecdraw"<<endl;
+        drawPush(r,g,b,a);
+    }
+
+
     
     template<> void Field< Sca > :: draw(float r, float g, float b, float a) {
        ITN  GL::push(); glColor4f(r,g,b,mData[i][0] * a);  GL::translate(mPoint[i].w()); GL::Glyph::Cube( mSpacing ); GL::pop(); END
@@ -497,25 +503,6 @@ namespace vsr{
 //    void Field< T > :: 
 
     
-    struct FrameField : public CubicLattice {
-    
-        Frame * mFrame;
-    
-        FrameField(int _w, int _h, int _d) : CubicLattice(_w,_h,_d), dll(_w,_h,_d) { 
-            
-            update(); 
-        }
-        
-        Field<Dll> dll;
-        
-        void update(){
-            
-        }
-        
-        void draw(){
-        
-        }
-    };
     
     
     
@@ -532,7 +519,7 @@ namespace vsr{
         Field<Sca> mDivergence;
         
         //Vector Derivative of Scalar Pressure Field is a Vector Field
-        Field< typename Field<Sca>::VecDeriv > mDerivative;
+        Field< typename Sca::VecDeriv > mDerivative;
         
         public:
         

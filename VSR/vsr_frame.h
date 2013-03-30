@@ -31,17 +31,12 @@
 
 namespace vsr {
 
-	class Frame {
+	class Frame  {
     
 		protected:
 		
 			Pnt mPos; 			/*!< Position Point */			
             Rot mRot;			/*!< Orientation Versor */
-             
-//			Trs mTrs;			/*!< Translation Versor */ 								
-//			Vec mX;				/*!< Global X */	
-//			Vec mY;				/*!< Global Y */
-//			Vec mZ;				/*!< Global Z */
 
 			/*! Direction Vector Generator (Position Momentum) */			
 			Vec dVec;		
@@ -84,6 +79,8 @@ namespace vsr {
 				@param[in] mot		Motor concatenated position and orientation
 			*/
 			Frame( const Mot& mot);					//Motor
+
+			Frame( const Dll& dll);					//Dual Line
 			
 			Frame (const Frame& f) {
 				mImage = f.mImage;
@@ -131,23 +128,26 @@ namespace vsr {
 				return *this;
 			}
 			
-            /*! Experimental: returns a Frame representing the concatenation ("addition") of *this followed by f */
-			Frame operator + (const Frame& f) const {
-                return Frame( f.mot() * mot() );
-            }
-            /*! Experimental: returns a Frame representing the transformation ("difference") from f to *this */
-			Frame operator -(const Frame& f) const {
-                return Frame( Gen::ratio( f.dll(), dll() ) );
-            }
-            /*! Experimental: returns a Frame representing the concatenation ("addition") of *this followed by f */
-			Frame& operator +=(const Frame& f) {
-                mot( f.mot() * mot() ); return *this;
-            }
-
-            /*! Experimental: returns a Frame representing the concatenation ("multiplication") of f followed by *this */
-			Frame operator *(const Frame& f) const {
-                return Frame( mot() * f.mot() );
-            }
+            
+            //where was this being used? note, Frame is not a subclass of Motor
+            
+//            /*! Experimental: returns a Frame representing the concatenation ("addition") of *this followed by f */
+//			Frame operator + (const Frame& f) const {
+//                return Frame( f.mot() * mot() );
+//            }
+//            /*! Experimental: returns a Frame representing the transformation ("difference") from f to *this */
+//			Frame operator -(const Frame& f) const {
+//                return Frame( Gen::ratio( f.dll(), dll() ) );
+//            }
+//            /*! Experimental: returns a Frame representing the concatenation ("addition") of *this followed by f */
+//			Frame& operator +=(const Frame& f) {
+//                mot( f.mot() * mot() ); return *this;
+//            }
+//
+//            /*! Experimental: returns a Frame representing the concatenation ("multiplication") of f followed by *this */
+//			Frame operator *(const Frame& f) const {
+//                return Frame( mot() * f.mot() );
+//            }
 
 
 			Mat4f& image() { return mImage; }										///< get matrix image 		

@@ -326,8 +326,8 @@ func = function(tmp)
 end
 
 -- 
--- local c = "re( Gld lnf, Mot mot ) return Mot( lnf * #mot * !lnf )"
--- -- 
--- local q =  func( c )
+local c = "re( Pnt pnt, Sph sph ) return Pnt( sph * #pnt * !sph )"
+-- 
+local q =  func( c )
 -- print(Rot_Dfp.key)
--- print (q.assemble)
+print (q.assemble)

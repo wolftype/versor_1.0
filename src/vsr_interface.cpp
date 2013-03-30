@@ -145,7 +145,9 @@ namespace vsr {
         //stateTransform();
         switch(keyboard.code){
             case 'c':
-                camera().reset(); break;
+                camera().reset(); 
+                model().reset();
+                break;
                 
         }
                 

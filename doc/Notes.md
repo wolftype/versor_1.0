@@ -20,7 +20,13 @@ Points and Lines
 		
 	Pnt ^ Inf <= Dll returns the Dual Plane through the point orthogonal to the Dual Line
 		Pnt ^ Inf is a Flat Point, often used for "potentialities", e.g. a flat point is ready-to-be converted . . .
+		
 
+DualLines and Lines
+	
+	Dll <= Dll is a (reversed) scalar dot product.  Zero when Orthogonal. Positive when pointing in opposite directions
+	Dll ^ Dll is a Direction Trivector and specfies Relative Chirality.  Is ZERO when they intersect OR are parellel. 
+		Increases in Magnitude as closest point gets farther away (except for parallel lines)
 
 Rounds
 
