@@ -39,6 +39,11 @@
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
+		<key>Field.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>26</integer>
+		</dict>
 		<key>Fluid.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -83,6 +88,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>
+		</dict>
+		<key>Navigation.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
 		</dict>
 		<key>OpGraph.xcscheme</key>
 		<dict>
@@ -213,6 +223,16 @@
 			<true/>
 		</dict>
 		<key>9B76CCDE1628AA810064FF35</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B78D444170E384E006AF189</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B9A4092170F654800E02BAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

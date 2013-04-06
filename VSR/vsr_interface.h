@@ -3,7 +3,7 @@
 //  A Control Object: Manipulate vsr objects using screen interaction (to be fed mouse input data)
 //
 //  Created by Pablo Colapinto on 3/24/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Wolftype. All rights reserved.
 //
 
 
@@ -21,7 +21,7 @@
 namespace vsr  {
     
     
-    /* Mapped Key values from GLV */
+    /* Mapped Key values */
     namespace Key{
         enum {
             
@@ -63,12 +63,18 @@ namespace vsr  {
 	}
 
 	struct MouseData {
+    
+        enum  {
+            Up = 1, Down, Left, Right
+        };
         
 		float x, y, dx, dy, ddx, ddy, xrel, yrel; //< 2D Mouse Position, first and second derivatives of motion, position relative to TL corner
 		
         Vec click, pos, move, accel, cat, drag, dragAccum, dragCat, projectFar, projectNear, projectMid;
         Pnt origin;
 		Biv biv, bivCat, dragBiv, dragBivCat;
+        
+        int gesture;  // stores major direction of mouse movement
         
 		bool isDown, isMoving, newClick;		
 		void toggle() { newClick = !newClick; }
@@ -92,6 +98,8 @@ namespace vsr  {
         
         int mMode;  ///< Edit Mode State
        // bool bFixed; ///< Fixed Functionality or 
+       
+        double mVel, mRot, mModelRot;
         
     public:
     
@@ -120,7 +128,7 @@ namespace vsr  {
             
             virtual ~ViewImpl(){}
 
-            // All Subclasses must define fullScreenToggle method and getData method
+            // All Subclasses should define fullScreenToggle method and getData method
             virtual void fullScreenToggle() {};            
             virtual void getData( void * udata){};
             
@@ -199,15 +207,19 @@ namespace vsr  {
  
         void windowTransform();
         void stateTransform();
-        void camSpin(float acc = .9);
-        void camTranslate(float acc = .9);
-        void modelTransform(float acc = .9);
-
+        
+        //NAVIGATION
+        void keyboardCamSpin(float acc, bool trigger);
+        void keyboardCamTranslate(float acc, bool trigger);
+        void keyboardModelTransform(float acc, bool trigger);
+        void mouseModelTransform(float acc, bool trigger);
+        void mouseCamTranslate(float acc, bool trigger);
+        void mouseCamSpin(float acc, bool trigger);
         
         void onMouseMove();        
         void onMouseDown();
         void onMouseDrag();
-        void onMouseUp(){ mouse.isDown = 0; }        
+        void onMouseUp();        
         void onKeyDown();
         void onKeyUp();
         
@@ -230,29 +242,35 @@ namespace vsr  {
         void toggle(int bitflag)  { mMode & bitflag ? disable(bitflag) : enable(bitflag); }
         void print(){}
         
+        double& db() { return mRot; }
+        double& dv() { return mVel; }
     };
     
     
     template <class A> void Interface :: touch( A& s, const Pnt& x, double t){
         
-        //physics
-        static double dt = 1;
-        static double acc = .9;
-        dt *= acc;
-		
-        if ( mouse.isDown ){
-            dt = t; // Reset acc
-            if ( pntClicked( x ) ) {
-                //cout << "clicked" << s << endl; 
-                select( &s );
+//        if ( keyboard.down ){
+        if ( !keyboard.alt && !keyboard.shift && !keyboard.alt ){
+        
+            //physics
+            static double dt = 1;
+            static double acc = .9;
+            dt *= acc;
+            
+            if ( mouse.isDown ){
+                dt = t; // Reset acc
+                if ( pntClicked( x ) ) {
+                    //cout << "clicked" << s << endl; 
+                    select( &s );
+                }
             }
-        }
+            
+            if ( isSelected( &s ) ){
+    //            cout << "selected" << &s << endl; 
+                xf(&s,x,dt);
+            }
         
-        if (isSelected( &s )){
-//            cout << "selected" << &s << endl; 
-            xf(&s,x,dt);
         }
-        
     }
     
     // GENERIC METHOD (BACKUP)
@@ -331,6 +349,7 @@ namespace vsr  {
         Pnt cp  = Fl::loc( vd().ray, Ro::loc(pos), 1);        
         
         switch(keyboard.code){
+        
             case 's': //SCALE
             {
                 Vec tm1 = mouse.pos + mouse.drag - sc;
@@ -354,7 +373,8 @@ namespace vsr  {
                 ts = Op::sp ( ts, Gen::mot( td ) );
                 break;
             }
-            case 'a': //scale
+            
+            case 'a': //(DEPRECATED!) scale using RO:: instead of Ro::loc 
             {
                 //printf("scale\n");s
                 Vec tm1 = mouse.pos + mouse.drag - sc;
@@ -362,7 +382,7 @@ namespace vsr  {
                 
                 //Drag towards or away from element
                 int neg = (tm1.norm() > tm2.norm()) ? 1 : -1; 
-                ts = Op::sp( ts, Gen::dil( Ro::cen(pos), mouse.drag.norm() * t * neg ) );
+                ts = Op::sp( ts, Gen::dil( Ro::cen( pos ), mouse.drag.norm() * t * neg ) );
                 break;
             }
 //            case 'b': //boost by drag (not working)
@@ -377,14 +397,15 @@ namespace vsr  {
 //                glPopMatrix();
 //                break;
 //            }
-            case 't': // twist about global line
+
+            case 't': // twist about global line (experimental)
             {
                 Dll td = Op::dl( mouse.origin ^ mouse.dragCat ^ Inf(1) );
                 ts = Op::sp ( ts, Gen::mot(td) );
                 break;
             }
 
-            case 'q': //DESELECT
+            default://case 'q': //DESELECT
             {
                 toggleSelect(s);
                 break;

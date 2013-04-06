@@ -32,6 +32,8 @@ namespace vsr{
             VBO vertex;     //vertex buffer container
             VBO index;      //element buffer container
             
+            GL::MODE mode;
+            
             MBO(){}
             
             MBO( Mesh mesh, int id = -1 ){
@@ -39,14 +41,15 @@ namespace vsr{
                 idx = id == -1 ? mCount : id;
                 vertex = VBO( &mesh.vertices()[0].Pos[0], mesh.num(), mesh.num() * sizeof(Vertex), GL::VERTEXBUFFER );
                 index = VBO( &mesh.indices()[0], mesh.numIdx(), mesh.numIdx() * sizeof(GLuint), GL::ELEMENTBUFFER );
+                mode = mesh.mode();
             }
                        
             //Enable Vertex Attributes FIRST             
-            void drawElements( GLenum mode, int num = -1, int off = 0){
+            void drawElements( int num = -1, int off = 0){ // GLenum mode,
                 index.drawElements(mode, num, off);
             }
             
-            void drawArray(GLenum mode){
+            void drawArray(){ //GLenum mode
                 vertex.drawArray(mode);
             }
 

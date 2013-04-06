@@ -1,6 +1,6 @@
 /*
  *  vsr_gxlib.h
- *  graphics
+ *  include platform specific graphics headers
  *
  *  Created by Pablo Colapinto on 10/6/11.
  *  Copyright 2011 __MyCompanyName__. All rights reserved.
@@ -21,7 +21,7 @@
 
 //        #define glGenFramebuffers glGenFramebuffersOES
 //        #define glBindFramebuffer glBindFramebufferOES
-//        #define GL_FRAMEBUFFER GL_FRAMEBUFFER_OES
+//        #define GL_FRAMEBUFFERbobobb GL_FRAMEBUFFER_OES
 //        #define GL_RENDERBUFFER GL_RENDERBUFFER_OES
 //        #define GL_COLOR_ATTACHMENT0 GL_COLOR_ATTACHMENT0_OES
 
@@ -41,18 +41,29 @@
         #include <GL/glu.h>
 		#include <GL/glut.h>
 		#include <GL/glext.h>
+        
+        #define GL_IMMEDIATE_MODE
+        
+    #elif defined(__raspberry__)
 
+        #include "bcm_host.h"
+        #include "GLES/gl.h"
+        #include "EGL/egl.h"
+        #include "EGL/eglext.h"
+        
     #else //defined(__APPLE__) || defined(__OSX__)
 
         //printf("APPLE SYSTEM\n");
         #include <OpenGL/OpenGL.h>
         #include <GLUT/GLUT.h>
 
+        #define GL_IMMEDIATE_MODE
+
     #endif
 
 #endif
 
-/* from cocos2d
+/* notes from cocos2d
  #import <Availability.h>
  00031 
  00032 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED

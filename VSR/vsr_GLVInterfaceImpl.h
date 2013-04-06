@@ -148,7 +148,10 @@ namespace vsr {
             camera().step();
             
             //RENDERING OPTIONS (advanced pushes data to GRAPHICS CARD)                        
-            if (bImmediate) immediate();
+            if (bImmediate) {
+                //printf("immediate mode\n");
+                immediate();
+            }
             else advanced();
             
             GL :: disablePreset();

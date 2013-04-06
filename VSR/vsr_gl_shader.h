@@ -11,6 +11,7 @@
 
 #include "vsr_gl.h"
 #include "vsr_file.h"
+
 #include <string>
 #include <stdio.h>
 #include <iostream>

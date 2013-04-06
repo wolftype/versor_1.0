@@ -10,11 +10,11 @@
 
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
-#include "vsr_tests.h"
 
 #include "vsr_draw.h"
 #include "vsr_mdraw.h"
 #include "vsr_mglyph.h"
+#include "vsr_mesh.h"
 
 #include "vsr_gl_shader.h"
 #include "vsr_gl_vattrib.h"
@@ -29,11 +29,16 @@
 #include "vsr_field.h"
 
 #include <iostream>
+#include "vsr_tests.h"
 
 
 using namespace vsr;
 using namespace glv;
 
+
+using namespace vsr::GLSL;
+using namespace vsr::GL;
+    
 using vsr::GL::Draw::Pipe;
 
 void simpleShader(GLVApp& app){
@@ -271,6 +276,7 @@ void render2texture(GLVApp& app){
 //    
     glPopAttrib();
     
+
     //STEP 2: RENDER TO SCREEN BY BINDING TEXTURE
     
     program.bind();
@@ -288,175 +294,49 @@ void render2texture(GLVApp& app){
 }
 
 
-void drawScene(GLVApp& app){
-   
-    static Field<Cir> f(10,10,10);
+//RENDER ALL GLYPHS USING gles 2.0 standards (not immediate mode)
+void meshes(GLVApp& app){
     
-    SET
-        ITJ(i,f.num())
-            double t = 1.0 * i/f.num();
-            f[i] = CXY(1).rot(Biv::xz*t).trs( f.grid(i) );
-        END
-   
-    END
-    
-//    static Par par = PAIR(0,1,0).trs(1,0,0);
-//    DRAWANDTOUCH(par);
 
-    //CUBE MAP SANITY CHECK!
-    double t = 3;
-    //X Direction Facing a Sphere
-    DRAW( Ro::dls(t,0.0,0.0) );
-    //NX Direction Facing a Circle
-    DRAW( CYZ(1).trs(-t,0,0) );
-    //Y Direction Facing A Small Red Circle
-    DRAW3( CXZ(.3).trs(0,t,0), 1,0,0 );
-    //NY Direction Facing A Pair of Green Points 
-    DRAW3( PAIR(1,0,0).trs(0,-t,0), 0,1,0 );
-    //Z Direction an Arrow Pointing to WORLD SPACE -X, Y (tricky one . . .)
-    GL::push(); GL::translate(0.,0.,t); DRAW( Vec(-1,1,0) ) ; GL::pop();
-    //NZ Direction a Plane
-    DRAW( Dlp(0,0,1,0).trs(0,0,-t) );
-    
-}
-
-void displayCubemapTexture(const Texture& tex){
-    
-    using namespace GLSL;
-    
     static ShaderProgram program;
+    static string Vert = AVertex + Varying + UMatrix + NTransform + VCalc + MVert;
+    static string Frag = USampler + Varying + MFrag;
     
-    static string Vert = AVertex + VColor + VTex + MVert;
-    
-    static string Frag = USampler + VColor + VTex + MFrag;
-
-    static GL::MBO mesh( GL::MGlyph::Rect(2.0,2.0) );
-    
-    //a 2D texture with vector values
-    static Texture pixelmap;
-     
     SET
-       
-        //compile shader and set up vertex attributes array
         program.source(Vert,Frag);
         program.bind();
-        
             Pipe::BindAttributes();
-        
         program.unbind();
-    
+        
     END
+        
     
+    static MBO circle ( Mesh::Circle() );
+    static MBO line ( Mesh::Line( Vec::x * 2, Vec::y ) );
+    static MBO dir ( Mesh::Dir() );
     
-    program.bind();    
-    program.uniform( );
-    //switch back to other func
-    tex.enable();
-    tex.bind();
-
-    Pipe::Line( mesh );    
-
-    tex.unbind();
-    tex.disable();
-
+    program.bind();
+        
+        program.uniform("modelView", app.scene().xf.modelView);
+        program.uniform("projection", app.scene().xf.proj);
+        program.uniform("normalMatrix", app.scene().xf.normal);
+        
+        Pipe::Line( dir );
+        
     program.unbind();
-
 }
-
-//render to cubemap and bind it
-void render2cubemap(GLVApp& app){
-
-    //A Framebuffer To Bind
-    static FBO fbo;
-    // A cubemap texture to fill
-    static Texture cmTexture( 256, 256, 1, GL::CUBEMAP );
-    
-    //Bind cubemap to fbo once
-    SET
-        fbo.attachCubeMap(cmTexture, GL::COLOR);
-    END
-
-    //Render Each Face To a Different Texture of the CubeMap
-    Vec dir;
-    for (int cubeface = 0; cubeface < 6; ++cubeface){
-    
-        switch( cubeface ){
-            case 0:
-                dir = Vec(1,0,0);
-                break;
-            case 1:
-                dir = Vec(-1,0,0);
-                break;
-            case 2:
-                dir = Vec(0,1,0);
-                break;
-            case 3:
-                dir = Vec(0,-1,0);
-                break;        
-            case 4:
-                dir = Vec(0,0,-1);
-                break;
-            case 5:
-                dir = Vec(0,0,1);
-                break;        
-            }
-                    
-        app.scene().push3D();
-        
-            app.camera().lookAt(dir);
-
-            glPushAttrib(GL_ALL_ATTRIB_BITS);
-        
-                fbo.bind();
-                
-                    //Viewport Size of Texture
-                    glViewport( 0, 0, cmTexture.width(), cmTexture.height() );
-                    
-                    //SPECIFY COLOR BUFFER
-                    glDrawBuffer(GL_COLOR_ATTACHMENT0 + cubeface);
-                    
-                    //Attach Texture to Framebuffer (again??)
-                                    
-                    ////CLEAR INFO ///
-                    GL::clearColor();
-                    GL::clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-                    //DRAWSCENE
-                    drawScene(app);
-                
-                fbo.unbind();
-
-            glPopAttrib();
-        
-        app.scene().pop3D();
-
-    }
-    
-//    cmTexture.enable();
-//    cmTexture.bind();
-    
-        displayCubemapTexture(cmTexture);
-    
-//    cmTexture.unbind();
-//    cmTexture.disable();
-
-}
-
 
 
 
 void GLVApp :: onDraw(){
   //  bImmediate = false;   
     bImmediate = true;   
-
-//    simpleShader(*this);
-//    shaderTest(*this);
- //   immediateTest(*this);
- 
- //   texture(*this);
-//     render2texture(*this);
- //       render2cubemap(*this);
-   render2cubemap(*this);     
+    
+    
+    
+ //   render2texture(*this);
+    meshes(*this);
+  //  simpleShader(*this);
 }
 
 int main(int argc, const char * argv[]) {
@@ -467,7 +347,7 @@ int main(int argc, const char * argv[]) {
 	GLV glv(0,0);	
 	glv.colors().back.set(.3,.3,.3);
     		
-	Window * win = new Window(256,256,"KNOTS",&glv);
+	Window * win = new Window(500,500,"Graphics Test",&glv);
     GLVApp * app = new GLVApp(win); 
     
     glv << app;

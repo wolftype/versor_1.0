@@ -38,10 +38,14 @@ void twoSpheres(GLVApp& app){
     DRAW3(c,0,1,0);
 
     //RED SPHERES
-    DRAW4(sA,1,0,0,.5);
     DRAW4(sB,1,0,0,.5);
+    DRAW4(sA,1,0,0,.5);
+    
+    app.text("Hit 'G' or 'S' and then click to grab or scale spheres,  'Q' to let them go.",50,50);
 
 }
+
+
 
 void threeSpheres(GLVApp& app){
 
@@ -60,75 +64,51 @@ void threeSpheres(GLVApp& app){
     Par p = c.dual();
 
     //CYAN Circle Plunge
+    glLineWidth(5);
     DRAW3(c,0,1,1);
+    glLineWidth(1);
     
     //GREEN Point Pair MEET
-    DRAW4(p,0,1,0,.5);
+    DRAW4(p,0,1,0,.8);
 
     //RED SPHERES
-    DRAW4(sA,1,0,0,.5);
-    DRAW4(sB,1,0,0,.5);
-    DRAW4(sC,1,0,0,.5);
+    DRAW4(sA,1,0,0,.8);
+    DRAW4(sB,1,0,0,.8);
+    DRAW4(sC,1,0,0,.8);
 
 }
 
-void lines(GLVApp& app){
 
-    static Frame a, b;
-    
-    SET
-        a.set(PT(-1,0,0)); b.set(PT(1,0,0));
-    END
-    
-    DRAWANDTOUCH(a); DRAWANDTOUCH(b);
 
-    Dll dllA = a.dly();
-    Dll dllB = b.dly();
-    
-    DRAW3(dllA,1,0,0); DRAW3(dllB,0,1,0);
-    
-    
-    Dll c = dllA % dllB;rr
-    Drt drt = dllA ^ dllB;
-    Sca sca = dllA <= dllB;
-    
-    cout << c.rnorm() << " " << sca << drt << endl; 
-
-}
-
-void circleAndSphere(GLVApp& app){
+void circleAndPlane(GLVApp& app){
 
     static Point pa = PT(1,0,0);
     static Point pb = PT(0,1,0);
     static Point pc = PT(-1,0,0);
     
-    //Grab points (hit 'g' and drag mouse) to define a circle
+    //Check for Grabbed points (hit 'g', click, and drag mouse) to define a circle
     app.interface.touch(pa);
     app.interface.touch(pb);
     app.interface.touch(pc);
 
-    DRAW(pa); DRAW(pb); DRAW(pc);
+    //Draw the Points
+    DRAW3(pa,1,0,0); DRAW3(pb,1,0,0); DRAW3(pc,1,0,0);
     
+    //Make a Circle
     Circle c = pa ^ pb ^ pc;
+
+    //Draw the Circle (YELLOW)
+    DRAW3(c,1,1,0);
     
-    //The Sphere Surrounding the Circle
-    DualSphere dls = Round::sur( c );    
+    //A Plane with Y normal at the origin
+    DualPlane dlp(0,1,0,0);
+
+    //Draw the Plane
+    DRAW3(dlp,0,1,1);
     
-    
-    //Another Sphere
-    static DualSphere dls2 = Ro::dls(2, 0, 0);
-    app.interface.touch(dls2);
-    DRAW4(dls,1,0,0,.3); DRAW4(dls2,1,0,0,.3);
-    
-    //The Circle Meet of the two Spheres
-    Circle inter = (dls ^ dls2).dual();
-    DRAW(inter);
-    
-    //The Point Pair
-    DRAW3( ( (dls ^ dls2) ^ Dlp(0,1,0,0) ).undual(), 0,1,0 );
-    
-    //The Plane
-    DRAW(Dlp(0,1,0,0));
+    //The Point Pair Meet of the Circle and the Plane
+    DRAW3( (c.dual() ^ Dlp(0,1,0,0) ).dual(), 0, 1, 0 );
+
 }
 
 
@@ -149,49 +129,29 @@ void linePoint(GLVApp& app){
         
 }
 
-void pointOnCircle(GLVApp& app){
 
-    static Cir c = CXY(1); 
-    DRAWANDTOUCH(c);
-    
-    static double rad,w;
-    SET app.gui(rad)(w); END
-        
-    Pnt p1 = Ro::pnt_cir( c, rad * TWOPI);
-    DRAW3(p1,1,0,0);
-    
-    Vec v = Ro::vec( c, rad * TWOPI );
-    DRAW(v);
-    Pnt p2 = (p1 + v*w).null();
-    DRAW(p2);
-    Cir c1 = p2 ^ c.dual();
-    DRAW(c1);
-}
 
 void GLVApp :: onDraw(){
 
-    static bool bTwoSpheres, bThreeSpheres, bTwoLines, bCircleAndSphere, bLinePoint, bCircle, bPointCircle;
-
-    //linePoint(*this);
-    //circle(*this);
-//    pointOnCircle(*this);
+    static bool bTwoSpheres, bThreeSpheres, bCircleAndPlane, bLinePoint;
 
     SET
-        gui(bTwoSpheres,"Two Spheres")(bThreeSpheres,"Three Spheres")(bTwoLines,"Two Lines")(bCircleAndSphere,"Circle and Sphere");
+        gui(bTwoSpheres,"Two Spheres")(bThreeSpheres,"Three Spheres")(bCircleAndPlane,"Circle and Plane")(bLinePoint,"Line and Point");
+        bTwoSpheres = true;
     END
     
-    if (bTwoSpheres) twoSpheres(*this);
-    if (bThreeSpheres) threeSpheres(*this);
-    if (bTwoLines) twoLines(*this);
-    if (bCircleAndSphere) circleAndSphere(*this);
+    if (bTwoSpheres)     twoSpheres(*this);
+    if (bThreeSpheres)   threeSpheres(*this);
+    if (bCircleAndPlane) circleAndPlane(*this);
+    if (bLinePoint)      linePoint(*this);
 }
 
 int main(int argc, const char * argv[]) {
 
-        cout << argv[0] << endl; 
+    cout << argv[0] << endl; 
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
-	glv.colors().back.set(.3,.3,.3);
+	glv.colors().back.set(.2,.2,.2);
     		
 	Window * win = new Window(500,500,"MEET OPERATIONS",&glv);
     GLVApp * app = new GLVApp(win);    
@@ -202,3 +162,45 @@ int main(int argc, const char * argv[]) {
 
     return 0;
 }
+
+//void twoLines(GLVApp& app){
+//
+//    static Frame a, b;
+//    
+//    SET
+//        a.set(PT(-1,0,0)); b.set(PT(1,0,0));
+//    END
+//    
+//    DRAWANDTOUCH(a); DRAWANDTOUCH(b);
+//
+//    Dll dllA = a.dly();
+//    Dll dllB = b.dly();
+//    
+//    DRAW3(dllA,1,0,0); DRAW3(dllB,0,1,0);
+//    
+//    Dll c = dllA % dllB;
+//    Drt drt = dllA ^ dllB;
+//    Sca sca = dllA <= dllB;
+//    
+//    cout << c.rnorm() << " " << sca << drt << endl; 
+//
+//}
+//
+//void pointOnCircle(GLVApp& app){
+//
+//    static Cir c = CXY(1); 
+//    DRAWANDTOUCH(c);
+//    
+//    static double rad,w;
+//    SET app.gui(rad)(w); END
+//        
+//    Pnt p1 = Ro::pnt_cir( c, rad * TWOPI);
+//    DRAW3(p1,1,0,0);
+//    
+//    Vec v = Ro::vec( c, rad * TWOPI );
+//    DRAW(v);
+//    Pnt p2 = (p1 + v*w).null();
+//    DRAW(p2);
+//    Cir c1 = p2 ^ c.dual();
+//    DRAW(c1);
+//}
