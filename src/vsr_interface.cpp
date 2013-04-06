@@ -16,14 +16,58 @@ namespace vsr {
 
 
     //DEFAULT IS NAVIGATION AND SELECTION MODES
-    Interface :: Interface()  : mMode( Mode::Navigate | Mode::Select ){
+    Interface :: Interface()  : mMode( Mode::Navigate | Mode::Select ), mVel(.1), mRot(.01), mModelRot(.05) {
+    }
+    
+    
+    // Calculate Position of Mouse, Ray of Eye, etc, in Scene
+    void Interface :: viewCalc(){
+        
+        //Assumes data has been copied to (or created from) scene transformation matrices (xf)
+        vd().z  = Op::sp(Vec::z, !model().rot() * camera().rot() ); 
+         
+        /// Bottom Left (0,0) to top right (1,1)
+        mouse.pos  = Vec( mouse.x / vd().w, 1 - mouse.y / vd().h, 0 ) ;
+        mouse.move = Vec( mouse.dx / vd().w, - mouse.dy / vd().h, 0 ) ;
+        
+        mouse.cat     = Op::sp( mouse.move * -1, !scene().cat() );
+        mouse.bivCat = vd().z ^ mouse.cat;
+
+        //GLU FUNCS
+        Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
+        Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
+        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );   
+
+        //OWN FUNCS (in progress, seem to give results scaled differently)
+//        Vec3f tv1 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 1.0), scene().xf );
+//        Vec3f tv2 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 0.0),scene().xf );
+//        Vec3f tv3 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 0.5),scene().xf );
+//        
+//        Vec v1(tv1.x, tv1.y, tv1.z);
+//        Vec v2(tv2.x, tv2.y, tv2.z);
+//        Vec v3(tv3.x, tv3.y, tv3.z);
+        
+ 
+        
+        //Get Line of Mouse Position into Z Space (store as a Dual Line)
+		vd().ray	 = Op::dl( Ro::null(v3) ^ v1.null() ^ Inf(1) ).runit();
+        
+		mouse.projectFar	= v1 ;
+		mouse.projectNear	= v2 ;
+		mouse.projectMid	= v3 ;
+
+        mouse.biv     = mouse.pos ^ mouse.projectFar; //not used?
+
+        //Point on Line Closest to Origin
+        mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), true ) );        
+
     }
     
 
     
+    
     void Interface :: onMouseMove(){
-        
-        
+                
 //        if ( mMode & Mode::Scale ) {	
 //          //  printf("interface scale\n");
 //            double s = mouse.move.wt();						
@@ -38,18 +82,23 @@ namespace vsr {
 //            Vec m = mouse.move;
 //            state() = Op::sp( state() , Gen::trs( m ) );
 //        }
+
+//    Or Navigation . . .
         
+
     }
+    
     
     void Interface :: onMouseDown(){
         
-        //tdx = tdy = 0;
         
         vd().clickray = vd().ray;
         mouse.click = mouse.pos;				
         mouse.isDown  = 1;
         mouse.newClick = 1;
         
+        //tdx = tdy = 0;
+
 //        //Setting a State?
 //        if (mMode & Mode::Transform){
 //            disable( Mode::Rotate | Mode::Grab | Mode::Scale | Mode::Transform ); //Stay in Edit Mode
@@ -61,7 +110,17 @@ namespace vsr {
 //            //break;				
 //        }
     }
+    
+    
+    void Interface :: onMouseUp(){
+        mouse.isDown = 0; 
+        mouse.newClick = 0;
+        mouseModelTransform(.7, false);
+        mouseCamTranslate(.7, false);
+        mouseCamSpin(.7, false);
+    }
 
+    
     void Interface :: onMouseDrag(){			
                        
 //            if (key.alt)   enable(Mode::CamArb);
@@ -81,9 +140,7 @@ namespace vsr {
             //relative top left (0.0 - .002 or so);
             float dx = mouse.dx;
             float dy = mouse.dy; //changed	
-            
-            //cout << "DX: " << dx << " DY: " << dy << endl;
-            
+                        
             //current position relative to top left (0.0 - 1.0)
             float cx = mouse.pos[0];//mouse.xrel;
             float cy = mouse.pos[1];//mouse.yrel;//changed
@@ -98,9 +155,11 @@ namespace vsr {
             
             mouse.dragAccum = Vec(nx,ny,0);							//total dvector since program launch
             mouse.drag		= Vec(tdx,tdy,0);						//vector from last click and hold to current position
-            mouse.dragCat = Op::sp(mouse.drag, !scene().cat());     //rotate drag by inverse concatenated orientation
+            
+            mouse.dragCat = Op::sp( mouse.drag, !scene().cat() );     //rotate drag by inverse concatenated orientation
             mouse.dragBivCat = vd().z ^ mouse.dragCat;
-            mouse.dragBiv = Vec::z ^ (Vec(nx,ny,0)); // nx*-1 ?
+            
+            mouse.dragBiv = Vec::z ^ mouse.drag; //( Vec ( nx, ny, 0 ) ); // nx*-1 ?
             
             Vec v1  = mouse.pos;
             Vec v2  = mouse.move;
@@ -108,12 +167,27 @@ namespace vsr {
             
             Vec rel ( .5-cx, .5-cy, 0.0 );
             Vec nn  ( nx, ny, 0.0 );					
-            
-            //double acc = mouse.accel.norm();	
-        
+                    
             mouse.newClick = 0;
 
             
+             int mdir = 0;
+             if ( fabs(tdx) > fabs(tdy) ) mdir = tdx > 0 ? MouseData::Right : MouseData::Left;
+             else if ( fabs(tdx) < fabs(tdy) ) mdir = tdy > 0 ? MouseData::Up : MouseData::Down; 
+        
+             mouse.gesture = mdir;
+            
+            
+            if (keyboard.alt) {	
+                mouseModelTransform(1.0, true);
+            } else if (keyboard.shift) {	
+                mouseCamTranslate(1.0, true);
+            } else if (keyboard.ctrl){
+                mouseCamSpin(1.0,true);
+            }
+
+
+
 //            //Camera Itself Does not Move Position, but glMatrices move via camera's rotor
 //            //i.e. in arb mode the camera orientation itself doesn't move, just the mvm underneath
 //            if (mMode & Mode::CamArb){																
@@ -139,6 +213,7 @@ namespace vsr {
     
     void Interface :: onKeyDown(){
 
+        keyboard.down = true;
         //fullscreen, etc (windowing controls)
         windowTransform();
                 
@@ -153,133 +228,193 @@ namespace vsr {
                 
         //Camera Controls			
         if (keyboard.alt) {	
-            modelTransform(1.0);
-        }
-        
-        if (keyboard.shift){   
-            camTranslate(1.0);
-        }  
-                        
-        if (keyboard.ctrl){	
-            camSpin(1.0);
-        }				
-                
+            keyboardModelTransform(1.0, true);
+        } else if (keyboard.shift){   
+            keyboardCamTranslate(1.0, true);
+        } else {                         
+            keyboardCamSpin(1.0, true);
+        }        
                 
     }
 
 
     void Interface :: onKeyUp(){
-            
-        //Camera Controls			
-        if (keyboard.alt) {	
-            modelTransform(.9);
-        }
         
-        if (keyboard.shift){   
-            camTranslate(.9);
-        }  
-                        
-        if (keyboard.ctrl){	
-            camSpin(.9);
-        }				
+        keyboard.down = false;
+            
+        keyboardModelTransform(.7, false);
+        keyboardCamTranslate(.7, false);
+        keyboardCamSpin(.7, false);
                     
     }    
     
     
-    void Interface :: modelTransform(float acc){
-        //cout << "Model" << endl; 
+    
+    void Interface :: mouseModelTransform(float acc, bool trigger){
         model().ab() = acc;
-        // Get Rotor Ratio between camera and model view
-        Rot ryz = Gen::ratio( model().yz(), camera().yz() );
-        Rot rxz = Gen::ratio( model().xz(), camera().xz() );
-        // Rotate By said Rotor
-        Biv tyz = Op::sp( model().yz(), ryz );
-        Biv txz = Op::sp( model().xz(), rxz );
-        //cout << tyz << txz << endl; 
-        switch( keyboard.code ){
-            case Key::Up:
-            {    
-                // camera().modelView().yz()
-                model().db() += tyz * .01;	
-                break;
-            }
-            case Key::Down:  
-            {
-                model().db() -= tyz * .01;	
-                break;
-            }
-            case Key::Left:
-            {
-                model().db() -= txz * .01;	
-                break;
-            }
-            case Key::Right: 
-            {
-                model().db() += txz * .01;	
-                break;
-            }
-        }
+        if (trigger) model().db() += mouse.dragBiv * mModelRot;
     }
     
-    void Interface :: camTranslate(float acc){
+    void Interface :: mouseCamTranslate(float acc, bool trigger){
         camera().ax() = acc;
-        switch(keyboard.code){
-            case Key::Up:
-                if (keyboard.ctrl) camera().dx() += camera().up() * .05;
-                else camera().dx() += camera().forward() * .05;	
-                break;
-            case Key::Down:
-                if (keyboard.ctrl) camera().dx() -= camera().up() * .05;  
-                else camera().dx() -= camera().forward() * .05; 
-                break;
-            case Key::Left:  camera().dx() -= camera().right() * .05; break;
-            case Key::Right: camera().dx() += camera().right() * .05; break;							
+        if(trigger) {
+        
+            switch(mouse.gesture){
+                case MouseData::Up:
+                    if (keyboard.ctrl) camera().dx() += camera().up() * mVel;
+                    else camera().dx() += camera().forward() * mVel * .5;	
+                    break;
+                case MouseData::Down:
+                    if (keyboard.ctrl) camera().dx() -= camera().up() * mVel;  
+                    else camera().dx() -= camera().forward() * mVel * .5; 
+                    break;
+                case MouseData::Left:
+                   camera().dx() -= camera().right() * mVel * .5; break;
+                case MouseData::Right:
+                    camera().dx() += camera().right() * mVel * .5; break;            
+            }
+        
         }
     }
     
-    void Interface :: camSpin(float acc){
-        if (!keyboard.shift){
-            camera().ab() = acc; 
+    void Interface :: mouseCamSpin(float acc, bool trigger){
+        camera().ab() = acc; 
+        if (trigger){
+            switch(mouse.gesture){
+                case MouseData::Up:    camera().db() += camera().yz() * mRot * .5;	break;
+                case MouseData::Down:  camera().db() -= camera().yz() * mRot * .5; break;
+                case MouseData::Left:  camera().db() -= camera().xz() * mRot * .5; break;
+                case MouseData::Right: camera().db() += camera().xz() * mRot * .5; break;							
+            }
+        }
+    }
+    
+    void Interface :: keyboardModelTransform(float acc, bool trigger){
+        
+        model().ab() = acc;
+        
+        if (trigger) {
+
+            // Get Rotor Ratio between camera and model view
+            Rot ryz = Gen::ratio( model().yz(), camera().yz() );
+            Rot rxz = Gen::ratio( model().xz(), camera().xz() );
+            
+            // Rotate By said Rotor
+            Biv tyz = Op::sp( model().yz(), ryz );
+            Biv txz = Op::sp( model().xz(), rxz );
+        
+            switch( keyboard.code ){
+                case Key::Up:
+                {    
+                    // camera().modelView().yz()
+                    model().db() += tyz * mModelRot;	
+                    break;
+                }
+                case Key::Down:  
+                {
+                    model().db() -= tyz * mModelRot;	
+                    break;
+                }
+                case Key::Left:
+                {
+                    model().db() -= txz * mModelRot;	
+                    break;
+                }
+                case Key::Right: 
+                {
+                    model().db() += txz * mModelRot;	
+                    break;
+                }
+            }
+        }
+    }
+    
+    void Interface :: keyboardCamTranslate(float acc, bool trigger){
+        camera().ax() = acc;
+        if (trigger){
             switch(keyboard.code){
-                case Key::Up:    camera().db() -= camera().yz() * .01;	break;
-                case Key::Down:  camera().db() += camera().yz() * .01; break;
-                case Key::Left:  camera().db() += camera().xz() * .01; break;
-                case Key::Right: camera().db() -= camera().xz() * .01; break;							
+                case Key::Up:
+                    if (keyboard.ctrl) camera().dx() += camera().up() * mVel;
+                    else camera().dx() += camera().forward() * mVel;	
+                    break;
+                case Key::Down:
+                    if (keyboard.ctrl) camera().dx() -= camera().up() * mVel;  
+                    else camera().dx() -= camera().forward() * mVel; 
+                    break;
+                case Key::Left:  camera().dx() -= camera().right() * mVel; break;
+                case Key::Right: camera().dx() += camera().right() * mVel; break;							
+            }
+        }
+    }
+    
+    void Interface :: keyboardCamSpin(float acc, bool trigger){
+        camera().ab() = acc; 
+        if (trigger){
+            switch(keyboard.code){
+                case Key::Up:    camera().db() -= camera().yz() * mRot;	break;
+                case Key::Down:  camera().db() += camera().yz() * mRot; break;
+                case Key::Left:  camera().db() += camera().xz() * mRot; break;
+                case Key::Right: camera().db() -= camera().xz() * mRot; break;							
             }
         }
     } 
+    
+    void Interface :: windowTransform(){
+       // printf("WT!\n");
+        switch(keyboard.code){
+                
+            case 96: //tilde
+                //printf("TILDE!\n");
+                vimpl -> fullScreenToggle(); 
+                break;
+            case 'q':
+     //           exit(0);
+                break;
+        }
+    }
+
+    //////////////////////
+    // TOUCHING ELEMENTS
+    //////////////////////
 
     void Interface :: touch( Frame& f, double t){
-        
-        static double dt = 5;
-        static double acc = .9;
-        dt *= acc;
-        if ( mouse.isDown ){
-            dt = t;// scene().ma() / scene().width();
-            if (pntClicked ( f.pos() ) ){
-                select(&f);//f.select();
-            }
-        }
-        if (isSelected( &f )){
-            xfFrame(&f, dt);
-        }
-        //cout << dt << endl; 
+//        if ( keyboard.down ){
+        if ( !keyboard.alt && !keyboard.shift && !keyboard.alt ){
 
+            static double dt = 5;
+            static double acc = .9;
+            dt *= acc;
+            if ( mouse.isDown ){
+                dt = t;// scene().ma() / scene().width();
+                if (pntClicked ( f.pos() ) ){
+                    select(&f);//f.select();
+                }
+            }
+            if (isSelected( &f ) ){
+                xfFrame(&f, dt);
+            }
+        //cout << dt << endl; 
+        }
     }
     
     void Interface :: touch( Frame& f, Frame& e, double t){
         
-        static double dt = 5;
-        static double acc = .9;
-        dt *= acc;
-        if ( mouse.isDown ){
-            dt = t;// scene().ma() / scene().width();
-            if (pntClicked ( f.pos() ) ){
-               select(&f);
+//        if ( keyboard.down ){
+         if ( !keyboard.alt && !keyboard.shift && !keyboard.alt ){
+       
+            static double dt = 5;
+            static double acc = .9;
+            dt *= acc;
+            if ( mouse.isDown ){
+                dt = t;// scene().ma() / scene().width();
+                if (pntClicked ( f.pos() ) ){
+                   select(&f);
+                }
             }
-        }
-        if (isSelected( &f )){
-            xfFrame(&f, &e, dt);
+            if (isSelected( &f ) && keyboard.down ){
+                xfFrame(&f, &e, dt);
+            }
+        
         }
     }
 
@@ -372,7 +507,7 @@ namespace vsr {
 				//double neg = mouse.drag[0];
 				break;
 			}
-			case 'q':
+			default:
 			{
                 toggleSelect(frame); 
                 break;
@@ -381,78 +516,12 @@ namespace vsr {
 		frame ->acc();
     }
     
+    
+    
     void Interface :: inputCalc(){
 
     }
     
-    
-    // Calculate Position of Mouse, Ray of Eye, etc, in Scene
-    void Interface :: viewCalc(){
-        
-        //Assumes data has been copied to (or created from) scene transfomration matrices (xf)
-        //Points into Scene's Z Space
-        vd().z  = Op::sp(Vec::z, !scene().cat()); 
-         
-        //bottom Left (0,0) to top right (1,1)
-        mouse.pos     = Vec( mouse.x / vd().w, 1 - mouse.y / vd().h, 0 ) ;
-        mouse.move	= Vec( mouse.dx/ vd().w, - mouse.dy/vd().h, 0 ) ;
-        mouse.cat     = Op::sp( mouse.move * -1, !scene().cat() );
-        mouse.bivCat = vd().z ^ mouse.cat;
 
-
- //       cout << "viewcalc:\n" << mouse.x << " " << mouse.y << endl; 
-        //GLU FUNCS
-        Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
-        Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
-        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );   
-
-        //OWN FUNCS (in progress, seem to give results scaled differently)
-//        Vec3f tv1 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 1.0), scene().xf );
-//        Vec3f tv2 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 0.0),scene().xf );
-//        Vec3f tv3 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 0.5),scene().xf );
-//        
-//        Vec v1(tv1.x, tv1.y, tv1.z);
-//        Vec v2(tv2.x, tv2.y, tv2.z);
-//        Vec v3(tv3.x, tv3.y, tv3.z);
-
- //       cout << v2 << tv2 << endl; 
-        
-        //Get Line of Mouse Position into Z Space (store as a Dual Line)
-		vd().ray	 = Op::dl( Ro::null(v3) ^ v1.null() ^ Inf(1) ).runit();
-        
-		mouse.projectFar	= v1 ;
-		mouse.projectNear	= v2 ;
-		mouse.projectMid	= v3 ;
-
-        mouse.biv     = mouse.pos ^ mouse.projectFar; //not used?
-
-        //Point on Line Closest to Origin
-        mouse.origin = Ro::null( Fl::loc( vd().ray, Ori(1), true ) );//v3.null();
-        //Ro::null( Fl::loc( vd().ray, Ori(1), true ) );
-        
-
-
-//            interface -> mouse.ddx		= win.mouse().ddx();
-//            interface -> mouse.ddy		= win.mouse().ddy();
-//            interface -> mouse.accel   = Vec( win.mouse().ddx(), -win.mouse().ddy(),0);
-             
-//            interface -> mouse.xrel     =  win.mouse().xRel() / win.width();
-//           interface -> mouse.yrel     = 1 - win.mouse().yRel() / win.height();
-
-    }
-    
-    void Interface :: windowTransform(){
-       // printf("WT!\n");
-        switch(keyboard.code){
-                
-            case 96: //tilde
-                //printf("TILDE!\n");
-                vimpl -> fullScreenToggle(); 
-                break;
-            case 'q':
-     //           exit(0);
-                break;
-        }
-    }
 
 } // Vsr::

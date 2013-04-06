@@ -19,20 +19,16 @@ This grabs both Versor and GLV (a windowing and user-interface system)
 
 ---
 
-**NOTE:** _VERSOR_ is in active development!  I have not been versioning it -- `git pull` frequently for updates!
+**NOTE:** _VERSOR_ is in active development!  I have not been versioning it -- `git pull` frequently for updates! And EMAIL me (wolftype@gmail.com)
+or the list (versor@mat.ucsb.edu) with questions.  You have to sign up for the list [here](#http://lists.create.ucsb.edu/mailman/listinfo/versor)
 
 ---
 
 
 INSTALL DEPENDENCIES
 ---
-libvsr.a can built in isolation with no dependencies except the standard library.  
 
-	make vsr GFX=0
-
-Most likely, however, you will want to be able to draw the elements to screen.
-  
-To use the draw routines, requires OpenGL, Glu, Glut, and GLEW.  You likely already have these installed.
+To use the draw routines requires OpenGL, Glu, Glut, and GLEW.  You likely already have these installed.
 If not, see Getting GLU / GLUT / GLEW section below
   
 To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
@@ -48,6 +44,14 @@ Once you have it, `cd` into `GLV` and make, then sudo make install
     cd GLV
     make
     sudo make install
+
+libvsr.a can also built in isolation with no dependencies except the standard library.  
+
+	make vsr GFX=0
+
+Most likely, however, you will want to be able to draw the elements to screen.
+
+
 
 BUILD
 ---

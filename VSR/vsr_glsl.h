@@ -26,6 +26,24 @@ namespace vsr{
             attribute vec2 texCoord;
         );
         
+        string UMatrix = STRINGIFY(
+            //uniform mat4 model;             // Model Transformation Matrix (Rot, Trs, Scl)
+            //uniform mat4 view;              // Camera Transformation Matrix (Rot and Trs)
+            uniform mat4 modelView;         // Model * View
+            uniform mat4 projection;        // Projection Matrix (ortho or frustrum)
+            uniform mat4 normalMatrix;      // Normal Matrix (inverse transpose of mvm)
+        );
+        
+        string ULight = STRINGIFY(
+            uniform vec3 lightPosition;
+        );
+        
+        string ULightProperty = STRINGIFY(
+            uniform vec3 ambientColor;
+            uniform vec3 diffuseMaterial;
+            uniform vec3 specularColor;
+        );
+        
         string USampler = STRINGIFY(
             uniform sampler2D sampleTexture;
         );
@@ -34,12 +52,17 @@ namespace vsr{
             uniform samplerCube sampleTexture;
         );
         
+        string Varying = STRINGIFY(
+            varying vec4 colorDst;
+            varying vec2 texco;
+        );
+        
         string VColor = STRINGIFY(
             varying vec4 colorDst;
         );
 
         string VTex = STRINGIFY(
-            varying vec2 vTexCoord;
+            varying vec2 texco;
         );
         
         string MFrag = STRINGIFY(
@@ -48,7 +71,7 @@ namespace vsr{
                 
                 vec4 tmpColor = colorDst;
                 
-                vec4 color = texture2D(sampleTexture, vTexCoord);
+                vec4 color = texture2D(sampleTexture, texco);
                 
                 gl_FragColor = color ;
             }
@@ -57,6 +80,23 @@ namespace vsr{
         string ColorCube = STRINGIFY(
             
         );
+        
+        string NTransform = STRINGIFY(
+           vec3 doNormal(vec4 n) {
+                return normalize( ( normalMatrix * n ).xyz );
+            }
+        );
+        
+        string VPass = STRINGIFY(
+            vec4 doVertex (vec4 v) { return gl_ModelViewProjectionMatrix * v; }
+        );
+
+        string VCalc = STRINGIFY(
+            vec4 doVertex (vec4 v) {
+                mat4 m = projection * modelView;
+                return m * v;
+            }
+        );
 
         string MVert = STRINGIFY(
             
@@ -64,13 +104,12 @@ namespace vsr{
             
                 colorDst = sourceColor;
                 
-                vTexCoord = texCoord;
-                
-                vec3 norm = normal;
-                
+                texco = texCoord;
+                                
                 vec4 pos =  vec4(position,1.0);
+                vec4 nor = vec4(normal,1.0);
                 
-                gl_Position = gl_ModelViewProjectionMatrix *pos;
+                gl_Position = doVertex(pos);
             }
         );
         

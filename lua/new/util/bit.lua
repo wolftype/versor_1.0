@@ -11,9 +11,9 @@ local bor = bit.bor
 local lshift = bit.lshift
 local rshift = bit.rshift
 
+S = {}
 metric = {1,1,1,1,-1}
 basis = {}
-cayley = {}
 subspace = {}
 
 --bit places of origin and infinity
@@ -29,7 +29,7 @@ blade = function(b, wt)
 	return {id = b, w = wt}
 end
 
-printBit = function(x)
+bitString = function(x)
 	local out = ""
 	local tmp = x
 	for i,iv in ipairs(metric) do
@@ -38,7 +38,7 @@ printBit = function(x)
 		tmp = rshift(tmp,1)
 	end
 	 
-	print(out, grade(x), basisString(x))
+	return out
 end
 
 basisString = function(x)
@@ -53,6 +53,14 @@ basisString = function(x)
 	if n > 0 then return "_e"..out 
 	else return "_s" end
 end
+
+bladeString = function(x)
+	local out = bitString (x.id)
+	out = out .. " " .. x.w .. " " .. basisString(x.id)
+	return out
+end
+
+
 
 buildBasis = function(m)
 	--make e1, e2, e3, e4 . . .
@@ -129,7 +137,7 @@ metricProduct = function(a,b)
 	local bs = band(a,b)
 	local i = 1
 	while bs ~= 0 do
-		if band(bs,1) ~= 0 then tmp.w = tmp.w * metric[i] end
+		if band(bs,1) == 1 then tmp.w = tmp.w * metric[i] end
 		bs = rshift(bs,1)
 		i = i+1
 	end
@@ -180,13 +188,16 @@ end
 
 --Push into e+.e- from a null basis (for calculating metric products)
 pushMink = function(x)
-	print("pushing:") 
-	printBit(x)
+--	print("pushing:") 
+--	print( bitString(x), "\n" )
+	
 	if (band(x, ORIGIN)==ORIGIN) then
 		local t = bxor(x, ORIGIN)
+		print( bitString(x),"push origin", bitString(t))
 		return { blade( bxor(t,EP), .5),  blade( bxor(t,EM), .5) }
 	elseif (band(x,INFINITY)==INFINITY) then
 		local t = bxor(x, INFINITY)
+		print(bitString(x),"push infinity", bitString(t))
 		return { blade( bxor(t,EP), -1),  blade( bxor(t,EM), 1) }	
 	end
 end
@@ -195,10 +206,12 @@ end
 popMink = function(x)
 	if (band(x, EP)==EP) then
 		local t = bxor(x, EP)
+		print(bitString(x), "pop ep", bitString(t))
 		return { blade( bxor(t,ORIGIN), 1),  blade( bxor(t,INFINITY), -.5) }
 	elseif (band(x,EM)==EM) then
 		local t = bxor(x, EM)
-		return { blade( bxor(t,ORIGIN), -1),  blade( bxor(t,INFINITY), .5) }	
+		print(bitString(x), "pop em", bitString(t))
+		return { blade( bxor(t,ORIGIN), 1),  blade( bxor(t,INFINITY), .5) }	
 	end	
 end
 
@@ -216,11 +229,16 @@ compress = function(x)
 	
 	--collect like terms
 	for i,iv in ipairs(x) do
+		--print (bladeString(iv))
 		local exists = 0
+		
 		for k,kv in ipairs(tally) do
 			if iv.id == kv.id then 
+			--	print (iv.id, kv.id)
 				exists = 1
+			--	print (kv.w, iv.w)
 				kv.w = kv.w + iv.w -- sum in weight
+				--print (kv.w)
 			end
 		end
 		--if doesn't exist, add it
@@ -231,7 +249,10 @@ compress = function(x)
 	
 	--remove zeros
 	for i,iv in ipairs(tally) do
-		if (iv.w ~= 0) then table.insert(res, iv ) end
+		if (iv.w ~= 0) then 
+		--	print (bladeString(iv))
+			table.insert(res, iv ) 
+		end
 	end
 	
 	return res
@@ -265,94 +286,107 @@ buildEuclidean = function()
 	
 end
 
-buildConformal = function()
+conformal = function(iv,jv)
 	
-	local S = cayley
-	for i,iv in ipairs(basis) do
-		local name = basisString(iv)
-		S[name] = { id = name, gp = {}, op = {}, ip = {} }
-	end
+	local idA = basisString(iv)
+	local idB = basisString(jv)
 	
-	for i,iv in ipairs(basis) do
-		local idA = basisString(iv)
-		
-		--get list of blades in minkowskian (diagonal) metric
-		local tmpA
-		if checkMink(iv)==true then tmpA = pushMink(iv)
-		else tmpA = { blade(iv,1) } end
-		
-		for j,jv in ipairs(basis) do
-			local idB = basisString(jv)
-			
-			--get list of blades in minkowskian (diagonal) metric
-			local tmpB
-			if checkMink(jv)==true then tmpB = pushMink(jv)
-			else tmpB = { blade(jv,1) } end
-
-			local gpTally = {}
-			local opTally = {}
-			local ipTally = {}
-
-			local gpPop = {}
-			local opPop = {}
-			local ipPop = {}
-
-			for k,kv in ipairs(tmpA) do
-				for l, lv in ipairs(tmpB) do
-					--calculate products in mink metric
-					local gp_res = metricProduct(kv.id,lv.id)
-					local op_res = outer( kv.id,lv.id) 
-					local ip_res = metricInner( kv.id,lv.id)
-					--push onto tally stack
-					table.insert(  gpTally, blade(gp_res.id, gp_res.w * kv.w * lv.w) )
-					table.insert(  opTally, blade(gp_res.id, gp_res.w * kv.w * lv.w) )
-					table.insert(  ipTally, blade(gp_res.id, gp_res.w * kv.w * lv.w) )
-				end
-			end
-			
-			local gpCompress = compress(gpTally)
-			local opCompress = compress(gpTally)
-			local ipCompress = compress(gpTally)
-			
-			for k, kv in ipairs(gpCompress) do
-				local tmp
-				if checkMink(kv.id)==true then tmp = popMink(kv.id)
-				else tmp = kv end
-			end
-			
-			-- S[idA].gp[S[idB]] = 
-			-- S[idA].op[S[idB]] = compress(opTally)
-			-- S[idA].ip[S[idB]] = compress(ipTally)
-			
-			printBit(iv)
-			printBit(jv)
-			print("EQUALS")
-			for k,kv in ipairs(gpCompress) do
-				printBit(kv.id)
-			end
-			print("\n")
-			
-			-- local gpPop = popMink(gp_res.id)
-			-- 	local opPop = popMink(op_res.id)
-			-- 	local ipPop = popMink(ip_res.id)
-			-- 
-			-- 	table.insert( S[idA].gp[S[idB]], blade(gp_res.id, gp_res.w * iv.w * jv.w) )
-			-- 	table.insert( S[idA].op[S[idB]], blade(op_res.id, gp_res.w * iv.w * jv.w) )
-			-- 	table.insert( S[idA].ip[S[idB]], blade(ip_res.id, gp_res.w * iv.w * jv.w) )
+	--get list of blades in minkowskian (diagonal) metric
+	local tmpA
+	if checkMink(iv)==true then tmpA = pushMink(iv)
+	else tmpA = { blade(iv,1) } end
 	
-			S[idA].involute = involute(iv)
-			S[idA].reverse = reverse(iv)
-			S[idA].conjugate = conjugate(iv)
-			
+	local tmpB
+	if checkMink(jv)==true then tmpB = pushMink(jv)
+	else tmpB = { blade(jv,1) } end
+
+	local gpTally = {}
+	local opTally = {}
+	local ipTally = {}
+
+	local gpPop = {}
+	local opPop = {}
+	local ipPop = {}
+	
+	for k,kv in ipairs(tmpA) do
+		--print (bladeString(kv))
+		for l, lv in ipairs(tmpB) do
+		--	print (bladeString(lv))
+			--calculate products in mink metric
+			local gp_res = metricProduct(kv.id,lv.id)
+			--print ( bladeString(blade(gp_res.id, gp_res.w * kv.w * lv.w)) )
+			local op_res = outer( kv.id,lv.id) 
+			local ip_res = metricInner( kv.id,lv.id)
+			--push onto tally stack
+			table.insert(  gpTally, blade(gp_res.id, gp_res.w * kv.w * lv.w) )
+			table.insert(  opTally, blade(gp_res.id, gp_res.w * kv.w * lv.w) )
+			table.insert(  ipTally, blade(gp_res.id, gp_res.w * kv.w * lv.w) )
 		end
 	end
 	
+--	for k,kv in ipairs(gpTally) do print ("tally", bladeString(kv)) end
+	
+	local gpCompress = compress(gpTally)
+	local opCompress = compress(opTally)
+	local ipCompress = compress(ipTally)
+
+
+	S[idA].gp[S[idB]] = {}
+	
+	for k, kv in ipairs(gpCompress) do
+	--	print( "compressed\n", bladeString(kv), "\n")
+		
+		local tmp
+		if checkMink(kv.id)==true then
+			--print("crazy") 
+			tmp = popMink(kv.id)
+			for m, mv in ipairs(tmp) do
+				mv.w = mv.w * kv.w
+			end
+		else tmp = {kv} end
+		
+		AddTab(gpPop, tmp)
+	end
+	
+
+	AddTab( S[idA].gp[S[idB]], compress(gpPop) )
+
+	-- S[idA].op[S[idB]] = compress(opTally)
+	-- S[idA].ip[S[idB]] = compress(ipTally)
+	
+	print( bitString(iv), bitString(jv), "equals" )
+	for k,kv in ipairs( S[idA].gp[S[idB]] ) do
+		print( bladeString(kv) )
+	end
+	print("\n")
+	
+	-- local gpPop = popMink(gp_res.id)
+	-- 	local opPop = popMink(op_res.id)
+	-- 	local ipPop = popMink(ip_res.id)
+	-- 
+	-- 	table.insert( S[idA].gp[S[idB]], blade(gp_res.id, gp_res.w * iv.w * jv.w) )
+	-- 	table.insert( S[idA].op[S[idB]], blade(op_res.id, gp_res.w * iv.w * jv.w) )
+	-- 	table.insert( S[idA].ip[S[idB]], blade(ip_res.id, gp_res.w * iv.w * jv.w) )
 end
 
---a and b are lists of 1 or 2 blades
-calcCayley = function(a,b)
-	local S = cayley
+buildConformal = function()
+	
+	for i,iv in ipairs(basis) do
+
+		local idA = basisString(iv)
+		S[idA].involute = involute(iv)
+		S[idA].reverse = reverse(iv)
+		S[idA].conjugate = conjugate(iv)
+			
+		for j, jv in ipairs(basis) do
+			conformal(iv,jv)
+		end
+
+	end
+	
 end
+
+
 
 buildSubspaces = function()
 
@@ -375,16 +409,23 @@ buildSubspaces = function()
 	end
 end
 
+prepTable = function()
+	for i,iv in ipairs(basis) do
+		local name = basisString(iv)
+		S[name] = { id = name, gp = {}, op = {}, ip = {} }
+	end
+end
 
-print("EP") printBit(EP)
-print("EM") printBit(EM)
+--print("EP") print( bitString( EP) )
+--print("EM") print( bitString( EM) )
 
 buildBasis(metric)
 reorderBasis()
 --printBasis()
-buildConformal()
+--buildConformal()
 --buildSubspaces()
-
+prepTable()
+conformal(EM, EP )
 
 
 

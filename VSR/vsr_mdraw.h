@@ -107,7 +107,7 @@ namespace vsr{
                     static void Line( GL::MBO& m ) {
                         m.bind();
                         Enable(); Pointer();
-                        m.drawElements( GL::TS );
+                        m.drawElements();
                         Disable();
                         m.unbind();
                     }                                        

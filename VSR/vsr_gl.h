@@ -1,9 +1,9 @@
 /*
- *  GL.h
- *  CONGA_05
+ *  vsr_gl.h
+ *  versor
  *
  *  Created by x on 3/23/10.
- *  Copyright 2010 x. All rights reserved.
+ *  Copyright 2010 wolftype. All rights reserved.
  *
  OpenGL operations class
  
@@ -30,11 +30,9 @@ namespace vsr {
     //Forward Typedefs 
     typedef MV<3,VEC,VSR_PRECISION>  Vec;
 
-	//class Camera;  
     class XformMat;
     
     using std::string;
-    
     
     namespace GL {
         

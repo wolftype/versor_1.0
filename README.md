@@ -456,39 +456,8 @@ Most reflections (in a sphere, circle, or point pair, or over a line or plane ) 
 	r = r / r[3]; 			//Renormalization of a point
 	
 The re() method calculates `v.re(C)` as `C*v.involution()*~C`.  With a versor `C` and an element `v` you might also try `C * v * !C`.  Inversion in a circle or a sphere may change the 
-weight of the element (for at Point at x, by x^2)
+weight of the element (for at Point at x, it will change it by x^2)
 
-TUTORIAL: BUILD A ROBOT ARM MODEL [This tutorial is in progress . . .]
----
-The following tutorial outlines (or will, when it is finished) how to model a simple three joint robotic arm.  There is actually already a class `Chain` which encapsulates much of the functionality below, but
-it will serve as a method to introduce the various elements and operators of geometric algebra.  Look in examples/robot.cpp for the implementation file.
-
-###Part One: The `Frame` class and Motor Algebra
-
-Versor includes a class for spatial orientation and navigation (much like a "Navigation" or "Pose" class might in other libraries).  
-A `Frame` is constructed by a Point position and Rotor orientation (much like the other libraries' classes might be instantiated with a Vector position and Quaternion orientation).
-
-	Frame myframe( Point(0,0,0,1,0), Rotor(1,0,0,0) );
-
-The above code makes a frame at the origin with default orientation.  
-**Note:** instead of `Pnt(0,0,0,1,0)` you can also use the `PAO` macro (for "Point-At-Origin") or make a `Point` by invoking the `null()` method of a Vector: `Vec(0,0,0).null()`
-
-Frames can easily be drawn and manipulated with the mouse.  In your GLVApp's `onDraw()` method:
-
-	static Frame myframe( PAO, Rotor(1,0,0,0) );
-	DRAW(myframe);
-	interface.touch(myframe);
-
-The `Frame` class has many methods for referencing various elements, like the `Line` (`Lin`) through the y-axis: 
-
-	Line yaxis = myframe.ly();		//<-- Returns the line through the yaxis
-	DRAW3(yaxis,0,1,0);  			//<-- Draws GREEN Line through y axis 
-
-or the xy `Plane` ('Pln'):
-
-	Plane xyplane = myframe.xy();
-	
- A `Frame` can also be instantiated by a `Motor` representing it's absolute position and orientation (combined!).
 
 
 LINKS

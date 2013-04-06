@@ -132,6 +132,9 @@ namespace vsr {
         
         Vertex& last() { return mVertex[ mVertex.size() - 1 ]; }
         
+        
+        #ifdef GL_IMMEDIATE_MODE
+        
         //immediate mode!
         void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
             glColor4f(r,g,b,a);
@@ -149,6 +152,8 @@ namespace vsr {
             glEnd();
         }
         
+        #endif
+        
 //        GLubyte * indices() { return &mIndex[0]; }
 //        float * vertices() { return &mVertex[0].Pos[0]; }
         
@@ -160,6 +165,7 @@ namespace vsr {
                 mVertex[i].Pos[2] -= z;
             }
         }
+        
         
         //LOAD FROM OBJ FILE
         void load(string s) {
@@ -202,54 +208,135 @@ namespace vsr {
         }    
     
         ///Skin a bunch of Circles
-        void skinCirc (Cir * s, int num, int res = 10){
-
-           int mU = res;
-           int mV = num;
-                                    
-            if (!mVertex.empty() ) mVertex.clear();	
-
-            for (int j = 0; j < mU; ++j){
-                double t = 2 * PI * j/mU;
-                for (int i = 0 ; i < mV; ++i){					
-                    Par p = Ro::par_cir( s[ i ], t );
-                    Pnt tp =  Ro::cen( Ro::split(p)[0] );
-                    mVertex.push_back( Vertex( Vec3f(tp[0], tp[1], tp[2]) ) ) ;
-                }
-            }
-            
-            //store quad indices and normals
-
-            if (!mIndex.empty()) mIndex.clear();
-            
-            for (int j = 0; j < mU-1; ++j){
-                for (int i = 0; i < mV-1; ++i){
-                    int idx = j * mV + i;
-                    int idx2 = idx + mV;
-                    mIndex.push_back( idx);
-                    mIndex.push_back( idx+1);
-                    mIndex.push_back( idx2+1);
-                    mIndex.push_back( idx2);
-                }
-            }
-            //last strip
-            for (int i = 0; i < mV-1; ++i){
-                int idx = (mU-1) * mV + i; 
-                int idx2 = i;
-                 mIndex.push_back( idx);
-                 mIndex.push_back( idx+1);
-                 mIndex.push_back( idx2+1);
-                 mIndex.push_back( idx2);
-            }
-
-        }
+//        void skinCirc (Cir * s, int num, int res = 10){
+//
+//           int mU = res;
+//           int mV = num;
+//                                    
+//            if (!mVertex.empty() ) mVertex.clear();	
+//
+//            for (int j = 0; j < mU; ++j){
+//                double t = 2 * PI * j/mU;
+//                for (int i = 0 ; i < mV; ++i){					
+//                    Par p = Ro::par_cir( s[ i ], t );
+//                    Pnt tp =  Ro::cen( Ro::split(p)[0] );
+//                    mVertex.push_back( Vertex( Vec3f(tp[0], tp[1], tp[2]) ) ) ;
+//                }
+//            }
+//            
+//            //store quad indices and normals
+//
+//            if (!mIndex.empty()) mIndex.clear();
+//            
+//            for (int j = 0; j < mU-1; ++j){
+//                for (int i = 0; i < mV-1; ++i){
+//                    int idx = j * mV + i;
+//                    int idx2 = idx + mV;
+//                    mIndex.push_back( idx);
+//                    mIndex.push_back( idx+1);
+//                    mIndex.push_back( idx2+1);
+//                    mIndex.push_back( idx2);
+//                }
+//            }
+//            //last strip
+//            for (int i = 0; i < mV-1; ++i){
+//                int idx = (mU-1) * mV + i; 
+//                int idx2 = i;
+//                 mIndex.push_back( idx);
+//                 mIndex.push_back( idx+1);
+//                 mIndex.push_back( idx2+1);
+//                 mIndex.push_back( idx2);
+//            }
+//
+//        }
         
-        static Mesh Circle(double scale = 1);        
+        static Mesh Sphere(double rad = 1.0, int slices = 20, int stacks = 20);
+        static Mesh Line( Vec a, Vec b);
+        static Mesh Cone( double rad = 1.0 , double h = 1.0, int slices = 10, int stacks = 4);
+        static Mesh Dir();
+        static Mesh Circle(double scale = 1);
+        static Mesh Disc(double scale = 1);        
         static Mesh Rect(float w, float h);
     };
     
+    inline Mesh Mesh::Sphere(double rad, int slices, int stacks){
+        Mesh m;
+        for (int i = 0; i < slices; ++i){
+            float u = 1.0 * i/slices;
+            for (int j = 0; j < stacks; ++j){
+                float v = -1.0 + 2.0* i/slices;
+                Vec tv = Vec::x.sp( Gen::rot( PIOVERTWO * u, PIOVERFOUR * v) ) * rad;
+                m.add( Vertex( Vec3f(tv[0], tv[1], tv[2]) ) );
+            }
+        }
+        
+        m.mode(GL::TS);
+        return m;
+    }
+    
+    inline Mesh Mesh::Line (Vec a, Vec b){
+    
+        Mesh m;
+        m.add(a).add(b);
+        m.add(0).add(1);
+        m.mode( GL::LS );
+        return m;
+    }
     
     inline Mesh Mesh::Circle (double scale){
+        
+        int res = floor( scale * 100);
+        Mesh m;
+        
+        for (int i = 0; i <= res; ++i){
+            float rad = 2.0 * PI * i / res;
+            float x = cos(rad);
+            float y = sin(rad);
+            
+            m.add( Vec3f(x,y,0) );
+            m.add(i);
+            
+        }
+        
+        m.mode(GL::LL);
+        return m;
+    }
+    
+
+    inline Mesh Mesh::Cone(double r, double h, int slices, int stacks){
+        
+        Mesh m;
+        
+        for (int i = 0; i <= stacks; ++i){
+            float z = h * i / stacks;
+            for (int j = 0; j < slices; ++j){
+                float rad = 2.0 * PI * j / slices;
+                float x = cos(rad) * (1.0-z) * r;
+                float y = sin(rad)  * (1.0-z) * r;
+                m.add( Vertex( Vec3f(x,y,z), Vec4f(1,1,1,1), Vec3f(x,y,z), Vec2f(z, 1.0* j/slices) ) );
+                m.add(i * slices + j);
+            }
+            m.add(i*slices);
+        }
+        
+        m.mode(GL::LL);
+        return m;
+    
+    }
+
+
+    inline Mesh Mesh::Dir(){
+        Mesh m = Cone(.3);
+        int n = m.num();
+        m.add( Vec3f(0,0,-1) );
+        m.add( n );
+        m.translate(0,0,1);
+        m.mode(GL::LS);
+        return m;
+    
+    }
+
+    inline Mesh Mesh::Disc (double scale){
         
         int res = floor( scale * 100);
         Mesh m;
@@ -268,20 +355,14 @@ namespace vsr {
         }
         
         m.add(1).add(0);
-        
+        m.mode(GL::TS);
         return m;
     }
     
-    
-    //Q: How is this different from MGlyph::Rect
     inline Mesh Mesh::Rect (float w, float h) {
         
         Mesh m;
         
-//        Vec3f lt (-w/2.0, -h/2.0, 0 );
-//        Vec3f rt = lt + Vec3f(w,0,0);
-//        Vec3f rb = rt + Vec3f(0,h,0);
-//        Vec3f lb = lt + Vec3f(0,h,0);
         Vec3f lb (-w/2.0, -h/2.0, 0 );
         Vec3f rb = lb + Vec3f(w,0,0);
         Vec3f rt = rb + Vec3f(0,h,0);
@@ -301,6 +382,8 @@ namespace vsr {
         m.mode(GL::TS);
         return m;
     }
+    
+    
     
     ///////////////
     ///////////////

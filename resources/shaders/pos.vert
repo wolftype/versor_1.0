@@ -13,7 +13,7 @@ uniform mat4 model;             // Model Transformation Matrix (Rot, Trs, Scl)
 uniform mat4 view;              // Camera Transformation Matrix (Rot and Trs)
 uniform mat4 modelView;         // Model * View
 uniform mat4 projection;        // Projection Matrix (ortho or frustrum)
-uniform mat4 normalMatrix;        // Normal Matrix (inverse transpose of mvm)
+uniform mat4 normalMatrix;      // Normal Matrix (inverse transpose of mvm)
 
 
 

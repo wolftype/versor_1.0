@@ -1,2 +1,0 @@
-gcc tests/testGL.cpp -o build/glvtest -lGLV -lGLU -lglut -lGL -lGLEW -lvsr -L/usr/local/lib -L/usr/lib/GL -Lbuild/lib/ -Ibuild/pch/ -IVSR/graphics -IVSR/core -IVSR/util -IVSR/codegen -IVSR/codegen/products -I/usr/local/include -I../externals/gl2ps/
-

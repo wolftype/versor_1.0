@@ -1,26 +1,17 @@
 /*
- *  Draw.cpp
- *  CONGA_05
+ *  vsr_gl.cpp
+ *  versor
  *
  *  Created by x on 3/23/10.
- *  Copyright 2010 x. All rights reserved.
+ *  Copyright 2010 wolftype. All rights reserved.
  *
  */
 
-//#include "op.h"
 #include "vsr.h"
-
 #include "vsr_gl.h"
-#include "vsr_camera.h"
+#include "vsr_gfxmatrix.h"
 
 namespace vsr {
-    //NEW
-//    int     GL::AttributeSize[] = {3,3,4,2};
-//    bool    GL::AttributeNormalizeBoolean[] = {GL_FALSE, GL_TRUE, GL_FALSE, GL_FALSE};
-//    GLenum  GL::AttributeType[] = {GL::FLOAT, GL::FLOAT, GL::UBYTE, GL::FLOAT};
-    
-    
-    //}
     
     
     void GL :: error(string tmsg){
@@ -159,9 +150,6 @@ namespace vsr {
         return Vec(winX, winY, winZ);
         
     }
-    
- 
-    
     
     
     Vec GL :: unproject(double _x, double _y, double _z, GLdouble* model_view, GLdouble* projection, GLint* viewport){

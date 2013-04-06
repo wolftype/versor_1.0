@@ -276,7 +276,7 @@ template<> inline void Draw :: Immediate (const Pnt& s){
 
 template<> inline void Draw :: Immediate (const Par& s){
         //Is Imaginary?
-        double size = Ro::size( s, true );
+        double size = Ro::size( s, false );
         std::vector<Pnt> pp = Ro::split( s );
         
         double ta = Ro::size( pp[0], true );
