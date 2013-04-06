@@ -13,7 +13,6 @@
 		9B158C0316C618FC00A6DFE0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B158C0416C618FC00A6DFE0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B158C0616C618FC00A6DFE0 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
-		9B18A3C916FB8C1E00D2D265 /* xInversiveMechanisms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B18A3C816FB8C1D00D2D265 /* xInversiveMechanisms.cpp */; };
 		9B1A26591700DBAE003165C8 /* xKnot2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A26581700DBAE003165C8 /* xKnot2.cpp */; };
 		9B1A265B170266EA003165C8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B1E15591670FF470015D25C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
@@ -80,6 +79,7 @@
 		9BB1082E163883B5009F3070 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9BB1082F163883B5009F3070 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9BB10831163883B5009F3070 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9BC881FC1710DA5100F24A2A /* xInversiveMechanisms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BC881FB1710DA5100F24A2A /* xInversiveMechanisms.cpp */; };
 		9BD351611665532300809328 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9BD351621665532300809328 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9BD351641665532300809328 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -534,7 +534,6 @@
 /* Begin PBXFileReference section */
 		9B0C756B162C9B9C0037F835 /* DemoAgacse */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoAgacse; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B158C0B16C618FC00A6DFE0 /* Reflections */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Reflections; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B18A3C816FB8C1D00D2D265 /* xInversiveMechanisms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xInversiveMechanisms.cpp; path = ../../../examples/private/xInversiveMechanisms.cpp; sourceTree = "<group>"; };
 		9B1A26581700DBAE003165C8 /* xKnot2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xKnot2.cpp; path = ../../../examples/private/xKnot2.cpp; sourceTree = "<group>"; };
 		9B1E15661670FF470015D25C /* Transformations */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Transformations; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1EF0ED166D988900617EB8 /* Twists */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Twists; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -573,7 +572,7 @@
 		9B78D455170E3887006AF189 /* xNavigation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xNavigation.cpp; path = ../../../examples/basics/xNavigation.cpp; sourceTree = "<group>"; };
 		9B78D457170E5D6C006AF189 /* xOpGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xOpGraph.cpp; path = ../../../examples/pending/xOpGraph.cpp; sourceTree = "<group>"; };
 		9B78D459170E5D7E006AF189 /* xFrames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xFrames.cpp; path = ../../../examples/basics/xFrames.cpp; sourceTree = "<group>"; };
-		9B9A40A0170F654800E02BAC /* Navigation copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Navigation copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B9A40A0170F654800E02BAC /* Navigation copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Navigation copy"; path = Field; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B9A40A3170F65AD00E02BAC /* xField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xField.cpp; path = ../../../examples/fields/xField.cpp; sourceTree = "<group>"; };
 		9B9A40A5170F66D500E02BAC /* xDipole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xDipole.cpp; sourceTree = "<group>"; };
 		9B9A40A7170FB5A700E02BAC /* xReflections.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xReflections.cpp; path = ../../../examples/pending/xReflections.cpp; sourceTree = "<group>"; };
@@ -581,6 +580,7 @@
 		9B9F32BA1631E8A10075D685 /* DemoBoosts */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = DemoBoosts; path = Hopf; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB108271638836A009F3070 /* Knots */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Knots; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB10836163883B5009F3070 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knots copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BC881FB1710DA5100F24A2A /* xInversiveMechanisms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xInversiveMechanisms.cpp; path = ../../../examples/pending/xInversiveMechanisms.cpp; sourceTree = "<group>"; };
 		9BD3516E1665532300809328 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = Dynamic; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD9351F16DC35ED008A9003 /* Reflections copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Reflections copy"; path = Group; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD9353116DC36AD008A9003 /* Scene */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Scene; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1067,8 +1067,8 @@
 		9B76AAD9170631770054ECBC /* Basic */ = {
 			isa = PBXGroup;
 			children = (
+				9BC881FB1710DA5100F24A2A /* xInversiveMechanisms.cpp */,
 				9B78D459170E5D7E006AF189 /* xFrames.cpp */,
-				9B18A3C816FB8C1D00D2D265 /* xInversiveMechanisms.cpp */,
 				9B9A40A7170FB5A700E02BAC /* xReflections.cpp */,
 				9B9A40A3170F65AD00E02BAC /* xField.cpp */,
 				9B78D455170E3887006AF189 /* xNavigation.cpp */,
@@ -2225,7 +2225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B18A3C916FB8C1E00D2D265 /* xInversiveMechanisms.cpp in Sources */,
+				9BC881FC1710DA5100F24A2A /* xInversiveMechanisms.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
