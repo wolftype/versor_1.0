@@ -286,6 +286,11 @@ namespace vsr{
             x, y, z, 1
         );    
     }
+    
+//    template< typename T>
+//    inline Mat4f XMat::rts( const Rot& r, const Vec& v, double scale s){
+//    
+//    }
 
 
 

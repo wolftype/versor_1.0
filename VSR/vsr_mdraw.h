@@ -43,8 +43,8 @@ namespace vsr{
                     //Change to BindDefaultAttributes and Keep Pipe Metaphor!
                     static void BindAttributes(){
                         vatt.pos.set( Shader :: Current(), "position", sizeof(Vertex), 3, 0);
-                        vatt.col.set( Shader :: Current(), "sourceColor", sizeof(Vertex), 4, Vertex::oc() );
                         vatt.norm.set( Shader :: Current(), "normal", sizeof(Vertex), 3, Vertex::on() );
+                        vatt.col.set( Shader :: Current(), "sourceColor", sizeof(Vertex), 4, Vertex::oc() );
                         vatt.tex.set( Shader :: Current(), "texCoord", sizeof(Vertex), 2, Vertex::ot() );
                     }
                     

@@ -27,8 +27,6 @@ namespace vsr{
         );
         
         string UMatrix = STRINGIFY(
-            //uniform mat4 model;             // Model Transformation Matrix (Rot, Trs, Scl)
-            //uniform mat4 view;              // Camera Transformation Matrix (Rot and Trs)
             uniform mat4 modelView;         // Model * View
             uniform mat4 projection;        // Projection Matrix (ortho or frustrum)
             uniform mat4 normalMatrix;      // Normal Matrix (inverse transpose of mvm)
@@ -52,10 +50,13 @@ namespace vsr{
             uniform samplerCube sampleTexture;
         );
         
+        //Pass from Vertex to Fragment Shader
         string Varying = STRINGIFY(
             varying vec4 colorDst;
             varying vec2 texco;
         );
+        
+
         
         string VColor = STRINGIFY(
             varying vec4 colorDst;
@@ -64,22 +65,10 @@ namespace vsr{
         string VTex = STRINGIFY(
             varying vec2 texco;
         );
-        
-        string MFrag = STRINGIFY(
-            
-            void main(void){
-                
-                vec4 tmpColor = colorDst;
-                
-                vec4 color = texture2D(sampleTexture, texco);
-                
-                gl_FragColor = color ;
-            }
-        );
-        
-        string ColorCube = STRINGIFY(
-            
-        );
+//        
+//        string ColorCube = STRINGIFY(
+//            
+//        );
         
         string NTransform = STRINGIFY(
            vec3 doNormal(vec4 n) {
@@ -98,11 +87,35 @@ namespace vsr{
             }
         );
 
+        //Calculate Lighting
+        string VLighting = STRINGIFY(
+            
+            uniform vec3 lightPosition;
+            
+            vec4 doColor(){
+                
+                //Infinite Viewer
+                vec3 L = normalize( lightPosition );
+                vec3 N = doNormal( vec4(normal,1.0) );
+                vec3 E = vec3(0,0,1); 
+                vec3 H = normalize( L + E );
+                
+                //Diffusion Coefficient
+                float df = max(0.0, dot(N,L) );
+
+                //Specular Coefficient
+                float sf = max(0.0, dot(L,H) );
+                    
+                return vec4((sourceColor * df).xyz , 1 );
+            }
+
+        );
+
         string MVert = STRINGIFY(
             
             void main(void){
             
-                colorDst = sourceColor;
+                colorDst = doColor();
                 
                 texco = texCoord;
                                 
@@ -112,6 +125,20 @@ namespace vsr{
                 gl_Position = doVertex(pos);
             }
         );
+        
+        
+         string MFrag = STRINGIFY(
+            
+            void main(void){
+                
+                vec4 litColor = colorDst;
+                
+                vec4 texColor = texture2D(sampleTexture, texco);
+                
+                gl_FragColor = litColor ;
+            }
+        );       
+        
         
         //cubemapping function [in progress]
         string VMakeCubemap = STRINGIFY(

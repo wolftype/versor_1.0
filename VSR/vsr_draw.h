@@ -68,7 +68,7 @@ namespace vsr {
                 template<> Vec Pos( const Biv& s);
                 template<> Vec Pos( const Pnt& s);
                 template<> Vec Pos( const Par& s);
-                template<> Vec Pos( const Cir& s){ return Ro::cen( s );	}
+                template<> Vec Pos( const Cir& s){ return Ro::loc( s );	}
                 template<> Vec Pos( const Sph& s);
                 template<> Vec Pos( const Pln& s);
                 template<> Vec Pos( const Dlp& s);
@@ -108,6 +108,22 @@ namespace vsr {
                 template<> Rot AA( const Tnb& s);
                 template<> Rot AA( const Flp& s);
                 template<> Rot AA( const Frame& f);
+                
+                template< class A > double Scale(const A& s);
+                template< > double Scale ( const Cir& s ){
+                    return Ro::rad(s);
+                }
+
+                
+                template< class A > Mat4f Mat( const A& s );
+                /// Extract 4x4 TRS Transformation Matrix from a Circle
+                template<> Mat4f Mat( const Cir& s){
+                    Biv b = Ro::dir( s ); // Get Direction
+                    Rot r = Gen::ratio( Vec::z, b.duale().unit() );
+                    Vec v = Ro::loc(s);
+                    double scale = Ro::rad( s );
+                    return Gen::mat(r,v,scale);
+                }
                                 
                 
                 void X( const Frame& f, float r=1.0, float g=1.0, float b=1.0, float a=1.0);
@@ -148,8 +164,6 @@ inline void Draw::Push( const A& pos, const Rot& rot, const double& scale ){
         Rot t = Gen::aa(rot);  
         GL::translate(pos.w());
         GL::rotate( t.w() );
-//        glTranslated(pos[0], pos[1], pos[2]);
-//       glRotated(t[0], t[1], t[2], t[3]);
         glScaled(scale,scale,scale);
 }
 

@@ -30,11 +30,11 @@ namespace vsr {
         Vec2<float> Tex;        ///< UV Coordinates
                 
         Vertex(const Vec3f& pos = Vec3f(0,0,0), 
-               const Vec4f& col = Vec4f(1,1,1,1), 
                const Vec3f& norm = Vec3f(0,0,1), 
+               const Vec4f& col = Vec4f(1,1,1,1), 
                const Vec2f& tex = Vec2f(0,0) )  
         
-        : Pos(pos), Col(col), Norm(norm), Tex(tex) 
+        : Pos(pos), Norm(norm),  Col(col), Tex(tex) 
         
         {}
         
@@ -46,25 +46,38 @@ namespace vsr {
         float * tex() { return &Tex[0]; }
         
         static GLvoid * on() { return (GLvoid*)sizeof(Vec3f); }
-        static GLvoid * oc() { return (GLvoid*)( sizeof(Vec3f) + sizeof(Vec4f) ); }
+        static GLvoid * oc() { return (GLvoid*)( 2 * sizeof(Vec3f) ) ; }
         static GLvoid * ot() { return (GLvoid*)( 2 * sizeof(Vec3f) + sizeof(Vec4f) ); }
 //        static GLvoid * oc() { return (GLvoid*)( 2 * sizeof(Vec3f) ); }
 //        static GLvoid * ot() { return (GLvoid*)( 3 * sizeof(Vec3f) ); }
-        
+
+        //friend ostream& operator << (ostream& os, Vertex v);
+        void print() { cout <<  Tex << endl; }
     };
+//    
+//    inline ostream& operator << (ostream& os, Vertex v){
+// //       stringstream td;
+//        os << v.Pos; os << v.Norm; os << v.Col;
+////        os << "pos: " << v.Pos << "norm: " << v.Norm << "col: " << v.Col;
+//        
+//        return os;
+//    }
     
-    struct Mesh : public Frame {
+    struct Mesh { //: public Frame {
         
     private:
         
         /// Draw Mode
         GL::MODE mMode;
         
+        /// Base Color
+        Vec4f mColor;
+        
         /// Vertices for VertexArray
         vector< Vertex > mVertex;
         
         ///Indices for ElementArray
-        vector< GLuint > mIndex;
+        vector< unsigned int > mIndex;
         
     public:
         
@@ -94,11 +107,25 @@ namespace vsr {
         Vertex& operator[] (int idx) { return mVertex[idx]; }
         Vertex operator[] (int idx) const { return mVertex[idx]; }
         
+        unsigned int& idx(int ix) { return mIndex[ix]; }
+        unsigned int idx(int ix) const { return mIndex[ix]; }
+        
         int num() const { return mVertex.size(); }
         int numIdx() const { return mIndex.size(); }
         
+        void color(float r, float g, float b, float a) { mColor.set(r,g,b,a); }
+        
+        //Add  vertices from another Mesh
+        Mesh& add(const Mesh& m){
+            for (int i = 0; i < m.num(); ++i) { add(m[i]); }
+            for (int i = 0; i < m.numIdx(); ++i) { add( m.idx(i) ); }
+        }
+        
         Mesh& add(const Vertex& v) { mVertex.push_back(v); return *this;}        
         Mesh& add(const Vec3f& v) { mVertex.push_back( Vertex(v) ); return *this; }
+        
+        Mesh& add(const Vec& p, const Vec& n) { mVertex.push_back( Vertex( Vec3f(p), Vec3f(n) ) ); return *this; }
+        
         Mesh& add(float x, float y, float z) { mVertex.push_back( Vertex( Vec3f(x,y,z) ) ); return *this; }
         //Mesh& add(const Vec& v) { mVertex.push_back( Vertex( Vec3f(v[0], v[1], v[2]) ) ); return *this; }
         
@@ -124,10 +151,12 @@ namespace vsr {
             for (int i = 0; i < n; ++i) { mIndex.push_back( idx[i] ); } 
             return *this;
         }
+        /// Add Last 
+        Mesh& add(){ add( num() - 1 ); }
         
         GL::MODE mode() { return mMode; }
         
-        vector<GLuint>::iterator indices() { return mIndex.begin(); }        
+        vector<unsigned int>::iterator indices() { return mIndex.begin(); }        
         vector<Vertex>::iterator vertices() { return mVertex.begin(); }
         
         Vertex& last() { return mVertex[ mVertex.size() - 1 ]; }
@@ -153,10 +182,7 @@ namespace vsr {
         }
         
         #endif
-        
-//        GLubyte * indices() { return &mIndex[0]; }
-//        float * vertices() { return &mVertex[0].Pos[0]; }
-        
+                
         void translate(float x, float y, float z){
             
             for (int i = 0; i < num(); ++i){
@@ -207,49 +233,9 @@ namespace vsr {
             printf("# of vertices: %d\n", (int)mVertex.size() );
         }    
     
-        ///Skin a bunch of Circles
-//        void skinCirc (Cir * s, int num, int res = 10){
-//
-//           int mU = res;
-//           int mV = num;
-//                                    
-//            if (!mVertex.empty() ) mVertex.clear();	
-//
-//            for (int j = 0; j < mU; ++j){
-//                double t = 2 * PI * j/mU;
-//                for (int i = 0 ; i < mV; ++i){					
-//                    Par p = Ro::par_cir( s[ i ], t );
-//                    Pnt tp =  Ro::cen( Ro::split(p)[0] );
-//                    mVertex.push_back( Vertex( Vec3f(tp[0], tp[1], tp[2]) ) ) ;
-//                }
-//            }
-//            
-//            //store quad indices and normals
-//
-//            if (!mIndex.empty()) mIndex.clear();
-//            
-//            for (int j = 0; j < mU-1; ++j){
-//                for (int i = 0; i < mV-1; ++i){
-//                    int idx = j * mV + i;
-//                    int idx2 = idx + mV;
-//                    mIndex.push_back( idx);
-//                    mIndex.push_back( idx+1);
-//                    mIndex.push_back( idx2+1);
-//                    mIndex.push_back( idx2);
-//                }
-//            }
-//            //last strip
-//            for (int i = 0; i < mV-1; ++i){
-//                int idx = (mU-1) * mV + i; 
-//                int idx2 = i;
-//                 mIndex.push_back( idx);
-//                 mIndex.push_back( idx+1);
-//                 mIndex.push_back( idx2+1);
-//                 mIndex.push_back( idx2);
-//            }
-//
-//        }
-        
+
+        static Mesh Point(float x, float y, float z);
+        static Mesh Grid(int w = 10, int h = 10, float spacing = .2);
         static Mesh Sphere(double rad = 1.0, int slices = 20, int stacks = 20);
         static Mesh Line( Vec a, Vec b);
         static Mesh Cone( double rad = 1.0 , double h = 1.0, int slices = 10, int stacks = 4);
@@ -257,18 +243,99 @@ namespace vsr {
         static Mesh Circle(double scale = 1);
         static Mesh Disc(double scale = 1);        
         static Mesh Rect(float w, float h);
+        static Mesh Cylinder(float r, float h, int slices = 20, int stacks = 2);
+        
+        /*! A Mesh of Skinned Circles 
+            @param Pointer to an Circle array
+            @param number of Circles in array
+            @param resolution (default 100)
+        */
+        static Mesh Skin (Cir * cir, int num, int res = 100);
     };
+    
+    
+    inline Mesh Mesh::Point(float x, float y, float z){
+        Mesh m;
+        m.add(x,y,z);
+        m.mode( GL::P );
+        return m;
+    }
+    
+    inline Mesh Mesh::Grid(int w, int h, float spacing){
+        Mesh m;
+        float tw = spacing * w;
+        float th = spacing * h;
+        
+        for (int i = 0; i < w; ++i){
+            float tx = (-1.0 + 2.0 * i/w ) * tw;
+            float ty = th/2.0;
+            m.add(tx,-ty,0).add();
+            m.add(tx,ty,0).add();
+        }
+        
+        for (int i = 0; i < h; ++i){
+            float ty = (-1.0 + 2.0 * i/h ) * th;
+            float tx = tw/2.0;
+            m.add(-tx,ty,0).add();
+            m.add(tx,ty,0).add();
+        }
+
+        m.mode(GL::LS);
+        return m;
+    }
     
     inline Mesh Mesh::Sphere(double rad, int slices, int stacks){
         Mesh m;
-        for (int i = 0; i < slices; ++i){
-            float u = 1.0 * i/slices;
-            for (int j = 0; j < stacks; ++j){
-                float v = -1.0 + 2.0* i/slices;
-                Vec tv = Vec::x.sp( Gen::rot( PIOVERTWO * u, PIOVERFOUR * v) ) * rad;
-                m.add( Vertex( Vec3f(tv[0], tv[1], tv[2]) ) );
+                
+        for (int i = 0; i <= stacks; ++i){
+        
+            float v = -1.0 + 2.0* i/stacks;
+            
+            for (int j = 0; j < slices; ++j){
+                
+                float u = 1.0* j/slices;
+                Vec tv = Vec::x.sp( Gen::rot( PI * u, PIOVERFOUR * v) ) * rad;
+                Vec n = tv.unit();
+                m.add( tv, n );
+
+                if (i == 0 || i == stacks) {
+                    break;
+                }
+                                
             }
         }
+        
+        
+        //BOTTOM 
+        for (int j = 0; j < slices; ++j){
+            m.add(j+1).add(0);
+        }
+        
+        //m.add(1);
+        
+        for (int i = 0; i < stacks -1; ++i){
+            static bool color = 0;
+            color = !color;
+            for (int j = 0; j < slices; ++j){
+                static bool xcolor = 0;
+                xcolor = !xcolor;                
+                int a = 1 + i * slices + j;
+                if (a == 0) continue;
+                
+                int b =  ( i < stacks - 2) ? a + slices : m.num() - 1;  // Higher Latitue or North Pole
+                
+               // int c = ( j < slices - 1 ) ? a + 1 : 1 + i * slices;
+                
+                int idx[2] = {a,b};
+                m.add(idx,2);
+                m[a].Col.set(color,xcolor,1,1);
+                m[b].Col.set(color,xcolor,1,1);
+            }
+            m.add( 1 + i * slices );
+        }
+        
+        
+        m.last().Col.set(0,1,0,1);
         
         m.mode(GL::TS);
         return m;
@@ -313,7 +380,7 @@ namespace vsr {
                 float rad = 2.0 * PI * j / slices;
                 float x = cos(rad) * (1.0-z) * r;
                 float y = sin(rad)  * (1.0-z) * r;
-                m.add( Vertex( Vec3f(x,y,z), Vec4f(1,1,1,1), Vec3f(x,y,z), Vec2f(z, 1.0* j/slices) ) );
+                m.add( Vertex( Vec3f(x,y,z), Vec3f(x,y,z),Vec4f(1,1,1,1), Vec2f(z, 1.0* j/slices) ) );
                 m.add(i * slices + j);
             }
             m.add(i*slices);
@@ -342,20 +409,25 @@ namespace vsr {
         Mesh m;
         m.add( Vec3f(0,0,0) );
         
-        for (int i = 0; i <= res; ++i){
+        for (int i = 0; i < res; ++i){
+        
             float rad = 2.0 * PI * i / res;
             float x = cos(rad);
             float y = sin(rad);
             
             m.add( Vec3f(x,y,0) );
             
-            int idx[2] = {i,0};
-            m.add(idx, 2);
-            
         }
-        
-        m.add(1).add(0);
+
+        for (int i = 1; i < res; ++i){    
+            int idx[2] = {i,0};
+            m.add( idx, 2);
+        }
+
+
+        m.add(1);
         m.mode(GL::TS);
+        
         return m;
     }
     
@@ -369,10 +441,10 @@ namespace vsr {
         Vec3f lt = rt - Vec3f(w,0,0);
         
         Vec3f normal(0,0,1);
-        Vertex va( lt, Vec4f(lt,1), normal, Vec2f(0,0));
-        Vertex vb( rt, Vec4f(lt,1), normal, Vec2f(1,0));
-        Vertex vc( rb, Vec4f(lt,1), normal, Vec2f(1,1));
-        Vertex vd( lb, Vec4f(lt,1), normal, Vec2f(0,1));
+        Vertex va( lt, normal, Vec4f(lt,1), Vec2f(0,0));
+        Vertex vb( rt, normal,  Vec4f(lt,1), Vec2f(1,0));
+        Vertex vc( rb, normal, Vec4f(lt,1), Vec2f(1,1));
+        Vertex vd( lb,  normal, Vec4f(lt,1), Vec2f(0,1));
         
         m.add(va).add(vb).add(vc).add(vd);
         
@@ -383,7 +455,95 @@ namespace vsr {
         return m;
     }
     
+    inline Mesh Mesh::Cylinder (float r, float height, int slices, int stacks){
+   
+        Mesh m;
+        m.add( Vec3f(0,0,0) );
+
+        for (int j = 0; j < slices; ++ j){
+            float rad = 2.0 * PI * j / slices;
+            float x = cos(rad) * r;
+            float z = -sin(rad) * r;
+        
+            for (int i = 0; i < stacks; ++i){
+                
+                float y = height * i/stacks;
+                
+                m.add( Vec3f(x,y,z) );
+                
+                int idx[2] = {i,0};
+                m.add(idx, 2);
+                
+            }
+        }
+        return m;
+    }
     
+    
+
+    inline Mesh Mesh::Skin (Cir * cir, int num, int res){
+        
+        Mesh m;
+        
+        for (int i = 0;  i < res; ++i){
+            double t= 1.0 * i/res;
+            
+            for (int j = 0; j < num; ++j){
+                double jt = 1.0 * j/num;
+                Vec v = Ro::pnt_cir( cir[j], TWOPI * t );
+                m.add( v[0], v[1], v[2] );
+                m.last().Col = Vec4f(t,jt,1-t,1.0);
+                //cout << v << endl; 
+            }
+        }
+        
+        //Calc Indices (FOR TRIANGLE STRIP)
+        int a,b,c,d;
+        for (int i = 0; i < num-1; ++i){
+            for (int j = 0; j < res; ++j){
+            
+                a = j * num + i;                //<-- current idx                        
+                b = a + 1;                      //<-- next circle
+                if (j>=res-1) { 
+                   // cout << "has looped around" << endl; 
+                    c = i + 1;
+                    d = i;
+                }
+                else {
+                    c = a + 1 + num ;           //<-- next on next circle
+                    d = a + num ;               //<-- next on same circle
+                }
+                int idx[2] = {a,c};
+                m.add(idx,2);
+            }
+            m.add(i).add(i+1+num);
+        }                
+        
+        //calc normals
+        for (int i = 0; i < res; ++i){
+            for (int j = 0; j < num-1; ++j){
+                a = i * num + j;        //<-- current idx
+                b = a + 1;              //<-- same on next circle
+                
+                if (i>=res-1) { 
+                    c = j + 1;
+                    d = j;
+                }
+                else {
+                    c = a + 1 + num ;           //<-- next on next circle
+                    d = a + num ;           //<-- next on same circle
+                }
+                Vec3f ta = m[b].Pos - m[a].Pos;
+                Vec3f tb = m[d].Pos - m[a].Pos;
+                Vec3f tc = -ta.cross(tb);
+                m[a].Norm = tc.unit();
+                //cout << m[a].Norm[0] << " " << m[a].Norm[1] << " " <<  m[a].Norm[2] << endl;
+            }
+        }
+        
+        return m;
+    
+    }
     
     ///////////////
     ///////////////
@@ -436,6 +596,50 @@ struct CirMesh{
         }
     }
 };
+
+///Skin a bunch of Circles
+//        void skinCirc (Cir * s, int num, int res = 10){
+//
+//           int mU = res;
+//           int mV = num;
+//                                    
+//            if (!mVertex.empty() ) mVertex.clear();	
+//
+//            for (int j = 0; j < mU; ++j){
+//                double t = 2 * PI * j/mU;
+//                for (int i = 0 ; i < mV; ++i){					
+//                    Par p = Ro::par_cir( s[ i ], t );
+//                    Pnt tp =  Ro::cen( Ro::split(p)[0] );
+//                    mVertex.push_back( Vertex( Vec3f(tp[0], tp[1], tp[2]) ) ) ;
+//                }
+//            }
+//            
+//            //store quad indices and normals
+//
+//            if (!mIndex.empty()) mIndex.clear();
+//            
+//            for (int j = 0; j < mU-1; ++j){
+//                for (int i = 0; i < mV-1; ++i){
+//                    int idx = j * mV + i;
+//                    int idx2 = idx + mV;
+//                    mIndex.push_back( idx);
+//                    mIndex.push_back( idx+1);
+//                    mIndex.push_back( idx2+1);
+//                    mIndex.push_back( idx2);
+//                }
+//            }
+//            //last strip
+//            for (int i = 0; i < mV-1; ++i){
+//                int idx = (mU-1) * mV + i; 
+//                int idx2 = i;
+//                 mIndex.push_back( idx);
+//                 mIndex.push_back( idx+1);
+//                 mIndex.push_back( idx2+1);
+//                 mIndex.push_back( idx2);
+//            }
+//
+//        }
+
 
 struct UVMesh{
     int u, v;

@@ -1,9 +1,9 @@
 /*
  *  Op.h
- *  CONGA_05
+ *  VERSOR
  *
- *  Created by x on 3/22/10.
- *  Copyright 2010 x. All rights reserved.
+ *  Created by Pablo Colapinto on 3/22/10.
+ *  Copyright 2010 Wolftype. All rights reserved.
  *
  
  TO DO : Set up spin operations for Origin, Tangents, and other elements that will turn into Points, Point Pairs, etc 
@@ -18,27 +18,6 @@
 
 #include "vsr.h"
 
-//#include "Sca.h"
-//#include "Pnt.h"
-//#include "Trs.h"
-//#include "Dil.h"
-//#include "Trv.h"
-//#include "Mot.h"
-//#include "Rot.h"
-//#include "Tri.h"
-//#include "Vec.h"
-//#include "Biv.h"
-//#include "Lin.h"
-//#include "Cir.h"
-//#include "Dll.h"
-//#include "Par.h"
-//#include "Ori.h"
-//#include "Inf.h"
-//#include "Pss.h"
-//#include "Sta.h"
-//#include "Mtt.h"
-//#include "versorFuncs.h"
-
 #include <iostream>
 #include <vector>
 #include <map>
@@ -49,8 +28,6 @@
 
 namespace vsr {
 
-
-//#define TYP typename Product
 
 struct Op {
     
@@ -86,14 +63,7 @@ struct Op {
     }   
     
 
-    static Sta statest() { return Sta(); }
-
-
-//    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
-//    sp(const A& a, const B& b){ return b * a * ~b; }
-//
-//    template<class A, class B> static typename Product<typename Product<B,A,typename A::value_type>::GP, B, typename A::value_type >::GP
-//    re(const A& a, const B& b){ return b * a.involution() * ~b; }
+//    static Sta statest() { return Sta(); }
     
 };
 
@@ -229,7 +199,9 @@ struct Gen {
         			
         return Rot(deg, v[0], v[1], v[2]);
     }
-    
+    /*!
+     4x4 Transformation Matrix From Rotor
+    */
     static Mat4f mat( const Rot& r) {
       
         Vec xi = Vec::x.sp(r);
@@ -242,6 +214,23 @@ struct Gen {
                       0   ,   0 ,   0 ,    1 );
     }
     
+    /*!
+     4x4 Transformation Matrix From Rotor, Translation Vector, and Scale
+    */
+    static Mat4f mat( const Rot& r, const Vec& v, double s) {
+      
+        Vec xi = Vec::x.sp(r);
+        Vec yi = Vec::y.sp(r);
+        Vec zi = Vec::z.sp(r);
+        
+        double x = v[0]; double y = v[1]; double z = v[2];
+        
+        return Mat4f( xi[0] * s, xi[1] * s, xi[2] * s, 0, 
+                      yi[0] * s, yi[1] * s, yi[2] * s, 0,
+                      zi[0] * s, zi[1] * s, zi[2] * s, 0,
+                      x  ,   y ,   z ,    1 );
+    }
+
     /*! Generate a Motor from a Dual Line Axis
         @param Dual Line Generator (the axis of rotation, including pitch and period)
     */

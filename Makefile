@@ -30,13 +30,14 @@ INSTALL_PCH = 0
 BASE_DIR	= ../
 
 #Locations of Source and Header Files
-INC_DIR		= VSR/
+VSR_DIR		= VSR/
 SRC_DIR		= src/
 TST_DIR		= tests/
 TST_DIR		= examples/
 
 #Locations of Libaries
 LIB_DIR		= $(BUILD_DIR)lib/
+INC_DIR		= $(BUILD_DIR)include/
 EXT_DIR		= externals/
 BIN_DIR		=$(BUILD_DIR)bin/
 
@@ -68,7 +69,7 @@ ifeq ($(GFX),1)
 		LINK_LDFLAGS += -lglv -lglew32 -lglu32 -lopengl32 -lglut32
 	endif
 
-	LDFLAGS	+= -L$(BASE_DIR)GLV/build/lib/
+	LDFLAGS	+= -L$(EXT_DIR)GLV/build/lib/
 	OBJS += $(OBJS_GL)
 endif
 
@@ -82,9 +83,9 @@ VPATH = $(PCH_DIR):\
 		$(INC_DIR)Elements
 
 IPATH = $(PCH_DIR) \
-		$(INC_DIR)Elements/\
+		$(VSR_DIR)Elements/\
+		$(VSR_DIR) \
 		$(INC_DIR) \
-		$(BASE_DIR)GLV/\
 		$(EXT_DIR) \
 		/usr/local/include/
 
@@ -144,7 +145,10 @@ clean:
 	@rm -r $(LIB_DIR)
 	@rm -r $(BIN_DIR)
 
-vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
+glv: FORCE
+	$(MAKE) --no-print-directory -C externals/GLV install DESTDIR=../../$(BUILD_DIR)
+
+vsr: title dir glv $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE

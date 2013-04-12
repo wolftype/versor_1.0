@@ -35,6 +35,14 @@ namespace vsr {
 //	template < typename T > class Col3;
 //	template < typename T > class Col4;
 
+    //Predeclare Template Friends
+    template< class T >
+    std::ostream& operator << ( std::ostream& os, const Vec2<T>& a );
+    template< class T >
+    std::ostream& operator << ( std::ostream& os, const Vec3<T>& a );
+    template< class T >
+    std::ostream& operator << ( std::ostream& os, const Vec4<T>& a );
+
 	//2D VECTOR
 	template <typename T = double>
 	class Vec2 {
@@ -60,7 +68,7 @@ namespace vsr {
 			double len() const { return sqrt (x * x + y * y); }
 			double dot(Vec2 v) const { return x * v.x + y * v.y; }
 			
-
+            friend ostream& operator << (ostream&, const Vec2<>&);
 	};
 
 
@@ -116,10 +124,7 @@ namespace vsr {
 
 	};
 
-	inline ostream& operator << (ostream& os, const Vec3<>& v) {
-		os << "X: " << v.x << "\t\tY: " << v.y << "\t\tZ: " << v.z << "\t\t\n" ;
-		return os;
-	}
+
 	
 	//4D VECTOR (HOMOGENOUS COORDINATES)
 	template <typename T = double>	
@@ -159,11 +164,21 @@ namespace vsr {
 
 	};
 	
-	inline ostream& operator << (ostream& os, const Vec4<>& v) {
-		os << "X: " << v.x << "\t\tY: " << v.y << "\t\tZ: " << v.z << "\t\tW: " << v.w << "\t\t\n" ;
+    template <typename T>
+	inline ostream& operator << (ostream& os, const Vec2<T>& v) {
+		os << "v2 X: " << v.x << "\t\tY: " << v.y << "\t\t\n" ;
 		return os;
 	}
-	
+    template <typename T>
+    inline ostream& operator << (ostream& os, const Vec4<T>& v) {
+		os << "v4 X: " << v.x << "\t\tY: " << v.y << "\t\tZ: " << v.z << "\t\tW: " << v.w << "\t\t\n" ;
+		return os;
+	}
+    template <typename T>
+	inline ostream& operator << (ostream& os, const Vec3<T>& v) {
+		os << "v3 X: " << v.x << "\t\tY: " << v.y << "\t\tZ: " << v.z << "\t\t\n" ;
+		return os;
+	}	
 
 	
 	//5D VECTOR (CONFORMAL)
@@ -274,7 +289,12 @@ namespace vsr {
                            );
         }
         
-         const T * val() const { return col[0].val(); }
+
+        void fill( T * res ) { 
+            std::copy( val(), val() + 16, res);            
+        }
+        
+          const T * val() const { return col[0].val(); }
          T * val() { return &col[0][0]; }
          const T operator [] ( int i ) const { return val()[i]; }
          T& operator [] ( int i ) { return val()[i]; }
