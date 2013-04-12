@@ -33,13 +33,13 @@ BASE_DIR	= ../
 VSR_DIR		= VSR/
 SRC_DIR		= src/
 TST_DIR		= tests/
-TST_DIR		= examples/
+EX_DIR		= examples/
 
 #Locations of Libaries
 LIB_DIR		= $(BUILD_DIR)lib/
 INC_DIR		= $(BUILD_DIR)include/
 EXT_DIR		= externals/
-BIN_DIR		=$(BUILD_DIR)bin/
+BIN_DIR		= $(BUILD_DIR)bin/
 
 #Warnings
 CFLAGS += -Wno-deprecated
@@ -78,7 +78,10 @@ VPATH = $(PCH_DIR):\
 		$(EXT_DIR): \
 		$(EXT_DIR)gl2ps: \
 		$(TST_DIR):\
+		$(EX_DIR):\
 		$(DEMO_DIR):\
+		$(VSR_DIR):\
+		$(VSR_DIR)Elements:\
 		$(INC_DIR):\
 		$(INC_DIR)Elements
 
@@ -107,7 +110,7 @@ FORCE:
 .PRECIOUS: $(EXEC_TARGETS) $(PCH_DIR)%.h.gch
 
 #COMPILATION of CPP to Object File
-$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
+$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h 
 	@echo 
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo CXX compiling $< to $@
