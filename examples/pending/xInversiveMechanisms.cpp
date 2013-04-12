@@ -17,6 +17,44 @@
 
 using namespace vsr;
 
+//DIAGRAMMATIC
+void cusp(GLVApp& app){
+
+    static Field<Pnt> f(1,10,1,.2);
+    static Frame frame;
+    
+    Mesh line(GL::LS);
+    
+    vector<Pnt> pnts;
+    
+    TOUCH(frame); DRAW3(frame.pos(),1,0,0);
+    
+    static double amt, spread;
+    static bool bWt;
+    
+    SET app.gui(amt,"amt",-100,100)(spread,"spread",.1,10)(bWt,"wt"); END
+    
+    f.resize(1,10,1,spread);
+    
+    ITJ(i,f.num())
+    
+        double t = 1.0 * i / f.num();
+        double dist = Ro::sqd( f.grid(i), frame.pos() );
+        double tmp  = amt * ( bWt ? 1.0 / (.01 + dist) : 1.0 );
+        Dls np = Ro::dls_pnt(f.grid(i), tmp );
+        f[i] = np;
+ 
+        Cir c  = Ro::cir( f[i], Biv::xy, tmp );
+        DRAW3(c,t, 1, 1- t);
+        Pnt sp = Ro::loc (frame.pos().re( f[i] ));
+        DRAW3(sp, t,1,1-t);
+        line.add(sp);
+    END
+    
+    line.draw();
+        
+}
+
 //kink
 void kink(GLVApp& app){
 
@@ -290,8 +328,10 @@ void pinch(GLVApp& app){
 }
 
 void GLVApp :: onDraw() {
+    cusp(*this);
+//    kink(*this);
 //    intussuception2(*this);
-    pinch(*this);
+//    pinch(*this);
 }
 
 int main(int argc, const char * argv[]) {
@@ -304,7 +344,7 @@ int main(int argc, const char * argv[]) {
 	Window * win = new Window(1000,500,"Boosted Surface",&glv);
     GLVApp * app = new GLVApp(win);    
     app->gui.colors().back.set(0,0,0);
-	glv.colors().back.set(.2,.2,.2);
+	glv.colors().back.set(.5,.5,.5);
     
     glv << app;
         
