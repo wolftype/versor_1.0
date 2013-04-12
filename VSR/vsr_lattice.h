@@ -117,12 +117,14 @@ namespace vsr {
             onDestroy();
             mWidth = _w; mHeight = _h; mDepth = _d; mSpacing = _s;
             alloc(); init();
+            return *this;
         }
                 
         int w() const { return mWidth; }
         int h() const { return mHeight; }
         int d() const { return mDepth; }
         double spacing() const { return mSpacing; }
+        void spacing( double amt ) { mSpacing = amt; }
         
         int num() const { return mNum; }
         

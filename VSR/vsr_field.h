@@ -92,9 +92,11 @@ namespace vsr{
         }
         
         Field& resize( int w, int h, int d, double spacing = 1.0){
-            CubicLattice::resize(w,h,d,spacing);
             
+            resize(w,h,d,spacing);
             alloc(); init();
+            
+            return *this;
         }
         
         void onDestroy(){
@@ -145,6 +147,13 @@ namespace vsr{
                 GL::Draw::Render( mData[i], r, g, b, a );
             }
         }
+
+        void drawGrid(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
+            for (int i = 0; i < mNum; ++i){
+                GL::Draw::Render( grid(i), r, g, b, a );
+            }
+        }
+
 
         void drawPush(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
             for (int i = 0; i < mNum; ++i){
