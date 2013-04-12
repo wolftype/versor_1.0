@@ -697,43 +697,7 @@ r = r / r[3];           //Renormalization of a point
 </code></pre>
 
 <p>The re() method calculates <code>v.re(C)</code> as <code>C*v.involution()*~C</code>. With a versor <code>C</code> and an element <code>v</code> you might also try <code>C * v * !C</code>. Inversion in a circle or a sphere may change the
-weight of the element (for at Point at x, by x^2)</p>
-
-<h2 id="thistutorialisinprogress...">TUTORIAL: BUILD A ROBOT ARM MODEL</h2>
-
-<p>The following tutorial outlines (or will, when it is finished) how to model a simple three joint robotic arm. There is actually already a class <code>Chain</code> which encapsulates much of the functionality below, but
-it will serve as a method to introduce the various elements and operators of geometric algebra. Look in examples/robot.cpp for the implementation file.</p>
-
-<h3 id="partone:theframeclassandmotoralgebra">Part One: The <code>Frame</code> class and Motor Algebra</h3>
-
-<p>Versor includes a class for spatial orientation and navigation (much like a &#8220;Navigation&#8221; or &#8220;Pose&#8221; class might in other libraries).<br/>
-A <code>Frame</code> is constructed by a Point position and Rotor orientation (much like the other libraries&#8217; classes might be instantiated with a Vector position and Quaternion orientation).</p>
-
-<pre><code>Frame myframe( Point(0,0,0,1,0), Rotor(1,0,0,0) );
-</code></pre>
-
-<p>The above code makes a frame at the origin with default orientation.<br/>
-<strong>Note:</strong> instead of <code>Pnt(0,0,0,1,0)</code> you can also use the <code>PAO</code> macro (for &#8220;Point-At-Origin&#8221;) or make a <code>Point</code> by invoking the <code>null()</code> method of a Vector: <code>Vec(0,0,0).null()</code></p>
-
-<p>Frames can easily be drawn and manipulated with the mouse. In your GLVApp&#8217;s <code>onDraw()</code> method:</p>
-
-<pre><code>static Frame myframe( PAO, Rotor(1,0,0,0) );
-DRAW(myframe);
-interface.touch(myframe);
-</code></pre>
-
-<p>The <code>Frame</code> class has many methods for referencing various elements, like the <code>Line</code> (<code>Lin</code>) through the y-axis: </p>
-
-<pre><code>Line yaxis = myframe.ly();      //&lt;-- Returns the line through the yaxis
-DRAW3(yaxis,0,1,0);             //&lt;-- Draws GREEN Line through y axis 
-</code></pre>
-
-<p>or the xy <code>Plane</code> (&#8216;Pln&#8217;):</p>
-
-<pre><code>Plane xyplane = myframe.xy();
-</code></pre>
-
-<p>A <code>Frame</code> can also be instantiated by a <code>Motor</code> representing it&#8217;s absolute position and orientation (combined!).</p>
+weight of the element (for at Point at x, it will change it by x^2)</p>
 
 <h2 id="links">LINKS</h2>
 

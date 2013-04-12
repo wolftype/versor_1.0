@@ -24,11 +24,17 @@
 <p>Developer: Pablo Colapinto<br/>
 <code>gmail: wolftype</code> </p>
 
-<p><a href="INSTALL.html">Download and Installation Instructions</a> </p>
+<p><a href="http://versor.mat.ucsb.edu">Homepage (versor.mat.ucsb.edu)</a></p>
+
+<p><a href="http://versor.mat.ucsb.edu/INSTALL.html">Download and Installation Instructions</a> </p>
+
+<p><a href="http://versor.mat.ucsb.edu/masters_appendix.pdf">Reference Guide to the Elements</a></p>
 
 <p><a href="http://lists.create.ucsb.edu/mailman/listinfo/versor">Join the Mailing List (for update notifications, to ask questions, discuss bugs, etc)</a> </p>
 
 <p><a href="http://wolftype.com/versor/colapinto_masters_final_02.pdf">Read my Master&#8217;s Thesis on the Subject</a></p>
+
+<p><a href="#papers">Other links, Resources, Papers</a></p>
 
 <p><a href="http://www.allosphere.ucsb.edu/">Look at the AlloSphere Research Group</a> </p>
 
@@ -169,12 +175,13 @@ In mathematics, the inner product of two points <code>pa</code> and <code>pb</co
 
 <pre><code>Point pa = Vec(1,0,0).null();
 Point pb = Vec(-1,0,0).null();
-Scalar squaredDist = pa &lt;= pb;
+Scalar squaredDist = ( pa &lt;= pb ) * -2;
 </code></pre>
 
-<p>which in this case would return <code>4</code>. We can extract the Scalar into a double like so:</p>
+<p>which in this case would return a Scalar value of <code>4</code>. The <code>-2</code> is there since the inner product really returns <strong>half the negative</strong> squared distance.
+We can extract the Scalar into a c++ double like so:</p>
 
-<pre><code>double squaredDist = ( pa &lt;= pb )[0];
+<pre><code>double squaredDist = ( pa &lt;= pb )[0] * -2;
 </code></pre>
 
 <p>Points thought of as Spheres (really, Dual Spheres, more on <em>Duality</em> later): they are Spheres of zero radius. As such they are a type of <em>Round</em> element. We can also build points this way:</p>
@@ -184,7 +191,12 @@ Scalar squaredDist = pa &lt;= pb;
 
 <p>or you can pass in another element</p>
 
-<pre><code>Round::null( Vec(1,0,0) )
+<pre><code>Round::null( Vec(1,0,0) );
+</code></pre>
+
+<p>or use the built-in method</p>
+
+<pre><code>Point pa = Vec(1,0,0).null();
 </code></pre>
 
 <p>Points can also be made with the macro <code>PT</code></p>
@@ -192,7 +204,7 @@ Scalar squaredDist = pa &lt;= pb;
 <pre><code>Point pa = PT(1,0,0);
 </code></pre>
 
-<p>which is just &#8220;syntactic sugar&#8221;</p>
+<p>which is just &#8220;syntactic sugar&#8221; for <code>Vec(1,0,0).null()</code></p>
 
 <p>Speaking of Spheres, we can also make spheres with a radius this way:</p>
 
@@ -675,48 +687,23 @@ want something to be drawable, let me know and I&#8217;ll add it in. Or try addi
 
 <p>The versors are constructed by the geometric entities, typically by using the <code>Gen::</code> routines. Operators can also be acted on by operators &#8211; you can rotate a translation, or twist a boost.</p>
 
-<h2 id="thistutorialisinprogress...">TUTORIAL: BUILD A ROBOT ARM MODEL</h2>
+<h2 id="reflections">REFLECTIONS</h2>
 
-<p>The following tutorial outlines (or will, when it is finished) how to model a simple three joint robotic arm. There is actually already a class <code>Chain</code> which encapsulates much of the functionality below, but
-it will serve as a method to introduce the various elements and operators of geometric algebra. Look in examples/robot.cpp for the implementation file.</p>
+<p>Most reflections (in a sphere, circle, or point pair, or over a line or plane ) can be calculated by writing</p>
 
-<h3 id="partone:theframeclassandmotoralgebra">Part One: The <code>Frame</code> class and Motor Algebra</h3>
-
-<p>Versor includes a class for spatial orientation and navigation (much like a &#8220;Navigation&#8221; or &#8220;Pose&#8221; class might in other libraries).<br/>
-A <code>Frame</code> is constructed by a Point position and Rotor orientation (much like the other libraries&#8217; classes might be instantiated with a Vector position and Quaternion orientation).</p>
-
-<pre><code>Frame myframe( Point(0,0,0,1,0), Rotor(1,0,0,0) );
+<pre><code>Pnt p = PT(1,0,0);
+Pnt r = p.re( CXY(1) ); //Reflection of a point in a circle
+r = r / r[3];           //Renormalization of a point
 </code></pre>
 
-<p>The above code makes a frame at the origin with default orientation.<br/>
-<strong>Note:</strong> instead of <code>Pnt(0,0,0,1,0)</code> you can also use the <code>PAO</code> macro (for &#8220;Point-At-Origin&#8221;) or make a <code>Point</code> by invoking the <code>null()</code> method of a Vector: <code>Vec(0,0,0).null()</code></p>
+<p>The re() method calculates <code>v.re(C)</code> as <code>C*v.involution()*~C</code>. With a versor <code>C</code> and an element <code>v</code> you might also try <code>C * v * !C</code>. Inversion in a circle or a sphere may change the
+weight of the element (for at Point at x, it will change it by x^2)</p>
 
-<p>Frames can easily be drawn and manipulated with the mouse. In your GLVApp&#8217;s <code>onDraw()</code> method:</p>
-
-<pre><code>static Frame myframe( PAO, Rotor(1,0,0,0) );
-DRAW(myframe);
-interface.touch(myframe);
-</code></pre>
-
-<p>The <code>Frame</code> class has many methods for referencing various elements, like the <code>Line</code> (<code>Lin</code>) through the y-axis: </p>
-
-<pre><code>Line yaxis = myframe.ly();      //&lt;-- Returns the line through the yaxis
-DRAW3(yaxis,0,1,0);             //&lt;-- Draws GREEN Line through y axis 
-</code></pre>
-
-<p>or the xy <code>Plane</code> (&#8216;Pln&#8217;):</p>
-
-<pre><code>Plane xyplane = myframe.xy();
-</code></pre>
-
-<p>A <code>Frame</code> can also be instantiated by a <code>Motor</code> representing it&#8217;s absolute position and orientation (combined!).</p>
-
-<h2 id="links:">LINKS:</h2>
+<h2 id="links">LINKS</h2>
 
 <ul>
-<li><a href="http://www.geometricalgebra.net/">The Good Book: <em>Geometric Algebra for Computer Science</em></a></li>
-<li><a href="http://wolftype.com/versor/colapinto_masters_final_02.pdf">My Master&#8217;s Thesis on the Subject</a></li>
 <li><a href="http://vimeo.com/wolftype">Some Video Demos of Versor</a></li>
+<li><a href="http://www.geometricalgebra.net/">The Good Book: <em>Geometric Algebra for Computer Science</em></a></li>
 <li><a href="http://www.delicious.com/tag/geometricalgebra">GA Bookmarks on Delicious</a></li>
 <li><a href="https://groups.google.com/forum/?fromgroups#!forum/geometric_algebra">GA Google Group</a></li>
 <li><a href="http://geocalc.clas.asu.edu/">David Hestenes&#8217; Geometric Calculus Page</a></li>
@@ -724,6 +711,13 @@ DRAW3(yaxis,0,1,0);             //&lt;-- Draws GREEN Line through y axis
 <li><a href="http://www.gdl.cinvestav.mx/~edb/">Eduardo Bayro-Corrochano&#8217;s Robotics Lab</a></li>
 <li><a href="http://www.mrao.cam.ac.uk/~clifford/">Cambridge University Geometric Algebra Research Group</a></li>
 <li><a href="http://www.mrao.cam.ac.uk/~clifford/">Cognitive Systems at Christian-Albrechts-Universität zu Kiel</a></li>
+</ul>
+
+<h2 id="papers">PAPERS</h2>
+
+<ul>
+<li>2011 <a href="http://wolftype.com/versor/colapinto_masters_final_02.pdf">Versor: Spatial Computing With Conformal Geometric Algebra</a></li>
+<li>2012 <a href="http://versor.mat.ucsb.edu/Boosted_Surfaces_submission_0113.pdf">Boosted Surfaces: Synthesis of Meshes using Point Pair Generators in the Conformal Model</a></li>
 </ul>
 
 </body>
