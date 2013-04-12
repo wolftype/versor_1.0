@@ -7,11 +7,9 @@ title:
 	@echo
 
 help: title
-	@echo make vsr ....................... builds the main vsr library with built-in graphics
+	@echo make vsr ....................... builds the main vsr library and glv submodule with built-in graphics
 	@echo make GFX=0 vsr ................. builds vsrs operations without graphics functionality
-	@echo make test ...................... builds and runs tests/test.cpp to test vsr engine
-	@echo make testGL .................... builds and runs tests/testGL.cpp to test graphics functionality  
-	@echo make examples/filename.cpp ..... builds and runs filename.cpp
+	@echo make examples/subfolder/xFilename.cpp ..... builds and runs xFilename.cpp
 	@echo
 	@echo email questions to wolftype@gmail.com or submit issues via github 
 	@echo more info: versor.mat.ucsb.edu
@@ -148,9 +146,15 @@ clean:
 	@rm -r $(PCH_DIR)
 	@rm -r $(LIB_DIR)
 	@rm -r $(BIN_DIR)
+	$(MAKE) --no-print-directory -C externals/GLV clean
 
 glv: FORCE
+ifeq ($(GFX),1)
+	@echo "building external GUI library GLV . . . if there are errors, make sure you have entered:\n\n"
+	@echo "git submodule init"
+	@echo "git submodule update\n\n"
 	$(MAKE) --no-print-directory -C externals/GLV install DESTDIR=../../$(BUILD_DIR)
+endif
 
 vsr: title dir glv $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))

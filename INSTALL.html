@@ -8,71 +8,53 @@
 
 <h1 id="versorcompilationandinstallationinstructions">VERSOR COMPILATION and INSTALLATION Instructions</h1>
 
-<p>This Documents the use of Versor as a standalone software.</p>
+<h2 id="thisdocumentstheuseofversorasastandalonesoftware.">This Documents the use of Versor as a standalone software.</h2>
 
-<h2 id="download">DOWNLOAD</h2>
+<p><strong>NOTE:</strong> <em>VERSOR</em> is in active development! I have not been versioning it &#8211; so <code>git pull</code> frequently for updates! And EMAIL me (wolftype@gmail.com)
+or the list (versor@mat.ucsb.edu) with questions or problems. You have to sign up for the list <a href="#http://lists.create.ucsb.edu/mailman/listinfo/versor">here</a></p>
 
-<p>For best results, cd into a common directory for all your code repositories &#8211;
-For instance, assuming you have a directory called <strong><code>code</code></strong> with all your git repos:</p>
+<h2 id="buildandrun">BUILD AND RUN</h2>
 
-<pre><code>cd code
-git clone git://github.com/wolftype/vsr.git
-git clone git://github.com/AlloSphere-Research-Group/GLV.git
+<pre><code>git clone git://github.com/wolftype/vsr.git
+cd vsr
+git submodule init
+git submodule update
 </code></pre>
 
-<p>This grabs both Versor and GLV (a windowing and user-interface system)</p>
+<p>This grabs both Versor and its GLV submodule (a windowing and user-interface system). Then you can</p>
+
+<pre><code>make vsr
+make examples/basics/xMeet.cpp
+</code></pre>
+
+<p>Please email me (wolftype at gmail) or the <a href="#">list</a> if you have any issues!</p>
 
 <hr />
 
-<p><strong>NOTE:</strong> <em>VERSOR</em> is in active development! I have not been versioning it &#8211; <code>git pull</code> frequently for updates!</p>
+<p>If the above fails, make sure you have OpenGL, Glu, Glut, and GLEW installed. If not, see Getting GLU / GLUT / GLEW section below.
+Or, email me. </p>
 
-<hr />
+<p>To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
+Bindings exist to two cross-platform windowing systems, <a href="mat.ucsb.edu/glv/">GLV</a> and <a href="">AlloCore</a>, both made by my colleagues in the MAT program.
+It should be easy to make a binding to Open Frameworks ofxgui, for instance (also an MAT project) </p>
 
-<h2 id="installdependencies">INSTALL DEPENDENCIES</h2>
+<p>The easiest way to get started to is to use GLV. GLV is great for quick and easy OpenGL-based interfaces. </p>
 
-<p>libvsr.a can built in isolation with no dependencies except the standard library. </p>
+<p><code>libvsr.a</code> can also built in isolation with no dependencies except the standard library. </p>
 
 <pre><code>make vsr GFX=0
 </code></pre>
 
 <p>Most likely, however, you will want to be able to draw the elements to screen.</p>
 
-<p>To use the draw routines, requires OpenGL, Glu, Glut, and GLEW. You likely already have these installed.
-If not, see Getting GLU / GLUT / GLEW section below</p>
-
-<p>To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
-Bindings exist to two cross-platform windowing systems, <a href="mat.ucsb.edu/glv/">GLV</a> and <a href="">AlloCore</a>, both made by my colleagues in the MAT program. </p>
-
-<p>The easiest way to get started to is to use GLV. GLV is great for quick and easy OpenGL-based interfaces. If you have not done so already, grab it here: </p>
-
-<pre><code>cd code
-git clone git@github.com:AlloSphere-Research-Group/GLV.git
-</code></pre>
-
-<p>Once you have it, <code>cd</code> into <code>GLV</code> and make, then sudo make install</p>
-
-<pre><code>cd GLV
-make
-sudo make install
-</code></pre>
-
-<h2 id="build">BUILD</h2>
-
-<p>To build on mac osx or linux:</p>
-
-<pre><code>make vsr
-</code></pre>
-
-<p>This builds the static library with full graphics support (using GLV).</p>
-
-<pre><code>make examples/Hopf.cpp
-</code></pre>
-
-<p>will build and run the Knots program</p>
-
-<p>for a list of make options:</p>
+<p>For a list of make options:</p>
 
 <pre><code>make help
+</code></pre>
+
+<p>To start over:</p>
+
+<pre><code>make clean
 </code></pre>
 
 <p>Feel free email me at wolftype@gmail.com with questions</p>
@@ -113,10 +95,7 @@ sudo make install
 
 <h2 id="otheroptions">Other Options</h2>
 
-<p>You might also build the older version in the Dynamic folder (which temporarily has a few more features, but only runs on mac os and is no longer supported. It runs slower and you&#8217;ll need to use the built in xcode project, and run &#8220;TestVsrGlv.app&#8221;)
-The Xcode project in OSX/vsr/ takes care of the multistage compilation process.
-It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors into libvsr.a, a library that calls the functions in the cga framework and does other nifty things
-(like helps with draw routines and helps with common operations). Take a look at Op.h.</p>
+<p>Email me with requests for ports, or to beg me to provide Windows support etc. </p>
 
 </body>
 </html>

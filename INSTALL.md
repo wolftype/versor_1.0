@@ -4,70 +4,51 @@ VERSOR COMPILATION and INSTALLATION Instructions
 ===
 
 This Documents the use of Versor as a standalone software.
-
-DOWNLOAD
 ---
 
-For best results, cd into a common directory for all your code repositories -- 
-For instance, assuming you have a directory called **`code`** with all your git repos:
+**NOTE:** _VERSOR_ is in active development!  I have not been versioning it -- so `git pull` frequently for updates! And EMAIL me (wolftype@gmail.com)
+or the list (versor@mat.ucsb.edu) with questions or problems.  You have to sign up for the list [here](#http://lists.create.ucsb.edu/mailman/listinfo/versor)
 
-	cd code
+BUILD AND RUN
+---
+
 	git clone git://github.com/wolftype/vsr.git
-	git clone git://github.com/AlloSphere-Research-Group/GLV.git
-
-This grabs both Versor and GLV (a windowing and user-interface system)
-
----
-
-**NOTE:** _VERSOR_ is in active development!  I have not been versioning it -- `git pull` frequently for updates! And EMAIL me (wolftype@gmail.com)
-or the list (versor@mat.ucsb.edu) with questions.  You have to sign up for the list [here](#http://lists.create.ucsb.edu/mailman/listinfo/versor)
-
----
-
-
-INSTALL DEPENDENCIES
----
-
-To use the draw routines requires OpenGL, Glu, Glut, and GLEW.  You likely already have these installed.
-If not, see Getting GLU / GLUT / GLEW section below
-  
-To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
-Bindings exist to two cross-platform windowing systems, [GLV](mat.ucsb.edu/glv/) and [AlloCore](), both made by my colleagues in the MAT program.  
-
-The easiest way to get started to is to use GLV.  GLV is great for quick and easy OpenGL-based interfaces.  If you have not done so already, grab it here: 
-
-	cd code
-	git clone git@github.com:AlloSphere-Research-Group/GLV.git
+	cd vsr
+	git submodule init
+	git submodule update
 	
-Once you have it, `cd` into `GLV` and make, then sudo make install
-    
-    cd GLV
-    make
-    sudo make install
+This grabs both Versor and its GLV submodule (a windowing and user-interface system).  Then you can
 
-libvsr.a can also built in isolation with no dependencies except the standard library.  
+	make vsr
+	make examples/basics/xMeet.cpp
+	
+Please email me (wolftype at gmail) or the [list](#) if you have any issues!
+
+---
+
+
+If the above fails, make sure you have OpenGL, Glu, Glut, and GLEW installed. If not, see Getting GLU / GLUT / GLEW section below.
+Or, email me.  
+
+To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
+Bindings exist to two cross-platform windowing systems, [GLV](mat.ucsb.edu/glv/) and [AlloCore](), both made by my colleagues in the MAT program. 
+It should be easy to make a binding to Open Frameworks ofxgui, for instance (also an MAT project) 
+
+The easiest way to get started to is to use GLV.  GLV is great for quick and easy OpenGL-based interfaces.  
+	
+`libvsr.a` can also built in isolation with no dependencies except the standard library.  
 
 	make vsr GFX=0
 
 Most likely, however, you will want to be able to draw the elements to screen.
 
-
-
-BUILD
----
-To build on mac osx or linux:
-
-	make vsr
-
-This builds the static library with full graphics support (using GLV).
-
-	make examples/Hopf.cpp
-
-will build and run the Knots program
-
-for a list of make options:
+For a list of make options:
 
     make help
+
+To start over:
+
+	make clean
 
 Feel free email me at wolftype@gmail.com with questions
 
@@ -106,7 +87,4 @@ or clone from current repos:
 
 Other Options
 ---
-You might also build the older version in the Dynamic folder (which temporarily has a few more features, but only runs on mac os and is no longer supported.  It runs slower and you'll need to use the built in xcode project, and run "TestVsrGlv.app")
-The Xcode project in OSX/vsr/ takes care of the multistage compilation process.
-It creates and embeds a cga (conformal geometric algebra) framework for calculating multivectors into libvsr.a, a library that calls the functions in the cga framework and does other nifty things
-(like helps with draw routines and helps with common operations).  Take a look at Op.h.
+Email me with requests for ports, or to beg me to provide Windows support etc.  
