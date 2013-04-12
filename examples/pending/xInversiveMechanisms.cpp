@@ -182,63 +182,116 @@ void bend(GLVApp& app){
     TOUCH(frame); DRAW(frame.lz());
     
     //SURFACE MESH
-    static Field<Pnt> f(1,19,10,.5);
+    static Field<Pnt> f(20,1,20,.5);
 
     //Amt, and Gui Draw Booleans
-    static double amt, xCurve,yCurve;
-    static bool bWt, bLine, bShow;
+    static double amt, xCurve,yCurve, vType, doff;
+    static bool bWt, bLine, bShow, bXreal, bYreal;
     
     SET 
-        app.gui(bWt,"wt")(amt,"amt",-100,100)(xCurve,"xCurve",-100,100)(yCurve,"yCurve",-100,100)(bLine, "line")(bShow,"show ref"); 
+        app.gui(bWt,"wt")(amt,"amt",-100,100)(xCurve,"xCurve",-100,100)(yCurve,"yCurve",-100,100)(bXreal, "x real")(bYreal,"y real")(vType,"type",0,3)(doff,"dist off",-10,10); 
         frame.scale(.2);
         bLine = true;
         bWt = true;
     END
     
+    UVMesh mesh(f.w(), f.d());
     
-    int iter = 10;
-    
-    UVMesh mesh(f.h(), f.d());
-    
-    Par xPar = frame.txScaled() * xCurve;
-    Par yPar = frame.txScaled() * yCurve;
+    Par xPar = frame.py( bXreal ) * xCurve;//frame.tyScaled() * xCurve;
+    Par yPar = frame.py( bYreal ) * yCurve;//frame.tyScaled() * yCurve;
     
     Bst xBst = Gen::bst( xPar );
     Bst yBst = Gen::bst( yPar );
 
-    Cir tx = Cir(frame.lz()).sp( xBst );
-    Cir ty = Cir(frame.ly()).sp( yBst );
+    Cir tx = Cir(frame.lx()).sp( xBst );
+    Cir ty = Cir(frame.lz()).sp( yBst );
     
     DRAW(tx);
     DRAW(ty);
     
+    
+    int type = vType;
     ITJ( i, f.num() )
         
         
-        double dist2XLine = ( f.grid(i) <=  ( bWt ? tx.dual() : Par( frame.dlz() ) ) ).dot()[0];
-        double dist2YLine = ( f.grid(i) <=  ( bWt ? ty.dual() : Par( frame.dly() ) ) ).dot()[0];
+        double dist2XLine = ( f.grid(i) <=  ( bWt ? tx.dual() : Par( frame.dlx() ) ) ).dot()[0];
+        double dist2YLine = ( f.grid(i) <=  ( bWt ? ty.dual() : Par( frame.dlz() ) ) ).dot()[0];
+        
+        double dist2Cen = Ro::sqd(f.grid(i), frame.pos() );
+        double dist2circ = (f.grid(i) <= frame.py(false).dual() ).dot()[0];
         
         Pnt& p = f[i]; 
         
-        Par tpar = xPar * 1.0 / ( 1.0 + dist2XLine )  + yPar * 1.0 / (1.0 + dist2YLine );                
-        Pnt np =  Ro::loc( p.sp( Gen::bst( tpar * amt ) ) );
+        Par tpar = ( xPar * 1.0 / ( doff + dist2XLine )  + yPar * 1.0 / (doff + dist2YLine ) ) ; 
+        
+        Par tpar2 = (xPar + yPar) * (1.0 / (doff + dist2Cen) );
+        Par tpar3 = (xPar + yPar) * (1.0 / (doff + dist2circ) );
+
+        Pnt np;
+        
+        switch(type){
+            case 0: np =  Ro::loc( p.sp( Gen::bst( tpar * amt ) ) ); break;
+            case 1: np =  Ro::loc( p.sp( Gen::bst( tpar2 * amt ) ) ); break;
+            case 2: np =  Ro::loc( p.sp( Gen::bst( tpar3 * amt ) ) ); break;
+        }   
+            
         
         mesh.add(np);
-        DRAW3( np,0,1,1);
+        //DRAW3( np,0,1,1);
             
     END
     
     mesh.draw(.3,.3,.3);
-    
+    mesh.drawTri(0,1,1);
     //Sphere
     DRAW4(frame.bound(), 1,0,0,.5);
 
 }
 
 
+void pinch(GLVApp& app){
+    //Plane
+    static double amt, iter;
+    SET app.gui(amt,"amt",-100,100)(iter, "iter",-100,100); END
+    
+    static Field<Pnt> f(20,1,20,.2);
+    UVMesh ma(20,20);
+    
+    static Dls da = Ro::dls(0,0,0,.2);
+    static Dls db = Ro::dls(0,-2,0,.2);
+    
+    TOUCH(da); TOUCH(db);
+    
+    Par p = db ^ da;
+    
+//    DRAW3(p,0,1,1);
+    DRAW3(p.undual(),1,1,0);
+    
+//    cout << Ro::size(p,true) << endl;
+//    cout << Ro::size(p,false) << endl;
+    
+    ITJ(i,f.num())
+        double dist = Ro::sqd( f.grid(i), PAO );
+        Bst bst = Gen::bst( p * amt  ); // / (.01 + dist) 
+//        f[i] = Ro::loc( f.grid(i).sp( bst ) ); 
+//        Cir c = f.grid(i) ^ p;
+        
+        Pnt np = f.grid(i);
+        ITJ(j, iter * 1.0 / (.01 + dist ) )
+            np = Ro::loc( np.sp(bst) ); 
+        END
+        f[i] = np;
+        ma.add(f[i]);
+    END
+    
+    ma.draw();
+    DRAW4(da,1,0,0,.2);
+    DRAW4(db,1,0,0,.2);
+}
+
 void GLVApp :: onDraw() {
-    intussuception2(*this);
-//    bend(*this);
+//    intussuception2(*this);
+    pinch(*this);
 }
 
 int main(int argc, const char * argv[]) {
@@ -248,7 +301,7 @@ int main(int argc, const char * argv[]) {
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
     		
-	Window * win = new Window(1000,500,"Inversions",&glv);
+	Window * win = new Window(1000,500,"Boosted Surface",&glv);
     GLVApp * app = new GLVApp(win);    
     app->gui.colors().back.set(0,0,0);
 	glv.colors().back.set(.2,.2,.2);

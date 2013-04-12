@@ -15,6 +15,7 @@
 		9B158C0616C618FC00A6DFE0 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B1A26591700DBAE003165C8 /* xKnot2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A26581700DBAE003165C8 /* xKnot2.cpp */; };
 		9B1A265B170266EA003165C8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B1A82EE17174BA200D4389A /* vsr_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71D16F0E9EF00629664 /* vsr_gl.cpp */; };
 		9B1E15591670FF470015D25C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B1E155A1670FF470015D25C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B1E155C1670FF470015D25C /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -115,7 +116,6 @@
 		9BF5C75516F0EA9600629664 /* xCurvature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C75416F0EA9600629664 /* xCurvature.cpp */; };
 		9BF5C75816F0EDA300629664 /* gl2ps.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C75716F0EDA300629664 /* gl2ps.c */; };
 		9BF5C77B16F0EDEA00629664 /* vsr_camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71916F0E9EF00629664 /* vsr_camera.cpp */; };
-		9BF5C77C16F0EDEC00629664 /* vsr_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71A16F0E9EF00629664 /* vsr_draw.cpp */; };
 		9BF5C77D16F0EE2400629664 /* vsr_gl_fbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71E16F0E9EF00629664 /* vsr_gl_fbo.cpp */; };
 		9BF5C77E16F0EE2600629664 /* vsr_frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71C16F0E9EF00629664 /* vsr_frame.cpp */; };
 		9BF5C77F16F0EE2900629664 /* vsr_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71B16F0E9EF00629664 /* vsr_file.cpp */; };
@@ -125,7 +125,6 @@
 		9BF5C78316F0EE3300629664 /* vsr_gl_vbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C72516F0E9EF00629664 /* vsr_gl_vbo.cpp */; };
 		9BF5C78516F0EE4000629664 /* vsr_interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C72716F0E9EF00629664 /* vsr_interface.cpp */; };
 		9BF5C78616F0EE4500629664 /* vsr_mv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C72916F0E9EF00629664 /* vsr_mv.cpp */; };
-		9BF5C78716F0EE9800629664 /* vsr_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71D16F0E9EF00629664 /* vsr_gl.cpp */; };
 		9BF5C79116F0FC4D00629664 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9BF5C79216F0FC4D00629664 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9BF5C79316F0FC4D00629664 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -1059,6 +1058,7 @@
 		9B76AAD81706314A0054ECBC /* Twists */ = {
 			isa = PBXGroup;
 			children = (
+				9B3F72D5170A1817001C1CCA /* xMeet.cpp */,
 				9B76AAC4170528300054ECBC /* xTwists.cpp */,
 			);
 			name = Twists;
@@ -1072,7 +1072,6 @@
 				9B9A40A7170FB5A700E02BAC /* xReflections.cpp */,
 				9B9A40A3170F65AD00E02BAC /* xField.cpp */,
 				9B78D455170E3887006AF189 /* xNavigation.cpp */,
-				9B3F72D5170A1817001C1CCA /* xMeet.cpp */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -2123,9 +2122,8 @@
 			files = (
 				9BF5C75816F0EDA300629664 /* gl2ps.c in Sources */,
 				9BF5C78616F0EE4500629664 /* vsr_mv.cpp in Sources */,
-				9BF5C78716F0EE9800629664 /* vsr_gl.cpp in Sources */,
-				9BF5C77C16F0EDEC00629664 /* vsr_draw.cpp in Sources */,
 				9BF5C77E16F0EE2600629664 /* vsr_frame.cpp in Sources */,
+				9B1A82EE17174BA200D4389A /* vsr_gl.cpp in Sources */,
 				9BF5C77B16F0EDEA00629664 /* vsr_camera.cpp in Sources */,
 				9BF5C77F16F0EE2900629664 /* vsr_file.cpp in Sources */,
 				9BF5C78516F0EE4000629664 /* vsr_interface.cpp in Sources */,

@@ -14,7 +14,7 @@
 #include "vsr_mesh.h"
 
 namespace vsr {
-    namespace GL{
+//    namespace GL{
     
         //MESH GLYPHS -- consolidate with mesh::rect, etc.
         namespace MGlyph {
@@ -36,10 +36,10 @@ namespace vsr {
                 Vec3f lt = rt - Vec3f(w,0,0);
                 
                 Vec3f normal(0,0,1);
-                Vertex va( lt, Vec4f(lt,1), normal, Vec2f(0.0,0.0));
-                Vertex vb( rt, Vec4f(lt,1), normal, Vec2f(1.0,0.0));
-                Vertex vc( rb, Vec4f(lt,1), normal, Vec2f(1.0,1.0));
-                Vertex vd( lb, Vec4f(lt,1), normal, Vec2f(0.0,1.0));
+                Vertex va( lt, normal, Vec4f(lt,1), Vec2f(0.0,0.0));
+                Vertex vb( rt,  normal, Vec4f(lt,1), Vec2f(1.0,0.0));
+                Vertex vc( rb, normal, Vec4f(lt,1),  Vec2f(1.0,1.0));
+                Vertex vd( lb,  normal, Vec4f(lt,1), Vec2f(0.0,1.0));
                 
                 m.add(va).add(vb).add(vc).add(vd);
                 
@@ -143,28 +143,8 @@ namespace vsr {
             }
             
             
-           static Mesh Cylinder (float scale, float length){
-           
-                int res = floor( scale * 100);
-                Mesh m;
-                m.add( Vec3f(0,0,0) );
-                
-                for (int i = 0; i <= res; ++i){
-                    float rad = 2.0 * PI * i / res;
-                    float x = cos(rad);
-                    float y = sin(rad);
-                    
-                    
-                    m.add( Vec3f(x,y,0) );
-                    
-                    int idx[2] = {i,0};
-                    m.add(idx, 2);
-                    
-                }
-            
-           }
+ 
         } // MGlyph::
-    } // GL::
 } // vsr ::
 
 #endif

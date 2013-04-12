@@ -100,10 +100,10 @@ namespace vsr {
     }
     
     struct VAttrib4{
-        VAttrib pos, col, norm, tex;
-        void enable() { pos.enable(); col.enable(); norm.enable(); tex.enable(); }
-        void disable() { pos.disable(); col.disable(); norm.disable(); tex.disable(); }
-        void pointer() { pos.pointer(); col.pointer(); norm.pointer(); tex.pointer(); }
+        VAttrib pos, norm, col, tex;
+        void enable() { pos.enable(); norm.enable(); col.enable(); tex.enable(); }
+        void disable() { pos.disable(); norm.disable(); col.disable(); tex.disable(); }
+        void pointer() { pos.pointer();  norm.pointer(); col.pointer(); tex.pointer(); }
     };
     
 } //vsr::

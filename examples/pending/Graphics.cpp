@@ -49,8 +49,8 @@ void simpleShader(GLVApp& app){
     static int slab, point;
     SET
         Pipe::InitBufferObjects(); 
-        slab = Pipe::Buffer( GL::MGlyph::Rect( 2, 2 ) ); //Auto Set VBO ID
-        point = Pipe::Buffer( GL::MGlyph::Point(1,1,1) );
+        slab = Pipe::Buffer( Mesh::Rect( 2, 2 ) ); //Auto Set VBO ID
+        point = Pipe::Buffer( Mesh::Point(1,1,1) );
     END
     
     Vertex lightpos(pt[0],pt[1],pt[2]);
@@ -108,7 +108,7 @@ void shaderTest(GLVApp& app){
             vc.push_back( c.trs(3.0 * i/num, 0,0) );
         }
         
-        GL::Draw::Pipe::Buffer( GL::MGlyph::Skin( &vc[0], num, 10 ), 100 );
+        GL::Draw::Pipe::Buffer( Mesh::Skin( &vc[0], num, 10 ), 100 );
     
     END
     
@@ -169,13 +169,13 @@ void texture(GLVApp & app){
 
     
     static ShaderProgram program;
-    static string Vert = AVertex + VColor + VTex + MVert;
-    static string Frag = USampler + VColor + VTex + MFrag;
+    static string Vert = AVertex + Varying + MVert;
+    static string Frag = USampler + Varying + MFrag;
 
     static Texture texture(64, 64);
     static unsigned char * data;
     
-    static GL::MBO mesh( GL::MGlyph::Rect(3.0,2.0) );
+    static MBO mesh( Mesh::Rect(3.0,2.0) );
     
      SET
         
@@ -237,7 +237,7 @@ void render2texture(GLVApp& app){
 
     static FBO fbo;
     static Texture texture(16, 16);
-    static GL::MBO mesh( GL::MGlyph::Rect(2.0,2.0) );
+    static MBO mesh( Mesh::Rect(2.0,2.0) );
     
     SET
        
@@ -299,7 +299,7 @@ void meshes(GLVApp& app){
     
 
     static ShaderProgram program;
-    static string Vert = AVertex + Varying + UMatrix + NTransform + VCalc + MVert;
+    static string Vert = AVertex + Varying + UMatrix  + NTransform + VLighting + VCalc + MVert;
     static string Frag = USampler + Varying + MFrag;
     
     SET
@@ -314,14 +314,28 @@ void meshes(GLVApp& app){
     static MBO circle ( Mesh::Circle() );
     static MBO line ( Mesh::Line( Vec::x * 2, Vec::y ) );
     static MBO dir ( Mesh::Dir() );
+    static MBO grid ( Mesh::Grid() );
+    static MBO cyl ( Mesh::Cylinder(1,2) );
+    static MBO sphere ( Mesh::Sphere() );
+    static MBO disc ( Mesh::Disc() );
+    
+    
+    
+    static Circle cir = CXY(1);
+    TOUCH(cir);
+    
+    Mat4f mat = app.scene().xf.modelViewMatrixf() * Draw::Mat(cir);
+    float mf[16];
+    mat.fill(mf);
     
     program.bind();
         
-        program.uniform("modelView", app.scene().xf.modelView);
+        program.uniform("modelView", mf );//app.scene().xf.modelView);
         program.uniform("projection", app.scene().xf.proj);
         program.uniform("normalMatrix", app.scene().xf.normal);
+        program.uniform("lightPosition", 0.0, 0.0, 1.0);
         
-        Pipe::Line( dir );
+        Pipe::Line( circle );
         
     program.unbind();
 }
@@ -330,7 +344,7 @@ void meshes(GLVApp& app){
 
 void GLVApp :: onDraw(){
   //  bImmediate = false;   
-    bImmediate = true;   
+    bImmediate = false;   
     
     
     
