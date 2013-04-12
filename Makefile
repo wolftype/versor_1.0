@@ -89,6 +89,7 @@ IPATH = $(PCH_DIR) \
 		$(VSR_DIR)Elements/\
 		$(VSR_DIR) \
 		$(INC_DIR) \
+		$(INC_DIR)Elements/\
 		$(EXT_DIR) \
 		/usr/local/include/
 
