@@ -28,6 +28,7 @@
 
 #include "vsr_op.h"
 #include "vsr_interp.h"
+#include "vsr_xf.h"
 
 namespace vsr {
 
@@ -152,7 +153,7 @@ namespace vsr {
 
 			Mat4f& image() { return mImage; }										///< get matrix image 		
 			Mat4f image() const { return mImage; }										///< get matrix image 		
-			Frame& orient()	{ mImage = Gen::mat(mRot); return *this; }					///< load matrix image with current rotor
+			Frame& orient()	{ mImage = Xf::mat(mRot); return *this; }					///< load matrix image with current rotor
 			void set(const Pnt&p, const Rot& r = Rot(1,0,0,0) ) { mPos = p; mRot = r; orient(); }
             void reset()	{ mRot.set(1,0,0,0); mPos.set(0,0,0,1,0); orient(); }		///< reset position and orientation
 			

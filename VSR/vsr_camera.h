@@ -229,11 +229,13 @@ class Camera : public Frame {
                 Mat4f tmvm = mvm();
                 Mat4f tproj = proj();
                 Mat4f tnorm = norm();
+                Mat4f tmvp = tproj * tmvm;
                 
                 copy(tmod.val(), tmod.val() + 16, xf.model);
                 copy(tview.val(), tview.val() + 16, xf.view);
                 copy(tmvm.val(), tmvm.val() + 16, xf.modelView);
                 copy(tproj.val(), tproj.val() + 16, xf.proj);
+                copy(tmvp.val(), tmvp.val() + 16, xf.modelViewProjection);
                 copy(tnorm.val(), tnorm.val() + 16, xf.normal);
              
                 xf.toDoubles();

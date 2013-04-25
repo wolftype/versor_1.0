@@ -22,21 +22,25 @@ namespace vsr{
     
     /*! Transformation Matrices Container */
     struct XformMat {
+    
         float model[16];
         float view[16];
         float modelView[16];
         float proj[16];
+        float modelViewProjection[16];
         float normal[16];
 
         double modeld[16];
         double viewd[16];
         double modelViewd[16];
         double projd[16];
+        double modelViewProjectiond[16];
         double normald[16];
         
         Mat4f modelMatrixf() const { return model; }
         Mat4f viewMatrixf()const { return view; }
         Mat4f modelViewMatrixf()const { return modelView; }
+        Mat4f modelViewProjectionMatrixf()const { return modelViewProjection; }
         Mat4f projMatrixf()const { return proj; }
         Mat4f normalMatrixf() const { return normal; }
 
@@ -46,6 +50,7 @@ namespace vsr{
                 projd[i] = proj[i];
                 viewd[i] = view[i];
                 modelViewd[i] = modelView[i];
+                modelViewProjectiond[i] = modelViewProjection[i];
                 normald[i] = normal[i];
             }
         }
@@ -56,6 +61,7 @@ namespace vsr{
                 proj[i] = projd[i];
                 view[i] = viewd[i];
                 modelView[i] = modelViewd[i];
+                modelViewProjection[i] = modelViewProjectiond[i];
                 normal[i] = normald[i];
             }
         }
@@ -87,6 +93,15 @@ namespace vsr{
                 for (int j = 0; j < 4; ++j){
                     int idx = i + j * 4;
                     os << xf.projd[idx] << " ";
+                }
+                os << "\n";
+            }
+
+            os << "MODELVIEWPROJECTION" << "\n";
+            for (int i = 0; i < 4; ++i){
+                for (int j = 0; j < 4; ++j){
+                    int idx = i + j * 4;
+                    os << xf.modelViewProjectiond[idx] << " ";
                 }
                 os << "\n";
             }

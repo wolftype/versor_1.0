@@ -559,13 +559,8 @@
 		9B25299D162DF3E500DD9FC2 /* DemoMotors */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = DemoMotors; path = Robot; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B26F0C51671069400455E54 /* Frames */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Frames; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B28076116700947001806F8 /* Twists copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Twists copy"; path = Topo; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2977E01729BA6D00227808 /* vsr_xf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_xf.h; sourceTree = "<group>"; };
 		9B3F72D5170A1817001C1CCA /* xMeet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMeet.cpp; path = ../../../examples/basics/xMeet.cpp; sourceTree = "<group>"; };
-		9B3F72DE170A77A8001C1CCA /* ctl_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ctl_gl.h; sourceTree = "<group>"; };
-		9B3F72DF170A77A8001C1CCA /* ctl_egl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ctl_egl.h; sourceTree = "<group>"; };
-		9B3F72E0170A77A8001C1CCA /* ctl_gxlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ctl_gxlib.h; sourceTree = "<group>"; };
-		9B3F72E1170A77A8001C1CCA /* ctl_matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ctl_matrix.h; sourceTree = "<group>"; };
-		9B3F72E2170A77C1001C1CCA /* berrygraphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = berrygraphics.cpp; path = ../tests/berrygraphics.cpp; sourceTree = "<group>"; };
-		9B3F72E3170A77C1001C1CCA /* berryrender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = berryrender.cpp; path = ../tests/berryrender.cpp; sourceTree = "<group>"; };
 		9B5890381641A69B0096B491 /* Meet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461416445FBE003BF1B2 /* Allo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Allo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461B16446392003BF1B2 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
@@ -1039,24 +1034,9 @@
 		9B3F72D9170A183D001C1CCA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				9B3F72DD170A77A8001C1CCA /* ctl */,
 				9BF5C74C16F0EA7600629664 /* Graphics.cpp */,
 			);
 			name = Graphics;
-			sourceTree = "<group>";
-		};
-		9B3F72DD170A77A8001C1CCA /* ctl */ = {
-			isa = PBXGroup;
-			children = (
-				9B3F72E2170A77C1001C1CCA /* berrygraphics.cpp */,
-				9B3F72E3170A77C1001C1CCA /* berryrender.cpp */,
-				9B3F72DE170A77A8001C1CCA /* ctl_gl.h */,
-				9B3F72DF170A77A8001C1CCA /* ctl_egl.h */,
-				9B3F72E0170A77A8001C1CCA /* ctl_gxlib.h */,
-				9B3F72E1170A77A8001C1CCA /* ctl_matrix.h */,
-			);
-			name = ctl;
-			path = ../../berry/sync/ctl;
 			sourceTree = "<group>";
 		};
 		9B5C461F164463A1003BF1B2 /* lib */ = {
@@ -1258,6 +1238,7 @@
 				9BF5C70A16F0E9D100629664 /* vsr_mv.h */,
 				9BF5C70B16F0E9D100629664 /* vsr_nestedFrame.h */,
 				9BF5C70C16F0E9D100629664 /* vsr_op.h */,
+				9B2977E01729BA6D00227808 /* vsr_xf.h */,
 				9BF5C70D16F0E9D100629664 /* vsr_optics.h */,
 				9BF5C70E16F0E9D100629664 /* vsr_set.h */,
 				9BF5C70F16F0E9D100629664 /* vsr_stat.h */,

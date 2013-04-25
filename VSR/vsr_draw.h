@@ -18,9 +18,9 @@
 
 #include "vsr_op.h"
 #include "vsr_frame.h"
+#include "vsr_xf.h"
 
 #include "vsr_gl.h"
-#include "vsr_matrix.h"
 #include "vsr_glyph.h"
 
 #include <vector>
@@ -115,16 +115,16 @@ namespace vsr {
                 }
 
                 
-                template< class A > Mat4f Mat( const A& s );
+//                template< class A > Mat4f Mat( const A& s );
                 
-                /// Extract 4x4 TRS Transformation Matrix from a Circle
-                template<> Mat4f Mat( const Cir& s){
-                    Biv b = Ro::dir( s ); // Get Direction
-                    Rot r = Gen::ratio( Vec::z, b.duale().unit() );
-                    Vec v = Ro::loc(s);
-                    double scale = Ro::rad( s );
-                    return Gen::mat(r,v,scale);
-                }
+//                /// Extract 4x4 TRS Transformation Matrix from a Circle
+//                template<> Mat4f Mat( const Cir& s){
+//                    Biv b = Ro::dir( s ); // Get Direction
+//                    Rot r = Gen::ratio( Vec::z, b.duale().unit() );
+//                    Vec v = Ro::loc(s);
+//                    double scale = Ro::rad( s );
+//                    return Xf::mat(r,v,scale);
+//                }
                                 
                 
                 void X( const Frame& f, float r=1.0, float g=1.0, float b=1.0, float a=1.0);
@@ -367,7 +367,7 @@ template<> inline void Draw :: Immediate (const Pln& s){
     Dls v = Fl::loc( s , PAO, false ); //Sph?
     Rot r = Gen::ratio( Vec::z, Op::dle( Biv( s ) ).unit() );
     glTranslatef(v[0],v[1],v[2]);
-    glMultMatrixf(&(Gen::mat(r).col[0][0]));
+    glMultMatrixf(&(Xf::mat(r).col[0][0]));
     Glyph::SolidGrid();		
 }
 
