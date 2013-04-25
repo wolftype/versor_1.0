@@ -109,7 +109,7 @@ FORCE:
 .PRECIOUS: $(EXEC_TARGETS) $(PCH_DIR)%.h.gch
 
 #COMPILATION of CPP to Object File
-$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h.gch 
+$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
 	@echo 
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo CXX compiling $< to $@
