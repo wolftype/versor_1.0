@@ -157,7 +157,7 @@ int main(int argc, const char * argv[]) {
 
     cout << argv[0] << endl; 
     
-    File::setdir( argv[0] );
+    //File::setdir( argv[0] );
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
 	glv.colors().back.set(1,1,1);
