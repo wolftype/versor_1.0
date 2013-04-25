@@ -8,7 +8,7 @@ PIROOT = $(HOME)/code/pi/root/
 
 CXX = arm-linux-gnueabihf-g++
 AR = ar crs
-CXXFLAGS = -D __raspberry__ -I$(PIROOT)usr/include
+CXXFLAGS = -D __raspberry__ -U __linux__ -I$(PIROOT)usr/include
 LDFLAGS =  -L$(PIROOT)usr/lib -lstdc++ -lm
 
 #Library name
@@ -16,7 +16,7 @@ LIB_NAME = vsr
 LIB_FILE = lib$(LIB_NAME).a
 
 #Cross Build Directories Relative to this Makefile
-BUILD_DIR 	= build/
+BUILD_DIR 	= ../../build/
 BIN_DIR		= $(BUILD_DIR)bin/
 OBJ_DIR		= $(BUILD_DIR)obj/
 LIB_DIR		= $(BUILD_DIR)lib/
