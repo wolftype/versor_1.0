@@ -36,8 +36,8 @@ void twoSpheres(GLVApp& app){
     Cir c = p.dual();
 
     //RED SPHERES
-    DRAW4( Ro::cir( Ro::dls(sA, -1),Biv::xy),1,0,0,.5);
-    DRAW4( Ro::cir(Ro::dls(sB, -1),Biv::xy),1,0,0,.5);
+    DRAW4( sA,1,0,0,.5);
+    DRAW4( sB,1,0,0,.5);
 
     //CYAN POINT PAIR PLUNGE
     DRAW3(Ro::loc( Ro::split(p,true) ),0,1,1);
