@@ -199,37 +199,8 @@ struct Gen {
         			
         return Rot(deg, v[0], v[1], v[2]);
     }
-    /*!
-     4x4 Transformation Matrix From Rotor
-    */
-    static Mat4f mat( const Rot& r) {
-      
-        Vec xi = Vec::x.sp(r);
-        Vec yi = Vec::y.sp(r);
-        Vec zi = Vec::z.sp(r);
-        
-        return Mat4f(xi[0], xi[1], xi[2], 0, 
-                      yi[0], yi[1], yi[2], 0,
-                      zi[0], zi[1], zi[2], 0,
-                      0   ,   0 ,   0 ,    1 );
-    }
-    
-    /*!
-     4x4 Transformation Matrix From Rotor, Translation Vector, and Scale
-    */
-    static Mat4f mat( const Rot& r, const Vec& v, double s) {
-      
-        Vec xi = Vec::x.sp(r);
-        Vec yi = Vec::y.sp(r);
-        Vec zi = Vec::z.sp(r);
-        
-        double x = v[0]; double y = v[1]; double z = v[2];
-        
-        return Mat4f( xi[0] * s, xi[1] * s, xi[2] * s, 0, 
-                      yi[0] * s, yi[1] * s, yi[2] * s, 0,
-                      zi[0] * s, zi[1] * s, zi[2] * s, 0,
-                      x  ,   y ,   z ,    1 );
-    }
+
+
 
     /*! Generate a Motor from a Dual Line Axis
         @param Dual Line Generator (the axis of rotation, including pitch and period)

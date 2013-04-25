@@ -332,15 +332,18 @@ void meshes(GLVApp& app){
     
     program.bind();
         
-        program.uniform("projection", app.scene().xf.proj);
+//        program.uniform("projection", app.scene().xf.proj);
+
+//       program.uniform("modelViewProjection", app.scene().xf.modelViewProjection);
+        
         program.uniform("normalMatrix", app.scene().xf.normal);
-        program.uniform("modelView", app.scene().xf.modelView );//app.scene().xf.modelView);        
+//        program.uniform("modelView", app.scene().xf.modelView );//app.scene().xf.modelView);        
         program.uniform("lightPosition", 0.0, 0.0, 1.0);
         
         
        // ITJ(i,f.num()) 
             //TOUCH(f[i]);
-            Draw::RenderES( f.dataPtr(), f.num(), program );
+            Draw::RenderES( f.dataPtr(), f.num(), app.scene().xf.modelViewProjectionMatrixf(), program );
        // END
         
     program.unbind();
@@ -363,8 +366,8 @@ void GLVApp :: onDraw(){
     
     
  //   render2texture(*this);
-    fixedfunc(*this);
-   // meshes(*this);
+   // fixedfunc(*this);
+    meshes(*this);
   //  simpleShader(*this);
 }
 

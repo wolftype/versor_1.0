@@ -17,6 +17,7 @@
 #include "vsr_gl_vbo.h"
 #include "vsr_mesh.h"
 #include "vsr_gl_data.h"
+#include "vsr_xf.h"
 
 namespace vsr{
 
@@ -208,7 +209,7 @@ namespace vsr{
                 template<class A> void RenderES ( const A& a, ShaderProgram& program ) {
                     
                 }
-                template<class A> void RenderES ( const A * a, int num, ShaderProgram& program ) {
+                template<class A> void RenderES ( const A * a, int num, const Mat4f& mvm, ShaderProgram& program ) {
                     
                 }
 
@@ -217,7 +218,7 @@ namespace vsr{
                     static MBO circle ( Mesh::Circle(.5) );
                     static float mf[16];
                     
-                    Mat4f mat = Draw::Mat(cir);
+                    Mat4f mat = Xf::mat(cir);
                     mat.fill(mf);
                     program.uniform("submodel", mf );    
 
@@ -226,7 +227,7 @@ namespace vsr{
                 }
 
 
-                template<> void RenderES ( const Cir * fcir, int num, ShaderProgram& program ){
+                template<> void RenderES ( const Cir * fcir, int num, const Mat4f& mvm, ShaderProgram& program ){
                     
                     static MBO circle ( Mesh::Circle(.5) );
                     static float mf[16];
@@ -235,10 +236,10 @@ namespace vsr{
                     
                     for (int i = 0; i < num; ++i){
                     
-                        Mat4f mat = Draw::Mat(fcir[i]);
+                        Mat4f mat = mvm * Xf::mat(fcir[i]);
                         mat.fill(mf);
-                        program.uniform("submodel", mf );    
-                        
+//                        program.uniform("submodel", mf );    
+                        program.uniform("modelViewProjection", mf);
                         circle.drawElements();
                         
                     }
