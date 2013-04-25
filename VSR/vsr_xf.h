@@ -29,6 +29,21 @@ namespace vsr {
                           zi[0], zi[1], zi[2], 0,
                           0   ,   0 ,   0 ,    1 );
         }
+        
+//        template<typename T>
+//        inline T copy(const Rot& r, const Vec& v, double s ){
+//            Vec xi = Vec::x.sp(r);
+//            Vec yi = Vec::y.sp(r);
+//            Vec zi = Vec::z.sp(r);
+//            
+//            double x = v[0]; double y = v[1]; double z = v[2];    
+//            
+//            
+//            return T ( xi[0] * s, xi[1] * s, xi[2] * s, 0, 
+//                          yi[0] * s, yi[1] * s, yi[2] * s, 0,
+//                          zi[0] * s, zi[1] * s, zi[2] * s, 0,
+//                          x  ,   y ,   z ,    1 );
+//         } 
         /*!
          4x4 Transformation Matrix From Rotor, Translation Vector, and Scale
         */

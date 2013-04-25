@@ -9,6 +9,7 @@
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
 #include "vsr_motor.h"
+
 #include "vsr_field.h"
 
 #include "vsr_tests.h"

@@ -102,10 +102,12 @@ void dipole(GLVApp& app){
     END
     
     //Draw Vector Field (Green)
-    f.draw(.2,1,.2);
+//    f.draw(.2,1,.2);
+    DRAW3(f, .2,1,.2);
     
     //Draw Particles
-    particles.draw(.5,1,1);
+    DRAW3(particles,.5,1,1);
+    
 
 }
 

@@ -74,8 +74,9 @@ void dipole(GLVApp& app){
     END
     
     //Draw Vector Field (Green)
-    f.draw(.2,1,.2);
+//    f.draw(.2,1,.2);
 
+    DRAW3(f,.2,1,.2);
 }
 
 void GLVApp :: onDraw(){

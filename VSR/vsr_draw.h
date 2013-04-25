@@ -18,7 +18,9 @@
 
 #include "vsr_op.h"
 #include "vsr_frame.h"
+#include "vsr_field.h"
 #include "vsr_xf.h"
+
 
 #include "vsr_gl.h"
 #include "vsr_glyph.h"
@@ -59,6 +61,13 @@ namespace vsr {
                 template<> void Immediate( const Tnb& );
                 template<> void Immediate( const Flp& );
                 template<> void Immediate( const Frame& );
+                
+                template< class A> void Immediate( const Field<A>&, float r = 1.0, float g= 1.0, float b= 1.0, float a = 1.0);
+                
+                template<> void Immediate( const Field<Sca>& f, float r, float g, float b, float a);
+                template<> void Immediate( const Field<Vec>& f, float r, float g, float b, float a);
+//                void Immediate( const Field<Vec>&, float r, float g, float b, float a);
+//                void Immediate( const Field<Sca>&, float r, float g, float b, float a); );
                 
                 void Immediate( const Cir&, double angleA, double angleB, bool dir);
                 
@@ -132,7 +141,10 @@ namespace vsr {
                 void Z( const Frame& f, float r=1.0, float g=1.0, float b=1.0, float a=1.0);
                                                 
                 template< class A > void Render(const A&, float, float, float,float a = 1.0);
-                template< class A > void Render(const A& a) { Draw::Render(a, 1,1,1); }
+                template< class A > void Render(const A& a) { Draw::Render(a, 1, 1, 1); }
+
+                template< class A > void Render(const Field<A>&, float, float, float,float a = 1.0);
+                template< class A > void Render(const Field<A>& a) { Draw::Render(a, 1, 1, 1); }
 
 //				template< class A > void Label(const A&);				
 //				template< class A > Vec Coord(const A&);				
@@ -209,6 +221,15 @@ inline void Draw :: Render (const A& s, float r, float g, float b, float a){
     
     Draw :: Immediate(s);
     
+    glPopMatrix();
+}
+
+template<class S>
+inline void Draw :: Render( const Field<S>& f, float r, float g, float b, float a){
+    glPushMatrix();
+        
+        Draw :: Immediate(f, r, g, b, a);
+        
     glPopMatrix();
 }
     
@@ -449,6 +470,47 @@ inline void Draw :: Immediate (const Cir& s, double angleA, double angleB, bool 
         
     Glyph::Segment2(angleA, angleB, size); 
 }
+
+
+template<class S>
+inline void Draw :: Immediate(const Field<S>& f, float r, float g , float b , float a){
+
+//    if (!bLattice){
+        for (int i = 0; i < f.num(); ++i){
+            Draw::Render( f[i], r, g, b, a );
+        }
+//    }
+}
+
+template<>
+inline void Draw :: Immediate( const Field<Sca>& f, float r, float g , float b , float a ){
+    
+       for (int i = 0; i < f.num(); ++i){  
+        GL::push(); glColor4f(r,g,b,f[i][0] * a);  GL::translate(f.grid(i).w()); GL::Glyph::Cube( f.spacing() ); GL::pop(); 
+        }
+
+}
+
+template<>
+inline void Draw :: Immediate( const Field<Vec>& f, float r, float g , float b , float a  ){
+      for (int i = 0; i < f.num(); ++i){
+        GL::push();
+        GL::translate( f.grid(i).w() );
+        GL::Draw::Render( f[i],r,g,b,a );
+        GL::pop();
+    }
+
+}
+
+//template<>
+//inline void Draw :: Immediate( const Lattice
+//        void drawGrid(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
+//            for (int i = 0; i < mNum; ++i){
+//                GL::Draw::Render( grid(i), r, g, b, a );
+//            }
+//        }
+
+
 
 //    struct Print {
 //    

@@ -13,7 +13,7 @@
 #include "vsr.h"
 #include "vsr_op.h"
 #include "vsr_frame.h"
-#include "vsr_draw.h"
+//#include "vsr_draw.h"
 #include "vsr_stat.h"
 #include "vsr_gfxdata.h"
 #include "vsr_lattice.h"
@@ -147,28 +147,30 @@ namespace vsr{
         Vec rand(){ 
             return Vec( px(Rand::Int(mWidth)) , py(Rand::Int(mHeight)), pz(Rand::Int(mDepth))  );         
         }
+//
 
-        void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
-            for (int i = 0; i < mNum; ++i){
-                GL::Draw::Render( mData[i], r, g, b, a );
-            }
-        }
-
-        void drawGrid(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
-            for (int i = 0; i < mNum; ++i){
-                GL::Draw::Render( grid(i), r, g, b, a );
-            }
-        }
-
-
-        void drawPush(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
-            for (int i = 0; i < mNum; ++i){
-                GL::push();
-                GL::translate( mPoint[i].w() );
-                GL::Draw::Render( mData[i],r,g,b,a );
-                GL::pop();
-            }
-        }
+            //MOVED TO vsr_draw
+//        void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
+//            for (int i = 0; i < mNum; ++i){
+//                GL::Draw::Render( mData[i], r, g, b, a );
+//            }
+//        }
+//
+//        void drawGrid(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
+//            for (int i = 0; i < mNum; ++i){
+//                GL::Draw::Render( grid(i), r, g, b, a );
+//            }
+//        }
+//
+//
+//        void drawPush(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0){
+//            for (int i = 0; i < mNum; ++i){
+//                GL::push();
+//                GL::translate( mPoint[i].w() );
+//                GL::Draw::Render( mData[i],r,g,b,a );
+//                GL::pop();
+//            }
+//        }
         
         //data at bottom front corner of vxl at p
         template<class B>
@@ -470,16 +472,16 @@ namespace vsr{
         ITN mData[i].pos() = mPoint[i]; END
     }
 
-    template<> void Field< Vec > :: draw(float r, float g, float b, float a) {
-        //cout <<"vecdraw"<<endl;
-        drawPush(r,g,b,a);
-    }
 
-
-    
-    template<> void Field< Sca > :: draw(float r, float g, float b, float a) {
-       ITN  GL::push(); glColor4f(r,g,b,mData[i][0] * a);  GL::translate(mPoint[i].w()); GL::Glyph::Cube( mSpacing ); GL::pop(); END
-    }
+//    template<> void Field< Vec > :: draw(float r, float g, float b, float a) {
+//        //cout <<"vecdraw"<<endl;
+//        drawPush(r,g,b,a);
+//    }
+//
+//    
+//    template<> void Field< Sca > :: draw(float r, float g, float b, float a) {
+//       ITN  GL::push(); glColor4f(r,g,b,mData[i][0] * a);  GL::translate(mPoint[i].w()); GL::Glyph::Cube( mSpacing ); GL::pop(); END
+//    }
 //    template<> Frame Field< Frame > :: surf(double u, double v){
 //        
 //        Patch p =  surfIdx(u,v);

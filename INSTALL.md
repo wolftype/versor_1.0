@@ -4,6 +4,7 @@ VERSOR COMPILATION and INSTALLATION Instructions
 ===
 
 This Documents the use of Versor as a standalone software.
+
 ---
 
 **NOTE:** _VERSOR_ is in active development!  I have not been versioning it -- so `git pull` frequently for updates! And EMAIL me (wolftype@gmail.com)
