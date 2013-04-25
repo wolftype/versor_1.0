@@ -129,7 +129,7 @@ $(OBJ_DIR)%.o: %.c
 
 $(PCH_DIR)%.h.gch: %.h
 	@echo CXX precompiling $< to $@
-	@echo This ,may take a little while but only needs to happen once
+	@echo This may take a little while but only needs to happen once
 	$(CXX) $(CXXFLAGS) $(HPATH) -x c++-header -c $< -o $@
 
 linkfile:
