@@ -37,6 +37,8 @@ namespace vsr {
 				 void Arr(const Vec& v1, bool line = 0);
 				//directed line element at a certain position
 				 void Dir(const Vec& v1, const Vec& v2);
+				//directed line element at a certain position
+				 void Dir2D(const Vec& v1, const Vec& v2);
 				
 				//reg circle
 				 void Circle(double radius = 1.0, int res = 50);
@@ -625,6 +627,25 @@ inline void Glyph :: Dir(const Vec& v1, const Vec& v2) {
 	glPopMatrix();
 
 }
+
+inline void Glyph :: Dir2D(const Vec& v1, const Vec& v2) {
+
+	Glyph::Line(v1, v2);	
+	Vec v3 = Vec( v2-v1 ).unit();		
+	Rot r2 = Gen::ratio( Vec::z, v3 );
+	
+//	double * m = &(Op::mat(r2)[0][0]);
+	Rot t = Gen::aa(r2);
+	
+	glPushMatrix();	
+		glTranslated(v2[0], v2[1], v2[2]);
+		glRotated(t[0], t[1], t[2], t[3]);
+//		glMultMatrixd( m );		
+		Glyph::TriLine(true);
+	glPopMatrix();
+
+}
+
 
 inline void Glyph :: Pin(const Vec& v2) {
 

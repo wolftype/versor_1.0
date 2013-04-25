@@ -34,6 +34,11 @@
 			<key>orderHint</key>
 			<integer>24</integer>
 		</dict>
+		<key>DipoleField.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>27</integer>
+		</dict>
 		<key>Dynamics.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -278,6 +283,11 @@
 			<true/>
 		</dict>
 		<key>9BF5C7BC16F3A60B00629664</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BFFDDAC1726467B00494CF1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

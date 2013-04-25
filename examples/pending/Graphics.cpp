@@ -296,13 +296,16 @@ void render2texture(GLVApp& app){
 
 //RENDER ALL GLYPHS USING gles 2.0 standards (not immediate mode)
 void meshes(GLVApp& app){
-    
+    app.bImmediate = false;   
+
 
     static ShaderProgram program;
-    static string Vert = AVertex + Varying + UMatrix  + NTransform + VLighting + VCalc + MVert;
-    static string Frag = USampler + Varying + MFrag;
     
     SET
+
+         string Vert = AVertex + Varying + UMatrix  + NTransform + VLighting + VCalc + MVert;
+         string Frag = USampler + Varying + MFrag;
+        
         program.source(Vert,Frag);
         program.bind();
             Pipe::BindAttributes();
@@ -310,46 +313,58 @@ void meshes(GLVApp& app){
         
     END
         
+//    static MBO circle ( Mesh::Circle() );
+//    static MBO line ( Mesh::Line( Vec::x * 2, Vec::y ) );
+//    static MBO dir ( Mesh::Dir() );
+//    static MBO grid ( Mesh::Grid() );
+//    static MBO cyl ( Mesh::Cylinder(1,2) );
+//    static MBO sphere ( Mesh::Sphere() );
+//    static MBO disc ( Mesh::Disc() );
     
-    static MBO circle ( Mesh::Circle() );
-    static MBO line ( Mesh::Line( Vec::x * 2, Vec::y ) );
-    static MBO dir ( Mesh::Dir() );
-    static MBO grid ( Mesh::Grid() );
-    static MBO cyl ( Mesh::Cylinder(1,2) );
-    static MBO sphere ( Mesh::Sphere() );
-    static MBO disc ( Mesh::Disc() );
+//    Dlp dlp(0,1,0,0);
+//    static Circle cir = CXY(1);
+//    TOUCH(cir);
+//    
+//    Par p = (cir.dual() ^ dlp).dual();
     
+    static Field<Cir> f (20,20,20,.5);
     
-    
-    static Circle cir = CXY(1);
-    TOUCH(cir);
-    
-    Mat4f mat = app.scene().xf.modelViewMatrixf() * Draw::Mat(cir);
-    float mf[16];
-    mat.fill(mf);
     
     program.bind();
         
-        program.uniform("modelView", mf );//app.scene().xf.modelView);
         program.uniform("projection", app.scene().xf.proj);
         program.uniform("normalMatrix", app.scene().xf.normal);
+        program.uniform("modelView", app.scene().xf.modelView );//app.scene().xf.modelView);        
         program.uniform("lightPosition", 0.0, 0.0, 1.0);
         
-        Pipe::Line( circle );
+        
+       // ITJ(i,f.num()) 
+            //TOUCH(f[i]);
+            Draw::RenderES( f.dataPtr(), f.num(), program );
+       // END
         
     program.unbind();
 }
 
-
+void fixedfunc(GLVApp& app){
+        app.bImmediate = true;   
+        static Field<Cir> f (20,20,20,.5);
+        
+        ITJ(i,f.num()) 
+            //TOUCH(f[i]);
+            Draw::Render( f[i] ) ;
+        END
+}
 
 void GLVApp :: onDraw(){
   //  bImmediate = false;   
-    bImmediate = false;   
+  //  bImmediate = false;   
     
     
     
  //   render2texture(*this);
-    meshes(*this);
+    fixedfunc(*this);
+   // meshes(*this);
   //  simpleShader(*this);
 }
 

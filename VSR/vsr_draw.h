@@ -116,6 +116,7 @@ namespace vsr {
 
                 
                 template< class A > Mat4f Mat( const A& s );
+                
                 /// Extract 4x4 TRS Transformation Matrix from a Circle
                 template<> Mat4f Mat( const Cir& s){
                     Biv b = Ro::dir( s ); // Get Direction

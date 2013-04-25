@@ -26,18 +26,18 @@ void dipole(GLVApp& app){
     static bool bReset;
 
     //Vector Field
-    static Field<Vec> f(20,15,1,.5);
+    static Field<Vec> f(60,10,1,.5);
     //Point Particles
-    static Field<Pnt> particles(20,10,1,.2);
+    static Field<Pnt> particles(30,20,1,.2);
     
     SET 
         app.gui(amt, "amt", -10,10)(trail,"trail",0,100)(bReset,"reset"); 
-        amt = .3; trail = 5;
+        amt = .3; trail = 1;
     END
     
     if (bReset) particles.reset();
 
-    //Imaginary Point Pair Follow Mouse Position
+    //Imaginary Point Pair Follows Mouse Position
     Pnt pnt = app.mouse().origin;
     Frame frame(pnt);
     Par par = frame.py(false) * amt;
@@ -52,7 +52,7 @@ void dipole(GLVApp& app){
         ITJ(j,trail)
             double t= 1.0 * j/trail;
             np = Ro::loc( np.sp( bst ) );
-            DRAW3(np,1,.5,1-t);                     //Draw Particle
+            DRAW3( Ro::dls(np,.05),1,.4,1-t);                     //Draw Particle
         END
         
         particles[i] = np;                          //Save to particle field

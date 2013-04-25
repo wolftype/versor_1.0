@@ -142,7 +142,9 @@ void ShaderProgram::source( string vs, string fs){
     bLoaded = true;
     bActive = true;
     
+    bind();
     get();
+    unbind();
 }
 
 void ShaderProgram::unload(){
@@ -228,12 +230,15 @@ void ShaderProgram::get() {
             
             mUniform.push_back( u );
             
+            //map version
+            mUniformMap[ string(u.name) ] = u;
             
             // check for array names
 //            if(u.name[ strlen(u.name)-3 ] == '[' && u.name[ strlen(u.name)-1 ] == ']') {
 //                u.name[ strlen(u.name)-3 ] = '\0';
 //            }
 //           
+            cout << u.name << " " << uniform( u.name ) << endl; 
             
             u.print();
 
@@ -245,6 +250,12 @@ void ShaderProgram::get() {
             Attribute a( program, j );
             
             mAttribute.push_back( a );
+            
+              //map version
+            mAttributeMap[ string(a.name) ] = a;
+            
+            cout << a.name << " " << attribute( a.name ) << endl; 
+
 
             a.print();
 

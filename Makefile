@@ -170,13 +170,13 @@ test: vsr tests/test.cpp
 testGL: vsr tests/testGL.cpp
 
 install: FORCE vsr
-	@echo installing to $(DESTDIR)
+	@echo installing vsr to $(DESTDIR)
 	@$(INSTALL) -d $(DESTDIR)/lib
 	@$(INSTALL) -d $(DESTDIR)/include/$(LIB_NAME)/Elements/
 	@$(INSTALL) -m 644 $(LIB_PATH) $(DESTDIR)/lib
-	@$(INSTALL) -m 644 $(INC_DIR)*.h $(DESTDIR)/include/$(LIB_NAME)
+	@$(INSTALL) -m 644 $(VSR_DIR)*.h $(DESTDIR)/include/$(LIB_NAME)
 	@$(INSTALL) -m 644 $(EXT_DIR)gl2ps/*.h $(DESTDIR)/include/$(LIB_NAME)
-	@$(INSTALL) -m 644 $(INC_DIR)Elements/*.h $(DESTDIR)/include/$(LIB_NAME)/Elements/
+	@$(INSTALL) -m 644 $(VSR_DIR)Elements/*.h $(DESTDIR)/include/$(LIB_NAME)/Elements/
 	@$(INSTALL) -d $(DESTDIR)/include/$(LIB_NAME)/pch/
 ifeq ($(INSTALL_PCH),1)
 	@echo installing precompiled header to $(DESTDIR)/include/$(LIB_NAME)/

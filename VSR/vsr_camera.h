@@ -212,7 +212,7 @@ class Camera : public Frame {
             Rot cat() { return camera.rot() * model.rot(); }//camera.rot() * model.rot(); }
             
             Mat4f mod() { return model.image(); }
-            Mat4f mvm() { return  XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos()) * XMat::rot( model.rot() ) ; }
+            Mat4f mvm() { return XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos()) * XMat::rot( model.rot() ) ; }
             Mat4f proj() { 
                 Lens& tl = camera.lens();
                 return XMat::fovy( tl.mFocal * PI/180.0, tl.mWidth/tl.mHeight, tl.mNear, tl.mFar ); 

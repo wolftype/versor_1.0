@@ -44,9 +44,9 @@ namespace vsr {
             printf("VATTRIB GETS\n");
             printf("program: %d string: %s \n", sprog, attrib.c_str());
             
-            mAtt.id = glGetAttribLocation(sprog, attrib.c_str()); 
+//            mAtt.id = glGetAttribLocation(sprog, attrib.c_str()); 
             
-            mAtt.getAttrib(sprog);
+            mAtt.getAttrib(sprog, attrib.c_str());
             mAtt.print();
             
             mSize = GL::cmp(mAtt.vectype);

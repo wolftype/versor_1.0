@@ -1,18 +1,22 @@
 #MAKEFILE TO CROSS COMPILE VERSOR TO RASPBERRY PI (only works on linux machine or VM)
+PORT = 22
+HOST = pi-la
+NAME = main
 
 EXEC_TARGETS = tests/%.cpp examples/%.cpp
+PIROOT = $(HOME)/code/pi/root/
 
 CXX = arm-linux-gnueabihf-g++
 AR = ar crs
-CXXFLAGS = -D __raspberry__ -Iusr/include
-LDFLAGS =  -Lusr/lib -lstdc++ -lm
+CXXFLAGS = -D __raspberry__ -I$(PIROOT)usr/include
+LDFLAGS =  -L$(PIROOT)usr/lib -lstdc++ -lm
 
 #Library name
 LIB_NAME = vsr
 LIB_FILE = lib$(LIB_NAME).a
 
 #Cross Build Directories Relative to this Makefile
-BUILD_DIR 	= ../../crossbuild/
+BUILD_DIR 	= build/
 BIN_DIR		= $(BUILD_DIR)bin/
 OBJ_DIR		= $(BUILD_DIR)obj/
 LIB_DIR		= $(BUILD_DIR)lib/
@@ -24,7 +28,7 @@ HEAD = vsr.h
 PCH = $(addsuffix .gch, $(HEAD))
 
 #Locations of Source and Header Files Relative to this Makefile
-INC_DIR		= ../../VSR/
+INC_DIR		= ../../vsr/
 SRC_DIR		= ../../src/
 
 #SEARCH PATHS
@@ -41,7 +45,7 @@ VPATH = $(PCH_DIR):\
 		$(INC_DIR)Elements
 
 #Locations of External Libaries
-EXT_DIR		= externals/
+EXT_DIR		= ../../externals/
 
 LDFLAGS := -L$(LIB_DIR) -l$(LIB_NAME) $(LDFLAGS)
 
@@ -49,14 +53,14 @@ LDFLAGS := -L$(LIB_DIR) -l$(LIB_NAME) $(LDFLAGS)
 OBJS := vsr_mv.o vsr_frame.o vsr_file.o
 
 #BARE BONES LIBRARY FILES (With Graphics)
-OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o vsr_gl_shader.o
+#OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o vsr_gl_shader.o
 
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
 	@echo Cross-Compiling $@ using $<
 	@echo $(CXX) $(CXXFLAGS) $(IPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS)
 	$(CXX) $(CXXFLAGS) $(IPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS)
-	@cd $(BIN_DIR) && scp $(*F) pi@192.168.0.2:/tmp
+	@cd $(BIN_DIR) && scp $(*F) $(HOST):/tmp
 
 #TITLE
 title: 
@@ -78,14 +82,14 @@ clean:
 
 #COPY TO RASPBERRY PI
 pie: vsr
-	scp -r build/lib/ pi@192.168.0.2:/tmp
+	scp -r build/lib/ $(HOST):/tmp
 #	scp -r build/include/ pi@10.0.1.13:/tmp
 
 #TEST WHOLE SHEBANG, BUILD LIBRARY THEN COMPILE AND RUN EXAMPLE
 test: title dir $(addprefix $(OBJ_DIR), $(GLOBJ))
 	$(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(GLOBJ))
 	$(CXX) $(CXXFLAGS) $(IPATH) -H $@ -o $(BIN_DIR)$(*F) $(LDFLAGS)
-	@cd $(BIN_DIR) && scp $(*F) pi@192.168.0.2:/tmp
+	@cd $(BIN_DIR) && scp $(*F) $(HOST):/tmp
 
 # Dummy target to force rebuilds
 FORCE:
@@ -108,3 +112,7 @@ $(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
 
 vsr: title dir $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
+
+# deploy:
+# 	scp -P $(PORT) $(BIN_DIR)$(NAME) $(HOST):/tmp
+# 	ssh -t -p $(PORT) $(HOST) /tmp/$(NAME)

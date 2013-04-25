@@ -98,11 +98,14 @@ void basicKnot(GLVApp& app){
 
 void GLVApp :: onDraw(){
  basicKnot(*this);
- text("Cabled Torus Knot Wound around Two Antipodal Hopf Links",50,50);
+// text("Cabled Torus Knot Wound around Two Antipodal Hopf Links",50,50);
 }
 
 int main(int argc, const char * argv[]) {
-        
+     
+//    cout << "arg: " << argv[0] << endl; 
+//    File::setdir( argv[0] );  
+           
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
 	glv.colors().back.set(0,0,0);
