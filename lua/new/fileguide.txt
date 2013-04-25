@@ -1,3 +1,8 @@
+These are the lua files I use to generate Versor's list of operations.
+
+Many of these files are in experimental stages.  For now, if you are interested
+in learning more, your best bet is to contact me directly [ wolftype at gmail ]
+
 basis - list of basis and order
 func - products (returns "instructions" and id)
 
@@ -14,6 +19,8 @@ vsrheaders - build mk types, and statics
 
 unroll - tests
 
+grammar - parsing
+bit - generic ga generating
 
 GENERATE
 ---

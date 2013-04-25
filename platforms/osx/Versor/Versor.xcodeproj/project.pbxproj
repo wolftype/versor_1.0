@@ -13,7 +13,6 @@
 		9B158C0316C618FC00A6DFE0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B158C0416C618FC00A6DFE0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B158C0616C618FC00A6DFE0 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
-		9B1A26591700DBAE003165C8 /* xKnot2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A26581700DBAE003165C8 /* xKnot2.cpp */; };
 		9B1A265B170266EA003165C8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B1A82EE17174BA200D4389A /* vsr_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C71D16F0E9EF00629664 /* vsr_gl.cpp */; };
 		9B1E15591670FF470015D25C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
@@ -134,6 +133,11 @@
 		9BF5C7C316F3A60B00629664 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9BF5C7C416F3A60B00629664 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9BF5C7C516F3A60B00629664 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9BFFDDB21726467B00494CF1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9BFFDDB31726467B00494CF1 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9BFFDDB41726467B00494CF1 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9BFFDDBE172646C400494CF1 /* xDipoleField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFDDBD172646C400494CF1 /* xDipoleField.cpp */; };
+		9BFFDDBF172665F700494CF1 /* xKnot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B76AAEF170659860054ECBC /* xKnot.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +289,13 @@
 			remoteInfo = vsr;
 		};
 		9BF5C7BE16F3A60B00629664 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B76CC231628A9440064FF35;
+			remoteInfo = vsr;
+		};
+		9BFFDDAE1726467B00494CF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
 			proxyType = 1;
@@ -528,6 +539,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9BFFDDB51726467B00494CF1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -731,6 +751,8 @@
 		9BF5C79D16F101B600629664 /* vsr_functional.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_functional.h; sourceTree = "<group>"; };
 		9BF5C7B816F2A65900629664 /* Mechanism copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Mechanism copy"; path = Fluid; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BF5C7CA16F3A60B00629664 /* Inversions */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Inversions; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BFFDDBA1726467B00494CF1 /* DipoleField */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DipoleField; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BFFDDBD172646C400494CF1 /* xDipoleField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xDipoleField.cpp; path = ../pending/xDipoleField.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1001,6 +1023,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BFFDDB11726467B00494CF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFFDDB21726467B00494CF1 /* OpenGL.framework in Frameworks */,
+				9BFFDDB31726467B00494CF1 /* GLUT.framework in Frameworks */,
+				9BFFDDB41726467B00494CF1 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1083,6 +1115,7 @@
 				9B76AAEE170659860054ECBC /* xDini.cpp */,
 				9B76AAEF170659860054ECBC /* xKnot.cpp */,
 				9B9A40A5170F66D500E02BAC /* xDipole.cpp */,
+				9BFFDDBD172646C400494CF1 /* xDipoleField.cpp */,
 				9B76AAF0170659860054ECBC /* xLinear.cpp */,
 			);
 			name = boosts;
@@ -1138,6 +1171,7 @@
 				9B76AAFF170659990054ECBC /* Commute copy */,
 				9B78D452170E384E006AF189 /* Meet copy */,
 				9B9A40A0170F654800E02BAC /* Navigation copy */,
+				9BFFDDBA1726467B00494CF1 /* DipoleField */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1849,6 +1883,25 @@
 			productReference = 9BF5C7CA16F3A60B00629664 /* Inversions */;
 			productType = "com.apple.product-type.tool";
 		};
+		9BFFDDAC1726467B00494CF1 /* DipoleField */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BFFDDB71726467B00494CF1 /* Build configuration list for PBXNativeTarget "DipoleField" */;
+			buildPhases = (
+				9BFFDDAF1726467B00494CF1 /* Sources */,
+				9BFFDDB11726467B00494CF1 /* Frameworks */,
+				9BFFDDB51726467B00494CF1 /* CopyFiles */,
+				9BFFDDB61726467B00494CF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9BFFDDAD1726467B00494CF1 /* PBXTargetDependency */,
+			);
+			name = DipoleField;
+			productName = DemoBoosts;
+			productReference = 9BFFDDBA1726467B00494CF1 /* DipoleField */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1897,6 +1950,7 @@
 				9B76AAF1170659990054ECBC /* Dipole */,
 				9B78D444170E384E006AF189 /* Navigation */,
 				9B9A4092170F654800E02BAC /* Field */,
+				9BFFDDAC1726467B00494CF1 /* DipoleField */,
 			);
 		};
 /* End PBXProject section */
@@ -1980,6 +2034,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9BD351681665532300809328 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BFFDDB61726467B00494CF1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2170,7 +2231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B1A26591700DBAE003165C8 /* xKnot2.cpp in Sources */,
+				9BFFDDBF172665F700494CF1 /* xKnot.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2224,6 +2285,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BC881FC1710DA5100F24A2A /* xInversiveMechanisms.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BFFDDAF1726467B00494CF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFFDDBE172646C400494CF1 /* xDipoleField.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2339,6 +2408,11 @@
 			isa = PBXTargetDependency;
 			target = 9B76CC231628A9440064FF35 /* vsr */;
 			targetProxy = 9BF5C7BE16F3A60B00629664 /* PBXContainerItemProxy */;
+		};
+		9BFFDDAD1726467B00494CF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B76CC231628A9440064FF35 /* vsr */;
+			targetProxy = 9BFFDDAE1726467B00494CF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3024,6 +3098,23 @@
 			};
 			name = Release;
 		};
+		9BFFDDB81726467B00494CF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = DipoleField;
+			};
+			name = Debug;
+		};
+		9BFFDDB91726467B00494CF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = DipoleField;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3275,6 +3366,15 @@
 			buildConfigurations = (
 				9BF5C7C816F3A60B00629664 /* Debug */,
 				9BF5C7C916F3A60B00629664 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BFFDDB71726467B00494CF1 /* Build configuration list for PBXNativeTarget "DipoleField" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BFFDDB81726467B00494CF1 /* Debug */,
+				9BFFDDB91726467B00494CF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

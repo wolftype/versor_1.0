@@ -20,8 +20,12 @@ void twoSpheres(GLVApp& app){
 
     //Two Dual Spheres
     static Dls sA = Ro::dls(-1,0,0,1);
-    static Dls sB = Ro::dls(1,0,0,.5);
+    static Dls sB = Ro::dls(1,0,0,1);
     
+    Pnt op = PT(0,-2,0);
+    //DRAW3(op,1,1,0);
+    
+    Cir orbit = op ^ sA ^ sB;
     //use 'G', 'R', 'S' to grab, rotate, or scale these elements
     TOUCH(sA); TOUCH(sB);
 
@@ -31,15 +35,18 @@ void twoSpheres(GLVApp& app){
     //Meet is dual to the plunge
     Cir c = p.dual();
 
+    //RED SPHERES
+    DRAW4( Ro::cir( Ro::dls(sA, -1),Biv::xy),1,0,0,.5);
+    DRAW4( Ro::cir(Ro::dls(sB, -1),Biv::xy),1,0,0,.5);
+
     //CYAN POINT PAIR PLUNGE
-    DRAW3(p,0,1,1);
+    DRAW3(Ro::loc( Ro::split(p,true) ),0,1,1);
+    DRAW3(Ro::loc( Ro::split(p,false) ),0,1,1);
     
     //GREEN CIRCLE MEET (is dotted when Meet is Imaginary)
     DRAW3(c,0,1,0);
-
-    //RED SPHERES
-    DRAW4(sB,1,0,0,.5);
-    DRAW4(sA,1,0,0,.5);
+    
+    DRAW3(orbit,0,0,0);
     
     app.text("Hit 'G' or 'S' and then click to grab or scale spheres,  'Q' to let them go.",50,50);
 
@@ -149,9 +156,11 @@ void GLVApp :: onDraw(){
 int main(int argc, const char * argv[]) {
 
     cout << argv[0] << endl; 
+    
+    File::setdir( argv[0] );
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
-	glv.colors().back.set(.2,.2,.2);
+	glv.colors().back.set(1,1,1);
     		
 	Window * win = new Window(500,500,"MEET OPERATIONS",&glv);
     GLVApp * app = new GLVApp(win);    

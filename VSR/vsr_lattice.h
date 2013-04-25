@@ -124,7 +124,7 @@ namespace vsr {
         int h() const { return mHeight; }
         int d() const { return mDepth; }
         double spacing() const { return mSpacing; }
-        void spacing( double amt ) { mSpacing = amt; }
+        void spacing( double amt ) { mSpacing = amt; init(); }
         
         int num() const { return mNum; }
         

@@ -258,7 +258,7 @@ namespace vsr {
                 
         virtual void gl2ps(){
             static int id = 0;
-            stringstream os; os << "output_" << id << ".eps";
+            stringstream os; os << "output_" << id << ".pdf";
             id++;
             
             FILE *fp;
@@ -267,24 +267,27 @@ namespace vsr {
             string name = File::output + os.str();
             fp = fopen(name.c_str(), "wb");
             
-            printf("Writing %s to %s", os.str().c_str(), name.c_str() );
+            printf("I am writing %s to %s\n", os.str().c_str(), name.c_str() );
             GLint tv[4];
             glGetIntegerv(GL_VIEWPORT, tv);
-            glPointSize(15);
+//            glPointSize(15);
             
-            //gl2psEnable(GL2PS_BLEND);
-            //	gl2psBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             //| GL2PS_NO_BLENDING 
             //| GL2PS_SIMPLE_LINE_OFFSET
             //
             
+            
             //gl2psEnable( GL2PS_POLYGON_OFFSET_FILL );
             while(state == GL2PS_OVERFLOW){
                 buffsize += 1024*1024;
-                gl2psBeginPage("test", "gl2psTestSimple", tv , GL2PS_EPS, GL2PS_SIMPLE_SORT,//GL2PS_NO_SORT,//, //GL2PS_SIMPLE_SORT, 
-                               GL2PS_TIGHT_BOUNDING_BOX | GL2PS_NO_PS3_SHADING | GL2PS_BEST_ROOT | GL2PS_NO_BLENDING | GL2PS_SIMPLE_LINE_OFFSET,// | GL2PS_BEST_ROOT, 
+                gl2psBeginPage("test", "gl2psTestSimple", tv , GL2PS_PDF, GL2PS_SIMPLE_SORT,//GL2PS_NO_SORT,//, //GL2PS_SIMPLE_SORT, 
+                               GL2PS_NO_PS3_SHADING | GL2PS_BEST_ROOT | GL2PS_SIMPLE_LINE_OFFSET | GL2PS_DRAW_BACKGROUND | GL2PS_TIGHT_BOUNDING_BOX,// | GL2PS_OCCLUSION_CULL,// | GL2PS_TIGHT_BOUNDING_BOX,// | GL2PS_BEST_ROOT, GL2PS_NO_PS3_SHADING | 
                                GL_RGBA, 0, NULL, 0, 0, 0, buffsize, fp, "out.eps");
                 
+                gl2psEnable(GL2PS_BLEND);
+                gl2psBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                gl2psPointSize(10);
+                gl2psLineWidth(1);
                  onDraw();
                 
                 state = gl2psEndPage();

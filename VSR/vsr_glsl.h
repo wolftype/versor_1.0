@@ -28,6 +28,7 @@ namespace vsr{
         
         string UMatrix = STRINGIFY(
             uniform mat4 modelView;         // Model * View
+            uniform mat4 submodel;          // Glyph-specific Transform
             uniform mat4 projection;        // Projection Matrix (ortho or frustrum)
             uniform mat4 normalMatrix;      // Normal Matrix (inverse transpose of mvm)
         );
@@ -82,7 +83,7 @@ namespace vsr{
 
         string VCalc = STRINGIFY(
             vec4 doVertex (vec4 v) {
-                mat4 m = projection * modelView;
+                mat4 m = projection * modelView * submodel;
                 return m * v;
             }
         );
@@ -121,6 +122,8 @@ namespace vsr{
                                 
                 vec4 pos =  vec4(position,1.0);
                 vec4 nor = vec4(normal,1.0);
+                
+                //xm = submodel;
                 
                 gl_Position = doVertex(pos);
             }

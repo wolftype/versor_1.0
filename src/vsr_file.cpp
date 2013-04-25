@@ -25,25 +25,35 @@ namespace vsr {
 	
 	void File :: setdir (string directory) {
 
+        string tmp = directory;
+        string cat = "";
         
-		resources = directory + "/";
         
-        directory.erase(directory.find_last_of('/')+1);
+        tmp.erase( tmp.find("vsr",0) );
+        tmp += "vsr/";
+//        while ( tmp != directory ){
+//            cat += "../";
+//            directory.erase(directory.find_last_of('/'));
+//        }
+//        
+//        cout << cat << endl; 
+        
 		cwd = directory;
+//		
+//		directory.erase(directory.find_last_of('/'));
+//		directory.erase(directory.find_last_of('/'));
+//		directory.erase(directory.find_last_of('/'));
+//		directory.erase(directory.find_last_of('/')+1);
 		
-		directory.erase(directory.find_last_of('/'));
-		directory.erase(directory.find_last_of('/'));
-		directory.erase(directory.find_last_of('/'));
-		directory.erase(directory.find_last_of('/')+1);
-		
-		data = directory+"resources/";
+
+		data = tmp+"resources/";
 		shaders = data+"shaders/";
 		textures = data+"textures/";
 		meshes = data  + "meshes/";
 		images = data  + "images/";
 		videos = data + "videos/";
 		audio = data + "audio/";
-        output = directory+"output/";
+        output = tmp+"output/";
 		
 		cout << "CWD: " << File::cwd 
 		<< "\nData Folder: " << File::data 

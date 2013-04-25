@@ -99,6 +99,12 @@ namespace vsr{
             return *this;
         }
         
+        Field& respace( double s ){
+            spacing(s);
+            init();
+            return *this;
+        }
+        
         void onDestroy(){
             if (mData) delete[] mData;
         }

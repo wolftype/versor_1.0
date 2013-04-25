@@ -20,39 +20,69 @@ using namespace vsr;
 //DIAGRAMMATIC
 void cusp(GLVApp& app){
 
-    static Field<Pnt> f(1,10,1,.2);
-    static Frame frame;
+    static Field<Pnt> f(1,100,1,.2);
+    static Frame frame(PT(-1,0,0));
     
     Mesh line(GL::LS);
     
     vector<Pnt> pnts;
+    vector<Vec> vec;
     
-    TOUCH(frame); DRAW3(frame.pos(),1,0,0);
+    TOUCH(frame); DRAW3(frame.bound(),1,0,0);
     
-    static double amt, spread;
-    static bool bWt;
+    static double q, tot, amt, spread;
+    static bool bWt,bDrawArrow;
     
-    SET app.gui(amt,"amt",-100,100)(spread,"spread",.1,10)(bWt,"wt"); END
+    SET 
+        app.gui(q,"q",-10,10)(tot,"tot",-1,1)(amt,"amt",-100,100)(spread,"spread",.1,10)(bWt,"wt")(bDrawArrow,"drawArrow"); 
+        amt = -5; q = 5; spread = .1; q = 1;
+    END
     
-    f.resize(1,10,1,spread);
+    f.respace(spread);
     
     ITJ(i,f.num())
     
+    
         double t = 1.0 * i / f.num();
         double dist = Ro::sqd( f.grid(i), frame.pos() );
-        double tmp  = amt * ( bWt ? 1.0 / (.01 + dist) : 1.0 );
-        Dls np = Ro::dls_pnt(f.grid(i), tmp );
+        double tmp  = tot * amt * ( bWt ? 1.0 / (.01 + dist) : 1.0 );
+
+        tmp += tot * q;
+
+        Dls np = Ro::dls_pnt(f.grid(i), tmp ); 
+        Dls ip = Ro::dls_pnt(f.grid(i), -tmp ); 
+                
+        Cir c  = Ro::cir( ip, Biv::xy );
+
         f[i] = np;
- 
-        Cir c  = Ro::cir( f[i], Biv::xy, tmp );
-        DRAW3(c,t, 1, 1- t);
+
         Pnt sp = Ro::loc (frame.pos().re( f[i] ));
-        DRAW3(sp, t,1,1-t);
+        pnts.push_back(sp);
+
+
         line.add(sp);
+        vec.push_back( sp - f.grid(i) );
+        
+        double rt = i / 5.0;
+        if ( ( rt - floor(rt) == 0 ) && !( int(rt) & 1 ) ) DRAW3( c, 1, .3, .3);
+        
+        
     END
     
-    line.draw();
+    //f.drawGrid(0,0,0);
+    GL::Glyph::Line(f.grid(0), f.grid( f.num() -1 ) );
+    glLineWidth(2);
+    line.draw(0,0,1);
+
+    ITJ(i, pnts.size() )
+        double rt = i / 5.0;
+        if ( ( rt - floor(rt) == 0 ) && !( int(rt) & 1 ) ) {
+            DRAW3(pnts[i],0,1,0);
         
+            if (bDrawArrow) { GL::Draw::Push(f.grid(i)); DRAW3(vec[i], .3,.3,.3); GL::pop(); }
+        }
+        
+    END
 }
 
 //kink
@@ -159,40 +189,44 @@ void intussuception(GLVApp& app){
 void intussuception2(GLVApp& app){
 
     //CONTROL POINT
-    static Frame frame( PT(0,0,0) );
+    static Frame frame( PT(0,1,0) );
     
-    TOUCH(frame); DRAW(frame.lz());
+    TOUCH(frame); //DRAW(frame.lz());
     
     //SURFACE MESH
-    static Field<Pnt> f(1,19,10,.5);
+    static Field<Pnt> f(20,1,20,.5);
 
     //Amt, and Gui Draw Booleans
-    static double amt, curve;
-    static bool bWt, bLine, bShow;
+    static double amt, curve,q, tot;
+    static bool bWt, bLine, bShow, bDrawSphere;
     
     SET 
-        app.gui(bWt,"wt")(amt,"amt",-100,100)(curve,"curve",-10,10)(bLine, "line")(bShow,"show ref"); 
+        app.gui(bWt,"use dist")(amt,"amt",-100,100)(q,"q",-100,100)(tot,"tot",-100,100)(curve,"curve",-10,10)(bLine, "use Line ")(bShow,"show ref")(bDrawSphere,"draw sphere"); 
         frame.scale(.2);
         bLine = true;
     END
     
     
     int iter = 10;
-    UVMesh mesh(f.h(), f.d());
+    UVMesh mesh(f.w(), f.d());
 
     Bst bst = Gen::bst( frame.txScaled() * curve );
     Cir tc = Cir(frame.lz()).sp( bst );
-    DRAW(tc);
+    
+    if (bLine) DRAW3(tc,0,1,0);
     
     ITJ( i, f.num() )
         
         
         double dist2Line = ( f.grid(i) <=  tc.dual() ).dot()[0];
-        double dist = Ro::sqd( frame.pos(), f.grid(i) );
+        
+        double dist2pos = Ro::sqd( frame.pos(), f.grid(i) );
         
         Pnt& p = f[i]; 
         
-        p = Ro::dls_pnt( f.grid( i ), amt * ( !bWt ? 1.0 : 2.0 / ( 1.0 + ( bLine ? dist2Line : dist ) ) ) );
+        double wt = amt * ( !bWt ? 1.0 : 2.0 / ( 1.0 + ( bLine ? dist2Line : dist2pos ) ) );
+        
+        p = Ro::dls_pnt( f.grid( i ), tot * (wt + q) );
         
         //Reflect Control into Surface
         Dls td = frame.bound().re( p );
@@ -202,14 +236,14 @@ void intussuception2(GLVApp& app){
         
         mesh.add(np);
         DRAW3( np,0,1,1);
-        if (bShow) bLine? DRAW(tp) : DRAW(td);
+        if (bShow) bLine? DRAW3(tp,1,.5,.5) : DRAW3(td,1,.5,.5);
     
     END
     
     mesh.draw(.3,.3,.3);
     
     //Sphere
-    DRAW4(frame.bound(), 1,0,0,.5);
+    if (bDrawSphere) DRAW4(frame.bound(), 1,0,0,.5);
 }
 
 
@@ -217,7 +251,7 @@ void bend(GLVApp& app){
     //CONTROL POINT
     static Frame frame( PT(0,0,0) );
     
-    TOUCH(frame); DRAW(frame.lz());
+    TOUCH(frame); //DRAW(frame.lz());
     
     //SURFACE MESH
     static Field<Pnt> f(20,1,20,.5);
@@ -244,8 +278,8 @@ void bend(GLVApp& app){
     Cir tx = Cir(frame.lx()).sp( xBst );
     Cir ty = Cir(frame.lz()).sp( yBst );
     
-    DRAW(tx);
-    DRAW(ty);
+    DRAW3(tx,1,0,0);
+    DRAW3(ty,1,0,0);
     
     
     int type = vType;
@@ -279,8 +313,8 @@ void bend(GLVApp& app){
             
     END
     
-    mesh.draw(.3,.3,.3);
-    mesh.drawTri(0,1,1);
+    mesh.draw(0,1,1);
+    mesh.drawTri(.3,.3,.3);
     //Sphere
     DRAW4(frame.bound(), 1,0,0,.5);
 
@@ -328,7 +362,8 @@ void pinch(GLVApp& app){
 }
 
 void GLVApp :: onDraw() {
-    cusp(*this);
+    bend(*this);
+ //   cusp(*this);
 //    kink(*this);
 //    intussuception2(*this);
 //    pinch(*this);
@@ -344,7 +379,7 @@ int main(int argc, const char * argv[]) {
 	Window * win = new Window(1000,500,"Boosted Surface",&glv);
     GLVApp * app = new GLVApp(win);    
     app->gui.colors().back.set(0,0,0);
-	glv.colors().back.set(.5,.5,.5);
+	glv.colors().back.set(1,1,1);
     
     glv << app;
         

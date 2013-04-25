@@ -12,8 +12,8 @@
 	FOR PASSING AROUND WITH MEMBERWISE SHALLOW COPYS
  */
 
-#ifndef MATRIX_H_INCLUDED
-#define MATRIX_H_INCLUDED
+#ifndef VSR_MATRIX_H_INCLUDED
+#define VSR_MATRIX_H_INCLUDED
 
 #include <iostream>
 #include "vsr_constants.h"
@@ -42,6 +42,8 @@ namespace vsr {
     std::ostream& operator << ( std::ostream& os, const Vec3<T>& a );
     template< class T >
     std::ostream& operator << ( std::ostream& os, const Vec4<T>& a );
+    template< class T >
+    std::ostream& operator << ( std::ostream& os, const Mat4<T>& a );
 
 	//2D VECTOR
 	template <typename T = double>

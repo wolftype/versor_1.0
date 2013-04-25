@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
+#include <map>
 
 //#include <fstream>
 //#include "vsr_file.h"
@@ -55,12 +56,13 @@ struct ShaderParam {
         
     ShaderParam() : buf(256) {}
     
-    ShaderParam(ShaderParam::Type t, GLuint p, GLuint i = 0) : id(i), buf(256), ptype(t) { 
+    ShaderParam(ShaderParam::Type t, GLuint p, GLuint i = 0) : idx(i), buf(256), ptype(t) { 
         if (t == ATTRIBUTE ) getAttrib(p);
         else getUniform(p);
     }
     
-    GLuint id;
+    GLint id;
+    GLuint idx;
     GLsizei buf;
     GLsizei len;
     GLint size;
@@ -70,31 +72,55 @@ struct ShaderParam {
     GLchar name[256];
 
     void getAttrib(GLuint program) {
-        glGetActiveAttrib(program, id, buf, &len, &size, &vectype, name);
+        glGetActiveAttrib(program, idx, buf, &len, &size, &vectype, name);
+        getAttribId(program);
         datatype = GL::type(vectype); //Get GL Type from Vectype
     }
 
     void getUniform(GLuint program) {
-        glGetActiveUniform(program, id, buf, &len, &size, &vectype, name);
+        glGetActiveUniform(program, idx, buf, &len, &size, &vectype, name);
+        getUniformId(program);
         datatype = GL::type(vectype);
         
     }
     
-    void set( GLuint sprog, string attrib) {
-            switch(ptype){
-                case ATTRIBUTE:
-                    id = glGetAttribLocation(sprog, attrib.c_str()); 
-                    getAttrib(sprog);            
-                    GL::error("get vertex attribute");
-                    break;
-                case UNIFORM:
-                    id = glGetAttribLocation(sprog, attrib.c_str());
-                    getUniform(sprog);
-                    GL::error("get vertex uniform");
-                    break;
-            }
-                        
-        }
+    void getAttrib(GLuint program, string tname) {
+        id = glGetAttribLocation(program, tname.c_str());
+        glGetActiveAttrib(program, id, buf, &len, &size, &vectype, name);
+        //getAttribId(program);
+        datatype = GL::type(vectype); //Get GL Type from Vectype
+    }
+
+    void getUniform(GLuint program, string tname) {
+        id = glGetUniformLocation(program, tname.c_str());
+        glGetActiveUniform(program, id, buf, &len, &size, &vectype, name);
+        //getUniformId(program);
+        datatype = GL::type(vectype);
+        
+    }
+    
+    void getUniformId(GLuint sprog){
+        id = glGetUniformLocation(sprog, name);
+    }
+    void getAttribId(GLuint sprog){
+        id = glGetAttribLocation(sprog, name);
+    }
+    
+//    void set( GLuint sprog, string attrib) {
+//            switch(ptype){
+//                case ATTRIBUTE:
+//                    id = glGetAttribLocation(sprog, attrib.c_str()); 
+//                    getAttrib(sprog);            
+//                    GL::error("get vertex attribute");
+//                    break;
+//                case UNIFORM:
+//                    id = glGetAttribLocation(sprog, attrib.c_str());
+//                    getUniform(sprog);
+//                    GL::error("get vertex uniform");
+//                    break;
+//            }
+//                        
+//        }
     
     void print(){
         
@@ -171,17 +197,23 @@ private:
 //struct ShaderData;
 
 class ShaderProgram {
-    
 
     bool            bLinked;
 	bool			bLoaded;			///< Loaded Boolean
 	bool			bActive;			///< Active Boolean
 			
     GLint 	mId;                        ///< Compiled and Linked Shader Program
+    
         
+    //Change this to a Map (so attributes and uniforms can be indexed by string)            
     vector<Attribute> mAttribute;       ///< Udata
     vector<Uniform> mUniform;           ///< Udata
-	
+
+    map<string, Attribute> mAttributeMap;       ///< Udata
+    map<string, Uniform> mUniformMap;           ///< Udata	
+    
+    typedef map<string, Attribute>::iterator AttIt;
+    typedef map<string, Uniform>::iterator UniIt;
 	public:
     
         Shader vert, frag;
@@ -199,7 +231,6 @@ class ShaderProgram {
             get();
         }
        
-		
         GLint id() const { return mId; }
 	
         void attach( const Shader& s );                         ///< Attach Vert or Frag Shader to Program
@@ -210,33 +241,47 @@ class ShaderProgram {
 		void source( string vs, string fs);                     ///< Load from Source
 		void setUniformVariable (char * name, float value);     ///< Change a Variable in the Shader
     
-        int uniform(const char * name) const { 
-            GLint loc = glGetUniformLocation(mId, name);
-            if (loc == -1) printf("No such uniform named \"%s\" in shader\n", name);
-           // cout << name << " " << loc << endl; 
-            GL::error("Get Shader Program Uniform Location");
-            return loc; 
+        //this info should be saved into a map to avoid repeated calls to glGet
+//        int uniform(const char * name) const { 
+//            GLint loc = glGetUniformLocation(mId, name);
+//            if (loc == -1) printf("No such uniform named \"%s\" in shader\n", name);
+//          
+//            GL::error("Get Shader Program Uniform Location");
+//            return loc; 
+//        }
+//
+//        int attribute(const char * name) const { 
+//            GLint loc = glGetAttribLocation(mId, name);
+//            if (loc == -1) printf("No such uniform named \"%s\" in shader\n", name);
+//            // cout << name << " " << loc << endl; 
+//            GL::error("Get Shader Program Uniform Location");
+//            return loc; 
+//        }        
+
+        GLint uniform(const char * name) { 
+            return mUniformMap[ string(name) ].id; 
         }
-        int attribute(const char * name) const { 
-            GLint loc = glGetAttribLocation(mId, name);
-            if (loc == -1) printf("No such uniform named \"%s\" in shader\n", name);
-            // cout << name << " " << loc << endl; 
-            GL::error("Get Shader Program Uniform Location");
-            return loc; 
+        
+
+        
+        GLint attribute(const char * name) { 
+            return mAttributeMap[ string(name) ].id; 
         }        
-        const ShaderProgram& uniform(const char * name, int v0) const{
+
+
+        const ShaderProgram& uniform(const char * name, int v0) {
             glUniform1i(uniform(name), v0);	
             GL::error("Set Shader Program Uniformi");
             return *this;
         }
         
-        const ShaderProgram& uniform(const char * name, float v0) const{
+        const ShaderProgram& uniform(const char * name, float v0) {
             glUniform1f(uniform(name), v0);	
             GL::error("Set Shader Program Uniformf");
             return *this;
         }
         
-        const ShaderProgram& uniform(const char * name, float v0, float v1) const{
+        const ShaderProgram& uniform(const char * name, float v0, float v1) {
             glUniform2f(uniform(name), v0, v1);	
             GL::error("Set Shader Program Uniformf");
             return *this;
@@ -248,7 +293,7 @@ class ShaderProgram {
             return *this;
         }
     
-        const ShaderProgram& uniform(const char * name, float vo[16]) const{
+        const ShaderProgram& uniform(const char * name, float vo[16]) {
             glUniformMatrix4fv(uniform(name), 1, GL_FALSE, vo); 
             //cout << "setting" << endl; 
             GL::error("Set Shader Program UniformMat4fv");
@@ -262,7 +307,7 @@ class ShaderProgram {
 //            return *this;
 //        }
 
-        const ShaderProgram& uniform43(const char * name, float vo[12]) const{
+        const ShaderProgram& uniform43(const char * name, float vo[12]) {
             glUniformMatrix4x3fv(uniform(name), 1, GL_FALSE, vo); 
             //cout << "setting" << endl; 
             GL::error("Set Shader Program UniformMat4fv");
@@ -310,6 +355,7 @@ class ShaderProgram {
 
         void unload();
     
+        /// GET UNIFORM AND ATTRIBUTES AND PUSH ONTO STACK
         void get();
         
         void bind() { begin(); }

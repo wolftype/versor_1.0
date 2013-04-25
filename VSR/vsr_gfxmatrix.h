@@ -194,7 +194,7 @@ namespace vsr{
         }
         
         static const Mat4f identity();
-        
+        static Mat4f aa( const Rot& r);
         
         /* Projection of World onto Screen Coordinates */
         static const Vec3f Project(const Vec3f& v, const XformMat& xf){
@@ -252,6 +252,27 @@ namespace vsr{
             z[0], z[1], z[2], 0,
             0, 0, 0, 1
         );        
+    }
+    
+    //4x4 Matrix from Axis Angle
+    inline Mat4f XMat::aa( const Rot& r ){
+        float c = cos( r[0] );
+        float s = sin( r[0] );
+        float xx = r[1] * r[1]; float yy =  r[2] * r[2]; float zz =  r[3] * r[3];
+        float oc = 1-c;
+        
+//        return Mat4f( 
+//            xx * oc + c, r[1] * r[2] * oc + r[3] * s, r[1] * r[3] * oc - r[2] * s, 0,
+//            r[1] * r[2] * oc - r[3] * s, yy * oc + c, r[2] * r[3] * oc + r[1] * s, 0,
+//            r[1] * r[3] * oc + r[2] * s, r[2] * r[3] * oc - r[1] * s, zz * oc, +c, 0,
+//            0,0,0,1
+//        );
+
+        return Mat4f( xx * oc + c, r[1] * r[2] * oc - r[3] * s, r[1] * r[3] * oc + r[2] * s, 0,
+            r[1] * r[2] * oc + r[3] * s,    yy * oc + c, r[2] * r[3] * oc - r[1] * s, 0,
+            r[1] * r[3] * oc - r[2] * s,    r[2] * r[3] * oc + r[1] * s,    zz * oc +c,                 0,
+            0,                              0,                            0,                             1
+        );
     }
 
     inline Mat4f XMat::rotXY(float rad){

@@ -17,7 +17,6 @@
 #include "vsr_gl_vbo.h"
 #include "vsr_mesh.h"
 #include "vsr_gl_data.h"
-//#include "vsr_mglyph.h"
 
 namespace vsr{
 
@@ -103,14 +102,30 @@ namespace vsr{
                         mbo[id].index.unbind(); 
                         mbo[id].vertex.unbind();   
                     }
+
+                    static void Begin(GL::MBO& m) { 
+                        m.bind(); 
+                        Enable(); Pointer(); 
+                    }
+                    static void End(GL::MBO& m) { 
+                        Disable(); 
+                        m.unbind();   
+                    }
                     
                     static void Line( GL::MBO& m ) {
                         m.bind();
-                        Enable(); Pointer();
+                        Enable(); 
+                        Pointer();
                         m.drawElements();
                         Disable();
                         m.unbind();
-                    }                                        
+                    }
+                    
+//                    static void BeginArray( GL::MBO& m){
+//                        m.bind();
+//                        Enable(); 
+//                        Pointer();
+//                    }
                 };
                 
                 //DECLARE                 
@@ -189,6 +204,48 @@ namespace vsr{
 //                    evbo.unbind();
                     
                 }
+                
+                template<class A> void RenderES ( const A& a, ShaderProgram& program ) {
+                    
+                }
+                template<class A> void RenderES ( const A * a, int num, ShaderProgram& program ) {
+                    
+                }
+
+                template<> void RenderES ( const Cir& cir, ShaderProgram& program ){
+                    
+                    static MBO circle ( Mesh::Circle(.5) );
+                    static float mf[16];
+                    
+                    Mat4f mat = Draw::Mat(cir);
+                    mat.fill(mf);
+                    program.uniform("submodel", mf );    
+
+                    Pipe::Line( circle );
+                 
+                }
+
+
+                template<> void RenderES ( const Cir * fcir, int num, ShaderProgram& program ){
+                    
+                    static MBO circle ( Mesh::Circle(.5) );
+                    static float mf[16];
+                    
+                    Pipe::Begin( circle );
+                    
+                    for (int i = 0; i < num; ++i){
+                    
+                        Mat4f mat = Draw::Mat(fcir[i]);
+                        mat.fill(mf);
+                        program.uniform("submodel", mf );    
+                        
+                        circle.drawElements();
+                        
+                    }
+                    
+                    Pipe::End( circle );
+                 
+                }
 
                 //BUFFER RENDER
                 template< class A > void BRender( const A& a){
@@ -199,6 +256,7 @@ namespace vsr{
                     glPopMatrix();                    
                 }
 
+
                 template< class A > void VRender( const A& a){
                     glPushMatrix();	
                         Draw :: Array(a);
@@ -206,9 +264,10 @@ namespace vsr{
                 }
                 
                 
-        }
+        } //DRAW::
     }//GL::
     
+#define DRAWES(t) vsr::GL::Draw::RenderES(t)    
 #define DRAWV(t) vsr::GL::Draw::VRender(t)    
 #define DRAWB(t) vsr::GL::Draw::BRender(t)    
 //#define DRAWV3(t,r,g,b) vsr::GL::Draw::Render(t,r,g,b)    

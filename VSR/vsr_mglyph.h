@@ -50,28 +50,28 @@ namespace vsr {
                 return m;
             }
 
-            static Mesh Circle (float scale){
-        
-                int res = floor( scale * 100);
-                Mesh m;
-                m.add( Vec3f(0,0,0) );
-                
-                for (int i = 0; i <= res; ++i){
-                    float rad = 2.0 * PI * i / res;
-                    float x = cos(rad);
-                    float y = sin(rad);
-                    
-                    m.add( Vec3f(x,y,0) );
-                    
-                    int idx[2] = {i,0};
-                    m.add(idx, 2);
-                    
-                }
-                
-                m.add(1).add(0);
-                
-                return m;
-            }
+//            static Mesh Circle (float scale){
+//        
+//                int res = floor( scale * 100);
+//                Mesh m;
+//                m.add( Vec3f(0,0,0) );
+//                
+//                for (int i = 0; i <= res; ++i){
+//                    float rad = 2.0 * PI * i / res;
+//                    float x = cos(rad);
+//                    float y = sin(rad);
+//                    
+//                    m.add( Vec3f(x,y,0) );
+//                    
+//                    int idx[2] = {i,0};
+//                    m.add(idx, 2);
+//                    
+//                }
+//                
+//                m.add(1).add(0);
+//                
+//                return m;
+//            }
             
             /*! A Mesh of Skinned Circles 
                 @param Pointer to an Circle array
