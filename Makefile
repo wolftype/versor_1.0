@@ -109,7 +109,7 @@ FORCE:
 .PRECIOUS: $(EXEC_TARGETS) $(PCH_DIR)%.h.gch
 
 #COMPILATION of CPP to Object File
-$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h 
+$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h.gch 
 	@echo 
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo CXX compiling $< to $@
@@ -129,7 +129,7 @@ $(OBJ_DIR)%.o: %.c
 
 $(PCH_DIR)%.h.gch: %.h
 	@echo CXX precompiling $< to $@
-	@echo This will take a little while and generate a large file ~600mb but only needs to happen once
+	@echo This ,may take a little while but only needs to happen once
 	$(CXX) $(CXXFLAGS) $(HPATH) -x c++-header -c $< -o $@
 
 linkfile:
