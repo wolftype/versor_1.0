@@ -362,7 +362,8 @@ namespace vsr {
 			
 	};
 	
-	inline ostream& operator << (ostream& os, const Mat4<>& m){
+	template<class T>
+	inline ostream& operator << (ostream& os, const Mat4<T>& m){
 	
 		os << "MAT 4: \n" << m.col[0] << m.col[1] << m.col[2] << m.col[3] <<"\n";
 		
