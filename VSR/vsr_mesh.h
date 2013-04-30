@@ -17,6 +17,7 @@
 #include "vsr_matrix.h"
 #include "vsr_gl.h"
 #include "vsr_glyph.h"
+#include "vsr_interp.h"
 
 using namespace std;
 
@@ -79,6 +80,9 @@ namespace vsr {
         ///Indices for ElementArray
         vector< unsigned int > mIndex;
         
+        ///Storage of Points in GA format
+       // vector< Vector > mPoint;
+        
     public:
         
         /// Set Draw Mode
@@ -129,7 +133,13 @@ namespace vsr {
         Mesh& add(float x, float y, float z) { mVertex.push_back( Vertex( Vec3f(x,y,z) ) ); return *this; }
         //Mesh& add(const Vec& v) { mVertex.push_back( Vertex( Vec3f(v[0], v[1], v[2]) ) ); return *this; }
         
-        
+        //for line mesh, value at t [0,1]
+        Vec3f at ( double t ) {
+            double tidx = t * num();
+            double idx = floor(tidx);
+            double remainder = tidx - idx;
+            return Interp::linear<Vec3f>( mVertex[idx].Pos, mVertex[idx+1].Pos, remainder );
+        }
         
         /// ADD N VERTICES
         template<typename T>
