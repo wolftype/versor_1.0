@@ -326,7 +326,7 @@ inline void Glyph :: Segment(float angle, float radius, bool sign, int res){
 
 	glNormal3f(0, 0, 1);
 
-	int num = res * fabs(angle);   //floor(20 * PI / (1 + ( PI - angle ) ));
+	int num = res * std::fabs(angle);   //floor(20 * PI / (1 + ( PI - angle ) ));
 
 	glBegin(GL_LINE_STRIP);
 		
@@ -349,7 +349,7 @@ inline void Glyph :: Segment2(float angle, float angle2, float radius, int res){
 
     // * fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
 
-	double ta = fabs(angle2 - angle);
+	double ta = std::fabs(angle2 - angle);
 	int num = res * ta;
     glBegin(GL_LINE_STRIP);
 		
@@ -393,7 +393,7 @@ inline void Glyph ::  DashedSegment (float angle, float radius, bool sign, int r
 
 	glNormal3f(0, 0, 1);
 
-	int num = res * fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
+	int num = res * std::fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
 
 	glBegin(GL_LINES);
 
@@ -413,7 +413,7 @@ inline void Glyph::DashedSegment2(float angle, float angle2, float radius, int r
 
 	glNormal3f(0, 0, 1);
 
-	int num = res * fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
+	int num = res * std::fabs(angle);//floor(20 * PI / (1 + ( PI - angle ) ));
 
 	glBegin(GL_LINES);
 		
@@ -434,7 +434,7 @@ inline void Glyph :: DashedSegment3(float angle, float off, float radius, bool s
 
 	glNormal3f(0, 0, 1);
 
-	int num = res * fabs(angle);   //floor(20 * PI / (1 + ( PI - angle ) ));
+	int num = res * std::fabs(angle);   //floor(20 * PI / (1 + ( PI - angle ) ));
 
 	glBegin(GL_LINES );
 		
@@ -454,7 +454,7 @@ inline void Glyph :: DirSegment (float angle, float radius, bool clockwise, int 
 
 	glNormal3f(0, 0, 1);
 
-	int num = 10 * fabs(angle);
+	int num = 10 * std::fabs(angle);
 	
 	Glyph::Segment(angle, radius, res);
 	
@@ -474,7 +474,7 @@ inline void Glyph :: DirDashedSegment (float angle, float radius, bool clockwise
 
 	glNormal3f(0, 0, 1);
 
-	int num = 10 * fabs(angle);
+	int num = 10 * std::fabs(angle);
 	
 	Glyph::DashedSegment(angle, radius, res);
 	
@@ -853,7 +853,7 @@ inline void Glyph :: Seg(const Cir& K, double t, bool dir, int res){
     //POINT POSITION AND RADIUS
 	Pnt v = Ro::cen(K);                                 //Center of Circle
 	double siz = Ro::size(K,false);                            //Squared Radius
-	double rad = sqrt ( fabs (siz) );                   //Radius
+	double rad = sqrt ( std::fabs (siz) );                   //Radius
 	                           
 	bool sign = Op::sn(b, Biv::xy);
 	
@@ -878,7 +878,7 @@ inline void Glyph :: SegOff(const Cir& K, double t, double off, bool dir, int re
     //POINT POSITION AND RADIUS
 	Pnt v = Ro::cen(K);                                 //Center of Circle
 	double siz = Ro::size(K,false);                       //Squared Radius
-	double rad = sqrt ( fabs (siz) );                   //Radius
+	double rad = sqrt ( std::fabs (siz) );                   //Radius
 	                           
 	bool sign = Op::sn(b, Biv::xy);
 	
@@ -903,7 +903,7 @@ void Glyph :: SegTo(const Cir& K, double st, double t, int res){
     //POINT POSITION AND RADIUS
     Pnt v = Ro::cen(K);                                 //Center of Circle
     double siz = Ro::size(K,false);                            //Squared Radius
-    double rad = sqrt ( fabs (siz) );                   //Radius
+    double rad = sqrt ( std::fabs (siz) );                   //Radius
     
    // bool sign = Op::sn(b, Biv::xy);
     
