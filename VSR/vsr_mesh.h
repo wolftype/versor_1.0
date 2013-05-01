@@ -85,6 +85,10 @@ namespace vsr {
         
     public:
         
+        void clear() {
+            mVertex.clear();
+            mIndex.clear();
+        }
         /// Set Draw Mode
         void mode( GL::MODE m) { mMode = m; }
         
