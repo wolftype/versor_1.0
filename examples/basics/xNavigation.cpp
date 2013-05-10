@@ -9,6 +9,7 @@
 #include "vsr.h"
 #include "vsr_GLVInterfaceImpl.h"
 #include "vsr_draw.h"
+#include "vsr_coord.h"
 
 
 #include "vsr_tests.h"
@@ -30,13 +31,34 @@ void nav(GLVApp& app){
     app.text("Alt (option) - to Rotate Model View ", 50,175);
     app.text("Ctrl - to Rotate Camera ", 50,150);
     app.text("Hit 'C' - to reset all ", 50,100);
-    app.text("Hit '~' - to toggle FullScreen", 50,100);
+    app.text("Hit '~' - to toggle FullScreen", 50,50);
+
+}
+
+void coord(GLVApp& app){
+
+    static Vec v = Vec::x;
+    
+    static double theta, phi;
+    SET
+        app.gui(theta)(phi);
+    END
+    
+    v = Vec::x.sp( Gen::rot(theta,phi) );
+    //DRAWANDTOUCH(v);
+    
+    Coord::Sph cs = Coord::vec2sph(v);
+    cout << cs << endl; 
+    Coord::Sph cs2 = Coord::sph2deg(cs);
+    cout << cs2 << endl; 
+
 
 }
 
 void GLVApp :: onDraw(){
 
-    nav(*this);
+ //   coord(*this);
+ //   nav(*this);
 }
 
 int main(int argc, const char * argv[]) {
