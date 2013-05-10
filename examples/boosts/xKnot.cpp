@@ -38,9 +38,8 @@ void basicKnot(GLVApp& app){
     static double lw;
     
     SET 
-    
         app.gui(P,"P",0,100)(Q,"Q",0,100)(amt)(size)(writhe, "writhe",0,100)(bDrawFiber)(lw,"lw",0,100); 
-	P = 3; Q = 2; amt = .02; size = .4; writhe = 2;
+        P = 3; Q = 2; amt = .02; size = .4; writhe = 2;
     END
 
     glLineWidth(lw);
@@ -96,8 +95,39 @@ void basicKnot(GLVApp& app){
 }
 
 
+void test(GLVApp& app){
+
+    static Field<Pnt> f( 20, 20, 20, 1 );
+    TorusKnot tk( 3, 2 );
+        
+    static double amt;
+    SET
+        app.gui(amt);
+        amt = 0;
+    END
+        
+    tk.amt = amt;
+    
+    static double time = 0; time += .01;
+    tk.HF.cir() = CXZ(1).sp( Gen::rot( Biv::xy * time) );
+    
+    ITJ(i, f.num())
+        double dist = .1 + f[i][4];//(.1 + Ro::sqd( f[i], PAO ) ) ;
+//        Bst bst = Gen::bst( par * 1./dist );
+        //Bst tb = Gen::bst( Ro::par( DLS(1), Vec::y) * amt * 1./dist );
+        Bst tb = tk.bst( amt * 1./dist );
+        //cout << tk.amt << endl; 
+        f[i] = Ro::loc( f[i].sp( tb ) );
+    END
+    
+    
+    DRAW3(f,1,0,1);
+    
+}
+
 void GLVApp :: onDraw(){
  basicKnot(*this);
+ //   test(*this);
 // text("Cabled Torus Knot Wound around Two Antipodal Hopf Links",50,50);
 }
 

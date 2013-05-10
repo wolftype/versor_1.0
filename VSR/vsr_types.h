@@ -12,6 +12,7 @@
 #include <map>
 #include <typeinfo>
 
+using namespace std;
 namespace vsr {
     
 
@@ -27,7 +28,7 @@ namespace vsr {
         DOUBLE        
     };
 
-    typedef map< const char *, int> NameMap;
+    typedef std::map< const char *, int> NameMap;
 
     NameMap create_types(){
         NameMap m;

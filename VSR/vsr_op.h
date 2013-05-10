@@ -717,7 +717,8 @@ struct Fl {
     static Pnt locd(const A& f, const Pnt& p){
         return ( p ^ f ) / f;
     }
-        /*! Weight of Flat 
+    
+    /*! Weight of Flat 
         @param Dual or Direct Flat
         @param boolean flag for duality
     */
@@ -824,6 +825,7 @@ typedef Ro Round;
 typedef Fl Flat;
 typedef Ta Tangent;
 #define PT(x,y,z) vsr::Ro::null(vsr::Vec(x,y,z))
+#define DLS(r) vsr::Ro::dls(0,0,0,r)
 #define IPT(x,y,z) vsr::Ro::inull(x,y,z)
 #define PV(v) vsr::Ro::null(v)
 #define PX(f) vsr::Ro::null(vsr::Vec(f,0,0))
