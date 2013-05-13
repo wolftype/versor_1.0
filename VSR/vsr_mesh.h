@@ -70,6 +70,7 @@ namespace vsr {
         
         /// Draw Mode
         GL::MODE mMode;
+        bool bUseElements, bUseColor;
         
         /// Base Color
         Vec4f mColor;
@@ -79,6 +80,8 @@ namespace vsr {
         
         ///Indices for ElementArray
         vector< unsigned int > mIndex;
+        
+        int u,v;
         
         ///Storage of Points in GA format
        // vector< Vector > mPoint;
@@ -90,24 +93,43 @@ namespace vsr {
             mIndex.clear();
         }
         /// Set Draw Mode
-        void mode( GL::MODE m) { mMode = m; }
+        Mesh& mode( GL::MODE m) { mMode = m; return *this; }
+        Mesh& useElements(bool b) { bUseElements= b; return *this; }
+        Mesh& useColor(bool b) { bUseColor = b; return *this; }
         
         /// Default Line Loop Mode
-        Mesh(GL::MODE m = GL::LL) : mMode(m) {}
+        Mesh(GL::MODE m = GL::LL, bool bE = false, bool bC = false) : mMode(m), bUseElements(bE), bUseColor(bC) {}
         
         Mesh(const Mesh& m){
             
             mMode = m.mMode;
+            bUseElements = m.bUseElements;
+            bUseColor = m.bUseColor;
             
-            for (int i = 0; i < m.num(); ++i){
-                mVertex.push_back( m[i] );
-            }
+            mVertex = m.mVertex;
+            mIndex = m.mIndex;
             
-            for (int i = 0; i < m.mIndex.size(); ++i){
-                mIndex.push_back(m.mIndex[i]);
-            }
-        }
+            u = m.u; v = m.v;
         
+        }
+
+
+        Mesh& operator = (const Mesh& m){
+            
+            if (this != &m) {
+            
+                mMode = m.mMode;
+                bUseElements = m.bUseElements;
+                
+                mVertex = m.mVertex;
+                mIndex = m.mIndex;
+                
+                u = m.u; v = m.v;
+            }
+            
+            return *this;
+        
+        }        
         /// Create Mesh from an OBJ file
         Mesh( string s) { load(s); }
                 
@@ -133,7 +155,8 @@ namespace vsr {
         Mesh& add(const Vec3f& v) { mVertex.push_back( Vertex(v) ); return *this; }
         
         Mesh& add(const Vec& p, const Vec& n) { mVertex.push_back( Vertex( Vec3f(p), Vec3f(n) ) ); return *this; }
-        
+        Mesh& add(const Vec& p, float r, float g, float b, float a = 1.0) { mVertex.push_back( Vertex( Vec3f(p), Vec3f(0,0,1), Vec4f(r,g,b,a) ) ); return *this; }
+         
         Mesh& add(float x, float y, float z) { mVertex.push_back( Vertex( Vec3f(x,y,z) ) ); return *this; }
         //Mesh& add(const Vec& v) { mVertex.push_back( Vertex( Vec3f(v[0], v[1], v[2]) ) ); return *this; }
         
@@ -170,6 +193,7 @@ namespace vsr {
         
         GL::MODE mode() { return mMode; }
         
+        
         vector<unsigned int>::iterator indices() { return mIndex.begin(); }        
         vector<Vertex>::iterator vertices() { return mVertex.begin(); }
         
@@ -181,15 +205,42 @@ namespace vsr {
         //immediate mode!
         void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
             glColor4f(r,g,b,a);
-            GL::Begin( mMode);
+            if (!bUseColor){
+                if (bUseElements) drawElements(r, g, b, a);
+                else drawVertices(r,g,b,a);
+            } else {
+                if (bUseElements) drawElementsColor();
+                else drawVerticesColor();            
+            }
+        }
+
+        void drawVertices(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+           GL::Begin( mMode);
             for (int i = 0; i < mVertex.size(); ++i){
                 GL::vertex( mVertex[i].Pos );
             }
-            glEnd();
+           glEnd();
         }
-        void drawElements() {
+        void drawElements(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
             GL::Begin( mMode);
             for (int i = 0; i < mIndex.size(); ++i){
+                GL::vertex( mVertex[ mIndex[i] ].Pos );
+            }
+            glEnd();
+        }
+
+        void drawVerticesColor() {
+           GL::Begin( mMode);
+            for (int i = 0; i < mVertex.size(); ++i){
+                GL::color( mVertex[i].Col );
+                GL::vertex( mVertex[i].Pos );
+            }
+           glEnd();
+        }
+        void drawElementsColor() {
+            GL::Begin( mMode);
+            for (int i = 0; i < mIndex.size(); ++i){
+                GL::color(  mVertex[ mIndex[i] ].Col );
                 GL::vertex( mVertex[ mIndex[i] ].Pos );
             }
             glEnd();
@@ -264,7 +315,13 @@ namespace vsr {
             @param number of Circles in array
             @param resolution (default 100)
         */
-        static Mesh Skin (Cir * cir, int num, int res = 100);
+        template< typename T>
+        static Mesh Skin (T cir, int num, int res = 100);
+        
+        //static Mesh UV(int w, int h);
+//        static Mesh Skin (Cir * cir, int num, int res = 100);
+        
+       //  static Mesh Skin (vector<Cir>& cir, int res = 100);
     };
     
     
@@ -494,8 +551,10 @@ namespace vsr {
     }
     
     
+    template<typename T>
+    inline Mesh Mesh::Skin (T cir, int num, int res){
+//    inline Mesh Mesh::Skin (Cir * cir, int num, int res){
 
-    inline Mesh Mesh::Skin (Cir * cir, int num, int res){
         
         Mesh m;
         
@@ -503,10 +562,10 @@ namespace vsr {
             double t= 1.0 * i/res;
             
             for (int j = 0; j < num; ++j){
-                double jt = 1.0 * j/num;
-                Vec v = Ro::pnt_cir( cir[j], TWOPI * t );
+                //double jt = 1.0 * j/num;
+                Vec v = Ro::pnt_cir( cir[j], PI * t );
                 m.add( v[0], v[1], v[2] );
-                m.last().Col = Vec4f(t,jt,1-t,1.0);
+                //m.last().Col = Vec4f(t,jt,1-t,1.0);
                 //cout << v << endl; 
             }
         }
@@ -555,6 +614,7 @@ namespace vsr {
             }
         }
         
+        m.mode( GL::TS ).useElements(true);
         return m;
     
     }
@@ -660,8 +720,26 @@ struct UVMesh{
 
     vector<Pnt> vp; ///<-- VECTORS
     vector<Vec> np; ///<-- NORMALS
+    
+    void clear() { vp.clear(); np.clear(); }
+    
+    //void erase() { vp.erase(); np.erase(); }
+    
     bool bFlipNormals;
     UVMesh(int _u=0, int _v=0) : u(_u), v(_v), bFlipNormals(0) {}
+    
+    
+    UVMesh& operator = (const UVMesh& uv){
+        if (this != &uv){
+            vp = uv.vp;
+            np = uv.np;
+            u = uv.u;
+            v = uv.v;
+        }
+        
+        return *this;
+    }
+    
     void add(const Pnt& p) { vp.push_back(p); }
     void add(const Vec& v) { vp.push_back(v.null()); }
     
@@ -708,6 +786,23 @@ struct UVMesh{
             }
         }
     }
+    
+    void drawLines(float rr=1, float gg=1, float bb=1, float aa =1){
+        glColor4f(rr,gg,bb,aa);
+        glBegin(GL_LINES);
+       for (int i = 0; i < u-1; ++i){
+            for (int j = 0; j < v-1; ++j){
+                int a = i * v + j;
+                int b = a + 1;
+                 
+                 GL::Line( vp[a], vp[b] );
+            }
+        }
+        glEnd();
+        
+    }
+    
+    
     
     void drawNormals(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
     

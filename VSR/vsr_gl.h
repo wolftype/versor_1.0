@@ -300,6 +300,10 @@ namespace vsr {
         inline void vertex( Vec3f v){
             glVertex3f(v[0],v[1],v[2]);
         }
+        
+       inline void color( Vec4f v){
+            glColor4f(v[0],v[1],v[2],v[3]);
+        }
 
         template<class T>
         void normal(T*);

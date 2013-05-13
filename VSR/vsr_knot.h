@@ -33,10 +33,12 @@ struct TorusKnot  {
     //A Circle base with methods for finding the links around which to knot . . .
     HopfFiber HF;
     
-    //A vector of circle in the knot orbit
+    /// A vector of circle in the knot orbit
     vector<Cir> cir;
-    //A vector of points in the knot orbit
+    /// A vector of points in the knot orbit
     vector<Pnt> pnt;
+    
+    vector<double> energies;    ///< Energy at idx (from pnt 0) 
     
     double amt; //RES
     
@@ -57,6 +59,62 @@ struct TorusKnot  {
     Bst bst(double t) { amt = t; return bst(); }
     
     TorusKnot(double p = 3, double q = 2, double a = .001) : P(p), Q(q), amt(a) {}
+
+	double energy(int idx, int num){
+
+	    double totalEnergy = 0;     ///< Running sum TOTAL ENERGY OF KNOT 
+		energies.clear();           ///< energies relative to idx
+	    energies.push_back(0);      ///< Initial
+	
+		//forward and reverse arc measurements
+	    vector<double> globalA; //Distance
+	    //vector<double> globalB;
+	    vector<double> local; //Distance
+	
+	    double totalA = 0;
+
+	    //integrated sums
+	    for (int i = 0; i < num; ++i){
+
+	        //Idx of Neighbor
+	        int idxA = i < num - 1 ? i + 1 : 0;
+
+	        double ta = Ro::dist( pnt[i], pnt[idxA]);
+	        local.push_back(ta);
+
+	        totalA += ta;
+
+	        globalA.push_back( totalA );
+	    }
+        
+	    for (int i = 0; i < num; ++i){    
+
+	        double ta = 0;
+
+	        for (int j = 0; j < num; ++j){
+
+	            if ( i != j ) {
+	                double chord = Ro::sqd( pnt[i], pnt[j] );
+
+	                double diffA = fabs( globalA[j] - globalA[i] );
+	                double diffB = fabs( (totalA - globalA[j] ) + globalA[i] );//fabs( globalB[j] - globalA[i] );
+
+	                double diff = diffA < diffB ? diffA : diffB;
+
+	                double tener = ( ( 1.0 / chord ) - (1.0 / (diff * diff) ) ) * local[j]; //weighted by distance
+	                //push back for i = 0
+	                if (i == idx ) energies.push_back(tener);
+	                ta += tener;
+	            }
+	        }
+
+	        totalEnergy += ta * local[i];
+	   }     
+        
+        return totalEnergy; 
+    } 
+	
+	     
         
 };
 

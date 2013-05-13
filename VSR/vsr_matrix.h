@@ -119,7 +119,8 @@ namespace vsr {
 			static Vec3<> ax(double s = 1.0){ return Vec3<>(s,0,0); }
 			static Vec3<> ay(double s = 1.0){ return Vec3<>(0,s,0); }
 			static Vec3<> az(double s = 1.0){ return Vec3<>(0,0,s); }						
-																					
+			
+                                                                                                                                                                                                                   
 			friend ostream& operator << (ostream&, const Vec3<>&);
         
         int size() const { return 3; } 

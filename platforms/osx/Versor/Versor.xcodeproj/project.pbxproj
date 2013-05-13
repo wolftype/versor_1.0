@@ -31,6 +31,10 @@
 		9B28075A16700947001806F8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B28075C16700947001806F8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B3F72D6170A1817001C1CCA /* xMeet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B3F72D5170A1817001C1CCA /* xMeet.cpp */; };
+		9B52EC30173F4E9B00780705 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9B52EC31173F4E9B00780705 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9B52EC32173F4E9B00780705 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B52EC3B173F4EC100780705 /* xKnot2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A26581700DBAE003165C8 /* xKnot2.cpp */; };
 		9B58902B1641A69B0096B491 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B58902C1641A69B0096B491 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B5C460716445FBE003BF1B2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
@@ -170,6 +174,13 @@
 			remoteInfo = vsr;
 		};
 		9B28075516700947001806F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B76CC231628A9440064FF35;
+			remoteInfo = vsr;
+		};
+		9B52EC2C173F4E9B00780705 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
 			proxyType = 1;
@@ -368,6 +379,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9B52EC33173F4E9B00780705 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B58902F1641A69B0096B491 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -561,6 +581,7 @@
 		9B28076116700947001806F8 /* Twists copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Twists copy"; path = Topo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2977E01729BA6D00227808 /* vsr_xf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_xf.h; sourceTree = "<group>"; };
 		9B3F72D5170A1817001C1CCA /* xMeet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMeet.cpp; path = ../../../examples/basics/xMeet.cpp; sourceTree = "<group>"; };
+		9B52EC38173F4E9B00780705 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knots copy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5890381641A69B0096B491 /* Meet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461416445FBE003BF1B2 /* Allo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Allo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461B16446392003BF1B2 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
@@ -818,6 +839,16 @@
 				9B28075916700947001806F8 /* OpenGL.framework in Frameworks */,
 				9B28075A16700947001806F8 /* GLUT.framework in Frameworks */,
 				9B28075C16700947001806F8 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B52EC2F173F4E9B00780705 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B52EC30173F4E9B00780705 /* OpenGL.framework in Frameworks */,
+				9B52EC31173F4E9B00780705 /* GLUT.framework in Frameworks */,
+				9B52EC32173F4E9B00780705 /* libvsr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1152,6 +1183,7 @@
 				9B78D452170E384E006AF189 /* Meet copy */,
 				9B9A40A0170F654800E02BAC /* Navigation copy */,
 				9BFFDDBA1726467B00494CF1 /* DipoleField */,
+				9B52EC38173F4E9B00780705 /* Knots copy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1494,6 +1526,25 @@
 			name = Topo;
 			productName = DemoBoosts;
 			productReference = 9B28076116700947001806F8 /* Twists copy */;
+			productType = "com.apple.product-type.tool";
+		};
+		9B52EC2A173F4E9B00780705 /* KnotMore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B52EC35173F4E9B00780705 /* Build configuration list for PBXNativeTarget "KnotMore" */;
+			buildPhases = (
+				9B52EC2D173F4E9B00780705 /* Sources */,
+				9B52EC2F173F4E9B00780705 /* Frameworks */,
+				9B52EC33173F4E9B00780705 /* CopyFiles */,
+				9B52EC34173F4E9B00780705 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B52EC2B173F4E9B00780705 /* PBXTargetDependency */,
+			);
+			name = KnotMore;
+			productName = DemoBoosts;
+			productReference = 9B52EC38173F4E9B00780705 /* Knots copy */;
 			productType = "com.apple.product-type.tool";
 		};
 		9B5890251641A69B0096B491 /* Meet */ = {
@@ -1932,12 +1983,20 @@
 				9B78D444170E384E006AF189 /* Navigation */,
 				9B9A4092170F654800E02BAC /* Field */,
 				9BFFDDAC1726467B00494CF1 /* DipoleField */,
+				9B52EC2A173F4E9B00780705 /* KnotMore */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9B1E15601670FF470015D25C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B52EC34173F4E9B00780705 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2083,6 +2142,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B52EC2D173F4E9B00780705 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B52EC3B173F4EC100780705 /* xKnot2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2304,6 +2371,11 @@
 			isa = PBXTargetDependency;
 			target = 9B76CC231628A9440064FF35 /* vsr */;
 			targetProxy = 9B28075516700947001806F8 /* PBXContainerItemProxy */;
+		};
+		9B52EC2B173F4E9B00780705 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B76CC231628A9440064FF35 /* vsr */;
+			targetProxy = 9B52EC2C173F4E9B00780705 /* PBXContainerItemProxy */;
 		};
 		9B5890261641A69B0096B491 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2549,6 +2621,24 @@
 					"\"$(SRCROOT)/../../../GLV/build/lib\"",
 				);
 				PRODUCT_NAME = Topo;
+			};
+			name = Release;
+		};
+		9B52EC36173F4E9B00780705 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = KnotMore;
+			};
+			name = Debug;
+		};
+		9B52EC37173F4E9B00780705 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = KnotMore;
 			};
 			name = Release;
 		};
@@ -3158,6 +3248,15 @@
 			buildConfigurations = (
 				9B28075F16700947001806F8 /* Debug */,
 				9B28076016700947001806F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B52EC35173F4E9B00780705 /* Build configuration list for PBXNativeTarget "KnotMore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B52EC36173F4E9B00780705 /* Debug */,
+				9B52EC37173F4E9B00780705 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
