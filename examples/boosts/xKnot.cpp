@@ -75,6 +75,9 @@ void basicKnot(GLVApp& app){
         tk.cir.push_back(tpar.dual().dil(tk.pnt[i], tt*3*size));
     END
     
+    Mesh nm = Mesh::Skin( tk.cir, tk.cir.size(), 10 ).useElements(true);
+    
+    
     //CABLES
     ITJ(i,tk.iter())
         double t = 1.0 * i/tk.iter();
@@ -89,8 +92,9 @@ void basicKnot(GLVApp& app){
     END
 
     tm.draw(0,1,0);
-    sm.draw(1,.5,.2);
+   sm.draw(1,.5,.2);
     sm2.draw(1,.8,.2);
+    nm.draw(0,1,0,.2);//(0,1,0);
     
 }
 
