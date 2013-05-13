@@ -720,6 +720,7 @@ struct UVMesh{
 
     vector<Pnt> vp; ///<-- VECTORS
     vector<Vec> np; ///<-- NORMALS
+    vector<Vec> cp; ///<-- COLORS
     
     void clear() { vp.clear(); np.clear(); }
     
@@ -733,6 +734,7 @@ struct UVMesh{
         if (this != &uv){
             vp = uv.vp;
             np = uv.np;
+            cp = uv.cp;
             u = uv.u;
             v = uv.v;
         }
@@ -801,7 +803,23 @@ struct UVMesh{
         glEnd();
         
     }
-    
+
+    void drawLinesColor(){
+       // glColor4f(rr,gg,bb,aa);
+        glBegin(GL_LINES);
+        int ix = 0;
+       for (int i = 0; i < u-1; ++i){
+            for (int j = 0; j < v-1; ++j){
+                int a = i * v + j;
+                int b = a + 1;
+                 glColor3f( cp[ix][0],cp[ix][1],cp[ix][2]);
+                 GL::Line( vp[a], vp[b] );
+                 ix++;
+            }
+        }
+        glEnd();
+        
+    }    
     
     
     void drawNormals(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
