@@ -251,7 +251,7 @@ void render2texture(GLVApp& app){
                 
         //attach Texture to Framebuffer's color attachment
         fbo.attach(texture, GL::COLOR);
-        fbo.attach( RBO(16,16, GL::DEPTHCOMP), GL::DEPTH);
+        fbo.attach( RBO(16,16, GL::DEPTHCOMP), GL::DEPTH);  // is this needed?
     END
     
     //STEP 1: RENDER TO TEXTURE

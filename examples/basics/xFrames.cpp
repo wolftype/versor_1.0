@@ -72,7 +72,10 @@ void GLVApp :: onDraw(){
 }
 
 int main(int argc, const char * argv[]) {
-        
+     
+    Par * test; 
+    test = new Par[10];    
+              
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	
 	glv.colors().back.set(.3,.3,.3);
