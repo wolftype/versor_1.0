@@ -297,6 +297,15 @@ namespace vsr {
             std::copy( val(), val() + 16, res);            
         }
         
+       template<class B>
+ 		Mat4& copy( const B& b){
+ 			// printf("copy");
+ 			for (int i = 0; i < 16; ++i){
+                 (*this)[i] = b[i];
+             }	
+ 			return *this;
+ 		} 
+        
           const T * val() const { return col[0].val(); }
          T * val() { return &col[0][0]; }
          const T operator [] ( int i ) const { return val()[i]; }
