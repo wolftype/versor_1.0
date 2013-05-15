@@ -293,7 +293,7 @@ namespace vsr {
         }
         
 
-        void fill( T * res ) { 
+        void fill( T * res ) const { 
             std::copy( val(), val() + 16, res);            
         }
         
