@@ -366,8 +366,8 @@ namespace vsr {
                     m[4]*m[9]*m[2] - m[8]*m[5]*m[2] + m[8]*m[1]*m[6] - m[0]*m[9]*m[6] - m[4]*m[1]*m[10] + m[0]*m[5]*m[10]
                 ) * (1./determinant);
         }
-        
-			friend ostream& operator << (ostream&, const Mat4<>&);
+            template<class S>
+			friend ostream& operator << (ostream&, const Mat4<S>&);
 			
 			
 	};
