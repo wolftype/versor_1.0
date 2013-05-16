@@ -33,7 +33,7 @@
 #define TPRINT(x) if(SANITYCHECK)cout<<x<<endl;
 
 #ifndef VSR_PRECISION
-typedef double VSR_PRECISION; 
+typedef float VSR_PRECISION; 
 #endif
 
 namespace vsr {
