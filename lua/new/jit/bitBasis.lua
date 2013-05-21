@@ -29,8 +29,6 @@ module("bitBasis", package.seeall)
 --Store Basis Combinatorics (a Cayley Graph)
 S = {}
 
---Store MV Types
-MV = {}
 
 --[[
 -------------------------------------
