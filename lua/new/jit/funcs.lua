@@ -162,9 +162,9 @@ productList = function(tx,ty,operation)
 	
 	--fetch table pairs of values in types
 	idx = 0
-	for i,iv in ipairs(tx.bases) do
+	for i,iv in ipairs(tx) do
 		
-		for j,jv in ipairs(ty.bases) do			
+		for j,jv in ipairs(ty) do			
 		
 			prod = B.S[iv][operation][jv]
 		
