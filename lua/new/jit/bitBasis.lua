@@ -40,10 +40,11 @@ Below is our metric:
 -------------------------------------
 --]]
 
-metric = {1,1,1}	--METRIC (use {1,1,1,1,-1} for 3D Conformal or {-1,-1,-1,1} for Spacetime )
+metric = {1,1,1}	--METRIC (use {1,1,1,1,-1} for 3D Conformal or {-1,-1,-1,1} for Spacetime, etc )
 basis = {}			--BASIS BLADES
 subspace = {} 		--BASIC SUBSPACE CREATION
-keys = {} 			--TYPE STORAGE
+keys = {} 			--TYPE KEY STORAGE  
+types = {}			--TYPES
 	
 ORIGIN = lshift(1,#metric-2)
 INFINITY = lshift(1,#metric-1)
@@ -140,9 +141,10 @@ buildBasis = function()
 		--print(k)
 		local shft = i - (32 * (k-1) )
 		--print(shft)
-		f[k] = lshift(1, shft-1)
-		keys[ basisString(iv) ] = f
-
+		f[k] = lshift(1, shft-1) 
+		local id = basisString(iv)
+		keys[ id  ] = f
+        types[ id ] = {iv} --{ desc = id, bases = {iv} }
 	end
 	
 end		
@@ -261,7 +263,7 @@ pushMink = function(x)
 	end
 end
 
---Pop back into null basis from Minkowskian
+--Pop back into degenerate null basis from nondegenerate Minkowskian (after xor-ing)
 popMink = function(x)
 	if (band(x, EP)==EP) then
 		local t = bxor(x, EP)
@@ -470,6 +472,8 @@ buildSubspaces = function()
 		end
 	end
 	
+	
+	--PRINT
 	for i,iv in ipairs(subspace) do
 	
 		print("SUBSPACE: "..i)
@@ -490,55 +494,55 @@ prepTable = function()
 end
 
 
---list of instructions for how to combine tx and ty multivectors
-productList = function(tx,ty,operation)
-		
-	local tally = {} 		--running tally
-	local combined = {}		--compressed tally
-	
-	--fetch table pairs of values in types
-	idx = 0
-	for i,iv in ipairs(tx.bases) do
-		
-		for j,jv in ipairs(ty.bases) do			
-		
-			prod = S[iv][operation][jv]
-		
-			for k, kv in ipairs(prod) do
-				instruction = {a = i, b = j, r = kv}
-				idx = idx + 1
-				tally[idx] = instruction 
-			end
-		end
-	end
-
-	-- --check for similar ids in the tally, or if weight is 0	
-	for i,iv in ipairs(tally) do
-		
-		-- print ( basisString( iv.r.id) , iv.a, iv.b, iv.r.w )
-		local exists = 0
-		
-		--if basis already in a table, insert additional instruction
-		for j, jv in pairs(combined) do
-			if iv.r.id == j then
-				exists = 1
-				if iv.r.w ~= 0 then
-					table.insert(jv, iv )
-				end
-			end
-		end
-	 
-		--otherwise, add the new instruction to table
-		if exists == 0 then	
-			if iv.r.w ~= 0 then
-				local newBasis = iv.r.id
-				combined[newBasis] = {iv}
-			end
-		end
-	end
-	
-	return order(combined)
-end
+-- --list of instructions for how to combine tx and ty multivectors
+-- productList = function(tx,ty,operation)
+-- 		
+-- 	local tally = {} 		--running tally
+-- 	local combined = {}		--compressed tally
+-- 	
+-- 	--fetch table pairs of values in types
+-- 	idx = 0
+-- 	for i,iv in ipairs(tx.bases) do
+-- 		
+-- 		for j,jv in ipairs(ty.bases) do			
+-- 		
+-- 			prod = S[iv][operation][jv]
+-- 		
+-- 			for k, kv in ipairs(prod) do
+-- 				instruction = {a = i, b = j, r = kv}
+-- 				idx = idx + 1
+-- 				tally[idx] = instruction 
+-- 			end
+-- 		end
+-- 	end
+-- 
+-- 	-- --check for similar ids in the tally, or if weight is 0	
+-- 	for i,iv in ipairs(tally) do
+-- 		
+-- 		-- print ( basisString( iv.r.id) , iv.a, iv.b, iv.r.w )
+-- 		local exists = 0
+-- 		
+-- 		--if basis already in a table, insert additional instruction
+-- 		for j, jv in pairs(combined) do
+-- 			if iv.r.id == j then
+-- 				exists = 1
+-- 				if iv.r.w ~= 0 then
+-- 					table.insert(jv, iv )
+-- 				end
+-- 			end
+-- 		end
+-- 	 
+-- 		--otherwise, add the new instruction to table
+-- 		if exists == 0 then	
+-- 			if iv.r.w ~= 0 then
+-- 				local newBasis = iv.r.id
+-- 				combined[newBasis] = {iv}
+-- 			end
+-- 		end
+-- 	end
+-- 	
+-- 	return order(combined)
+-- end   
 
 
 order = function(c)
@@ -583,13 +587,11 @@ keyCheck = function(fa,fb)
 end
 
 register= function()
-	-- for i, iv in ipairs( basis ) do
-	-- 	print ( basisString(iv), keys[ basisString(iv)])
-	-- end
+
 	for i, iv in ipairs( subspace ) do
-		keys[iv.desc] = keyCalc(iv.bases)
+		keys[iv.desc] = keyCalc(iv.bases) 
+		types[iv.desc] = iv.bases
 		print (iv.desc, keyString(iv.desc) )
---		print ( iv.desc, keyCalc(iv.bases) )
 	end
 	print ("\n")
 	
