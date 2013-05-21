@@ -39,7 +39,7 @@ end
 makePType = function(tx, lhid, rhid)
 
 	local res = tx.type--F.getProductListType(tx)
-	local out = "(\n"
+	local out = "\n"
 	local sep = ","	
 	
 	--for each result blade
@@ -51,7 +51,7 @@ makePType = function(tx, lhid, rhid)
 --		end	
 	end
 	
-	return out .. ")"
+	return out
 		
 end
 

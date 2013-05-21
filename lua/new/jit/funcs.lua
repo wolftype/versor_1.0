@@ -119,34 +119,6 @@ tableToString = function(x, sep)
 	return out
 end
 
--- getTypeFromTable = function(t)
--- 	return getTypeFromString( tableToString(t,""), States );
--- end
-
-
-
---STRING RETURNING FUNCTIONS (version, cast, product)
---operations that always return same type 
-
---RETURNS LIST OF CHANGES
--- versionString = function(tx, operation)
--- 	local tally = {}	
--- 	for i, iv in ipairs(tx.bases) do
--- 		local out = ""
--- 		res = iv[operation]
--- 		local tn = i-1
--- 		if res.w == -1 then out = out .. "-" end
--- 		out = out .. "a[" .. tn .. "]"
--- 		tally[i] = out
--- 	end		
--- 	local final = "("
--- 	for i,iv in ipairs(tally) do
--- 		final = final .. iv
--- 		if i < #tally then final = final .. "," end
--- 	end
--- 	final = final ..");"
--- 	return final
--- end
 
 --List of -1 or 1s
 versionList = function (tx, operation)
@@ -246,22 +218,27 @@ makeType = function(p, nd)
 
 	for i,iv in pairs( B.keys ) do
 		
-		if B.keyCheck(f, iv) then isMem = true t = i end
+		if B.keyCheck(f, iv) then isMem = true return i end
 	
 	end
 		
-	if (isMem==true) then 
-		--print("IS OLD: ", t)  
-		return t
-	else 
-		B.keys[ nd ] = f 
+	-- if (isMem==true) then 
+	-- 	--print("IS OLD: ", t)  
+	-- 	return t
+	-- else   
+	--if function hasn't returned yet, then type iss NEW   
+		--add to keys  
+		B.keys[ nd ] = f
+		--add to built types
+		B.types[ nd ] = p
+		--print info 
 		print (nd, "NEW KEY: ", B.keyString( nd ))
 		for i, iv in ipairs(p) do
 			print ( B.basisString(iv) )
 		end
 		print("\n")  
 		return nd
-	end
+   -- end
 	
 end
 
