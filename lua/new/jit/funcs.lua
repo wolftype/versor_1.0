@@ -169,7 +169,7 @@ productList = function(tx,ty,operation)
 			prod = B.S[iv][operation][jv]
 		
 			for k, kv in ipairs(prod) do
-				instruction = {a = i, b = j, r = kv}
+				instruction = {a = i, b = j, ida = B.basisString(iv), idb = B.basisString(jv), r = kv}
 				idx = idx + 1
 				tally[idx] = instruction 
 			end

@@ -21,11 +21,11 @@ for i, iv in ipairs( B.subspace ) do
 		local ip = F.productList( iv.bases, jv.bases, "ip")
 		
 		local g = F.makeType( gp.blades, iv.desc .. jv.desc )  
-		if (g) then print( g ,"gp( a : &", iv.desc, ", b : &", jv.desc, " ) return {", g, T.makePType( gp, "a", "b"), "} end" ) end
+		if (g) then print( g ,"gp( a : &", iv.desc, ", b : &", jv.desc, " ) return {", g, T.makePType2( gp, "a", "b"), "} end" ) end
 		local o = F.makeType( op.blades, iv.desc .. "_op_" .. jv.desc )
-	    if (o) then print( o, "op( a : &", iv.desc, ",b : &", jv.desc, ")\n  return {", g, T.makePType( gp, "a", "b"), "} end" ) end
+	    if (o) then print( o, "op( a : &", iv.desc, ",b : &", jv.desc, ")\n  return {", g, T.makePType2( gp, "a", "b"), "} end" ) end
 		local i = F.makeType( ip.blades, iv.desc .. "_ip_" .. jv.desc )                                   
-		if (i) then print( i, "ip(a : &", iv.desc, ", b : &", jv.desc, " )\n return {", g, T.makePType( gp, "a", "b"), "} end" ) end 
+		if (i) then print( i, "ip(a : &", iv.desc, ", b : &", jv.desc, " )\n return {", g, T.makePType2( gp, "a", "b"), "} end" ) end 
 	end
 end    
 
