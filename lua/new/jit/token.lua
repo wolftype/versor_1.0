@@ -31,7 +31,7 @@ makePToken2 = function(tx, lhid, rhid)
 		end
 		local ta = jv.ida
 		local tb = jv.idb
-		out = out .. lhid.."."..ta.." * "..rhid.."."..tb		
+		out = out .. lhid.."._"..ta.." * "..rhid.."._"..tb		
 	end
 	return out
 end

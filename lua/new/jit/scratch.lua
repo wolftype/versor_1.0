@@ -38,7 +38,7 @@ print ("reverse(", B.subspace[2].desc, "& a){ return ", B.subspace[2].desc, T.ma
 for i, iv in pairs( B.types) do
    print("struct ", i," {")
    for j, jv in ipairs (iv) do
-       print ("\t",B.basisString(jv), ": double;\n")
+       print ("\t_"..B.basisString(jv), ": double;\n")
    end 
 	print ("}")
 end
