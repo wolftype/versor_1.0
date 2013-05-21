@@ -21,6 +21,21 @@ makePToken = function(tx, lhid, rhid)
 	return out
 end
 
+--returns .e1 .e2 etc instead of [0], [1]    
+makePToken2 = function(tx, lhid, rhid)
+ 	out = ""
+ 	for j, jv in ipairs(tx) do
+		if jv.r == -1 then out = out .. " - "
+		else
+			if j ~= 1 then out = out .. " + " end
+		end
+		local ta = jv.ida
+		local tb = jv.idb
+		out = out .. lhid.."."..ta.." * "..rhid.."."..tb		
+	end
+	return out
+end
+
 makeVToken = function (tx)
 	out = ""
 	for k, kv in ipairs (tx) do
@@ -46,6 +61,27 @@ makePType = function(tx, lhid, rhid)
 	for i, iv in ipairs(tx.blades) do
 --		for j, jv in ipairs(iv) do			
 			out = out .. makePToken(tx.inst[iv], lhid, rhid) --change iv to tx[iv]
+			if ( i < #tx.blades ) then out = out .. sep end
+			out = out .."\n"					
+--		end	
+	end
+	
+	return out
+		
+end 
+
+
+--unrolled type from productList (.e1 etc instead of [0] etc )
+makePType2 = function(tx, lhid, rhid)
+
+	local res = tx.type--F.getProductListType(tx)
+	local out = "\n"
+	local sep = ","	
+	
+	--for each result blade
+	for i, iv in ipairs(tx.blades) do
+--		for j, jv in ipairs(iv) do			
+			out = out .. makePToken2(tx.inst[iv], lhid, rhid) --change iv to tx[iv]
 			if ( i < #tx.blades ) then out = out .. sep end
 			out = out .."\n"					
 --		end	
