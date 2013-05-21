@@ -16,9 +16,9 @@ for i, iv in ipairs( B.subspace ) do
 	for j, jv in ipairs( B.subspace ) do  
 		
 		
-		local gp = F.productList( iv, jv, "gp")
-		local op = F.productList( iv, jv, "op")
-		local ip = F.productList( iv, jv, "ip")
+		local gp = F.productList( iv.bases, jv.bases, "gp")
+		local op = F.productList( iv.bases, jv.bases, "op")
+		local ip = F.productList( iv.bases, jv.bases, "ip")
 		
 		local g = F.makeType( gp.blades, iv.desc .. jv.desc )  
 		if (g) then print( g ,"gp( a : &", iv.desc, ", b : &", jv.desc, " ) return {", g, T.makePType( gp, "a", "b"), "} end" ) end
