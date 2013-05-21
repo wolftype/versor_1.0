@@ -85,7 +85,7 @@ namespace vsr{
         void zero() { ITER mData[tidx] = T(0); ITEND }
         
         Field( int w, int h, int d, double spacing = 1.0) :
-        CubicLattice(w,h,d,spacing)
+        CubicLattice(w,h,d,spacing), mData( NULL )
         {
             alloc();
             init();
