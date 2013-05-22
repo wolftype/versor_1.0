@@ -86,6 +86,7 @@ namespace vsr{
         
         Field( int w, int h, int d, double spacing = 1.0) :
         CubicLattice(w,h,d,spacing), mData( NULL )
+
         {
             alloc();
             init();
