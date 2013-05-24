@@ -169,7 +169,8 @@ productList = function(tx,ty,operation)
 			prod = B.S[iv][operation][jv]
 		
 			for k, kv in ipairs(prod) do
-				instruction = {a = i, b = j, ida = B.basisString(iv), idb = B.basisString(jv), r = kv}
+				instruction = {a = i, b = j, ida = B.basisString(iv), idb = B.basisString(jv), r = kv} 
+			   -- print (kv.w)
 				idx = idx + 1
 				tally[idx] = instruction 
 			end
@@ -204,43 +205,37 @@ productList = function(tx,ty,operation)
 	return B.order(combined)
 end
 
---pass in a product list to make a new type
+--pass in a product list to make a new type, and key/type table for checking
 makeType = function(p, nd)
-
-	local f = B.keyCalc(p)
-	
+    print (nd)
+	local f = B.keyCalc(p) 
+    print (nd)     
 	local sum = 0	
-	for i, iv in ipairs(f) do sum = sum + iv end
+	for i, iv in ipairs(f) do print (iv) sum = sum + iv end
 	if sum == 0 then return end
 
-	local isMem = false
 	local t = ""
 
 	for i,iv in pairs( B.keys ) do
 		
-		if B.keyCheck(f, iv) then isMem = true return i end
+		if B.keyCheck(f, iv) then print ("old") return i end
 	
 	end
-		
-	-- if (isMem==true) then 
-	-- 	--print("IS OLD: ", t)  
-	-- 	return t
-	-- else   
-	--if function hasn't returned yet, then type iss NEW   
-		--add to keys  
-		B.keys[ nd ] = f
-		--add to built types
-		B.types[ nd ] = p
-		--print info 
-		print (nd, "NEW KEY: ", B.keyString( nd ))
-		for i, iv in ipairs(p) do
-			print ( B.basisString(iv) )
-		end
-		print("\n")  
-		return nd
-   -- end
+		 
+	--add to keys  
+	B.keys[ nd ] = f
+	--add to built types
+	B.types[ nd ] = p
+	--print info 
+	print (nd, "NEW KEY: ", B.keyString( nd ))
+	for i, iv in ipairs(p) do
+		print ( B.basisString(iv) )
+	end
+	print("\n")  
+	return nd    
 	
 end
+
 
 
 --x is a paired ordered instruction list, outputs a simplified return type and ipaired ordered nstruction list
