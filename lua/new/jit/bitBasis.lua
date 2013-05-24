@@ -38,17 +38,17 @@ Below is our metric:
 -------------------------------------
 --]]
 
-metric = {1,1,1}	--METRIC (use {1,1,1,1,-1} for 3D Conformal or {-1,-1,-1,1} for Spacetime, etc )
+metric = {}			--METRIC (use {1,1,1,1,-1} for 3D Conformal or {-1,-1,-1,1} for Spacetime, etc )
 basis = {}			--BASIS BLADES
 subspace = {} 		--BASIC SUBSPACE CREATION
 keys = {} 			--TYPE KEY STORAGE  
-types = {}			--TYPES
-	
-ORIGIN = lshift(1,#metric-2)
-INFINITY = lshift(1,#metric-1)
-EP = ORIGIN
-EM = INFINITY
-EPLANE = bor(ORIGIN,INFINITY)
+types = {}			--TYPES  
+
+ORIGIN = 0
+INFINITY = 0
+EP = 0
+EM = 0
+EPLANE = 0
 
 blade = function(b, wt)
 	return {id = b, w = wt}
@@ -102,8 +102,10 @@ flag = function()
 end
 
 
-buildBasis = function()
+buildBasis = function() 
+	
 	m = metric
+
 	--make e1, e2, e3, e4 . . .
 	table.insert(basis,0)
 	local nb = 1
@@ -434,6 +436,12 @@ buildConformal = function()
 	
 	prepTable()
 	
+	ORIGIN = lshift(1,#metric-2)
+	INFINITY = lshift(1,#metric-1)
+	EP = ORIGIN
+	EM = INFINITY
+	EPLANE = bor(ORIGIN,INFINITY)
+
 	for i,iv in ipairs(basis) do
 
 		--local idA = basisString(iv)
