@@ -26,7 +26,7 @@ end
 makePToken2 = function(tx, lhid, rhid)
  	out = ""
  	for j, jv in ipairs(tx) do
-		if jv.r == -1 then out = out .. " - "
+		if jv.r.w == -1 then out = out .. " - "
 		else
 			if j ~= 1 then out = out .. " + " end
 		end
