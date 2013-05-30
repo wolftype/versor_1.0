@@ -17,6 +17,8 @@ print(b:unpack())
 
 print(space.operator"split")
 
+print(a.mv)
+
 
 if(false) then
 	local c = terralib.includecstring [[ 
