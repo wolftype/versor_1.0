@@ -80,6 +80,22 @@ basisString = function(x)
 	else return "s" end
 end
 
+basisBit = function(name)
+	if(name == "s") then
+		return 0
+	end
+
+	local x = 0
+	local lastn = tonumber(name:sub(name:len()))
+	for i=lastn, 1, -1 do
+		x = lshift(x, 1)
+		if(name:find(tostring(i), nil, false)) then
+			x = x+1
+		end
+	end
+	return x
+end
+
 bladeString = function(x)
 	local out = bitString (x.id)
 	out = out .. " " .. x.w .. " " .. basisString(x.id)
@@ -455,9 +471,11 @@ buildConformal = function()
 
 	end
 	
+	--[[
 	for i,iv in ipairs(basis) do
-		print ( S[iv].id )
+		print ("bas",  S[iv].id )
 	end
+	--]]
 end
 
 
@@ -592,15 +610,52 @@ keyCheck = function(fa,fb)
 	return res
 end
 
-register= function()
+basisKeys = function(basis)
+	local ids = {}
+	for i=1, #basis do
+		local name = basis[i]
+		local id = basisBit(name)
+		ids[i] = id
+	end
+	return ids
+end
 
+basisKey = function(basis)
+	local ids = basisKeys(basis)
+	local keys = keyCalc(ids)
+	local v = 0
+	for i=1, #keys do
+		v = v+keys[i]
+	end
+	return v
+end
+
+replaceType = function(oty, nty)
+	local v = keys[oty]
+	keys[oty] = nil
+	keys[nty] = v
+	
+	local v = types[oty]
+	types[oty] = nil
+	types[nty] = v
+	
+	for i=1, #subspace do
+		local subs = subspace[i]
+		if(subs.desc == oty) then
+			subs.desc = nty
+			break
+		end
+	end
+end
+
+register= function()
+	print"register"
 	for i, iv in ipairs( subspace ) do
 		keys[iv.desc] = keyCalc(iv.bases) 
 		types[iv.desc] = iv.bases
 		print (iv.desc, keyString(iv.desc) )
 	end
 	print ("\n")
-	
 end
 
 

@@ -3,6 +3,8 @@ package.path = "../util/?.lua;"..package.path
 require "routines"
 
 local B = require "bitBasis"
+local utils = require"utils"
+local printt = utils.printt
 
 module("funcs", package.seeall)
 
@@ -205,130 +207,49 @@ productList = function(tx,ty,operation)
 	return B.order(combined)
 end
 
---pass in a product list to make a new type, and key/type table for checking
-makeType = function(p, nd)
-    print (nd)
-	local f = B.keyCalc(p) 
-    print (nd)     
+--pass in a product list to make a new type
+makeType = function(p, nd, force)
+
+	local f = B.keyCalc(p)
 	local sum = 0	
-	for i, iv in ipairs(f) do print (iv) sum = sum + iv end
+	for i, iv in ipairs(f) do sum = sum + iv end
 	if sum == 0 then return end
 
 	local t = ""
 
 	for i,iv in pairs( B.keys ) do
+		if B.keyCheck(f, iv) then 
 		
-		if B.keyCheck(f, iv) then print ("old") return i end
-	
+			isMem = true 
+			if(force) then
+				B.replaceType(i, nd)
+				--B.keys[i] = nil
+				--B.keys[nd] = iv
+				--print(string.format("replacing %s with %s", i, nd))
+				return nd
+			else
+				return i
+			end
+		end
 	end
-		 
-	--add to keys  
-	B.keys[ nd ] = f
-	--add to built types
-	B.types[ nd ] = p
-	--print info 
-	print (nd, "NEW KEY: ", B.keyString( nd ))
-	for i, iv in ipairs(p) do
-		print ( B.basisString(iv) )
-	end
-	print("\n")  
-	return nd    
-	
+		
+	-- if (isMem==true) then 
+	-- 	--print("IS OLD: ", t)  
+	-- 	return t
+	-- else   
+	--if function hasn't returned yet, then type iss NEW   
+		--add to keys  
+		B.keys[ nd ] = f
+		--add to built types
+		B.types[ nd ] = p
+		--print info 
+		--[[
+		print (nd, "NEW KEY: ", B.keyString( nd ))
+		for i, iv in ipairs(p) do
+			print ( B.basisString(iv) )
+		end
+		print("\n")  
+		--]]
+		return nd
+   -- end
 end
-
-
-
---x is a paired ordered instruction list, outputs a simplified return type and ipaired ordered nstruction list
---format is
--- toInstructionList = function(x, states)
--- 	n = 1
--- 	ntab = {}
--- 	mvtype = ""
--- 	
--- 	for i,iv in ipairs(x) do
--- 		for k, kv in pairs(iv) do
--- 			mvtype = mvtype .. k
--- 			ntab[n] = kv
--- 			for j, jv in ipairs(ntab[n]) do
--- 				jv.r = jv.r.w
--- 			end
--- 			n = n + 1
--- 		end
--- 	end
--- 	
--- 	local t = getTypeFromBasisString(mvtype, states)
--- 	return {type=t, inst=ntab}
--- end
-
--- --Convert String s of BASES to Type culled from List x of types (typicall AllStates)
--- getTypeFromBasisString = function(s,x)
--- 	local n = 0
--- 	local out = ""
--- 	local ba = {}
--- 	for b in string.gmatch(s, "%w+") do
--- 		base = "_" .. b
--- 		for i, v in ipairs (order) do
--- 			if base == v.id then 
--- 				n = n + v.key 
--- 				table.insert(ba, v)
--- 				--print(base)
--- 			end
--- 		end
--- 	end
--- 	--print(s)
--- 	local nm = getTypeId(n,x)
--- 	--print (nm)
--- 	--if nm == "Muv" then return 0 end
--- 	t = { id = nm, desc = getTypeDesc(n,x), bases = ba, key = n}
--- 	return t
--- end
-
--- versionTypeString = function (result)
--- 	local mvtype = ""
--- 	
--- 	for i, iv in ipairs(result) do
--- 		mvtype = mvtype .. iv.id
--- 	end
--- 	
--- 	return mvtype
--- end
-
-
---Experimental: Looks For Difference in Type between two Types and looks up in list x
--- diffType = function(tx, ty, x)
--- 	local n = 0 
--- 	if tx.key == ty.key then n = tx.key end
--- 	if tx.key > ty.key then
--- 		n = tx.key - ty.key
--- 	end
--- 	if tx.key < ty.key then
--- 		n = ty.key - tx.key
--- 	end
--- --	print(n)
--- 	return getType(n, x)
--- --	return getType(n,x)
--- end
-
-
-
---copies values from type tx to type ty 
--- cast = function (tx, ty)
--- 	local out = ""
--- 	for i, iv in ipairs(tx.bases) do
--- 		for k, kv in ipairs(ty.bases) do
--- 			if iv == kv then				
--- 				out = out .. string.format( "a[%d] = b[%d];\n", i-1, k-1 )
--- 			end 
--- 		end
--- 	end
--- 	return out
--- end
-
---copies first x elems
--- directCast = function(tx)
--- 	local out = ""
--- 	for i, iv in ipairs(tx.bases) do
--- 		out = out .. string.format("a[%d] = b[%d];\n", i-1, i-1)
--- 	end
--- 	return out
--- end
