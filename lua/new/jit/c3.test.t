@@ -2,12 +2,24 @@ Strict.__newindex,Strict.__index = nil,nil
 package.path = package.path .. ";/Users/wesleysmith/Documents/libs/Lust/?.lua;./?.t"
 package.cpath = package.cpath .. ";/Users/wesleysmith/Documents/libs/lpeg-0.12/?.so"
 
+local ffi = require("ffi")
 local C3 = terralib.require"C3"
 local space = terralib.require"space"
+local utils = require"utils"
+local printt = utils.printt
 
+
+
+print(Pnt(1, 2, 3, 4, 5))
 
 local p1 = C3.null(1, 0, 0)
 local p2 = C3.null(-1, 0, 0)
+
+print(p1*p2)
+print(unpack(p1:value()))
+print(unpack((p1:reverse()):value()))
+
+
 local pp = p1^p2
 local a, b = C3.split(pp)
 print(p1, p2)
@@ -15,9 +27,6 @@ print(pp)
 print(a:unpack())
 print(b:unpack())
 
-print(space.operator"split")
-
-print(a.mv)
 
 
 if(false) then
