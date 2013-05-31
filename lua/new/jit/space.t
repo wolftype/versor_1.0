@@ -1,5 +1,4 @@
-local utils = require"utils"
-local printt = utils.printt
+local ffi = require("ffi")
 local B = require "bitBasis"
 local F = require "funcs"
 local Proxy = (function()
@@ -12,6 +11,8 @@ local Proxy = (function()
 	end
 end)()
 local Lust = require"Lust"
+local utils = require"utils"
+local printt = utils.printt
 
 -----------------------------------------------
 -- GLOBALS:
@@ -151,7 +152,45 @@ local function constructor(name)
 	
 	-- for Lua usage
 	getmetatable(st).__call = function(st, ...)
-		return Proxy()(st.constructor(...))
+		return st.constructor(...)
+	end
+
+	local mt = {
+		__mul = function(a, b)
+			return M.gp(a, b)
+		end,
+		__pow = function(a, b)
+			return M.op(a, b)
+		end,
+		__div = function(a, b)
+			return M.div(a, b)
+		end,
+		__unm = function(a)
+			return M.gp(a, s(-1))
+		end,
+		__index = {
+			value = function(a)
+				return st.entries:map(function(e) return a[e.field] end)
+			end,
+			unpack = function(a)
+				return unpack(a:value())
+			end,
+			reverse = function(a)
+				return M.reverse(a)
+			end,
+			involute = function(a)
+				return M.involute(a)
+			end,
+			conjugate = function(a)
+				return M.conjugate(a)
+			end,
+			inverse = function(a)
+				return M.inverse(a)
+			end,
+		}
+	}
+	st.metamethods.__staticinitialize = function(self)
+		ffi.metatype(self.cachedcstring, mt)
 	end
 end
 

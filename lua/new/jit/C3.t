@@ -1,7 +1,6 @@
 local B = require "bitBasis"
 local F = require "funcs"
 local space = terralib.require"space"
-local Proxy = require"Proxy"
 
 --- Build the algebra
 B.metric = {1,1,1,1,-1}	--Set Metric (this example is conformal)
@@ -87,19 +86,9 @@ end
 
 
 local M = {}
-M.null = function(a, b, c)
-	return Proxy(null(a, b, c))
-end
-
-M.dls = function(a, b, c, r)
-	return Proxy(dls(a, b, c, r))
-end
-
-M.split = function(pp)
-	local a, b = space.split(pp.mv)
-	return Proxy(a), Proxy(b)
-end
-
+M.null = null
+M.dls = dls
+M.split = space.split
 M.operators = { null=null }
 
 
