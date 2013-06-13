@@ -72,14 +72,14 @@ void GLVApp :: onDraw(){
 }
 
 int main(int argc, const char * argv[]) {
-     
-    Par * test; 
-    test = new Par[10];
-    
-    Inf inf(1);
-    Drv dir(1,1,1);
-    
-    cout << "TEST" << ( inf <= dir ) << endl;
+//     
+//    Par * test; 
+//    test = new Par[10];
+//    
+//    Inf inf(1);
+//    Drv dir(1,1,1);
+//    
+//    cout << "TEST" << ( inf <= dir ) << endl;
               
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	

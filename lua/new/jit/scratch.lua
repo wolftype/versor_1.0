@@ -2,7 +2,7 @@ local B = require "bitBasis"
 local T = require "token"
 local F = require "funcs"
 
-B.metric = {1,1,1,1,-1}		--Set Metric (this example is conformal)
+B.metric = {1,1,1}		--Set Metric (this example is conformal)
 B.buildBasis()				--Build Basis
 
 --B.buildEuclidean()		--Build Basis Products Using a Euclidean Metric
@@ -23,9 +23,9 @@ for i, iv in ipairs( B.subspace ) do
 		local g = F.makeType( gp.blades, iv.desc .. jv.desc )  
 		if (g) then print( g ,"gp( a : &", iv.desc, ", b : &", jv.desc, " ) return {", g, T.makePType2( gp, "a", "b"), "} end" ) end
 		local o = F.makeType( op.blades, iv.desc .. "_op_" .. jv.desc )
-	    if (o) then print( o, "op( a : &", iv.desc, ",b : &", jv.desc, ")\n  return {", g, T.makePType2( gp, "a", "b"), "} end" ) end
+	    if (o) then print( o, "op( a : &", iv.desc, ",b : &", jv.desc, ")\n  return {", g, T.makePType2( op, "a", "b"), "} end" ) end
 		local i = F.makeType( ip.blades, iv.desc .. "_ip_" .. jv.desc )                                   
-		if (i) then print( i, "ip(a : &", iv.desc, ", b : &", jv.desc, " )\n return {", g, T.makePType2( gp, "a", "b"), "} end" ) end 
+		if (i) then print( i, "ip(a : &", iv.desc, ", b : &", jv.desc, " )\n return {", g, T.makePType2( ip, "a", "b"), "} end" ) end 
 	end
 end    
 
