@@ -188,7 +188,8 @@ namespace vsr {
             Flp flat() const { return mPos ^ Inf(1); }
             
 			Vec x() const { return right(); } Vec y() const { return up(); } Vec z() const { return forward(); }
-			
+			Vec xs() const { return right() * scale(); } Vec ys() const { return up() * scale(); } Vec zs() const { return forward() * scale(); }
+            			
 			/* Local Euclidean Bivectors */
 			Biv xz()		{ return right() ^ forward(); } ///< xz euclidean bivector
 			Biv xy()		{ return right() ^ up();   }	///< xy euclidean bivector

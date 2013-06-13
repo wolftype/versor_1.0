@@ -321,6 +321,201 @@ void bend(GLVApp& app){
 }
 
 
+void bendBW(GLVApp& app){
+    //CONTROL POINT
+    static Frame frame( PT(0,0,0) );
+    
+    TOUCH(frame); //DRAW(frame.lz());
+    
+    //SURFACE MESH
+    static Field<Pnt> f(20,1,20,.5);
+
+    //Amt, and Gui Draw Booleans
+    static double amt, xCurve,yCurve, vType, doff;
+    static bool bWt, bLine, bShow, bXreal, bYreal;
+    
+    SET 
+        app.gui(bWt,"wt")(amt,"amt",-100,100)(xCurve,"xCurve",-100,100)(yCurve,"yCurve",-100,100)(bXreal, "x real")(bYreal,"y real")(vType,"type",0,3)(doff,"dist off",-10,10); 
+        frame.scale(.2);
+        bLine = true;
+        bWt = true;
+    END
+    
+    UVMesh mesh(f.w(), f.d());
+    
+    Par xPar = frame.py( bXreal ) * xCurve;//frame.tyScaled() * xCurve;
+    Par yPar = frame.py( bYreal ) * yCurve;//frame.tyScaled() * yCurve;
+    
+    Bst xBst = Gen::bst( xPar );
+    Bst yBst = Gen::bst( yPar );
+
+    Cir tx = Cir(frame.lx()).sp( xBst );
+    Cir ty = Cir(frame.lz()).sp( yBst );
+    
+    Par uvpar = frame.tyScaled();
+    
+    DRAW3(tx,0,0,0);
+    DRAW3(ty,0,0,0);
+    
+    
+    int type = vType;
+    ITJ( i, f.num() )
+        
+        
+        double dist2XLine = ( f.grid(i) <=  ( bWt ? tx.dual() : Par( frame.dlx() ) ) ).dot()[0];
+        double dist2YLine = ( f.grid(i) <=  ( bWt ? ty.dual() : Par( frame.dlz() ) ) ).dot()[0];
+        
+        double dist2Cen = Ro::sqd(f.grid(i), frame.pos() );
+        double dist2circ = (f.grid(i) <= frame.py(false).dual() ).dot()[0];
+        
+        Pnt& p = f[i]; 
+        
+        Par tpar = ( xPar * 1.0 / ( doff + dist2XLine )  + yPar * 1.0 / (doff + dist2YLine ) ) ; 
+        
+        Par tpar2 = (xPar + yPar) * (1.0 / (doff + dist2Cen) );
+        Par tpar3 = (xPar + yPar) * (1.0 / (doff + dist2circ) );
+        
+        Par tpar4 = -uvpar * ( ( xCurve / ( doff + dist2XLine ) ) + yCurve / (doff + dist2YLine) );
+        
+        Pnt np;
+        
+        switch(type){
+            case 0: np =  Ro::loc( p.sp( Gen::bst( tpar4 * amt ) ) ); break;
+            case 1: np =  Ro::loc( p.sp( Gen::bst( tpar2 * amt ) ) ); break;
+            case 2: np =  Ro::loc( p.sp( Gen::bst( tpar3 * amt ) ) ); break;
+        }   
+            
+        
+        mesh.add(np);
+        //DRAW3( np,0,1,1);
+            
+    END
+    
+    mesh.draw(.5,.5,.5);
+    mesh.drawTri(.3,.3,.3);
+    //Sphere
+    //DRAW4(frame.bound(), 1,0,0,.5);
+
+}
+
+void gaussian6(GLVApp& app){
+
+    static Field<Frame> f(3,3,1,2);
+    static Field<Par> fpar(3,3,1,2);
+    
+    ITJ(i,f.num())
+        TOUCH(f[i])
+        GL::Draw::Y(f[i],0,0,0);
+        fpar[i] = f[i].tyScaled();
+    END
+    
+    static double iter;//, amtA, amtB;
+    static double amtT;
+    static double * amtA = new double[ f.num() ];
+    static double * amtB = new double[ f.num() ];
+    static double falloff, offset, dfalloff;
+    static bool bUseDist;
+    
+    SET
+        app.gui(bUseDist,"dist")(offset, "offset", 0, 100)(falloff,"falloff", 0, 100)(dfalloff,"dfalloff",0,100);
+        app.gui(iter,"iter",10,1000)(amtT,"TOTAL_amt",-100,100);//(amtB,"amtB",-100,100);
+        iter = 3; //amtA = 1; //amtB = -1;
+        amtT = 1;
+        ITJ(i,f.num())
+            f[i].rot( Gen::rot( Biv::yz * PI/4.0) );//Gen::rot( (i & 1 ) ? Biv::yz * -PI/4.0 : Biv::yz * PI/4.0 ) );
+            app.gui(amtA[i], "amtA",-100,100);
+             app.gui(amtB[i], "amtB",-100,100);
+             //amtA[i] = 1;
+             //amtB[i] = -1;
+        END
+    END
+    
+    
+    ITJ(i,f.num())
+        f.grid(i) = f[i].pos();
+        Par parUa = f[i].tyScaled(  -amtA[i] * amtT );
+        Cir cUa = Cir( f[i].lx() ).sp( Gen::bst( parUa ) ); 
+        DRAW3(cUa,0,0,0);
+        Par parVa = f[i].tyScaled(  -amtB[i] * amtT );
+        Cir cVa = Cir( f[i].lz() ).sp( Gen::bst( parVa ) ); 
+        DRAW3(cVa,0,0,0);        
+        
+    END
+    
+    UVMesh uv(iter+1,iter+1);
+    IT2i(iter,iter)
+       
+        Patch pat = f.surfIdx(u,v);
+        Point src = f.surfGrid(u,v);
+        
+        //double rw = pat.rw; double rh = pat.rh;
+
+        Par parUa = f[pat.a].tyScaled(  -amtA[pat.a] * amtT );
+        Cir cUa = Cir( f[pat.a].lx() ).sp( Gen::bst( parUa ) ); 
+//        DRAW3(cUa,0,0,0);
+        
+        double uaw = ( src <= cUa.dual() ).dot()[0];
+             
+        Par parVa = f[pat.a].tyScaled(-amtB[pat.a] * amtT );
+        Cir cVa = Cir( f[pat.a].lz() ).sp( Gen::bst( parVa ) ); 
+//        DRAW3(cVa,0,0,0);
+                               
+        Par parUb = f[pat.b].tyScaled(-amtA[pat.b] * amtT);
+        Cir cUb = Cir( f[pat.b].lx() ).sp( Gen::bst( parUb ) ); 
+//        DRAW3(cUb,0,0,0);
+        
+        Par parVb = f[pat.b].tyScaled(-amtB[pat.b] * amtT );
+        Cir cVb = Cir( f[pat.b].lz() ).sp( Gen::bst( parVb ) ); 
+//        DRAW3(cVb,0,0,0);
+                
+        Par parUc = f[pat.c].tyScaled(-amtA[pat.c]  * amtT);
+        Cir cUc = Cir( f[pat.c].lx() ).sp( Gen::bst( parUc ) ); 
+//        DRAW3(cUc,0,0,0);
+        
+        Par parVc = f[pat.c].tyScaled(-amtB[pat.c]* amtT);
+        Cir cVc = Cir( f[pat.c].lz() ).sp( Gen::bst( parVc ) ); 
+//        DRAW3(cVc,0,0,0);
+        
+        Par parUd = f[pat.d].tyScaled(-amtA[pat.d] * amtT);
+        Cir cUd = Cir( f[pat.d].lx() ).sp( Gen::bst( parUd ) ); 
+//        DRAW3(cUd,0,0,0);
+        
+        Par parVd = f[pat.d].tyScaled(-amtB[pat.d] * amtT);
+        Cir cVd = Cir( f[pat.d].lz() ).sp( Gen::bst( parVd ) ); 
+//        DRAW3(cVd,0,0,0);
+                
+        //Par parU = bSquared ? Interp::sqsurface<Par>( parUa, parUb, parUc, parUd, rw,rh ) : Interp::surface<Par>( parUa, parUb, parUc, parUd, rw,rh );;
+        //Par parV = bSquared ? Interp::sqsurface<Par>( parVa, parVb, parVc, parVd, rw,rh ) : Interp::surface<Par>( parVa, parVb, parVc, parVd, rw,rh );
+        double dua = 1.0 / ( offset+ falloff * ( src <= ( cUa.dual() ) ).dot()[0] );
+        double dva = 1.0 / ( offset + falloff * ( src <= ( cVa.dual() ) ).dot()[0] );
+        double dpa = dfalloff / ( offset + Ro::sqd(src, f[pat.a].pos()) );
+
+        double dub = 1.0 / ( offset + falloff * ( src <= ( cUb.dual() ) ).dot()[0] );
+        double dvb = 1.0 / ( offset + falloff * ( src <= ( cVb.dual() ) ).dot()[0] );
+        double dpb = dfalloff/ ( offset + Ro::sqd(src, f[pat.b].pos() ) );
+                
+        double duc = 1.0 / ( offset + falloff * ( src <= ( cUc.dual() ) ).dot()[0] );
+        double dvc = 1.0 / ( offset + falloff * ( src <= ( cVc.dual() ) ).dot()[0] );
+        double dpc = dfalloff/ ( offset + Ro::sqd(src, f[pat.c].pos() ) );
+        
+        double dud = 1.0 / ( offset + falloff * ( src <= ( cUd.dual() ) ).dot()[0] );
+        double dvd = 1.0 / ( offset + falloff * ( src <= ( cVd.dual() ) ).dot()[0] );
+        double dpd = dfalloff / ( offset + Ro::sqd(src, f[pat.d].pos() ) );        
+        
+        Bst bst = Gen::bst( parUa * dua + parVa * dva + parUb * dub + parVb * dvb + parUc * duc + parVc * dvc + parUd * dud + parVd * dvd);
+        Bst bst2 = Gen::bst( ( parUa * dua + parVa * dva ) * dpa + ( parUb * dub + parVb * dvb) * dpb + ( parUc * duc + parVc * dvc) * dpc + ( parUd * dud + parVd * dvd) * dpd);
+
+        Point p = src.sp( bUseDist ? bst2 : bst) ;//Ro::loc( src.sp(bst2) );
+        
+        uv.add(p);
+
+    END END 
+
+    uv.draw(.5,.5,.5);
+    uv.drawTri(.2,.2,.2);
+
+}
+
 void pinch(GLVApp& app){
     //Plane
     static double amt, iter;
@@ -362,7 +557,8 @@ void pinch(GLVApp& app){
 }
 
 void GLVApp :: onDraw() {
-    bend(*this);
+  //  bendBW(*this);
+    gaussian6(*this);
  //   cusp(*this);
 //    kink(*this);
 //    intussuception2(*this);

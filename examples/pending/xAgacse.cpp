@@ -46,7 +46,7 @@ void basic(GLVApp& app){
     app.interface.touch(c);
 
     SETGUI("basic")
-        app.gui(num,"num",1,100)(amt,"amt")(bSkin, "skin");
+        app.gui(num,"num",1,100)(amt,"amt",0,1000)(bSkin, "skin");
         
         amt = 1;
         num = 20;
@@ -55,7 +55,7 @@ void basic(GLVApp& app){
     CirMesh cm;
     
     ITJi(i,num)
-        double xt = -1.0 + 2.0 * t * amt;
+        double xt = -amt + 2.0 * t * amt;
         Cir tc = c.sp( frame.ppx( xt ) );
         DRAW3( tc, 1, t*.5, t );     
         cm.add(tc);   
@@ -150,7 +150,7 @@ void origin(GLVApp& app){
 void dini(GLVApp& app, bool reset = false){
 
     static Dll dll = DLN(0,1,0);
-    static Frame frame(PT(0,2,0), Rot(1,0,0,0));
+    static Frame frame(PT(0,1,0), Rot(1,0,0,0));
     
     app.interface.touch(frame); 
     static Pnt p = Ro::null(1,0,0);
@@ -183,14 +183,21 @@ void dini(GLVApp& app, bool reset = false){
     
     ITJi(i,num)
         Pnt tp = p.sp( tw.mot(-t) );
+        //double tt = pitch * i/num;
+        Par mpar = par.sp(  tw.mot(-t) );//par.trs(0,tp[1],0);//0,tt,0);//
+         double ti = t;   
         ITJi(j, num)
-            Par npar = par.trs(0,tp[1],0);
+           /// double ttt = 1.0 * j/num;
+            double xt = 1 + t / ( 1 - t );
+            Par npar = par.sp(  tw.mot(- xt) );//par.trs(0,tp[1],0);//0,tt,0);//
             Bst pp = Gen::bst(npar*t);//Gen::trv(1,npar * t);
-            Pnt np = Ro::loc( tp.sp( pp ) );
-            
-            uvmesh.add(np);
+            Pnt np = tp.sp( pp );//Ro::loc(  );
+            //cout << pp * tw.mot() << endl; 
+            uvmesh.add(np/np[3]);
 
         END 
+        
+        DRAW(mpar ^ tp);
     END 
     
     //DRAW
@@ -479,26 +486,26 @@ void surface(GLVApp& app){
 }
 
 
-/*
+
 void poles(GLVApp& app){
     
-    using namespace gam::gen;
-    static gam::Sine<> sin(40);
     
-    static Lattice<Par> f(2,2,2,sqrt(2));
+    Drv drv(1,2,3);
+    cout << ( (drv ^ Ori(1)) <= Inf(1) ) << endl;
+    
+    static Field<Par> f(2,2,2,sqrt(2));
     static Frame * frame = new Frame[f.num()];
     
     static bool bDraw;
-    static float val,bamt, amt, num,dy1, dy2, w1, w2;
+    static float val,bamt, amt, num,dy1, dy2, w1, w2, r1, r2;
     SET
-        GxSync::master() << sin;
         
         ITJ(i,f.num()) frame[i].pos() = Ro::null( f.grid(i) ); frame[i].orientX( frame[i].pos() * 2 ); END 
         
         static Gui gui;
         app.subgui["poles"] = &gui;
         gui(num, "num", 10,100)(val, "val", -10,10)(dy1, "y_pos_a",-10,10)(dy2,"y_pos_b",-10,10);
-        gui(w1, "w_a",-10,10)(w2,"w_b",-10,10)(bDraw)(amt,"warp_amt",-100,100)(bamt,"boost_amt",-10,10);
+        gui(w1, "w_a",-10,10)(w2,"w_b",-10,10)(r1,"r1",-10,10)(r2,"r2",-10,10)(bDraw)(amt,"warp_amt",-100,100)(bamt,"boost_amt",-10,10);
         
         val = 1;
         bamt = 0;
@@ -508,66 +515,64 @@ void poles(GLVApp& app){
         
     END 
 
-    ITJ(i,f.num())
-        if (bDraw) {frame[i].push(); (Vec::x * amt * frame[i].scale() ).draw(0,0,0); frame[i].pop(); }
-        app.interface.touch(frame[i]);
-        f.grid(i) = frame[i].pos();
-        f[i] = frame[i].tx( amt * frame[i].scale() );
-    END
-    
-    GL::lightPos(0,0,5);
     static Cir c = CXZ(1);
+    static Cir c2 = c;
+    TOUCH(c2);
     Par par = c.dual();
     
-    Pnt pa = Ro::null_cen( Ro::split1(par) ).trs(0,dy1,0);
-    Pnt pb = Ro::null_cen( Ro::split2(par) ).trs(0,dy2,0);
+    Pnt pa = Ro::loc( Ro::split(par,true) ).trs(0,dy1,0);
+    Pnt pb = Ro::loc( Ro::split(par,false) ).trs(0,dy2,0);
+    pa = Ro::dls(pa, r1);
+    pb = Ro::dls(pb, r2);
     pa[3] = w1;
     pb[3] = w2;
     Par par2 = pa ^ pb;
     Sca sca = pa <= pb;
+    Bst bstA = pa * pb;
+    
+   // cout << bstA << endl;
     
     int it = num;
 
-    CirMesh cm, cm2;
+    vector<Cir> c1;
     
-    
+
     //INITIAL POLAR FORMS
-    ITI(i,it)
-        
-        Pnt_Pnt pp = par2 * (-1.0 + 2.0 * t) * amt;
+    ITJ(i,it)
+       double t = 1.0 * i/it; 
+        Bst pp = par2 * (-1.0 + 2.0 * t) * amt;
+        Bst tb = Gen::bst( par2 * (-1.0 + 2.0 * t) * amt );
         pp[0] = sca[0];
         
-        Cir tc = c.sp(pp);
         
-        cm.add(tc);
+        Cir tc = c2.sp(pp);
+        
+        c1.push_back(tc);
         
     END 
 
-    cm.skin();
-    
-    //cout << Lattice<Par>::limit( f, app.mouse().origin ) << endl; 
-    //cout << f.offset( app.mouse().origin ) << endl; 
+    Mesh cm = Mesh::Skin(c1, c1.size(), 20);
+    cm.draw();
 
-    ITJ(i, cm.vp.size() )
-    
-        Vec tv = f.offset( cm.vp[i] );
-        //cout << tv << endl; 
-        Par tpar = Interp::volume<Par> ( f.data(), tv[0], tv[1], tv[2] );//f.euler ( cm.vp[i] );
-        Pnt_Pnt pp = Gen::tpar( tpar * bamt );
-        //pp[0] = val;
-        Pnt np = Ro::null_cen ( cm.vp[i].sp ( pp ) ) ;
-        cm2.vp.push_back( np );
+//    ITJ(i, cm.vp.size() )
 //    
-    END 
-    cm2.res = cm.res;
-    
-    cm2.draw(.5,0,0,1);
+//        Vec tv = f.offset( cm.vp[i] );
+//        //cout << tv << endl; 
+//        Par tpar = Interp::volume<Par> ( f.data(), tv[0], tv[1], tv[2] );//f.euler ( cm.vp[i] );
+//        Pnt_Pnt pp = Gen::tpar( tpar * bamt );
+//        //pp[0] = val;
+//        Pnt np = Ro::null_cen ( cm.vp[i].sp ( pp ) ) ;
+//        cm2.vp.push_back( np );
+////    
+//    END 
+//    cm2.res = cm.res;
+//    
+//    cm2.draw(.5,0,0,1);
     
     app.text("Equator boosted by the Geometric Product of its (weighted) antipodal poles");
     
 }
 
-*/
 
 void linear(GLVApp& app){
 
@@ -684,7 +689,7 @@ void demo (GLVApp& app){
     else if(bDini) { dini(app); app.gui << (*app.subgui["dini"]); }
     else if (bLinear) { linear(app); app.gui << (*app.subgui["linear"]); }
     else if (bSurface){ surface(app);app.gui << *app.subgui["bilinear"]; }
-    //else if (bPoles) { poles(app); app.gui << *app.subgui["poles"]; }
+    else if (bPoles) { poles(app); app.gui << *app.subgui["poles"]; }
     else if (bBending) { lineToCircle(app); app.gui << *app.subgui["line2circle"]; }
     
     
@@ -696,7 +701,9 @@ void GLVApp :: onDraw(){
 
  //   basic2(*this);
  //   origin(*this);
+//    poles(*this);
     demo(*this);
+    
 // if (bDemo) 
     
 //    dini(*this);
@@ -709,7 +716,7 @@ void GLVApp :: onDraw(){
 //    osctest(*this);
 
  //   linear(*this);
-    text("Use the G, R, S keys to Grab, Rotate, and Scale Control Points.  Q to let go.",50,50);
+ //   text("Use the G, R, S keys to Grab, Rotate, and Scale Control Points.  Q to let go.",50,50);
 }
 
 int main() {
