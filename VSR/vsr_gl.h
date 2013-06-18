@@ -37,9 +37,11 @@ namespace vsr {
     namespace GL {
         
         enum ATTACH {
+			#ifndef __REDUCED_GRAPHICS__
             COLOR =     GL_COLOR_ATTACHMENT0, 
             DEPTH =     GL_DEPTH_ATTACHMENT,
-            STENCIL =   GL_STENCIL_ATTACHMENT
+            STENCIL =   GL_STENCIL_ATTACHMENT 
+			#endif
         };
         
         enum USAGE {
@@ -112,14 +114,17 @@ namespace vsr {
             MIPMAPLINEAR = GL_LINEAR_MIPMAP_LINEAR,
             MIPMAPNEAREST = GL_LINEAR_MIPMAP_NEAREST
         };
-        
+                                                   
+
         enum IFORMAT {
+			#ifndef __REDUCED_GRAPHICS__  
+            STENCILIDX  = GL_STENCIL_INDEX8,
+			#endif
             DEPTHCOMP   = GL_DEPTH_COMPONENT16, //GL_DEPTH_COMPONENT24 ?
             RGBA4       = GL_RGBA4,
             RGBA8       = GL_RGBA8,
-            RGB5        = GL_RGB5_A1,
-            //           RGB565      = GL_RGB565,
-            STENCILIDX  = GL_STENCIL_INDEX8
+            RGB5        = GL_RGB5_A1
+            //           RGB565      = GL_RGB565,  
         };
         
         enum ATTRIB{
