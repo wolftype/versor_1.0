@@ -21,7 +21,10 @@ include Makefile.common
 
 #LINK TO GRAPHICS LIBRARIES FLAG (GLV, OpenGL, GLUT) 
 # run make GFX=0 vsr to make versor without built-in graphics capabilities (just data and operations)
-GFX = 1
+GFX = 1 
+
+REDUCED_GFX = 0
+
 INSTALL_PCH = 0
 
 #Location of Git Repository Directory
@@ -43,7 +46,7 @@ BIN_DIR		= $(BUILD_DIR)bin/
 CFLAGS += -Wno-deprecated
 
 OBJS := vsr_mv.o vsr_frame.o vsr_file.o
-OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o vsr_gl_shader.o gl2ps.o 
+OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o gl2ps.o #vsr_gl_shader.o 
 
 HEAD = vsr.h
 PCH_DIR = $(BUILD_DIR)pch/
@@ -55,21 +58,30 @@ DEPFLAGS = -MMD -MF $(basename $@).dep
 #Link
 LDFLAGS	+= -L$(LIB_DIR) 
 
-LINK_LDFLAGS += -l$(LIB_NAME)
+LINK_LDFLAGS += -l$(LIB_NAME) 
+
 #Graphics only added to LDFLAGS if GFX=1 - (default)
-ifeq ($(GFX),1)
+
+ifneq ($(GFX), 0)
+ 
 	ifeq ($(PLATFORM), linux)
 		LINK_LDFLAGS += -lGLV -lglut -lGLEW -lGLU -lGL
 		LDFLAGS += -L/usr/lib/x86_64-linux-gnu/
-	else ifeq ($(PLATFORM), macosx)
+	else ifeq ($(PLATFORM), macosx) 
 		LINK_LDFLAGS += -lglv -framework OpenGL -framework GLUT  
 	else ifeq ($(PLATFORM), windows)
 		LINK_LDFLAGS += -lglv -lglew32 -lglu32 -lopengl32 -lglut32
-	endif
+	endif 
 
-	LDFLAGS	+= -L$(EXT_DIR)GLV/build/lib/
-	OBJS += $(OBJS_GL)
-endif
+	ifeq ($(REDUCED_GFX), 1)
+		CPPFLAGS += -D __REDUCED_GRAPHICS__
+	endif  
+
+	OBJS += $(OBJS_GL) 
+endif  
+
+
+#endif
 
 VPATH = $(PCH_DIR):\
 		$(SRC_DIR):\
@@ -101,12 +113,14 @@ CXXFLAGS	:= $(CFLAGS) $(CXXFLAGS)
 
 
 EXEC_TARGETS = tests/%.cpp examples/%.cpp examples/%/%.cpp
+ 
 
 
 # Dummy target to force rebuilds
 FORCE:
 
-.PRECIOUS: $(EXEC_TARGETS) $(PCH_DIR)%.h.gch
+.PRECIOUS: $(EXEC_TARGETS) $(PCH_DIR)%.h.gch  
+  
 
 #COMPILATION of CPP to Object File
 $(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
@@ -148,13 +162,12 @@ clean:
 	@rm -r $(BIN_DIR)
 	$(MAKE) --no-print-directory -C externals/GLV clean
 
-glv: FORCE
-ifeq ($(GFX),1)
+glv: 
+	@echo "glv"
 	@echo "building external GUI library GLV . . . if there are errors, make sure you have entered:\n\n"
 	@echo "git submodule init"
 	@echo "git submodule update\n\n"
 	$(MAKE) --no-print-directory -C externals/GLV install DESTDIR=../../$(BUILD_DIR)
-endif
 
 vsr: title dir glv $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))

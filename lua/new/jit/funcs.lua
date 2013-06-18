@@ -220,12 +220,8 @@ makeType = function(p, nd, force)
 	for i,iv in pairs( B.keys ) do
 		if B.keyCheck(f, iv) then 
 		
-			isMem = true 
 			if(force) then
 				B.replaceType(i, nd)
-				--B.keys[i] = nil
-				--B.keys[nd] = iv
-				--print(string.format("replacing %s with %s", i, nd))
 				return nd
 			else
 				return i
@@ -233,23 +229,11 @@ makeType = function(p, nd, force)
 		end
 	end
 		
-	-- if (isMem==true) then 
-	-- 	--print("IS OLD: ", t)  
-	-- 	return t
-	-- else   
 	--if function hasn't returned yet, then type iss NEW   
 		--add to keys  
 		B.keys[ nd ] = f
 		--add to built types
 		B.types[ nd ] = p
-		--print info 
-		--[[
-		print (nd, "NEW KEY: ", B.keyString( nd ))
-		for i, iv in ipairs(p) do
-			print ( B.basisString(iv) )
-		end
-		print("\n")  
-		--]]
+
 		return nd
-   -- end
 end

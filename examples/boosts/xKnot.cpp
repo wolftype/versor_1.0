@@ -140,11 +140,12 @@ void GLVApp :: onDraw(){
 int main(int argc, const char * argv[]) {
      
 //    cout << "arg: " << argv[0] << endl; 
-//    File::setdir( argv[0] );  
+    File::setdir( argv[0] );  
            
-    /* Set Up GLV hierarchy */
+    /* Set Up GLV hiera
+    rchy */
 	GLV glv(0,0);	
-	glv.colors().back.set(0,0,0);
+	glv.colors().back.set(1,1,1);
     		
 	Window * win = new Window(500,500,"VSR",&glv);
     GLVApp * app = new GLVApp(win);    

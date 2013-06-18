@@ -155,7 +155,11 @@ void GLVApp :: onDraw(){
 
 int main(int argc, const char * argv[]) {
 
-    cout << argv[0] << endl; 
+    cout << argv[0] << endl;
+    
+     #ifdef __REDUCED_GRAPHICS__
+        cout << "REDUCED GRAPHICS" << endl;
+      #endif 
     
     //File::setdir( argv[0] );
     /* Set Up GLV hierarchy */
