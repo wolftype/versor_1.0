@@ -32,10 +32,12 @@ namespace vsr {
             case GL_INVALID_OPERATION:
                 printf("%s:\n %s\n", msg, "The specified operation is not allowed in the current state. The offending command is ignored and has no other side effect than to set the error flag.");
                 break;
-                
+            
+            #ifndef __REDUCED_GRAPHICS__
             case GL_INVALID_FRAMEBUFFER_OPERATION:
                 printf("%s:\n %s\n", msg, "Framebuffer is Incomplete");
                 break;
+            #endif
                 
             case GL_STACK_OVERFLOW:
                 printf("%s:\n %s\n", msg, "This command would cause a stack overflow. The offending command is ignored and has no other side effect than to set the error flag.");
