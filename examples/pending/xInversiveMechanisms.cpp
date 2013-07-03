@@ -70,7 +70,7 @@ void cusp(GLVApp& app){
     END
     
     //f.drawGrid(0,0,0);
-    GL::Glyph::Line(f.grid(0), f.grid( f.num() -1 ) );
+    Glyph::Line(f.grid(0), f.grid( f.num() -1 ) );
     glLineWidth(2);
     line.draw(0,0,1);
 
@@ -79,7 +79,7 @@ void cusp(GLVApp& app){
         if ( ( rt - floor(rt) == 0 ) && !( int(rt) & 1 ) ) {
             DRAW3(pnts[i],0,1,0);
         
-            if (bDrawArrow) { GL::Draw::Push(f.grid(i)); DRAW3(vec[i], .3,.3,.3); GL::pop(); }
+            if (bDrawArrow) { Draw::Push(f.grid(i)); DRAW3(vec[i], .3,.3,.3); GL::pop(); }
         }
         
     END
@@ -405,7 +405,7 @@ void gaussian6(GLVApp& app){
     
     ITJ(i,f.num())
         TOUCH(f[i])
-        GL::Draw::Y(f[i],0,0,0);
+        Draw::Y(f[i],0,0,0);
         fpar[i] = f[i].tyScaled();
     END
     

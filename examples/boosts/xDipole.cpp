@@ -20,7 +20,7 @@ using namespace glv;
 
 void dipole(GLVApp& app){
 
-    using namespace vsr::GL;
+    //using namespace vsr::GL;
     
     static double amt, trail;
     static bool bReset;

@@ -58,7 +58,7 @@ void coord(GLVApp& app){
 void GLVApp :: onDraw(){
 
  //   coord(*this);
- //   nav(*this);
+    nav(*this);
 }
 
 int main(int argc, const char * argv[]) {

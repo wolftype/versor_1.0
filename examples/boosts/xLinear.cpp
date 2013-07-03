@@ -30,8 +30,8 @@ void linear(GLVApp& app){
     app.interface.touch(f2);
     
 	//Draw their local x axes
-    GL::Draw::X(f1);
-    GL::Draw::X(f2);
+    Draw::X(f1);
+    Draw::X(f2);
 
 
     //GUI STUFF

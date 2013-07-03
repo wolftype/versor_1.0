@@ -75,7 +75,7 @@ void bilinear(GLVApp& app){
         // GL::Draw::PushFrame(frame[i]);
         // DRAW3(Vec::x * frame[i].scale() * amt , 0,0,0); 
         // GL::pop();
-		GL::Draw::X(frame[i]);
+		Draw::X(frame[i]);
         app.interface.touch(frame[i]);
         
         //frame[i].scale() *= scale;

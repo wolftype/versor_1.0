@@ -586,25 +586,8 @@
 		9B26F0C51671069400455E54 /* Frames */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Frames; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B28076116700947001806F8 /* Twists copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Twists copy"; path = Topo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2977E01729BA6D00227808 /* vsr_xf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vsr_xf.h; sourceTree = "<group>"; };
-		9B3567D6177231E6004B455B /* Frames copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Frames copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B3567D6177231E6004B455B /* Frames copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Frames copy"; path = Roots; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3567D917723279004B455B /* xRoots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xRoots.cpp; path = ../basics/xRoots.cpp; sourceTree = "<group>"; };
-		9B3567DC177245FE004B455B /* gfx_constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_constants.h; sourceTree = "<group>"; };
-		9B3567DD177245FE004B455B /* gfx_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_data.h; sourceTree = "<group>"; };
-		9B3567DE177245FE004B455B /* gfx_egl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_egl.h; sourceTree = "<group>"; };
-		9B3567DF177245FE004B455B /* gfx_fbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_fbo.h; sourceTree = "<group>"; };
-		9B3567E0177245FE004B455B /* gfx_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_gl.h; sourceTree = "<group>"; };
-		9B3567E1177245FE004B455B /* gfx_glsl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_glsl.h; sourceTree = "<group>"; };
-		9B3567E2177245FE004B455B /* gfx_glu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_glu.h; sourceTree = "<group>"; };
-		9B3567E3177245FE004B455B /* gfx_lib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_lib.h; sourceTree = "<group>"; };
-		9B3567E4177245FE004B455B /* gfx_matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_matrix.h; sourceTree = "<group>"; };
-		9B3567E5177245FE004B455B /* gfx_mbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_mbo.h; sourceTree = "<group>"; };
-		9B3567E6177245FE004B455B /* gfx_mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_mesh.h; sourceTree = "<group>"; };
-		9B3567E7177245FE004B455B /* gfx_pipe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_pipe.h; sourceTree = "<group>"; };
-		9B3567E8177245FE004B455B /* gfx_shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_shader.h; sourceTree = "<group>"; };
-		9B3567E9177245FE004B455B /* gfx_texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_texture.h; sourceTree = "<group>"; };
-		9B3567EA177245FE004B455B /* gfx_vattrib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_vattrib.h; sourceTree = "<group>"; };
-		9B3567EB177245FE004B455B /* gfx_vbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_vbo.h; sourceTree = "<group>"; };
-		9B3567EC177245FE004B455B /* gfx_xfmatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gfx_xfmatrix.h; sourceTree = "<group>"; };
 		9B3F72D5170A1817001C1CCA /* xMeet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMeet.cpp; path = ../../../examples/basics/xMeet.cpp; sourceTree = "<group>"; };
 		9B52EC38173F4E9B00780705 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = KnotMore; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5890381641A69B0096B491 /* Meet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1096,31 +1079,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9B3567DB177245FE004B455B /* gfx */ = {
-			isa = PBXGroup;
-			children = (
-				9B3567DC177245FE004B455B /* gfx_constants.h */,
-				9B3567DD177245FE004B455B /* gfx_data.h */,
-				9B3567DE177245FE004B455B /* gfx_egl.h */,
-				9B3567DF177245FE004B455B /* gfx_fbo.h */,
-				9B3567E0177245FE004B455B /* gfx_gl.h */,
-				9B3567E1177245FE004B455B /* gfx_glsl.h */,
-				9B3567E2177245FE004B455B /* gfx_glu.h */,
-				9B3567E3177245FE004B455B /* gfx_lib.h */,
-				9B3567E4177245FE004B455B /* gfx_matrix.h */,
-				9B3567E5177245FE004B455B /* gfx_mbo.h */,
-				9B3567E6177245FE004B455B /* gfx_mesh.h */,
-				9B3567E7177245FE004B455B /* gfx_pipe.h */,
-				9B3567E8177245FE004B455B /* gfx_shader.h */,
-				9B3567E9177245FE004B455B /* gfx_texture.h */,
-				9B3567EA177245FE004B455B /* gfx_vattrib.h */,
-				9B3567EB177245FE004B455B /* gfx_vbo.h */,
-				9B3567EC177245FE004B455B /* gfx_xfmatrix.h */,
-			);
-			name = gfx;
-			path = ../../gfx;
-			sourceTree = "<group>";
-		};
 		9B3F72D9170A183D001C1CCA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1277,7 +1235,6 @@
 			children = (
 				9BF5C69E16F0E9D100629664 /* deprecated */,
 				9BF5C6A316F0E9D100629664 /* Elements */,
-				9B3567DB177245FE004B455B /* gfx */,
 				9BF5C6D916F0E9D100629664 /* vsr.h */,
 				9BF5C6DA16F0E9D100629664 /* vsr_boost.h */,
 				9BF5C6DB16F0E9D100629664 /* vsr_camera.h */,

@@ -33,7 +33,7 @@ void field(GLVApp& app){
 
 
     //f.draw(0,1,0);
-    e.draw(0,1,1);
+    DRAW3(e,0,1,1);
 }
 
 void GLVApp :: onDraw(){

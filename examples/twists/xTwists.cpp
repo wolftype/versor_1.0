@@ -32,7 +32,7 @@ void twists(GLVApp& app){
     Dll dll = frame.dly();
     DRAW3(dll,1,0,0);
     //Draw Y Vector
-    GL::Draw::Y(frame);
+    Draw::Y(frame);
     
     //A Twist around and along that axis
     DualLine twist = Twist::Along( dll, period * PI, pitch * PI);

@@ -140,7 +140,7 @@ void GLVApp :: onDraw(){
 int main(int argc, const char * argv[]) {
      
 //    cout << "arg: " << argv[0] << endl; 
-    File::setdir( argv[0] );  
+ //   File::setdir( argv[0] );  
            
     /* Set Up GLV hiera
     rchy */

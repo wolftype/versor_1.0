@@ -328,7 +328,7 @@ namespace vsr {
         
         virtual void drawLinkages(bool dashed = true){
             for (int i = 0; i < mNum-1; ++i){
-                (dashed) ? GL::Glyph::DashedLine(mFrame[i].pos(), mFrame[i+1].pos() ) : GL::Glyph::Line(mFrame[i].pos(), mFrame[i+1].pos() );
+                (dashed) ? Glyph::DashedLine(mFrame[i].pos(), mFrame[i+1].pos() ) : Glyph::Line(mFrame[i].pos(), mFrame[i+1].pos() );
             }            
         }
         
