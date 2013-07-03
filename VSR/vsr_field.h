@@ -14,9 +14,12 @@
 #include "vsr_op.h"
 #include "vsr_frame.h"
 //#include "vsr_draw.h"
-#include "vsr_stat.h"
-#include "vsr_gfxdata.h"
+//#include "vsr_stat.h"
+
 #include "vsr_lattice.h"
+
+
+#include "gfx/gfx_data.h"
 
 namespace vsr{
 
@@ -145,9 +148,9 @@ namespace vsr{
         void reset() { init(); }
         
         /*! Random Vector in Field*/
-        Vec rand(){ 
-            return Vec( px(Rand::Int(mWidth)) , py(Rand::Int(mHeight)), pz(Rand::Int(mDepth))  );         
-        }
+//        Vec rand(){ 
+//            return Vec( px(Rand::Int(mWidth)) , py(Rand::Int(mHeight)), pz(Rand::Int(mDepth))  );         
+//        }
 //
 
             //MOVED TO vsr_draw
