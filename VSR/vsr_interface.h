@@ -11,12 +11,21 @@
 #ifndef vsr_Interface_h
 #define vsr_Interface_h
 
-#include "vsr_gl.h"
-#include "vsr_gfxmatrix.h"
+//#include "vsr_gl.h"
+//#include "vsr_gfxmatrix.h"
+
+#include "gfx_gl.h"
+#include "gfx_glu.h"
+#include "gfx_xfmatrix.h"
+
 #include "vsr_set.h"
 #include "vsr_drawable.h"
 #include "vsr_camera.h"
+
 #include <map>
+
+
+using namespace gfx;
 
 namespace vsr  {
     

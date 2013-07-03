@@ -1,4 +1,4 @@
-//
+ //
 //  Glyph.h
 //  vsr_static
 //
@@ -12,13 +12,13 @@
 #define vsr_static_Glyph_h
 
 //#include "vsr_gxlib.h"
-#include "gfx_lib.h"
+#include "gfx/gfx_lib.h"
 
-using namespace gfx;
+
 
 namespace vsr {
 
- //   namespace GL{
+    namespace GL{
     
         /// GL BUILTIN PIPELINE
 		namespace Glyph {
@@ -801,27 +801,14 @@ inline void Glyph :: Box ( double w, double h, double d ){
     double fr = d/2.0;     double ba = -d/2.0;
 
     glBegin(GL_QUADS);
-        gfx::GL::Quad( Vec(le,bo,fr), Vec(le,to,fr), Vec(ri,to,fr), Vec(ri,bo,fr) ) ;
-        gfx::GL::Quad( Vec(le,to,fr), Vec(le,to,ba), Vec(ri,to,ba), Vec(ri,to,fr) ) ;
-        gfx::GL::Quad( Vec(le,to,ba), Vec(le,bo,ba), Vec(ri,bo,ba), Vec(ri,to,ba) ) ;
-        gfx::GL::Quad( Vec(le,bo,ba), Vec(le,bo,fr), Vec(ri,bo,fr), Vec(ri,bo,ba) ) ;
-        gfx::GL::Quad( Vec(le,bo,ba), Vec(le,to,ba), Vec(le,to,fr), Vec(le,bo,fr) ) ;
-        gfx::GL::Quad( Vec(ri,bo,fr), Vec(ri,to,fr), Vec(ri,to,ba), Vec(ri,bo,ba) ) ;
+        GL::Quad( Vec(le,bo,fr), Vec(le,to,fr), Vec(ri,to,fr), Vec(ri,bo,fr) ) ;
+        GL::Quad( Vec(le,to,fr), Vec(le,to,ba), Vec(ri,to,ba), Vec(ri,to,fr) ) ;
+        GL::Quad( Vec(le,to,ba), Vec(le,bo,ba), Vec(ri,bo,ba), Vec(ri,to,ba) ) ;
+        GL::Quad( Vec(le,bo,ba), Vec(le,bo,fr), Vec(ri,bo,fr), Vec(ri,bo,ba) ) ;
+        GL::Quad( Vec(le,bo,ba), Vec(le,to,ba), Vec(le,to,fr), Vec(le,bo,fr) ) ;
+        GL::Quad( Vec(ri,bo,fr), Vec(ri,to,fr), Vec(ri,to,ba), Vec(ri,bo,ba) ) ;
     glEnd();
-//    glBegin(GL_TRIANGLE_STRIP);
-//
-//    glVertex3f(le, bo, fr);
-//    glVertex3f(le, to, fr);
-//    glVertex3f(ri, bo, fro);
-//
-//    glVertex3f(ri, to, fr);
-//    glVertex3f(le, to, ba);
-//    glVertex3f(ri, to, ba);
-//
-//    glVertex3f(le, bo, ba);
-//    glVertex3f(ri, bo, ba);
-//
-//    glEnd;
+
 }
 
 
@@ -842,134 +829,134 @@ inline void Glyph :: Axes(const Vec& v1, const Vec& v2, const Vec& v3){
 	glEnd();
 }
 
-inline void Glyph :: SegRad( const Cir& k){
-    Seg( k, TWOPI * Ro::cur(k) );
-}
+// inline void Glyph :: SegRad( const Cir& k){
+//     Seg( k, TWOPI * Ro::cur(k) );
+// }
+// 
+// inline void Glyph :: Seg(const Cir& K, double t, bool dir, int res){
+// 
+//     //ORIENTATION
+// 	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+// 	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
+//     Rot v4 = Gen::aa(r);  
+// 
+//     //POINT POSITION AND RADIUS
+// 	Pnt v = Ro::cen(K);                                 //Center of Circle
+// 	double siz = Ro::size(K,false);                            //Squared Radius
+// 	double rad = sqrt ( std::fabs (siz) );                   //Radius
+// 	                           
+// 	bool sign = Op::sn(b, Biv::xy);
+// 	
+//     if (siz != 0){
+// 	glPushMatrix();
+// 		glTranslated(v[0],v[1],v[2]);
+// 		glRotated(v4[0], v4[1], v4[2], v4[3]);
+// 		siz > 0 ? Glyph::Segment(t, rad, sign, res) : Glyph::DashedSegment(t,rad, sign, res);
+// 	glPopMatrix();
+//     }
+// 
+// }
+// 
+// //like seg, but with offset
+// inline void Glyph :: SegOff(const Cir& K, double t, double off, bool dir, int res){
+// 
+//     //ORIENTATION
+// 	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+// 	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
+//     Rot v4 = Gen::aa(r);  
+// 
+//     //POINT POSITION AND RADIUS
+// 	Pnt v = Ro::cen(K);                                 //Center of Circle
+// 	double siz = Ro::size(K,false);                       //Squared Radius
+// 	double rad = sqrt ( std::fabs (siz) );                   //Radius
+// 	                           
+// 	bool sign = Op::sn(b, Biv::xy);
+// 	
+// 	glPushMatrix();
+// 		glTranslated(v[0],v[1],v[2]);
+// 		glRotated(v4[0], v4[1], v4[2], v4[3]);
+// 		siz > 0 ? Glyph::Segment3(t, off, rad, sign, res) : Glyph::DashedSegment3(t, off, rad, sign, res);
+// 	glPopMatrix();
+// 
+// }
+// 
+// void Glyph :: SegTo(const Cir& K, double st, double t, int res){
+//     
+//     Rot roff = Gen::rot(Biv::xy * st);
+//     //Vec4<> r4 = Op::aa(roff);  
+//     //cout << roff << endl; 
+//     //ORIENTATION
+//     Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+//     Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );// * roff;	//Determine Orientation
+//     Rot v4 = Gen::aa(r);  
+//     
+//     //POINT POSITION AND RADIUS
+//     Pnt v = Ro::cen(K);                                 //Center of Circle
+//     double siz = Ro::size(K,false);                            //Squared Radius
+//     double rad = sqrt ( std::fabs (siz) );                   //Radius
+//     
+//    // bool sign = Op::sn(b, Biv::xy);
+//     
+//     glPushMatrix();
+//     glTranslated(v[0],v[1],v[2]);
+//     glRotated(v4[0], v4[1], v4[2], v4[3]);//glRotated(r4.w, r4.x, r4.y, r4.z);
+// //    siz > 0 ? Glyph::Segment(t, rad, sign, res) : Glyph::DashedSegment(t,rad, sign, res);
+//     siz > 0 ? Glyph::Segment2(st, st + t, rad, res) : Glyph::DashedSegment2(st, st + t, rad, res);
+//     glPopMatrix();
+//     
+// }    
+//     
+// void Glyph :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
+// //	glColor3f(K.red(), K.green(), K.blue());
+// 	Biv bi = Biv(Ro::dir(K));							//Extract Euclidean Bivector
+// 	Rot r = Gen::ratio(Vec::z, Op::dle( bi ).unit() );	//Determine Orientation
+// 	Pnt v = Ro::cen(K);			
+// 	Rot v4 = Gen::aa(r);
+// 	double siz = Ro::size(K,false);
+// 	double rad = Ro::rad(K);
+// 	//bool sn = Op::sn(bi, Biv::xy);
+// 
+// 	Dlp da = ( a^Inf(1) ) <= K;
+// 	da = da.unit();
+// 	Dlp db = ( b^Inf(1) ) <= K;
+// 	db = db.unit();
+// 	Dlp dy = Ro::noon(K);
+// 	dy = dy.unit();
+// 	
+// 	double t1 = ( da <= dy)[0];
+// 	double t2 = ( db <= dy)[0];
+// 	
+// 	glPushMatrix();
+// 		glTranslated( v[0], v[1], v[2] );
+// 		glRotated(v4[0], v4[1], v4[2], v4[3]);
+// 		siz > 0 ? Glyph::Segment2(t1, t2, rad, res) : Glyph::DashedSegment2(t1,t2, rad, res);
+// 	glPopMatrix();
+// }
+// 
+//     void Glyph :: SegPnts(const Cir& K, const Pnt& a, const Pnt& b, int res){
+//         static Pnt tp, cen;
+//         static Dll da, db, rat;
+//         
+//         bool sn = 0;//Op::sn ( Ro::dir(K, false ), Biv::xy );
+//         
+//         cen = Ro::loc(K);
+//         da = ( cen ^ a ^ Inf(1) ).dual(); 
+//         db = ( cen ^ b ^ Inf(1) ).dual(); 
+//     
+//         rat = (sn) ? Gen::log(db, da) : Gen::log(da, db);
+//        
+//         glBegin(GL_LINE_STRIP);
+//         for (int i = 0; i <= res; ++i){
+//             double t = 1.0 * i/res;
+//             tp = a.mot( rat * t ); 
+//             glVertex3f(tp[0], tp[1], tp[2]);
+//         }
+//         glEnd();
+//         
+//     }   
 
-inline void Glyph :: Seg(const Cir& K, double t, bool dir, int res){
 
-    //ORIENTATION
-	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
-	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
-    Rot v4 = Gen::aa(r);  
-
-    //POINT POSITION AND RADIUS
-	Pnt v = Ro::cen(K);                                 //Center of Circle
-	double siz = Ro::size(K,false);                            //Squared Radius
-	double rad = sqrt ( std::fabs (siz) );                   //Radius
-	                           
-	bool sign = Op::sn(b, Biv::xy);
-	
-    if (siz != 0){
-	glPushMatrix();
-		glTranslated(v[0],v[1],v[2]);
-		glRotated(v4[0], v4[1], v4[2], v4[3]);
-		siz > 0 ? Glyph::Segment(t, rad, sign, res) : Glyph::DashedSegment(t,rad, sign, res);
-	glPopMatrix();
-    }
-
-}
-
-//like seg, but with offset
-inline void Glyph :: SegOff(const Cir& K, double t, double off, bool dir, int res){
-
-    //ORIENTATION
-	Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
-	Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );	//Determine Orientation
-    Rot v4 = Gen::aa(r);  
-
-    //POINT POSITION AND RADIUS
-	Pnt v = Ro::cen(K);                                 //Center of Circle
-	double siz = Ro::size(K,false);                       //Squared Radius
-	double rad = sqrt ( std::fabs (siz) );                   //Radius
-	                           
-	bool sign = Op::sn(b, Biv::xy);
-	
-	glPushMatrix();
-		glTranslated(v[0],v[1],v[2]);
-		glRotated(v4[0], v4[1], v4[2], v4[3]);
-		siz > 0 ? Glyph::Segment3(t, off, rad, sign, res) : Glyph::DashedSegment3(t, off, rad, sign, res);
-	glPopMatrix();
-
-}
-
-void Glyph :: SegTo(const Cir& K, double st, double t, int res){
-    
-    Rot roff = Gen::rot(Biv::xy * st);
-    //Vec4<> r4 = Op::aa(roff);  
-    //cout << roff << endl; 
-    //ORIENTATION
-    Biv b = Biv(Ro::dir(K));							//Extract Euclidean Bivector
-    Rot r = Gen::ratio(Vec::z, Op::dle( b ).unit() );// * roff;	//Determine Orientation
-    Rot v4 = Gen::aa(r);  
-    
-    //POINT POSITION AND RADIUS
-    Pnt v = Ro::cen(K);                                 //Center of Circle
-    double siz = Ro::size(K,false);                            //Squared Radius
-    double rad = sqrt ( std::fabs (siz) );                   //Radius
-    
-   // bool sign = Op::sn(b, Biv::xy);
-    
-    glPushMatrix();
-    glTranslated(v[0],v[1],v[2]);
-    glRotated(v4[0], v4[1], v4[2], v4[3]);//glRotated(r4.w, r4.x, r4.y, r4.z);
-//    siz > 0 ? Glyph::Segment(t, rad, sign, res) : Glyph::DashedSegment(t,rad, sign, res);
-    siz > 0 ? Glyph::Segment2(st, st + t, rad, res) : Glyph::DashedSegment2(st, st + t, rad, res);
-    glPopMatrix();
-    
-}    
-    
-void Glyph :: Seg2(const Cir& K, const Pnt& a, const Pnt& b, int res){
-//	glColor3f(K.red(), K.green(), K.blue());
-	Biv bi = Biv(Ro::dir(K));							//Extract Euclidean Bivector
-	Rot r = Gen::ratio(Vec::z, Op::dle( bi ).unit() );	//Determine Orientation
-	Pnt v = Ro::cen(K);			
-	Rot v4 = Gen::aa(r);
-	double siz = Ro::size(K,false);
-	double rad = Ro::rad(K);
-	//bool sn = Op::sn(bi, Biv::xy);
-
-	Dlp da = ( a^Inf(1) ) <= K;
-	da = da.unit();
-	Dlp db = ( b^Inf(1) ) <= K;
-	db = db.unit();
-	Dlp dy = Ro::noon(K);
-	dy = dy.unit();
-	
-	double t1 = ( da <= dy)[0];
-	double t2 = ( db <= dy)[0];
-	
-	glPushMatrix();
-		glTranslated( v[0], v[1], v[2] );
-		glRotated(v4[0], v4[1], v4[2], v4[3]);
-		siz > 0 ? Glyph::Segment2(t1, t2, rad, res) : Glyph::DashedSegment2(t1,t2, rad, res);
-	glPopMatrix();
-}
-
-    void Glyph :: SegPnts(const Cir& K, const Pnt& a, const Pnt& b, int res){
-        static Pnt tp, cen;
-        static Dll da, db, rat;
-        
-        bool sn = 0;//Op::sn ( Ro::dir(K, false ), Biv::xy );
-        
-        cen = Ro::loc(K);
-        da = ( cen ^ a ^ Inf(1) ).dual(); 
-        db = ( cen ^ b ^ Inf(1) ).dual(); 
-    
-        rat = (sn) ? Gen::log(db, da) : Gen::log(da, db);
-       
-        glBegin(GL_LINE_STRIP);
-        for (int i = 0; i <= res; ++i){
-            double t = 1.0 * i/res;
-            tp = a.mot( rat * t ); 
-            glVertex3f(tp[0], tp[1], tp[2]);
-        }
-        glEnd();
-        
-    }
-
-
-//    } //GL::
+    } //GL::
 
 } //vsr::
 

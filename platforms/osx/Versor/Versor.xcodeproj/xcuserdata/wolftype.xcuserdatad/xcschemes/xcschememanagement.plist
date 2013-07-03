@@ -119,6 +119,11 @@
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
+		<key>Roots.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
+		</dict>
 		<key>Scene.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -188,6 +193,11 @@
 			<true/>
 		</dict>
 		<key>9B28075316700947001806F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B3567CB177231E6004B455B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

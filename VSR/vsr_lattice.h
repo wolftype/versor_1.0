@@ -13,7 +13,8 @@
 #include <vector>
 
 #include "vsr.h"
-#include "vsr_gfxdata.h"
+
+#include "gfx_data.h"
 
 
 using namespace std;

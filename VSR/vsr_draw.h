@@ -20,10 +20,10 @@
 #include "vsr_frame.h"
 #include "vsr_field.h"
 #include "vsr_xf.h"
-
-
-#include "vsr_gl.h"
 #include "vsr_glyph.h"
+
+#include "gfx_gl.h"
+
 
 #include <vector>
 #include <sstream>
@@ -35,10 +35,11 @@
 #define MAXFAR 100
 
 using namespace std;
+using namespace gfx;
 
 namespace vsr {
 
-        namespace GL {
+//        namespace GL {
          	
             namespace Draw {
 		
@@ -356,7 +357,7 @@ template<> inline void Draw :: Immediate (const Cir& s){
             bool sn = Op::sn(b, Biv::xy);
             
             GL::translate(v.w());
-            GL:rotate(t.w());
+            GL::rotate(t.w());
 
             // Is it imaginary 
             bool im = size > 0 ? 1 : 0;
@@ -461,7 +462,7 @@ inline void Draw :: Immediate (const Cir& s, double angleA, double angleB, bool 
 //    bool sn = Op::sn(b, Biv::xy);
     
     GL::translate(v.w());
-    GL:rotate(t.w());
+    GL::rotate(t.w());
 
     // Is it imaginary 
 //    bool im = size > 0 ? 1 : 0;
@@ -486,7 +487,7 @@ template<>
 inline void Draw :: Immediate( const Field<Sca>& f, float r, float g , float b , float a ){
     
        for (int i = 0; i < f.num(); ++i){  
-        GL::push(); glColor4f(r,g,b,f[i][0] * a);  GL::translate(f.grid(i).w()); GL::Glyph::Cube( f.spacing() ); GL::pop(); 
+        GL::push(); glColor4f(r,g,b,f[i][0] * a);  GL::translate(f.grid(i).w()); Glyph::Cube( f.spacing() ); GL::pop(); 
         }
 
 }
@@ -496,7 +497,7 @@ inline void Draw :: Immediate( const Field<Vec>& f, float r, float g , float b ,
       for (int i = 0; i < f.num(); ++i){
         GL::push();
         GL::translate( f.grid(i).w() );
-        GL::Draw::Render( f[i],r,g,b,a );
+        Draw::Render( f[i],r,g,b,a );
         GL::pop();
     }
 
@@ -544,11 +545,11 @@ inline void Draw :: Immediate( const Field<Vec>& f, float r, float g , float b ,
 //        static string TikzPerspective( const State&, const Camera& );
 //    };
 
-    } //GL::
+//    } //GL::
     
-#define DRAW(t) vsr::GL::Draw::Render(t)    
-#define DRAW3(t,r,g,b) vsr::GL::Draw::Render(t,r,g,b)    
-#define DRAW4(t,r,g,b,a) vsr::GL::Draw::Render(t,r,g,b,a)    
+#define DRAW(t) vsr::Draw::Render(t)    
+#define DRAW3(t,r,g,b) vsr::Draw::Render(t,r,g,b)    
+#define DRAW4(t,r,g,b,a) vsr::Draw::Render(t,r,g,b,a)    
 
 } //vsr::
 #endif

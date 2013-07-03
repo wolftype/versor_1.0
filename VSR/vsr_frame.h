@@ -30,6 +30,10 @@
 #include "vsr_interp.h"
 #include "vsr_xf.h"
 
+#include "gfx_matrix.h"
+
+//#include "vsr_matrix.h"
+
 namespace vsr {
 
 	class Frame  {
@@ -175,6 +179,7 @@ namespace vsr {
 			void pos(double x, double y, double z) { mPos = Ro::null(x,y,z); } ///< set position point
 			void rot0( const Rot& r) { mRot = r; }				///< set rotor without orientation (deprecated)
 			Rot rot() const { return mRot; }					///< get orientation rotor
+            Quat quat() const { return Quat(mRot[0], -mRot[3], mRot[2], mRot[1]); }
 			void rot(const Rot& r) { mRot = r; orient(); }		///< set orientation rotot
 			Rot& rot() { return mRot; }							///< set orientation rotor
 			Trs trs() const { return Gen::trs(mPos); }			///< get translation versor

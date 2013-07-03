@@ -10,15 +10,17 @@
  
  */
 
-#ifndef VSR_GRAPHICS_INCLUDED
-#define VSR_GRAPHICS_INCLUDED
+#ifndef GFX_GRAPHICS_INCLUDED
+#define GFX_GRAPHICS_INCLUDED
+//#include "ctl_matrix.h"
 
-#include "vsr_matrix.h"
+#include "gfx_matrix.h"  
+
 #include <iostream>
 
 using std::ostream;
 
-namespace vsr  {
+namespace gfx  {
 
 enum Cube{
     LEFT	= 1,

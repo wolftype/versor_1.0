@@ -13,9 +13,13 @@
  #ifndef CAMERA_H_INCLUDED
  #define CAMERA_H_INCLUDED
 
-#include "vsr_gl.h"
+#include "gfx_gl.h"
+#include "gfx_xfmatrix.h"
+
 #include "vsr_frame.h"
-#include "vsr_gfxmatrix.h"
+
+
+using namespace gfx;
  
 namespace vsr {
 
@@ -196,6 +200,67 @@ class Camera : public Frame {
 
  
 
+//    class Scene {
+//    
+//        public:
+//            
+//            Scene() : camera(0.0,0.0,5.0), model() {}
+//            
+//            XformMat xf;            
+//            Frame model;
+//            Camera camera;
+//            
+//            float height() const { return camera.height(); }
+//            float width() const { return camera.width(); }
+//            
+//            Rot cat() { return camera.rot() * model.rot(); }//camera.rot() * model.rot(); }
+//            
+//            Mat4f mod() { return model.image(); }
+//            
+//            Mat4f mvm() { return XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos()) * XMat::rot( model.rot() ) ; }
+//            
+//            Mat4f proj() { 
+//                Lens& tl = camera.lens();
+//                return XMat::fovy( tl.mFocal * PI/180.0, tl.mWidth/tl.mHeight, tl.mNear, tl.mFar ); 
+//            }
+//            Mat4f norm(){
+//                return (!mvm().transpose());
+//            }
+//            
+//            //ADVANCED MODE -> Update Shader Uniforms
+//            void updateMatrices(){
+//            
+//                Mat4f tmod = mod();
+//                Mat4f tview = XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos());
+//                Mat4f tmvm = mvm();
+//                Mat4f tproj = proj();
+//                Mat4f tnorm = norm();
+//                Mat4f tmvp = tproj * tmvm;
+//                
+//                copy(tmod.val(), tmod.val() + 16, xf.model);
+//                copy(tview.val(), tview.val() + 16, xf.view);
+//                copy(tmvm.val(), tmvm.val() + 16, xf.modelView);
+//                copy(tproj.val(), tproj.val() + 16, xf.proj);
+//                copy(tmvp.val(), tmvp.val() + 16, xf.modelViewProjection);
+//                copy(tnorm.val(), tnorm.val() + 16, xf.normal);
+//             
+//                xf.toDoubles();
+//            }
+//            
+//            void pop3D();
+//            void push3D();
+//            
+//            //IMMEDIATE MODE ONLY (NO IPHONE, etc)
+//            void getMatrices(){
+//                glGetDoublev(GL_PROJECTION_MATRIX, xf.projd);	
+//                glGetDoublev(GL_MODELVIEW_MATRIX, xf.modelViewd);
+//                glGetIntegerv(GL_VIEWPORT, xf.viewport);	
+//                
+//                xf.toFloats();
+//            }
+//    
+//    };
+
     class Scene {
     
         public:
@@ -212,7 +277,9 @@ class Camera : public Frame {
             Rot cat() { return camera.rot() * model.rot(); }//camera.rot() * model.rot(); }
             
             Mat4f mod() { return model.image(); }
-            Mat4f mvm() { return XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos()) * XMat::rot( model.rot() ) ; }
+            
+            Mat4f mvm() { return XMat::lookAt( camera.x(), camera.y(), camera.z() * -1, camera.pos()) * XMat::rot( model.quat() ) ; }
+            
             Mat4f proj() { 
                 Lens& tl = camera.lens();
                 return XMat::fovy( tl.mFocal * PI/180.0, tl.mWidth/tl.mHeight, tl.mNear, tl.mFar ); 
@@ -235,7 +302,8 @@ class Camera : public Frame {
                 copy(tview.val(), tview.val() + 16, xf.view);
                 copy(tmvm.val(), tmvm.val() + 16, xf.modelView);
                 copy(tproj.val(), tproj.val() + 16, xf.proj);
-                copy(tmvp.val(), tmvp.val() + 16, xf.modelViewProjection);
+                
+                //copy(tmvp.val(), tmvp.val() + 16, xf.modelViewProjection);
                 copy(tnorm.val(), tnorm.val() + 16, xf.normal);
              
                 xf.toDoubles();

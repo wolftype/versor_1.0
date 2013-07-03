@@ -12,8 +12,8 @@
 
 #include "vsr_GLVInterfaceImpl.h"
 
-
 #include "vsr_fiber.h"
+
 #include "vsr_knot.h"
 
 #include "vsr_mesh.h"

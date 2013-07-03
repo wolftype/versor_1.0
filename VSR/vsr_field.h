@@ -18,8 +18,8 @@
 
 #include "vsr_lattice.h"
 
-
-#include "gfx/gfx_data.h"
+//#include "vsr_gfxdata.h"
+#include "gfx_data.h"
 
 namespace vsr{
 

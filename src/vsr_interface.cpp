@@ -34,9 +34,9 @@ namespace vsr {
         mouse.bivCat = vd().z ^ mouse.cat;
 
         //GLU FUNCS
-        Vec v1 = GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
-        Vec v2 = GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
-        Vec v3 = GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );   
+        Vec v1 = gfx::GL::unproject( mouse.x, vd().h - mouse.y , 1.0,  scene().xf );
+        Vec v2 = gfx::GL::unproject( mouse.x, vd().h - mouse.y , 0.0,  scene().xf );
+        Vec v3 = gfx::GL::unproject( mouse.x, vd().h - mouse.y , 0.5,  scene().xf );   
 
         //OWN FUNCS (in progress, seem to give results scaled differently)
 //        Vec3f tv1 = XMat::UnProject( Vec3f( mouse.x, vd().h - mouse.y , 1.0), scene().xf );

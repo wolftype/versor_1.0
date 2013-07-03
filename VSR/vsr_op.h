@@ -23,7 +23,7 @@
 #include <map>
 #include <string>
 
-#include "vsr_matrix.h"
+#include "gfx_matrix.h"
 #include "vsr_math.h"
 
 namespace vsr {

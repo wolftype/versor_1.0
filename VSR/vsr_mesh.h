@@ -13,9 +13,11 @@
 #include <fstream>
 #include <sstream>
 
+#include "gfx_gl.h"
+#include "gfx_matrix.h"
+
+
 #include "vsr_frame.h"
-#include "vsr_matrix.h"
-#include "vsr_gl.h"
 #include "vsr_glyph.h"
 #include "vsr_interp.h"
 
@@ -237,6 +239,7 @@ namespace vsr {
             }
            glEnd();
         }
+        
         void drawElementsColor() {
             GL::Begin( mMode);
             for (int i = 0; i < mIndex.size(); ++i){
@@ -834,7 +837,7 @@ struct UVMesh{
                 int d = c - 1;
                 
                 Vec mid = Interp::surface<Vec>( vp[a], vp[b], vp[c], vp[d], .5, .5);
-                GL::Glyph::Line( mid, mid + normal(a,b,c) );
+                Glyph::Line( mid, mid + normal(a,b,c) );
                 //GL::Quad(vp[a], vp[b], vp[c], vp[d]);
             
             }

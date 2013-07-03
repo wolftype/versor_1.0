@@ -17,7 +17,10 @@
 #include "vsr_gxlib.h"
 #include "vsr_data.h"
 #include "vsr_file.h"
+
 #include "vsr_matrix.h"
+//#include "gfx/gfx_matrix.h"
+
 
 #include "vsrtypes.h"
 

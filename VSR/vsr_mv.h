@@ -22,8 +22,10 @@
 #include <iostream>
 #include <sstream>
 //#include <math.h>
+
 #include "vsr_templates.h"
 
+#include "gfx_matrix.h"
 
 //#include <map>
 //#include <utility>
@@ -242,6 +244,9 @@ public:
 
     //Feed in a value_type e.g. Vec(0.0), mind the decimals
 	MV(const T& v = T()) BASECONST { std::fill(mW, mW + N, v);  }
+    
+    MV(const gfx::Vec3f& v) BASECONST { set( v[0], v[1], v[2] ); }
+    MV(const gfx::Vec3d& v) BASECONST { set( v[0], v[1], v[2] ); }
     
     /*! Copy Constructor Same Type  */ //TPRINT("Copy Constructor Same Type \n");
     MV(const MV<N, IDX, T>& mv)  BASECONST { set(mv);  }

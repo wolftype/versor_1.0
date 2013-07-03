@@ -10,8 +10,9 @@
 #define Versor_vsr_xf_h
 
 #include "vsr_op.h"
-#include "vsr_matrix.h"
+#include "gfx_matrix.h"
 
+using namespace gfx;
 namespace vsr {
 
     namespace Xf {
