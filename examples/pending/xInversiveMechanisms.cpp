@@ -558,16 +558,16 @@ void pinch(GLVApp& app){
 
 void GLVApp :: onDraw() {
   //  bendBW(*this);
-    gaussian6(*this);
+   gaussian6(*this);
  //   cusp(*this);
 //    kink(*this);
-//    intussuception2(*this);
+ //  intussuception2(*this);
 //    pinch(*this);
 }
 
 int main(int argc, const char * argv[]) {
      
-    File::setdir( argv[0] );       
+   // File::setdir( argv[0] );       
 
     /* Set Up GLV hierarchy */
 	GLV glv(0,0);	

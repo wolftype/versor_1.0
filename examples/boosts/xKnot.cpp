@@ -96,7 +96,7 @@ void basicKnot(GLVApp& app){
     sm2.draw(1,.8,.2);
     nm.draw(0,1,0,.2);//(0,1,0);
     
-    cout << tk.HF.mtt(PIOVERTWO, PIOVERFOUR/2.0) << endl;
+    //cout << tk.HF.mtt(PIOVERTWO, PIOVERFOUR/2.0) << endl;
     
 }
 

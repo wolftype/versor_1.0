@@ -59,6 +59,11 @@
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
+		<key>Gaussian.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>31</integer>
+		</dict>
 		<key>Graphics.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -98,6 +103,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>
+		</dict>
+		<key>Membrane.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>30</integer>
 		</dict>
 		<key>Navigation.xcscheme</key>
 		<dict>
@@ -203,6 +213,16 @@
 			<true/>
 		</dict>
 		<key>9B52EC2A173F4E9B00780705</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B57F2DB178B45F5005DAFC8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B57F2EC178B46DA005DAFC8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

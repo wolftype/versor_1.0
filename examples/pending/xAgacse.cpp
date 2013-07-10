@@ -281,10 +281,10 @@ void lineToCircle(GLVApp& app){
         double cur = Ro::cur(tc);
         
         glColor3f(t,.5*t,.5*t);
-        GL::Glyph::Seg( tc , TWOPI * cur  );
+        Glyph::Seg( tc , TWOPI * cur  );
         
         
-        if ( ERROR(cur,err) ) GL::Glyph::Line(frame.vec() + frame.y() * PI, frame.vec() - frame.y() * PI); 
+        if ( ERROR(cur,err) ) Glyph::Line(frame.vec() + frame.y() * PI, frame.vec() - frame.y() * PI); 
     END 
     
     app.text("Bending a line into a circle of a given radius");
@@ -316,8 +316,8 @@ void boosted(GLVApp& app){
     
     DRAW3( c,1,1,0);
     
-    GL::Draw::X(f1);//.drawX();
-    GL::Draw::X(f2);//.drawX();
+    Draw::X(f1);//.drawX();
+    Draw::X(f2);//.drawX();
     
     Par pa = f1.tx(f1.scale());
     Par pb = f2.tx(f2.scale());
@@ -394,7 +394,7 @@ void surface(GLVApp& app){
         fd[i] = frame[i].dll() ;
         ft[i] = frame[i].x() * ( frame[i].scale() );
         
-        GL::Draw::PushFrame(frame[i]);
+        Draw::PushFrame(frame[i]);
         DRAW3(Vec::x * frame[i].scale() * amt , 0,0,0); 
         GL::pop();
         app.interface.touch(frame[i]);
@@ -613,8 +613,8 @@ void linear(GLVApp& app){
         
     END 
     
-    GL::Draw::X(f1);//f1.drawX();
-    GL::Draw::X(f2);//f2.drawX();
+    Draw::X(f1);//f1.drawX();
+    Draw::X(f2);//f2.drawX();
     
     Par pa = f1.tx(f1.scale());
     Par pb = f2.tx(f2.scale());

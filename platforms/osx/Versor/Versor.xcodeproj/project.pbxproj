@@ -38,6 +38,14 @@
 		9B52EC31173F4E9B00780705 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B52EC32173F4E9B00780705 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B52EC3B173F4EC100780705 /* xKnot2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A26581700DBAE003165C8 /* xKnot2.cpp */; };
+		9B57F2E1178B45F5005DAFC8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9B57F2E2178B45F5005DAFC8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9B57F2E3178B45F5005DAFC8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B57F2F2178B46DA005DAFC8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9B57F2F3178B46DA005DAFC8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9B57F2F4178B46DA005DAFC8 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B57F2FC178B4753005DAFC8 /* xGaussian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B57F2FB178B4753005DAFC8 /* xGaussian.cpp */; };
+		9B57F2FD178B483D005DAFC8 /* xMembrane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B57F2EA178B4631005DAFC8 /* xMembrane.cpp */; };
 		9B58902B1641A69B0096B491 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B58902C1641A69B0096B491 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B5C460716445FBE003BF1B2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
@@ -178,6 +186,20 @@
 			remoteInfo = vsr;
 		};
 		9B52EC2C173F4E9B00780705 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B76CC231628A9440064FF35;
+			remoteInfo = vsr;
+		};
+		9B57F2DD178B45F5005DAFC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B76CC231628A9440064FF35;
+			remoteInfo = vsr;
+		};
+		9B57F2EE178B46DA005DAFC8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
 			proxyType = 1;
@@ -394,6 +416,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B57F2E4178B45F5005DAFC8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		9B57F2F5178B46DA005DAFC8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9B58902F1641A69B0096B491 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -590,6 +630,10 @@
 		9B3567D917723279004B455B /* xRoots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xRoots.cpp; path = ../basics/xRoots.cpp; sourceTree = "<group>"; };
 		9B3F72D5170A1817001C1CCA /* xMeet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMeet.cpp; path = ../../../examples/basics/xMeet.cpp; sourceTree = "<group>"; };
 		9B52EC38173F4E9B00780705 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = KnotMore; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B57F2E8178B45F5005DAFC8 /* Curvature copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Curvature copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B57F2EA178B4631005DAFC8 /* xMembrane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMembrane.cpp; path = ../../../examples/boosts/xMembrane.cpp; sourceTree = "<group>"; };
+		9B57F2F9178B46DA005DAFC8 /* Gaussian */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Gaussian; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B57F2FB178B4753005DAFC8 /* xGaussian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xGaussian.cpp; path = ../../../examples/boosts/xGaussian.cpp; sourceTree = "<group>"; };
 		9B5890381641A69B0096B491 /* Meet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Meet; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461416445FBE003BF1B2 /* Allo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Allo; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5C461B16446392003BF1B2 /* libapr-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libapr-1.dylib"; path = "usr/lib/libapr-1.dylib"; sourceTree = SDKROOT; };
@@ -869,6 +913,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B57F2E0178B45F5005DAFC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B57F2E1178B45F5005DAFC8 /* OpenGL.framework in Frameworks */,
+				9B57F2E2178B45F5005DAFC8 /* GLUT.framework in Frameworks */,
+				9B57F2E3178B45F5005DAFC8 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B57F2F1178B46DA005DAFC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B57F2F2178B46DA005DAFC8 /* OpenGL.framework in Frameworks */,
+				9B57F2F3178B46DA005DAFC8 /* GLUT.framework in Frameworks */,
+				9B57F2F4178B46DA005DAFC8 /* libvsr.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B58902A1641A69B0096B491 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1136,7 +1200,7 @@
 			name = Basic;
 			sourceTree = "<group>";
 		};
-		9B76AAEC170659850054ECBC /* boosts */ = {
+		9B76AAEC170659850054ECBC /* Boosts */ = {
 			isa = PBXGroup;
 			children = (
 				9B76AAED170659860054ECBC /* xBilinear.cpp */,
@@ -1147,7 +1211,7 @@
 				9B76AAF0170659860054ECBC /* xLinear.cpp */,
 				9B3567D917723279004B455B /* xRoots.cpp */,
 			);
-			name = boosts;
+			name = Boosts;
 			path = ../../../examples/boosts;
 			sourceTree = "<group>";
 		};
@@ -1156,7 +1220,7 @@
 			children = (
 				9BF5C75716F0EDA300629664 /* gl2ps.c */,
 				9B5C461F164463A1003BF1B2 /* lib */,
-				9B76AAEC170659850054ECBC /* boosts */,
+				9B76AAEC170659850054ECBC /* Boosts */,
 				9B76AAD9170631770054ECBC /* Basic */,
 				9B76AAD81706314A0054ECBC /* Twists */,
 				9B76AAD71706313F0054ECBC /* Kinematics */,
@@ -1203,6 +1267,8 @@
 				9BFFDDBA1726467B00494CF1 /* DipoleField */,
 				9B52EC38173F4E9B00780705 /* Knots copy */,
 				9B3567D6177231E6004B455B /* Frames copy */,
+				9B57F2E8178B45F5005DAFC8 /* Curvature copy */,
+				9B57F2F9178B46DA005DAFC8 /* Gaussian */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1216,7 +1282,9 @@
 				9BF5C75216F0EA8B00629664 /* xTransformations.cpp */,
 				9B1A26581700DBAE003165C8 /* xKnot2.cpp */,
 				9BF5C74816F0EA5100629664 /* xGroup.cpp */,
+				9B57F2FB178B4753005DAFC8 /* xGaussian.cpp */,
 				9BF5C75416F0EA9600629664 /* xCurvature.cpp */,
+				9B57F2EA178B4631005DAFC8 /* xMembrane.cpp */,
 				9BF5C74A16F0EA5E00629664 /* xAgacse.cpp */,
 			);
 			name = "Pending Demos";
@@ -1580,6 +1648,42 @@
 			name = KnotMore;
 			productName = DemoBoosts;
 			productReference = 9B52EC38173F4E9B00780705 /* Knots copy */;
+			productType = "com.apple.product-type.tool";
+		};
+		9B57F2DB178B45F5005DAFC8 /* Membrane */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B57F2E5178B45F5005DAFC8 /* Build configuration list for PBXNativeTarget "Membrane" */;
+			buildPhases = (
+				9B57F2DE178B45F5005DAFC8 /* Sources */,
+				9B57F2E0178B45F5005DAFC8 /* Frameworks */,
+				9B57F2E4178B45F5005DAFC8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B57F2DC178B45F5005DAFC8 /* PBXTargetDependency */,
+			);
+			name = Membrane;
+			productName = DemoBoosts;
+			productReference = 9B57F2E8178B45F5005DAFC8 /* Curvature copy */;
+			productType = "com.apple.product-type.tool";
+		};
+		9B57F2EC178B46DA005DAFC8 /* Gaussian */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B57F2F6178B46DA005DAFC8 /* Build configuration list for PBXNativeTarget "Gaussian" */;
+			buildPhases = (
+				9B57F2EF178B46DA005DAFC8 /* Sources */,
+				9B57F2F1178B46DA005DAFC8 /* Frameworks */,
+				9B57F2F5178B46DA005DAFC8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B57F2ED178B46DA005DAFC8 /* PBXTargetDependency */,
+			);
+			name = Gaussian;
+			productName = DemoBoosts;
+			productReference = 9B57F2F9178B46DA005DAFC8 /* Gaussian */;
 			productType = "com.apple.product-type.tool";
 		};
 		9B5890251641A69B0096B491 /* Meet */ = {
@@ -2020,6 +2124,8 @@
 				9BFFDDAC1726467B00494CF1 /* DipoleField */,
 				9B52EC2A173F4E9B00780705 /* KnotMore */,
 				9B3567CB177231E6004B455B /* Roots */,
+				9B57F2DB178B45F5005DAFC8 /* Membrane */,
+				9B57F2EC178B46DA005DAFC8 /* Gaussian */,
 			);
 		};
 /* End PBXProject section */
@@ -2194,6 +2300,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B52EC3B173F4EC100780705 /* xKnot2.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B57F2DE178B45F5005DAFC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B57F2FD178B483D005DAFC8 /* xMembrane.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B57F2EF178B46DA005DAFC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B57F2FC178B4753005DAFC8 /* xGaussian.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2413,6 +2535,16 @@
 			isa = PBXTargetDependency;
 			target = 9B76CC231628A9440064FF35 /* vsr */;
 			targetProxy = 9B52EC2C173F4E9B00780705 /* PBXContainerItemProxy */;
+		};
+		9B57F2DC178B45F5005DAFC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B76CC231628A9440064FF35 /* vsr */;
+			targetProxy = 9B57F2DD178B45F5005DAFC8 /* PBXContainerItemProxy */;
+		};
+		9B57F2ED178B46DA005DAFC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B76CC231628A9440064FF35 /* vsr */;
+			targetProxy = 9B57F2EE178B46DA005DAFC8 /* PBXContainerItemProxy */;
 		};
 		9B5890261641A69B0096B491 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2700,6 +2832,50 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = KnotMore;
+			};
+			name = Release;
+		};
+		9B57F2E6178B45F5005DAFC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Membrane;
+			};
+			name = Debug;
+		};
+		9B57F2E7178B45F5005DAFC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Membrane;
+			};
+			name = Release;
+		};
+		9B57F2F7178B46DA005DAFC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Gaussian;
+			};
+			name = Debug;
+		};
+		9B57F2F8178B46DA005DAFC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../GLV/build/lib\"",
+				);
+				PRODUCT_NAME = Gaussian;
 			};
 			name = Release;
 		};
@@ -3327,6 +3503,24 @@
 			buildConfigurations = (
 				9B52EC36173F4E9B00780705 /* Debug */,
 				9B52EC37173F4E9B00780705 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B57F2E5178B45F5005DAFC8 /* Build configuration list for PBXNativeTarget "Membrane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B57F2E6178B45F5005DAFC8 /* Debug */,
+				9B57F2E7178B45F5005DAFC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B57F2F6178B46DA005DAFC8 /* Build configuration list for PBXNativeTarget "Gaussian" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B57F2F7178B46DA005DAFC8 /* Debug */,
+				9B57F2F8178B46DA005DAFC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
