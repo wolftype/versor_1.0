@@ -661,9 +661,10 @@ end
 
 print( sign( basisBit("e123"), basisBit("e12") ) )
 print( sign( basisBit("e12"), basisBit("e123") ) )
- 
+print( inner( basisBit("e1"), basisBit("e12") ).id ) 
 
-print( inner( basisBit("e1"), basisBit("e12") ).id )
+local t = product( basisBit("e2"), basisBit("e1") )
+print(  t.id, t.w )
 -- buildBasis()
 -- buildEuclidean()
 -- printBasis()
