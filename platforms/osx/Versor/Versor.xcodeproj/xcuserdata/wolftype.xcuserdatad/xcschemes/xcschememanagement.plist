@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>23</integer>
 		</dict>
+		<key>Compilation.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>32</integer>
+		</dict>
 		<key>Curvature.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -203,6 +208,11 @@
 			<true/>
 		</dict>
 		<key>9B28075316700947001806F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B2C66CB178F2F3900A80336</key>
 		<dict>
 			<key>primary</key>
 			<true/>
