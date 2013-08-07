@@ -31,9 +31,12 @@ namespace vsr{
         //Vector on S2
         Vec mVec;
         
+        //phase on cir
+        double mPhase;
+        
         public:
                 
-        HopfFiber(bool hand=true) : bHanded(hand) {
+        HopfFiber(bool hand=true) : bHanded(hand), mPhase(0) {
             mCir = CXZ(1);
             mVec = Vec::y;
         }
@@ -43,6 +46,9 @@ namespace vsr{
 
         Vec& vec() { return mVec;}
         Vec vec() const { return mVec; }
+
+        double& phase() { return mPhase;}
+        double phase() const { return mPhase; }
         
         //Dual line axis of Circle South Pole (i.e. the North Pole)
         DualLine dll(){ return (Inf(1) <= mCir).runit(); }
@@ -127,6 +133,11 @@ namespace vsr{
         
         Pnt phase(double theta, double phi, double phs){
             return Ro::pnt_cir( fiber(theta,phi), phs * PI);
+        }
+       
+        
+        Pnt pnt(){
+            return Ro::pnt_cir( fiberA(), mPhase * PI ); 
         }
         
     };

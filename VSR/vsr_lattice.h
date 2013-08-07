@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "vsr.h"
-
+#include "vsr_interp.h"
 #include "gfx_data.h"
 
 

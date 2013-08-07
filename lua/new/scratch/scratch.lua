@@ -1,6 +1,8 @@
--- local G = require "grammar"
+-- local G = require "grammar"   
+package.path = "../gen/?.lua;../vsrmodule/?.lua;".. package.path 
+
 local T = require "types"
-local F = require "funcs2"
+local F = require "funcs"
 
 local symbols = {gp=1, op=2, ip=3}
 local tempTable = {}

@@ -57,7 +57,7 @@ void rootSystem(GLVApp& app){
 			 
 				bool done = 1;
 			    Vec nr = -!root[i] * results[j] * root[i]; 
-	                
+				cout << "yo: " << nr << endl;    
                 bool exists = 0; 
 				for ( int k = 0; k < cs; ++k){
 					exists = ( nr == results[k] );
@@ -65,6 +65,7 @@ void rootSystem(GLVApp& app){
 				}
 				
 				if (!exists)  {
+					
 					results.push_back( nr );
 					done = 0; 
 				}   
@@ -75,7 +76,7 @@ void rootSystem(GLVApp& app){
    }   
    
    for (int i = 0; i < results.size(); ++i){
-   // cout << results[i] << endl; 
+  // cout << results[i] << endl; 
     DRAW( results[i] );
    }
 //	

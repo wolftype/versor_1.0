@@ -54,7 +54,7 @@ blade = function(b, wt)
 	return {id = b, w = wt}
 end
 
-bitString = function(x)
+bitString = function(x)  
 	local out = ""
 	local tmp = x
 	for i,iv in ipairs(metric) do
@@ -515,58 +515,7 @@ prepTable = function()
 		local name = basisString(iv)
 		S[iv] = { id = name, basis = iv, gp = {}, op = {}, ip = {} }
 	end
-end
-
-
--- --list of instructions for how to combine tx and ty multivectors
--- productList = function(tx,ty,operation)
--- 		
--- 	local tally = {} 		--running tally
--- 	local combined = {}		--compressed tally
--- 	
--- 	--fetch table pairs of values in types
--- 	idx = 0
--- 	for i,iv in ipairs(tx.bases) do
--- 		
--- 		for j,jv in ipairs(ty.bases) do			
--- 		
--- 			prod = S[iv][operation][jv]
--- 		
--- 			for k, kv in ipairs(prod) do
--- 				instruction = {a = i, b = j, r = kv}
--- 				idx = idx + 1
--- 				tally[idx] = instruction 
--- 			end
--- 		end
--- 	end
--- 
--- 	-- --check for similar ids in the tally, or if weight is 0	
--- 	for i,iv in ipairs(tally) do
--- 		
--- 		-- print ( basisString( iv.r.id) , iv.a, iv.b, iv.r.w )
--- 		local exists = 0
--- 		
--- 		--if basis already in a table, insert additional instruction
--- 		for j, jv in pairs(combined) do
--- 			if iv.r.id == j then
--- 				exists = 1
--- 				if iv.r.w ~= 0 then
--- 					table.insert(jv, iv )
--- 				end
--- 			end
--- 		end
--- 	 
--- 		--otherwise, add the new instruction to table
--- 		if exists == 0 then	
--- 			if iv.r.w ~= 0 then
--- 				local newBasis = iv.r.id
--- 				combined[newBasis] = {iv}
--- 			end
--- 		end
--- 	end
--- 	
--- 	return order(combined)
--- end   
+end  
 
 
 order = function(c)
@@ -659,27 +608,34 @@ register= function()
 end
 
 
-print( sign( basisBit("e123"), basisBit("e12") ) )
-print( sign( basisBit("e12"), basisBit("e123") ) )
-print( inner( basisBit("e1"), basisBit("e12") ).id ) 
-
-local t = product( basisBit("e2"), basisBit("e1") )
-print(  t.id, t.w )
--- buildBasis()
--- buildEuclidean()
--- printBasis()
--- buildSubspaces()
--- register()
-
---buildConformal()
-
--- local tmp = productList( subspace[1], subspace[1], "gp")
+metric = {1,1,1,1,-1}
 -- 
--- for i, iv in ipairs (tmp.blades) do
--- 	print ( basisString(iv) )
--- 	for j, jv in ipairs( tmp.inst[iv] ) do
--- 		print ("+ a["..jv.a .. "] * b[" .. jv.b .. "] * " .. jv.r.w)
--- 	end
--- end
+buildBasis()
+-- 
+for i, iv in ipairs(basis) do print( bitString(iv) ) end  
+--
+buildConformal()
+--                           
+cayleyTable = function() 
+	local out = " s is a scalar, e4 is origin and e5 is infinity\n"
+	for i, iv in ipairs(basis) do  
+
+		for k, kv in ipairs(basis) do
+	      	 out = out .. basisString(iv) .. "\t*\t" .. basisString(kv) .. "\t=\t"  
+			--out = out .. S[iv].gp[kv]
+		    	for j, jv in ipairs( S[iv].gp[kv] ) do    
+					if (jv.w == -1) then out = out .. "-"  end
+					out = out .. basisString(jv.id)
+					if (j < #S[iv].gp[kv]) then out = out .. "\t+\t" end
+				   
+					--else out = out .. "\n" end
+				end  
+				out = out .. "\n" 
+		 end
+	end 
+	return out
+end
+
+print (cayleyTable()) 
 
 

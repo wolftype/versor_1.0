@@ -59,6 +59,7 @@
 		9B68013B163F349E004A850F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B68013C163F349E004A850F /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B68013E163F349E004A850F /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B68DE6F17A076D70071AA34 /* xHopf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B68DE6E17A076D60071AA34 /* xHopf.cpp */; };
 		9B76AAC5170528300054ECBC /* xTwists.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B76AAC4170528300054ECBC /* xTwists.cpp */; };
 		9B76AAC7170617AB0054ECBC /* xRobot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B76AAC6170617AB0054ECBC /* xRobot.cpp */; };
 		9B76AACC17062CC60054ECBC /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -656,6 +657,7 @@
 		9B5C461C16446392003BF1B2 /* libaprutil-1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libaprutil-1.dylib"; path = "usr/lib/libaprutil-1.dylib"; sourceTree = SDKROOT; };
 		9B5C4620164463E1003BF1B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B680148163F349E004A850F /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = Graphics; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B68DE6E17A076D60071AA34 /* xHopf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xHopf.cpp; sourceTree = "<group>"; };
 		9B76AAC4170528300054ECBC /* xTwists.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xTwists.cpp; path = ../../../examples/twists/xTwists.cpp; sourceTree = "<group>"; };
 		9B76AAC6170617AB0054ECBC /* xRobot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xRobot.cpp; path = ../../../examples/kinematics/xRobot.cpp; sourceTree = "<group>"; };
 		9B76AAD317062CC60054ECBC /* Robot copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Robot copy"; path = Articulated; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1238,6 +1240,7 @@
 				9B76AAED170659860054ECBC /* xBilinear.cpp */,
 				9B76AAEE170659860054ECBC /* xDini.cpp */,
 				9B76AAEF170659860054ECBC /* xKnot.cpp */,
+				9B68DE6E17A076D60071AA34 /* xHopf.cpp */,
 				9B9A40A5170F66D500E02BAC /* xDipole.cpp */,
 				9BFFDDBD172646C400494CF1 /* xDipoleField.cpp */,
 				9B76AAF0170659860054ECBC /* xLinear.cpp */,
@@ -2492,6 +2495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B68DE6F17A076D70071AA34 /* xHopf.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
