@@ -230,6 +230,15 @@ namespace vsr {
             }
             glEnd();
         }
+        void drawElementsNormal(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+            GL::Begin( mMode);
+            for (int i = 0; i < mIndex.size(); ++i){
+                GL::normal( mVertex[ mIndex[i] ].Norm );
+                GL::vertex( mVertex[ mIndex[i] ].Pos );
+            }
+            glEnd();
+        }
+
 
         void drawVerticesColor() {
            GL::Begin( mMode);
@@ -634,6 +643,12 @@ struct CirMesh{
     vector<Pnt> vp;
     int res;
     
+    void clear() { vc.clear(); vp.clear(); bSkinned = false; }
+    
+    bool bSkinned;
+    
+    CirMesh() : bSkinned(false) {}
+    
     CirMesh& add(const Cir& c) { vc.push_back(c); return *this; }
 
     void skin() { 
@@ -644,9 +659,11 @@ struct CirMesh{
                 vp.push_back( Ro::pnt_cir(vc[j], t * TWOPI) );
             }
         }
+        bSkinned = true;
     }
     
     void draw(float r = .5, float g=.5, float b=.5, float a = 1.0) {
+        if (!bSkinned) { skin(); }
         for(int i = 0; i < res; ++i){
             for(int j = 0; j < res-2; ++j){
                 glColor4f(r,g,b,a);
