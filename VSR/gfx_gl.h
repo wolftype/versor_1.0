@@ -422,6 +422,15 @@ namespace gfx {
             glVertex3f(v[0],v[1],v[2]);
         }
 
+        inline void normal(float a, float b, float c){
+            glNormal3f(a,b,c);
+        }
+        
+        inline void normal( const Vec3f& v){
+            glNormal3f(v[0],v[1],v[2]);
+        }
+
+
         inline void translate (float const * p){
             glTranslatef(p[0], p[1], p[2]);
         }
