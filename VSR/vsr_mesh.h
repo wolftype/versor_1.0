@@ -647,15 +647,15 @@ struct CirMesh{
     
     bool bSkinned;
     
-    CirMesh() : bSkinned(false) {}
+    CirMesh() : bSkinned(false), res(20) {}
     
     CirMesh& add(const Cir& c) { vc.push_back(c); return *this; }
 
     void skin() { 
-        res = vc.size();
+        //res = vc.size();
         for (int i = 0; i <= res; ++i){
             double t= 1.0 * i/res;
-            for (int j = 0; j < res; ++j){
+            for (int j = 0; j < vc.size(); ++j){
                 vp.push_back( Ro::pnt_cir(vc[j], t * TWOPI) );
             }
         }
@@ -663,9 +663,9 @@ struct CirMesh{
     }
     
     void draw(float r = .5, float g=.5, float b=.5, float a = 1.0) {
-        if (!bSkinned) { skin(); }
+        //if (!bSkinned) { skin(); }
         for(int i = 0; i < res; ++i){
-            for(int j = 0; j < res-2; ++j){
+            for(int j = 0; j < vc.size()-2; ++j){
                 glColor4f(r,g,b,a);
                 glBegin(GL_QUADS);
                 int a = i * (res) + j;
@@ -738,17 +738,27 @@ struct CirMesh{
 struct UVMesh{
     int u, v;
 
+    struct Quad{
+        int a, b, c, d;        
+        Vec normal;
+        Quad(const Vec& v, int _a, int _b, int _c, int _d) : normal(v), a(_a), b(_b), c(_c), d(_d) {}
+    };
+    
+    vector<Quad> qp;
+    
     vector<Pnt> vp; ///<-- VECTORS
     vector<Vec> np; ///<-- NORMALS
     vector<Vec> cp; ///<-- COLORS
     
-    void clear() { vp.clear(); np.clear(); }
+    void clear() { vp.clear(); np.clear(); cp.clear(); qp.clear(); }
     
     //void erase() { vp.erase(); np.erase(); }
     
     bool bFlipNormals;
     UVMesh(int _u=0, int _v=0) : u(_u), v(_v), bFlipNormals(0) {}
+    void dim(int _u, int _v) { u = _u; v = _v; }
     
+
     
     UVMesh& operator = (const UVMesh& uv){
         if (this != &uv){
@@ -770,10 +780,7 @@ struct UVMesh{
             return dir.unit();
     }
     
-    void draw(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
-    
-        glColor4f(rr,gg,bb,aa);
-        glBegin(GL_QUADS);
+    void calc(){
         for (int i = 0; i < u-1; ++i){
             for (int j = 0; j < v-1; ++j){
                 int a = i * v + j;
@@ -781,11 +788,32 @@ struct UVMesh{
                 int c = b + v;
                 int d = c - 1;
                 
-                GL::normal(normal(a,b,c).w());
-                GL::Quad(vp[a], vp[b], vp[c], vp[d]);
+                Quad( normal(a,b,c), a, b, c, d );
             
             }
+        }        
+    }
+    
+    void draw(float rr = 1, float gg = 1, float bb = 1, float aa = 1){
+    
+        glColor4f(rr,gg,bb,aa);
+        glBegin(GL_QUADS);
+        for (int i = 0; i < qp.size(); ++i){
+             GL::normal( qp[i].normal.w() );
+             GL::Quad( vp[ qp[i].a ], vp[ qp[i].b ], vp[ qp[i].c ], vp[ qp[i].d ] ); 
         }
+//        for (int i = 0; i < u-1; ++i){
+//            for (int j = 0; j < v-1; ++j){
+//                int a = i * v + j;
+//                int b = a + 1;
+//                int c = b + v;
+//                int d = c - 1;
+//                
+//                GL::normal(normal(a,b,c).w());
+//                GL::Quad(vp[a], vp[b], vp[c], vp[d]);
+//            
+//            }
+//        }
         glEnd();
     }
     
