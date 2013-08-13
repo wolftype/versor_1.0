@@ -13,7 +13,7 @@
 
 //#include "vsr_gxlib.h"
 //#include "gfx_lib.h"
-#include "gfx_gl.h"
+#include "gfx/gfx_gl.h"
 
 using namespace gfx;
 

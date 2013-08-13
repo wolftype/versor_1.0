@@ -10,7 +10,7 @@
 #define Versor_vsr_xf_h
 
 #include "vsr_op.h"
-#include "gfx_matrix.h"
+#include "gfx/gfx_matrix.h"
 
 using namespace gfx;
 namespace vsr {

@@ -22,7 +22,7 @@
 #include "vsr_xf.h"
 #include "vsr_glyph.h"
 
-#include "gfx_gl.h"
+#include "gfx/gfx_gl.h"
 
 
 #include <vector>

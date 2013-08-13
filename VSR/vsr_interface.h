@@ -14,9 +14,9 @@
 //#include "vsr_gl.h"
 //#include "vsr_gfxmatrix.h"
 
-#include "gfx_gl.h"
-#include "gfx_glu.h"
-#include "gfx_xfmatrix.h"
+#include "gfx/gfx_gl.h"
+#include "gfx/gfx_glu.h"
+#include "gfx/gfx_xfmatrix.h"
 
 #include "vsr_set.h"
 #include "vsr_drawable.h"

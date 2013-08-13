@@ -101,6 +101,7 @@ IPATH = $(PCH_DIR) \
 		$(INC_DIR) \
 		$(INC_DIR)Elements/\
 		$(EXT_DIR) \
+		$(EXT_DIR)/gfx/\
 		/usr/local/include/
 
 HPATH = $(addprefix -I, $(IPATH))

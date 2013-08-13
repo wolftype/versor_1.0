@@ -13,8 +13,8 @@
  #ifndef CAMERA_H_INCLUDED
  #define CAMERA_H_INCLUDED
 
-#include "gfx_gl.h"
-#include "gfx_xfmatrix.h"
+#include "gfx/gfx_gl.h"
+#include "gfx/gfx_xfmatrix.h"
 
 #include "vsr_frame.h"
 

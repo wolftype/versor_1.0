@@ -25,7 +25,7 @@
 
 #include "vsr_templates.h"
 
-#include "gfx_matrix.h"
+#include "gfx/gfx_matrix.h"
 
 //#include <map>
 //#include <utility>

@@ -14,7 +14,7 @@
 
 #include "vsr.h"
 #include "vsr_interp.h"
-#include "gfx_data.h"
+#include "gfx/gfx_data.h"
 
 
 using namespace std;

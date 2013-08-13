@@ -33,7 +33,7 @@ vsr::Mesh mesh(GL::LL);
 
 void hopf(GLVApp& app){
 
-
+    vector<Cir> vc;
 
     // set up
     static double theta, phi,amt, lat, longi, NUM, ttheta, tphi, rad, size;
@@ -66,6 +66,8 @@ void hopf(GLVApp& app){
         DRAW3( hf.vec(),1,1,0 ); 
         hf.phase() = t * amt * 100 + time;
        DRAW3( hf.pnt(),1,0,t ); 
+       
+        vc.push_back( hf.fiberA() );
      END
 
 	// Local Statics
@@ -86,7 +88,26 @@ void hopf(GLVApp& app){
     END
     
     mesh.draw();
-     
+
+    UVMesh sk;
+    int res =20;
+    for (int i = 0; i < vc.size(); ++i){
+        for (int j = 0; j <= res; ++j){
+            sk.add( Ro::pnt_cir( vc[i], TWOPI * j/res) );
+        }
+    }
+        for (int j = 0; j <= res; ++j){
+            sk.add( Ro::pnt_cir( vc[0], TWOPI * j/res) );
+        }
+        
+    sk.dim(vc.size()+1, res+1); 
+    sk.calc();
+   
+    sk.drawTri(1,0,0);
+    sk.draw(0,0,1,.5);
+//    Mesh sk = Mesh::Skin( vc, vc.size(), 20 ).mode(GL::TS).useElements(true);
+//    sk.draw();
+//     
 //     ITJ(i,50) VAL(i,50)
 //       hf.vec() = Coord::sph2vec(theta * TWOPI, t* (-.5 + 1 * phi) * PI);
 //       DRAW3( hf.pnt(),0,1,t ); 

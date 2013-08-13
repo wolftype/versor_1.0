@@ -13,8 +13,8 @@
 #include <fstream>
 #include <sstream>
 
-#include "gfx_gl.h"
-#include "gfx_matrix.h"
+#include "gfx/gfx_gl.h"
+#include "gfx/gfx_matrix.h"
 
 
 #include "vsr_frame.h"
@@ -72,7 +72,7 @@ namespace vsr {
         
         /// Draw Mode
         GL::MODE mMode;
-        bool bUseElements, bUseColor;
+        bool bUseElements, bUseColor, bUseNormals;
         
         /// Base Color
         Vec4f mColor;
@@ -98,15 +98,17 @@ namespace vsr {
         Mesh& mode( GL::MODE m) { mMode = m; return *this; }
         Mesh& useElements(bool b) { bUseElements= b; return *this; }
         Mesh& useColor(bool b) { bUseColor = b; return *this; }
+        Mesh& useNormals(bool b) { bUseNormals = b; return *this; }
         
         /// Default Line Loop Mode
-        Mesh(GL::MODE m = GL::LL, bool bE = false, bool bC = false) : mMode(m), bUseElements(bE), bUseColor(bC) {}
+        Mesh(GL::MODE m = GL::LL, bool bE = false, bool bC = false) : mMode(m), bUseElements(bE), bUseColor(bC), bUseNormals(false) {}
         
         Mesh(const Mesh& m){
             
             mMode = m.mMode;
             bUseElements = m.bUseElements;
             bUseColor = m.bUseColor;
+            bUseNormals = m.bUseNormals;
             
             mVertex = m.mVertex;
             mIndex = m.mIndex;
@@ -204,59 +206,72 @@ namespace vsr {
         
         #ifdef GL_IMMEDIATE_MODE
         
-        //immediate mode!
-        void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
-            glColor4f(r,g,b,a);
-            if (!bUseColor){
-                if (bUseElements) drawElements(r, g, b, a);
-                else drawVertices(r,g,b,a);
-            } else {
-                if (bUseElements) drawElementsColor();
-                else drawVerticesColor();            
+            //immediate mode!
+            void draw(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+                glColor4f(r,g,b,a);
+                if (!bUseColor){
+                    if (bUseElements) {
+                        if (bUseNormals) drawElementsNormal(r,g,b,a);
+                        else drawElements(r, g, b, a);
+                    } else {
+                        if (bUseNormals) drawVerticesNormal(r,g,b,a);
+                        else drawVertices(r, g, b, a);
+                    }
+                } else {
+                    if (bUseElements) drawElementsColor();
+                    else drawVerticesColor();            
+                }
             }
-        }
 
-        void drawVertices(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
-           GL::Begin( mMode);
-            for (int i = 0; i < mVertex.size(); ++i){
-                GL::vertex( mVertex[i].Pos );
+            void drawVertices(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+               GL::Begin( mMode);
+                for (int i = 0; i < mVertex.size(); ++i){
+                    GL::vertex( mVertex[i].Pos );
+                }
+               glEnd();
             }
-           glEnd();
-        }
-        void drawElements(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
-            GL::Begin( mMode);
-            for (int i = 0; i < mIndex.size(); ++i){
-                GL::vertex( mVertex[ mIndex[i] ].Pos );
+            void drawVerticesNormal(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+               GL::Begin( mMode);
+                for (int i = 0; i < mVertex.size(); ++i){
+                    GL::normal( mVertex[i].Norm );
+                    GL::vertex( mVertex[i].Pos );
+                }
+               glEnd();
             }
-            glEnd();
-        }
-        void drawElementsNormal(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
-            GL::Begin( mMode);
-            for (int i = 0; i < mIndex.size(); ++i){
-                GL::normal( mVertex[ mIndex[i] ].Norm );
-                GL::vertex( mVertex[ mIndex[i] ].Pos );
+            void drawElements(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+                GL::Begin( mMode);
+                for (int i = 0; i < mIndex.size(); ++i){
+                    GL::vertex( mVertex[ mIndex[i] ].Pos );
+                }
+                glEnd();
             }
-            glEnd();
-        }
+            void drawElementsNormal(float r = 1.0, float g = 1.0, float b = 1.0, float a = 1.0) {
+                GL::Begin( mMode);
+                for (int i = 0; i < mIndex.size(); ++i){
+                    GL::normal( mVertex[ mIndex[i] ].Norm );
+                    GL::vertex( mVertex[ mIndex[i] ].Pos );
+                }
+                glEnd();
+            }
 
 
-        void drawVerticesColor() {
-           GL::Begin( mMode);
-            for (int i = 0; i < mVertex.size(); ++i){
-                GL::color( mVertex[i].Col );
-                GL::vertex( mVertex[i].Pos );
+            void drawVerticesColor() {
+               GL::Begin( mMode);
+                for (int i = 0; i < mVertex.size(); ++i){
+                    GL::color( mVertex[i].Col );
+                    GL::vertex( mVertex[i].Pos );
+                }
+               glEnd();
             }
-           glEnd();
-        }
-        
-        void drawElementsColor() {
-            GL::Begin( mMode);
-            for (int i = 0; i < mIndex.size(); ++i){
-                GL::color(  mVertex[ mIndex[i] ].Col );
-                GL::vertex( mVertex[ mIndex[i] ].Pos );
+            
+            void drawElementsColor() {
+                GL::Begin( mMode);
+                for (int i = 0; i < mIndex.size(); ++i){
+                    GL::color(  mVertex[ mIndex[i] ].Col );
+                    GL::vertex( mVertex[ mIndex[i] ].Pos );
+                }
+                glEnd();
             }
-            glEnd();
-        }
         
         #endif
                 
@@ -626,7 +641,7 @@ namespace vsr {
             }
         }
         
-        m.mode( GL::TS ).useElements(true);
+        m.mode( GL::TS ).useElements(true).useNormals(true);
         return m;
     
     }
@@ -788,7 +803,7 @@ struct UVMesh{
                 int c = b + v;
                 int d = c - 1;
                 
-                Quad( normal(a,b,c), a, b, c, d );
+                qp.push_back( Quad( normal(a,b,c), a, b, c, d ) );
             
             }
         }        

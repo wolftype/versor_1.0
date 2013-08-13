@@ -1,3 +1,6 @@
 [submodule "externals/GLV"]
 	path = externals/GLV
 	url = git://github.com/AlloSphere-Research-Group/GLV.git
+[submodule "externals/gfx"]
+	path = externals/gfx
+	url = git://github.com/wolftype/gfx.git

@@ -30,7 +30,7 @@
 #include "vsr_interp.h"
 #include "vsr_xf.h"
 
-#include "gfx_matrix.h"
+#include "gfx/gfx_matrix.h"
 
 //#include "vsr_matrix.h"
 

@@ -10,7 +10,7 @@
 #ifndef VSR_INTERP_INCLUDED
 #define VSR_INTERP_INCLUDED
 
-#include "gfx_matrix.h"
+#include "gfx/gfx_matrix.h"
 
 using namespace std;
 

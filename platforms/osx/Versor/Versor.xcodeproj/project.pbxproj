@@ -3146,7 +3146,7 @@
 				OTHER_LDFLAGS = "-lGLV";
 				SDKROOT = macosx;
 				SYMROOT = build;
-				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/ $SRCROOT/../../../../";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/gfx/ $SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/ $SRCROOT/../../../../";
 			};
 			name = Debug;
 		};
@@ -3174,7 +3174,7 @@
 				OTHER_LDFLAGS = "-lGLV";
 				SDKROOT = macosx;
 				SYMROOT = build;
-				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/ $SRCROOT/../../../../";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/gfx/ $SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/ $SRCROOT/../../../../";
 			};
 			name = Release;
 		};
@@ -3286,6 +3286,7 @@
 					"\"$(SRCROOT)/../../../GLV/build/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/ $SRCROOT/../../../../ $SRCROOT/../../../externals/gfx/";
 			};
 			name = Debug;
 		};
@@ -3297,6 +3298,7 @@
 					"\"$(SRCROOT)/../../../GLV/build/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr/ $(SRCROOT)/../../../externals/ $SRCROOT/../../../../ $SRCROOT/../../../externals/gfx/";
 			};
 			name = Release;
 		};
