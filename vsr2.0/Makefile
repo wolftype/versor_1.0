@@ -1,7 +1,12 @@
+GCC = 0 
+ifeq ($(GCC),1)
+   CXX = gcc -std=c++0x  
+else
 ifeq ($(CLANG_LOCAL),1)
 CXX = usr/local/bin/clang++ -std=c++11 
 else
 CXX = /Users/wolftype/code/clangbuild2/Release+Asserts/bin/clang++ -std=c++11  
+endif
 endif
 CXX += -arch x86_64
 CXX += -Ivsr/ -I../externals/GLV/ -I../externals/gfx/ -I/usr/include/ 
