@@ -33,7 +33,7 @@ struct TorusKnot  {
     //A Circle base with methods for finding the links around which to knot . . .
     HopfFiber HF;
     
-    /// A vector of circle in the knot orbit
+    /// A vector of circles in the knot orbit
     vector<Cir> cir;
     /// A vector of points in the knot orbit
     vector<Pnt> pnt;
@@ -42,9 +42,16 @@ struct TorusKnot  {
     
     double amt; //RES
     
+    TorusKnot& add(const Pnt& p){
+        pnt.push_back(p); return *this;
+    }
+
+    TorusKnot& add(const Cir& c){
+        cir.push_back(c); return *this;
+    }    
 //    int num() { return pnt.size(); }
     int iter() { 
-        return ( P == 0 || Q == 0 ) ?  1.0/amt : P * Q / amt;
+        return ( P == 0 || Q == 0 ) ?  1.0/amt : P * Q / (amt * Ro::size(HF.cir(), false) );
     }
     
     Par par() { 

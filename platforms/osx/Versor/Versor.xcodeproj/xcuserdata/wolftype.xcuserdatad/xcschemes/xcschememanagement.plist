@@ -99,6 +99,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>KnottedKnot.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>33</integer>
+		</dict>
 		<key>Mechanism.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -218,6 +223,11 @@
 			<true/>
 		</dict>
 		<key>9B3567CB177231E6004B455B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B4F065317C7EBE9002112D5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

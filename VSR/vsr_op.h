@@ -616,6 +616,9 @@ struct Ro {
      static Cir cir(const Dls& dls, const Biv& flat){
         return dls ^ ( ( dls <= ( flat.involution() * Inf(1) ) )  * -1.0 );  
      }
+     /*!
+      Real Dual Sphere from two points
+     */
     /*!
      Direct (imaginary?) Point Pair From Dual Sphere and Euclidean Vector
      */    

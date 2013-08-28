@@ -36,6 +36,10 @@
 		9B3567D1177231E6004B455B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B3567DA17723279004B455B /* xRoots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B3567D917723279004B455B /* xRoots.cpp */; };
 		9B3F72D6170A1817001C1CCA /* xMeet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B3F72D5170A1817001C1CCA /* xMeet.cpp */; };
+		9B4F065917C7EBE9002112D5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9B4F065A17C7EBE9002112D5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
+		9B4F065B17C7EBE9002112D5 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
+		9B4F066517C7EC29002112D5 /* KnottedKnot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B4F066417C7EC29002112D5 /* KnottedKnot.cpp */; };
 		9B52EC30173F4E9B00780705 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9B52EC31173F4E9B00780705 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B52EC32173F4E9B00780705 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -182,6 +186,13 @@
 			remoteInfo = vsr;
 		};
 		9B28075516700947001806F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B76CC231628A9440064FF35;
+			remoteInfo = vsr;
+		};
+		9B4F065517C7EBE9002112D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9B76CC0A1628A9380064FF35 /* Project object */;
 			proxyType = 1;
@@ -420,6 +431,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9B4F065C17C7EBE9002112D5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9B52EC33173F4E9B00780705 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -646,6 +666,8 @@
 		9B3567D6177231E6004B455B /* Frames copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Frames copy"; path = Roots; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3567D917723279004B455B /* xRoots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xRoots.cpp; path = ../basics/xRoots.cpp; sourceTree = "<group>"; };
 		9B3F72D5170A1817001C1CCA /* xMeet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMeet.cpp; path = ../../../examples/basics/xMeet.cpp; sourceTree = "<group>"; };
+		9B4F066117C7EBE9002112D5 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knots copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B4F066417C7EC29002112D5 /* KnottedKnot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KnottedKnot.cpp; sourceTree = "<group>"; };
 		9B52EC38173F4E9B00780705 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = KnotMore; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B57F2E8178B45F5005DAFC8 /* Curvature copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Curvature copy"; path = Membrane; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B57F2EA178B4631005DAFC8 /* xMembrane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMembrane.cpp; path = ../../../examples/boosts/xMembrane.cpp; sourceTree = "<group>"; };
@@ -925,6 +947,16 @@
 				9B3567CF177231E6004B455B /* libvsr.a in Frameworks */,
 				9B3567D0177231E6004B455B /* GLUT.framework in Frameworks */,
 				9B3567D1177231E6004B455B /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B4F065817C7EBE9002112D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B4F065917C7EBE9002112D5 /* OpenGL.framework in Frameworks */,
+				9B4F065A17C7EBE9002112D5 /* GLUT.framework in Frameworks */,
+				9B4F065B17C7EBE9002112D5 /* libvsr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,6 +1272,7 @@
 				9B76AAED170659860054ECBC /* xBilinear.cpp */,
 				9B76AAEE170659860054ECBC /* xDini.cpp */,
 				9B76AAEF170659860054ECBC /* xKnot.cpp */,
+				9B4F066417C7EC29002112D5 /* KnottedKnot.cpp */,
 				9B68DE6E17A076D60071AA34 /* xHopf.cpp */,
 				9B9A40A5170F66D500E02BAC /* xDipole.cpp */,
 				9BFFDDBD172646C400494CF1 /* xDipoleField.cpp */,
@@ -1306,6 +1339,7 @@
 				9B57F2E8178B45F5005DAFC8 /* Curvature copy */,
 				9B57F2F9178B46DA005DAFC8 /* Gaussian */,
 				9B2C66CC178F2F3900A80336 /* Compilation */,
+				9B4F066117C7EBE9002112D5 /* Knots copy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1684,6 +1718,25 @@
 			name = Roots;
 			productName = DemoMotors;
 			productReference = 9B3567D6177231E6004B455B /* Frames copy */;
+			productType = "com.apple.product-type.tool";
+		};
+		9B4F065317C7EBE9002112D5 /* KnottedKnot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B4F065E17C7EBE9002112D5 /* Build configuration list for PBXNativeTarget "KnottedKnot" */;
+			buildPhases = (
+				9B4F065617C7EBE9002112D5 /* Sources */,
+				9B4F065817C7EBE9002112D5 /* Frameworks */,
+				9B4F065C17C7EBE9002112D5 /* CopyFiles */,
+				9B4F065D17C7EBE9002112D5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B4F065417C7EBE9002112D5 /* PBXTargetDependency */,
+			);
+			name = KnottedKnot;
+			productName = DemoBoosts;
+			productReference = 9B4F066117C7EBE9002112D5 /* Knots copy */;
 			productType = "com.apple.product-type.tool";
 		};
 		9B52EC2A173F4E9B00780705 /* KnotMore */ = {
@@ -2182,12 +2235,20 @@
 				9B57F2DB178B45F5005DAFC8 /* Membrane */,
 				9B57F2EC178B46DA005DAFC8 /* Gaussian */,
 				9B2C66CB178F2F3900A80336 /* Compilation */,
+				9B4F065317C7EBE9002112D5 /* KnottedKnot */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9B1E15601670FF470015D25C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B4F065D17C7EBE9002112D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2356,6 +2417,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B3567DA17723279004B455B /* xRoots.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B4F065617C7EBE9002112D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B4F066517C7EC29002112D5 /* KnottedKnot.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2595,6 +2664,11 @@
 			isa = PBXTargetDependency;
 			target = 9B76CC231628A9440064FF35 /* vsr */;
 			targetProxy = 9B28075516700947001806F8 /* PBXContainerItemProxy */;
+		};
+		9B4F065417C7EBE9002112D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B76CC231628A9440064FF35 /* vsr */;
+			targetProxy = 9B4F065517C7EBE9002112D5 /* PBXContainerItemProxy */;
 		};
 		9B52EC2B173F4E9B00780705 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2899,6 +2973,24 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Roots;
+			};
+			name = Release;
+		};
+		9B4F065F17C7EBE9002112D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = KnottedKnot;
+			};
+			name = Debug;
+		};
+		9B4F066017C7EBE9002112D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = KnottedKnot;
 			};
 			name = Release;
 		};
@@ -3591,6 +3683,15 @@
 			buildConfigurations = (
 				9B3567D4177231E6004B455B /* Debug */,
 				9B3567D5177231E6004B455B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B4F065E17C7EBE9002112D5 /* Build configuration list for PBXNativeTarget "KnottedKnot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B4F065F17C7EBE9002112D5 /* Debug */,
+				9B4F066017C7EBE9002112D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
