@@ -1,7 +1,7 @@
 GCC = 0 
 GFX = 0
 ifeq ($(GCC),1)
-   CXX = gcc -std=c++0x  
+   CXX = g++ -std=c++0x  
 else
 ifeq ($(CLANG_LOCAL),1)
 CXX = usr/local/bin/clang++ -std=c++11 
