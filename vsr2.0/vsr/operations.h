@@ -1,6 +1,7 @@
 #ifndef OPERATIONS_H_INCLUDED
 #define OPERATIONS_H_INCLUDED
 
+#include <math.h>   
 #include "products_all.h"  
 #include "constants.h"
 
