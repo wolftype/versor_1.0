@@ -16,7 +16,7 @@ CXX += -O3 -fpeel-loops  -ftemplate-depth-1200
 
 AR 	= ar crs 
 
-LDFLAGS = -Lbuild/lib/ -L../externals/GLV/build/lib/    
+LDFLAGS = -Lbuild/lib/ -L../externals/GLV/build/lib/ -lm  
 
 ifeq ($(GFX),1)
 LDFLAGS += -lglv -framework OpenGL -framework GLUT 
