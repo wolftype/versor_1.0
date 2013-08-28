@@ -1,4 +1,5 @@
 GCC = 0 
+GFX = 0
 ifeq ($(GCC),1)
    CXX = gcc -std=c++0x  
 else
@@ -15,8 +16,11 @@ CXX += -O3 -fpeel-loops  -ftemplate-depth-1200
 
 AR 	= ar crs 
 
-LDFLAGS = -Lbuild/lib/ -L../externals/GLV/build/lib/ 
+LDFLAGS = -Lbuild/lib/ -L../externals/GLV/build/lib/    
+
+ifeq ($(GFX),1)
 LDFLAGS += -lglv -framework OpenGL -framework GLUT 
+endif
                            
 LDFLAGS := $(LDFLAGS)  
 
