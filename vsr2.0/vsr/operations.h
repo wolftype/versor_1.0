@@ -7,10 +7,7 @@
 
 namespace vsr{
 
-template< class A >
-A operator ~(const A& a){
-	return Reverse<A>::Type::template Make(a) ;
-}
+
                           
 template<class A>
 A operator * (const A& a, VT f){
@@ -18,7 +15,6 @@ A operator * (const A& a, VT f){
 	for (int i = 0; i < A::Num; ++i){ tmp[i] *= f; }
 	return tmp;
 }     
-
 
 template<class A>
 A operator / (const A& a, VT f){
@@ -38,19 +34,19 @@ A& operator /= (A& a, VT f){
 	return a;
 }
 
-template< class A>
-A operator -(const A& a){
-	A tmp = a;
-	for (int i = 0; i < A::Num; ++i){ tmp[i] = -tmp[i]; }
+template< TT X, TT ...XS>  
+MV<X,XS...> MV<X,XS...>::operator -() const{
+	MV<X,XS...> tmp = *this;
+	for (int i = 0; i < MV<X,XS...>::Num; ++i){ tmp[i] = -tmp[i]; }
 	return tmp;
 }
 
 
-template< class A>
-A operator !(const A& a){
-	A tmp = ~a;
-	VT v = (a <= tmp)[0];
-	return (v==0) ? tmp : a / v;
+template< TT X, TT ...XS>  
+MV<X,XS...> MV<X,XS...>::operator !() const {
+	MV<X,XS...> tmp = ~(*this);
+	VT v = (*this <= tmp)[0];
+	return (v==0) ? tmp : (*this) / v;
 }
 
 template<TT ... XS, TT ... YS>

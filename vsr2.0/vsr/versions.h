@@ -79,7 +79,10 @@ MV<X,XS...> MV<X,XS...>::involution() const{
 	return Involute<MV<X,XS...>>::Type::template Make(*this);
 } 
 
-
+template< TT X, TT ...XS>
+MV<X,XS...> MV<X,XS...>::operator ~() const{
+	return Reverse< MV<X,XS...> >::Type::template Make(*this) ;
+}
 
 } //vsr::   
 

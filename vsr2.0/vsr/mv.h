@@ -96,8 +96,9 @@ struct MV<X, XS...>{
 	static void bprint() { bsprint(X); TAIL::bprint(); }  
 	void vprint() const { for ( float i : val ) printf("%f\t", i); printf("\n"); }   
 	
-	// MV operator ~() const;
-	// MV operator -() const;  
+	MV operator ~() const;
+	MV operator -() const;  
+	MV operator !() const; 
 	//template<class B>
 	
 	//template<int ... XS>   
