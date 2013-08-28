@@ -7,8 +7,9 @@ CXX = usr/local/bin/clang++ -std=c++11
 else
 CXX = /Users/wolftype/code/clangbuild2/Release+Asserts/bin/clang++ -std=c++11  
 endif
-endif
 CXX += -arch x86_64
+endif  
+
 CXX += -Ivsr/ -I../externals/GLV/ -I../externals/gfx/ -I/usr/include/ 
 CXX += -O3 -fpeel-loops  -ftemplate-depth-1200 
 
