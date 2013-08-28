@@ -59,13 +59,6 @@ struct MV<X, XS...>{
 	// template<typename...Args>     
 	template<typename...Args>     
 	constexpr explicit MV(Args...v) : val{ static_cast<VT>(v)...} {} 
-	// 
-
-	// template< TT ... NXS > 
-	// constexpr MV(const MV<NXS...>& n ) = delete;    
-
-	// template< int ... NX >
-	// operator MV<NX...>() const;  
 	
 	template<class A> A cast() const; 
 	
@@ -84,12 +77,6 @@ struct MV<X, XS...>{
 	MV unit() const;
 	MV runit() const;
     MV tunit() const;
-			
-	// template< TT ... NXS >
-	// operator MV<NXS...>() const;   
-	// {
-	// 	return MV<NXS...>();
-	// }
 	 
 	constexpr VT operator[] (int idx) const{
 		return val[idx]; 
@@ -104,13 +91,6 @@ struct MV<X, XS...>{
 		}
         return true;
     }	
-	// template<class B>
-	//     bool operator == (const B& mv) const{
-	//         int t = Num <= B::Num ? Num : B::Num;
-	//         int n = memcmp(val, mv.begin(), t * sizeof(VT) );
-	//         if (n != 0) return false;
-	//         else return true;
-	//     }  
 	
 	static void print() { printf("%d\t",X); TAIL::print(); } 
 	static void bprint() { bsprint(X); TAIL::bprint(); }  
@@ -303,104 +283,7 @@ MV<X, XS...> MV<X,XS...>::tunit() const {
 }
          
 
-template<class A>
-A operator * (const A& a, VT f){
-	A tmp = a;
-	for (int i = 0; i < A::Num; ++i){ tmp[i] *= f; }
-	return tmp;
-}     
-
-
-template<class A>
-A operator / (const A& a, VT f){
-	A tmp = a;
-	for (int i = 0; i < A::Num; ++i){ tmp[i] /= f; }
-	return tmp;
-}
-template<class A>
-A& operator *= (A& a, VT f){
-	for (int i = 0; i < A::Num; ++i){ a[i] *= f; }
-	return a;
-} 
-
-template<class A>
-A& operator /= (A& a, VT f){
-	for (int i = 0; i < A::Num; ++i){ a[i] /= f; }
-	return a;
-}
-
-template< class A>
-A operator -(const A& a){
-	A tmp = a;
-	for (int i = 0; i < A::Num; ++i){ tmp[i] = -tmp[i]; }
-	return tmp;
-}
-
-
-template< class A>
-A operator !(const A& a){
-	A tmp = ~a;
-	VT v = (a <= tmp)[0];
-	return (v==0) ? tmp : a / v;
-}
-
-template<TT ... XS, TT ... YS>
-auto operator / (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
-	(  a * !b )
-)
- 
-template< class A>
-A operator -(const A& a, const A& b){ 
-	A tmp;
-	for (int i = 0; i < A::Num; ++i) tmp[i] = a[i] - b[i];
-	return tmp;
-}   
-//sum of similar types
-// template< class A>
-// A operator +(const A& a, const A& b){ 
-// 	A tmp;
-// 	for (int i = 0; i < A::Num; ++i) tmp[i] = a[i] + b[i];
-// 	return tmp;
-// } 
-// template< TT X, TT...XS >
-// A operator +( const MV& a, const A& b ){ 
-// 	A tmp;
-// 	for (int i = 0; i < A::Num; ++i) tmp[i] = a[i] + b[i];
-// 	return tmp;
-// } 
-
-
-template< class A>
-A& operator -=(A& a, const A& b){ 
-	for (int i = 0; i < A::Num; ++i) a[i] -= b[i];
-	return a;
-}
-template< class A>
-A& operator +=(A& a, const A& b){ 
-	for (int i = 0; i < A::Num; ++i) a[i] += b[i];
-	return a;
-}   
-
-//REFLECT
-template< class A, class B>
-constexpr A ref(const A& a, const B& b) { 
-	return (-!b * a * b).template cast<A>();
-} 
-
-//spin
-template< class A, class B>
-constexpr A sp(const A& a, const B& b) { 
-	return (b * a * ~b).template cast<A>();
-}  
-//PROJECT A onto B
-template< class A, class B>
-constexpr auto pj(const A& a, const B& b) RETURNS ( 
-	(a <= b ) / b
-) 
-template< class A, class B>
-constexpr auto rj(const A& a, const B& b) RETURNS ( 
-	(a ^ b ) / b
-)     
+    
 
 
 
@@ -416,29 +299,7 @@ typename ICat< typename NotType< MV<0>, B >::Type, MV<0> >::Type operator + ( VT
 	return Ret(a) + b.template cast<Ret>();
 }
 
-// template<class A, class B> 
-// typename ICat< typename NotType< A, B >::Type, A >::Type operator + ( const A & a, const B& b) {
-// 	typedef typename ICat< typename NotType< A, B >::Type, A >::Type Ret;
-// 	return a.template cast<Ret>() + b.template cast<Ret>();
-// }  
 
-// template<TT X, TT...XS, TT Y, TT...YS> 
-// typename ICat< typename NotType< MV<X,XS...>, MV<Y,YS...> >::Type, MV<X,XS...> >::Type operator + ( const MV<X,XS...> & a, const MV<Y,YS...>& b) {
-// 	typedef typename ICat< typename NotType< MV<X,XS...>, MV<Y,YS...> >::Type, MV<X,XS...> >::Type Ret;
-// 	return a.template cast<Ret>() + b.template cast<Ret>();
-// }
-// 
-// template<class B>
-// typename ICat< typename NotType< MV<0>, B >::Type, MV<0> >::Type operator + ( VT a, const B& b) {
-// 	typedef typename ICat< typename NotType< MV<0>, B >::Type, MV<0> >::Type Ret;
-// 	return Ret(a) + b.template cast<Ret>();
-// } 
-
-// template<TT X, TT...XS, TT Y, TT...YS>
-// auto operator + ( const MV<X,XS...>& a, const MV<Y,YS...>& b) RETURNS(
-// 	typedef typename Cat< MV<X,XS...>, typename NotType< MV<Y,YS...>, MV<X,XS...> >::Type Ret;
-// 	return a.cast<Ret>() + b.cast<Ret>()
-// )  
   
 
 } //vsr::   

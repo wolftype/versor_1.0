@@ -6,8 +6,97 @@
 #include "constants.h"
 
 namespace vsr{
-                          
 
+template< class A >
+A operator ~(const A& a){
+	return Reverse<A>::Type::template Make(a) ;
+}
+                          
+template<class A>
+A operator * (const A& a, VT f){
+	A tmp = a;
+	for (int i = 0; i < A::Num; ++i){ tmp[i] *= f; }
+	return tmp;
+}     
+
+
+template<class A>
+A operator / (const A& a, VT f){
+	A tmp = a;
+	for (int i = 0; i < A::Num; ++i){ tmp[i] /= f; }
+	return tmp;
+}
+template<class A>
+A& operator *= (A& a, VT f){
+	for (int i = 0; i < A::Num; ++i){ a[i] *= f; }
+	return a;
+} 
+
+template<class A>
+A& operator /= (A& a, VT f){
+	for (int i = 0; i < A::Num; ++i){ a[i] /= f; }
+	return a;
+}
+
+template< class A>
+A operator -(const A& a){
+	A tmp = a;
+	for (int i = 0; i < A::Num; ++i){ tmp[i] = -tmp[i]; }
+	return tmp;
+}
+
+
+template< class A>
+A operator !(const A& a){
+	A tmp = ~a;
+	VT v = (a <= tmp)[0];
+	return (v==0) ? tmp : a / v;
+}
+
+template<TT ... XS, TT ... YS>
+auto operator / (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	(  a * !b )
+)
+ 
+template< class A>
+A operator -(const A& a, const A& b){ 
+	A tmp;
+	for (int i = 0; i < A::Num; ++i) tmp[i] = a[i] - b[i];
+	return tmp;
+}   
+
+
+template< class A>
+A& operator -=(A& a, const A& b){ 
+	for (int i = 0; i < A::Num; ++i) a[i] -= b[i];
+	return a;
+}
+template< class A>
+A& operator +=(A& a, const A& b){ 
+	for (int i = 0; i < A::Num; ++i) a[i] += b[i];
+	return a;
+}   
+
+//REFLECT
+template< class A, class B>
+constexpr A ref(const A& a, const B& b) { 
+	return (-!b * a * b).template cast<A>();
+} 
+
+//spin
+template< class A, class B>
+constexpr A sp(const A& a, const B& b) { 
+	return (b * a * ~b).template cast<A>();
+}  
+//PROJECT A onto B
+template< class A, class B>
+constexpr auto pj(const A& a, const B& b) RETURNS ( 
+	(a <= b ) / b
+) 
+template< class A, class B>
+constexpr auto rj(const A& a, const B& b) RETURNS ( 
+	(a ^ b ) / b
+)
 
 
 namespace Op{   
