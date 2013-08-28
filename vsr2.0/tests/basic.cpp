@@ -1,4 +1,6 @@
-#define __EUC__
+#define __EUC__  
+
+#include <vector>
 #include "root.h"
 
 using namespace vsr;   
