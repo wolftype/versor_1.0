@@ -1,6 +1,7 @@
 #define __EUC__  
 
-#include <vector>
+#include <vector>      
+#include <iostream>
 #include "operations.h"
 
 using namespace vsr;   
