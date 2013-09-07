@@ -46,16 +46,16 @@ struct Op {
     re(const A& a, const B& b){ return vsr::re(a,b); }  
     
     template<class B>
-    static typename Product< B, Pss, typename B::value_type>::GP dl(const B& b) { return b * Pss(1); } 
+    static typename Product< B, Pss, typename B::value_type>::GP dl(const B& b) { return b * Pss(-1); } 
 
     template<class B>
-    static typename Product< B, Pss, typename B::value_type>::GP udl(const B& b) { return b * Pss(-1); } 
+    static typename Product< B, Pss, typename B::value_type>::GP udl(const B& b) { return b * Pss(1); } 
     
     template<class B>
     static typename Product< B, Tri, typename B::value_type>::GP dle(const B& b) { return b * Tri(-1); } 
 
     template<class B>
-    static typename Product< B, Tri, typename B::value_type>::GP udle(const B& b) { return b * Tri(-1); }     
+    static typename Product< B, Tri, typename B::value_type>::GP udle(const B& b) { return b * Tri(1); }     
     
     template<class A>
     static bool sn(const A& a, const A& b) {
@@ -486,6 +486,7 @@ struct Ro {
     static VSR_PRECISION dst(const Pnt& a, const Pnt& b){
         return sqrt( fabs(sqd(a,b) ) );
     }    
+    
     /*! Split Points from Point Pair 
         @param PointPair input
     */

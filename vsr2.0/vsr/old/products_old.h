@@ -1,5 +1,7 @@
-#ifndef PRODUCTS_ANYMET_H_INCLUDED
+ #ifndef PRODUCTS_ANYMET_H_INCLUDED
 #define PRODUCTS_ANYMET_H_INCLUDED
+
+//SHOULD DEFINE METRIC SPACE BEFORE INCLUDING THIS FILE IF YOU WANT TO USE OVERLOADED OPERATORS
 
 #include <math.h>
 #include "lists.h"
@@ -360,7 +362,20 @@ struct EIProd{
 	constexpr Type ip(const A& a, const B& b) const{
 		return DO::template Make<Type>(a, b);
 	}
-}; 
+};
+
+
+   
+// template<TT DIM>
+// struct CGA{
+// 	    
+// 	typedef MV<0> Sca; 
+// 	
+// 	typedef typename Blade1<DIM>::VEC Vec;
+// 	// typedef typename OProd< Vec,Vec, DIM >::Type Biv;
+// 	// typedef typename OProd< Biv,Vec, DIM >::Type Tri; 	
+// 
+// };  
 
 
 //EUCLIDEAN
@@ -378,68 +393,113 @@ CA eip(const A& a, const B& b) RETURNS(
 )
 
 //NON-EUCLIDEAN
-template<class M, class A, class B > 
-CA mgp(const A& a, const B& b) RETURNS(
+template<class A, class B, class M>
+CA mgp(const A& a, const B& b, const M&) RETURNS(
 	( Prod<A,B,M,false>().gp(a, b) )
 )    
-template<class M, class A, class B > 
-CA mop(const A& a, const B& b) RETURNS(
+template<class A, class B, class M>
+CA mop(const A& a, const B& b, const M&) RETURNS(
 	( OProd<A,B,M,false>().op(a, b) )
 )
-template<class M, class A, class B >
-CA mip(const A& a, const B& b) RETURNS(
+template<class A, class B, class M>
+CA mip(const A& a, const B& b, const M&) RETURNS(
 	( IProd<A,B,M,false>().ip(a, b) )
 )
 
 //CONFORMAL
-template<class M, class A, class B>
-CA cgp(const A& a, const B& b) RETURNS(
+template<class A, class B, class M>
+CA cgp(const A& a, const B& b, const M&) RETURNS(
 	( Prod<A,B,M,true>().gp(a, b) )
 ) 
-template<class M, class A, class B>
-CA cop(const A& a, const B& b) RETURNS(
+
+template<class A, class B, class M>
+CA cop(const A& a, const B& b, const M&) RETURNS(
 	( OProd<A,B,M,true>().op(a, b) )
 )
-template<class M, class A, class B>
-CA cip(const A& a, const B& b) RETURNS(
+template<class A, class B, class M>
+CA cip(const A& a, const B& b, const M&) RETURNS(
 	( IProd<A,B,M,true>().ip(a, b) )
 )
                      
+///OPERATORS REQUIRE THE FOLLOWING MACROS HAVE BEEN DEFINED (SO METRIC CAN BE DETERMINED) 
+#ifdef __EUC__
+template<TT ... XS, TT ... YS>
+auto operator * (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( egp( a, b) )
+)  
+template<TT ... XS, TT ... YS>
+auto operator ^ (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( eop( a, b ) )
+)
+template<TT ... XS, TT ... YS>
+auto operator <= (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( eip( a, b ) )
+)
                 
 template<class A, class B>
-auto egp_inst(const A&, const B&) RETURNS(
-	( typename EProd<A,B>::DO() )
-)
+typename EProd<A,B>::DO inst(const A&, const B&) {
+	return typename EProd<A,B>::DO();
+}
 
-template<class M, class A, class B>
-auto mgp_inst(const A&, const B&) RETURNS(
-	( typename Prod<A,B,M,false>::DO() )
-)
+#endif  
 
-//STRAIGHT EUCLIDEAN GA
+#ifdef __MET__
+template<TT ... XS, TT ... YS>
+auto operator * (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( mgp( a, b, GLOBAL_METRIC ) )
+) 
+template<TT ... XS, TT ... YS>
+auto operator ^ (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( mop( a, b, GLOBAL_METRIC ) )
+)
+template<TT ... XS, TT ... YS>
+auto operator <= (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( mip( a, b, GLOBAL_METRIC ) )
+)
+template<class A, class B>
+auto inst(const A&, const B&) RETURNS(
+	( typename Prod<A,B,decltype(GLOBAL_METRIC),false>::DO() )
+)
+#endif  
+
+#ifdef __CON__                         
+template<TT ... XS, TT ... YS>
+auto operator * (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( cgp( a, b, GLOBAL_METRIC ) )
+)
+template<TT ... XS, TT ... YS>
+auto operator ^ (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( cop( a, b, GLOBAL_METRIC ) )
+)
+template<TT ... XS, TT ... YS>
+auto operator <= (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	( cip( a, b, GLOBAL_METRIC ) )
+) 
+template<class A, class B>
+auto inst(const A&, const B&) RETURNS(
+   	( typename IProd<A,B, decltype(GLOBAL_METRIC),true>::DO() )  
+)
+template<class A, class B>
+auto instL(const A&, const B&) RETURNS(
+   	( typename IProd<A,B, decltype(GLOBAL_METRIC),true>::InstList() )  
+)
+template<class A, class B>
+auto instR(const A&, const B&) RETURNS(
+   	( typename IProd<A,B, decltype(GLOBAL_METRIC),true>::Type() )  
+)   
+#endif
+
+
 template<TT DIM>
 struct EGA{    
 	typedef MV<0> Sca; 
-	template<TT N> using e = MV< 1<<(N-1) >;
+	typedef MV<1> e1;
+	typedef MV<2> e2;
+	typedef MV<4> e3;
 	typedef typename Blade1<DIM>::VEC Vec;
 	typedef typename EOProd<Vec,Vec>::Type Biv;
-	typedef typename EOProd<Biv,Vec>::Type Tri;
-	 	
-	typedef decltype( 1 + Biv() ) Rot; 
-	
-	typedef MV< pss(DIM) > Pss; //same as tri in EGA<3>
-};  
-
-//Metric GA (e.g. Spacetime Algebra)
-template<class M>
-struct MGA{   
-	static const int DIM = M::Num;
-	typedef MV<0> Sca; 
-	template<TT N> using e = MV< 1<<(N-1) >;
-	typedef typename Blade1<DIM>::VEC Vec; 
-    typedef typename Prod<Vec,Vec, M, false>::Type Biv;
-	typedef decltype( 1 + Biv() ) Rot;  
-	typedef MV< pss(DIM) > Pss;    
+	typedef typename EOProd<Biv,Vec>::Type Tri; 	
+	typedef typename EProd<Vec,Vec>::Type Rot; 
 };
 
 template<TT DIM>
@@ -448,8 +508,7 @@ struct CGA{
 	           
 	typedef typename RMetric<DIM-1,1>::Type M;   
 	
-	typedef MV<0> Sca; 
-	template<TT N> using e = MV< 1<<(N-1) >;   
+	typedef MV<0> Sca;
 	typedef MV< pss(DIM) > Pss;  
 		
 	typedef typename Blade1<DIM-2>::VEC 	Vec;
@@ -489,265 +548,49 @@ struct CGA{
 	
 };  
 
-template<TT DIM, class A>
-struct CGAMV : public A {  
- 
-    typedef A Type;
-    
-	typedef typename RMetric<DIM-1,1>::Type M;
 
-	template< class ... Args >
-	constexpr CGAMV(Args...v) : A(v...) {} 
-	constexpr CGAMV(const A& a) : A(a) {}   
-	template<class B>
-	constexpr CGAMV(const CGAMV<DIM,B>& b) : A( b.template cast<A>() ) {}   
-	 
-	template< class B >
-	CGAMV<DIM, typename Prod<A, typename CGAMV<DIM,B>::Type, M, true>::Type> operator * (const CGAMV<DIM, B>& b) const {
-		return CGAMV<DIM, typename Prod<A, typename CGAMV<DIM,  B>::Type, M, true>::Type>( cgp<M>( *this, b ) );
-	} 
-	
-	template<class B>
-	CGAMV<DIM, typename OProd<A, typename B::Type, M, true>::Type> operator ^ (const B& b) const {
-		return CGAMV<DIM, typename OProd<A, typename B::Type, M, true>::Type>( cop<M>( *this, b ) );
-	}
- 
-	template<class B>
-	CGAMV<DIM, typename IProd<A, typename B::Type, M, true>::Type> operator <= (const B& b) const {
-		return CGAMV<DIM, typename IProd<A, typename B::Type, M, true>::Type>( cip<M>( *this, b ) );
-	}  
-	 
-	CGAMV<DIM, typename Prod<A, typename CGA<DIM>::Pss, M, true>::Type > dual() const{
-		return  CGAMV<DIM, typename Prod<A, typename CGA<DIM>::Pss, M, true>::Type >( cgp<M>( *this,  typename CGA<DIM>::Pss(-1) )  );
-	} 
-	CGAMV<DIM, typename Prod<A, typename CGA<DIM>::Pss, M, true>::Type > undual() const{
-		return  CGAMV<DIM, typename Prod<A, typename CGA<DIM>::Pss, M, true>::Type >( cgp<M>( *this,  typename CGA<DIM>::Pss(1) )  );
-	}    
-	 
-	
-	CGAMV operator ~() const{
-		return Reverse< A >::Type::template Make(*this) ;
-	}
-	
-	CGAMV operator !() const {    
+//EUCLIDEAN
+typedef EGA<3>::Sca Sca; 
+typedef EGA<3>::e1 e1; 
+typedef EGA<3>::e2 e2; 
+typedef EGA<3>::e3 e3; 
+typedef EGA<3>::Vec Vec; 
+typedef EGA<3>::Biv Biv; 
+typedef EGA<3>::Tri Tri; 
+typedef EGA<3>::Rot Rot;  
 
-		CGAMV tmp = ~(*this); 
-		VT v = ((*this) * tmp)[0];    
-		return (v==0) ? tmp : tmp / v;
-	}
-	
-	template<class B>
-	auto operator / (const CGAMV<DIM,B>& b) const RETURNS(
-		(  *this * !b )
-	)   
-	
-	CGAMV conj() const { return this -> conjugation(); }
-	CGAMV inv() const { return this -> involution(); } 
-	
-	VT wt() const{ return (*this <= *this)[0]; }
-	VT rwt() const{ return (*this <= ~(*this))[0]; }
-	VT norm() const { VT a = rwt(); if(a<0) return 0; return sqrt( a ); } 
-	VT rnorm() const{ VT a = rwt(); if(a<0) return -sqrt( -a ); return sqrt( a );  }  
-	
-	CGAMV unit() const { VT t = sqrt( fabs( (*this <= *this)[0] ) ); if (t == 0) return A(); return *this / t; }
-	CGAMV runit() const { VT t = rnorm(); if (t == 0) return  A(); return *this / t; }
-    CGAMV tunit() const {    VT t = norm(); if (t == 0) return A(); return *this / t; }  
-
-	template<typename B>
-	CGAMV sp( const B& b) const { return (b * (*this) * ~b).template cast<A>(); }  
-	template<typename B>
-	CGAMV re( const B& b) const { return (-!b * (*this) * b).template cast<A>(); }
-	
-	CGAMV operator + (const CGAMV& a) {
-		CGAMV tmp;
-		for (int i = 0; i < A::Num; ++i) tmp[i] = (*this)[i] + a[i];
-		return tmp;
-	}  
-	
-	CGAMV operator - (const CGAMV& a) {
-		CGAMV tmp;
-		for (int i = 0; i < A::Num; ++i) tmp[i] = (*this)[i] - a[i];
-		return tmp;
-	}
-	 
-	CGAMV operator -() const{
-		CGAMV tmp = *this;
-		for (int i = 0; i < A::Num; ++i){ tmp[i] = -tmp[i]; }
-		return tmp;
-	}  
-	
-	CGAMV& operator -=(const CGAMV& b){ 
-		for (int i = 0; i < A::Num; ++i) (*this)[i] -= b[i];
-		return *this;
-	}   
-	CGAMV& operator +=(const CGAMV& b){ 
-		for (int i = 0; i < A::Num; ++i) (*this)[i] += b[i];
-		return *this;
-	}                             
-	
-   static CGAMV x, y, z, xy, xz, yz;   
-};  
-
-template<TT DIM, class A> CGAMV<DIM,A> CGAMV<DIM,A>::x = A().template set<1>(1);
-template<TT DIM, class A> CGAMV<DIM,A> CGAMV<DIM,A>::y =  A().template set<2>(1);  
-template<TT DIM, class A> CGAMV<DIM,A> CGAMV<DIM,A>::z =  A().template set<4>(1);  
-template<TT DIM, class A> CGAMV<DIM,A> CGAMV<DIM,A>::xy = A().template set<3>(1);  
-template<TT DIM, class A> CGAMV<DIM,A> CGAMV<DIM,A>::xz = A().template set<5>(1);  
-template<TT DIM, class A> CGAMV<DIM,A> CGAMV<DIM,A>::yz = A().template set<6>(1);    
+//CONFORMAL
+typedef CGA<5>::Ori Ori; //Origin
+typedef CGA<5>::Inf Inf; //Infinity
+typedef CGA<5>::Mnk Mnk; //E Plane
+typedef CGA<5>::Pss Pss; //E Plane
 
 
-template<class M, class A>
-struct MGAMV : public A {  
- 
-    typedef A Type;
-	//static const int DIM = M::Num;
-	
-	template< class ... Args >
-	constexpr MGAMV(Args...v) : A(v...) {}
-	 
-	template<class B>
-	MGAMV<M, typename Prod<A, typename B::Type, M, false>::Type> operator * (const B& b) {
-		return MGAMV<M, typename Prod<A, typename B::Type, M, false>::Type>( mgp<M>( *this, b ) );
-	}     
+typedef CGA<5>::Pnt Pnt; //Point    
 
-	template<class B>
-	MGAMV<M, typename OProd<A, typename B::Type, M, false>::Type> operator ^ (const B& b) {
-		return MGAMV<M, typename OProd<A, typename B::Type, M, false>::Type>( mop<M>( *this, b ) );
-	}
- 
-	template<class B>
-	MGAMV<M, typename IProd<A, typename B::Type, M, false>::Type> operator <= (const B& b) {
-		return MGAMV<M, typename IProd<A, typename B::Type, M, false>::Type>( mip<M>( *this, b ) );
-	}  
-	 
-	MGAMV<M, typename Prod<A, typename MGA<M>::Pss, M, false>::Type > dual(){
-		return  MGAMV<M, typename Prod<A, typename MGA<M>::Pss, M, false>::Type >( mgp<M>( *this,  typename MGA<M>::Pss(-1) )  );
-	} 
-	MGAMV<M, typename Prod<A, typename MGA<M>::Pss, M, false>::Type > undual(){
-		return  MGAMV<M, typename Prod<A, typename MGA<M>::Pss, M, false>::Type >( mgp<M>( *this,  typename MGA<M>::Pss(1) )  );
-	} 
-	
-}; 
+typedef Pnt Dls; 		 //Dual Sphere  
+typedef CGA<5>::Par Par; //Point Pair
+typedef CGA<5>::Cir Cir; //Circle
+typedef CGA<5>::Sph Sph; //Sphere
 
-template<class A>
-struct EGAMV : public A {  
- 
-    typedef A Type;
+typedef CGA<5>::Drv Drv; //Direction Vector
+typedef CGA<5>::Tnv Tnv; //Tangent Vector   
+typedef CGA<5>::Drb Drb; //Direction Bivector
+typedef CGA<5>::Tnb Tnb; //Tangent Bivector  
+typedef CGA<5>::Drb Drt; //Direction Trivector
+typedef CGA<5>::Tnb Tnb; //Tangent Trivector
+typedef CGA<5>::Dll Dll; //Dual Line        
+typedef CGA<5>::Lin Lin; //Dual Line    
+typedef CGA<5>::Flp Flp; //Flat Plane
+typedef CGA<5>::Pln Pln; //Plane 
+typedef CGA<5>::Dlp Dlp; //Plane   
 
-	template< class ... Args >
-	constexpr EGAMV(Args...v) : A(v...) {}
-	 
-	template<class B>
-	EGAMV<typename EProd<A, typename B::Type>::Type> operator * (const B& b) {
-		return EGAMV<typename EProd<A, typename B::Type>::Type>( egp( *this, b ) );
-	}     
-
-	template<class B>
-	EGAMV<typename EOProd<A, typename B::Type>::Type> operator ^ (const B& b) {
-		return EGAMV<typename EOProd<A, typename B::Type>::Type>( eop( *this, b ) );
-	}
- 
-	template<class B>
-	EGAMV<typename EIProd<A, typename B::Type>::Type> operator <= (const B& b) {
-		return EGAMV<typename EIProd<A, typename B::Type>::Type>( eip( *this, b ) );
-	}   
-	
-};
-
-//EUCLIDEAN CANDIDATES
-template<TT N> using NESca = EGAMV<typename EGA<N>::Sca>;   
-template<TT N> using NEVec = EGAMV<typename EGA<N>::Vec>; 
-template<TT N> using NEBiv = EGAMV<typename EGA<N>::Biv>; 
-template<TT N> using NETri = EGAMV<typename EGA<N>::Tri>; 
-template<TT N> using NERot = EGAMV<typename EGA<N>::Rot>; 
-template<TT N> using NEe   = EGAMV<typename EGA<N>::template e<N> >;   
-
-//3D Euclidean
-// typedef NESca<3> Sca; 
-// typedef NEVec<3> Vec; 
-// typedef NEBiv<3> Biv; 
-// typedef NETri<3> Tri; 
-// typedef NERot<3> Rot;
-// typedef NEe<1> e1; 
-// typedef NEe<2> e2; 
-// typedef NEe<3> e3;  
-
-
-//N-Dimensional Conformal Candidates                        
-template<TT N, TT E> using Ne  =  CGAMV<N,typename CGA<N>::template e<E> >; 
-template<TT N> using NSca = CGAMV<N, typename CGA<N>::Sca>;   
-template<TT N> using NVec = CGAMV<N, typename CGA<N>::Vec>; 
-template<TT N> using NBiv = CGAMV<N, typename CGA<N>::Biv>; 
-template<TT N> using NTri = CGAMV<N, typename CGA<N>::Tri>; 
-template<TT N> using NRot = CGAMV<N, typename CGA<N>::Rot>;
-template<TT N> using NOri = CGAMV<N, typename CGA<N>::Ori>;  
-template<TT N> using NInf = CGAMV<N, typename CGA<N>::Inf>;  
-template<TT N> using NMnk = CGAMV<N, typename CGA<N>::Mnk>;  
-template<TT N> using NPss = CGAMV<N, typename CGA<N>::Pss>;
-template<TT N> using NPnt = CGAMV<N, typename CGA<N>::Pnt>;  
-template<TT N> using NPar = CGAMV<N, typename CGA<N>::Par>;  
-template<TT N> using NCir = CGAMV<N, typename CGA<N>::Cir>;  
-template<TT N> using NSph = CGAMV<N, typename CGA<N>::Sph>;  
-template<TT N> using NDrv = CGAMV<N, typename CGA<N>::Drv>;  
-template<TT N> using NTnv = CGAMV<N, typename CGA<N>::Tnv>;  
-template<TT N> using NDrb = CGAMV<N, typename CGA<N>::Drb>;  
-template<TT N> using NTnb = CGAMV<N, typename CGA<N>::Tnb>;  
-template<TT N> using NDrt = CGAMV<N, typename CGA<N>::Drt>;  
-template<TT N> using NTnt = CGAMV<N, typename CGA<N>::Tnt>; 
-template<TT N> using NDll = CGAMV<N, typename CGA<N>::Dll>;  
-template<TT N> using NLin = CGAMV<N, typename CGA<N>::Lin>;  
-template<TT N> using NFlp = CGAMV<N, typename CGA<N>::Flp>;  
-template<TT N> using NPln = CGAMV<N, typename CGA<N>::Pln>; 
-template<TT N> using NDlp = CGAMV<N, typename CGA<N>::Dlp>;   
-template<TT N> using NTrs = CGAMV<N, typename CGA<N>::Trs>;  
-template<TT N> using NMot = CGAMV<N, typename CGA<N>::Mot>;  
-template<TT N> using NTrv = CGAMV<N, typename CGA<N>::Trv>;  
-template<TT N> using NBst = CGAMV<N, typename CGA<N>::Bst>; 
-template<TT N> using NDil = CGAMV<N, typename CGA<N>::Dil>;
-template<TT N> using NTsd = CGAMV<N, typename CGA<N>::Tsd>;
-
-//3D CONFORMAL 
-typedef Ne<5,1> e1; 
-typedef Ne<5,2> e2; 
-typedef Ne<5,3> e3; 
-
-typedef NSca<5> Sca; 
-typedef NVec<5> Vec; 
-typedef NBiv<5> Biv; 
-typedef NTri<5> Tri; 
-typedef NRot<5> Rot;
-
-typedef NOri<5> Ori; //Origin
-typedef NInf<5> Inf; //Infinity
-typedef NMnk<5> Mnk; //E Plane
-typedef NPss<5> Pss; //E Plane
-
-typedef NPnt<5> Pnt; 	 //Homogenous Point in 3D  
-typedef Pnt Dls; 		 //Dual Sphere    
-
-typedef NPar<5> Par;	 //Point Pair
-typedef NCir<5> Cir;	 //Circle
-typedef NSph<5> Sph;	 //Sphere
-                    	
-typedef NDrv<5> Drv;	 //Direction Vector
-typedef NTnv<5> Tnv;	 //Tangent Vector   
-typedef NDrb<5> Drb;	 //Direction Bivector
-typedef NTnb<5> Tnb;	 //Tangent Bivector  
-typedef NDrb<5> Drt;	 //Direction Trivector
-typedef NTnb<5> Tnb;	 //Tangent Trivector  
-                    	
-typedef NDll<5> Dll;	 //Dual Line        
-typedef NLin<5> Lin;	 //Dual Line    
-typedef NFlp<5> Flp;	 //Flat Plane
-typedef NPln<5> Pln;	 //Plane 
-typedef NDlp<5> Dlp;	 //Plane   
-                    	
-typedef NTrs<5> Trs;	 //Translator 
-typedef NMot<5> Mot;	 //Motor 
-typedef NTrv<5> Trv;	 //Transversor 
-typedef NBst<5> Bst;	 //Boost 
-typedef NDil<5> Dil;	 //Dilator 
-typedef NTsd<5> Tsd;	 //Translated Dilator  
+typedef CGA<5>::Trs Trs; //Translator 
+typedef CGA<5>::Mot Mot; //Motor 
+typedef CGA<5>::Trv Trv; //Transversor 
+typedef CGA<5>::Bst Bst; //Boost 
+typedef CGA<5>::Dil Dil; //Dilator 
+typedef CGA<5>::Tsd Tsd; //Translated Dilator  
 
  
 } //vsr::

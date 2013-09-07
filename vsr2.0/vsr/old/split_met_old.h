@@ -58,15 +58,52 @@ struct Blade{
 	static const int SIGN = S;  
 	
 	static void print() {
-		printf("%f\t",1.0/S); bsprint(X); 
-	}   
+		printf("%d\t",S); bsprint(X); 
+	}
+};
+template<TT X>
+struct Blade<X,1>{
+	static const TT BIT = X;
+	static const int SIGN = 1;  
+	
+	static void print() {
+		printf("+.5\t"); bsprint(X); 
+	}
+};
+template<TT X>
+struct Blade<X,2>{  
+	static const TT BIT = X;
+	static const int SIGN = 2;  
+	
+	static void print() {
+		printf("+1\t"); bsprint(X); 
+	}
+};
+template<TT X>
+struct Blade<X,-1>{
+	static const TT BIT = X;
+//	static const int SIGN = -1;  
+	static const int SIGN = -1;  
+		
+	static void print() {
+		printf("-.5\t"); bsprint(X); 
+	}
+};
+template<TT X>
+struct Blade<X,-2>{
+	static const TT BIT = X;
+	static const int SIGN = -2;  
+	
+	static void print() {
+		printf("-1\t"); bsprint(X); 
+	}
 };
 
 
 template< TT a, TT dim>
 struct PushMink{  
-	typedef XList< Blade< ( a ^ origin<dim>() ) ^ EP<dim>(), 2 >,  Blade< ( a ^ origin<dim>() ) ^  EM<dim>(), 2 > > ORI;
-	typedef XList< Blade< ( a ^ infinity<dim>() ) ^ EP<dim>(), -1 >, Blade< ( a ^ infinity<dim>() ) ^  EM<dim>(), 1 > > INF;  
+	typedef XList< Blade< ( a ^ origin<dim>() ) ^ EP<dim>(), 1 >,  Blade< ( a ^ origin<dim>() ) ^  EM<dim>(), 1 > > ORI;
+	typedef XList< Blade< ( a ^ infinity<dim>() ) ^ EP<dim>(), -2 >, Blade< ( a ^ infinity<dim>() ) ^  EM<dim>(), 2 > > INF;  
 	typedef typename Maybe< (a & origin<dim>()) == origin<dim>(), ORI, INF >::Type SWHICH; 
 	typedef  XList< Blade<a, 1> > PASS;
 	typedef typename Maybe< checkMink<a,dim>(), PASS, SWHICH  >::Type Type;
@@ -74,8 +111,8 @@ struct PushMink{
 
 template< class A, TT dim>
 struct PopMink{  
-	typedef XList< Blade< ( A::BIT ^ EP<dim>() ) ^ origin<dim>(), 1 * A::SIGN >,  Blade< ( A::BIT ^ EP<dim>() ) ^  infinity<dim>(), -2 * A::SIGN> > ORI;
-	typedef XList< Blade< ( A::BIT ^ EM<dim>() ) ^ origin<dim>(), 1 * A::SIGN >, Blade< ( A::BIT ^ EM<dim>() ) ^  infinity<dim>(), 2* A::SIGN > > INF;  
+	typedef XList< Blade< ( A::BIT ^ EP<dim>() ) ^ origin<dim>(), 2 * A::SIGN >,  Blade< ( A::BIT ^ EP<dim>() ) ^  infinity<dim>(), -1 * A::SIGN> > ORI;
+	typedef XList< Blade< ( A::BIT ^ EM<dim>() ) ^ origin<dim>(), 2 * A::SIGN >, Blade< ( A::BIT ^ EM<dim>() ) ^  infinity<dim>(), 1* A::SIGN > > INF;  
 	typedef typename Maybe< (A::BIT & origin<dim>()) == origin<dim>(), ORI, INF >::Type SWHICH; 
 	typedef XList< A > PASS;
 	typedef typename Maybe< checkMink<A::BIT,dim>(), PASS, SWHICH  >::Type Type;
@@ -175,32 +212,16 @@ constexpr bool compare(const A& = A(), const B& = B()){
 	return A::BIT == B::BIT;
 }  
 
-constexpr TT CalcSum( TT a, TT b){
-	return a + b; 
-}   
 
 template< class A, class B >
-struct Sum{               
-   typedef Blade< A::BIT, CalcSum(A::SIGN, B::SIGN) > Type;  
+struct Sum{
+   typedef Blade< A::BIT, (A::SIGN + B::SIGN)/2 > Type;  
 };
 
 template<class P, int Num>
 struct CompressIt{
 	typedef P Type;
 };  
-
-template<class P>
-struct CompressIt<P,2>{
-  	typedef typename P::HEAD A; 
-	typedef typename P::TAIL::HEAD B;
-	
-	typedef typename Maybe< compare( A(), B() ), 
-	    XList< typename Sum< A, B >::Type >,
-		P
-		>::Type Type; 
-		
-
-};
 
 template<class P>
 struct CompressIt<P,4>{
@@ -221,6 +242,8 @@ struct CompressIt<P,4>{
 			typename Sum< B, D >::Type 
 		>  
 		>::Type Type; 
+		
+
 };  
 
 //compress a popped list in a 1, 3 or ...

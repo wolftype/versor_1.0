@@ -59,16 +59,39 @@ struct Cast< MV<>, B >{
 template<TT X, TT...XS> template<class A> 
 A MV<X,XS...>::cast() const{
  return Cast<  A, MV<X,XS...> >::Type::template Cast<A>( *this );
-} 
+}  
 
-template<TT X, TT...XS> template<int IDX> 
+template<TT X, TT...XS> template<class A>
+A MV<X,XS...>::copy() const{
+	A tmp;
+	for (int i = 0; i < A::Num; ++i) tmp[i] = (*this)[i];
+	return tmp;
+}
+              
+
+
+template<TT X, TT...XS> template<TT IDX> 
 VT MV<X,XS...>::get() const{
  return val[ find(IDX, *this) ];
 }
-template<TT X, TT...XS> template<int IDX> 
+template<TT X, TT...XS> template<TT IDX> 
 VT& MV<X,XS...>::get() {
  return val[ find(IDX, *this) ];
-}
+} 
+
+template<TT X, TT...XS> template<TT IDX> 
+ MV<X,XS...>& MV<X,XS...>::set(VT v)
+{
+	get<IDX>() = v;
+	return *this;
+}  
+
+// template<TT X, TT ... XS> MV<X,XS...> MV<X,XS...>::x = MV<X,XS...>().set<1>(1);
+// template<TT X, TT ... XS> MV<X,XS...> MV<X,XS...>::y = MV<X,XS...>().set<2>(1);  
+// template<TT X, TT ... XS> MV<X,XS...> MV<X,XS...>::z = MV<X,XS...>().set<4>(1);  
+// template<TT X, TT ... XS> MV<X,XS...> MV<X,XS...>::xy = MV<X,XS...>().set<3>(1);  
+// template<TT X, TT ... XS> MV<X,XS...> MV<X,XS...>::xz = MV<X,XS...>().set<5>(1);  
+// template<TT X, TT ... XS> MV<X,XS...> MV<X,XS...>::yz = MV<X,XS...>().set<6>(1);     
 
 template<TT X, TT...XS> 
 MV<X,XS...> MV<X,XS...>::conjugation() const{
@@ -79,10 +102,10 @@ MV<X,XS...> MV<X,XS...>::involution() const{
 	return Involute<MV<X,XS...>>::Type::template Make(*this);
 } 
 
-template< TT X, TT ...XS>
-MV<X,XS...> MV<X,XS...>::operator ~() const{
-	return Reverse< MV<X,XS...> >::Type::template Make(*this) ;
-}
+// template< TT X, TT ...XS>
+// MV<X,XS...> MV<X,XS...>::operator ~() const{
+// 	return Reverse< MV<X,XS...> >::Type::template Make(*this) ;
+// } 
 
 } //vsr::   
 

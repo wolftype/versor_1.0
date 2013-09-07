@@ -95,6 +95,8 @@
 		9B9F32C41631E8B50075D685 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
 		9B9F32C51631E8BE0075D685 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9B9F32C71631E8E20075D685 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
+		9BA8866217CFC4F200297953 /* Vsr2Tests.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9BA8866117CFC4F200297953 /* Vsr2Tests.1 */; };
+		9BA8866C17CFC60A00297953 /* basic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8866717CFC5F200297953 /* basic.cpp */; };
 		9BB1081F1638836A009F3070 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF01628AAF00064FF35 /* OpenGL.framework */; };
 		9BB108201638836A009F3070 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CCF21628AAF70064FF35 /* GLUT.framework */; };
 		9BB108221638836A009F3070 /* libvsr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B76CC241628A9440064FF35 /* libvsr.a */; };
@@ -566,6 +568,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		9BA8865A17CFC4F100297953 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				9BA8866217CFC4F200297953 /* Vsr2Tests.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9BB108231638836A009F3070 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -666,7 +678,7 @@
 		9B3567D6177231E6004B455B /* Frames copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Frames copy"; path = Roots; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3567D917723279004B455B /* xRoots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xRoots.cpp; path = ../basics/xRoots.cpp; sourceTree = "<group>"; };
 		9B3F72D5170A1817001C1CCA /* xMeet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xMeet.cpp; path = ../../../examples/basics/xMeet.cpp; sourceTree = "<group>"; };
-		9B4F066117C7EBE9002112D5 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knots copy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B4F066117C7EBE9002112D5 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = KnottedKnot; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4F066417C7EC29002112D5 /* KnottedKnot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KnottedKnot.cpp; sourceTree = "<group>"; };
 		9B52EC38173F4E9B00780705 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Knots copy"; path = KnotMore; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B57F2E8178B45F5005DAFC8 /* Curvature copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Curvature copy"; path = Membrane; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -705,6 +717,13 @@
 		9B9A40A7170FB5A700E02BAC /* xReflections.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xReflections.cpp; path = ../../../examples/pending/xReflections.cpp; sourceTree = "<group>"; };
 		9B9A40A9170FB5EF00E02BAC /* xCommute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xCommute.cpp; path = ../../../examples/pending/xCommute.cpp; sourceTree = "<group>"; };
 		9B9F32BA1631E8A10075D685 /* DemoBoosts */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = DemoBoosts; path = Hopf; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA8865C17CFC4F100297953 /* Vsr2Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Vsr2Tests; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA8865F17CFC4F100297953 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9BA8866117CFC4F200297953 /* Vsr2Tests.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Vsr2Tests.1; sourceTree = "<group>"; };
+		9BA8866717CFC5F200297953 /* basic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = basic.cpp; path = ../../../vsr2.0/tests/basic.cpp; sourceTree = "<group>"; };
+		9BA8866817CFC5F200297953 /* graphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = graphics.cpp; path = ../../../vsr2.0/tests/graphics.cpp; sourceTree = "<group>"; };
+		9BA8866917CFC5F200297953 /* graphics2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = graphics2.cpp; path = ../../../vsr2.0/tests/graphics2.cpp; sourceTree = "<group>"; };
+		9BA8866A17CFC5F200297953 /* roots.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = roots.cpp; path = ../../../vsr2.0/tests/roots.cpp; sourceTree = "<group>"; };
 		9BB108271638836A009F3070 /* Knots */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Knots; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB10836163883B5009F3070 /* Knots copy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Knots copy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC881FB1710DA5100F24A2A /* xInversiveMechanisms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xInversiveMechanisms.cpp; path = ../../../examples/pending/xInversiveMechanisms.cpp; sourceTree = "<group>"; };
@@ -1107,6 +1126,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BA8865917CFC4F100297953 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BB1081E1638836A009F3070 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1287,6 +1313,7 @@
 			isa = PBXGroup;
 			children = (
 				9BF5C75716F0EDA300629664 /* gl2ps.c */,
+				9BA8866B17CFC5F600297953 /* vsr2.0 */,
 				9B5C461F164463A1003BF1B2 /* lib */,
 				9B76AAEC170659850054ECBC /* Boosts */,
 				9B76AAD9170631770054ECBC /* Basic */,
@@ -1296,6 +1323,7 @@
 				9B3F72D9170A183D001C1CCA /* Graphics */,
 				9B76AAC31704E4420054ECBC /* make_demos */,
 				9B2C66CE178F2F3900A80336 /* Compilation */,
+				9BA8865E17CFC4F100297953 /* Vsr2Tests */,
 				9B76CC141628A9390064FF35 /* Products */,
 				9BBF0AD3163B082400146CA6 /* Shaders */,
 				9BF5C71616F0E9EF00629664 /* src */,
@@ -1340,6 +1368,7 @@
 				9B57F2F9178B46DA005DAFC8 /* Gaussian */,
 				9B2C66CC178F2F3900A80336 /* Compilation */,
 				9B4F066117C7EBE9002112D5 /* Knots copy */,
+				9BA8865C17CFC4F100297953 /* Vsr2Tests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1360,6 +1389,26 @@
 				9BF5C74A16F0EA5E00629664 /* xAgacse.cpp */,
 			);
 			name = "Pending Demos";
+			sourceTree = "<group>";
+		};
+		9BA8865E17CFC4F100297953 /* Vsr2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9BA8865F17CFC4F100297953 /* main.cpp */,
+				9BA8866117CFC4F200297953 /* Vsr2Tests.1 */,
+			);
+			path = Vsr2Tests;
+			sourceTree = "<group>";
+		};
+		9BA8866B17CFC5F600297953 /* vsr2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				9BA8866717CFC5F200297953 /* basic.cpp */,
+				9BA8866817CFC5F200297953 /* graphics.cpp */,
+				9BA8866917CFC5F200297953 /* graphics2.cpp */,
+				9BA8866A17CFC5F200297953 /* roots.cpp */,
+			);
+			name = vsr2.0;
 			sourceTree = "<group>";
 		};
 		9BBF0AD3163B082400146CA6 /* Shaders */ = {
@@ -2016,6 +2065,23 @@
 			productReference = 9B9F32BA1631E8A10075D685 /* DemoBoosts */;
 			productType = "com.apple.product-type.tool";
 		};
+		9BA8865B17CFC4F100297953 /* Vsr2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BA8866517CFC4F200297953 /* Build configuration list for PBXNativeTarget "Vsr2Tests" */;
+			buildPhases = (
+				9BA8865817CFC4F100297953 /* Sources */,
+				9BA8865917CFC4F100297953 /* Frameworks */,
+				9BA8865A17CFC4F100297953 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Vsr2Tests;
+			productName = Vsr2Tests;
+			productReference = 9BA8865C17CFC4F100297953 /* Vsr2Tests */;
+			productType = "com.apple.product-type.tool";
+		};
 		9BB1081A1638836A009F3070 /* Knots */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BB108241638836A009F3070 /* Build configuration list for PBXNativeTarget "Knots" */;
@@ -2236,6 +2302,7 @@
 				9B57F2EC178B46DA005DAFC8 /* Gaussian */,
 				9B2C66CB178F2F3900A80336 /* Compilation */,
 				9B4F065317C7EBE9002112D5 /* KnottedKnot */,
+				9BA8865B17CFC4F100297953 /* Vsr2Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -2565,6 +2632,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B68DE6F17A076D70071AA34 /* xHopf.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BA8865817CFC4F100297953 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BA8866C17CFC60A00297953 /* basic.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3394,6 +3469,32 @@
 			};
 			name = Release;
 		};
+		9BA8866317CFC4F200297953 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.flyingmeat.compilers.llvm.tot;
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = (
+					"-std=c++11",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/gfx/ $SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr2.0/vsr $(SRCROOT)/../../../externals/ $SRCROOT/../../../../";
+			};
+			name = Debug;
+		};
+		9BA8866417CFC4F200297953 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.flyingmeat.compilers.llvm.tot;
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = (
+					"-std=c++11",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/../../../externals/gfx/ $SRCROOT/../../../externals/GLV/ $(SRCROOT)/../../../vsr2.0/vsr $(SRCROOT)/../../../externals/ $SRCROOT/../../../../";
+			};
+			name = Release;
+		};
 		9BB108251638836A009F3070 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3839,6 +3940,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9BA8866517CFC4F200297953 /* Build configuration list for PBXNativeTarget "Vsr2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BA8866317CFC4F200297953 /* Debug */,
+				9BA8866417CFC4F200297953 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		9BB108241638836A009F3070 /* Build configuration list for PBXNativeTarget "Knots" */ = {
 			isa = XCConfigurationList;

@@ -331,7 +331,17 @@ void k3(GLVApp& app){
 }
 
 void GLVApp :: onDraw(){
-    k0(*this);
+    //k0(*this);
+    
+    static Cir c = CXY(1);
+    static double time = 0; time += .001;
+    Rot r = Gen::rot (Biv::xz * time);
+    
+    c = c.sp(r);
+    
+    DRAW(c);
+    
+    
 }
 
 int main(int argc, const char * argv[]) {

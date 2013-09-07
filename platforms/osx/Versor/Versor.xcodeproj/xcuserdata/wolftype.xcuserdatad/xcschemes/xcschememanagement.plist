@@ -169,6 +169,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Vsr2Tests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>34</integer>
+		</dict>
 		<key>vsr.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -303,6 +308,11 @@
 			<true/>
 		</dict>
 		<key>9B9F32B91631E8A10075D685</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BA8865B17CFC4F100297953</key>
 		<dict>
 			<key>primary</key>
 			<true/>

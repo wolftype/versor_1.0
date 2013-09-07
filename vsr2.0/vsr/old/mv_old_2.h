@@ -45,9 +45,23 @@ struct MV{
 	static void vprint(){ printf("nil\n");}  
 };   
 
+ 
+// constexpr TT dual(TT a, TT dim){
+// 	return a ^ pss(dim);
+// }              
+// template< int DIM >
+// struct Duality{
+// 	typedef typename ICat< MV< M::HEAD ^ pss(DIM) >, typename Duality< DIM, typename M::TAIL >::Type >::Type Type; 
+// };
+// template< int DIM>
+// struct Duality< DIM, MV<> > {
+// 	typedef MV<> Type; 
+// };
 
 template<TT X, TT ... XS>
 struct MV<X, XS...>{  
+	 
+	//typedef MV< dual(X,5), dual(XS,5)... > DUAL;
 	
 	static const int Num = sizeof...(XS) +1;  
 	VT val[Num];
@@ -62,8 +76,7 @@ struct MV<X, XS...>{
 	template<typename...Args>     
 	constexpr explicit MV(Args...v) : val{ static_cast<VT>(v)...} {}    
 	  
-	template<class A> A cast() const;   
-	template<class A> A copy() const; 
+	template<class A> A cast() const; 
 	
 	template<typename A>
 	MV& operator = ( const A& a) {
@@ -78,6 +91,16 @@ struct MV<X, XS...>{
 	
 	MV conjugation() const;
 	MV involution() const; 
+	
+	
+	VT wt() const;
+	VT rwt() const;
+	VT norm() const; 
+	VT rnorm() const;  
+	
+	MV unit() const;
+	MV runit() const;
+    MV tunit() const;
 	 
 	constexpr VT operator[] (int idx) const{
 		return val[idx]; 
@@ -96,8 +119,38 @@ struct MV<X, XS...>{
 	static void print() { printf("%d\t",X); TAIL::print(); } 
 	static void bprint() { bsprint(X); TAIL::bprint(); }  
 	void vprint() const { for ( float i : val ) printf("%f\t", i); printf("\n"); }   
-	      
-
+	
+	MV operator ~() const;
+	MV operator -() const;  
+	MV operator !() const;
+	                       
+	template<typename B>
+	MV sp( const B& ) const; 
+	template<typename B>
+	MV re( const B& ) const;  
+	             
+	//  duale() RETURNS(
+	// 	( (*this * MV< pss(3) >(-1) ) 
+	// )  
+	// //CGA 5D Dual
+	// auto dual() RETURNS (
+	// 	(*this * MV< pss(5) >(-1) )
+	// )   
+ 
+	
+	//template<int ... XS>   
+	MV operator + (const MV& a) {
+		MV tmp;
+		for (int i = 0; i < Num; ++i) tmp[i] = (*this)[i] + a[i];
+		return tmp;
+	} 
+	MV operator - (const MV& a) {
+		MV tmp;
+		for (int i = 0; i < Num; ++i) tmp[i] = (*this)[i] - a[i];
+		return tmp;
+	}
+      
+    static MV x, y, z, xy, xz, yz;
 	 
 }; 
  
@@ -242,14 +295,14 @@ typename ICat< typename NotType< MV<XS...>, MV<YS...> >::Type, MV<XS...> >::Type
 	return a.template cast<Ret>() - b.template cast<Ret>();
 }
 
-// template<TT...XS, TT...YS> 
-// MV<XS...> operator += ( MV<XS...> & a, const MV<YS...>& b) {
-// 	return a + b.template cast< MV<XS...> >();
-// }
-// template<TT...XS, TT...YS> 
-// MV<XS...> operator -= ( MV<XS...> & a, const MV<YS...>& b) {
-// 	return a - b.template cast< MV<XS...> >();
-// }  
+template<TT...XS, TT...YS> 
+MV<XS...> operator += ( MV<XS...> & a, const MV<YS...>& b) {
+	return a + b.template cast< MV<XS...> >();
+}
+template<TT...XS, TT...YS> 
+MV<XS...> operator -= ( MV<XS...> & a, const MV<YS...>& b) {
+	return a - b.template cast< MV<XS...> >();
+}
 
 template<class B>
 typename ICat< typename NotType< MV<0>, B >::Type, MV<0> >::Type operator + ( VT a, const B& b) {
@@ -257,8 +310,44 @@ typename ICat< typename NotType< MV<0>, B >::Type, MV<0> >::Type operator + ( VT
 	return Ret(a) + b.template cast<Ret>();
 }
 
+ 
 
+
+
+
+template<TT X, TT...XS>
+VT MV<X,XS...>::wt() 	const{
+	return (*this <= *this)[0];  
+}       
+template<TT X, TT...XS>      
+VT MV<X,XS...>::rwt() 	const{
+   return (*this <= ~(*this))[0]; 
+}      
+template<TT X, TT...XS>      
+VT MV<X,XS...>::norm() 	const{
+  VT a = rwt(); if(a<0) return 0; return sqrt( a );    
+}     
+template<TT X, TT...XS>      
+VT MV<X,XS...>::rnorm() const{
+ VT a = rwt(); if(a<0) return -sqrt( -a ); return sqrt( a ); 
+} 
+                             
+template<TT X, TT...XS>      
+MV<X, XS...> MV<X,XS...>::unit() 	const{
+   VT t = sqrt( fabs( (*this <= *this)[0] ) ); if (t == 0) return MV<X,XS...>(); return *this / t; 
+}     
+template<TT X, TT...XS>      
+MV<X, XS...> MV<X,XS...>::runit() const{
+   VT t = rnorm(); if (t == 0) return  MV<X,XS...>(); return *this / t; 
+}    
+template<TT X, TT...XS>      
+MV<X, XS...> MV<X,XS...>::tunit() const {
+   VT t = norm(); if (t == 0) return MV<X,XS...>(); return *this / t; 
+}
          
+
+
+
 
 template<class A>
 A operator * (const A& a, VT f){
@@ -284,21 +373,75 @@ A& operator /= (A& a, VT f){
 	for (int i = 0; i < A::Num; ++i){ a[i] /= f; }
 	return a;
 }
+
+template< TT X, TT ...XS>  
+MV<X,XS...> MV<X,XS...>::operator -() const{
+	MV<X,XS...> tmp = *this;
+	for (int i = 0; i < MV<X,XS...>::Num; ++i){ tmp[i] = -tmp[i]; }
+	return tmp;
+}
+
+
+template< TT X, TT ...XS>  
+MV<X,XS...> MV<X,XS...>::operator !() const {    
+	
+	MV<X,XS...> tmp = ~(*this); 
+	VT v = ((*this) * tmp)[0];    
+	return (v==0) ? tmp : tmp / v;
+}
+
+template<TT ... XS, TT ... YS>
+auto operator / (const MV<XS...>& a, const MV<YS...>& b) RETURNS(
+	(  a * !b )
+)
  
-
-
 // template< class A>
-// A& operator -=(A& a, const A& b){ 
-// 	for (int i = 0; i < A::Num; ++i) a[i] -= b[i];
-// 	return a;
-// }
-// template< class A>
-// A& operator +=(A& a, const A& b){ 
-// 	for (int i = 0; i < A::Num; ++i) a[i] += b[i];
-// 	return a;
+// A operator -(const A& a, const A& b){ 
+// 	A tmp;
+// 	for (int i = 0; i < A::Num; ++i) tmp[i] = a[i] - b[i];
+// 	return tmp;
 // }   
 
 
+template< class A>
+A& operator -=(A& a, const A& b){ 
+	for (int i = 0; i < A::Num; ++i) a[i] -= b[i];
+	return a;
+}
+template< class A>
+A& operator +=(A& a, const A& b){ 
+	for (int i = 0; i < A::Num; ++i) a[i] += b[i];
+	return a;
+}   
+
+//REFLECT
+template< class A, class B>
+constexpr A ref(const A& a, const B& b) { 
+	return (-!b * a * b).template cast<A>();
+} 
+template< TT X, TT ...XS> template<class B> 
+MV<X,XS...> MV<X,XS...>::re( const B& b) const{
+	return ref(*this, b);
+}
+
+//spin
+template< class A, class B>
+constexpr A spin(const A& a, const B& b) { 
+	return (b * a * ~b).template cast<A>();
+} 
+template< TT X, TT ...XS> template<class B> 
+MV<X,XS...> MV<X,XS...>::sp( const B& b) const{
+	return spin(*this, b);
+} 
+//PROJECT A onto B
+template< class A, class B>
+constexpr auto pj(const A& a, const B& b) RETURNS ( 
+	(a <= b ) / b
+) 
+template< class A, class B>
+constexpr auto rj(const A& a, const B& b) RETURNS ( 
+	(a ^ b ) / b
+)
   
 
 } //vsr::   

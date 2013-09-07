@@ -1,20 +1,26 @@
-#define __EUC__  
+#define __CON__  
+#define GLOBAL_METRIC RMetric<4,1>::Type()
 
-#include <vector>      
-#include <iostream>
 #include "operations.h"
+#include <iostream>
 
-using namespace vsr;   
+using namespace vsr;
+using namespace std;
+   
 
 typedef Blade1<4>::VEC Vec4;
 
+//constexpr int test() { return 2; }
+
 int main(){
 	
-	Vec4 v(1,2,3,4);
-	Vec4 v2(1,2.5,3.5,4.5);
-	(v*v2).vprint();  
-	(!v2).vprint();
-	(~v2).vprint();  
+	//Mot d;
+	auto a = Pss(1);
 	
+	(~a).vprint();
+	(!a).vprint();  
+	
+	(~a * a ).vprint();
+
 	return 0;
 }

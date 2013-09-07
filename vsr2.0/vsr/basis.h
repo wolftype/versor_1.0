@@ -63,7 +63,11 @@ constexpr bool compare(){
 		return ( grade(A) == grade(B) ) ?  A < B: grade(A) < grade(B); //return A < B::HEAD;
 }
 
-
+//pss
+// template< TT dim >   
+constexpr TT pss(TT dim){
+	return ( dim == 0 ) ? 0 : (1 << (dim-1)) | pss( dim-1 ); 
+}
 
 } //vsr::
 
