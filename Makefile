@@ -31,7 +31,7 @@ INSTALL_PCH = 0
 BASE_DIR	= ../
 
 #Locations of Source and Header Files
-VSR_DIR		= VSR/
+VSR_DIR		= vsr/
 SRC_DIR		= src/
 TST_DIR		= tests/
 EX_DIR		= examples/
@@ -46,7 +46,7 @@ BIN_DIR		= $(BUILD_DIR)bin/
 CFLAGS += -Wno-deprecated
 
 OBJS := vsr_mv.o vsr_frame.o vsr_file.o
-OBJS_GL := vsr_camera.o vsr_interface.o vsr_gl.o gl2ps.o #vsr_gl_shader.o 
+OBJS_GL := vsr_camera.o vsr_interface.o  gl2ps.o #vsr_gl_shader.o   vsr_gl.o
 
 HEAD = vsr.h
 PCH_DIR = $(BUILD_DIR)pch/
@@ -113,7 +113,7 @@ CFLAGS		:= $(CPPFLAGS) $(CFLAGS)
 CXXFLAGS	:= $(CFLAGS) $(CXXFLAGS)
 
 
-EXEC_TARGETS = tests/%.cpp examples/%.cpp examples/%/%.cpp
+EXEC_TARGETS = tests/%.cpp examples/%.cpp
  
 
 
@@ -124,8 +124,8 @@ FORCE:
   
 
 #COMPILATION of CPP to Object File
-$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH) ) %.h
-	@echo 
+$(OBJ_DIR)%.o: %.cpp #$(addprefix $(PCH_DIR), $(PCH) ) %.h
+	@echo %<
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo CXX compiling $< to $@
 	@echo /////////////////////////////////////////////////////////////////////////////
@@ -197,20 +197,3 @@ ifeq ($(INSTALL_PCH),1)
 	@$(INSTALL) -m 644 $(PCH_DIR)*.gch $(DESTDIR)/include/$(LIB_NAME)/
 endif
 
-#ifneq ($(EXT_LIB_COPY_DIR), )
-#	@$(INSTALL) -m 644 $(EXT_LIB_COPY_DIR)/* $(DESTDIR)/lib
-#endif
-
-#lib dir etc . . .
-#Stuff set in Makefile.common (here for debugging)
-# PREFIX		= /usr/local/
-# BUILD_CONFIG = Release
-# BUILD_DIR	= build/
-# BIN_DIR		= $(BUILD_DIR)bin/
-# OBJ_DIR		= $(BUILD_DIR)obj/
-# CC = gcc
-# AR = ar rcs
-#architecturem, sdks, optimization
-# CCFLAGS += -arch x86_64
-# CCFLAGS += -isysroot /Developer/SDKs/MacOSX10.6.sdk -mmacosx-version-min=10.6
-# CCFLAGS += -O3 -fpeel-loops
