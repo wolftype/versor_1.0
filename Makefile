@@ -145,7 +145,7 @@ $(OBJ_DIR)%.o: %.c
 $(PCH_DIR)%.h.gch: %.h
 	@echo CXX precompiling $< to $@
 	@echo This may take a little while but only needs to happen once
-	$(CXX) $(CXXFLAGS) $(HPATH) -x c++-header -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(HPATH) -H -x c++-header -c $< -o $@
 
 linkfile:
 	@printf "%b\n" "CPPFLAGS +=$(LINK_CPPFLAGS)\r\nLDFLAGS +=$(LINK_LDFLAGS)" > Makefile.link
@@ -170,7 +170,7 @@ glv:
 	@echo "git submodule update\n\n"
 	$(MAKE) --no-print-directory -C externals/GLV install DESTDIR=../../$(BUILD_DIR)
 
-vsr: title dir glv $(PCH_DIR)vsr.h.gch $(addprefix $(OBJ_DIR), $(OBJS))
+vsr: title dir glv addprefix($(PCH_DIR), $PCH) $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
