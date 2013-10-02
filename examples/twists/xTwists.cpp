@@ -17,6 +17,46 @@
 
 using namespace vsr;
 
+void test(GLVApp &app){
+    Dll aa = DLN(0,1,0).sp(Gen::trs(5,0,0));
+    Dll bb = DLN(0,0,1).sp(Gen::trs(-5,0,0));  
+
+    Mot m = bb/aa;
+    //cout << Gen::log(m) << endl; 
+ 
+     
+        Dll rq;						//tmp dll
+        Drv cperp, cpara;
+        Dll q = m;						//extract grade 2 part
+        
+        double  ac = acos( m[0] );		//angle of rotor	
+        double  den = Math::sinc(ac);
+        double  den2 = ac * ac * den;
+        
+        
+        Biv b =  ( Ori(1) <= ( q * Inf(1) ) ) / den * -1.0;			//negative necessary . dll? . . 
+        Dll tq = b * q;
+        
+//        cout << b << endl;
+//        cout << tq << endl;
+        
+        if (den2 == 0 ) {
+            //cperp = b * -1.0;
+            cpara = q;// * -1.0;
+        } else {
+            cperp = ( b * Drt(m[7]) ) / ( ( den2 )  * -1.0 );	//perpendicular (along line of axis)
+            cpara = ( b * tq ) / ( ( den2 )  * -1.0 );			//parallel      (in plane of rotation)
+        }
+        
+        cout << ((b * Drt(m[7])/ ( ( den2 )  * -1.0 ) )) << endl; 
+        
+        Drv c = cperp + cpara;
+        rq += (b);
+        rq += c;
+
+         
+}
+
 void twists(GLVApp& app){
     
     static double period, pitch;
@@ -85,6 +125,8 @@ void twistfield(GLVApp& app){
 
 void GLVApp :: onDraw() {
 
+//    test(*this);
+    
     static bool bBasic;
     SET
         gui(bBasic,"Basic Twist");

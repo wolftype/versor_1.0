@@ -6,6 +6,8 @@ HOST = pi-la
 NAME = main    
 
 PIROOT = $(HOME)/code/pi/root/
+ 
+CLANG = 0
 
 #COMPILER VERSION
 ifeq ($(GCC),1) 
@@ -15,10 +17,10 @@ else
    CXX = g++ -std=c++0x  
 endif
 else
-ifeq ($(CLANG_LOCAL),1)
-CXX = usr/local/bin/clang++ -std=c++11 
-else
+ifeq ($(CLANG),0) 
 CXX = /Users/wolftype/code/clangbuild2/Release+Asserts/bin/clang++ -std=c++11  
+else 
+CXX = $(CLANG) -std=c++11   
 endif
 CXX += -arch x86_64
 endif  
