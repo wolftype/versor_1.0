@@ -46,7 +46,7 @@ BIN_DIR		= $(BUILD_DIR)bin/
 CFLAGS += -Wno-deprecated
 
 OBJS := vsr_mv.o vsr_frame.o vsr_file.o
-OBJS_GL := vsr_camera.o vsr_interface.o  gl2ps.o #vsr_gl_shader.o   vsr_gl.o
+OBJS_GL := vsr_camera.o vsr_interface.o  gl2ps.o
 
 HEAD = vsr.h
 PCH_DIR = $(BUILD_DIR)pch/
@@ -125,13 +125,13 @@ FORCE:
 
 #COMPILATION of CPP to Object File
 $(OBJ_DIR)%.o: %.cpp #$(addprefix $(PCH_DIR), $(PCH) ) %.h
-	@echo %<
+	@echo $<
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo CXX compiling $< to $@
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo
-	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@ 
-
+	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@
+	
 #COMPILATION of C to Object File
 $(OBJ_DIR)%.o: %.c
 	@echo 
@@ -170,7 +170,7 @@ glv:
 	@echo "git submodule update\n\n"
 	$(MAKE) --no-print-directory -C externals/GLV install DESTDIR=../../$(BUILD_DIR)
 
-vsr: title dir glv $(addprefix $(OBJ_DIR), $(OBJS))
+vsr: title dir glv $(PCH_DIR)vsr.h.gch $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
