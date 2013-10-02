@@ -31,7 +31,7 @@ INSTALL_PCH = 0
 BASE_DIR	= ../
 
 #Locations of Source and Header Files
-VSR_DIR		= VSR/
+VSR_DIR		= vsr/
 SRC_DIR		= src/
 TST_DIR		= tests/
 EX_DIR		= examples/
@@ -129,7 +129,7 @@ $(OBJ_DIR)%.o: %.cpp #$(addprefix $(PCH_DIR), $(PCH) ) %.h
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo CXX compiling $< to $@
 	@echo /////////////////////////////////////////////////////////////////////////////
-	@echo
+	@echo $(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@
 	$(CXX) $(CXXFLAGS) $(HPATH) -H -c $< -o $@
 	
 #COMPILATION of C to Object File
