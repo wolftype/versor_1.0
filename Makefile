@@ -170,7 +170,7 @@ glv:
 	@echo "git submodule update\n\n"
 	$(MAKE) --no-print-directory -C externals/GLV install DESTDIR=../../$(BUILD_DIR)
 
-vsr: title dir glv $(addprefix $(PCH_DIR), $PCH) $(addprefix $(OBJ_DIR), $(OBJS))
+vsr: title dir glv $(addprefix $(PCH_DIR), $(PCH)) $(addprefix $(OBJ_DIR), $(OBJS))
 	 $(AR) $(LIB_DIR)$(LIB_FILE) $(addprefix $(OBJ_DIR), $(OBJS))
 
 $(EXEC_TARGETS): $(LIB_PATH) FORCE
