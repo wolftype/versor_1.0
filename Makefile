@@ -124,7 +124,7 @@ FORCE:
   
 
 #COMPILATION of CPP to Object File
-$(OBJ_DIR)%.o: %.cpp #$(addprefix $(PCH_DIR), $(PCH) ) %.h
+$(OBJ_DIR)%.o: %.cpp $(addprefix $(PCH_DIR), $(PCH)) #%.h
 	@echo $<
 	@echo /////////////////////////////////////////////////////////////////////////////
 	@echo CXX compiling $< to $@
