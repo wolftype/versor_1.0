@@ -31,7 +31,7 @@ INSTALL_PCH = 0
 BASE_DIR	= ../
 
 #Locations of Source and Header Files
-VSR_DIR		= vsr/
+VSR_DIR		= VSR/
 SRC_DIR		= src/
 TST_DIR		= tests/
 EX_DIR		= examples/
