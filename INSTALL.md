@@ -3,22 +3,38 @@ CSS: style0.css
 VERSOR COMPILATION and INSTALLATION Instructions
 ===
 
-This Documents the use of Versor as a standalone software.
-
 ---
 
-**NOTE:** _VERSOR_ is in active development!  I have not been versioning it -- so `git pull` frequently for updates! And EMAIL me (wolftype@gmail.com)
-or the list (versor@mat.ucsb.edu) with questions or problems.  You have to sign up for the list [here](#http://lists.create.ucsb.edu/mailman/listinfo/versor)
+**NOTE:** 
+_VERSOR_ is in active development!  `git pull` frequently for updates! And GMAIL me (wolftype)
+or the list (versor@mat.ucsb.edu) with questions or problems.  
 
-BUILD AND RUN
+You can sign up for the list [here](#http://lists.create.ucsb.edu/mailman/listinfo/versor).
+
+There is also a local list for my GA seminar [here](#http://lists.create.ucsb.edu/mailman/listinfo/spinor)
+
+BUILD 
 ---
+ 
+### Version 2.0 ###
+
+
+	git clone git://github.com/wolftype/vsr2.0.git                              
+	cd vsr2.0
+	git submodule init
+	git submodule update 
+
+This grabs Versor (vsr), a Graphics Library (gfx) submodule and GLV (a user-interface submodule). 
+
+	
+### Version 1.0 ###
 
 	git clone git://github.com/wolftype/vsr.git
 	cd vsr
 	git submodule init
 	git submodule update
 	
-This grabs both Versor and its GLV submodule (a windowing and user-interface system).  Then you can
+
 
 	make vsr
 	make examples/basics/xMeet.cpp
@@ -29,11 +45,11 @@ Please email me (wolftype at gmail) or the [list](#) if you have any issues!
 
 
 If the above fails, make sure you have OpenGL, Glu, Glut, and GLEW installed. If not, see Getting GLU / GLUT / GLEW section below.
-Or, email me.  
+Or, email the [list](#http://lists.create.ucsb.edu/mailman/listinfo/versor). 
 
 To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
 Bindings exist to two cross-platform windowing systems, [GLV](mat.ucsb.edu/glv/) and [AlloCore](), both made by my colleagues in the MAT program. 
-It should be easy to make a binding to Open Frameworks ofxgui, for instance (also an MAT project) 
+It should be easy to make a binding to Open Frameworks ofxgui, for instance (also an MAT-Alum project) 
 
 The easiest way to get started to is to use GLV.  GLV is great for quick and easy OpenGL-based interfaces.  
 	

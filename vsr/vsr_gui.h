@@ -205,7 +205,8 @@ namespace glv {
 			}
 		}
 
-		s->colors().text.set(0,1,0);
+		s->colors().text.set(0,1,0); 
+		// s->colors().selection.set(0,1,0);  
 		//cout << _name << endl;
 		s->name( _name );
 		add((Widget*)s, _name);

@@ -9,7 +9,7 @@ CSS: style0.css
 <img src = "resources/images/twist_04_bw.gif" width = 400>
 <img src = "resources/images/lox_0.jpg" width = 100>
 
-Versor (libvsr)
+Versor (libvsr) Version 1.0 
 ===
 A (Fast) C++ library for Conformal Geometric Algebra.  
 ---
@@ -20,7 +20,9 @@ Developer: Pablo Colapinto
 
 [Homepage (versor.mat.ucsb.edu)](http://versor.mat.ucsb.edu)
 
-[Download and Installation Instructions](http://versor.mat.ucsb.edu/INSTALL.html) 
+[Download and Installation Instructions](http://versor.mat.ucsb.edu/INSTALL.html)  
+ 
+[A Javascript Port of Versor](http://github.com/weshoke/versor.js) 
  
 [Reference Guide to the Elements](http://versor.mat.ucsb.edu/masters_appendix.pdf)
 
@@ -64,10 +66,11 @@ Developer: Pablo Colapinto
 * [GAViewer](http://www.science.uva.nl/ga/viewer/content_viewer.html) Standalone GA interface
 * [Gaigen](http://staff.science.uva.nl/~fontijne/g25.html) An Implementation Generator
 * [CluCalc/CluViz](http://www.clucalc.info/) Standalone and Library
+* [versor.js](http://www.github.com/weshoke/versor.js) A javascript port of this library
 
 ---
  
-1. **To INSTALL please read the [INSTALL file](INSTALL.html)**  
+1. **To INSTALL please read the [INSTALL file](http://versor.mat.ucsb.edu/INSTALL.html)**  
 2. **The current document is a work-in-progress!  For specific questions please do not hesitate to contact me: wolftype (at) gmail dot com**
 
 ---

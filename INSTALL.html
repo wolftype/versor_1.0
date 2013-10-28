@@ -8,22 +8,38 @@
 
 <h1 id="versorcompilationandinstallationinstructions">VERSOR COMPILATION and INSTALLATION Instructions</h1>
 
-<h2 id="thisdocumentstheuseofversorasastandalonesoftware.">This Documents the use of Versor as a standalone software.</h2>
+<hr />
 
-<p><strong>NOTE:</strong> <em>VERSOR</em> is in active development! I have not been versioning it &#8211; so <code>git pull</code> frequently for updates! And EMAIL me (wolftype@gmail.com)
-or the list (versor@mat.ucsb.edu) with questions or problems. You have to sign up for the list <a href="#http://lists.create.ucsb.edu/mailman/listinfo/versor">here</a></p>
+<p><strong>NOTE:</strong>
+<em>VERSOR</em> is in active development! <code>git pull</code> frequently for updates! And GMAIL me (wolftype)
+or the list (versor@mat.ucsb.edu) with questions or problems. </p>
 
-<h2 id="buildandrun">BUILD AND RUN</h2>
+<p>You can sign up for the list <a href="#http://lists.create.ucsb.edu/mailman/listinfo/versor">here</a>.</p>
+
+<p>There is also a local list for my GA seminar <a href="#http://lists.create.ucsb.edu/mailman/listinfo/spinor">here</a></p>
+
+<h2 id="build">BUILD</h2>
+
+<h3 id="version2.0">Version 2.0</h3>
+
+<pre><code>git clone git://github.com/wolftype/vsr2.0.git                              
+cd vsr2.0
+git submodule init
+git submodule update 
+</code></pre>
+
+<p>This grabs Versor (vsr), a Graphics Library (gfx) submodule and GLV (a user-interface submodule). </p>
+
+<h3 id="version1.0">Version 1.0</h3>
 
 <pre><code>git clone git://github.com/wolftype/vsr.git
 cd vsr
 git submodule init
 git submodule update
-</code></pre>
 
-<p>This grabs both Versor and its GLV submodule (a windowing and user-interface system). Then you can</p>
 
-<pre><code>make vsr
+
+make vsr
 make examples/basics/xMeet.cpp
 </code></pre>
 
@@ -32,11 +48,11 @@ make examples/basics/xMeet.cpp
 <hr />
 
 <p>If the above fails, make sure you have OpenGL, Glu, Glut, and GLEW installed. If not, see Getting GLU / GLUT / GLEW section below.
-Or, email me. </p>
+Or, email the <a href="#http://lists.create.ucsb.edu/mailman/listinfo/versor">list</a>. </p>
 
 <p>To use the built-in interface, gui, mouse and keyboard, etc, requires an input control listener set-up.
 Bindings exist to two cross-platform windowing systems, <a href="mat.ucsb.edu/glv/">GLV</a> and <a href="">AlloCore</a>, both made by my colleagues in the MAT program.
-It should be easy to make a binding to Open Frameworks ofxgui, for instance (also an MAT project) </p>
+It should be easy to make a binding to Open Frameworks ofxgui, for instance (also an MAT-Alum project) </p>
 
 <p>The easiest way to get started to is to use GLV. GLV is great for quick and easy OpenGL-based interfaces. </p>
 

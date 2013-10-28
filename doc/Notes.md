@@ -42,6 +42,10 @@ Extendors
 	Group theory includes the notion of an Extendor (i.e. a Glide Plane or a Roto-inversion)
 	A GLD (glide plane) is a Reflection followed by a Translation (or vice versa): a Line * FlatPoint
 
+Distances
+
+	Dual Line and Point: pnt <= dll.runit() seems to return -dist^2/2.0
+
 	
 TO DO
 ---
